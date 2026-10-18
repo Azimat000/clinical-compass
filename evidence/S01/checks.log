@@ -1,0 +1,54 @@
+S01 — проверки главного агента, 18.10.2026 Europe/Moscow
+
+$ python3 tools/validate_plan.py --pending-tag S01
+{
+  "slices": 26,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 2,
+  "fulfilled_requirements": 0,
+  "next_slice": "S02"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+EXIT_CODE: 0
+
+$ python3 tools/session.py status
+Текущий: нет
+Последний принятый: S01
+Следующий готовый: S02
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+EXIT_CODE: 0
+
+$ python3 tools/test_plan_validation.py
+test_budget_overflow (__main__.PlanTests.test_budget_overflow) ... ok
+test_dependency_cycle (__main__.PlanTests.test_dependency_cycle) ... ok
+test_false_fulfilment (__main__.PlanTests.test_false_fulfilment) ... ok
+test_finalist_cannot_skip_final_preparation (__main__.PlanTests.test_finalist_cannot_skip_final_preparation) ... ok
+test_independent_work_after_clinical_block (__main__.PlanTests.test_independent_work_after_clinical_block) ... ok
+test_lost_subcondition (__main__.PlanTests.test_lost_subcondition) ... ok
+test_missing_requirement (__main__.PlanTests.test_missing_requirement) ... ok
+test_source_changed (__main__.PlanTests.test_source_changed) ... ok
+test_unauthorized_postcontest (__main__.PlanTests.test_unauthorized_postcontest) ... ok
+test_valid_plan (__main__.PlanTests.test_valid_plan) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.249s
+
+OK
+EXIT_CODE: 0
+
+$ git diff --check
+EXIT_CODE: 0
+
+Главный агент: дополнительная read-only сверка (Python inline), EXIT_CODE: 0.
+PASS: 83 исходных ID и 160 подпунктов сохранены побуквенно; изменены только статусы/доказательства ID S01.
+PASS: contract охватывает 40 ID S01; requirements-review охватывает 51 подпункт S01.
+PASS: 26 уникальных вопросов, все 7 полей заполнены; требования/срезы существуют, даты повторной проверки указаны.
+PASS: B01–B11 имеют сопоставление вопросам/датам; неизвестное не переведено в fulfilled/not_applicable.
+PASS: локальные SHA-256 источников совпали с manifest, исходная память сохранена добавлением истории.
+PASS: статусы S02–S25 не изменены, следующий S02, расходы/обязательства 0 ₽.
+PASS: все 16 изменённых/новых файлов входят в перечень результата S01; посторонних изменений нет.
+MANUAL PASS: основные документы, исходная карточка, новые статусы и diff просмотрены главным агентом; личных документов/подписей/почты в новых файлах нет.
+Ограничение: проверено содержание и структура документов, не достоверность внешнего реестра команды или клинический/правовой допуск.
