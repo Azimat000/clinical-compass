@@ -1,0 +1,54 @@
+{
+  "checked_on": "2026-10-18 Europe/Moscow",
+  "exact_request_time": "not_recorded",
+  "provenance": "read-only web-researcher /root/s02_drug_guidelines; main agent did not repeat request",
+  "method": "POST",
+  "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetJsonClinrecsFilterV2",
+  "content_type": "application/json",
+  "body": {
+    "filters": [
+      {
+        "fieldName": "status",
+        "filterType": 1,
+        "filterValueType": 2,
+        "value1": "",
+        "value2": "",
+        "values": [
+          1
+        ]
+      }
+    ],
+    "sortOption": {
+      "fieldName": "",
+      "sortType": 1
+    },
+    "pageSize": 1000,
+    "currentPage": 1,
+    "useANDoperator": true,
+    "columns": []
+  },
+  "reported_response_summary": {
+    "TotalRecords": 772,
+    "selected_records": [
+      {
+        "Code": 301,
+        "id": "301_3",
+        "publication_date_as_reported": "2024-08-26 12:06:01",
+        "ApplyStatusCalculated": 1,
+        "NPC_approved": true,
+        "version": 3,
+        "age_category": "Взрослые"
+      },
+      {
+        "Code": 457,
+        "id": "457_3",
+        "publication_date_as_reported": "2024-09-19 00:00:00",
+        "ApplyStatusCalculated": 1,
+        "NPC_approved": true,
+        "version": 3,
+        "age_category": "Взрослые"
+      }
+    ]
+  },
+  "limitation": "Полный API-ответ и полные тексты КР локально не сохранены; это переданный исследователем результат, не raw response. Не доказывает отсутствие гипотетической замены с иным Code."
+}
