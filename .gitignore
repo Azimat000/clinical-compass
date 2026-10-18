@@ -1,0 +1,17 @@
+# Local temporary files and secrets
+.DS_Store
+tmp/
+.env
+.env.*
+!.env.example
+secrets/
+private-data/
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+coverage/
+playwright-report/
+test-results/
