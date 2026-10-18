@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-18T21:26:02+03:00",
+  "updated_on": "2026-10-18",
   "current_slice": null,
-  "last_accepted_slice": "S01",
-  "next_slice": "S04",
+  "last_accepted_slice": "S02",
+  "next_slice": "S03",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -20,10 +20,10 @@
       "reason": null
     },
     "S02": {
-      "status": "blocked",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S02",
       "handoff": "memory/sessions/S02.md",
-      "reason": "B03: официальные Russian for Russia PHQ-9/GAD-7 и права подтверждены, но точная связь этих русских форм с первичным психометрическим исследованием не установлена. ГРЛС/официальный листок Авиандра проверены и больше не блокируют S02. Все правила неактивны; следующий независимый S04 — в новой сессии."
+      "reason": null
     },
     "S03": {
       "status": "planned",
