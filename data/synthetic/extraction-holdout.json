@@ -1,0 +1,1222 @@
+{
+  "schema_version": 1,
+  "dataset_version": "S03-v1",
+  "provenance": {
+    "synthetic": true,
+    "author": "Codex / S03",
+    "created_on": "2026-10-18",
+    "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+    "clinical_review_status": "not_reviewed",
+    "clinical_reviewer": null,
+    "clinical_gold": false,
+    "active": false
+  },
+  "offsets": "Python Unicode code points, zero-based, end-exclusive",
+  "annotation_policy": "docs/validation/dataset.md",
+  "prescription_values": "Вымышленные значения входа; не проверенные дозировки и не рекомендации.",
+  "split": "holdout",
+  "records": [
+    {
+      "id": "H01",
+      "profile_id": "SYN-H01",
+      "split": "holdout",
+      "template": "sections",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Консультация от 27 сентября 2026. Возраст: 39 лет. Установлен диагноз «генерализованное тревожное расстройство», код не приведён. Не беременна со слов пациента. Авиандр предложен лишь для обсуждения; полный список лекарств будет позже.",
+      "facts": [
+        {
+          "id": "H01-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-27",
+          "quote": "27 сентября 2026",
+          "span": {
+            "start": 16,
+            "end": 32
+          }
+        },
+        {
+          "id": "H01-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 39,
+          "quote": "39 лет",
+          "span": {
+            "start": 43,
+            "end": 49
+          }
+        },
+        {
+          "id": "H01-F03",
+          "field": "diagnosis",
+          "assertion": "present",
+          "value": "генерализованное тревожное расстройство",
+          "quote": "генерализованное тревожное расстройство",
+          "span": {
+            "start": 71,
+            "end": 110
+          }
+        },
+        {
+          "id": "H01-F04",
+          "field": "pregnancy_status",
+          "assertion": "negated",
+          "value": false,
+          "quote": "Не беременна со слов пациента",
+          "span": {
+            "start": 130,
+            "end": 159
+          }
+        },
+        {
+          "id": "H01-F05",
+          "field": "medication",
+          "assertion": "considered",
+          "value": "Авиандр",
+          "quote": "Авиандр предложен лишь для обсуждения",
+          "span": {
+            "start": 161,
+            "end": 198
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "concomitant_medications",
+        "medication_allergy"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "concomitant_medications",
+        "diagnosis",
+        "event_date",
+        "medication",
+        "medication_allergy",
+        "pregnancy_status"
+      ]
+    },
+    {
+      "id": "H02",
+      "profile_id": "SYN-H02",
+      "split": "holdout",
+      "template": "narrative",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Запись 26.09.2026: на момент визита ровно 18 лет. Ранее в школе обсуждали тревожность, диагноз не ставили. Беременность отрицает, кормление грудью отрицает. Вопрос о препарате Авиандр пока без решения.",
+      "facts": [
+        {
+          "id": "H02-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-26",
+          "quote": "26.09.2026",
+          "span": {
+            "start": 7,
+            "end": 17
+          }
+        },
+        {
+          "id": "H02-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 18,
+          "quote": "ровно 18 лет",
+          "span": {
+            "start": 36,
+            "end": 48
+          }
+        },
+        {
+          "id": "H02-F03",
+          "field": "diagnosis",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "диагноз не ставили",
+          "span": {
+            "start": 87,
+            "end": 105
+          }
+        },
+        {
+          "id": "H02-F04",
+          "field": "pregnancy_status",
+          "assertion": "negated",
+          "value": false,
+          "quote": "Беременность отрицает",
+          "span": {
+            "start": 107,
+            "end": 128
+          }
+        },
+        {
+          "id": "H02-F05",
+          "field": "lactation_status",
+          "assertion": "negated",
+          "value": false,
+          "quote": "кормление грудью отрицает",
+          "span": {
+            "start": 130,
+            "end": 155
+          }
+        },
+        {
+          "id": "H02-F06",
+          "field": "medication",
+          "assertion": "considered",
+          "value": "Авиандр",
+          "quote": "Вопрос о препарате Авиандр",
+          "span": {
+            "start": 157,
+            "end": 183
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "medication_allergy",
+        "concomitant_medications"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "concomitant_medications",
+        "diagnosis",
+        "event_date",
+        "lactation_status",
+        "medication",
+        "medication_allergy",
+        "pregnancy_status"
+      ]
+    },
+    {
+      "id": "H03",
+      "profile_id": "SYN-H03",
+      "split": "holdout",
+      "template": "brief",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Оценка 25/09/2026. 50 лет. F32.2 указан врачом. Раньше жаловался на тревогу, теперь отмечает потерю интереса. Сегодня отрицает мысли о причинении себе вреда. Назначения не приложены.",
+      "facts": [
+        {
+          "id": "H03-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-25",
+          "quote": "25/09/2026",
+          "span": {
+            "start": 7,
+            "end": 17
+          }
+        },
+        {
+          "id": "H03-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 50,
+          "quote": "50 лет",
+          "span": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "id": "H03-F03",
+          "field": "diagnosis",
+          "assertion": "present",
+          "value": "F32.2",
+          "quote": "F32.2",
+          "span": {
+            "start": 27,
+            "end": 32
+          }
+        },
+        {
+          "id": "H03-F04",
+          "field": "symptom",
+          "assertion": "present",
+          "value": "потеря интереса",
+          "quote": "потерю интереса",
+          "span": {
+            "start": 93,
+            "end": 108
+          }
+        },
+        {
+          "id": "H03-F05",
+          "field": "self_harm_report",
+          "assertion": "negated",
+          "value": false,
+          "quote": "Сегодня отрицает мысли о причинении себе вреда",
+          "span": {
+            "start": 110,
+            "end": 156
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "current_medications",
+        "medication_allergy"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "current_medications",
+        "diagnosis",
+        "event_date",
+        "medication_allergy",
+        "self_harm_report",
+        "symptom"
+      ]
+    },
+    {
+      "id": "H04",
+      "profile_id": "SYN-H04",
+      "split": "holdout",
+      "template": "quote",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Сообщение получено 24.09.2026. Человек 24 лет пишет: «сегодня есть намерение причинить себе вред». В прежней записи такого сообщения не было. Местонахождение и фактический приём лекарств не указаны.",
+      "facts": [
+        {
+          "id": "H04-F01",
+          "field": "received_date",
+          "assertion": "present",
+          "value": "2026-09-24",
+          "quote": "24.09.2026",
+          "span": {
+            "start": 19,
+            "end": 29
+          }
+        },
+        {
+          "id": "H04-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 24,
+          "quote": "24 лет",
+          "span": {
+            "start": 39,
+            "end": 45
+          }
+        },
+        {
+          "id": "H04-F03",
+          "field": "self_harm_report",
+          "assertion": "present",
+          "value": true,
+          "quote": "сегодня есть намерение причинить себе вред",
+          "span": {
+            "start": 54,
+            "end": 96
+          }
+        },
+        {
+          "id": "H04-F04",
+          "field": "historical_self_harm_report",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "В прежней записи такого сообщения не было",
+          "span": {
+            "start": 99,
+            "end": 140
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "location",
+        "current_medications",
+        "diagnosis"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "current_medications",
+        "diagnosis",
+        "historical_self_harm_report",
+        "location",
+        "received_date",
+        "self_harm_report"
+      ]
+    },
+    {
+      "id": "H05",
+      "profile_id": "SYN-H05",
+      "split": "holdout",
+      "template": "self_report",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "23.09.2026, 67 лет. В списке: Авиандр 20 мг вечером, источник — старый лист. Сегодня сообщил о сильном головокружении и падении. Продолжает ли терапию, неизвестно. Причинность не проверена.",
+      "facts": [
+        {
+          "id": "H05-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-23",
+          "quote": "23.09.2026",
+          "span": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "id": "H05-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 67,
+          "quote": "67 лет",
+          "span": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "id": "H05-F03",
+          "field": "medication",
+          "assertion": "historical",
+          "value": "Авиандр",
+          "quote": "Авиандр 20 мг вечером",
+          "span": {
+            "start": 30,
+            "end": 51
+          }
+        },
+        {
+          "id": "H05-F04",
+          "field": "dose",
+          "assertion": "historical",
+          "value": {
+            "value": 20,
+            "unit": "mg"
+          },
+          "quote": "20 мг",
+          "span": {
+            "start": 38,
+            "end": 43
+          }
+        },
+        {
+          "id": "H05-F05",
+          "field": "symptom",
+          "assertion": "present",
+          "value": "головокружение",
+          "quote": "сильном головокружении",
+          "span": {
+            "start": 95,
+            "end": 117
+          }
+        },
+        {
+          "id": "H05-F06",
+          "field": "symptom",
+          "assertion": "present",
+          "value": "падение",
+          "quote": "падении",
+          "span": {
+            "start": 120,
+            "end": 127
+          }
+        },
+        {
+          "id": "H05-F07",
+          "field": "medication_use",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "Продолжает ли терапию, неизвестно",
+          "span": {
+            "start": 129,
+            "end": 162
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "confirmed_current_regimen",
+        "diagnosis",
+        "medication_allergy"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "confirmed_current_regimen",
+        "diagnosis",
+        "dose",
+        "event_date",
+        "medication",
+        "medication_allergy",
+        "medication_use",
+        "symptom"
+      ]
+    },
+    {
+      "id": "H06",
+      "profile_id": "SYN-H06",
+      "split": "holdout",
+      "template": "mixed_sources",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "На 22.09.2026 в карточке 44 года, в самоотчёте 49 лет. Врач: препарат Q 0.25 г дважды в день. Пациент: «250 мг один раз в день». Условное название Q; режимы не согласованы.",
+      "facts": [
+        {
+          "id": "H06-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-22",
+          "quote": "22.09.2026",
+          "span": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "id": "H06-F02",
+          "field": "age_years",
+          "assertion": "conflicting",
+          "value": 44,
+          "quote": "44 года",
+          "span": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "id": "H06-F03",
+          "field": "age_years",
+          "assertion": "conflicting",
+          "value": 49,
+          "quote": "49 лет",
+          "span": {
+            "start": 47,
+            "end": 53
+          }
+        },
+        {
+          "id": "H06-F04",
+          "field": "medication",
+          "assertion": "listed",
+          "value": "препарат Q",
+          "quote": "препарат Q",
+          "span": {
+            "start": 61,
+            "end": 71
+          }
+        },
+        {
+          "id": "H06-F05",
+          "field": "dose",
+          "assertion": "conflicting",
+          "value": {
+            "value": 0.25,
+            "unit": "g"
+          },
+          "quote": "0.25 г",
+          "span": {
+            "start": 72,
+            "end": 78
+          }
+        },
+        {
+          "id": "H06-F06",
+          "field": "frequency_per_day",
+          "assertion": "conflicting",
+          "value": 2,
+          "quote": "дважды в день",
+          "span": {
+            "start": 79,
+            "end": 92
+          }
+        },
+        {
+          "id": "H06-F07",
+          "field": "dose",
+          "assertion": "conflicting",
+          "value": {
+            "value": 250,
+            "unit": "mg"
+          },
+          "quote": "250 мг",
+          "span": {
+            "start": 104,
+            "end": 110
+          }
+        },
+        {
+          "id": "H06-F08",
+          "field": "frequency_per_day",
+          "assertion": "conflicting",
+          "value": 1,
+          "quote": "один раз в день",
+          "span": {
+            "start": 111,
+            "end": 126
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "confirmed_current_regimen",
+        "diagnosis"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "confirmed_current_regimen",
+        "diagnosis",
+        "dose",
+        "event_date",
+        "frequency_per_day",
+        "medication"
+      ]
+    },
+    {
+      "id": "H07",
+      "profile_id": "SYN-H07",
+      "split": "holdout",
+      "template": "archival",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "21.09.2026; 16 лет. Прежний проект «Авиандр 10 мг» перечёркнут врачом, назначения не было. Тревога после конфликта в семье. Аллергологический анамнез неизвестен.",
+      "facts": [
+        {
+          "id": "H07-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-21",
+          "quote": "21.09.2026",
+          "span": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "id": "H07-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 16,
+          "quote": "16 лет",
+          "span": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "id": "H07-F03",
+          "field": "medication",
+          "assertion": "cancelled_proposal",
+          "value": "Авиандр",
+          "quote": "Авиандр 10 мг",
+          "span": {
+            "start": 36,
+            "end": 49
+          }
+        },
+        {
+          "id": "H07-F04",
+          "field": "dose",
+          "assertion": "cancelled_proposal",
+          "value": {
+            "value": 10,
+            "unit": "mg"
+          },
+          "quote": "10 мг",
+          "span": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "id": "H07-F05",
+          "field": "medication_allergy",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "Аллергологический анамнез неизвестен",
+          "span": {
+            "start": 124,
+            "end": 160
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "diagnosis",
+        "concomitant_medications"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "concomitant_medications",
+        "diagnosis",
+        "dose",
+        "event_date",
+        "medication",
+        "medication_allergy"
+      ]
+    },
+    {
+      "id": "H08",
+      "profile_id": "SYN-H08",
+      "split": "holdout",
+      "template": "brief",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "20.09.26. 59 л. Д-з: ГТР? Авиандр: не начинал. Сон: плохой, не хуже прежнего. Шкала GAD-7 заполнена не полностью, версия не обозначена.",
+      "facts": [
+        {
+          "id": "H08-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-20",
+          "quote": "20.09.26",
+          "span": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "id": "H08-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 59,
+          "quote": "59 л.",
+          "span": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "id": "H08-F03",
+          "field": "diagnosis",
+          "assertion": "suspected",
+          "value": "ГТР",
+          "quote": "ГТР?",
+          "span": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "id": "H08-F04",
+          "field": "medication",
+          "assertion": "negated",
+          "value": "Авиандр",
+          "quote": "Авиандр: не начинал",
+          "span": {
+            "start": 26,
+            "end": 45
+          }
+        },
+        {
+          "id": "H08-F05",
+          "field": "sleep_change",
+          "assertion": "negated",
+          "value": "not_worse",
+          "quote": "не хуже прежнего",
+          "span": {
+            "start": 60,
+            "end": 76
+          }
+        },
+        {
+          "id": "H08-F06",
+          "field": "scale_name",
+          "assertion": "present",
+          "value": "GAD-7",
+          "quote": "GAD-7",
+          "span": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "id": "H08-F07",
+          "field": "scale_complete",
+          "assertion": "present",
+          "value": false,
+          "quote": "не полностью",
+          "span": {
+            "start": 100,
+            "end": 112
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "scale_version",
+        "scale_total",
+        "medication_allergy"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "diagnosis",
+        "event_date",
+        "medication",
+        "medication_allergy",
+        "scale_complete",
+        "scale_name",
+        "scale_total",
+        "scale_version",
+        "sleep_change"
+      ]
+    },
+    {
+      "id": "H09",
+      "profile_id": "SYN-H09",
+      "split": "holdout",
+      "template": "timeline",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "19 сентября 2026, 30 лет. План менялся вчера: вечерний приём отменён врачом. Сегодня отмечен только утренний приём Авиандра, вечер ещё не наступил. Причину вчерашнего изменения не указали.",
+      "facts": [
+        {
+          "id": "H09-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-19",
+          "quote": "19 сентября 2026",
+          "span": {
+            "start": 0,
+            "end": 16
+          }
+        },
+        {
+          "id": "H09-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 30,
+          "quote": "30 лет",
+          "span": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "id": "H09-F03",
+          "field": "plan_change",
+          "assertion": "present",
+          "value": "evening_cancelled",
+          "quote": "вечерний приём отменён врачом",
+          "span": {
+            "start": 46,
+            "end": 75
+          }
+        },
+        {
+          "id": "H09-F04",
+          "field": "adherence_morning",
+          "assertion": "patient_reported",
+          "value": "taken",
+          "quote": "отмечен только утренний приём",
+          "span": {
+            "start": 85,
+            "end": 114
+          }
+        },
+        {
+          "id": "H09-F05",
+          "field": "medication",
+          "assertion": "patient_reported",
+          "value": "Авиандр",
+          "quote": "Авиандра",
+          "span": {
+            "start": 115,
+            "end": 123
+          }
+        },
+        {
+          "id": "H09-F06",
+          "field": "adherence_evening",
+          "assertion": "not_due",
+          "value": null,
+          "quote": "вечер ещё не наступил",
+          "span": {
+            "start": 125,
+            "end": 146
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "dose",
+        "plan_change_reason",
+        "diagnosis"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "adherence_evening",
+        "adherence_morning",
+        "age_years",
+        "diagnosis",
+        "dose",
+        "event_date",
+        "medication",
+        "plan_change",
+        "plan_change_reason"
+      ]
+    },
+    {
+      "id": "H10",
+      "profile_id": "SYN-H10",
+      "split": "holdout",
+      "template": "narrative",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "18.09.2026. 72 года. Врач перечислил F41.1 и F32.0 без указания основного диагноза. «Появилась слабость после таблетки», время и название неизвестны. Авиандр обсуждали ранее, приём не подтверждён.",
+      "facts": [
+        {
+          "id": "H10-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-18",
+          "quote": "18.09.2026",
+          "span": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "id": "H10-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 72,
+          "quote": "72 года",
+          "span": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "id": "H10-F03",
+          "field": "diagnosis",
+          "assertion": "present",
+          "value": "F41.1",
+          "quote": "F41.1",
+          "span": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "id": "H10-F04",
+          "field": "diagnosis",
+          "assertion": "present",
+          "value": "F32.0",
+          "quote": "F32.0",
+          "span": {
+            "start": 45,
+            "end": 50
+          }
+        },
+        {
+          "id": "H10-F05",
+          "field": "symptom",
+          "assertion": "present",
+          "value": "слабость",
+          "quote": "Появилась слабость после таблетки",
+          "span": {
+            "start": 85,
+            "end": 118
+          }
+        },
+        {
+          "id": "H10-F06",
+          "field": "medication",
+          "assertion": "historical",
+          "value": "Авиандр",
+          "quote": "Авиандр обсуждали ранее",
+          "span": {
+            "start": 150,
+            "end": 173
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "primary_diagnosis",
+        "medication_name",
+        "symptom_onset",
+        "confirmed_current_regimen"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "confirmed_current_regimen",
+        "diagnosis",
+        "event_date",
+        "medication",
+        "medication_name",
+        "primary_diagnosis",
+        "symptom",
+        "symptom_onset"
+      ]
+    },
+    {
+      "id": "H11",
+      "profile_id": "SYN-H11",
+      "split": "holdout",
+      "template": "quote",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Текст без даты и возраста. «Лекарственной аллергии нет» — со слов пациента. Сосед принимает Авиандр; про собственные препараты не ответил. Вопрос о мыслях причинить себе вред оставлен пустым.",
+      "facts": [
+        {
+          "id": "H11-F01",
+          "field": "medication_allergy",
+          "assertion": "negated",
+          "value": false,
+          "quote": "Лекарственной аллергии нет",
+          "span": {
+            "start": 28,
+            "end": 54
+          }
+        },
+        {
+          "id": "H11-F02",
+          "field": "medication",
+          "assertion": "third_party",
+          "value": "Авиандр",
+          "quote": "Сосед принимает Авиандр",
+          "span": {
+            "start": 76,
+            "end": 99
+          }
+        },
+        {
+          "id": "H11-F03",
+          "field": "current_medications",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "про собственные препараты не ответил",
+          "span": {
+            "start": 101,
+            "end": 137
+          }
+        },
+        {
+          "id": "H11-F04",
+          "field": "self_harm_report",
+          "assertion": "unknown",
+          "value": null,
+          "quote": "Вопрос о мыслях причинить себе вред оставлен пустым",
+          "span": {
+            "start": 139,
+            "end": 190
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "age_years",
+        "event_date",
+        "diagnosis"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "current_medications",
+        "diagnosis",
+        "event_date",
+        "medication",
+        "medication_allergy",
+        "self_harm_report"
+      ]
+    },
+    {
+      "id": "H12",
+      "profile_id": "SYN-H12",
+      "split": "holdout",
+      "template": "prescription_first",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "text": "Визит 17.09.2026, 63 года. В назначении условный препарат W, 1/2 таблетки утром. Сила таблетки неизвестна. Начало записано 32.08.2026. Сейчас жалоб нет, но полный список препаратов не собран.",
+      "facts": [
+        {
+          "id": "H12-F01",
+          "field": "event_date",
+          "assertion": "present",
+          "value": "2026-09-17",
+          "quote": "17.09.2026",
+          "span": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "id": "H12-F02",
+          "field": "age_years",
+          "assertion": "present",
+          "value": 63,
+          "quote": "63 года",
+          "span": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "id": "H12-F03",
+          "field": "medication",
+          "assertion": "listed",
+          "value": "препарат W",
+          "quote": "препарат W",
+          "span": {
+            "start": 49,
+            "end": 59
+          }
+        },
+        {
+          "id": "H12-F04",
+          "field": "dose",
+          "assertion": "present",
+          "value": {
+            "value": 0.5,
+            "unit": "tablet"
+          },
+          "quote": "1/2 таблетки",
+          "span": {
+            "start": 61,
+            "end": 73
+          }
+        },
+        {
+          "id": "H12-F05",
+          "field": "medication_start",
+          "assertion": "invalid",
+          "value": null,
+          "quote": "32.08.2026",
+          "span": {
+            "start": 123,
+            "end": 133
+          }
+        },
+        {
+          "id": "H12-F06",
+          "field": "current_complaints",
+          "assertion": "negated",
+          "value": [],
+          "quote": "Сейчас жалоб нет",
+          "span": {
+            "start": 135,
+            "end": 151
+          }
+        }
+      ],
+      "critical_missing_fields": [
+        "tablet_strength",
+        "concomitant_medications",
+        "diagnosis"
+      ],
+      "annotation_scope": "Только target_fields этого случая; остальные поля не участвуют в метриках. Клинические выводы не размечены.",
+      "clinical_expectation": null,
+      "target_fields": [
+        "age_years",
+        "concomitant_medications",
+        "current_complaints",
+        "diagnosis",
+        "dose",
+        "event_date",
+        "medication",
+        "medication_start",
+        "tablet_strength"
+      ]
+    }
+  ]
+}

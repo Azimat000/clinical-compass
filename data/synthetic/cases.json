@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "dataset_version": "S03-v1",
+  "provenance": {
+    "synthetic": true,
+    "author": "Codex / S03",
+    "created_on": "2026-10-18",
+    "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+    "clinical_review_status": "not_reviewed",
+    "clinical_reviewer": null,
+    "clinical_gold": false,
+    "active": false
+  },
+  "offsets": "Python Unicode code points, zero-based, end-exclusive",
+  "annotation_policy": "docs/validation/dataset.md",
+  "prescription_values": "Вымышленные значения входа; не проверенные дозировки и не рекомендации.",
+  "cases": [
+    {
+      "id": "D01",
+      "profile_id": "SYN-D01",
+      "scenario_type": "consideration",
+      "title": "Подтверждённый в синтетическом профиле ГТР; кандидат для врачебного рассмотрения",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": 35,
+        "diagnosis": "ГТР, указан врачом в вымышленном случае",
+        "leading_specialty": "терапевт",
+        "symptoms": [
+          "постоянное беспокойство",
+          "нарушение сна"
+        ],
+        "medication_allergy": false,
+        "pregnancy_status": false,
+        "concomitant_medications": []
+      },
+      "aviandr_consideration": {
+        "draft": "Рассмотреть справку по Авиандра после проверки показаний и всех ограничений; это кандидат рассмотрения, не разрешение назначения.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R01",
+          "R02",
+          "R03",
+          "R05",
+          "R11",
+          "R12"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Подготовить врачу сверку действующей инструкции, анамнеза и вариантов терапии; дозу и решение оставляет врач.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Подготовить вопрос о желательности профильной консультации; научное основание категории и решение ещё требуют проверки.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "current_source_applicability",
+        "expert_review"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04"
+      ]
+    },
+    {
+      "id": "D02",
+      "profile_id": "SYN-D02",
+      "scenario_type": "restriction",
+      "title": "Возрастная граница и особая группа",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": 18,
+        "diagnosis": "тревожные жалобы, диагноз не установлен",
+        "leading_specialty": "акушер-гинеколог",
+        "symptoms": [
+          "беспокойство"
+        ],
+        "pregnancy_status": true,
+        "medication_allergy": null,
+        "concomitant_medications": null
+      },
+      "aviandr_consideration": {
+        "draft": "Не выдавать положительный допуск к Авиандра: ровно 18 лет, беременность и неизвестные сведения требуют проверки точных ограничений.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R01",
+          "R03",
+          "R06",
+          "R11",
+          "R12"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Проект рекомендации: уточнить диагноз/анамнез и обсудить подходящие для подтверждённой популяции варианты с врачом; автоматического назначения нет.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Подготовить обсуждение с профильным врачом с учётом особой группы; категория/срочность не утверждены.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "medication_allergy",
+        "concomitant_medications",
+        "confirmed_diagnosis",
+        "expert_review"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04"
+      ]
+    },
+    {
+      "id": "D03",
+      "profile_id": "SYN-D03",
+      "scenario_type": "depressive_symptoms",
+      "title": "Депрессивная симптоматика без установленного показания",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": 47,
+        "diagnosis": null,
+        "leading_specialty": "невролог",
+        "symptoms": [
+          "сниженное настроение",
+          "потеря интереса"
+        ],
+        "self_harm_report": null,
+        "current_medications": null
+      },
+      "aviandr_consideration": {
+        "draft": "Нельзя выводить показание к Авиандра из одного описания депрессивных симптомов; вернуть врачу пробел основания.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R02",
+          "R09",
+          "R11",
+          "R12",
+          "R13"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Проект рекомендации: врачебная оценка симптомов и недостающих сведений; стандартизированный инструмент доступен только после S07, выбор лечения за врачом.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Проект профильной консультации для уточнения состояния; обязательность и срочность требуют независимого обоснования.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "confirmed_diagnosis",
+        "self_harm_report",
+        "current_medications",
+        "expert_review"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04",
+        "B03"
+      ]
+    },
+    {
+      "id": "D04",
+      "profile_id": "SYN-D04",
+      "scenario_type": "deterioration",
+      "title": "Ухудшение и сообщение о намерении причинить себе вред",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": 52,
+        "diagnosis": "ГТР в прежней вымышленной записи",
+        "leading_specialty": "терапевт",
+        "symptoms": [
+          "усиление жалоб"
+        ],
+        "timeline": [
+          {
+            "date": "2026-10-10",
+            "report": "беспокойство"
+          },
+          {
+            "date": "2026-10-17",
+            "report": "сегодня есть намерение причинить себе вред"
+          }
+        ],
+        "current_medications": null
+      },
+      "aviandr_consideration": {
+        "draft": "Рассмотрение Авиандра не заменяет оценки нового сообщения; автоматического назначения/изменения нет.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R02",
+          "R11",
+          "R13",
+          "R15"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Проект для врача: отдельно проверить сообщение, давность и клиническое состояние; кандидат сигнала A01/A03 остаётся неактивным до утверждения протокола.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Кандидат обязательного маршрута для экспертной проверки, срочность не задана; фактическое направление подтверждает врач на сервере.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "current_medications",
+        "location",
+        "expert_review",
+        "approved_urgency"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04"
+      ]
+    },
+    {
+      "id": "D05",
+      "profile_id": "SYN-D05",
+      "scenario_type": "adverse_and_missed",
+      "title": "Нежелательная жалоба и пропуск",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": 28,
+        "diagnosis": "ГТР в вымышленной записи",
+        "leading_specialty": "психиатр",
+        "medications": [
+          {
+            "name": "Авиандр",
+            "status": "patient_reported",
+            "dose": null
+          }
+        ],
+        "symptoms": [
+          "тошнота"
+        ],
+        "timeline": [
+          {
+            "date": "2026-10-16",
+            "report": "утренний приём отметил, вечерний пропустил"
+          },
+          {
+            "date": "2026-10-17",
+            "report": "жалоба на тошноту; причинность не оценена"
+          }
+        ]
+      },
+      "aviandr_consideration": {
+        "draft": "Проверить фактический режим/инструкцию и сообщение о жалобе; не считать причинность установленной и не отменять препарат автоматически.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R04",
+          "R07",
+          "R14",
+          "R17",
+          "R19"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Проект для врача: оценить жалобу, выяснить причину пропуска и действующий план; изменения лечения только после врача.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Связанному врачу подготовить сообщение о жалобе/пропуске; необходимость отдельного направления и срочность требуют оценки.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "dose",
+        "adverse_event_causality",
+        "expert_review"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04"
+      ]
+    },
+    {
+      "id": "D06",
+      "profile_id": "SYN-D06",
+      "scenario_type": "incomplete_conflicting",
+      "title": "Неполнота и противоречия",
+      "provenance": {
+        "synthetic": true,
+        "author": "Codex / S03",
+        "created_on": "2026-10-18",
+        "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+        "clinical_review_status": "not_reviewed",
+        "clinical_reviewer": null,
+        "clinical_gold": false,
+        "active": false
+      },
+      "profile": {
+        "age_years": null,
+        "age_reports": [
+          33,
+          41
+        ],
+        "diagnosis": "ГТР? в неутверждённом тексте",
+        "leading_specialty": "кардиолог",
+        "medications": [
+          {
+            "name": "Авиандр",
+            "dose_reports": [
+              "10 мг",
+              "20 мг"
+            ],
+            "confirmed": false
+          }
+        ],
+        "medication_allergy": null,
+        "scale": {
+          "name": "PHQ-9",
+          "version": null,
+          "complete": false,
+          "total": null
+        }
+      },
+      "aviandr_consideration": {
+        "draft": "Недостаточно данных для справки о допустимости Авиандра; противоречивые значения не выбирать молча.",
+        "eligibility": null,
+        "source_rule_ids": [
+          "R01",
+          "R03",
+          "R04",
+          "R09",
+          "R11",
+          "R12",
+          "R18"
+        ],
+        "clinical_review_status": "not_reviewed"
+      },
+      "treatment_recommendations": {
+        "draft": "Проект рекомендации: врач уточняет возраст, диагноз, режим и аллергию; неполную анкету не суммировать и не подменять пропуски нулём.",
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "routing": {
+        "draft": "Показать отсутствие достаточных оснований для категории маршрута, запросить уточнение у врача; неизвестное не означает отсутствие риска.",
+        "category": null,
+        "urgency": null,
+        "active": false,
+        "requires_physician_confirmation": true,
+        "clinical_review_status": "not_reviewed"
+      },
+      "technical_expectations": [
+        "Показать исходные данные и их происхождение.",
+        "Не активировать неподтверждённые правила.",
+        "Сохранить неизвестное и противоречия.",
+        "Не выполнять назначение, изменение, отмену или направление без врача на сервере."
+      ],
+      "critical_missing_fields": [
+        "confirmed_age",
+        "confirmed_diagnosis",
+        "confirmed_current_regimen",
+        "medication_allergy",
+        "scale_version",
+        "expert_review"
+      ],
+      "clinical_expectation": null,
+      "activation_blockers": [
+        "B04",
+        "B03"
+      ]
+    }
+  ]
+}

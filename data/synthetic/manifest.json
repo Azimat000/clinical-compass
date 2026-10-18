@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "dataset_version": "S03-v1",
+  "frozen_on": "2026-10-18",
+  "provenance": {
+    "synthetic": true,
+    "author": "Codex / S03",
+    "created_on": "2026-10-18",
+    "origin": "Вымышлено с нуля для технической проверки; реальные истории, люди и контакты не использованы.",
+    "clinical_review_status": "not_reviewed",
+    "clinical_reviewer": null,
+    "clinical_gold": false,
+    "active": false
+  },
+  "counts": {
+    "demonstration": 6,
+    "development": 24,
+    "holdout": 12
+  },
+  "files": [
+    {
+      "path": "data/synthetic/cases.json",
+      "sha256": "2b990334661c1d0ac588753cc72e915a07a35743884cb71584f79a72f621da8f"
+    },
+    {
+      "path": "data/synthetic/extraction-development.json",
+      "sha256": "5c827aca7a31711eeb19dee93a2e6c8fabd5edd86a836f4faa7773cc78ffa79d"
+    },
+    {
+      "path": "data/synthetic/extraction-holdout.json",
+      "sha256": "7829d17ca57b65a1c00b371d81387799d8567299d88cccb76c274c71826012b0"
+    }
+  ],
+  "holdout_policy": {
+    "group_key": "profile_id",
+    "selected_before_extractor": true,
+    "clinical_blind_independence": false,
+    "development_use_prohibited": true,
+    "already_inspected_by_dataset_author": true,
+    "evaluation_stage": "S12",
+    "tuning_after_results": "Version this benchmark; use newly authored unseen profiles for another independent measurement."
+  }
+}

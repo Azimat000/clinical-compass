@@ -318,8 +318,12 @@
         }
       ],
       "evidence_expected": "Профиль плюс рекомендации плюс маршрутизация в каждом случае; в том числе обоснованный отказ или недостаток данных",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "data/synthetic/cases.json",
+        "docs/validation/dataset.md",
+        "evidence/S03/acceptance.md"
+      ]
     },
     {
       "id": "M05",
@@ -596,7 +600,11 @@
       ],
       "evidence_expected": "Отчет врача о полезности корректности и ограничениях",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/validation/dataset.md",
+        "data/synthetic/manifest.json",
+        "evidence/S03/acceptance.md"
+      ]
     },
     {
       "id": "E03",
@@ -754,7 +762,11 @@
       ],
       "evidence_expected": "Отложенный размеченный набор разных шаблонов; точность и полнота по полям; отдельно критичные пропуски",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/validation/dataset.md",
+        "data/synthetic/manifest.json",
+        "evidence/S03/acceptance.md"
+      ]
     },
     {
       "id": "T03",

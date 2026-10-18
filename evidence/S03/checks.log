@@ -1,0 +1,91 @@
+$ python3 tools/validate_synthetic.py
+{
+  "status": "PASS",
+  "errors": [],
+  "counts": {
+    "demonstration": 6,
+    "development": 24,
+    "holdout": 12
+  },
+  "unique_profiles_including_demo": 42,
+  "fact_count": 210,
+  "template_count": 12,
+  "assertion_counts": {
+    "present": 104,
+    "considered": 7,
+    "negated": 21,
+    "suspected": 4,
+    "unknown": 24,
+    "patient_reported": 11,
+    "conflicting": 15,
+    "historical": 10,
+    "stopped": 1,
+    "third_party": 2,
+    "listed": 5,
+    "invalid": 2,
+    "incomplete": 1,
+    "cancelled_proposal": 2,
+    "not_due": 1
+  },
+  "dose_units": {
+    "mg": 7,
+    "g": 2,
+    "ml": 1,
+    "None": 1,
+    "tablet": 1
+  },
+  "max_cross_split_text_similarity": 0.4661,
+  "nearest_pair": [
+    "DEV06",
+    "H04"
+  ],
+  "scope": "Structural/textual fixture integrity only; no extraction or clinical performance measured.",
+  "privacy_limit": "Contact pattern scan supplements authored provenance; it does not prove anonymization."
+}
+
+EXIT_CODE: 0
+
+$ python3 -m unittest discover -s tools -p test_synthetic_validation.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.904s
+
+OK
+
+EXIT_CODE: 0
+
+$ python3 -m unittest discover -s tools -p test_plan_validation.py
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.417s
+
+OK
+
+EXIT_CODE: 0
+
+$ python3 tools/validate_plan.py --pending-tag S03
+{
+  "slices": 26,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 4,
+  "fulfilled_requirements": 0,
+  "next_slice": "S04"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+
+EXIT_CODE: 0
+
+$ python3 tools/session.py status
+Текущий: нет
+Последний принятый: S03
+Следующий готовый: S04
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+
+EXIT_CODE: 0
+
+$ git diff --check
+
+EXIT_CODE: 0
