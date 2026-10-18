@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"></head>
+<body>
+<header><a class="brand" href="/">✳ Клинический компас</a><span class="badge">Синтетическое демо</span></header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Демонстрационные данные вымышлены. Медицинские рекомендации пока недоступны.</footer>
+</body></html>

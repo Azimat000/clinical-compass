@@ -1,0 +1,27 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/Dockerfile
+    command: ["sh", "-c", "python -m apps.compass seed-demo && exec python -m apps.compass serve --host 0.0.0.0"]
+    ports:
+      - "127.0.0.1:${COMPASS_PORT:-8000}:8000"
+    volumes:
+      - compass-data:/app/var
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 10
+  worker:
+    build:
+      context: .
+      dockerfile: apps/Dockerfile
+    command: ["python", "-m", "apps.compass", "worker"]
+    volumes:
+      - compass-data:/app/var
+    depends_on:
+      web:
+        condition: service_healthy
+volumes:
+  compass-data:

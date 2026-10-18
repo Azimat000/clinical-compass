@@ -1,0 +1,131 @@
+$ docker compose -p hac-s04 exec -T web python -m unittest discover -s apps/tests -v
+
+test_atomic_data_and_event_rollback (test_foundation.FoundationTests.test_atomic_data_and_event_rollback) ... ok
+test_catalog_extension_keeps_versions_and_blocks_incomplete_scores (test_foundation.FoundationTests.test_catalog_extension_keeps_versions_and_blocks_incomplete_scores) ... ok
+test_confirmation_requires_doctor_relationship_version_and_approval (test_foundation.FoundationTests.test_confirmation_requires_doctor_relationship_version_and_approval) ... ok
+test_event_retry_rolls_back_partial_handler_and_recovers (test_foundation.FoundationTests.test_event_retry_rolls_back_partial_handler_and_recovers) ... ok
+test_immutable_migrations_and_atomic_failure (test_foundation.FoundationTests.test_immutable_migrations_and_atomic_failure) ... ok
+test_model_guards_unknowns_foreign_keys_and_audit (test_foundation.FoundationTests.test_model_guards_unknowns_foreign_keys_and_audit) ... ok
+test_read_only_shell_escapes_input_and_rejects_other_hosts (test_foundation.FoundationTests.test_read_only_shell_escapes_input_and_rejects_other_hosts) ... ok
+test_schema_extension_preserves_existing_data (test_foundation.FoundationTests.test_schema_extension_preserves_existing_data) ... ok
+test_search_filter_and_index_update (test_foundation.FoundationTests.test_search_filter_and_index_update) ... ok
+test_seed_is_idempotent_and_survives_connection_restart (test_foundation.FoundationTests.test_seed_is_idempotent_and_survives_connection_restart) ... ok
+test_unknown_topic_goes_to_dead_queue (test_foundation.FoundationTests.test_unknown_topic_goes_to_dead_queue) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.123s
+
+OK
+
+exit=0
+$ docker compose -p hac-s04 exec -T web python apps/tests/smoke_restart.py
+{
+  "process_restart": [
+    {
+      "restart_round": 1,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "001_initial",
+        "status": "ok"
+      },
+      "six_cards": true
+    },
+    {
+      "restart_round": 2,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "001_initial",
+        "status": "ok"
+      },
+      "six_cards": true
+    }
+  ],
+  "durable_events_after_restart": 6,
+  "integrity": "ok"
+}
+
+
+exit=0
+$ docker compose -p hac-s04 exec -T web python -m pip check
+No broken requirements found.
+
+
+exit=0
+$ docker compose -p hac-s04 exec -T web python -c import sqlite3,json,platform; c=sqlite3.connect('/app/var/compass.sqlite3'); print(json.dumps({'python':platform.python_version(),'sqlite':sqlite3.sqlite_version,'migration':c.execute('select version,checksum from schema_migrations').fetchall(),'patients':[list(r) for r in c.execute('select id,created_at from patients order by id')],'events':[list(r) for r in c.execute('select id,status from outbox_events order by id')],'receipts':c.execute('select count(*) from event_receipts').fetchone()[0],'integrity':c.execute('pragma integrity_check').fetchone()[0],'foreign_key_errors':c.execute('pragma foreign_key_check').fetchall()}))
+{"python": "3.13.11", "sqlite": "3.46.1", "migration": [["001_initial", "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea"]], "patients": [["D01", "2026-10-18T18:54:39.660667+00:00"], ["D02", "2026-10-18T18:54:39.660894+00:00"], ["D03", "2026-10-18T18:54:39.660974+00:00"], ["D04", "2026-10-18T18:54:39.661025+00:00"], ["D05", "2026-10-18T18:54:39.661075+00:00"], ["D06", "2026-10-18T18:54:39.661123+00:00"]], "events": [["0139fc75-1459-4d79-90a0-07c431b532cd", "processed"], ["57fd3950-186f-4be6-8974-7d95e7063468", "processed"], ["62925499-6313-45e7-8798-48137adc3a94", "processed"], ["7af426c9-3f4f-428d-b520-64ade4bf0893", "processed"], ["91f5e2c2-e792-483a-8331-dea9e8aa4732", "processed"], ["babe795e-7cb1-49a7-b77f-9ed1af36ba5c", "processed"]], "receipts": 6, "integrity": "ok", "foreign_key_errors": []}
+
+
+exit=0
+$ docker compose -p hac-s04 restart
+
+ Container hac-s04-worker-1 Restarting
+ Container hac-s04-web-1 Restarting
+ Container hac-s04-worker-1 Started
+ Container hac-s04-web-1 Started
+
+exit=0
+$ docker compose -p hac-s04 up -d --wait
+
+ Container hac-s04-worker-1 Running
+ Container hac-s04-web-1 Running
+ Container hac-s04-web-1 Waiting
+ Container hac-s04-web-1 Healthy
+ Container hac-s04-web-1 Waiting
+ Container hac-s04-worker-1 Waiting
+ Container hac-s04-web-1 Healthy
+ Container hac-s04-worker-1 Healthy
+
+exit=0
+$ docker compose -p hac-s04 exec -T web python -c import sqlite3,json,platform; c=sqlite3.connect('/app/var/compass.sqlite3'); print(json.dumps({'python':platform.python_version(),'sqlite':sqlite3.sqlite_version,'migration':c.execute('select version,checksum from schema_migrations').fetchall(),'patients':[list(r) for r in c.execute('select id,created_at from patients order by id')],'events':[list(r) for r in c.execute('select id,status from outbox_events order by id')],'receipts':c.execute('select count(*) from event_receipts').fetchone()[0],'integrity':c.execute('pragma integrity_check').fetchone()[0],'foreign_key_errors':c.execute('pragma foreign_key_check').fetchall()}))
+{"python": "3.13.11", "sqlite": "3.46.1", "migration": [["001_initial", "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea"]], "patients": [["D01", "2026-10-18T18:54:39.660667+00:00"], ["D02", "2026-10-18T18:54:39.660894+00:00"], ["D03", "2026-10-18T18:54:39.660974+00:00"], ["D04", "2026-10-18T18:54:39.661025+00:00"], ["D05", "2026-10-18T18:54:39.661075+00:00"], ["D06", "2026-10-18T18:54:39.661123+00:00"]], "events": [["0139fc75-1459-4d79-90a0-07c431b532cd", "processed"], ["57fd3950-186f-4be6-8974-7d95e7063468", "processed"], ["62925499-6313-45e7-8798-48137adc3a94", "processed"], ["7af426c9-3f4f-428d-b520-64ade4bf0893", "processed"], ["91f5e2c2-e792-483a-8331-dea9e8aa4732", "processed"], ["babe795e-7cb1-49a7-b77f-9ed1af36ba5c", "processed"]], "receipts": 6, "integrity": "ok", "foreign_key_errors": []}
+
+
+exit=0
+$ docker compose -p hac-s04 down
+
+ Container hac-s04-worker-1 Stopping
+ Container hac-s04-worker-1 Stopped
+ Container hac-s04-worker-1 Removing
+ Container hac-s04-worker-1 Removed
+ Container hac-s04-web-1 Stopping
+ Container hac-s04-web-1 Stopped
+ Container hac-s04-web-1 Removing
+ Container hac-s04-web-1 Removed
+ Network hac-s04_default Removing
+ Network hac-s04_default Removed
+
+exit=0
+$ docker compose -p hac-s04 up -d --wait
+
+ Network hac-s04_default Creating
+ Network hac-s04_default Created
+ Container hac-s04-web-1 Creating
+ Container hac-s04-web-1 Created
+ Container hac-s04-worker-1 Creating
+ Container hac-s04-worker-1 Created
+ Container hac-s04-web-1 Starting
+ Container hac-s04-web-1 Started
+ Container hac-s04-web-1 Waiting
+ Container hac-s04-web-1 Healthy
+ Container hac-s04-worker-1 Starting
+ Container hac-s04-worker-1 Started
+ Container hac-s04-web-1 Waiting
+ Container hac-s04-worker-1 Waiting
+ Container hac-s04-worker-1 Healthy
+ Container hac-s04-web-1 Healthy
+
+exit=0
+$ docker compose -p hac-s04 exec -T web python -c import sqlite3,json,platform; c=sqlite3.connect('/app/var/compass.sqlite3'); print(json.dumps({'python':platform.python_version(),'sqlite':sqlite3.sqlite_version,'migration':c.execute('select version,checksum from schema_migrations').fetchall(),'patients':[list(r) for r in c.execute('select id,created_at from patients order by id')],'events':[list(r) for r in c.execute('select id,status from outbox_events order by id')],'receipts':c.execute('select count(*) from event_receipts').fetchone()[0],'integrity':c.execute('pragma integrity_check').fetchone()[0],'foreign_key_errors':c.execute('pragma foreign_key_check').fetchall()}))
+{"python": "3.13.11", "sqlite": "3.46.1", "migration": [["001_initial", "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea"]], "patients": [["D01", "2026-10-18T18:54:39.660667+00:00"], ["D02", "2026-10-18T18:54:39.660894+00:00"], ["D03", "2026-10-18T18:54:39.660974+00:00"], ["D04", "2026-10-18T18:54:39.661025+00:00"], ["D05", "2026-10-18T18:54:39.661075+00:00"], ["D06", "2026-10-18T18:54:39.661123+00:00"]], "events": [["0139fc75-1459-4d79-90a0-07c431b532cd", "processed"], ["57fd3950-186f-4be6-8974-7d95e7063468", "processed"], ["62925499-6313-45e7-8798-48137adc3a94", "processed"], ["7af426c9-3f4f-428d-b520-64ade4bf0893", "processed"], ["91f5e2c2-e792-483a-8331-dea9e8aa4732", "processed"], ["babe795e-7cb1-49a7-b77f-9ed1af36ba5c", "processed"]], "receipts": 6, "integrity": "ok", "foreign_key_errors": []}
+
+
+exit=0
+$ docker compose -p hac-s04 ps
+NAME               IMAGE            COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+hac-s04-web-1      hac-s04-web      "sh -c 'python -m ap…"   web       6 seconds ago   Up 6 seconds (healthy)   127.0.0.1:18004->8000/tcp
+hac-s04-worker-1   hac-s04-worker   "python -m apps.comp…"   worker    6 seconds ago   Up Less than a second    8000/tcp
+
+
+exit=0

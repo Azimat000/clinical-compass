@@ -20,7 +20,10 @@
       ],
       "evidence_expected": "Контрольные примеры подсчета и неполных анкет; источник русской валидации и условия использования",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F02",
@@ -40,7 +43,10 @@
       ],
       "evidence_expected": "Сценарии соответствующего и неподходящего назначения; каждое утверждение связано с источником",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F03",
@@ -61,7 +67,10 @@
       ],
       "evidence_expected": "Положительные и отрицательные сценарии риска; неизвестные сведения не считаются отсутствием риска",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F04",
@@ -82,7 +91,10 @@
       ],
       "evidence_expected": "Несколько визитов и самоотчетов; сравнение сопоставимых версий шкал",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F05",
@@ -104,7 +116,10 @@
       ],
       "evidence_expected": "Отчет пациента сохраняется и появляется у ведущего врача; пациент видит собственную динамику",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F06",
@@ -124,7 +139,10 @@
       ],
       "evidence_expected": "Двустороннее сообщение и повторная доставка после разрыва соединения",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F07",
@@ -144,7 +162,10 @@
       ],
       "evidence_expected": "Врач видит пропуски и отсутствие данных как разные состояния",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "F08",
@@ -184,7 +205,10 @@
       ],
       "evidence_expected": "Оба типа маршрутизации; неполные данные; отсутствие самостоятельного направления",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M01",
@@ -216,7 +240,10 @@
       ],
       "evidence_expected": "Пациент не меняет назначения; врач не читает чужого пациента; попытки прямого доступа отвергаются",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M02",
@@ -245,7 +272,10 @@
       ],
       "evidence_expected": "Два кабинета показывают один отчет без ручной пересылки",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M03",
@@ -286,7 +316,10 @@
       ],
       "evidence_expected": "Тест каждого из пяти видов клинических действий; пациент получает только подтвержденный план",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M04",
@@ -322,7 +355,9 @@
       "actual_evidence": [
         "data/synthetic/cases.json",
         "docs/validation/dataset.md",
-        "evidence/S03/acceptance.md"
+        "evidence/S03/acceptance.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
       ]
     },
     {
@@ -361,7 +396,10 @@
       ],
       "evidence_expected": "Замер от приема критических данных до видимого уведомления; сбой и повтор; журнал действий",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M06",
@@ -390,7 +428,10 @@
       ],
       "evidence_expected": "Проверка обеих категорий без опоры только на цвет; заметность в карточке и списке",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "M07",
@@ -436,7 +477,9 @@
         "evidence/S02/received-review.md",
         "evidence/S02/received-research.md",
         "evidence/S02/received-grls-check.json",
-        "evidence/S02/acceptance-review.md"
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
       ]
     },
     {
@@ -502,7 +545,9 @@
         "evidence/S02/received-research.md",
         "evidence/S02/received/manifest.json",
         "docs/clinical/validation-request.md",
-        "evidence/S02/acceptance-review.md"
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
       ]
     },
     {
@@ -525,7 +570,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
       ]
     },
     {
@@ -548,7 +595,10 @@
       ],
       "evidence_expected": "Проверки чужих данных; отсутствие персональных сведений в логах презентации репозитории и внешних запросах",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
     },
     {
       "id": "E01",
@@ -946,8 +996,16 @@
         }
       ],
       "evidence_expected": "Нагрузочный отчет и объяснение узких мест; честное разделение проверенного и предполагаемого",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
     },
     {
       "id": "T10",
@@ -982,8 +1040,16 @@
         }
       ],
       "evidence_expected": "Демонстрация добавления тестовой шкалы или правила без изменения вычислительного ядра",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
     },
     {
       "id": "T11",
@@ -1023,8 +1089,16 @@
         }
       ],
       "evidence_expected": "Показать поиск выборку и безопасное расширение схемы; замер запросов",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
     },
     {
       "id": "T12",
@@ -1044,8 +1118,16 @@
         }
       ],
       "evidence_expected": "Матрица сущностей F01-F08 M01-M10; каждый основной процесс сохраняет нужные данные",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
     },
     {
       "id": "T13",
@@ -2064,7 +2146,14 @@
         "evidence/S02/received-review.md",
         "evidence/S02/received-research.md",
         "evidence/S02/received/manifest.json",
-        "evidence/S02/acceptance-review.md"
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
       ]
     },
     {

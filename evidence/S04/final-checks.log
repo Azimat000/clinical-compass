@@ -1,0 +1,25 @@
+$ python3 tools/validate_plan.py --pending-tag S04
+{
+  "slices": 26,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 5,
+  "fulfilled_requirements": 0,
+  "next_slice": "S05"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+
+exit=0
+$ python3 tools/session.py status
+Текущий: нет
+Последний принятый: S04
+Следующий готовый: S05
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+
+exit=0
+$ git diff --cached --check
+
+
+exit=0

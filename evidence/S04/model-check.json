@@ -1,0 +1,632 @@
+{
+  "health": {
+    "status": "ok",
+    "schema_version": "001_initial",
+    "foreign_keys": true,
+    "journal_mode": "delete"
+  },
+  "sqlite_objects": [
+    {
+      "name": "assessments_timeline",
+      "type": "index",
+      "tbl_name": "assessments"
+    },
+    {
+      "name": "encounters_timeline",
+      "type": "index",
+      "tbl_name": "encounters"
+    },
+    {
+      "name": "messages_timeline",
+      "type": "index",
+      "tbl_name": "messages"
+    },
+    {
+      "name": "observations_timeline",
+      "type": "index",
+      "tbl_name": "observations"
+    },
+    {
+      "name": "one_leading_doctor",
+      "type": "index",
+      "tbl_name": "care_relationships"
+    },
+    {
+      "name": "outbox_ready",
+      "type": "index",
+      "tbl_name": "outbox_events"
+    },
+    {
+      "name": "adherence_reports",
+      "type": "table",
+      "tbl_name": "adherence_reports"
+    },
+    {
+      "name": "adverse_events",
+      "type": "table",
+      "tbl_name": "adverse_events"
+    },
+    {
+      "name": "alerts",
+      "type": "table",
+      "tbl_name": "alerts"
+    },
+    {
+      "name": "assessments",
+      "type": "table",
+      "tbl_name": "assessments"
+    },
+    {
+      "name": "audit_entries",
+      "type": "table",
+      "tbl_name": "audit_entries"
+    },
+    {
+      "name": "care_actions",
+      "type": "table",
+      "tbl_name": "care_actions"
+    },
+    {
+      "name": "care_relationships",
+      "type": "table",
+      "tbl_name": "care_relationships"
+    },
+    {
+      "name": "catalog_versions",
+      "type": "table",
+      "tbl_name": "catalog_versions"
+    },
+    {
+      "name": "consents",
+      "type": "table",
+      "tbl_name": "consents"
+    },
+    {
+      "name": "conversations",
+      "type": "table",
+      "tbl_name": "conversations"
+    },
+    {
+      "name": "deliveries",
+      "type": "table",
+      "tbl_name": "deliveries"
+    },
+    {
+      "name": "doctor_confirmations",
+      "type": "table",
+      "tbl_name": "doctor_confirmations"
+    },
+    {
+      "name": "documents",
+      "type": "table",
+      "tbl_name": "documents"
+    },
+    {
+      "name": "encounter_search",
+      "type": "table",
+      "tbl_name": "encounter_search"
+    },
+    {
+      "name": "encounter_search_config",
+      "type": "table",
+      "tbl_name": "encounter_search_config"
+    },
+    {
+      "name": "encounter_search_content",
+      "type": "table",
+      "tbl_name": "encounter_search_content"
+    },
+    {
+      "name": "encounter_search_data",
+      "type": "table",
+      "tbl_name": "encounter_search_data"
+    },
+    {
+      "name": "encounter_search_docsize",
+      "type": "table",
+      "tbl_name": "encounter_search_docsize"
+    },
+    {
+      "name": "encounter_search_idx",
+      "type": "table",
+      "tbl_name": "encounter_search_idx"
+    },
+    {
+      "name": "encounters",
+      "type": "table",
+      "tbl_name": "encounters"
+    },
+    {
+      "name": "event_receipts",
+      "type": "table",
+      "tbl_name": "event_receipts"
+    },
+    {
+      "name": "extracted_facts",
+      "type": "table",
+      "tbl_name": "extracted_facts"
+    },
+    {
+      "name": "extraction_runs",
+      "type": "table",
+      "tbl_name": "extraction_runs"
+    },
+    {
+      "name": "messages",
+      "type": "table",
+      "tbl_name": "messages"
+    },
+    {
+      "name": "observations",
+      "type": "table",
+      "tbl_name": "observations"
+    },
+    {
+      "name": "outbox_events",
+      "type": "table",
+      "tbl_name": "outbox_events"
+    },
+    {
+      "name": "patients",
+      "type": "table",
+      "tbl_name": "patients"
+    },
+    {
+      "name": "proposals",
+      "type": "table",
+      "tbl_name": "proposals"
+    },
+    {
+      "name": "referrals",
+      "type": "table",
+      "tbl_name": "referrals"
+    },
+    {
+      "name": "risk_evaluations",
+      "type": "table",
+      "tbl_name": "risk_evaluations"
+    },
+    {
+      "name": "schema_migrations",
+      "type": "table",
+      "tbl_name": "schema_migrations"
+    },
+    {
+      "name": "self_reports",
+      "type": "table",
+      "tbl_name": "self_reports"
+    },
+    {
+      "name": "sessions",
+      "type": "table",
+      "tbl_name": "sessions"
+    },
+    {
+      "name": "source_versions",
+      "type": "table",
+      "tbl_name": "source_versions"
+    },
+    {
+      "name": "therapy_courses",
+      "type": "table",
+      "tbl_name": "therapy_courses"
+    },
+    {
+      "name": "users",
+      "type": "table",
+      "tbl_name": "users"
+    },
+    {
+      "name": "audit_no_delete",
+      "type": "trigger",
+      "tbl_name": "audit_entries"
+    },
+    {
+      "name": "audit_no_update",
+      "type": "trigger",
+      "tbl_name": "audit_entries"
+    },
+    {
+      "name": "confirmation_guard",
+      "type": "trigger",
+      "tbl_name": "doctor_confirmations"
+    },
+    {
+      "name": "confirmation_no_delete",
+      "type": "trigger",
+      "tbl_name": "doctor_confirmations"
+    },
+    {
+      "name": "confirmation_no_update",
+      "type": "trigger",
+      "tbl_name": "doctor_confirmations"
+    },
+    {
+      "name": "confirmed_proposal_no_update",
+      "type": "trigger",
+      "tbl_name": "proposals"
+    },
+    {
+      "name": "encounter_search_delete",
+      "type": "trigger",
+      "tbl_name": "encounters"
+    },
+    {
+      "name": "encounter_search_insert",
+      "type": "trigger",
+      "tbl_name": "encounters"
+    },
+    {
+      "name": "encounter_search_update",
+      "type": "trigger",
+      "tbl_name": "encounters"
+    }
+  ],
+  "clinical_objects_empty": {
+    "source_versions": 0,
+    "catalog_versions": 0,
+    "assessments": 0,
+    "proposals": 0,
+    "doctor_confirmations": 0,
+    "care_actions": 0,
+    "therapy_courses": 0,
+    "referrals": 0,
+    "alerts": 0,
+    "deliveries": 0
+  },
+  "patient_count": 6,
+  "D06_age_status": "conflicting",
+  "foreign_key_check": [],
+  "integrity_check": "ok",
+  "http_routes": [
+    {
+      "rule": "/static/<path:filename>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "rule": "/healthz",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "rule": "/",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "rule": "/demo/<patient_id>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    }
+  ],
+  "migration": [
+    {
+      "version": "001_initial",
+      "checksum": "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea",
+      "applied_at": "2026-10-18T18:54:16.544252+00:00"
+    }
+  ],
+  "primary_keys_not_null": {
+    "schema_migrations": [
+      {
+        "cid": 0,
+        "name": "version",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "users": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "sessions": [
+      {
+        "cid": 0,
+        "name": "token_hash",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "patients": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "care_relationships": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "encounters": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "observations": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "source_versions": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "catalog_versions": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "assessments": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "self_reports": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "proposals": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "doctor_confirmations": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "care_actions": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "therapy_courses": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "referrals": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "risk_evaluations": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "adverse_events": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "alerts": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "conversations": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "messages": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "adherence_reports": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "documents": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "extraction_runs": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "extracted_facts": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "consents": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "audit_entries": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "outbox_events": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "event_receipts": [
+      {
+        "cid": 0,
+        "name": "event_id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "consumer",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 2
+      }
+    ],
+    "deliveries": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ]
+  }
+}

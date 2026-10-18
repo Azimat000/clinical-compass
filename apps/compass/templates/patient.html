@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}{{ patient.code }} — Клинический компас{% endblock %}
+{% block content %}<a class="back" href="/">← Все случаи</a><span class="eyebrow">СИНТЕТИЧЕСКИЙ СЛУЧАЙ · {{ patient.id }}</span><h1>{{ patient.code }}</h1><section class="notice"><strong>Карточка прототипа</strong><p>Исходные сведения вымышлены и не проверены врачом. Отсутствие сведений не означает отсутствие риска. Назначения и направления здесь не создаются.</p></section><section><h2>Записи</h2>{% for e in encounters %}<article class="record"><p>{{ e.narrative }}</p><span class="muted">Происхождение: {{ e.origin }}</span></article>{% endfor %}</section>{% endblock %}
