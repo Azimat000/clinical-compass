@@ -127,10 +127,15 @@ class FoundationTests(unittest.TestCase):
         self.assertEqual('002_test_extension', health(self.db)['schema_version'])
         self.assertEqual([], self.db.execute('PRAGMA foreign_key_check').fetchall())
 
-    def test_read_only_shell_escapes_input_and_rejects_other_hosts(self):
+    def test_authenticated_shell_escapes_input_and_rejects_other_hosts(self):
         seed_demo(self.db)
+        from test_access import setup_identities, login
+        from apps.compass.access import invite, accept_invite
+        setup_identities(self.db)
+        accept_invite(self.db, 'pat-a', invite(self.db, 'doc-a', 'D01'))
         app = create_app(self.path)
         client = app.test_client()
+        self.assertEqual(302, login(client, 'doc-a').status_code)
         self.assertEqual('ok', client.get('/healthz').json['status'])
         page = client.get('/').get_data(as_text=True)
         self.assertIn('Демо 01', page)

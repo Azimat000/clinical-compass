@@ -35,9 +35,12 @@ def seed_demo(db):
                        ('demo.seeded', code, stamp, json.dumps({'synthetic': True})))
 
 
-def patient_list(db, query='', age_status=''):
+def patient_list(db, query='', age_status='', doctor_id=None):
     sql = 'SELECT p.* FROM patients p WHERE 1=1'
     params = []
+    if doctor_id is not None:
+        sql += ' AND EXISTS (SELECT 1 FROM care_relationships r WHERE r.patient_id=p.id AND r.doctor_id=? AND r.ends_at IS NULL AND r.starts_at<=?)'
+        params += [doctor_id, now()]
     if query:
         # Quote the whole input as an FTS literal; users cannot inject its grammar.
         literal = '"' + query.replace('"', '""') + '"'

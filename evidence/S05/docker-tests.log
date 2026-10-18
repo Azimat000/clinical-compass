@@ -1,0 +1,29 @@
+test_ended_relationship_immediately_revokes_doctor_access (test_access.AccessTests.test_ended_relationship_immediately_revokes_doctor_access) ... ok
+test_expired_revoked_disabled_doctor_and_wrong_owner_invites (test_access.AccessTests.test_expired_revoked_disabled_doctor_and_wrong_owner_invites) ... ok
+test_forged_cookie_and_hidden_patient_search (test_access.AccessTests.test_forged_cookie_and_hidden_patient_search) ... ok
+test_invitation_bound_to_recipient_single_use_competing_offer_invalidated (test_access.AccessTests.test_invitation_bound_to_recipient_single_use_competing_offer_invalidated) ... ok
+test_login_csrf_replay_and_authenticated_csrf (test_access.AccessTests.test_login_csrf_replay_and_authenticated_csrf) ... ok
+test_login_throttle_persistent_and_generic_errors (test_access.AccessTests.test_login_throttle_persistent_and_generic_errors) ... ok
+test_no_anonymous_cards_or_api (test_access.AccessTests.test_no_anonymous_cards_or_api) ... ok
+test_patient_document_reports_and_actions_access_matrix (test_access.AccessTests.test_patient_document_reports_and_actions_access_matrix) ... ok
+test_recipient_reassignment_and_future_relationship_do_not_grant_access (test_access.AccessTests.test_recipient_reassignment_and_future_relationship_do_not_grant_access) ... ok
+test_roles_invitation_pair_and_shared_technical_report_after_restart (test_access.AccessTests.test_roles_invitation_pair_and_shared_technical_report_after_restart) ... ok
+test_secure_configuration_and_no_secrets_in_audit (test_access.AccessTests.test_secure_configuration_and_no_secrets_in_audit) ... ok
+test_seed_accounts_random_idempotent_and_no_implicit_relationship (test_access.AccessTests.test_seed_accounts_random_idempotent_and_no_implicit_relationship) ... ok
+test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled (test_access.AccessTests.test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled) ... ok
+test_atomic_data_and_event_rollback (test_foundation.FoundationTests.test_atomic_data_and_event_rollback) ... ok
+test_authenticated_shell_escapes_input_and_rejects_other_hosts (test_foundation.FoundationTests.test_authenticated_shell_escapes_input_and_rejects_other_hosts) ... ok
+test_catalog_extension_keeps_versions_and_blocks_incomplete_scores (test_foundation.FoundationTests.test_catalog_extension_keeps_versions_and_blocks_incomplete_scores) ... ok
+test_confirmation_requires_doctor_relationship_version_and_approval (test_foundation.FoundationTests.test_confirmation_requires_doctor_relationship_version_and_approval) ... ok
+test_event_retry_rolls_back_partial_handler_and_recovers (test_foundation.FoundationTests.test_event_retry_rolls_back_partial_handler_and_recovers) ... ok
+test_immutable_migrations_and_atomic_failure (test_foundation.FoundationTests.test_immutable_migrations_and_atomic_failure) ... ok
+test_model_guards_unknowns_foreign_keys_and_audit (test_foundation.FoundationTests.test_model_guards_unknowns_foreign_keys_and_audit) ... ok
+test_schema_extension_preserves_existing_data (test_foundation.FoundationTests.test_schema_extension_preserves_existing_data) ... ok
+test_search_filter_and_index_update (test_foundation.FoundationTests.test_search_filter_and_index_update) ... ok
+test_seed_is_idempotent_and_survives_connection_restart (test_foundation.FoundationTests.test_seed_is_idempotent_and_survives_connection_restart) ... ok
+test_unknown_topic_goes_to_dead_queue (test_foundation.FoundationTests.test_unknown_topic_goes_to_dead_queue) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 7.790s
+
+OK

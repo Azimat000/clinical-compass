@@ -239,10 +239,15 @@
         }
       ],
       "evidence_expected": "Пациент не меняет назначения; врач не читает чужого пациента; попытки прямого доступа отвергаются",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
       ]
     },
     {
@@ -271,10 +276,15 @@
         }
       ],
       "evidence_expected": "Два кабинета показывают один отчет без ручной пересылки",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
       ]
     },
     {
@@ -594,10 +604,15 @@
         }
       ],
       "evidence_expected": "Проверки чужих данных; отсутствие персональных сведений в логах презентации репозитории и внешних запросах",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
       ]
     },
     {
@@ -1146,8 +1161,14 @@
         }
       ],
       "evidence_expected": "Негативные проверки доступа; проверка логов и резервных копий; карта угроз",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
+      ]
     },
     {
       "id": "C01",

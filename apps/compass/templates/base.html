@@ -2,7 +2,7 @@
 <html lang="ru">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"></head>
 <body>
-<header><a class="brand" href="/">✳ Клинический компас</a><span class="badge">Синтетическое демо</span></header>
+<header><a class="brand" href="/">✳ Клинический компас</a><span class="badge">Синтетическое демо</span>{% if current_user %}<nav aria-label="Кабинет"><span>{{ current_user.display_name }} · {{ 'Врач' if current_user.role=='doctor' else 'Пациент' }}</span><form action="{{ url_for('logout') }}" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Выйти</button></form></nav>{% endif %}</header>
 <main>{% block content %}{% endblock %}</main>
 <footer>Демонстрационные данные вымышлены. Медицинские рекомендации пока недоступны.</footer>
 </body></html>

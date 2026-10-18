@@ -1,0 +1,73 @@
+ Image hac-s04-worker Building
+ Image hac-s04-web Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 967B done
+#1 DONE 0.0s
+
+#2 [worker internal] load build definition from Dockerfile
+#2 transferring dockerfile: 618B done
+#2 DONE 0.0s
+
+#3 [worker internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#3 ...
+
+#4 [auth] library/python:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [worker internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#3 DONE 1.4s
+
+#5 [web internal] load .dockerignore
+#5 transferring context: 131B done
+#5 DONE 0.0s
+
+#6 [web 1/6] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#6 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#6 DONE 0.0s
+
+#7 [web internal] load build context
+#7 transferring context: 70.34kB 0.0s done
+#7 DONE 0.0s
+
+#8 [web 2/6] WORKDIR /app
+#8 CACHED
+
+#9 [web 3/6] COPY apps/requirements.lock /app/apps/requirements.lock
+#9 CACHED
+
+#10 [web 4/6] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#10 CACHED
+
+#11 [worker 5/6] COPY apps /app/apps
+#11 DONE 0.0s
+
+#12 [web 6/6] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#12 DONE 0.0s
+
+#13 [web] exporting to image
+#13 exporting layers 0.0s done
+#13 exporting manifest sha256:8c5a57e161031609ea02e4a153b00c4790a5b00b8954d11dffea4d25695543ce done
+#13 exporting config sha256:3a4bd8a89adebd9a9243f0be44e1091239ef9430f596c3017a338f9a5b985c5d done
+#13 exporting attestation manifest sha256:2b93834ca06e62868b75a11d030507ec22fb44a6d76b51c6d88bd0f1c3a16fbf 0.0s done
+#13 exporting manifest list sha256:91db6c1d0caf3c20470aac8533a263a47e018722faa76e78ff4742e01e75e1a8 done
+#13 naming to docker.io/library/hac-s04-web:latest done
+#13 unpacking to docker.io/library/hac-s04-web:latest 0.0s done
+#13 DONE 0.1s
+
+#14 [worker] exporting to image
+#14 exporting layers 0.0s done
+#14 exporting manifest sha256:2215a7426bfa7990f42c4297389fcb4475fe4380e430205237febe8d70d8caef done
+#14 exporting config sha256:f40d6091dde08271e79418605cf98c73bec6fc3ee056e62a4e35b65c43fe902d done
+#14 exporting attestation manifest sha256:c25f9391aaf75359800c82f257916070dd6402fd3fc448287e69716866300ea8 0.0s done
+#14 exporting manifest list sha256:c08fbdb4ff8d2f33cf96dc0ab72fdab72e27e42a141bd575c9a71096cf671444 done
+#14 naming to docker.io/library/hac-s04-worker:latest done
+#14 unpacking to docker.io/library/hac-s04-worker:latest 0.0s done
+#14 DONE 0.1s
+
+#15 [worker] resolving provenance for metadata file
+#15 DONE 0.0s
+
+#16 [web] resolving provenance for metadata file
+#16 DONE 0.0s
+ Image hac-s04-worker Built
+ Image hac-s04-web Built

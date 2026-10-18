@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description='Clinical Compass synthetic demo')
     parser.add_argument('--db', default=os.environ.get('COMPASS_DB', 'var/compass.sqlite3'))
     commands = parser.add_subparsers(dest='command', required=True)
-    for command in ('migrate', 'seed-demo', 'status'):
+    for command in ('migrate', 'seed-demo', 'seed-accounts', 'status'):
         commands.add_parser(command)
     worker = commands.add_parser('worker')
     worker.add_argument('--once', action='store_true')
@@ -30,6 +30,9 @@ def main():
         migrate(db)
         if args.command == 'seed-demo':
             seed_demo(db)
+        elif args.command == 'seed-accounts':
+            from .access import seed_accounts
+            print(json.dumps(seed_accounts(db), ensure_ascii=False, indent=2))
         elif args.command == 'status':
             print(json.dumps(health(db), ensure_ascii=False))
         elif args.command == 'worker':
