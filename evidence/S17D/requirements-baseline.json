@@ -1,0 +1,1370 @@
+[
+  {
+    "id": "F01",
+    "source": "case.pdf, стр. 1",
+    "kind": "Функции",
+    "text": "Предлагать стандартизированные методы оценки состояния пациента",
+    "primary_slice": "S07",
+    "verification_slices": [
+      "S17",
+      "S08B",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "F01.1",
+        "text": "Предлагать стандартизированные методы оценки состояния пациента"
+      }
+    ],
+    "evidence_expected": "Контрольные примеры подсчета и неполных анкет; источник русской валидации и условия использования",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S07/research.md",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S08B/acceptance.md",
+      "evidence/S08B/final-checks.log",
+      "evidence/S08B/upgrade.json",
+      "apps/tests/test_ages.py",
+      "docs/architecture/age-reviews.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "F02",
+    "source": "case.pdf, стр. 1",
+    "kind": "Функции",
+    "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии",
+    "primary_slice": "S08",
+    "verification_slices": [
+      "S17",
+      "S08A",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "F02.1",
+        "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии"
+      }
+    ],
+    "evidence_expected": "Сценарии соответствующего и неподходящего назначения; каждое утверждение связано с источником",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md"
+    ]
+  },
+  {
+    "id": "F03",
+    "source": "case.pdf, стр. 1",
+    "kind": "Функции",
+    "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления",
+    "primary_slice": "S08",
+    "verification_slices": [
+      "S14",
+      "S17",
+      "S08A",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "F03.1",
+        "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления"
+      }
+    ],
+    "evidence_expected": "Положительные и отрицательные сценарии риска; неизвестные сведения не считаются отсутствием риска",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "F08",
+    "source": "case.pdf, стр. 1",
+    "kind": "Функции",
+    "text": "Выявлять ситуации направления к психиатру для врачей других специальностей; рекомендовать дальнейшую маршрутизацию по данным с категориями обязательно и желательно в зависимости от тяжести",
+    "primary_slice": "S09",
+    "verification_slices": [
+      "S17",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "F08.1",
+        "text": "Врач другой специальности"
+      },
+      {
+        "id": "F08.2",
+        "text": "Выявление потребности в психиатре"
+      },
+      {
+        "id": "F08.3",
+        "text": "Маршрут по данным пациента"
+      },
+      {
+        "id": "F08.4",
+        "text": "Категория обязательно"
+      },
+      {
+        "id": "F08.5",
+        "text": "Категория желательно"
+      },
+      {
+        "id": "F08.6",
+        "text": "Учёт тяжести"
+      }
+    ],
+    "evidence_expected": "Оба типа маршрутизации; неполные данные; отсутствие самостоятельного направления",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S09/acceptance.md",
+      "evidence/S09/external-check.md",
+      "evidence/S09/final-checks.log",
+      "evidence/S09/upgrade.json",
+      "apps/tests/test_routing.py",
+      "docs/architecture/routing.md",
+      "evidence/S09/completion-review/research.md",
+      "evidence/S09/completion-review/boundary-review.md",
+      "evidence/S09/completion-review/source-archive.json",
+      "evidence/S09/completion-review/final-checks.log",
+      "evidence/S09/completion-review/runtime.json",
+      "evidence/S09/completion-review/upgrade.json",
+      "evidence/S09/completion-review/docker-tests.log",
+      "evidence/S09/completion-review/docker-smoke.log",
+      "evidence/S09/completion-review/browser-check.json",
+      "apps/tests/test_clinical_rules.py",
+      "apps/tests/test_clinical_workflow.py",
+      "docs/clinical/critical-protocol-v1.md",
+      "docs/architecture/clinical-rules.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "M03",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Назначение изменение и отмена терапии; направление к психиатру; изменение плана лечения только после подтверждения врачом",
+    "primary_slice": "S08",
+    "verification_slices": [
+      "S09",
+      "S14",
+      "S17",
+      "S08A",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M03.1",
+        "text": "Назначение терапии"
+      },
+      {
+        "id": "M03.2",
+        "text": "Изменение терапии"
+      },
+      {
+        "id": "M03.3",
+        "text": "Отмена терапии"
+      },
+      {
+        "id": "M03.4",
+        "text": "Направление к психиатру"
+      },
+      {
+        "id": "M03.5",
+        "text": "Изменение плана"
+      },
+      {
+        "id": "M03.6",
+        "text": "Подтверждение врачом перед каждым действием"
+      }
+    ],
+    "evidence_expected": "Тест каждого из пяти видов клинических действий; пациент получает только подтвержденный план",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S09/acceptance.md",
+      "evidence/S09/external-check.md",
+      "evidence/S09/final-checks.log",
+      "evidence/S09/upgrade.json",
+      "apps/tests/test_routing.py",
+      "docs/architecture/routing.md",
+      "evidence/S09/completion-review/research.md",
+      "evidence/S09/completion-review/boundary-review.md",
+      "evidence/S09/completion-review/source-archive.json",
+      "evidence/S09/completion-review/final-checks.log",
+      "evidence/S09/completion-review/runtime.json",
+      "evidence/S09/completion-review/upgrade.json",
+      "evidence/S09/completion-review/docker-tests.log",
+      "evidence/S09/completion-review/docker-smoke.log",
+      "evidence/S09/completion-review/browser-check.json",
+      "apps/tests/test_clinical_rules.py",
+      "apps/tests/test_clinical_workflow.py",
+      "docs/clinical/critical-protocol-v1.md",
+      "docs/architecture/clinical-rules.md",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "M04",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Демонстрация на клинических сценариях с рассмотрением назначения Авиандра; каждый сценарий включает профиль пациента рекомендации по лечению и маршрутизацию",
+    "primary_slice": "S03",
+    "verification_slices": [
+      "S08",
+      "S18",
+      "S08A",
+      "S17",
+      "S17B",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M04.1",
+        "text": "Рассмотрение Авиандра"
+      },
+      {
+        "id": "M04.2",
+        "text": "Профиль в каждом случае"
+      },
+      {
+        "id": "M04.3",
+        "text": "Лечебные рекомендации в каждом случае"
+      },
+      {
+        "id": "M04.4",
+        "text": "Маршрутизация в каждом случае"
+      }
+    ],
+    "evidence_expected": "Профиль плюс рекомендации плюс маршрутизация в каждом случае; в том числе обоснованный отказ или недостаток данных",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "data/synthetic/cases.json",
+      "docs/validation/dataset.md",
+      "evidence/S03/acceptance.md",
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "M05",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Механизм алертинга самостоятельно определяет критическое состояние по признакам выбранным командой; экстренно оповещает врача и выполняет действия выбранные командой",
+    "primary_slice": "S09",
+    "verification_slices": [
+      "S10",
+      "S14",
+      "S15",
+      "S17",
+      "S10A",
+      "S17B",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M05.1",
+        "text": "Самостоятельное определение критичности"
+      },
+      {
+        "id": "M05.2",
+        "text": "Обоснованные признаки команды"
+      },
+      {
+        "id": "M05.3",
+        "text": "Экстренное оповещение врача"
+      },
+      {
+        "id": "M05.4",
+        "text": "Определённые командой действия"
+      },
+      {
+        "id": "M05.5",
+        "text": "Фактически работающий механизм"
+      }
+    ],
+    "evidence_expected": "Замер от приема критических данных до видимого уведомления; сбой и повтор; журнал действий",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S09/acceptance.md",
+      "evidence/S09/external-check.md",
+      "evidence/S09/final-checks.log",
+      "evidence/S09/upgrade.json",
+      "apps/tests/test_routing.py",
+      "docs/architecture/routing.md",
+      "evidence/S09/resume-2026-10-19/plan-change.md",
+      "evidence/S10A/acceptance.md",
+      "evidence/S10A/final-checks.log",
+      "evidence/S10A/delivery.json",
+      "evidence/S10A/browser-check.json",
+      "evidence/S10A/upgrade.json",
+      "apps/tests/test_notifications.py",
+      "docs/architecture/routine-notifications.md",
+      "evidence/S09/completion-review/research.md",
+      "evidence/S09/completion-review/boundary-review.md",
+      "evidence/S09/completion-review/source-archive.json",
+      "evidence/S09/completion-review/final-checks.log",
+      "evidence/S09/completion-review/runtime.json",
+      "evidence/S09/completion-review/upgrade.json",
+      "evidence/S09/completion-review/docker-tests.log",
+      "evidence/S09/completion-review/docker-smoke.log",
+      "evidence/S09/completion-review/browser-check.json",
+      "apps/tests/test_clinical_rules.py",
+      "apps/tests/test_clinical_workflow.py",
+      "docs/clinical/critical-protocol-v1.md",
+      "docs/architecture/clinical-rules.md",
+      "evidence/S10/acceptance.md",
+      "evidence/S10/final-checks.log",
+      "evidence/S10/runtime.json",
+      "evidence/S10/upgrade.json",
+      "evidence/S10/reserve.json",
+      "evidence/S10/browser-check.json",
+      "evidence/S10/offscreen-check.json",
+      "evidence/S10/docker-tests.log",
+      "apps/tests/test_critical_delivery.py",
+      "docs/architecture/critical-delivery.md",
+      "docs/clinical/critical-protocol-v2.md",
+      "evidence/S10/final-browser-measurement.json",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S15/acceptance.md",
+      "evidence/S15/performance.json",
+      "evidence/S15/load.json",
+      "evidence/S15/performance.md",
+      "evidence/S15/recovery.json",
+      "evidence/S15/recovery.md",
+      "docs/operations/recovery.md",
+      "apps/tests/test_backup.py",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "M06",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Сигналы о направлении к психиатру и безопасности терапии визуально выделены; категории обязательно и желательно различимы",
+    "primary_slice": "S09",
+    "verification_slices": [
+      "S13",
+      "S17",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M06.1",
+        "text": "Заметное направление"
+      },
+      {
+        "id": "M06.2",
+        "text": "Заметная безопасность терапии"
+      },
+      {
+        "id": "M06.3",
+        "text": "Различимость обязательно/желательно"
+      }
+    ],
+    "evidence_expected": "Проверка обеих категорий без опоры только на цвет; заметность в карточке и списке",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S09/acceptance.md",
+      "evidence/S09/external-check.md",
+      "evidence/S09/final-checks.log",
+      "evidence/S09/upgrade.json",
+      "apps/tests/test_routing.py",
+      "docs/architecture/routing.md",
+      "evidence/S09/completion-review/research.md",
+      "evidence/S09/completion-review/boundary-review.md",
+      "evidence/S09/completion-review/source-archive.json",
+      "evidence/S09/completion-review/final-checks.log",
+      "evidence/S09/completion-review/runtime.json",
+      "evidence/S09/completion-review/upgrade.json",
+      "evidence/S09/completion-review/docker-tests.log",
+      "evidence/S09/completion-review/docker-smoke.log",
+      "evidence/S09/completion-review/browser-check.json",
+      "apps/tests/test_clinical_rules.py",
+      "apps/tests/test_clinical_workflow.py",
+      "docs/clinical/critical-protocol-v1.md",
+      "docs/architecture/clinical-rules.md",
+      "evidence/S13/acceptance.md",
+      "evidence/S13/platforms.md",
+      "evidence/S13/browser-check.json",
+      "docs/architecture/interface-search-extensions.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md"
+    ]
+  },
+  {
+    "id": "M07",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Рекомендовать только препараты зарегистрированные в РФ в пределах зарегистрированных показаний противопоказаний и доз; решение вне инструкции принимает только врач",
+    "primary_slice": "S08",
+    "verification_slices": [
+      "S02",
+      "S17",
+      "S08A",
+      "S08B",
+      "S17B",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M07.1",
+        "text": "Регистрация препарата в РФ"
+      },
+      {
+        "id": "M07.2",
+        "text": "Показания"
+      },
+      {
+        "id": "M07.3",
+        "text": "Противопоказания"
+      },
+      {
+        "id": "M07.4",
+        "text": "Режимы дозирования"
+      },
+      {
+        "id": "M07.5",
+        "text": "Вне инструкции решает только врач"
+      }
+    ],
+    "evidence_expected": "Проверки показаний противопоказаний доз и неизвестных данных; ссылка на действующую запись ГРЛС",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/clinical/sources.md",
+      "evidence/S02/requirements-review.md",
+      "evidence/S02/acceptance.md",
+      "docs/clinical/rule-catalog.md",
+      "evidence/S02/research-clinical.md",
+      "evidence/S02/received-review.md",
+      "evidence/S02/received-research.md",
+      "evidence/S02/received-grls-check.json",
+      "evidence/S02/acceptance-review.md",
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/S08B/acceptance.md",
+      "evidence/S08B/final-checks.log",
+      "evidence/S08B/upgrade.json",
+      "apps/tests/test_ages.py",
+      "docs/architecture/age-reviews.md",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "M08",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Клинические рекомендации действующие и одобренные Минздравом РФ; международные только дополнение с явным источником; сведения о препаратах из действующей инструкции или ОХЛП ГРЛС; инструменты валидированные с валидированной русской версией; источник валидации и соблюдение авторских прав и лицензии",
+    "primary_slice": "S02",
+    "verification_slices": [
+      "S07",
+      "S08",
+      "S09",
+      "S17",
+      "S08A",
+      "S08B",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M08.1",
+        "text": "Действующие КР РФ"
+      },
+      {
+        "id": "M08.2",
+        "text": "Одобрение Минздравом"
+      },
+      {
+        "id": "M08.3",
+        "text": "Международные только дополнение"
+      },
+      {
+        "id": "M08.4",
+        "text": "Явный источник международных"
+      },
+      {
+        "id": "M08.5",
+        "text": "Действующая инструкция/ОХЛП именно ГРЛС"
+      },
+      {
+        "id": "M08.6",
+        "text": "Валидированный инструмент"
+      },
+      {
+        "id": "M08.7",
+        "text": "Валидированная русская версия"
+      },
+      {
+        "id": "M08.8",
+        "text": "Источник валидации"
+      },
+      {
+        "id": "M08.9",
+        "text": "Авторские права и лицензия"
+      }
+    ],
+    "evidence_expected": "Открываемые первоисточники; карточки шкал; проверка актуальности перед сдачей; ни одного правила без основания",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/clinical/sources.md",
+      "evidence/S02/requirements-review.md",
+      "evidence/S02/acceptance.md",
+      "docs/clinical/scales-rights.md",
+      "evidence/S02/research-scales.md",
+      "evidence/S02/received-review.md",
+      "evidence/S02/received-research.md",
+      "evidence/S02/received/manifest.json",
+      "docs/clinical/validation-request.md",
+      "evidence/S02/acceptance-review.md",
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S07/research.md",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S08B/acceptance.md",
+      "evidence/S08B/final-checks.log",
+      "evidence/S08B/upgrade.json",
+      "apps/tests/test_ages.py",
+      "docs/architecture/age-reviews.md",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S09/acceptance.md",
+      "evidence/S09/external-check.md",
+      "evidence/S09/final-checks.log",
+      "evidence/S09/upgrade.json",
+      "apps/tests/test_routing.py",
+      "docs/architecture/routing.md",
+      "evidence/S09/completion-review/research.md",
+      "evidence/S09/completion-review/boundary-review.md",
+      "evidence/S09/completion-review/source-archive.json",
+      "evidence/S09/completion-review/final-checks.log",
+      "evidence/S09/completion-review/runtime.json",
+      "evidence/S09/completion-review/upgrade.json",
+      "evidence/S09/completion-review/docker-tests.log",
+      "evidence/S09/completion-review/docker-smoke.log",
+      "evidence/S09/completion-review/browser-check.json",
+      "apps/tests/test_clinical_rules.py",
+      "apps/tests/test_clinical_workflow.py",
+      "docs/clinical/critical-protocol-v1.md",
+      "docs/architecture/clinical-rules.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "docs/release/inventory.md",
+      "evidence/S17/external-check.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "M09",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Соответствие требованиям законодательства РФ",
+    "primary_slice": "S01",
+    "verification_slices": [
+      "S14",
+      "S17",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M09.1",
+        "text": "Соответствие требованиям законодательства РФ"
+      }
+    ],
+    "evidence_expected": "Описание назначения; карта данных; применимые основания и ограничения; документы проекта",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/contest/contract.md",
+      "evidence/S01/acceptance.md",
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "docs/release/inventory.md",
+      "evidence/S17/external-check.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "M10",
+    "source": "case.pdf, стр. 2",
+    "kind": "Обязательные условия",
+    "text": "Соблюдение конфиденциальности",
+    "primary_slice": "S05",
+    "verification_slices": [
+      "S14",
+      "S17",
+      "S18",
+      "S22",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "M10.1",
+        "text": "Соблюдение конфиденциальности"
+      }
+    ],
+    "evidence_expected": "Проверки чужих данных; отсутствие персональных сведений в логах презентации репозитории и внешних запросах",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/data-model.md",
+      "evidence/S04/acceptance.md",
+      "docs/architecture/access.md",
+      "apps/tests/test_access.py",
+      "evidence/S05/acceptance.md",
+      "evidence/S05/final-checks.log",
+      "evidence/S05/docker-final-restart.log",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "docs/release/inventory.md",
+      "evidence/S17/external-check.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "E01",
+    "source": "case.pdf, стр. 3",
+    "kind": "Критерии оценки",
+    "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники",
+    "primary_slice": "S02",
+    "verification_slices": [
+      "S17",
+      "S18",
+      "S17B",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "E01.1",
+        "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники"
+      }
+    ],
+    "evidence_expected": "На защите открыть основание вывода; отчет проверки источников",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/clinical/sources.md",
+      "evidence/S02/requirements-review.md",
+      "evidence/S02/acceptance.md",
+      "docs/clinical/scales-rights.md",
+      "evidence/S02/research-scales.md",
+      "evidence/S02/received-review.md",
+      "evidence/S02/received-research.md",
+      "evidence/S02/received/manifest.json",
+      "evidence/S02/acceptance-review.md",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "docs/release/inventory.md",
+      "evidence/S17/external-check.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "E02",
+    "source": "case.pdf, стр. 3",
+    "kind": "Критерии оценки",
+    "text": "Клиническая применимость",
+    "primary_slice": "S03",
+    "verification_slices": [
+      "S17",
+      "S18",
+      "S17B",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "E02.1",
+        "text": "Клиническая применимость"
+      }
+    ],
+    "evidence_expected": "Отчет врача о полезности корректности и ограничениях",
+    "fulfilment_status": "not_verified",
+    "actual_evidence": [
+      "docs/validation/dataset.md",
+      "data/synthetic/manifest.json",
+      "evidence/S03/acceptance.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "E05",
+    "source": "case.pdf, стр. 3",
+    "kind": "Критерии оценки",
+    "text": "Отдельно оценивается каждый пункт списка функций инструмента",
+    "primary_slice": "S11",
+    "verification_slices": [
+      "S17",
+      "S18",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "E05.1",
+        "text": "Отдельно оценивается каждый пункт списка функций инструмента"
+      }
+    ],
+    "evidence_expected": "Восемь независимых приемочных сценариев",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/communication.md",
+      "apps/tests/test_communication.py",
+      "evidence/S11/acceptance.md",
+      "evidence/S11/final-checks.log",
+      "evidence/S11/runtime.json",
+      "evidence/S11/upgrade.json",
+      "evidence/S11/browser-check.json",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md"
+    ]
+  },
+  {
+    "id": "T01",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Быстродействие: отклик интерфейса формирование рекомендаций доставка алерта врачу с момента поступления критических данных и другое",
+    "primary_slice": "S15",
+    "verification_slices": [
+      "S17",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T01.1",
+        "text": "Отклик интерфейса"
+      },
+      {
+        "id": "T01.2",
+        "text": "Формирование рекомендаций"
+      },
+      {
+        "id": "T01.3",
+        "text": "Алерт от момента поступления критических данных"
+      }
+    ],
+    "evidence_expected": "Воспроизводимый отчет с нагрузкой оборудованием и долей неуспешных запросов",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "evidence/S15/acceptance.md",
+      "evidence/S15/performance.json",
+      "evidence/S15/load.json",
+      "evidence/S15/performance.md",
+      "evidence/S15/recovery.json",
+      "evidence/S15/recovery.md",
+      "docs/operations/recovery.md",
+      "apps/tests/test_backup.py",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md"
+    ]
+  },
+  {
+    "id": "T03",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Надежность и корректность: количество сбоев в сценариях; устойчивость к полноте и корректности входных данных",
+    "primary_slice": "S14",
+    "verification_slices": [
+      "S17",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T03.1",
+        "text": "Число сбоев сценариев"
+      },
+      {
+        "id": "T03.2",
+        "text": "Неполнота ввода"
+      },
+      {
+        "id": "T03.3",
+        "text": "Некорректность ввода"
+      }
+    ],
+    "evidence_expected": "Пустые неполные неверные противоречивые и повторные данные; перечень сбоев",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "evidence/audits/2026-10-19-s08a/report.json",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "T05",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Обоснованность выводов и рекомендаций релевантными источниками методами шкалами и другим на основе чего они сделаны",
+    "primary_slice": "S08",
+    "verification_slices": [
+      "S17",
+      "S08A",
+      "S08B",
+      "S17B",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T05.1",
+        "text": "Выводы с релевантными источниками"
+      },
+      {
+        "id": "T05.2",
+        "text": "Методы/шкалы как основания"
+      },
+      {
+        "id": "T05.3",
+        "text": "Связь с конкретными данными пациента"
+      }
+    ],
+    "evidence_expected": "Проверка каждого вывода в контрольных сценариях; отсутствие неподтвержденных утверждений",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "evidence/S08A/acceptance.md",
+      "evidence/S08A/external-check.md",
+      "evidence/S08A/final-checks.log",
+      "evidence/S08A/upgrade.json",
+      "apps/tests/test_decisions.py",
+      "docs/architecture/clinical-decisions.md",
+      "evidence/S08B/acceptance.md",
+      "evidence/S08B/final-checks.log",
+      "evidence/S08B/upgrade.json",
+      "apps/tests/test_ages.py",
+      "docs/architecture/age-reviews.md",
+      "evidence/S08/acceptance.md",
+      "evidence/S08/external-check.md",
+      "evidence/S08/final-checks.log",
+      "evidence/S08/upgrade.json",
+      "apps/compass/resources/therapy-reference-v2.json",
+      "apps/tests/test_therapy.py",
+      "docs/architecture/therapy-review.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json"
+    ]
+  },
+  {
+    "id": "T07",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Отказоустойчивость и восстановление: копии объем возможной потери время восстановления сохранность критических отправленных и полученных данных во время сбоя",
+    "primary_slice": "S10",
+    "verification_slices": [
+      "S15",
+      "S17",
+      "S10A",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T07.1",
+        "text": "Резервная копия"
+      },
+      {
+        "id": "T07.2",
+        "text": "Объём возможной потери"
+      },
+      {
+        "id": "T07.3",
+        "text": "Время восстановления"
+      },
+      {
+        "id": "T07.4",
+        "text": "Критические данные отправленные при сбое"
+      },
+      {
+        "id": "T07.5",
+        "text": "Критические данные полученные при сбое"
+      }
+    ],
+    "evidence_expected": "Реальное восстановление из копии; отключение работника и сервера; отчет о потерях и времени; данные во время сбоя",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "evidence/S09/resume-2026-10-19/plan-change.md",
+      "evidence/S10A/acceptance.md",
+      "evidence/S10A/final-checks.log",
+      "evidence/S10A/delivery.json",
+      "evidence/S10A/browser-check.json",
+      "evidence/S10A/upgrade.json",
+      "apps/tests/test_notifications.py",
+      "docs/architecture/routine-notifications.md",
+      "evidence/S10/acceptance.md",
+      "evidence/S10/final-checks.log",
+      "evidence/S10/runtime.json",
+      "evidence/S10/upgrade.json",
+      "evidence/S10/reserve.json",
+      "evidence/S10/browser-check.json",
+      "evidence/S10/offscreen-check.json",
+      "evidence/S10/docker-tests.log",
+      "apps/tests/test_critical_delivery.py",
+      "docs/architecture/critical-delivery.md",
+      "docs/clinical/critical-protocol-v2.md",
+      "evidence/S10/final-browser-measurement.json",
+      "evidence/S15/acceptance.md",
+      "evidence/S15/performance.json",
+      "evidence/S15/load.json",
+      "evidence/S15/performance.md",
+      "evidence/S15/recovery.json",
+      "evidence/S15/recovery.md",
+      "docs/operations/recovery.md",
+      "apps/tests/test_backup.py",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md"
+    ]
+  },
+  {
+    "id": "T10",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Гибкость архитектуры: добавление и обновление шкал препаратов правил алертинга новых функций без изменения ядра",
+    "primary_slice": "S04",
+    "verification_slices": [
+      "S13",
+      "S17",
+      "S17C",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T10.1",
+        "text": "Новые/обновлённые шкалы"
+      },
+      {
+        "id": "T10.2",
+        "text": "Новые/обновлённые препараты"
+      },
+      {
+        "id": "T10.3",
+        "text": "Новые правила алертинга"
+      },
+      {
+        "id": "T10.4",
+        "text": "Новые функции"
+      },
+      {
+        "id": "T10.5",
+        "text": "Без изменения ядра"
+      }
+    ],
+    "evidence_expected": "Демонстрация добавления тестовой шкалы или правила без изменения вычислительного ядра",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/system.md",
+      "docs/architecture/data-model.md",
+      "docs/architecture/decisions.md",
+      "docs/RUNBOOK.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S04/checks.log",
+      "evidence/S04/docker-check.json",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "evidence/S13/acceptance.md",
+      "evidence/S13/platforms.md",
+      "evidence/S13/browser-check.json",
+      "docs/architecture/interface-search-extensions.md",
+      "evidence/S13/extensibility.md",
+      "evidence/S13/extensions.json",
+      "evidence/S13/upgrade.json",
+      "evidence/S13/search.json",
+      "apps/tests/test_s13.py",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "T12",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента",
+    "primary_slice": "S04",
+    "verification_slices": [
+      "S06",
+      "S11",
+      "S17",
+      "S17B",
+      "S17C",
+      "S17D",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T12.1",
+        "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента"
+      }
+    ],
+    "evidence_expected": "Матрица сущностей F01-F08 M01-M10; каждый основной процесс сохраняет нужные данные",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/system.md",
+      "docs/architecture/data-model.md",
+      "docs/architecture/decisions.md",
+      "docs/RUNBOOK.md",
+      "evidence/S04/acceptance.md",
+      "evidence/S04/checks.log",
+      "evidence/S04/docker-check.json",
+      "docs/architecture/records.md",
+      "apps/tests/test_records.py",
+      "evidence/S06/acceptance.md",
+      "evidence/S06/final-checks.log",
+      "evidence/S06/docker-restart.log",
+      "evidence/S06/doctor-history.png",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "docs/architecture/communication.md",
+      "apps/tests/test_communication.py",
+      "evidence/S11/acceptance.md",
+      "evidence/S11/final-checks.log",
+      "evidence/S11/runtime.json",
+      "evidence/S11/upgrade.json",
+      "evidence/S11/browser-check.json",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17B/acceptance.md",
+      "evidence/S17B/requirements-review.json",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  },
+  {
+    "id": "T13",
+    "source": "case.pdf, стр. 3",
+    "kind": "Технические метрики",
+    "text": "Защищенность данных",
+    "primary_slice": "S05",
+    "verification_slices": [
+      "S14",
+      "S17",
+      "S08B",
+      "S17C",
+      "S17D",
+      "S17E",
+      "S17F"
+    ],
+    "subchecks": [
+      {
+        "id": "T13.1",
+        "text": "Защищенность данных"
+      }
+    ],
+    "evidence_expected": "Негативные проверки доступа; проверка логов и резервных копий; карта угроз",
+    "fulfilment_status": "partial",
+    "actual_evidence": [
+      "docs/architecture/access.md",
+      "apps/tests/test_access.py",
+      "evidence/S05/acceptance.md",
+      "evidence/S05/final-checks.log",
+      "evidence/S05/docker-final-restart.log",
+      "evidence/S07/acceptance.md",
+      "evidence/S07/review/scale-research.md",
+      "evidence/S07/review/final-checks.log",
+      "apps/tests/test_assessments.py",
+      "docs/architecture/assessments.md",
+      "evidence/S08B/acceptance.md",
+      "evidence/S08B/final-checks.log",
+      "evidence/S08B/upgrade.json",
+      "apps/tests/test_ages.py",
+      "docs/architecture/age-reviews.md",
+      "evidence/S14/acceptance.md",
+      "evidence/S14/security.md",
+      "evidence/S14/reliability.md",
+      "evidence/S14/final-checks-r3.log",
+      "evidence/S14/docker-tests-final.log",
+      "apps/tests/test_security.py",
+      "docs/compliance/data-map.md",
+      "evidence/S17/acceptance-matrix.md",
+      "evidence/S17/audit.json",
+      "docs/release/known-limitations.md",
+      "evidence/S17C/acceptance.md",
+      "evidence/S17C/requirements-review.json",
+      "apps/tests/test_first_visits.py",
+      "docs/architecture/first-visit.md"
+    ]
+  }
+]

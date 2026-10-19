@@ -1,0 +1,76 @@
+{
+  "packet_version": "s17d-review-packet-v1",
+  "date": "2026-10-20",
+  "status": "awaiting_independent_clinical_review",
+  "clinical_validation": false,
+  "new_rules_active": false,
+  "review_results": [],
+  "files": [
+    {
+      "path": "docs/clinical/first-visit-protocol.md",
+      "sha256": "72840567dee682a2a46a964dce14fe235617bcbb709c18dd9f4f56bf7263bc47"
+    },
+    {
+      "path": "docs/clinical/first-visit-instrument-decision.md",
+      "sha256": "9f2416efe0fc860cd10863befb8c5224ff3e692697d82f15c5e0c501493b8009"
+    },
+    {
+      "path": "docs/validation/first-visit-scenarios.md",
+      "sha256": "953d87e8c3a1aae66642f3ef1b4db3967516fbab6214cb6ba6c83d1582acbcd1"
+    },
+    {
+      "path": "docs/architecture/first-visit.md",
+      "sha256": "b58ceb5815a3dc64de8924d6f465e56947156b6dc30a47e1d2d4ef08afaec9e2"
+    },
+    {
+      "path": "apps/compass/first_visits.py",
+      "sha256": "4dbf959f17fe4e5292830ea52e24d315c4fa7337c7e4816a8f4d8d66cd965db3"
+    },
+    {
+      "path": "apps/compass/clinical_rules.py",
+      "sha256": "c3ea0ef72ce182d88de491f3bf0632ed7bb1b1bb4e084906464d0bb9294bb4aa"
+    },
+    {
+      "path": "apps/compass/decisions.py",
+      "sha256": "2853463ae07a0db41e9c5c9044de11f367cff74839a9b045fdc7c8a78a7851f4"
+    },
+    {
+      "path": "apps/compass/resources/clinical-rules-v1.json",
+      "sha256": "bc46d2e685588ebe3e7a36999a5fe801b335153a9001b04956e96f8323da3e5e"
+    },
+    {
+      "path": "apps/compass/resources/therapy-reference-v2.json",
+      "sha256": "6d8ba2bed9415f247df488b7ea6fc9e3b44a3acbca0be2e75e4a91894595338b"
+    },
+    {
+      "path": "apps/compass/resources/routing-reference-v1.json",
+      "sha256": "f5491c1756e8ee1823666c006a5412e2e91bc896d3e213534e2c27e6d28ddde9"
+    },
+    {
+      "path": "data/synthetic/cases.json",
+      "sha256": "2b990334661c1d0ac588753cc72e915a07a35743884cb71584f79a72f621da8f"
+    },
+    {
+      "path": "evidence/S09/completion-review/sources/kr301.pdf",
+      "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd"
+    },
+    {
+      "path": "evidence/S09/completion-review/sources/kr457.pdf",
+      "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a"
+    },
+    {
+      "path": "evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf",
+      "sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc"
+    }
+  ],
+  "profiles": [
+    "FV01",
+    "FV02",
+    "FV03",
+    "FV04",
+    "FV05",
+    "FV06",
+    "FV07"
+  ],
+  "note": "Хеши фиксируют входной материал, а не утверждение правил. Новые формулы и клинические эталоны ещё не утверждены. Исследование источников не заменяет специалиста."
+}

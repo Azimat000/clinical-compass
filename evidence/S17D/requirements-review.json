@@ -1,0 +1,600 @@
+[
+  {
+    "id": "F01",
+    "text": "Предлагать стандартизированные методы оценки состояния пациента",
+    "subchecks": [
+      {
+        "id": "F01.1",
+        "text": "Предлагать стандартизированные методы оценки состояния пациента"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новый короткий инструмент не включён; B17 открыт, точная DASS-42 сохранена."
+  },
+  {
+    "id": "F02",
+    "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии",
+    "subchecks": [
+      {
+        "id": "F02.1",
+        "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новых лечебных рекомендаций нет; справка прежняя."
+  },
+  {
+    "id": "F03",
+    "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления",
+    "subchecks": [
+      {
+        "id": "F03.1",
+        "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новые риски FV04/FV05 не покрыты активными правилами; B04."
+  },
+  {
+    "id": "F08",
+    "text": "Выявлять ситуации направления к психиатру для врачей других специальностей; рекомендовать дальнейшую маршрутизацию по данным с категориями обязательно и желательно в зависимости от тяжести",
+    "subchecks": [
+      {
+        "id": "F08.1",
+        "text": "Врач другой специальности"
+      },
+      {
+        "id": "F08.2",
+        "text": "Выявление потребности в психиатре"
+      },
+      {
+        "id": "F08.3",
+        "text": "Маршрут по данным пациента"
+      },
+      {
+        "id": "F08.4",
+        "text": "Категория обязательно"
+      },
+      {
+        "id": "F08.5",
+        "text": "Категория желательно"
+      },
+      {
+        "id": "F08.6",
+        "text": "Учёт тяжести"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новые ветви без F41.1 и обе категории не приняты."
+  },
+  {
+    "id": "M03",
+    "text": "Назначение изменение и отмена терапии; направление к психиатру; изменение плана лечения только после подтверждения врачом",
+    "subchecks": [
+      {
+        "id": "M03.1",
+        "text": "Назначение терапии"
+      },
+      {
+        "id": "M03.2",
+        "text": "Изменение терапии"
+      },
+      {
+        "id": "M03.3",
+        "text": "Отмена терапии"
+      },
+      {
+        "id": "M03.4",
+        "text": "Направление к психиатру"
+      },
+      {
+        "id": "M03.5",
+        "text": "Изменение плана"
+      },
+      {
+        "id": "M03.6",
+        "text": "Подтверждение врачом перед каждым действием"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Все пять действий остаются за отдельным подтверждением врача; код сохранён."
+  },
+  {
+    "id": "M04",
+    "text": "Демонстрация на клинических сценариях с рассмотрением назначения Авиандра; каждый сценарий включает профиль пациента рекомендации по лечению и маршрутизацию",
+    "subchecks": [
+      {
+        "id": "M04.1",
+        "text": "Рассмотрение Авиандра"
+      },
+      {
+        "id": "M04.2",
+        "text": "Профиль в каждом случае"
+      },
+      {
+        "id": "M04.3",
+        "text": "Лечебные рекомендации в каждом случае"
+      },
+      {
+        "id": "M04.4",
+        "text": "Маршрутизация в каждом случае"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Семь сценариев — задание проверки, не клинические эталоны; D01–D06 сохранены."
+  },
+  {
+    "id": "M05",
+    "text": "Механизм алертинга самостоятельно определяет критическое состояние по признакам выбранным командой; экстренно оповещает врача и выполняет действия выбранные командой",
+    "subchecks": [
+      {
+        "id": "M05.1",
+        "text": "Самостоятельное определение критичности"
+      },
+      {
+        "id": "M05.2",
+        "text": "Обоснованные признаки команды"
+      },
+      {
+        "id": "M05.3",
+        "text": "Экстренное оповещение врача"
+      },
+      {
+        "id": "M05.4",
+        "text": "Определённые командой действия"
+      },
+      {
+        "id": "M05.5",
+        "text": "Фактически работающий механизм"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новые признаки/реакции не утверждены, нового измеренного критического пути нет."
+  },
+  {
+    "id": "M06",
+    "text": "Сигналы о направлении к психиатру и безопасности терапии визуально выделены; категории обязательно и желательно различимы",
+    "subchecks": [
+      {
+        "id": "M06.1",
+        "text": "Заметное направление"
+      },
+      {
+        "id": "M06.2",
+        "text": "Заметная безопасность терапии"
+      },
+      {
+        "id": "M06.3",
+        "text": "Различимость обязательно/желательно"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новых категорий/критических сигналов нет; старый интерфейс сохранён."
+  },
+  {
+    "id": "M07",
+    "text": "Рекомендовать только препараты зарегистрированные в РФ в пределах зарегистрированных показаний противопоказаний и доз; решение вне инструкции принимает только врач",
+    "subchecks": [
+      {
+        "id": "M07.1",
+        "text": "Регистрация препарата в РФ"
+      },
+      {
+        "id": "M07.2",
+        "text": "Показания"
+      },
+      {
+        "id": "M07.3",
+        "text": "Противопоказания"
+      },
+      {
+        "id": "M07.4",
+        "text": "Режимы дозирования"
+      },
+      {
+        "id": "M07.5",
+        "text": "Вне инструкции решает только врач"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Инструкция/справка прежние; новых доз/показаний/назначений нет."
+  },
+  {
+    "id": "M08",
+    "text": "Клинические рекомендации действующие и одобренные Минздравом РФ; международные только дополнение с явным источником; сведения о препаратах из действующей инструкции или ОХЛП ГРЛС; инструменты валидированные с валидированной русской версией; источник валидации и соблюдение авторских прав и лицензии",
+    "subchecks": [
+      {
+        "id": "M08.1",
+        "text": "Действующие КР РФ"
+      },
+      {
+        "id": "M08.2",
+        "text": "Одобрение Минздравом"
+      },
+      {
+        "id": "M08.3",
+        "text": "Международные только дополнение"
+      },
+      {
+        "id": "M08.4",
+        "text": "Явный источник международных"
+      },
+      {
+        "id": "M08.5",
+        "text": "Действующая инструкция/ОХЛП именно ГРЛС"
+      },
+      {
+        "id": "M08.6",
+        "text": "Валидированный инструмент"
+      },
+      {
+        "id": "M08.7",
+        "text": "Валидированная русская версия"
+      },
+      {
+        "id": "M08.8",
+        "text": "Источник валидации"
+      },
+      {
+        "id": "M08.9",
+        "text": "Авторские права и лицензия"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Исследование источников не заменяет клиническую проверку; новые формы/правила выключены."
+  },
+  {
+    "id": "M09",
+    "text": "Соответствие требованиям законодательства РФ",
+    "subchecks": [
+      {
+        "id": "M09.1",
+        "text": "Соответствие требованиям законодательства РФ"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новая правовая экспертиза и внешний запуск не выполнялись."
+  },
+  {
+    "id": "M10",
+    "text": "Соблюдение конфиденциальности",
+    "subchecks": [
+      {
+        "id": "M10.1",
+        "text": "Соблюдение конфиденциальности"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Только синтетика, персональные заключения и закрытая переписка не внесены."
+  },
+  {
+    "id": "E01",
+    "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники",
+    "subchecks": [
+      {
+        "id": "E01.1",
+        "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Источниковый контроль external-check.md, границы переноса явно ограничены."
+  },
+  {
+    "id": "E02",
+    "text": "Клиническая применимость",
+    "subchecks": [
+      {
+        "id": "E02.1",
+        "text": "Клиническая применимость"
+      }
+    ],
+    "status_before": "not_verified",
+    "status_after": "not_verified",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Фактической независимой клинической проверки нет."
+  },
+  {
+    "id": "E05",
+    "text": "Отдельно оценивается каждый пункт списка функций инструмента",
+    "subchecks": [
+      {
+        "id": "E05.1",
+        "text": "Отдельно оценивается каждый пункт списка функций инструмента"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Каждый ID/подпункт сопоставлен отдельно; это не выполнение всех функций."
+  },
+  {
+    "id": "T01",
+    "text": "Быстродействие: отклик интерфейса формирование рекомендаций доставка алерта врачу с момента поступления критических данных и другое",
+    "subchecks": [
+      {
+        "id": "T01.1",
+        "text": "Отклик интерфейса"
+      },
+      {
+        "id": "T01.2",
+        "text": "Формирование рекомендаций"
+      },
+      {
+        "id": "T01.3",
+        "text": "Алерт от момента поступления критических данных"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новых замеров задержки критического события нет; прежние числа не перенесены."
+  },
+  {
+    "id": "T03",
+    "text": "Надежность и корректность: количество сбоев в сценариях; устойчивость к полноте и корректности входных данных",
+    "subchecks": [
+      {
+        "id": "T03.1",
+        "text": "Число сбоев сценариев"
+      },
+      {
+        "id": "T03.2",
+        "text": "Неполнота ввода"
+      },
+      {
+        "id": "T03.3",
+        "text": "Некорректность ввода"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "make check проверяет прежнюю реализацию; новые клинические ветви не испытаны."
+  },
+  {
+    "id": "T05",
+    "text": "Обоснованность выводов и рекомендаций релевантными источниками методами шкалами и другим на основе чего они сделаны",
+    "subchecks": [
+      {
+        "id": "T05.1",
+        "text": "Выводы с релевантными источниками"
+      },
+      {
+        "id": "T05.2",
+        "text": "Методы/шкалы как основания"
+      },
+      {
+        "id": "T05.3",
+        "text": "Связь с конкретными данными пациента"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Пакет для проверки привязан к SHA; новые клинические выводы не утверждены."
+  },
+  {
+    "id": "T07",
+    "text": "Отказоустойчивость и восстановление: копии объем возможной потери время восстановления сохранность критических отправленных и полученных данных во время сбоя",
+    "subchecks": [
+      {
+        "id": "T07.1",
+        "text": "Резервная копия"
+      },
+      {
+        "id": "T07.2",
+        "text": "Объём возможной потери"
+      },
+      {
+        "id": "T07.3",
+        "text": "Время восстановления"
+      },
+      {
+        "id": "T07.4",
+        "text": "Критические данные отправленные при сбое"
+      },
+      {
+        "id": "T07.5",
+        "text": "Критические данные полученные при сбое"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Новый путь при сбое/повторе не проверен; местный резерв и потери после копии остаются."
+  },
+  {
+    "id": "T10",
+    "text": "Гибкость архитектуры: добавление и обновление шкал препаратов правил алертинга новых функций без изменения ядра",
+    "subchecks": [
+      {
+        "id": "T10.1",
+        "text": "Новые/обновлённые шкалы"
+      },
+      {
+        "id": "T10.2",
+        "text": "Новые/обновлённые препараты"
+      },
+      {
+        "id": "T10.3",
+        "text": "Новые правила алертинга"
+      },
+      {
+        "id": "T10.4",
+        "text": "Новые функции"
+      },
+      {
+        "id": "T10.5",
+        "text": "Без изменения ядра"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Модули/ресурсы/зависимости сохранены; расширение движка не выполнялось."
+  },
+  {
+    "id": "T12",
+    "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента",
+    "subchecks": [
+      {
+        "id": "T12.1",
+        "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Модель первого приёма S17C сохранена; новые сущности не добавлены."
+  },
+  {
+    "id": "T13",
+    "text": "Защищенность данных",
+    "subchecks": [
+      {
+        "id": "T13.1",
+        "text": "Защищенность данных"
+      }
+    ],
+    "status_before": "partial",
+    "status_after": "partial",
+    "S17D_result": "NOT_ACCEPTED",
+    "evidence": [
+      "evidence/S17D/acceptance.md",
+      "evidence/S17D/checks.log",
+      "evidence/S17D/review-packet.json"
+    ],
+    "remaining": "Доступы/серверные ограничения сохранены; нового внешнего контура нет."
+  }
+]
