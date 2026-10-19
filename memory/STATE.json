@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T00:41:39+03:00",
+  "updated_on": "2026-10-20T01:00:39+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17E",
   "next_slice": null,
@@ -223,6 +223,23 @@
       "lock": "docs/design/skills.lock.json",
       "commit_ref": "refs/tags/setup/interface-skills",
       "scope": "Инструменты для S13, интерфейсных S14–S15/S17C/S17E/S18/S20; установка не принимает срезы. S16 исключён."
+    }
+  },
+  "latest_synthetic_audit": {
+    "report": "evidence/audits/2026-10-20-longitudinal/acceptance.md",
+    "results": "evidence/audits/2026-10-20-longitudinal/results.json",
+    "jury": "evidence/audits/2026-10-20-longitudinal/jury-review.md",
+    "commit_ref": "refs/tags/audit/2026-10-20-longitudinal",
+    "technical_status": "PASS",
+    "contest_readiness": "NO_GO",
+    "independent_clinical_validation": false,
+    "real_user_trial": false,
+    "next_action": "S17D/S17 сохраняют blocked. Нужны фактическое клиническое заключение точной версии, законная апробация, закрытые метрики и индивидуальные подтверждения. Синтетический аудит не принимает S17F/S18.",
+    "jury_score": {
+      "score": 27,
+      "maximum": 60,
+      "official": false,
+      "scale": "six equally weighted diagnostic AI ratings, not official contest weights"
     }
   }
 }
