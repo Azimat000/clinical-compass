@@ -205,11 +205,18 @@
         }
       ],
       "evidence_expected": "Двустороннее сообщение и повторная доставка после разрыва соединения",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
         "evidence/S04/acceptance.md",
-        "evidence/audits/2026-10-19-s08a/report.json"
+        "evidence/audits/2026-10-19-s08a/report.json",
+        "docs/architecture/communication.md",
+        "apps/tests/test_communication.py",
+        "evidence/S11/acceptance.md",
+        "evidence/S11/final-checks.log",
+        "evidence/S11/runtime.json",
+        "evidence/S11/upgrade.json",
+        "evidence/S11/browser-check.json"
       ]
     },
     {
@@ -229,11 +236,18 @@
         }
       ],
       "evidence_expected": "Врач видит пропуски и отсутствие данных как разные состояния",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
         "evidence/S04/acceptance.md",
-        "evidence/audits/2026-10-19-s08a/report.json"
+        "evidence/audits/2026-10-19-s08a/report.json",
+        "docs/architecture/communication.md",
+        "apps/tests/test_communication.py",
+        "evidence/S11/acceptance.md",
+        "evidence/S11/final-checks.log",
+        "evidence/S11/runtime.json",
+        "evidence/S11/upgrade.json",
+        "evidence/S11/browser-check.json"
       ]
     },
     {
@@ -1001,8 +1015,16 @@
         }
       ],
       "evidence_expected": "Восемь независимых приемочных сценариев",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "docs/architecture/communication.md",
+        "apps/tests/test_communication.py",
+        "evidence/S11/acceptance.md",
+        "evidence/S11/final-checks.log",
+        "evidence/S11/runtime.json",
+        "evidence/S11/upgrade.json",
+        "evidence/S11/browser-check.json"
+      ]
     },
     {
       "id": "E06",
@@ -1478,7 +1500,14 @@
         "evidence/S07/review/scale-research.md",
         "evidence/S07/review/final-checks.log",
         "apps/tests/test_assessments.py",
-        "docs/architecture/assessments.md"
+        "docs/architecture/assessments.md",
+        "docs/architecture/communication.md",
+        "apps/tests/test_communication.py",
+        "evidence/S11/acceptance.md",
+        "evidence/S11/final-checks.log",
+        "evidence/S11/runtime.json",
+        "evidence/S11/upgrade.json",
+        "evidence/S11/browser-check.json"
       ]
     },
     {

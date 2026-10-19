@@ -1,0 +1,51 @@
+#0 building with "colima" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 858B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 384B done
+#3 DONE 0.0s
+
+#4 [1/8] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#4 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 19.39kB 0.0s done
+#5 DONE 0.0s
+
+#6 [2/8] WORKDIR /app
+#6 CACHED
+
+#7 [3/8] COPY apps/requirements.lock /app/apps/requirements.lock
+#7 CACHED
+
+#8 [4/8] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#8 CACHED
+
+#9 [5/8] COPY apps /app/apps
+#9 DONE 0.0s
+
+#10 [6/8] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#10 DONE 0.0s
+
+#11 [7/8] COPY evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf /app/evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf
+#11 DONE 0.0s
+
+#12 [8/8] COPY evidence/S09/completion-review/sources/kr457.pdf /app/evidence/S09/completion-review/sources/kr457.pdf
+#12 DONE 0.0s
+
+#13 exporting to image
+#13 exporting layers 0.1s done
+#13 exporting manifest sha256:20bffacc74431478b13206e519d491378da0715c574f22a98539a336792e41f5 done
+#13 exporting config sha256:03f5ff488b5689069e5867b137f5552a964159e6d6e4a874db0e894050620098 done
+#13 exporting attestation manifest sha256:9f88967efc186431b1f6fb20d21d8d30c506bd474d005ce76ec822f9258d4744 done
+#13 exporting manifest list sha256:a40d3a9a10818819bd835ae9fdcba7eb61198c50efb2a374516874bab63a629b done
+#13 naming to docker.io/library/clinical-compass:s11 done
+#13 unpacking to docker.io/library/clinical-compass:s11 0.0s done
+#13 DONE 0.1s

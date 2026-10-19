@@ -69,6 +69,15 @@ def snapshot(db, patient_id, relationship_id):
     result['actions'] = [dict(r) for r in db.execute('''SELECT a.*,c.proposal_id FROM care_actions a
         JOIN doctor_confirmations c ON c.id=a.confirmation_id JOIN proposals p ON p.id=c.proposal_id
         WHERE p.patient_id=? ORDER BY a.id''', (patient_id,))]
+    # Preserve old empty snapshots; new accompaniment information requires rereview.
+    for table, query in (
+        ('adherence_tasks', 'SELECT * FROM adherence_tasks WHERE patient_id=? ORDER BY id'),
+        ('adherence_entries', 'SELECT e.* FROM adherence_entries e JOIN adherence_tasks t ON t.id=e.task_id WHERE t.patient_id=? ORDER BY e.id'),
+        ('messages', 'SELECT m.* FROM messages m JOIN conversations c ON c.id=m.conversation_id JOIN care_relationships r ON r.id=c.relationship_id WHERE r.patient_id=? ORDER BY m.id'),
+    ):
+        rows = [dict(r) for r in db.execute(query, (patient_id,))]
+        if rows:
+            result[table] = rows
     for table in ('source_versions', 'catalog_versions', 'assessment_form_releases'):
         result[table] = sorted((dict(r) for r in db.execute(f'SELECT * FROM {table}')), key=canonical)
     return canonical(result)

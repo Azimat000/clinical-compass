@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery
+from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication
 
 
 def create_app(database=None):
@@ -131,6 +131,36 @@ def create_app(database=None):
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
         return render_patient(patient_id)
+
+    @app.get('/patients/<patient_id>/communication')
+    def communication_page(patient_id):
+        patient = patient_or_404(patient_id)
+        try:
+            data = communication.view(get_db(), g.user, patient_id)
+        except communication.Error as error:
+            return render_template('result.html', title='Раздел недоступен', message=str(error)), error.status
+        return render_template('communication.html', patient=patient, data=data,
+                               message_key=secrets.token_hex(16), task_key=secrets.token_hex(16),
+                               report_keys={t['id']:secrets.token_hex(16) for t in data['tasks']})
+
+    @app.post('/patients/<patient_id>/communication/<operation>')
+    def communication_write(patient_id, operation):
+        patient_or_404(patient_id)
+        try:
+            if operation == 'send':
+                communication.send(get_db(),g.user,patient_id,request.form)
+            elif operation == 'schedule':
+                role('doctor')
+                communication.schedule(get_db(),g.user,patient_id,request.form)
+            elif operation == 'report':
+                communication.report(get_db(),g.user,patient_id,request.form.get('task_id',''),request.form)
+            elif operation in ('received','read'):
+                communication.receipt(get_db(),g.user,patient_id,request.form.get('message_id',''),operation)
+            else:
+                abort(404)
+        except communication.Error as error:
+            return render_template('result.html', title='Не сохранено', message=str(error)), error.status
+        return redirect(url_for('communication_page',patient_id=patient_id),code=303)
 
     @app.get('/notifications')
     def notification_inbox():

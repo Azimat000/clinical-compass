@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T20:17:06+03:00",
+  "updated_on": "2026-10-19T20:34:15+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S10",
-  "next_slice": "S11",
+  "last_accepted_slice": "S11",
+  "next_slice": "S12",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -74,8 +74,8 @@
       "reason": null
     },
     "S11": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S11",
       "handoff": "memory/sessions/S11.md",
       "reason": null
     },
@@ -186,7 +186,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S10 принят в локальной синтетической области: критический web-сигнал, отдельная реакция врача, реальная CLI/PTY-консоль с синтетическим оператором, сбои/повторы. Физическое окно резерва/реальный врач/внешняя служба не подтверждены. Следующий S11 в новой сессии. Доказательства evidence/S10/acceptance.md; B04/апробация/полное восстановление остаются.",
+    "next_action": "S11 принят в локальной синтетической области: двусторонние сообщения/явные квитанции, повтор после TCP-разрыва и kill/restart, подтверждённые врачом пункты и описательный знаменатель, общий F01–F08 сценарий. B12 не снят: два Linux404 в прежних тестах; диагностический полный прогон PASS, итоговый лог evidence/S11/docker-tests.log. Реальная клиническая апробация/внешние каналы/полнота терапии не доказаны. Следующий S12 только в новой сессии; evidence/S11/acceptance.md.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
