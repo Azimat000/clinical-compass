@@ -119,12 +119,12 @@ class FoundationTests(unittest.TestCase):
         custom.mkdir()
         for p in MIGRATIONS.glob('*.sql'):
             (custom / p.name).write_bytes(p.read_bytes())
-        (custom / '002_test_extension.sql').write_text('ALTER TABLE patients ADD COLUMN test_extension TEXT;\nCREATE INDEX test_extension_index ON patients(test_extension);\n')
+        (custom / '999_test_extension.sql').write_text('ALTER TABLE patients ADD COLUMN test_extension TEXT;\nCREATE INDEX test_extension_index ON patients(test_extension);\n')
         migrate(self.db, custom)
         migrate(self.db, custom)
         self.assertEqual(6, self.db.execute('SELECT count(*) FROM patients').fetchone()[0])
         self.assertEqual(6, self.db.execute('SELECT count(*) FROM outbox_events').fetchone()[0])
-        self.assertEqual('002_test_extension', health(self.db)['schema_version'])
+        self.assertEqual('999_test_extension', health(self.db)['schema_version'])
         self.assertEqual([], self.db.execute('PRAGMA foreign_key_check').fetchall())
 
     def test_authenticated_shell_escapes_input_and_rejects_other_hosts(self):

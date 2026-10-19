@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access
+from . import access, records
 
 
 def create_app(database=None):
@@ -122,6 +122,9 @@ def create_app(database=None):
 
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
+        return render_patient(patient_id)
+
+    def render_patient(patient_id, form_values=None, form_error=None):
         patient = patient_or_404(patient_id)
         db = get_db()
         encounters = db.execute('SELECT * FROM encounters WHERE patient_id=? ORDER BY occurred_at DESC', (patient_id,)).fetchall()
@@ -129,7 +132,12 @@ def create_app(database=None):
             WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=?''', (patient_id, now())).fetchone()
         checks = db.execute('''SELECT c.* FROM relationship_checks c JOIN care_relationships r ON r.id=c.relationship_id
             WHERE r.patient_id=? AND r.ends_at IS NULL ORDER BY c.received_at DESC LIMIT 20''', (patient_id,)).fetchall()
-        return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks)
+        entries = records.history(db, patient_id)
+        return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+                               entries=entries, record_warnings=records.warnings(patient, entries),
+                               record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
+                               request_key=(form_values.get('request_key', '') if form_values is not None else secrets.token_hex(16)),
+                               today=records.today().isoformat(), form_values=form_values or {}, form_error=form_error)
 
     @app.post('/invitations')
     def create_invitation():
@@ -172,6 +180,34 @@ def create_app(database=None):
             db.execute('INSERT INTO relationship_checks VALUES(?,?,?,?)', (check_id, r['id'], g.user['id'], now()))
             access.audit(db, g.user['id'], 'care.connection_checked', check_id)
         return redirect(url_for('demo_patient', patient_id=patient_id))
+
+    def submit_record(patient_id, kind):
+        role('patient' if kind == 'self_report' else 'doctor')
+        patient_or_404(patient_id)
+        try:
+            entry_id = records.save(get_db(), g.user, patient_id, kind, request.form)
+        except records.RecordError as error:
+            # Keep entered values on error without creating a partial record.
+            if error.status == 400:
+                return render_patient(patient_id, request.form, str(error)), 400
+            return render_template('result.html', title='Запись не сохранена', message=str(error)), error.status
+        return redirect(url_for('demo_patient', patient_id=patient_id) + '#entry-' + entry_id, code=303)
+
+    @app.post('/patients/<patient_id>/self-reports')
+    def self_report(patient_id):
+        return submit_record(patient_id, 'self_report')
+
+    @app.post('/patients/<patient_id>/visits')
+    def visit(patient_id):
+        return submit_record(patient_id, 'visit')
+
+    @app.get('/api/patients/<patient_id>/history')
+    def history_api(patient_id):
+        patient = patient_or_404(patient_id)
+        entries = records.history(get_db(), patient_id)
+        # Opaque retry hashes are internal and do not belong in the read API.
+        return jsonify({'entries': [{k: v for k, v in e.items() if k not in ('request_key', 'payload_json')} for e in entries],
+                        'warnings': records.warnings(patient, entries)})
 
     @app.get('/api/patients/<patient_id>')
     def patient_api(patient_id):

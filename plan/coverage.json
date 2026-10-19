@@ -90,10 +90,16 @@
         }
       ],
       "evidence_expected": "Несколько визитов и самоотчетов; сравнение сопоставимых версий шкал",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
       ]
     },
     {
@@ -115,10 +121,16 @@
         }
       ],
       "evidence_expected": "Отчет пациента сохраняется и появляется у ведущего врача; пациент видит собственную динамику",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
       ]
     },
     {
@@ -284,7 +296,13 @@
         "apps/tests/test_access.py",
         "evidence/S05/acceptance.md",
         "evidence/S05/final-checks.log",
-        "evidence/S05/docker-final-restart.log"
+        "evidence/S05/docker-final-restart.log",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
       ]
     },
     {
@@ -1141,7 +1159,13 @@
         "docs/RUNBOOK.md",
         "evidence/S04/acceptance.md",
         "evidence/S04/checks.log",
-        "evidence/S04/docker-check.json"
+        "evidence/S04/docker-check.json",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
       ]
     },
     {

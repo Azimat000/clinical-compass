@@ -50,7 +50,7 @@ def main():
                         'accounts': diagnostic.execute('SELECT id,role,disabled FROM users').fetchall()}, ensure_ascii=False))
                 raise
 
-        result, report_id = [], None
+        result, report_id, clinical_id = [], None, None
         for round_number in (1, 2):
             with open(Path(directory) / f'server-{round_number}.log', 'wb') as log:
                 process = subprocess.Popen(command + ['serve', '--port', str(port)], cwd=ROOT, stdout=log, stderr=log)
@@ -75,7 +75,24 @@ def main():
                         post(patient, '/link', {'invitation': token})
                         html = post(patient, '/patients/D01/connection-check', {})
                         report_id = re.search(r'Технический отчёт ([0-9a-f]+)', html).group(1)
+                        key = re.search(r'name="request_key" value="([^"]+)"', html).group(1)
+                        values = {'request_key': key, 'observed_on': '2026-10-18', 'wellbeing': 'worse',
+                                  'complaints_status': 'known', 'complaints_text': 'Синтетическая жалоба после перезапуска',
+                                  'risk_factors_status': 'unknown', 'adverse_events_status': 'known',
+                                  'adverse_events_text': 'Синтетическое нежелательное явление', 'age_status': 'unknown'}
+                        html = post(patient, '/patients/D01/self-reports', values)
+                        clinical_id = json.loads(get(doctor, '/api/patients/D01/history'))['entries'][0]['id']
+                        post(patient, '/patients/D01/self-reports', values)  # Same retry does not duplicate.
+                        html = get(doctor, '/demo/D01')
+                        visit_key = re.search(r'name="request_key" value="([^"]+)"', html).group(1)
+                        post(doctor, '/patients/D01/visits', {'request_key': visit_key, 'observed_on': '2026-10-18',
+                            'risk_factors_status': 'denied', 'summary': 'Синтетический визит врача', 'wellbeing': 'same'})
                     assert report_id in get(patient) and report_id in get(doctor, '/demo/D01')
+                    for browser in (doctor, patient):
+                        clinical = json.loads(get(browser, '/api/patients/D01/history'))['entries']
+                        assert len(clinical) == 2 and clinical_id in [e['id'] for e in clinical]
+                        assert {e['kind'] for e in clinical} == {'visit', 'self_report'}
+                        assert 'Синтетическое нежелательное явление' in get(browser, '/demo/D01')
                     assert 'Демо 01' in get(doctor) and 'Демо 02' not in get(doctor)
                     for browser in (doctor, patient):
                         try:
@@ -83,7 +100,7 @@ def main():
                             raise AssertionError('Foreign patient was accessible')
                         except HTTPError as error:
                             assert error.code == 404
-                    result.append({'restart_round': round_number, 'health': status, 'shared_report': True, 'foreign_denied': True})
+                    result.append({'restart_round': round_number, 'health': status, 'shared_report': True, 'foreign_denied': True, 'shared_clinical_history': True})
                 finally:
                     process.terminate(); process.wait(timeout=10)
         subprocess.run(command + ['worker', '--once'], cwd=ROOT, check=True)
@@ -92,9 +109,12 @@ def main():
             assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed'").fetchone()[0] == 6
             assert db.execute('SELECT count(*) FROM event_receipts').fetchone()[0] == 6
             assert db.execute('SELECT count(*) FROM relationship_checks').fetchone()[0] == 1
+            assert db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0] == 2
+            assert db.execute('SELECT count(*) FROM self_reports').fetchone()[0] == 1
+            assert db.execute('SELECT count(*) FROM adverse_events').fetchone()[0] == 1
             assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             assert db.execute('PRAGMA foreign_key_check').fetchall() == []
-        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1, 'integrity': 'ok'}, ensure_ascii=False, indent=2))
+        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1, 'durable_clinical_entries': 2, 'durable_adverse_events': 1, 'integrity': 'ok'}, ensure_ascii=False, indent=2))
 
 
 if __name__ == '__main__':
