@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T19:18:19+03:00",
+  "updated_on": "2026-10-19T19:24:22+03:00",
   "current_slice": null,
   "last_accepted_slice": "S08",
-  "next_slice": null,
+  "next_slice": "S10A",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -65,7 +65,7 @@
       "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S09.md",
-      "reason": "B04: не подтверждены точные машинные признаки, карта категорий/срочности и протокол реакции/резервных действий; КР не задают готового алгоритма. Ручная часть реализована, A01–A05 неактивны; реальных критических событий нет. Условия возобновления: evidence/S09/acceptance.md."
+      "reason": "B04: не подтверждены точные машинные признаки/применимость, категории/срочность, клинические действия и местный протокол реакции/резерва. Новый ASQ также без подтверждения точной русской валидации; не активирован. S09 blocked; независимая доставка обычных отчётов выделена в planned S10A, исходный S10 требует S09."
     },
     "S10": {
       "status": "planned",
@@ -174,13 +174,19 @@
       "commit_ref": "refs/tags/slice/S08B",
       "handoff": "memory/sessions/S08B.md",
       "reason": null
+    },
+    "S10A": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S10A.md",
+      "reason": null
     }
   },
   "latest_audit": {
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "B13/B14 закрыты в S08B; S08 принят справочно. S09 теперь blocked: ручные категории/подтверждение реализованы, A01–A05 неактивны. Перед продолжением проверить конкретные основания/протокол B04 по evidence/S09/acceptance.md; готового независимого среза нет, S10 не начинать через блокер.",
+    "next_action": "Следующая новая сессия S10A: независимая доставка обычных самоотчётов после S06; не критический алерт. S09 blocked по B04, исходный S10 требует S09 и S10A. См. evidence/S09/resume-2026-10-19/plan-change.md.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

@@ -496,7 +496,8 @@
         "S10",
         "S14",
         "S15",
-        "S17"
+        "S17",
+        "S10A"
       ],
       "subchecks": [
         {
@@ -531,7 +532,8 @@
         "evidence/S09/final-checks.log",
         "evidence/S09/upgrade.json",
         "apps/tests/test_routing.py",
-        "docs/architecture/routing.md"
+        "docs/architecture/routing.md",
+        "evidence/S09/resume-2026-10-19/plan-change.md"
       ]
     },
     {
@@ -1160,7 +1162,8 @@
       "primary_slice": "S10",
       "verification_slices": [
         "S15",
-        "S17"
+        "S17",
+        "S10A"
       ],
       "subchecks": [
         {
@@ -1186,7 +1189,9 @@
       ],
       "evidence_expected": "Реальное восстановление из копии; отключение работника и сервера; отчет о потерях и времени; данные во время сбоя",
       "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "actual_evidence": [
+        "evidence/S09/resume-2026-10-19/plan-change.md"
+      ]
     },
     {
       "id": "T08",
