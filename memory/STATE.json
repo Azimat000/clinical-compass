@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T23:36:59+03:00",
+  "updated_on": "2026-10-19T23:49:35+03:00",
   "current_slice": null,
   "last_accepted_slice": "S15",
-  "next_slice": null,
+  "next_slice": "S17B",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -174,13 +174,43 @@
       "commit_ref": "refs/tags/slice/S10A",
       "handoff": "memory/sessions/S10A.md",
       "reason": null
+    },
+    "S17B": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17B.md",
+      "reason": null
+    },
+    "S17C": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17C.md",
+      "reason": null
+    },
+    "S17D": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17D.md",
+      "reason": null
+    },
+    "S17E": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17E.md",
+      "reason": null
+    },
+    "S17F": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17F.md",
+      "reason": null
     }
   },
   "latest_audit": {
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S17 blocked: свод83/160 подготовлен, но E06/клиническая применимость/закрытые условия/индивидуальные подтверждения не закрыты. Без тега, без S18. Новые фактические основания → повторная проверка и возобновление S17; evidence/S17/acceptance.md и docs/release/known-limitations.md. S16 исключён, S17A отменён.",
+    "next_action": "По прямому поручению добавлен блок S17B–S17F перед прежними S18–S25. Следующая сессия только S17B; он зависит от принятого S15 и не требует фиктивной приёмки S17. S17 остаётся blocked без тега: E02/E06/закрытые условия/индивидуальные подтверждения. S18 ждёт принятия S17 и S17F; S16 исключён, S17A не используется. План: docs/product/therapist-first-visit-plan.md.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
@@ -192,7 +222,7 @@
       "report": "memory/sessions/interface-skills.md",
       "lock": "docs/design/skills.lock.json",
       "commit_ref": "refs/tags/setup/interface-skills",
-      "scope": "Инструменты для S13 и интерфейсных задач S14–S15/S18/S20; ни один срез не принят этой настройкой. Исторический S16 исключён из действующего плана."
+      "scope": "Инструменты для S13, интерфейсных S14–S15/S17C/S17E/S18/S20; установка не принимает срезы. S16 исключён."
     }
   }
 }

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "base_commit": "6c04b065b5f073eb6b3fd0cedcaf3d8ae7d65d48",
+  "summary": {
+    "slices": 33,
+    "pdf_requirements": 37,
+    "contest_conditions": 46,
+    "subchecks": 160,
+    "accepted_slices": 19,
+    "fulfilled_requirements": 0,
+    "next_slice": "S17B"
+  },
+  "tracked_files_checked": 722,
+  "changed_baseline_paths": [
+    "START_HERE.md",
+    "docs/design/skills-workflow.md",
+    "docs/product/contest-strategy.md",
+    "docs/release/known-limitations.md",
+    "memory/BLOCKERS.md",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/EXTERNAL.md",
+    "memory/STATE.json",
+    "plan/COVERAGE.md",
+    "plan/ROADMAP.md",
+    "plan/coverage.json",
+    "plan/manifest.json",
+    "plan/slices/S18.md"
+  ],
+  "preserved": [
+    "83 original requirements and 160 subchecks",
+    "all original statuses and actual evidence",
+    "all old slice tasks/outputs/acceptance/conditions and IDs",
+    "runtime/SQL/forms/synthetic data/source documents",
+    "S17 blocked and 19 accepted slices",
+    "qualification and postcontest permissions",
+    "budget and transaction history"
+  ],
+  "routing_probes": [
+    "S17B next while S17 blocked",
+    "B→C→D",
+    "E independent when D blocked",
+    "F waits for D+E",
+    "S18 waits for S17+F"
+  ]
+}
