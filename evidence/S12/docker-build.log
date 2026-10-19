@@ -1,0 +1,52 @@
+#0 building with "colima" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 858B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 384B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 48.38kB done
+#4 DONE 0.0s
+
+#5 [1/8] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#5 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#5 DONE 0.0s
+
+#6 [2/8] WORKDIR /app
+#6 CACHED
+
+#7 [3/8] COPY apps/requirements.lock /app/apps/requirements.lock
+#7 CACHED
+
+#8 [4/8] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#8 CACHED
+
+#9 [5/8] COPY apps /app/apps
+#9 DONE 0.0s
+
+#10 [6/8] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#10 DONE 0.0s
+
+#11 [7/8] COPY evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf /app/evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf
+#11 DONE 0.0s
+
+#12 [8/8] COPY evidence/S09/completion-review/sources/kr457.pdf /app/evidence/S09/completion-review/sources/kr457.pdf
+#12 DONE 0.0s
+
+#13 exporting to image
+#13 exporting layers 0.1s done
+#13 exporting manifest sha256:b2ccbcf4ae001fc23b4781fc350a2fc1f80f151b6886e99d46b0e78ecaf05f21 done
+#13 exporting config sha256:0e1245b5b9abca9a63e9e046711db0e3a2830f898175e4eb3e41df159b2405c8
+#13 exporting config sha256:0e1245b5b9abca9a63e9e046711db0e3a2830f898175e4eb3e41df159b2405c8 done
+#13 exporting attestation manifest sha256:266bb94229be6be037035d8b8643a0e910bac53b7c7f3526a786f01b66505b04 done
+#13 exporting manifest list sha256:a733b3523f66fb2099fe89daae0a53c967592cbdc5620f5b04d31f351bab802e done
+#13 naming to docker.io/library/compass:s12 done
+#13 unpacking to docker.io/library/compass:s12 0.0s done
+#13 DONE 0.1s

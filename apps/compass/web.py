@@ -1,10 +1,12 @@
 """Local synthetic cabinets; every patient resource uses server-side access checks."""
 import os
+import re
+import json
 import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication
+from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
 
 
 def create_app(database=None):
@@ -27,6 +29,11 @@ def create_app(database=None):
     def role(required):
         if g.user['role'] != required:
             abort(403)
+
+    @app.errorhandler(413)
+    def request_too_large(error):
+        return render_template('result.html',title='Ввод слишком большой',
+                               message='Запрос больше 65 536 байт. Для импорта нужен текст или .txt UTF-8 до 24 000 байт; уменьшите файл или текст.'),413
 
     @app.errorhandler(clinical_rules.RuleError)
     def rule_failure(error):
@@ -204,6 +211,44 @@ def create_app(database=None):
         if action == 'received':
             return '', 204
         return redirect(url_for('critical_inbox'),code=303)
+
+    @app.route('/patients/<patient_id>/imports', methods=['GET', 'POST'])
+    def imports_page(patient_id):
+        role('doctor')
+        patient = patient_or_404(patient_id)
+        error, status = None, 200
+        values = request.form if request.method == 'POST' else {}
+        if request.method == 'POST':
+            try:
+                file = request.files.get('file')
+                if file and file.filename and request.form.get('source_text','').strip():
+                    raise extraction.ExtractionError('Выберите один источник: текст или файл.')
+                text = extraction.upload_text(file) if file and file.filename else request.form.get('source_text','')
+                if re.search(r'\d{101}',text):
+                    raise extraction.ExtractionError('Числовой фрагмент длиннее 100 цифр не поддерживается; проверьте источник.')
+                extraction.save_import(get_db(),g.user,patient_id,text,request.form.get('request_key',''))
+                return redirect(url_for('imports_page',patient_id=patient_id),code=303)
+            except (extraction.ExtractionError, decisions.DecisionError) as exc:
+                error, status = str(exc), exc.status
+        items = extraction.history(get_db(),patient_id)
+        for item in items:
+            for candidate in item['result']['candidates']:
+                candidate['review_value'] = extraction.canonical(candidate['value'])
+            for review in item['reviews']:
+                review['payload'] = json.loads(review['payload_json'])
+        return render_template('imports.html',patient=patient,items=items,error=error,values=values,
+                               fields=extraction.FIELDS,assertions=extraction.ASSERTIONS,assertion_labels=extraction.ASSERTION_LABELS,
+                               warning=extraction.WARNING,new_key=lambda:secrets.token_hex(16)),status
+
+    @app.post('/patients/<patient_id>/imports/<import_id>/review')
+    def review_import(patient_id,import_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        try:
+            extraction.review(get_db(),g.user,patient_id,import_id,request.form)
+        except (extraction.ExtractionError, decisions.DecisionError) as exc:
+            return render_template('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
+        return redirect(url_for('imports_page',patient_id=patient_id),code=303)
 
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)

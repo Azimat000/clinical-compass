@@ -71,6 +71,8 @@ def snapshot(db, patient_id, relationship_id):
         WHERE p.patient_id=? ORDER BY a.id''', (patient_id,))]
     # Preserve old empty snapshots; new accompaniment information requires rereview.
     for table, query in (
+        ('text_imports', 'SELECT * FROM text_imports WHERE patient_id=? ORDER BY id'),
+        ('extraction_reviews', 'SELECT e.* FROM extraction_reviews e JOIN text_imports t ON t.id=e.import_id WHERE t.patient_id=? ORDER BY e.id'),
         ('adherence_tasks', 'SELECT * FROM adherence_tasks WHERE patient_id=? ORDER BY id'),
         ('adherence_entries', 'SELECT e.* FROM adherence_entries e JOIN adherence_tasks t ON t.id=e.task_id WHERE t.patient_id=? ORDER BY e.id'),
         ('messages', 'SELECT m.* FROM messages m JOIN conversations c ON c.id=m.conversation_id JOIN care_relationships r ON r.id=c.relationship_id WHERE r.patient_id=? ORDER BY m.id'),
