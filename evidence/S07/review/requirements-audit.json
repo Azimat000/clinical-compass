@@ -1,0 +1,2251 @@
+{
+  "date": "2026-10-19 Europe/Moscow",
+  "scope": "Complete requirement inventory reviewed against unchanged case/regulations and new contest report. Statuses are BEFORE implementation acceptance, not new fulfilment claims.",
+  "baseline_commit": "fa21b2426747370b45b628ed6c4a9557f4c3f016",
+  "groups": 83,
+  "subchecks": 160,
+  "requirements": [
+    {
+      "id": "F01",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Предлагать стандартизированные методы оценки состояния пациента",
+      "subchecks": [
+        {
+          "id": "F01.1",
+          "text": "Предлагать стандартизированные методы оценки состояния пациента"
+        }
+      ],
+      "status_before_review": "blocked",
+      "implementation_slice": "S07",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Контрольные примеры подсчета и неполных анкет; источник русской валидации и условия использования",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S07/research.md",
+        "evidence/S07/acceptance.md"
+      ]
+    },
+    {
+      "id": "F02",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии",
+      "subchecks": [
+        {
+          "id": "F02.1",
+          "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S08",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Сценарии соответствующего и неподходящего назначения; каждое утверждение связано с источником",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "F03",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Учитывать и оценивать индивидуальные риски и нежелательные явления",
+      "subchecks": [
+        {
+          "id": "F03.1",
+          "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S08",
+      "verification_slices": [
+        "S14",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Положительные и отрицательные сценарии риска; неизвестные сведения не считаются отсутствием риска",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "F04",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Мониторинг динамики состояния пациента",
+      "subchecks": [
+        {
+          "id": "F04.1",
+          "text": "Мониторинг динамики состояния пациента"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S07",
+      "verification_slices": [
+        "S13",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Несколько визитов и самоотчетов; сравнение сопоставимых версий шкал",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png",
+        "evidence/S07/research.md",
+        "evidence/S07/acceptance.md"
+      ]
+    },
+    {
+      "id": "F05",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Интерфейс пациента для самоотчета и самостоятельного отслеживания динамики",
+      "subchecks": [
+        {
+          "id": "F05.1",
+          "text": "Интерфейс пациента для самоотчета и самостоятельного отслеживания динамики"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S06",
+      "verification_slices": [
+        "S07",
+        "S13",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Отчет пациента сохраняется и появляется у ведущего врача; пациент видит собственную динамику",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png",
+        "evidence/S07/research.md",
+        "evidence/S07/acceptance.md"
+      ]
+    },
+    {
+      "id": "F06",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Каналы коммуникации для сопровождения лечебного процесса",
+      "subchecks": [
+        {
+          "id": "F06.1",
+          "text": "Каналы коммуникации для сопровождения лечебного процесса"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S11",
+      "verification_slices": [
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Двустороннее сообщение и повторная доставка после разрыва соединения",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "F07",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Оценивать приверженность лечению и рекомендациям врача",
+      "subchecks": [
+        {
+          "id": "F07.1",
+          "text": "Оценивать приверженность лечению и рекомендациям врача"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S11",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Врач видит пропуски и отсутствие данных как разные состояния",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "F08",
+      "source": "case.pdf, стр. 1",
+      "requirement": "Выявлять ситуации направления к психиатру для врачей других специальностей; рекомендовать дальнейшую маршрутизацию по данным с категориями обязательно и желательно в зависимости от тяжести",
+      "subchecks": [
+        {
+          "id": "F08.1",
+          "text": "Врач другой специальности"
+        },
+        {
+          "id": "F08.2",
+          "text": "Выявление потребности в психиатре"
+        },
+        {
+          "id": "F08.3",
+          "text": "Маршрут по данным пациента"
+        },
+        {
+          "id": "F08.4",
+          "text": "Категория обязательно"
+        },
+        {
+          "id": "F08.5",
+          "text": "Категория желательно"
+        },
+        {
+          "id": "F08.6",
+          "text": "Учёт тяжести"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S09",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Оба типа маршрутизации; неполные данные; отсутствие самостоятельного направления",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M01",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Как минимум роли Врач и Пациент с раздельными функциями и правами доступа",
+      "subchecks": [
+        {
+          "id": "M01.1",
+          "text": "Роль Врач"
+        },
+        {
+          "id": "M01.2",
+          "text": "Роль Пациент"
+        },
+        {
+          "id": "M01.3",
+          "text": "Раздельные функции"
+        },
+        {
+          "id": "M01.4",
+          "text": "Серверные права доступа"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S05",
+      "verification_slices": [
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Пациент не меняет назначения; врач не читает чужого пациента; попытки прямого доступа отвергаются",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
+      ]
+    },
+    {
+      "id": "M02",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Данные пациента связаны с ведущим лечащим врачом; введенные пациентом сведения попадают в его карточку у врача без третьих лиц",
+      "subchecks": [
+        {
+          "id": "M02.1",
+          "text": "Ведущий лечащий врач"
+        },
+        {
+          "id": "M02.2",
+          "text": "Самоотчёт попадает именно в его карточку"
+        },
+        {
+          "id": "M02.3",
+          "text": "Нет ручного посредника"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S05",
+      "verification_slices": [
+        "S06",
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Два кабинета показывают один отчет без ручной пересылки",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
+      ]
+    },
+    {
+      "id": "M03",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Назначение изменение и отмена терапии; направление к психиатру; изменение плана лечения только после подтверждения врачом",
+      "subchecks": [
+        {
+          "id": "M03.1",
+          "text": "Назначение терапии"
+        },
+        {
+          "id": "M03.2",
+          "text": "Изменение терапии"
+        },
+        {
+          "id": "M03.3",
+          "text": "Отмена терапии"
+        },
+        {
+          "id": "M03.4",
+          "text": "Направление к психиатру"
+        },
+        {
+          "id": "M03.5",
+          "text": "Изменение плана"
+        },
+        {
+          "id": "M03.6",
+          "text": "Подтверждение врачом перед каждым действием"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S08",
+      "verification_slices": [
+        "S09",
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Тест каждого из пяти видов клинических действий; пациент получает только подтвержденный план",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M04",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Демонстрация на клинических сценариях с рассмотрением назначения Авиандра; каждый сценарий включает профиль пациента рекомендации по лечению и маршрутизацию",
+      "subchecks": [
+        {
+          "id": "M04.1",
+          "text": "Рассмотрение Авиандра"
+        },
+        {
+          "id": "M04.2",
+          "text": "Профиль в каждом случае"
+        },
+        {
+          "id": "M04.3",
+          "text": "Лечебные рекомендации в каждом случае"
+        },
+        {
+          "id": "M04.4",
+          "text": "Маршрутизация в каждом случае"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S03",
+      "verification_slices": [
+        "S08",
+        "S16",
+        "S18"
+      ],
+      "evidence_expected": "Профиль плюс рекомендации плюс маршрутизация в каждом случае; в том числе обоснованный отказ или недостаток данных",
+      "existing_evidence": [
+        "data/synthetic/cases.json",
+        "docs/validation/dataset.md",
+        "evidence/S03/acceptance.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M05",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Механизм алертинга самостоятельно определяет критическое состояние по признакам выбранным командой; экстренно оповещает врача и выполняет действия выбранные командой",
+      "subchecks": [
+        {
+          "id": "M05.1",
+          "text": "Самостоятельное определение критичности"
+        },
+        {
+          "id": "M05.2",
+          "text": "Обоснованные признаки команды"
+        },
+        {
+          "id": "M05.3",
+          "text": "Экстренное оповещение врача"
+        },
+        {
+          "id": "M05.4",
+          "text": "Определённые командой действия"
+        },
+        {
+          "id": "M05.5",
+          "text": "Фактически работающий механизм"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S09",
+      "verification_slices": [
+        "S10",
+        "S14",
+        "S15",
+        "S17"
+      ],
+      "evidence_expected": "Замер от приема критических данных до видимого уведомления; сбой и повтор; журнал действий",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M06",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Сигналы о направлении к психиатру и безопасности терапии визуально выделены; категории обязательно и желательно различимы",
+      "subchecks": [
+        {
+          "id": "M06.1",
+          "text": "Заметное направление"
+        },
+        {
+          "id": "M06.2",
+          "text": "Заметная безопасность терапии"
+        },
+        {
+          "id": "M06.3",
+          "text": "Различимость обязательно/желательно"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S09",
+      "verification_slices": [
+        "S13",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Проверка обеих категорий без опоры только на цвет; заметность в карточке и списке",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M07",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Рекомендовать только препараты зарегистрированные в РФ в пределах зарегистрированных показаний противопоказаний и доз; решение вне инструкции принимает только врач",
+      "subchecks": [
+        {
+          "id": "M07.1",
+          "text": "Регистрация препарата в РФ"
+        },
+        {
+          "id": "M07.2",
+          "text": "Показания"
+        },
+        {
+          "id": "M07.3",
+          "text": "Противопоказания"
+        },
+        {
+          "id": "M07.4",
+          "text": "Режимы дозирования"
+        },
+        {
+          "id": "M07.5",
+          "text": "Вне инструкции решает только врач"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S08",
+      "verification_slices": [
+        "S02",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Проверки показаний противопоказаний доз и неизвестных данных; ссылка на действующую запись ГРЛС",
+      "existing_evidence": [
+        "docs/clinical/sources.md",
+        "evidence/S02/requirements-review.md",
+        "evidence/S02/acceptance.md",
+        "docs/clinical/rule-catalog.md",
+        "evidence/S02/research-clinical.md",
+        "evidence/S02/received-review.md",
+        "evidence/S02/received-research.md",
+        "evidence/S02/received-grls-check.json",
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M08",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Клинические рекомендации действующие и одобренные Минздравом РФ; международные только дополнение с явным источником; сведения о препаратах из действующей инструкции или ОХЛП ГРЛС; инструменты валидированные с валидированной русской версией; источник валидации и соблюдение авторских прав и лицензии",
+      "subchecks": [
+        {
+          "id": "M08.1",
+          "text": "Действующие КР РФ"
+        },
+        {
+          "id": "M08.2",
+          "text": "Одобрение Минздравом"
+        },
+        {
+          "id": "M08.3",
+          "text": "Международные только дополнение"
+        },
+        {
+          "id": "M08.4",
+          "text": "Явный источник международных"
+        },
+        {
+          "id": "M08.5",
+          "text": "Действующая инструкция/ОХЛП именно ГРЛС"
+        },
+        {
+          "id": "M08.6",
+          "text": "Валидированный инструмент"
+        },
+        {
+          "id": "M08.7",
+          "text": "Валидированная русская версия"
+        },
+        {
+          "id": "M08.8",
+          "text": "Источник валидации"
+        },
+        {
+          "id": "M08.9",
+          "text": "Авторские права и лицензия"
+        }
+      ],
+      "status_before_review": "blocked",
+      "implementation_slice": "S02",
+      "verification_slices": [
+        "S07",
+        "S08",
+        "S09",
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Открываемые первоисточники; карточки шкал; проверка актуальности перед сдачей; ни одного правила без основания",
+      "existing_evidence": [
+        "docs/clinical/sources.md",
+        "evidence/S02/requirements-review.md",
+        "evidence/S02/acceptance.md",
+        "docs/clinical/scales-rights.md",
+        "evidence/S02/research-scales.md",
+        "evidence/S02/received-review.md",
+        "evidence/S02/received-research.md",
+        "evidence/S02/received/manifest.json",
+        "docs/clinical/validation-request.md",
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S07/research.md",
+        "evidence/S07/acceptance.md"
+      ]
+    },
+    {
+      "id": "M09",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Соответствие требованиям законодательства РФ",
+      "subchecks": [
+        {
+          "id": "M09.1",
+          "text": "Соответствие требованиям законодательства РФ"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Описание назначения; карта данных; применимые основания и ограничения; документы проекта",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md",
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md"
+      ]
+    },
+    {
+      "id": "M10",
+      "source": "case.pdf, стр. 2",
+      "requirement": "Соблюдение конфиденциальности",
+      "subchecks": [
+        {
+          "id": "M10.1",
+          "text": "Соблюдение конфиденциальности"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S05",
+      "verification_slices": [
+        "S14",
+        "S17",
+        "S18",
+        "S22"
+      ],
+      "evidence_expected": "Проверки чужих данных; отсутствие персональных сведений в логах презентации репозитории и внешних запросах",
+      "existing_evidence": [
+        "docs/architecture/data-model.md",
+        "evidence/S04/acceptance.md",
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
+      ]
+    },
+    {
+      "id": "E01",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники",
+      "subchecks": [
+        {
+          "id": "E01.1",
+          "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S02",
+      "verification_slices": [
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "evidence_expected": "На защите открыть основание вывода; отчет проверки источников",
+      "existing_evidence": [
+        "docs/clinical/sources.md",
+        "evidence/S02/requirements-review.md",
+        "evidence/S02/acceptance.md",
+        "docs/clinical/scales-rights.md",
+        "evidence/S02/research-scales.md",
+        "evidence/S02/received-review.md",
+        "evidence/S02/received-research.md",
+        "evidence/S02/received/manifest.json",
+        "evidence/S02/acceptance-review.md"
+      ]
+    },
+    {
+      "id": "E02",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Клиническая применимость",
+      "subchecks": [
+        {
+          "id": "E02.1",
+          "text": "Клиническая применимость"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S03",
+      "verification_slices": [
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "evidence_expected": "Отчет врача о полезности корректности и ограничениях",
+      "existing_evidence": [
+        "docs/validation/dataset.md",
+        "data/synthetic/manifest.json",
+        "evidence/S03/acceptance.md"
+      ]
+    },
+    {
+      "id": "E03",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Удобство пользовательского интерфейса",
+      "subchecks": [
+        {
+          "id": "E03.1",
+          "text": "Удобство пользовательского интерфейса"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S13",
+      "verification_slices": [
+        "S16",
+        "S18"
+      ],
+      "evidence_expected": "Замеры времени действий и наблюдение пользователей",
+      "existing_evidence": []
+    },
+    {
+      "id": "E04",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Наличие всех обязательных условий",
+      "subchecks": [
+        {
+          "id": "E04.1",
+          "text": "Наличие всех обязательных условий"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S17",
+      "verification_slices": [
+        "S18"
+      ],
+      "evidence_expected": "Нет непокрытых обязательных условий перед сдачей",
+      "existing_evidence": []
+    },
+    {
+      "id": "E05",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Отдельно оценивается каждый пункт списка функций инструмента",
+      "subchecks": [
+        {
+          "id": "E05.1",
+          "text": "Отдельно оценивается каждый пункт списка функций инструмента"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S11",
+      "verification_slices": [
+        "S17",
+        "S18"
+      ],
+      "evidence_expected": "Восемь независимых приемочных сценариев",
+      "existing_evidence": []
+    },
+    {
+      "id": "E06",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Апробация с соблюдением законодательства и сохранением конфиденциальности",
+      "subchecks": [
+        {
+          "id": "E06.1",
+          "text": "Действительная апробация"
+        },
+        {
+          "id": "E06.2",
+          "text": "Соблюдение закона"
+        },
+        {
+          "id": "E06.3",
+          "text": "Сохранение конфиденциальности"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S16",
+      "verification_slices": [
+        "S17",
+        "S18"
+      ],
+      "evidence_expected": "Протокол участников заданий ошибок и результатов без идентифицирующих данных",
+      "existing_evidence": []
+    },
+    {
+      "id": "T01",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Быстродействие: отклик интерфейса формирование рекомендаций доставка алерта врачу с момента поступления критических данных и другое",
+      "subchecks": [
+        {
+          "id": "T01.1",
+          "text": "Отклик интерфейса"
+        },
+        {
+          "id": "T01.2",
+          "text": "Формирование рекомендаций"
+        },
+        {
+          "id": "T01.3",
+          "text": "Алерт от момента поступления критических данных"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S15",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Воспроизводимый отчет с нагрузкой оборудованием и долей неуспешных запросов",
+      "existing_evidence": []
+    },
+    {
+      "id": "T02",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Точность и полнота извлечения ключевых сведений из историй болезни разных шаблонов: порядок разделов детализация стиль описания формат диагнозов и назначений",
+      "subchecks": [
+        {
+          "id": "T02.1",
+          "text": "Точность извлечения"
+        },
+        {
+          "id": "T02.2",
+          "text": "Полнота извлечения"
+        },
+        {
+          "id": "T02.3",
+          "text": "Разный порядок"
+        },
+        {
+          "id": "T02.4",
+          "text": "Разная детализация"
+        },
+        {
+          "id": "T02.5",
+          "text": "Разный стиль"
+        },
+        {
+          "id": "T02.6",
+          "text": "Разный формат диагнозов"
+        },
+        {
+          "id": "T02.7",
+          "text": "Разный формат назначений"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S12",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Отложенный размеченный набор разных шаблонов; точность и полнота по полям; отдельно критичные пропуски",
+      "existing_evidence": [
+        "docs/validation/dataset.md",
+        "data/synthetic/manifest.json",
+        "evidence/S03/acceptance.md"
+      ]
+    },
+    {
+      "id": "T03",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Надежность и корректность: количество сбоев в сценариях; устойчивость к полноте и корректности входных данных",
+      "subchecks": [
+        {
+          "id": "T03.1",
+          "text": "Число сбоев сценариев"
+        },
+        {
+          "id": "T03.2",
+          "text": "Неполнота ввода"
+        },
+        {
+          "id": "T03.3",
+          "text": "Некорректность ввода"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S14",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Пустые неполные неверные противоречивые и повторные данные; перечень сбоев",
+      "existing_evidence": []
+    },
+    {
+      "id": "T04",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Эргономика: время и количество действий пользователя в типовых сценариях",
+      "subchecks": [
+        {
+          "id": "T04.1",
+          "text": "Время пользователя"
+        },
+        {
+          "id": "T04.2",
+          "text": "Число действий"
+        },
+        {
+          "id": "T04.3",
+          "text": "Типовые сценарии"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S13",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Время клики успешность и наблюдаемые затруднения",
+      "existing_evidence": []
+    },
+    {
+      "id": "T05",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Обоснованность выводов и рекомендаций релевантными источниками методами шкалами и другим на основе чего они сделаны",
+      "subchecks": [
+        {
+          "id": "T05.1",
+          "text": "Выводы с релевантными источниками"
+        },
+        {
+          "id": "T05.2",
+          "text": "Методы/шкалы как основания"
+        },
+        {
+          "id": "T05.3",
+          "text": "Связь с конкретными данными пациента"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S08",
+      "verification_slices": [
+        "S16",
+        "S17"
+      ],
+      "evidence_expected": "Проверка каждого вывода в контрольных сценариях; отсутствие неподтвержденных утверждений",
+      "existing_evidence": []
+    },
+    {
+      "id": "T06",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Устойчивость к нагрузкам: одновременные пользователи и изменение отклика",
+      "subchecks": [
+        {
+          "id": "T06.1",
+          "text": "Одновременные пользователи"
+        },
+        {
+          "id": "T06.2",
+          "text": "Отклик под нагрузкой"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S15",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Число пользователей задержки ошибки и доставка алертов под нагрузкой",
+      "existing_evidence": []
+    },
+    {
+      "id": "T07",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Отказоустойчивость и восстановление: копии объем возможной потери время восстановления сохранность критических отправленных и полученных данных во время сбоя",
+      "subchecks": [
+        {
+          "id": "T07.1",
+          "text": "Резервная копия"
+        },
+        {
+          "id": "T07.2",
+          "text": "Объём возможной потери"
+        },
+        {
+          "id": "T07.3",
+          "text": "Время восстановления"
+        },
+        {
+          "id": "T07.4",
+          "text": "Критические данные отправленные при сбое"
+        },
+        {
+          "id": "T07.5",
+          "text": "Критические данные полученные при сбое"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S10",
+      "verification_slices": [
+        "S15",
+        "S17"
+      ],
+      "evidence_expected": "Реальное восстановление из копии; отключение работника и сервера; отчет о потерях и времени; данные во время сбоя",
+      "existing_evidence": []
+    },
+    {
+      "id": "T08",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Кроссплатформенность",
+      "subchecks": [
+        {
+          "id": "T08.1",
+          "text": "Кроссплатформенность"
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S13",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Проверка доступных настольных и мобильных браузеров с указанием версий",
+      "existing_evidence": []
+    },
+    {
+      "id": "T09",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Масштабируемость архитектуры",
+      "subchecks": [
+        {
+          "id": "T09.1",
+          "text": "Масштабируемость архитектуры"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S04",
+      "verification_slices": [
+        "S15",
+        "S17"
+      ],
+      "evidence_expected": "Нагрузочный отчет и объяснение узких мест; честное разделение проверенного и предполагаемого",
+      "existing_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
+    },
+    {
+      "id": "T10",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Гибкость архитектуры: добавление и обновление шкал препаратов правил алертинга новых функций без изменения ядра",
+      "subchecks": [
+        {
+          "id": "T10.1",
+          "text": "Новые/обновлённые шкалы"
+        },
+        {
+          "id": "T10.2",
+          "text": "Новые/обновлённые препараты"
+        },
+        {
+          "id": "T10.3",
+          "text": "Новые правила алертинга"
+        },
+        {
+          "id": "T10.4",
+          "text": "Новые функции"
+        },
+        {
+          "id": "T10.5",
+          "text": "Без изменения ядра"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S04",
+      "verification_slices": [
+        "S13",
+        "S17"
+      ],
+      "evidence_expected": "Демонстрация добавления тестовой шкалы или правила без изменения вычислительного ядра",
+      "existing_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
+    },
+    {
+      "id": "T11",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Гибкость работы с данными: структура базы скорость доступа удобство поиска фильтрации выборок и расширение модели",
+      "subchecks": [
+        {
+          "id": "T11.1",
+          "text": "Структура базы"
+        },
+        {
+          "id": "T11.2",
+          "text": "Скорость доступа"
+        },
+        {
+          "id": "T11.3",
+          "text": "Поиск"
+        },
+        {
+          "id": "T11.4",
+          "text": "Фильтры"
+        },
+        {
+          "id": "T11.5",
+          "text": "Выборки"
+        },
+        {
+          "id": "T11.6",
+          "text": "Расширение модели"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S04",
+      "verification_slices": [
+        "S13",
+        "S15",
+        "S17"
+      ],
+      "evidence_expected": "Показать поиск выборку и безопасное расширение схемы; замер запросов",
+      "existing_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
+    },
+    {
+      "id": "T12",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Полнота данных: модель покрывает сущности необходимые для задач инструмента",
+      "subchecks": [
+        {
+          "id": "T12.1",
+          "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S04",
+      "verification_slices": [
+        "S06",
+        "S11",
+        "S17"
+      ],
+      "evidence_expected": "Матрица сущностей F01-F08 M01-M10; каждый основной процесс сохраняет нужные данные",
+      "existing_evidence": [
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json",
+        "docs/architecture/records.md",
+        "apps/tests/test_records.py",
+        "evidence/S06/acceptance.md",
+        "evidence/S06/final-checks.log",
+        "evidence/S06/docker-restart.log",
+        "evidence/S06/doctor-history.png"
+      ]
+    },
+    {
+      "id": "T13",
+      "source": "case.pdf, стр. 3",
+      "requirement": "Защищенность данных",
+      "subchecks": [
+        {
+          "id": "T13.1",
+          "text": "Защищенность данных"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S05",
+      "verification_slices": [
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Негативные проверки доступа; проверка логов и резервных копий; карта угроз",
+      "existing_evidence": [
+        "docs/architecture/access.md",
+        "apps/tests/test_access.py",
+        "evidence/S05/acceptance.md",
+        "evidence/S05/final-checks.log",
+        "evidence/S05/docker-final-restart.log"
+      ]
+    },
+    {
+      "id": "C01",
+      "source": "1.4",
+      "requirement": "Рабочий язык чемпионата — русский.",
+      "subchecks": [
+        {
+          "id": "C01.1",
+          "text": "Рабочий язык чемпионата — русский."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C02",
+      "source": "4.1",
+      "requirement": "Допуск: дееспособность, гражданство РФ или законное нахождение иностранца в РФ; возраст 18–35 лет на начало приёма заявок; установленный медицинский или технический профиль. Медицинский профиль — от 4 курса, ординатор, аспирант или врач.",
+      "subchecks": [
+        {
+          "id": "C02.1",
+          "text": "Допуск: дееспособность, гражданство РФ или законное нахождение иностранца в РФ; возраст 18–35 лет на начало приёма заявок; установленный медицинский или технический профиль. Медицинский профиль — от 4 курса, ординатор, аспирант или врач."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C03",
+      "source": "1.5.1;3.1–3.11;4.5;6.1–6.6",
+      "requirement": "Личная заявка, отбор, приглашение в чат и регистрация именно команды 15 октября — разные стадии. Проверить уже состоявшийся допуск, порядок отбора и командную регистрацию; не подавать заявку заново.",
+      "subchecks": [
+        {
+          "id": "C03.1",
+          "text": "Заявка через онлайн-форму и уведомление по email"
+        },
+        {
+          "id": "C03.2",
+          "text": "Отбор по соответствию требованиям, достоверности, профилю, мотивации/опыту и потенциалу междисциплинарной команды"
+        },
+        {
+          "id": "C03.3",
+          "text": "Пять критериев отбора оцениваются 0–5, сумма; проходной балл/число мест до конца отбора не раскрываются"
+        },
+        {
+          "id": "C03.4",
+          "text": "Отбор окончателен по предусмотренным правилам; возможен отказ при несоответствии/ложных сведениях"
+        },
+        {
+          "id": "C03.5",
+          "text": "Приглашение в чат до 14 октября; ошибочная ссылка срока в п.3.9 не подменяет подтверждение"
+        },
+        {
+          "id": "C03.6",
+          "text": "Регистрация команды 15 октября одним очным представителем; онлайн лишь по усмотрению организатора при объективных причинах"
+        },
+        {
+          "id": "C03.7",
+          "text": "Команда считается зарегистрированной после внесения в реестр; статус проверить ретроспективно"
+        },
+        {
+          "id": "C03.8",
+          "text": "Участник без команды может быть исключён или с согласия присоединён к уже существующей команде"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C04",
+      "source": "3.2–3.3;4.6–4.7",
+      "requirement": "Сведения должны быть полными и достоверными. Дополнительно запрошенные сведения предоставить за три рабочих дня. Недостоверные сведения и незаконные действия могут привести к отстранению.",
+      "subchecks": [
+        {
+          "id": "C04.1",
+          "text": "Сведения должны быть полными и достоверными. Дополнительно запрошенные сведения предоставить за три рабочих дня. Недостоверные сведения и незаконные действия могут привести к отстранению."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S19",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C05",
+      "source": "4.2;4.10;6.4",
+      "requirement": "Команда сохраняет состав 2–5 человек, медицинский и технический профили, не более двух технических специалистов на протяжении конкурса.",
+      "subchecks": [
+        {
+          "id": "C05.1",
+          "text": "Команда сохраняет состав 2–5 человек, медицинский и технический профили, не более двух технических специалистов на протяжении конкурса."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C06",
+      "source": "1.5.2–1.5.3",
+      "requirement": "Команда действует под единым названием, решает один кейс; капитан представляет её интересы.",
+      "subchecks": [
+        {
+          "id": "C06.1",
+          "text": "Команда действует под единым названием, решает один кейс; капитан представляет её интересы."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C07",
+      "source": "4.12",
+      "requirement": "Одно лицо не может состоять в двух командах.",
+      "subchecks": [
+        {
+          "id": "C07.1",
+          "text": "Одно лицо не может состоять в двух командах."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C08",
+      "source": "6.6",
+      "requirement": "Состав зарегистрированной команды меняется только по согласованию с организатором.",
+      "subchecks": [
+        {
+          "id": "C08.1",
+          "text": "Состав зарегистрированной команды меняется только по согласованию с организатором."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C09",
+      "source": "4.9;6.7–6.9",
+      "requirement": "О выходе или невозможности дальнейшего участия сообщить не позднее одного рабочего дня. Сохраняются минимум два человека и оба профиля, иначе организатор принимает решение за два рабочих дня. Добровольный выход лишает права на сертификат и призы; существенное влияние отстранённого участника может затронуть результаты.",
+      "subchecks": [
+        {
+          "id": "C09.1",
+          "text": "О выходе или невозможности дальнейшего участия сообщить не позднее одного рабочего дня. Сохраняются минимум два человека и оба профиля, иначе организатор принимает решение за два рабочих дня. Добровольный выход лишает права на сертификат и призы; существенное влияние отстранённого участника может затронуть результаты."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S19",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C10",
+      "source": "2.2.4;6.5",
+      "requirement": "Трекер и модератор предусмотрены не позднее 16 октября. Найти контакты и порядок получения экспертной поддержки.",
+      "subchecks": [
+        {
+          "id": "C10.1",
+          "text": "Трекер и модератор предусмотрены не позднее 16 октября. Найти контакты и порядок получения экспертной поддержки."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S02",
+        "S16"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md",
+        "docs/clinical/sources.md",
+        "evidence/S02/requirements-review.md",
+        "evidence/S02/acceptance.md",
+        "evidence/S02/external-check.md",
+        "evidence/S02/received-review.md",
+        "evidence/S02/received-research.md",
+        "docs/clinical/validation-request.md",
+        "evidence/S02/acceptance-review.md"
+      ]
+    },
+    {
+      "id": "C11",
+      "source": "2.2.4;7.1–7.4",
+      "requirement": "Условия и метрики должны были объявить 15 октября и опубликовать в чате не позднее 16 октября. Вводные данные и ресурсы обещаны, но их состав публично не определён.",
+      "subchecks": [
+        {
+          "id": "C11.1",
+          "text": "Условия и метрики должны были объявить 15 октября и опубликовать в чате не позднее 16 октября. Вводные данные и ресурсы обещаны, но их состав публично не определён."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C12",
+      "source": "5.4.6",
+      "requirement": "Участник самостоятельно отслеживает чат и официальные ресурсы; опубликованное сообщение считается полученным. Недоступность чата фиксируется честно, проверка не имитируется.",
+      "subchecks": [
+        {
+          "id": "C12.1",
+          "text": "Участник самостоятельно отслеживает чат и официальные ресурсы; опубликованное сообщение считается полученным. Недоступность чата фиксируется честно, проверка не имитируется."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C13",
+      "source": "7.3;7.7–7.8",
+      "requirement": "Вопросы по кейсу задаются только по процедуре чата. Опубликованные ответы обязательны для команд и дополняют метрики, не противореча положению.",
+      "subchecks": [
+        {
+          "id": "C13.1",
+          "text": "Вопросы по кейсу задаются только по процедуре чата. Опубликованные ответы обязательны для команд и дополняют метрики, не противореча положению."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S18"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C14",
+      "source": "7.4–7.6;8.4.4;8.5–8.7",
+      "requirement": "Метрики оцениваются 1–10, итог суммируется; веса применяются при наличии. Исключительное изменение метрик сообщается минимум за три рабочих дня до предзащиты и не ухудшает положение начавших работу. При равенстве — приоритетная метрика, иначе председатель жюри.",
+      "subchecks": [
+        {
+          "id": "C14.1",
+          "text": "Метрики оцениваются 1–10, итог суммируется; веса применяются при наличии. Исключительное изменение метрик сообщается минимум за три рабочих дня до предзащиты и не ухудшает положение начавших работу. При равенстве — приоритетная метрика, иначе председатель жюри."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S19",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C15",
+      "source": "4.8;4.12;8.4–8.4.3;8.11",
+      "requirement": "Жюри публикуется минимум за три рабочих дня до предзащиты. Конфликт интересов требует самоотвода; замены уведомляются. Запрещено влиять на жюри, экспертов, трекеров и модераторов.",
+      "subchecks": [
+        {
+          "id": "C15.1",
+          "text": "Жюри публикуется минимум за три рабочих дня до предзащиты. Конфликт интересов требует самоотвода; замены уведомляются. Запрещено влиять на жюри, экспертов, трекеров и модераторов."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S19",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C16",
+      "source": "8.2–8.3;8.6",
+      "requirement": "Предзащита 28 октября проходит онлайн; допущены команды, зарегистрированные 15 октября. Форма оценки определяется организатором.",
+      "subchecks": [
+        {
+          "id": "C16.1",
+          "text": "Предзащита 28 октября проходит онлайн; допущены команды, зарегистрированные 15 октября. Форма оценки определяется организатором."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S18",
+      "verification_slices": [
+        "S19"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C17",
+      "source": "1.5.6;1.5.8;8.3;8.9",
+      "requirement": "В финал проходят три лучшие команды по кейсу. Демо-день 30 октября гибридный и публичный; проход подтверждается фактическим результатом.",
+      "subchecks": [
+        {
+          "id": "C17.1",
+          "text": "В финал проходят три лучшие команды по кейсу. Демо-день 30 октября гибридный и публичный; проход подтверждается фактическим результатом."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S19",
+      "verification_slices": [
+        "S20",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C18",
+      "source": "1.5.7;8.8.2;8.10",
+      "requirement": "Постер предусмотрен для каждой/всех команд; круг участников неоднозначен и требует уточнения. Подготовить постер заранее. Один человек — один балл; приз партнёра отдельный и не входит в главный фонд.",
+      "subchecks": [
+        {
+          "id": "C18.1",
+          "text": "Постер предусмотрен для каждой/всех команд; круг участников неоднозначен и требует уточнения. Подготовить постер заранее. Один человек — один балл; приз партнёра отдельный и не входит в главный фонд."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S18",
+      "verification_slices": [
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C19",
+      "source": "5.4.1–5.4.3",
+      "requirement": "Сроки считаются по Москве. Электронные действия — до 23:59 последнего дня применимого срока. Нерабочий день переносится, если не установлено иное. Это не задаёт время питча или специальный дедлайн загрузки.",
+      "subchecks": [
+        {
+          "id": "C19.1",
+          "text": "Сроки считаются по Москве. Электронные действия — до 23:59 последнего дня применимого срока. Нерабочий день переносится, если не установлено иное. Это не задаёт время питча или специальный дедлайн загрузки."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S19",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C20",
+      "source": "5.4.4–5.4.5;1.3",
+      "requirement": "Точные место, время и порядок очных этапов сообщаются минимум за три рабочих дня; изменения — минимум за один рабочий день, кроме форс-мажора. Индивидуальное право удалённой финальной защиты не установлено.",
+      "subchecks": [
+        {
+          "id": "C20.1",
+          "text": "Точные место, время и порядок очных этапов сообщаются минимум за три рабочих дня; изменения — минимум за один рабочий день, кроме форс-мажора. Индивидуальное право удалённой финальной защиты не установлено."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S20",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C21",
+      "source": "11.1–11.4",
+      "requirement": "Организатор может изменить сроки/программу/формат или отменить событие по предусмотренным основаниям. Уведомление — минимум за три рабочих дня, при форс-мажоре срочно. Изменения положения публикуются в чате; ухудшающие изменения не применяются к ранее возникшим отношениям. Компенсация расходов не предусмотрена.",
+      "subchecks": [
+        {
+          "id": "C21.1",
+          "text": "Организатор может изменить сроки/программу/формат или отменить событие по предусмотренным основаниям. Уведомление — минимум за три рабочих дня, при форс-мажоре срочно. Изменения положения публикуются в чате; ухудшающие изменения не применяются к ранее возникшим отношениям. Компенсация расходов не предусмотрена."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S19",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C22",
+      "source": "5.2–5.3",
+      "requirement": "Участие бесплатно. Проживание, питание, транспорт и другие расходы не предоставляются и не компенсируются.",
+      "subchecks": [
+        {
+          "id": "C22.1",
+          "text": "Участие бесплатно. Проживание, питание, транспорт и другие расходы не предоставляются и не компенсируются."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S20"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C23",
+      "source": "4.11–4.14",
+      "requirement": "Академическая честность: не выдавать чужие или приобретённые вне чемпионата решения за собственные; использовать чужую ИС только с разрешением. Возможна проверка заимствований, отстранение и аннулирование призов.",
+      "subchecks": [
+        {
+          "id": "C23.1",
+          "text": "Академическая честность: не выдавать чужие или приобретённые вне чемпионата решения за собственные; использовать чужую ИС только с разрешением. Возможна проверка заимствований, отстранение и аннулирование призов."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S14",
+        "S17",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C24",
+      "source": "4.12;12.1",
+      "requirement": "Материалы организаторов разрешены только для участия. Нельзя передавать доступ, использовать вне целей или воспроизводить без предусмотренного согласия.",
+      "subchecks": [
+        {
+          "id": "C24.1",
+          "text": "Материалы организаторов разрешены только для участия. Нельзя передавать доступ, использовать вне целей или воспроизводить без предусмотренного согласия."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S14",
+        "S17",
+        "S18",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C25",
+      "source": "13.1–13.5",
+      "requirement": "Конфиденциальность охватывает обозначенные сведения, кейсы/метрики до публикации, пациентские и коммерческие данные, переданные материалы, обсуждения/оценки до объявления и другие сведения участия. Срок — пять лет после окончания, предусмотрены санкции.",
+      "subchecks": [
+        {
+          "id": "C25.1",
+          "text": "Конфиденциальность охватывает обозначенные сведения, кейсы/метрики до публикации, пациентские и коммерческие данные, переданные материалы, обсуждения/оценки до объявления и другие сведения участия. Срок — пять лет после окончания, предусмотрены санкции."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S14",
+        "S17",
+        "S18",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C26",
+      "source": "1.5.6;13.3",
+      "requirement": "Публичный финал и право организатора на фото/видеосъёмку не являются общим разрешением участнику самостоятельно публиковать материалы.",
+      "subchecks": [
+        {
+          "id": "C26.1",
+          "text": "Публичный финал и право организатора на фото/видеосъёмку не являются общим разрешением участнику самостоятельно публиковать материалы."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S18",
+      "verification_slices": [
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C27",
+      "source": "12.2;12.7",
+      "requirement": "До отчуждения права принадлежат авторам. Непобедивший финалист передаёт права только по отдельному договору, не автоматически.",
+      "subchecks": [
+        {
+          "id": "C27.1",
+          "text": "До отчуждения права принадлежат авторам. Непобедивший финалист передаёт права только по отдельному договору, не автоматически."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C28",
+      "source": "12.3–12.5;договорIII",
+      "requirement": "Победитель безвозмездно передаёт полные исключительные права по всему миру бессрочно: код, алгоритмы, модели, дизайн, базы, презентации, документы и носители. Допускаются коммерческое использование, переработка, регистрация и лицензирование. Личные неимущественные права сохраняются.",
+      "subchecks": [
+        {
+          "id": "C28.1",
+          "text": "Победитель безвозмездно передаёт полные исключительные права по всему миру бессрочно: код, алгоритмы, модели, дизайн, базы, презентации, документы и носители. Допускаются коммерческое использование, переработка, регистрация и лицензирование. Личные неимущественные права сохраняются."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C29",
+      "source": "12.3.1–12.4;договор1.4,2.1.3",
+      "requirement": "Каждый член победившей команды подписывает отдельный договор; отказ одного лишает команду выплаты. Авторство и соавторство должны соответствовать реальному вкладу, а не одному формальному членству.",
+      "subchecks": [
+        {
+          "id": "C29.1",
+          "text": "Каждый член победившей команды подписывает отдельный договор; отказ одного лишает команду выплаты. Авторство и соавторство должны соответствовать реальному вкладу, а не одному формальному членству."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C30",
+      "source": "договор1.3–1.5;приложения1–2;акт2.3,4.1–4.2",
+      "requirement": "Права переходят при подписании договора. Факт передачи носителей и документации оформляется актом; нужен отдельный перечень результатов. Канал передачи согласовывается.",
+      "subchecks": [
+        {
+          "id": "C30.1",
+          "text": "Права переходят при подписании договора. Факт передачи носителей и документации оформляется актом; нужен отдельный перечень результатов. Канал передачи согласовывается."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S17",
+      "verification_slices": [
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C31",
+      "source": "12.6;договорII",
+      "requirement": "Гарантии: права не отчуждены, не заложены, не переданы по лицензиям и не оспорены; нет нарушений чужих прав, неуказанных заимствований, гостайны и ПД третьих лиц, кроме обезличенных данных, выданных организатором.",
+      "subchecks": [
+        {
+          "id": "C31.1",
+          "text": "Гарантии: права не отчуждены, не заложены, не переданы по лицензиям и не оспорены; нет нарушений чужих прав, неуказанных заимствований, гостайны и ПД третьих лиц, кроме обезличенных данных, выданных организатором."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S14",
+        "S17",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C32",
+      "source": "договорIV–VII",
+      "requirement": "Автор содействует урегулированию претензий и возмещает предусмотренные убытки, расходы и полученные выплаты при установленном нарушении. Одностороннее расторжение договора допускается лишь по закону; прочие изменения оформляются письменно.",
+      "subchecks": [
+        {
+          "id": "C32.1",
+          "text": "Автор содействует урегулированию претензий и возмещает предусмотренные убытки, расходы и полученные выплаты при установленном нарушении. Одностороннее расторжение договора допускается лишь по закону; прочие изменения оформляются письменно."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C33",
+      "source": "12.1;13.3–13.4",
+      "requirement": "Общего разрешения публичного репозитория и публикации после финала нет. Сохраняются режим материалов и конфиденциальность.",
+      "subchecks": [
+        {
+          "id": "C33.1",
+          "text": "Общего разрешения публичного репозитория и публикации после финала нет. Сохраняются режим материалов и конфиденциальность."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S22",
+        "S23"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C34",
+      "source": "8.8–8.8.2",
+      "requirement": "Главный фонд — 200 000 ₽ после налогов на команду. Распределение определяет фактический состав команды; порядок/форма выплаты — отдельное соглашение. Срок выплаты и налоговый агент не указаны.",
+      "subchecks": [
+        {
+          "id": "C34.1",
+          "text": "Главный фонд — 200 000 ₽ после налогов на команду. Распределение определяет фактический состав команды; порядок/форма выплаты — отдельное соглашение. Срок выплаты и налоговый агент не указаны."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C35",
+      "source": "8.1;4.9",
+      "requirement": "Онлайн-сертификат предусмотрен участникам команд, зарегистрированных 15 октября. Вышедший участник теряет право; фактическую выдачу нельзя обещать от имени организатора.",
+      "subchecks": [
+        {
+          "id": "C35.1",
+          "text": "Онлайн-сертификат предусмотрен участникам команд, зарегистрированных 15 октября. Вышедший участник теряет право; фактическую выдачу нельзя обещать от имени организатора."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C36",
+      "source": "3.6;политики и согласие сайта",
+      "requirement": "Каждый участник подписывает отдельное согласие на ПД при регистрации или открытии. Веб-согласие и политики относятся к данным участников, а не заменяют документы медицинского сервиса.",
+      "subchecks": [
+        {
+          "id": "C36.1",
+          "text": "Отдельное письменное индивидуальное согласие каждого участника"
+        },
+        {
+          "id": "C36.2",
+          "text": "Цели и получатели данных веб-согласия/политик проверены отдельно от пациентского сервиса"
+        },
+        {
+          "id": "C36.3",
+          "text": "Веб-согласие рассчитано на пять лет; политика допускает предусмотренных получателей/обработчиков"
+        },
+        {
+          "id": "C36.4",
+          "text": "Разрешённые политикой операции не означают автоматического разрешения передавать пациентские данные"
+        },
+        {
+          "id": "C36.5",
+          "text": "Участник может проверить применимый порядок обращения по ПД; прямое рекламное согласие не установлено"
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C37",
+      "source": "8.4.4–8.4.5;9.7",
+      "requirement": "Оценки окончательны, кроме технической ошибки подсчёта и подтверждённого конфликта интересов. Заявление об ошибке — за один рабочий день; опубликованные результаты нужно сохранить.",
+      "subchecks": [
+        {
+          "id": "C37.1",
+          "text": "Оценки окончательны, кроме технической ошибки подсчёта и подтверждённого конфликта интересов. Заявление об ошибке — за один рабочий день; опубликованные результаты нужно сохранить."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S19",
+      "verification_slices": [
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    },
+    {
+      "id": "C38",
+      "source": "9.1–9.7",
+      "requirement": "Общая претензия содержит ФИО, телефон, email и суть. Рассмотрение — десять рабочих дней; повторная претензия — за пять рабочих дней после ответа. Судебный порядок задан положением; это не общий способ оспаривать содержательную оценку жюри.",
+      "subchecks": [
+        {
+          "id": "C38.1",
+          "text": "Общая претензия содержит ФИО, телефон, email и суть. Рассмотрение — десять рабочих дней; повторная претензия — за пять рабочих дней после ответа. Судебный порядок задан положением; это не общий способ оспаривать содержательную оценку жюри."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S19",
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C39",
+      "source": "7.7;9.1;10.1",
+      "requirement": "Уточнения — через процедуру чата, модератора/трекера. Контакт положения: Анна Поляк, anmediv@gmail.com; претензии: ivashchenko_a_a@staff.sechenov.ru. Агент не пишет людям без поручения пользователя.",
+      "subchecks": [
+        {
+          "id": "C39.1",
+          "text": "Уточнения — через процедуру чата, модератора/трекера. Контакт положения: Анна Поляк, anmediv@gmail.com; претензии: ivashchenko_a_a@staff.sechenov.ru. Агент не пишет людям без поручения пользователя."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C40",
+      "source": "1.3;5.1;сайт/новость16.10",
+      "requirement": "Фактический старт — 15 октября, работа до 30 октября. Начало онлайн-этапа 15/16 октября различается по источникам; устаревший блок сайта не переносит конкурс.",
+      "subchecks": [
+        {
+          "id": "C40.1",
+          "text": "Фактический старт — 15 октября, работа до 30 октября. Начало онлайн-этапа 15/16 октября различается по источникам; устаревший блок сайта не переносит конкурс."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C41",
+      "source": "4.12;12.1;12.6;пробелы",
+      "requirement": "Специальных публичных норм о Codex/ИИ, собственном старом коде, open source, SaaS и внешних API нет. Требуются уточнения, проверка лицензий и отсутствие самовольной передачи материалов. Состав доступных данных/ресурсов не гарантирован.",
+      "subchecks": [
+        {
+          "id": "C41.1",
+          "text": "Специальных публичных норм о Codex/ИИ, собственном старом коде, open source, SaaS и внешних API нет. Требуются уточнения, проверка лицензий и отсутствие самовольной передачи материалов. Состав доступных данных/ресурсов не гарантирован."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S02",
+        "S04",
+        "S14",
+        "S17"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md",
+        "docs/clinical/sources.md",
+        "evidence/S02/requirements-review.md",
+        "evidence/S02/acceptance.md",
+        "docs/clinical/scales-rights.md",
+        "evidence/S02/research-scales.md",
+        "evidence/S02/external-check.md",
+        "evidence/S02/received-review.md",
+        "evidence/S02/received-research.md",
+        "evidence/S02/received/manifest.json",
+        "evidence/S02/acceptance-review.md",
+        "docs/architecture/system.md",
+        "docs/architecture/data-model.md",
+        "docs/architecture/decisions.md",
+        "docs/RUNBOOK.md",
+        "evidence/S04/acceptance.md",
+        "evidence/S04/checks.log",
+        "evidence/S04/docker-check.json"
+      ]
+    },
+    {
+      "id": "C42",
+      "source": "7.4–7.8;8;отсутствующиедетали",
+      "requirement": "Веса/приоритет, входные форматы/поля, критерии апробации, питч/Q&A, слайды/видео, загрузка, размеры постера и инфраструктура публично не конкретизированы. Получить ответы или сохранить явные пробелы, не придумывать разрешения.",
+      "subchecks": [
+        {
+          "id": "C42.1",
+          "text": "Веса/приоритет, входные форматы/поля, критерии апробации, питч/Q&A, слайды/видео, загрузка, размеры постера и инфраструктура публично не конкретизированы. Получить ответы или сохранить явные пробелы, не придумывать разрешения."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S12",
+        "S16",
+        "S17",
+        "S18",
+        "S20"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C43",
+      "source": "5.4.6;7.8;11.4",
+      "requirement": "Сохранить версии и хеши PDF/положения. Новые дополнения чата учитывать отдельным слоем, не заменять исходные формулировки молча.",
+      "subchecks": [
+        {
+          "id": "C43.1",
+          "text": "Сохранить версии и хеши PDF/положения. Новые дополнения чата учитывать отдельным слоем, не заменять исходные формулировки молча."
+        }
+      ],
+      "status_before_review": "partial",
+      "implementation_slice": "S00",
+      "verification_slices": [
+        "S01",
+        "S17",
+        "S18",
+        "S21"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C44",
+      "source": "2.2.6;8.8.2;сайт",
+      "requirement": "Стажировки, поддержка дальнейшего развития и постерный приз без подробных условий не являются гарантированным доходом или внедрением.",
+      "subchecks": [
+        {
+          "id": "C44.1",
+          "text": "Стажировки, поддержка дальнейшего развития и постерный приз без подробных условий не являются гарантированным доходом или внедрением."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S21",
+        "S22"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C45",
+      "source": "1.2–1.3;сайт",
+      "requirement": "Различать роли: организатор — НМИЦ Сербского, соорганизатор — Сеченовский университет, партнёр — Авинейро; координатор — Берёзовая роща. Не отождествлять площадки открытия/финала и не придумывать скрытые критерии.",
+      "subchecks": [
+        {
+          "id": "C45.1",
+          "text": "Различать роли: организатор — НМИЦ Сербского, соорганизатор — Сеченовский университет, партнёр — Авинейро; координатор — Берёзовая роща. Не отождествлять площадки открытия/финала и не придумывать скрытые критерии."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S01",
+      "verification_slices": [
+        "S18",
+        "S20"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": [
+        "docs/contest/contract.md",
+        "evidence/S01/acceptance.md"
+      ]
+    },
+    {
+      "id": "C46",
+      "source": "12;договорIII;границаплана",
+      "requirement": "После отчуждения развитие возможно в согласованной роли относительно правообладателя. Медицинский пилот и регистрация не считаются выполненными хакатонным демо.",
+      "subchecks": [
+        {
+          "id": "C46.1",
+          "text": "После отчуждения развитие возможно в согласованной роли относительно правообладателя. Медицинский пилот и регистрация не считаются выполненными хакатонным демо."
+        }
+      ],
+      "status_before_review": "not_verified",
+      "implementation_slice": "S22",
+      "verification_slices": [
+        "S23",
+        "S24",
+        "S25"
+      ],
+      "evidence_expected": "Запись факта/применимости/ответа в указанном срезе и доказательство по источнику; неизвестное не считается выполненным.",
+      "existing_evidence": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}DASS-42 — Клинический компас{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('demo_patient',patient_id=task.patient_id) }}#assessments">← В карточку</a>
+<span class="eyebrow">СИНТЕТИЧЕСКОЕ ДЕМО · АНКЕТА ДЛЯ ВРАЧА</span>
+<h1>{{ instrument.title }}</h1>
+<p>{{ instrument.attribution }}</p>
+<section class="notice"><strong>Только вымышленные ответы</strong><p>Врач получит анкету и рассмотрит её отдельно. Анкета не устанавливает диагноз и не создаёт назначений или направлений. После отправки здесь появится квитанция. Баллы автоматически пациенту не выдаются.</p></section>
+{% if error %}<p class="error" role="alert">{{ error }} Ответы не сохранены. Проверьте форму.</p>{% endif %}
+<p>{{ instrument.instruction }}</p>
+<p>В электронной форме выберите один вариант для каждого утверждения. Можно оставить пропуск: тогда ответы передадутся врачу без расчёта результата.</p>
+<form method="post" class="questionnaire">
+<input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="form_version_id" value="{{ instrument.id }}">
+{% for item in instrument['items'] %}{% set number=loop.index %}
+<fieldset><legend>{{ number }}. {{ item }}</legend>
+{% for option in instrument.options %}{% set code=loop.index0 %}
+<label class="answer"><input type="radio" name="answer_{{ number }}" value="{{ code }}" {% if values.get('answer_'~number)==code|string %}checked{% endif %}><span>{{ code }} — {{ option }}</span></label>
+{% endfor %}
+<label class="answer skip"><input type="radio" name="answer_{{ number }}" value="" {% if not values.get('answer_'~number) %}checked{% endif %}><span>Оставить без ответа</span></label>
+</fieldset>
+{% endfor %}
+<button>Передать анкету врачу</button>
+</form>
+<p class="muted">Версия: {{ instrument.version }}. <a href="{{ instrument.source.url }}">Официальный бланк</a> · <a href="{{ instrument.validation_url }}">Исследование русской версии</a> · <a href="{{ instrument.rights_url }}">Условия применения</a>.</p>
+{% endblock %}

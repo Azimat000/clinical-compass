@@ -19,12 +19,16 @@
         }
       ],
       "evidence_expected": "Контрольные примеры подсчета и неполных анкет; источник русской валидации и условия использования",
-      "fulfilment_status": "blocked",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
         "evidence/S04/acceptance.md",
         "evidence/S07/research.md",
-        "evidence/S07/acceptance.md"
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -103,7 +107,11 @@
         "evidence/S06/docker-restart.log",
         "evidence/S06/doctor-history.png",
         "evidence/S07/research.md",
-        "evidence/S07/acceptance.md"
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -136,7 +144,11 @@
         "evidence/S06/docker-restart.log",
         "evidence/S06/doctor-history.png",
         "evidence/S07/research.md",
-        "evidence/S07/acceptance.md"
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -568,7 +580,7 @@
         }
       ],
       "evidence_expected": "Открываемые первоисточники; карточки шкал; проверка актуальности перед сдачей; ни одного правила без основания",
-      "fulfilment_status": "blocked",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/clinical/sources.md",
         "evidence/S02/requirements-review.md",
@@ -583,7 +595,11 @@
         "docs/architecture/data-model.md",
         "evidence/S04/acceptance.md",
         "evidence/S07/research.md",
-        "evidence/S07/acceptance.md"
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -669,7 +685,12 @@
         "evidence/S02/received-review.md",
         "evidence/S02/received-research.md",
         "evidence/S02/received/manifest.json",
-        "evidence/S02/acceptance-review.md"
+        "evidence/S02/acceptance-review.md",
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -1089,7 +1110,12 @@
         "docs/RUNBOOK.md",
         "evidence/S04/acceptance.md",
         "evidence/S04/checks.log",
-        "evidence/S04/docker-check.json"
+        "evidence/S04/docker-check.json",
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -1173,7 +1199,12 @@
         "evidence/S06/acceptance.md",
         "evidence/S06/final-checks.log",
         "evidence/S06/docker-restart.log",
-        "evidence/S06/doctor-history.png"
+        "evidence/S06/doctor-history.png",
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -1199,7 +1230,12 @@
         "apps/tests/test_access.py",
         "evidence/S05/acceptance.md",
         "evidence/S05/final-checks.log",
-        "evidence/S05/docker-final-restart.log"
+        "evidence/S05/docker-final-restart.log",
+        "evidence/S07/acceptance.md",
+        "evidence/S07/review/scale-research.md",
+        "evidence/S07/review/final-checks.log",
+        "apps/tests/test_assessments.py",
+        "docs/architecture/assessments.md"
       ]
     },
     {
@@ -1486,7 +1522,9 @@
       "fulfilment_status": "not_verified",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1513,7 +1551,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1536,7 +1576,9 @@
       "fulfilment_status": "not_verified",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1560,7 +1602,9 @@
       "fulfilment_status": "not_verified",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1763,7 +1807,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1879,7 +1925,9 @@
       "fulfilment_status": "not_verified",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -1945,7 +1993,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -2206,7 +2256,9 @@
         "docs/RUNBOOK.md",
         "evidence/S04/acceptance.md",
         "evidence/S04/checks.log",
-        "evidence/S04/docker-check.json"
+        "evidence/S04/docker-check.json",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -2232,7 +2284,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {
@@ -2257,7 +2311,9 @@
       "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/contest/contract.md",
-        "evidence/S01/acceptance.md"
+        "evidence/S01/acceptance.md",
+        "evidence/S07/review/contest-research.md",
+        "docs/product/contest-strategy.md"
       ]
     },
     {

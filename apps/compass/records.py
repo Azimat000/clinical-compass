@@ -168,3 +168,13 @@ def warnings(patient, entries):
             if len(values) > 1:
                 result.append(f'{day}: различаются сведения «{FIELDS.get(code, "Возраст") }». Нужно сверить источники; записи сохранены отдельно.')
     return result
+
+
+def wellbeing_trend(entries):
+    """A categorical diary, not a scale, severity estimate or accumulated score."""
+    rows = sorted((e for e in entries if e['kind'] == 'self_report'),
+                  key=lambda e: (e['observed_on'], e['recorded_at'], e['id']))[-30:]
+    levels = {'better': 48, 'same': 96, 'worse': 144, 'unknown': 192}
+    return [{'x': 170 + i * 340 / max(1, len(rows) - 1), 'y': levels[e['payload']['wellbeing']],
+             'date': e['observed_on'], 'id': e['id'], 'label': WELLBEING[e['payload']['wellbeing']]}
+            for i, e in enumerate(rows)]

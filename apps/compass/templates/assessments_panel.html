@@ -1,0 +1,32 @@
+<section id="assessments" class="record-form"><h2>Анкета для оценки симптомов</h2>
+{% if current_user.role=='doctor' %}
+<p>DASS-42: три отдельные суммы симптомов без диагноза и уровней тяжести. Результаты доступны ведущему врачу; пациент получает квитанцию. Его дневник самочувствия отображается отдельно.</p>
+<p class="muted">Известный сверенный возраст от 18 лет — ограничение этого демо. Возраст участников русского исследования не указан; общий FAQ DASS допускает применение от 14 лет. Для интерпретации нужна соответствующая подготовка; приложение её не заменяет.</p>
+{% if assessment_error %}<p class="error" role="alert">{{ assessment_error }}</p>{% endif %}
+<form method="post" action="{{ url_for('request_assessment',patient_id=patient.id) }}">
+<input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="assignment_key" value="{{ assignment_key }}"><input type="hidden" name="form_version_id" value="{{ assessment_form.id }}">
+<input type="hidden" name="age_status" value="known">
+<div class="form-grid"><label>Сверенный возраст на сегодня<input name="age_years" type="number" min="18" max="120" required value="{{ assessment_values.get('age_years','') }}"></label>
+<label>Источник сведений о возрасте<input name="age_basis" maxlength="1000" required value="{{ assessment_values.get('age_basis','') }}" placeholder="Например, вымышленная дата рождения в случае D01"></label></div>
+<button>Предложить DASS-42</button><p class="muted">Предложение действует сегодня, не более 24 часов. Неизвестный или противоречивый возраст сначала нужно сверить. Предлагается конкретному связанному пациенту.</p></form>
+<p class="muted">{{ assessment_form.attribution }} <a href="{{ assessment_form.source.url }}">Бланк</a> · <a href="{{ assessment_form.validation_url }}">Русское исследование</a> · <a href="{{ assessment_form.rights_url }}">Условия</a></p>
+{% else %}<p>Если врач предложил анкету, заполните её вымышленными ответами. После отправки появится квитанция. Дневник вашего самочувствия находится выше и доступен независимо от анкеты.</p>{% endif %}
+{% for task in pending_assessments %}<p><a href="{{ url_for('assessment_form',request_id=task.id) }}">Заполнить предложенную DASS-42</a> · {{ task.requested_at }}</p>{% else %}<p class="muted">Новых предложенных анкет нет.</p>{% endfor %}
+{% if current_user.role=='patient' %}{% for receipt in measured %}<article class="record"><strong>Анкета отправлена врачу</strong><p>{{ receipt.recorded_at }} (UTC) · {{ receipt.form_version_id }}</p><a href="{{ url_for('assessment_form',request_id=receipt.request_id) }}">Квитанция</a></article>{% endfor %}
+{% else %}
+{% for trend in assessment_trends %}<h3>Динамика DASS-42</h3><p class="muted">{{ trend.version }}. Сравниваются только одна версия формы, один ключ и один источник. Показано наблюдений: {{ trend.shown }}, по порядку; даты — в таблице. Пропуск не равен нулю.</p>
+{% for series in trend.series %}<h4>{{ series.name }}</h4><svg class="trend" viewBox="0 0 590 205" role="img" aria-label="{{ series.name }}: точки сумм от 0 до 42 по порядку наблюдений. Точные значения в таблице ниже.">
+<line x1="48" y1="40" x2="48" y2="166" class="axis"/><line x1="48" y1="166" x2="552" y2="166" class="axis"/><text x="14" y="45">42</text><text x="22" y="171">0</text>
+{% for point in series.points %}<a href="#assessment-{{ point.id }}"><circle cx="{{ point.x }}" cy="{{ point.y }}" r="6" class="trend-dot"><title>{{ point.date }} · {{ series.name }}: {{ point.value }} из 42</title></circle></a>{% endfor %}<text x="180" y="196">По порядку наблюдений →</text></svg>{% endfor %}
+{% endfor %}
+{% if measured %}<div class="table-scroll"><table><caption>Три отдельные суммы DASS-42, каждая от 0 до 42. Без общего балла и автоматической интерпретации.</caption><thead><tr><th>Дата</th><th>Депрессивные симптомы</th><th>Тревожные симптомы</th><th>Стресс</th><th>Версия / полнота</th></tr></thead><tbody>
+{% for result in measured %}<tr><td><a href="#assessment-{{ result.id }}">{{ result.observed_on }}</a></td>{% for code in ['depression','anxiety','stress'] %}<td>{{ result.scores[code] if result.scores is not none else 'Не рассчитано' }}</td>{% endfor %}<td>{{ result.scale_version_id }} · {{ 'Полная' if result.completeness=='complete' else 'Есть пропуски' }}</td></tr>{% endfor %}</tbody></table></div>{% endif %}
+{% for result in measured %}<article class="record" id="assessment-{{ result.id }}"><h3>DASS-42 · {{ result.observed_on }}</h3>
+<p>Источник ответов: {{ result.display_name }}. Период: {{ result.form.period }}.</p>
+{% if result.scores is none %}<p>Есть пропуски. Ни одна сумма не рассчитана; пропуски не заменены нулями.</p>{% else %}<p>Депрессивные симптомы: {{ result.scores.depression }} / 42 · Тревожные симптомы: {{ result.scores.anxiety }} / 42 · Стресс: {{ result.scores.stress }} / 42.</p>{% endif %}
+<p>Диагноз и дальнейшие действия определяет врач. Анкета не создаёт назначения, направления или экстренные уведомления.</p>
+<details><summary>Исходные ответы (42 пункта)</summary><ol>{% for answer in result.answers %}<li><strong>{{ result.form['items'][loop.index0] }}</strong><p>{{ 'Пропуск' if answer is none else (answer|string~' — '~result.form.options[answer]) }}</p></li>{% endfor %}</ol></details>
+<details><summary>Версия, источник и сведения о возрасте</summary>
+<p>Возраст: {{ result.age_years }} на {{ result.age_on }}, источник: {{ result.age_basis }}.</p><p>Автор: {{ result.actor_id }}. Получено (UTC): {{ result.recorded_at }}. Запись {{ result.id }}.</p>
+<p class="muted">Версия: {{ result.scale_version_id }} · {{ result.scoring_version }}. <a href="{{ result.source_url }}">Источник</a>, SHA-256: <span class="hash">{{ result.source_sha256 }}</span>. <a href="{{ result.form.validation_url }}">Русская валидация</a>.</p></details></article>{% endfor %}
+{% endif %}</section>

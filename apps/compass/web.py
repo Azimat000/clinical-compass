@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records
+from . import access, records, assessments
 
 
 def create_app(database=None):
@@ -15,6 +15,7 @@ def create_app(database=None):
     db = connect(app.config['DATABASE'])
     try:
         migrate(db)
+        assessments.install_form(db)
     finally:
         db.close()
 
@@ -124,7 +125,7 @@ def create_app(database=None):
     def demo_patient(patient_id):
         return render_patient(patient_id)
 
-    def render_patient(patient_id, form_values=None, form_error=None):
+    def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None):
         patient = patient_or_404(patient_id)
         db = get_db()
         encounters = db.execute('SELECT * FROM encounters WHERE patient_id=? ORDER BY occurred_at DESC', (patient_id,)).fetchall()
@@ -133,8 +134,14 @@ def create_app(database=None):
         checks = db.execute('''SELECT c.* FROM relationship_checks c JOIN care_relationships r ON r.id=c.relationship_id
             WHERE r.patient_id=? AND r.ends_at IS NULL ORDER BY c.received_at DESC LIMIT 20''', (patient_id,)).fetchall()
         entries = records.history(db, patient_id)
+        measured = assessments.history(db, g.user, patient_id)
         return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                entries=entries, record_warnings=records.warnings(patient, entries),
+                               wellbeing_trend=records.wellbeing_trend(entries),
+                               measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
+                               pending_assessments=assessments.pending(db, g.user, patient_id), assessment_form=assessments.definition(),
+                               assignment_key=(assessment_values.get('assignment_key','') if assessment_values is not None else secrets.token_hex(16)),
+                               assessment_values=assessment_values or {}, assessment_error=assessment_error,
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
                                request_key=(form_values.get('request_key', '') if form_values is not None else secrets.token_hex(16)),
                                today=records.today().isoformat(), form_values=form_values or {}, form_error=form_error)
@@ -208,6 +215,43 @@ def create_app(database=None):
         # Opaque retry hashes are internal and do not belong in the read API.
         return jsonify({'entries': [{k: v for k, v in e.items() if k not in ('request_key', 'payload_json')} for e in entries],
                         'warnings': records.warnings(patient, entries)})
+
+    @app.post('/patients/<patient_id>/assessment-requests')
+    def request_assessment(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        try:
+            assessments.assign(get_db(), g.user, patient_id, request.form)
+        except assessments.AssessmentError as error:
+            return render_patient(patient_id, assessment_error=str(error), assessment_values=request.form), error.status
+        return redirect(url_for('demo_patient', patient_id=patient_id)+'#assessments', code=303)
+
+    @app.route('/assessments/<request_id>', methods=['GET','POST'])
+    def assessment_form(request_id):
+        db = get_db()
+        try:
+            task = assessments.visible_request(db, g.user, request_id, read_completed=request.method=='GET')
+            if request.method == 'POST':
+                assessments.submit(db, g.user, request_id, request.form)
+                return redirect(url_for('assessment_form', request_id=request_id), code=303)
+            completed = db.execute('SELECT assessment_id,recorded_at FROM assessment_results WHERE request_id=?', (request_id,)).fetchone()
+            if completed:
+                if g.user['role']=='doctor':
+                    return redirect(url_for('demo_patient', patient_id=task['patient_id'])+'#assessment-'+completed['assessment_id'])
+                return render_template('assessment_receipt.html', task=task, received_at=completed['recorded_at'])
+            if task['expires_at']<=now() or task['age_on']!=records.today().isoformat():
+                raise assessments.AssessmentError('Срок предложения истёк. Врач может предложить новую анкету.',409)
+            form = assessments.available_form(db, task['form_version_id'])
+        except assessments.AssessmentError as error:
+            if request.method == 'POST' and error.status == 400:
+                return render_template('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form, error=str(error)),400
+            return render_template('result.html', title='Анкета недоступна', message=str(error)),error.status
+        return render_template('assessment_form.html', task=task, instrument=form, values={}, error=None)
+
+    @app.get('/api/patients/<patient_id>/assessments')
+    def assessments_api(patient_id):
+        patient_or_404(patient_id)
+        return jsonify({'assessments': assessments.history(get_db(),g.user,patient_id)})
 
     @app.get('/api/patients/<patient_id>')
     def patient_api(patient_id):

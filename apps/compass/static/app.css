@@ -29,3 +29,18 @@ section { scroll-margin-top:20px; }
 
 .card-nav { display:flex; flex-wrap:wrap; gap:18px; margin:24px 0; }
 .card-nav a { color:var(--accent); font-weight:650; }
+
+.questionnaire { max-width:52rem; }
+.questionnaire fieldset { padding:20px; }
+.answer { display:flex; align-items:flex-start; gap:12px; margin:13px 0; padding:6px; cursor:pointer; }
+.answer input { width:22px; height:22px; min-height:22px; margin:4px 0 0; flex-shrink:0; accent-color:var(--accent); }
+.answer span { display:block; }
+.answer.skip { color:var(--muted); border-top:1px solid var(--line); padding-top:14px; }
+.trend { display:block; width:100%; max-width:680px; height:auto; background:white; border:1px solid var(--line); border-radius:8px; margin:16px 0 28px; }
+.trend text { font:20px system-ui,sans-serif; fill:var(--ink); }
+.axis { stroke:#6a7c75; stroke-width:1.5; }
+.grid-line { stroke:#d8e3de; stroke-width:1; }
+.trend-dot { fill:var(--accent); stroke:white; stroke-width:2; }
+.trend a:focus-visible circle { stroke:#c28627; stroke-width:4; }
+.hash { overflow-wrap:anywhere; }
+summary { cursor:pointer; font-weight:650; padding:14px 0; }

@@ -50,7 +50,7 @@ def main():
                         'accounts': diagnostic.execute('SELECT id,role,disabled FROM users').fetchall()}, ensure_ascii=False))
                 raise
 
-        result, report_id, clinical_id = [], None, None
+        result, report_id, clinical_id, assessment_tasks = [], None, None, []
         for round_number in (1, 2):
             with open(Path(directory) / f'server-{round_number}.log', 'wb') as log:
                 process = subprocess.Popen(command + ['serve', '--port', str(port)], cwd=ROOT, stdout=log, stderr=log)
@@ -87,6 +87,22 @@ def main():
                         visit_key = re.search(r'name="request_key" value="([^"]+)"', html).group(1)
                         post(doctor, '/patients/D01/visits', {'request_key': visit_key, 'observed_on': '2026-10-18',
                             'risk_factors_status': 'denied', 'summary': 'Синтетический визит врача', 'wellbeing': 'same'})
+                        for incomplete in (False, True):
+                            html = get(doctor, '/demo/D01')
+                            assignment_key = re.search(r'name="assignment_key" value="([^"]+)"', html).group(1)
+                            version = re.search(r'name="form_version_id" value="([^"]+)"', html).group(1)
+                            html = post(doctor, '/patients/D01/assessment-requests', {
+                                'assignment_key': assignment_key, 'form_version_id': version, 'age_years': '35',
+                                'age_status': 'known', 'age_basis': 'Синтетический профиль D01, сверено для теста'})
+                            task = re.search(r'href="/assessments/([0-9a-f]+)"', html).group(1)
+                            assert 'Шкала депрессии, тревоги и стресса' in get(patient, '/assessments/' + task)
+                            answers = {'form_version_id': version, **{f'answer_{i}': str(i % 4) for i in range(1, 43)}}
+                            if incomplete:
+                                answers['answer_21'] = ''
+                            receipt = post(patient, '/assessments/' + task, answers)
+                            assert 'Анкета отправлена врачу' in receipt and 'Депрессивные симптомы:' not in receipt
+                            post(patient, '/assessments/' + task, answers)
+                            assessment_tasks.append(task)
                     assert report_id in get(patient) and report_id in get(doctor, '/demo/D01')
                     for browser in (doctor, patient):
                         clinical = json.loads(get(browser, '/api/patients/D01/history'))['entries']
@@ -94,13 +110,27 @@ def main():
                         assert {e['kind'] for e in clinical} == {'visit', 'self_report'}
                         assert 'Синтетическое нежелательное явление' in get(browser, '/demo/D01')
                     assert 'Демо 01' in get(doctor) and 'Демо 02' not in get(doctor)
+                    measured = json.loads(get(doctor, '/api/patients/D01/assessments'))['assessments']
+                    assert len(measured) == 2
+                    complete = next(r for r in measured if r['completeness'] == 'complete')
+                    missing = next(r for r in measured if r['completeness'] == 'incomplete')
+                    assert complete['scores'] == {'depression': 21, 'anxiety': 19, 'stress': 23}
+                    assert missing['scores'] is None and missing['answers'][20] is None
+                    assert complete['source_sha256'] == '5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86'
+                    receipts = json.loads(get(patient, '/api/patients/D01/assessments'))['assessments']
+                    assert len(receipts) == 2 and all(set(r) == {'request_id','requested_at','recorded_at','form_version_id'} for r in receipts)
+                    for task in assessment_tasks:
+                        receipt = get(patient, '/assessments/' + task)
+                        assert 'Анкета отправлена врачу' in receipt and 'scores' not in receipt and 'answers' not in receipt
                     for browser in (doctor, patient):
                         try:
                             get(browser, '/api/patients/D02')
                             raise AssertionError('Foreign patient was accessible')
                         except HTTPError as error:
                             assert error.code == 404
-                    result.append({'restart_round': round_number, 'health': status, 'shared_report': True, 'foreign_denied': True, 'shared_clinical_history': True})
+                    result.append({'restart_round': round_number, 'health': status, 'shared_report': True,
+                                   'foreign_denied': True, 'shared_clinical_history': True,
+                                   'doctor_assessments_preserved': True, 'patient_scores_hidden': True})
                 finally:
                     process.terminate(); process.wait(timeout=10)
         subprocess.run(command + ['worker', '--once'], cwd=ROOT, check=True)
@@ -112,9 +142,14 @@ def main():
             assert db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0] == 2
             assert db.execute('SELECT count(*) FROM self_reports').fetchone()[0] == 1
             assert db.execute('SELECT count(*) FROM adverse_events').fetchone()[0] == 1
+            assert db.execute('SELECT count(*) FROM assessments').fetchone()[0] == 2
+            assert db.execute('SELECT count(*) FROM assessment_results').fetchone()[0] == 2
+            assert db.execute('SELECT count(*) FROM care_actions').fetchone()[0] == 0
             assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             assert db.execute('PRAGMA foreign_key_check').fetchall() == []
-        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1, 'durable_clinical_entries': 2, 'durable_adverse_events': 1, 'integrity': 'ok'}, ensure_ascii=False, indent=2))
+        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1,
+                          'durable_clinical_entries': 2, 'durable_adverse_events': 1, 'durable_assessments': 2,
+                          'integrity': 'ok'}, ensure_ascii=False, indent=2))
 
 
 if __name__ == '__main__':

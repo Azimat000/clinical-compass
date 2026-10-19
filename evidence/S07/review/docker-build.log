@@ -1,0 +1,67 @@
+ Image hac-s04-web Building
+ Image hac-s04-worker Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 967B done
+#1 DONE 0.0s
+
+#2 [worker internal] load build definition from Dockerfile
+#2 transferring dockerfile: 618B done
+#2 DONE 0.0s
+
+#3 [worker internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#3 DONE 0.0s
+
+#4 [worker internal] load .dockerignore
+#4 transferring context: 131B done
+#4 DONE 0.0s
+
+#5 [web internal] load build context
+#5 transferring context: 10.30kB done
+#5 DONE 0.0s
+
+#6 [worker 1/6] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#6 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#6 DONE 0.0s
+
+#7 [worker 2/6] WORKDIR /app
+#7 CACHED
+
+#8 [worker 3/6] COPY apps/requirements.lock /app/apps/requirements.lock
+#8 CACHED
+
+#9 [worker 4/6] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#9 CACHED
+
+#10 [web 5/6] COPY apps /app/apps
+#10 DONE 0.0s
+
+#11 [web 6/6] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#11 DONE 0.0s
+
+#12 [worker] exporting to image
+#12 exporting layers 0.0s done
+#12 exporting manifest sha256:7cb99714618a3fda34466d81420defdffcbed6f095b55a3ff778da5055fded0e done
+#12 exporting config sha256:46e23f860d89bc7886d0733466f4586de589ce27cee2a4c346a72e44aaa2b8b4 done
+#12 exporting attestation manifest sha256:3310e01db32502702f218c582bc6ff0abe97a4399f6d35400d22ec8677e33f14 0.0s done
+#12 exporting manifest list sha256:6dde4e6074ad69f48fc6d19cff35ae4f9bef0fa4a1d51ad5df95ae2d3bdec023 done
+#12 naming to docker.io/library/hac-s04-worker:latest done
+#12 unpacking to docker.io/library/hac-s04-worker:latest 0.0s done
+#12 DONE 0.1s
+
+#13 [web] exporting to image
+#13 exporting layers 0.0s done
+#13 exporting manifest sha256:a90db57a1cfaf1e749ead06505292e2a8e0793fdc1ae01a7ddbeda8f1c8a92d7 done
+#13 exporting config sha256:7138f3fe97df5c83adbd3fb30f7c4d85e91e97e6bc0bc8e3c831018fe4417a6c done
+#13 exporting attestation manifest sha256:9659e1ab93dd67dc5006feabdbef284c8693f513a288d84b25bc5a130ca0c087 0.0s done
+#13 exporting manifest list sha256:3c33c0c38e5cdbfbecc41cc2b880a2095cfa92cd94722afe09b842709248e46d done
+#13 naming to docker.io/library/hac-s04-web:latest done
+#13 unpacking to docker.io/library/hac-s04-web:latest 0.0s done
+#13 DONE 0.1s
+
+#14 [web] resolving provenance for metadata file
+#14 DONE 0.0s
+
+#15 [worker] resolving provenance for metadata file
+#15 DONE 0.0s
+ Image hac-s04-web Built
+ Image hac-s04-worker Built
