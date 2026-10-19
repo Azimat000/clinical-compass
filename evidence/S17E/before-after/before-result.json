@@ -1,0 +1,32 @@
+{
+  "phase": "before",
+  "kind": "automated agent self-check, synthetic; not usability trial",
+  "tasks": [
+    {
+      "name": "doctor: card → first visit → complaint + source + draft action → save",
+      "clicks": 2,
+      "fills": 3,
+      "selections": 1,
+      "wheels": 13,
+      "elapsed_ms": 944,
+      "actions": 19
+    },
+    {
+      "name": "patient: card → self-report → return overview → confirmed decisions → messages",
+      "clicks": 5,
+      "fills": 0,
+      "selections": 0,
+      "wheels": 1,
+      "elapsed_ms": 439,
+      "actions": 6
+    }
+  ],
+  "checks": [],
+  "browser": {
+    "engine": "Chromium",
+    "version": "151.0.7922.34",
+    "viewport": "1440x1000",
+    "platform": "darwin"
+  },
+  "status": "PASS"
+}

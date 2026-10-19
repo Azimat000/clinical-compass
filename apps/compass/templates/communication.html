@@ -4,7 +4,9 @@
 <a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}, НЯ и динамика</a>
 <h1>Сообщения и выполнение плана</h1>
 <p class="notice">Локальное синтетическое демо. Сообщения не меняют лечение и не проверяются автоматически на критичность. Для медицинских сведений используйте самоотчёт в карточке. Этот канал не является экстренной помощью; постоянное присутствие врача не обеспечено.</p>
-<h2>Переписка</h2><p>«Сохранено» означает приём сервером. «Получено» и «Прочитано» отмечает адресат отдельно. Обновите страницу для новых сообщений.</p>
+<nav class="card-nav" aria-label="Связь и план"><a href="#correspondence">Написать сообщение</a><a href="{{ url_for('decisions_page',patient_id=patient.id) }}#decisions-history">Подтверждённый план</a><a href="#plan-progress">Выполнение плана</a></nav>
+<p class="notice">Получение и прочтение не означает реакцию врача. Решение и изменение плана подтверждаются отдельно.</p>
+<h2 id="correspondence">Переписка</h2><p>«Сохранено» означает приём сервером. «Получено» и «Прочитано» отмечает адресат отдельно. Обновите страницу для новых сообщений.</p>
 {% for m in data.messages %}<article class="record" id="message-{{ m.id }}"><strong>{{ 'Вы' if m.sender_id==current_user.id else 'Собеседник' }}</strong> · {{ m.sent_at }} UTC
 <p class="preserve-text">{{ m.body }}</p>
 <p>Сохранено{% if m.received_at %} · Получено: {{ m.received_at }}{% endif %}{% if m.read_at %} · Прочитано: {{ m.read_at }}{% endif %}</p>
@@ -16,7 +18,7 @@
 <label>Связать с самоотчётом / визитом<select name="entry_id"><option value="">Без связи</option>{% for e in data.entries %}<option value="{{ e.id }}">{{ e.observed_on }} · {{ 'Самоотчёт' if e.kind=='self_report' else 'Визит' }} · {{ e.id }}</option>{% endfor %}</select></label>
 <label>Связать с пунктом плана<select name="task_id"><option value="">Без связи</option>{% for t in data.tasks %}<option value="{{ t.id }}">{{ t.label }} · {{ t.due_at }}</option>{% endfor %}</select></label>
 <button>Отправить сообщение</button><p role="status" class="retry-status"></p></form>
-<h2>Выполнение плана</h2>
+<h2 id="plan-progress">Выполнение плана</h2>
 <p>Это описательный учёт отдельных пунктов, введённых и подтверждённых врачом. Полнота расписания не предполагается. Лекарственные дозы и расписание автоматически не создаются. Каждая отметка сохраняет автора; исправление добавляет новую запись.</p>
 <p>Наступившие пункты: {{ data.counts.due }}. Выполнено: {{ data.counts.taken }}; пропущено: {{ data.counts.missed }}; нет сведений: {{ data.counts.unknown }}; противоречия: {{ data.counts.conflicting }}. Будущие: {{ data.counts.future }}; исключены после смены плана: {{ data.counts.superseded }}.</p>
 <p><strong>По известным исходам: {% if data.counts.percent is not none %}{{ data.counts.percent }}% ({{ data.counts.taken }} / {{ data.counts.known }}){% else %}не рассчитывается: знаменатель 0{% endif %}.</strong> Неизвестные и противоречивые исходы не считаются пропусками. Это не медицинская шкала и не оценка всей терапии.</p>

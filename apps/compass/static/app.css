@@ -211,3 +211,20 @@ body{background:white}
 
 .field-error{color:var(--danger)!important;border-left:3px solid var(--danger);padding:8px 12px;background:var(--danger-bg)}
 [aria-invalid="true"]{border:2px solid var(--danger)}
+
+/* S17E: task choice and a single, progressively enhanced visit form. */
+.task-choice,.visit-steps,.patient-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px}
+.task-choice a,.visit-steps a,.patient-actions a{display:flex;align-items:center;min-height:48px;padding:10px 16px;border:1px solid var(--control);border-radius:4px;font-weight:600;background:var(--surface)}
+.task-choice a[aria-current],.visit-steps a[aria-current]{background:var(--accent);color:var(--surface);border-color:var(--accent);text-decoration:none}
+.visit-steps{border-bottom:1px solid var(--line);padding-bottom:16px}
+[data-visit-step]>h3{margin-top:0}
+[data-visit-step]>h3:focus{outline:3px solid var(--focus);outline-offset:4px}
+.visit-actions{border-top:1px solid var(--line);padding-top:20px;margin-top:24px}
+.visit-actions button:disabled{opacity:.55;cursor:default}
+.first-visit-workspace details{margin-bottom:16px}
+.patient-actions{margin-bottom:12px}
+@media(max-width:600px){.task-choice a,.visit-steps a,.patient-actions a{flex:1 1 100%;overflow-wrap:anywhere}.visit-actions>button{width:100%}}
+
+.visit-brief>div{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,2fr);gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.visit-brief dt{font-weight:600}.visit-brief dd{margin:0}.visit-brief details{margin:8px 0 0}
+@media(max-width:600px){.visit-brief>div{grid-template-columns:1fr;gap:4px}}

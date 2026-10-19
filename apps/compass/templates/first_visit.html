@@ -1,21 +1,34 @@
 {% extends 'base.html' %}
+{% from 'first_visit_fact.html' import visit_fact with context %}
 {% block title %}Первый приём — {{ patient.code }}{% endblock %}
 {% block content %}
 <div class="first-visit-workspace">
 <a class="back" href="{{ url_for('demo_patient',patient_id=patient.id) }}">Карточка {{ patient.code }}</a>
 <h1>Первый приём</h1>
+<nav class="task-choice" aria-label="Задача врача"><a aria-current="page" href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=visit_id) }}">Первый приём</a><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#overview">Наблюдение</a></nav>
 <p class="demo-note">Синтетический случай. Диагноз и назначение для начала не нужны. Это запись сведений для врача, а не подтверждённый скрининг. Новые правила безопасности пока не активны; отсутствие сигнала не означает отсутствие риска. Демо не обеспечивает экстренную помощь.</p>
-<nav class="card-nav" aria-label="Разделы приёма">{% if current and current.state=='completed' %}<a href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id='new') }}">Новая запись</a>{% else %}<a href="#visit-form">{{ 'Продолжить запись' if current else 'Новая запись' }}</a>{% endif %}<a href="#visit-summary">Сводка</a><a href="#visit-history">Сохранённые приёмы</a></nav>
-{% if current %}<p role="status">Сохранено: {{ 'черновик' if current.state=='draft' else 'запись завершена' }}. Версия {{ current.revision }}, врач {{ current.actor_id }}, {{ current.recorded_at }} (UTC).</p>{% endif %}
+<nav class="card-nav" aria-label="Записи приёма"><a href="#visit-summary">Сводка</a><a href="#visit-history">Сохранённые приёмы</a></nav>
+{% if not current %}{% set recent=namespace(seen=[]) %}{% for item in visits %}{% if item.visit_id not in recent.seen %}{% set recent.seen=recent.seen+[item.visit_id] %}{% if item.state=='draft' %}<p><a class="button" href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=item.visit_id) }}">Продолжить черновик от {{ item.payload.observed_on }}</a></p>{% endif %}{% endif %}{% endfor %}{% endif %}
+{% if current %}<p role="status">Сохранено: {{ 'черновик' if current.state=='draft' else 'запись завершена' }}. Версия {{ current.revision }}.</p>
+<details><summary>Автор, время и протокол</summary><p>Врач {{ current.actor_id }}, {{ current.recorded_at }} (UTC). Протокол {{ current.protocol_version }}.</p></details>
+<aside class="notice warning" aria-label="Сведения для проверки врачом"><strong>Проверить перед решением</strong><p>Возраст: {{ statuses[current.payload.age.status] }}. Безопасность: {{ statuses[current.payload.fields.safety.status] }}. Острые телесные жалобы: {{ statuses[current.payload.fields.acute.status] }}.</p>
+{% for code in ['safety','acute'] %}{% if current.payload.fields[code].text %}<p>{{ fields[code][1] }}: {{ current.payload.fields[code].text }}</p>{% endif %}{% endfor %}
+<p>Проект действия {{ 'сохранён, не исполнен' if current.payload.action_draft else 'не составлен' }}. Категория и срочность нового маршрута не определяются: клиническая проверка не завершена.</p></aside>{% endif %}
 {% if error %}<p class="error" role="alert" id="visit-error" tabindex="-1">{{ error }} Новая версия не сохранена. Введённые значения оставлены в форме.</p>{% endif %}
 {% if not current or current.state=='draft' or error %}
 <section class="workspace" id="visit-form"><h2>{{ 'Продолжение приёма' if current else 'Сбор сведений' }}</h2>
-<p>Можно сохранить неполные сведения и вернуться позже. «Неизвестно» и явное отрицание — разные состояния. Для имеющихся сведений укажите описание и основание; для отрицания — основание, без описания. У противоречия сохраните оба утверждения с источниками.</p>
-<form method="post" action="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=visit_id) }}" {% if error %}aria-describedby="visit-error"{% endif %}>
+<p>Сохраните черновик перед выходом. Между шагами можно возвращаться без потери ввода. Неизвестное и явное отрицание различаются; для известных сведений и противоречия нужны описание и основание, для отрицания — основание без описания.</p>
+<nav class="visit-steps" aria-label="Шаги приёма"><a href="#visit-step-1">1. Жалобы</a><a href="#visit-step-2">2. Уточнения и безопасность</a><a href="#visit-step-3">3. Оценка</a><a href="#visit-step-4">4. Решение и план</a></nav>
+<form data-visit-form data-has-error="{{ 'yes' if error else 'no' }}" method="post" action="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=visit_id) }}" {% if error %}aria-describedby="visit-error"{% endif %}>
 <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}"><input type="hidden" name="base_revision" value="{{ values.get('base_revision','0') }}">
+<section data-visit-step="1" id="visit-step-1"><h3 tabindex="-1">1. Жалобы</h3>
 <div class="form-grid"><label>Дата наблюдения (Москва), обязательно<input type="date" name="observed_on" min="1900-01-01" max="{{ today }}" required value="{{ values.get('observed_on',today) }}"></label>
 <label>Тип приёма<select name="visit_kind"><option value="first" {% if values.get('visit_kind','first')=='first' %}selected{% endif %}>Первый</option><option value="repeat" {% if values.get('visit_kind')=='repeat' %}selected{% endif %}>Повторный</option></select></label></div>
 <label class="answer"><input type="checkbox" name="not_collected" value="yes" {% if values.get('not_collected')=='yes' %}checked{% endif %}><span>Сведения о жалобах пока не собраны</span></label>
+{% for code in ['complaints','course','impact','history','followup'] %}{{ visit_fact(code,fields[code]) }}{% endfor %}
+</section>
+<section data-visit-step="2" id="visit-step-2"><h3 tabindex="-1">2. Уточнения и безопасность</h3>
+<p class="notice warning">Сведения безопасности проверяет врач отдельно. Порядок шагов не задаёт медицинскую срочность и не заменяет оценку врача.</p>
 <fieldset><legend>Возраст и источник</legend><div class="form-grid">
 <label>Состояние возраста<select name="age_status">{% for key in ['unknown','known','conflicting'] %}<option value="{{ key }}" {% if values.get('age_status','unknown')==key %}selected{% endif %}>{{ statuses[key] }}</option>{% endfor %}</select></label>
 <label>Полных лет<input type="number" name="age_years" min="0" max="120" value="{{ values.get('age_years','') }}"></label>
@@ -24,41 +37,29 @@
 <label>Источник возраста<select name="age_source">{% for key,label in sources.items() %}<option value="{{ key }}" {% if values.get('age_source','patient')==key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
 <label>Основание и дата сведений о возрасте<textarea name="age_basis" maxlength="1000" rows="2">{{ values.get('age_basis','') }}</textarea></label></div>
 <p class="muted">Неизвестный возраст: значения пустые. При противоречии опишите расхождение. Запись возраста не является допуском к инструменту.</p></fieldset>
-{% for code,definition in fields.items() %}<fieldset><legend>{{ definition[1] }}</legend>
-<div class="form-grid"><label>Состояние: {{ definition[1]|lower }}<select name="{{ code }}_status">{% for key,label in statuses.items() %}<option value="{{ key }}" {% if values.get(code+'_status','unknown')==key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
-<label>Источник: {{ definition[1]|lower }}<select name="{{ code }}_source">{% for key,label in sources.items() %}<option value="{{ key }}" {% if values.get(code+'_source','patient')==key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
-<label>Дата сведений: {{ definition[1]|lower }}<input type="date" min="1900-01-01" max="{{ today }}" name="{{ code }}_on" value="{{ values.get(code+'_on','') }}"></label></div>
-<label>Описание: {{ definition[1]|lower }}<textarea name="{{ code }}_text" maxlength="2000" rows="2">{{ values.get(code+'_text','') }}</textarea></label>
-<label>Основание, источник расхождения: {{ definition[1]|lower }}<textarea name="{{ code }}_basis" maxlength="1000" rows="2">{{ values.get(code+'_basis','') }}</textarea></label>
-{% if code in ['safety','acute'] %}<p class="notice warning">Сведения требуют отдельной оценки врача. Это свободная запись врача, не утверждённая процедура вопросов и не автоматическая оценка срочности. Нет ответа ≠ нет риска.</p>{% endif %}
-</fieldset>{% endfor %}
+{% for code in ['other_states','medications','somatic','safety','acute'] %}{{ visit_fact(code,fields[code]) }}{% endfor %}
 <fieldset><legend>Документированные врачебные факты</legend><p>Например, диагноз из конкретного документа. Слова пациента сохраняйте в соответствующем разделе выше.</p>
 <label>Факты из документа<textarea name="documented_facts" maxlength="4000" rows="3">{{ values.get('documented_facts','') }}</textarea></label>
 <label>Документ, автор и дата<textarea name="document_basis" maxlength="1000" rows="2">{{ values.get('document_basis','') }}</textarea></label></fieldset>
-<label>Проект действия врача (не назначение и не направление)<textarea name="action_draft" maxlength="4000" rows="3">{{ values.get('action_draft','') }}</textarea></label>
-<button name="state" value="draft">Сохранить черновик</button> <button class="secondary" name="state" value="completed">Завершить запись</button>
-<p class="muted">Завершение фиксирует запись, включая пробелы, и закрывает её изменение. Диагноз, назначение, направление и запись в государственные системы не создаются. Новые уточнения — в новом приёме.</p>
-</form></section>{% endif %}
-<section class="workspace" id="visit-summary"><h2>Сводка сохранённой версии</h2>
-{% if current %}{% set p=current.payload %}
-<p>Протокол {{ current.protocol_version }}. {{ 'Первый' if p.visit_kind=='first' else 'Повторный' }} приём, наблюдение {{ p.observed_on }}.</p>
-<h3>Возраст</h3><p>{{ statuses[p.age.status] }}; лет: {{ p.age.years if p.age.years is not none else 'не указано' }}; дата рождения: {{ p.age.birth_date or 'не указана' }}. {{ p.age.detail or '' }} Источник: {{ sources[p.age_source] }}. {{ p.age_basis }}</p>
-<h3>Жалобы и сведения с источниками</h3>
-{% for code,definition in fields.items() %}{% set fact=p.fields[code] %}<article class="record"><h4>{{ definition[1] }}</h4><p><strong>{{ statuses[fact.status] }}</strong></p>{% if fact.text %}<p class="preserve-text">{{ fact.text }}</p>{% endif %}<p class="muted">{{ sources[fact.source] }}; {{ fact.observed_on }}. {{ fact.basis or 'Основание не указано' }}</p></article>{% endfor %}
-<h3>Документированные врачебные факты</h3><p class="preserve-text">{{ p.documented_facts or 'Не внесены' }}</p><p>{{ p.document_basis }}</p>
-<h3>Что уточнить</h3><ul>{% for code,definition in fields.items() %}{% if p.fields[code].status in ['unknown','conflicting'] %}<li>{{ definition[1] }}: {{ statuses[p.fields[code].status] }}</li>{% endif %}{% endfor %}{% if p.age.status!='known' %}<li>Возраст: {{ statuses[p.age.status] }}</li>{% endif %}</ul>
-<p class="notice warning">Заполнение формы не исключает риск и не устанавливает диагноз. Клиническая проверка нового пути остаётся открытой.</p>
-<h3>Проект действия</h3><p class="preserve-text">{{ p.action_draft or 'Не составлен' }}</p><p>Текст не исполнен. <a href="{{ url_for('decisions_page',patient_id=patient.id) }}">Отдельные проекты и подтверждения врача</a></p>
-{% else %}<p>Сводка появится после первого сохранения. Сведения пока не собраны.</p>{% endif %}
-<h3>Результат инструмента отдельно от приёма</h3><p>Короткая оценка пока недоступна: точный пакет не подтверждён. DASS-42 остаётся отдельным дополнительным измерением с проверкой применимости и отдельными сериями; диагноз по баллам не устанавливается.</p>
-{% for result in measured %}<article class="record"><p>{{ result.form.title }} · {{ result.scale_version_id }} · {{ result.observed_on }} · {{ 'Полная' if result.scores is not none else 'Неполная' }}</p>{% if result.scores is not none %}<ul>{% for code,subscale in result.form.subscales.items() %}<li>{{ subscale.label }}: {{ result.scores[code] }}</li>{% endfor %}</ul>{% else %}<p>Неполная анкета: баллов нет.</p>{% endif %}</article>{% else %}<p>Результатов инструмента нет.</p>{% endfor %}
-<a href="{{ url_for('demo_patient',patient_id=patient.id) }}#assessments">Открыть отдельное измерение DASS-42</a>
-<h3>Подтверждённый план</h3><p>Показывается отдельно в разделе <a href="{{ url_for('decisions_page',patient_id=patient.id) }}">«Решения врача»</a>. Сохранение приёма не меняет его.</p>
-{% for item in decisions if item.decision=='approved' %}<article class="record"><p>Подтверждено врачом {{ item.doctor_id }} · {{ item.confirmed_at }}</p><p class="preserve-text">{{ item.payload.content }}</p><p class="muted">Запись плана {{ item.action_id }}. История изменений доступна в решениях врача.</p></article>{% else %}<p>Подтверждённых решений нет.</p>{% endfor %}
 </section>
+<section data-visit-step="3" id="visit-step-3"><h3 tabindex="-1">3. Оценка</h3>
+<p>Сначала сохраните черновик. Дополнительная анкета открывается отдельно, после проверки применимости. Вернуться можно через сохранённые приёмы.</p>
+{% include 'first_visit_results.html' %}</section>
+<section data-visit-step="4" id="visit-step-4"><h3 tabindex="-1">4. Решение и план</h3>
+<label>Проект действия врача (не назначение и не направление)<textarea name="action_draft" maxlength="4000" rows="3">{{ values.get('action_draft','') }}</textarea></label>
+<p>Следующее действие: сохраните запись, затем откройте <a href="{{ url_for('decisions_page',patient_id=patient.id) }}">отдельные проекты и подтверждения врача</a>. Из этой формы лечение и направление не создаются.</p>
+</section>
+<div class="visit-actions"><div data-step-controls hidden><button type="button" class="secondary" data-step-back>Назад</button> <button type="button" class="secondary" data-step-next>Далее</button></div>
+<p data-unsaved-status role="status">Изменения сохраняются только по кнопке.</p>
+<button name="state" value="draft">Сохранить черновик</button> <button class="secondary" name="state" value="completed">Завершить запись</button>
+<p class="muted">Завершение фиксирует запись, включая пробелы, и закрывает её изменение. Диагноз, назначение, направление и запись в государственные системы не создаются. Новые уточнения — в новом приёме.</p></div>
+</form></section>
+{% include 'first_visit_summary.html' %}
+{% else %}{% include 'first_visit_summary.html' %}{% endif %}
 <section id="visit-history"><h2>Сохранённые приёмы и версии</h2><p><a href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id='new') }}">Начать новый приём</a></p>
-{% for item in visits %}<article class="record"><a href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=item.visit_id) }}">Приём {{ item.visit_id }} · версия {{ item.revision }}</a><p>{{ 'Черновик' if item.state=='draft' else 'Завершён' }} · {{ item.payload.observed_on }} · врач {{ item.actor_id }} · {{ item.recorded_at }} (UTC)</p>
-<details><summary>Снимок этой версии</summary>{% for code,definition in fields.items() %}<p>{{ definition[1] }}: {{ statuses[item.payload.fields[code].status] }}. {{ item.payload.fields[code].text }} · {{ sources[item.payload.fields[code].source] }} · {{ item.payload.fields[code].observed_on }} · {{ item.payload.fields[code].basis }}</p>{% endfor %}<p>Возраст: {{ statuses[item.payload.age.status] }}, {{ item.payload.age.years }}; {{ item.payload.age.detail or '' }}; {{ item.payload.age_basis }}</p><p>Документированные факты: {{ item.payload.documented_facts }} · {{ item.payload.document_basis }}</p><p>Проект действия: {{ item.payload.action_draft }}</p></details></article>{% else %}<p>Приёмов ещё нет. Запишите жалобы или отметьте, что сведения пока не собраны.</p>{% endfor %}
+{% for item in visits %}<article class="record"><a href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=item.visit_id) }}">{{ item.payload.observed_on }} · версия {{ item.revision }}</a><p>{{ 'Черновик' if item.state=='draft' else 'Завершён' }} · {{ item.payload.observed_on }} · врач {{ item.actor_id }} · {{ item.recorded_at }} (UTC)</p>
+<details><summary>Снимок и технические сведения этой версии</summary><p>Приём {{ item.visit_id }}. Протокол {{ item.protocol_version }}.</p>{% for code,definition in fields.items() %}<p>{{ definition[1] }}: {{ statuses[item.payload.fields[code].status] }}. {{ item.payload.fields[code].text }} · {{ sources[item.payload.fields[code].source] }} · {{ item.payload.fields[code].observed_on }} · {{ item.payload.fields[code].basis }}</p>{% endfor %}<p>Возраст: {{ statuses[item.payload.age.status] }}, {{ item.payload.age.years }}; {{ item.payload.age.detail or '' }}; {{ item.payload.age_basis }}</p><p>Документированные факты: {{ item.payload.documented_facts }} · {{ item.payload.document_basis }}</p><p>Проект действия: {{ item.payload.action_draft }}</p></details></article>{% else %}<p>Приёмов ещё нет. Запишите жалобы или отметьте, что сведения пока не собраны.</p>{% endfor %}
 </section>
 </div>
+<script src="{{ url_for('static',filename='first_visit.js') }}" defer></script>
 {% endblock %}

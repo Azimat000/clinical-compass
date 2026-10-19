@@ -1,0 +1,42 @@
+{
+  "phase": "after",
+  "kind": "automated agent self-check, synthetic; not usability trial",
+  "tasks": [
+    {
+      "name": "doctor: card → first visit → complaint + source + draft action → save",
+      "clicks": 3,
+      "fills": 3,
+      "selections": 1,
+      "wheels": 2,
+      "elapsed_ms": 593,
+      "actions": 9
+    },
+    {
+      "name": "patient: card → self-report → return overview → confirmed decisions → messages",
+      "clicks": 5,
+      "fills": 0,
+      "selections": 0,
+      "wheels": 1,
+      "elapsed_ms": 616,
+      "actions": 6
+    }
+  ],
+  "checks": [
+    "all steps and return retain inputs; explicit save survives real process restart; keyboard Tab",
+    "server validation reveals every step; focus error; no data loss",
+    "320/768/1024/1440 all steps no page overflow; CSS zoom 200% (emulated, not browser preference)",
+    "Enter selects step, long Russian text, dirty leave dismissed, native validation reveals hidden date",
+    "completion read-only; unknown/conflicting, action draft, sources and history remain visible",
+    "patient tasks, message saved without fictional reaction; 320px; physician URL 403",
+    "F01 assessment, F02 reference, F03 risk, F04 dynamics, F05 self-report, F06 messages, F07 adherence, F08 routing accessible; no new rule activated",
+    "unchanged A02-v2 actual event visible on first-visit screen; mandatory/desirable route category and urgency/project/approved labels, 320px signal",
+    "no-JS full form accessible"
+  ],
+  "browser": {
+    "engine": "Google Chrome",
+    "version": "155.0.8059.82",
+    "viewport": "1440x1000",
+    "platform": "darwin"
+  },
+  "status": "PASS"
+}
