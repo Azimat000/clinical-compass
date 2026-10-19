@@ -103,6 +103,16 @@ def main():
                             assert 'Анкета отправлена врачу' in receipt and 'Депрессивные симптомы:' not in receipt
                             post(patient, '/assessments/' + task, answers)
                             assessment_tasks.append(task)
+                        decision_page = get(doctor, '/patients/D01/decisions')
+                        decision_key = re.search(r'name="request_key" value="([^"]+)"', decision_page).group(1)
+                        post(doctor, '/patients/D01/decisions', {'request_key':decision_key,'kind':'plan_change',
+                            'content':'Синтетический план после просмотра','basis':'Вымышленный визит',
+                            'uncertainties':'Профессиональная проверка правил не выполнена'})
+                        drafts = json.loads(get(doctor, '/api/patients/D01/decisions'))['decisions']
+                        proposal = drafts[0]
+                        assert json.loads(get(patient, '/api/patients/D01/decisions'))['decisions'] == []
+                        post(doctor, '/patients/D01/decisions/'+proposal['id']+'/confirm',
+                            {'version':str(proposal['version']),'decision':'approved','rationale':'Просмотрено на синтетике','reviewed':'yes'})
                     assert report_id in get(patient) and report_id in get(doctor, '/demo/D01')
                     for browser in (doctor, patient):
                         clinical = json.loads(get(browser, '/api/patients/D01/history'))['entries']
@@ -128,7 +138,12 @@ def main():
                             raise AssertionError('Foreign patient was accessible')
                         except HTTPError as error:
                             assert error.code == 404
-                    result.append({'restart_round': round_number, 'health': status, 'shared_report': True,
+                    for browser in (doctor, patient):
+                        actions = json.loads(get(browser, '/api/patients/D01/decisions'))['decisions']
+                        assert len(actions) == 1 and actions[0]['decision'] == 'approved'
+                        assert 'Синтетический план после просмотра' in get(browser, '/patients/D01/decisions')
+                    assert 'input_snapshot' not in json.loads(get(patient, '/api/patients/D01/decisions'))['decisions'][0]
+                    result.append({'manual_decision_preserved': True, 'restart_round': round_number, 'health': status, 'shared_report': True,
                                    'foreign_denied': True, 'shared_clinical_history': True,
                                    'doctor_assessments_preserved': True, 'patient_scores_hidden': True})
                 finally:
@@ -144,7 +159,7 @@ def main():
             assert db.execute('SELECT count(*) FROM adverse_events').fetchone()[0] == 1
             assert db.execute('SELECT count(*) FROM assessments').fetchone()[0] == 2
             assert db.execute('SELECT count(*) FROM assessment_results').fetchone()[0] == 2
-            assert db.execute('SELECT count(*) FROM care_actions').fetchone()[0] == 0
+            assert db.execute('SELECT count(*) FROM care_actions').fetchone()[0] == 1
             assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             assert db.execute('PRAGMA foreign_key_check').fetchall() == []
         print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1,

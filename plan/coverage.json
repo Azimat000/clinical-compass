@@ -39,7 +39,8 @@
       "primary_slice": "S08",
       "verification_slices": [
         "S16",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -48,10 +49,16 @@
         }
       ],
       "evidence_expected": "Сценарии соответствующего и неподходящего назначения; каждое утверждение связано с источником",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -63,7 +70,8 @@
       "verification_slices": [
         "S14",
         "S16",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -72,10 +80,16 @@
         }
       ],
       "evidence_expected": "Положительные и отрицательные сценарии риска; неизвестные сведения не считаются отсутствием риска",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -332,7 +346,8 @@
       "verification_slices": [
         "S09",
         "S14",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -361,10 +376,16 @@
         }
       ],
       "evidence_expected": "Тест каждого из пяти видов клинических действий; пациент получает только подтвержденный план",
-      "fulfilment_status": "not_verified",
+      "fulfilment_status": "partial",
       "actual_evidence": [
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -376,7 +397,8 @@
       "verification_slices": [
         "S08",
         "S16",
-        "S18"
+        "S18",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -403,7 +425,13 @@
         "docs/validation/dataset.md",
         "evidence/S03/acceptance.md",
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -488,7 +516,8 @@
       "verification_slices": [
         "S02",
         "S16",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -525,7 +554,13 @@
         "evidence/S02/received-grls-check.json",
         "evidence/S02/acceptance-review.md",
         "docs/architecture/data-model.md",
-        "evidence/S04/acceptance.md"
+        "evidence/S04/acceptance.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -539,7 +574,8 @@
         "S08",
         "S09",
         "S16",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -599,7 +635,13 @@
         "evidence/S07/review/scale-research.md",
         "evidence/S07/review/final-checks.log",
         "apps/tests/test_assessments.py",
-        "docs/architecture/assessments.md"
+        "docs/architecture/assessments.md",
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
       ]
     },
     {
@@ -943,7 +985,8 @@
       "primary_slice": "S08",
       "verification_slices": [
         "S16",
-        "S17"
+        "S17",
+        "S08A"
       ],
       "subchecks": [
         {
@@ -960,8 +1003,15 @@
         }
       ],
       "evidence_expected": "Проверка каждого вывода в контрольных сценариях; отсутствие неподтвержденных утверждений",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "evidence/S08A/acceptance.md",
+        "evidence/S08A/external-check.md",
+        "evidence/S08A/final-checks.log",
+        "evidence/S08A/upgrade.json",
+        "apps/tests/test_decisions.py",
+        "docs/architecture/clinical-decisions.md"
+      ]
     },
     {
       "id": "T06",

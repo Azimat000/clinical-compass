@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="intro"><span class="eyebrow">КАБИНЕТ ВРАЧА</span><h1>Ваши пациенты</h1><p>В карточках доступны сведения пациентов, принявших ваше приглашение.</p></div>
-<section class="notice"><strong>Знакомство с прототипом</strong><p>Пригласите пациента по его демонстрационному коду, например D01. Карточка появится после принятия приглашения в кабинете пациента. Самоотчёты, дневник и предложенные DASS-42 доступны в карточке. Лечебные назначения пока недоступны.</p></section>
+<section class="notice"><strong>Знакомство с прототипом</strong><p>Пригласите пациента по его демонстрационному коду, например D01. Карточка появится после принятия приглашения в кабинете пациента. Самоотчёты, дневник и предложенные DASS-42 доступны в карточке. Ручные проекты и подтверждённые решения врача доступны в отдельном разделе карточки; автоматического подбора терапии нет.</p></section>
 <section><h2>Пригласить пациента</h2><form action="{{ url_for('create_invitation') }}" method="post" class="search"><input type="hidden" name="csrf" value="{{ csrf }}"><label>Код пациента<input name="patient_id" placeholder="D01" maxlength="100" required></label><button>Создать приглашение</button></form>
 {% for offer in offers %}<div class="record"><span>Ожидает принятия · {{ offer.patient_id }}</span><form method="post" action="{{ url_for('revoke_invitation',token_hash=offer.token_hash) }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Отозвать приглашение</button></form></div>{% endfor %}</section>
 <section aria-labelledby="patients-title"><div class="section-heading"><h2 id="patients-title">Связанные пациенты</h2><span>{{ patients|length }} в выборке</span></div>

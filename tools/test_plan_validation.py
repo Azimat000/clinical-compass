@@ -74,8 +74,9 @@ class PlanTests(unittest.TestCase):
         cards = json.loads((self.root / 'plan/manifest.json').read_text())['slices']
         state = json.loads((self.root / 'memory/STATE.json').read_text())
         state.update(current_slice=None, qualification='qualified', postcontest_authorized=False)
+        prefinal = {card['id'] for card in cards[:next(i for i, card in enumerate(cards) if card['id'] == 'S20')]}
         for sid, entry in state['slices'].items():
-            entry['status'] = 'accepted' if int(sid[1:]) <= 19 else 'planned'
+            entry['status'] = 'accepted' if sid in prefinal else 'planned'
         state['slices']['S20']['status'] = 'blocked'
         self.assertIsNone(ready_id(cards, state))
         state['qualification'] = 'not_qualified'

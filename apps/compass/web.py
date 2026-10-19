@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments
+from . import access, records, assessments, decisions
 
 
 def create_app(database=None):
@@ -276,11 +276,43 @@ def create_app(database=None):
         patient_or_404(patient_id)
         return jsonify([dict(r) for r in get_db().execute('SELECT id,received_at,payload_json FROM self_reports WHERE patient_id=? ORDER BY received_at', (patient_id,))])
 
+    @app.route('/patients/<patient_id>/decisions', methods=['GET', 'POST'])
+    def decisions_page(patient_id):
+        patient = patient_or_404(patient_id)
+        error, status = None, 200
+        if request.method == 'POST':
+            role('doctor')
+            try:
+                proposal_id = decisions.draft(get_db(), g.user, patient_id, request.form)
+                return redirect(url_for('decisions_page', patient_id=patient_id)+'#decision-'+proposal_id, code=303)
+            except decisions.DecisionError as failure:
+                error, status = str(failure), failure.status
+        items = decisions.history(get_db(), g.user, patient_id)
+        return render_template('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
+                               reference=decisions.reference() if g.user['role']=='doctor' else None,
+                               error=error, values=request.form if request.method=='POST' else {},
+                               request_key=request.form.get('request_key', secrets.token_hex(16))), status
+
+    @app.post('/patients/<patient_id>/decisions/<proposal_id>/confirm')
+    def confirm_decision(patient_id, proposal_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        try:
+            decisions.confirm(get_db(), g.user, patient_id, proposal_id, request.form)
+        except decisions.DecisionError as error:
+            return render_template('result.html', title='Решение не подтверждено', message=str(error)), error.status
+        return redirect(url_for('decisions_page', patient_id=patient_id)+'#decision-'+proposal_id, code=303)
+
+    @app.get('/api/patients/<patient_id>/decisions')
+    def decisions_api(patient_id):
+        patient_or_404(patient_id)
+        return jsonify({'decisions': decisions.history(get_db(), g.user, patient_id)})
+
     @app.post('/api/patients/<patient_id>/actions')
     def actions_api(patient_id):
         role('doctor')
         patient_or_404(patient_id)
-        # Fail closed until S08/S09 implement reviewed proposals and confirmation.
+        # Generic action writes remain closed; use the versioned manual review workflow.
         return {'error': 'clinical_actions_inactive'}, 409
 
     return app

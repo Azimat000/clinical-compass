@@ -370,13 +370,62 @@
       "acceptance_tag": "slice/S07"
     },
     {
+      "id": "S08A",
+      "title": "Проекты решений и серверное подтверждение на синтетике",
+      "target_date": "19.10",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S07"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Показать версионированную справку врачу с источниками и ограничениями без активных лекарственных правил.",
+        "Реализовать ручной проект и отдельное подтверждение пяти видов решений врача в синтетическом демо.",
+        "Сохранить неизменяемую историю, отказ при новых данных/плане/источнике и отрицательные сценарии."
+      ],
+      "outputs": [
+        "apps/compass/decisions.py",
+        "apps/compass/migrations/005_decisions.sql",
+        "docs/architecture/clinical-decisions.md",
+        "evidence/S08A/acceptance.md"
+      ],
+      "acceptance": [
+        "Все пять видов ручных синтетических решений создаёт и подтверждает только действующий связанный врач; черновик и отклонение не меняют план.",
+        "Новые сведения, другой подтверждённый план, версия справки или день делают старый проект непригодным к подтверждению; повтор не создаёт дублей.",
+        "История и основания сохраняются после перезапуска; пациент видит только подтверждённые решения; справка не создаёт автоматических назначений и не выдаёт неизвестность за допуск."
+      ],
+      "handoff_path": "memory/sessions/S08A.md",
+      "evidence_dir": "evidence/S08A",
+      "requirement_ids": [
+        "F02",
+        "F03",
+        "M03",
+        "M04",
+        "M07",
+        "M08",
+        "T05"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py --pending-tag S08A",
+        "python3 tools/session.py status",
+        ".venv/bin/python evidence/S08A/check_upgrade.py",
+        "python3 evidence/S08A/verify_integrity.py"
+      ],
+      "planned_commit": "slice(S08A): synthetic decision workflow",
+      "acceptance_tag": "slice/S08A"
+    },
+    {
       "id": "S08",
       "title": "Терапевтическая справка, риски и подтверждение врачом",
       "target_date": "21–22.10",
       "depends_on": [
         "S02",
         "S03",
-        "S07"
+        "S07",
+        "S08A"
       ],
       "condition": "always",
       "stage": "contest",
