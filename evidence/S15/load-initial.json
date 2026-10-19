@@ -1,0 +1,1506 @@
+{
+  "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu_count": 8,
+    "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "sqlite": "3.50.4",
+    "packages": {
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "waitress": "3.0.2"
+    },
+    "hardware": "Apple M2\n17179869184",
+    "server": "Waitress CLI threads=4, SQLite DELETE/FULL, local disk",
+    "at": "2026-10-19T20:05:29.074132+00:00"
+  },
+  "method": "fresh DB each run; 50/50 doctor/patient; sequential login excluded; barrier start, 4 cycles x 5 requests/user, no think time; same machine clients/server/worker; finite burst not endurance",
+  "runs": [
+    {
+      "users": 10,
+      "pairs": 5,
+      "requests": 200,
+      "cycles": 4,
+      "duration_s": 0.7614797499991255,
+      "requests_per_s": 262.6465116114114,
+      "http_ms": {
+        "n": 200,
+        "p50_ms": 21.46162500139326,
+        "p95_ms": 126.28870800108416,
+        "max_ms": 480.12645799826714
+      },
+      "login_sequential_ms": {
+        "n": 10,
+        "p50_ms": 65.59362500047428,
+        "p95_ms": 98.17595899949083,
+        "max_ms": 98.17595899949083
+      },
+      "errors": [],
+      "error_fraction": 0.0,
+      "counts": {
+        "self_reports": 20,
+        "critical_events": 10,
+        "care_actions": 0
+      },
+      "critical_ready_ms": {
+        "n": 10,
+        "p50_ms": 286.306,
+        "p95_ms": 882.976,
+        "max_ms": 882.976
+      },
+      "critical_receipt_ms": {
+        "n": 10,
+        "p50_ms": 942.594,
+        "p95_ms": 1376.239,
+        "max_ms": 1376.239
+      },
+      "receipt_method": "Explicit HTTP after workload completion, no browser render/human response; includes intentional delay",
+      "raw_requests": [
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 15.617249999195337
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L001",
+          "cycle": 0,
+          "code": 200,
+          "ms": 40.154040998459095
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L001/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 21.408332999271806
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 0,
+          "code": 200,
+          "ms": 18.448625000019092
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L001",
+          "cycle": 0,
+          "code": 200,
+          "ms": 17.480875001638196
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 28.057042000000365
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L001",
+          "cycle": 1,
+          "code": 200,
+          "ms": 36.16991599847097
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L001/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 24.97070800018264
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 1,
+          "code": 200,
+          "ms": 15.092875000846107
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L001",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.182667002402013
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 21.46162500139326
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L001",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.753000000084285
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L001/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 19.88208400143776
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 2,
+          "code": 200,
+          "ms": 126.28870800108416
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L001",
+          "cycle": 2,
+          "code": 200,
+          "ms": 23.016541999822948
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 19.53950000097393
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L001",
+          "cycle": 3,
+          "code": 200,
+          "ms": 23.222542000439717
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L001/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 16.815582999697654
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 3,
+          "code": 200,
+          "ms": 17.947167001693742
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L001",
+          "cycle": 3,
+          "code": 200,
+          "ms": 16.444917000626447
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 9.143333998508751
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L000",
+          "cycle": 0,
+          "code": 200,
+          "ms": 33.54337500059046
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L000/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 22.622583001066232
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 0,
+          "code": 200,
+          "ms": 22.269666998909088
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L000",
+          "cycle": 0,
+          "code": 200,
+          "ms": 25.14912499827915
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 27.18216600260348
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L000",
+          "cycle": 1,
+          "code": 200,
+          "ms": 26.533207997999853
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L000/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 25.68750000136788
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 1,
+          "code": 200,
+          "ms": 17.49437499893247
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L000",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.11366700087092
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.813416001445148
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L000",
+          "cycle": 2,
+          "code": 200,
+          "ms": 44.73133299688925
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L000/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 126.66687499950058
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 2,
+          "code": 200,
+          "ms": 26.032125002529938
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L000",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.835165999713354
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 17.19016700008069
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L000",
+          "cycle": 3,
+          "code": 200,
+          "ms": 22.480625000753207
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L000/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 19.63291599895456
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 3,
+          "code": 200,
+          "ms": 53.481208997254726
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L000",
+          "cycle": 3,
+          "code": 200,
+          "ms": 20.363832998555154
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 12.658167001063703
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L003",
+          "cycle": 0,
+          "code": 200,
+          "ms": 41.428166998230154
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L003/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 61.01137500081677
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 0,
+          "code": 200,
+          "ms": 29.446791999362176
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L003",
+          "cycle": 0,
+          "code": 200,
+          "ms": 34.95233300054679
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.76591699794517
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L003",
+          "cycle": 1,
+          "code": 200,
+          "ms": 30.41799999846262
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L003/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 20.45850000286009
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 1,
+          "code": 200,
+          "ms": 17.479499998444226
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L003",
+          "cycle": 1,
+          "code": 200,
+          "ms": 148.29216599900974
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 23.690999998507323
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L003",
+          "cycle": 2,
+          "code": 200,
+          "ms": 27.892957998119527
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L003/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 14.203083999746013
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.872124997666106
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L003",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.37554099963745
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 25.408917001186637
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L003",
+          "cycle": 3,
+          "code": 200,
+          "ms": 26.10379100224236
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L003/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 19.287334002001444
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 3,
+          "code": 200,
+          "ms": 13.116874997649575
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L003",
+          "cycle": 3,
+          "code": 200,
+          "ms": 14.656166000349913
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 20.22062499963795
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L004",
+          "cycle": 0,
+          "code": 200,
+          "ms": 61.11433299884084
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L004/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 21.055042001535185
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 0,
+          "code": 200,
+          "ms": 81.93233399651945
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L004",
+          "cycle": 0,
+          "code": 200,
+          "ms": 26.066665999678662
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 54.89337499966496
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L004",
+          "cycle": 1,
+          "code": 200,
+          "ms": 25.69716600191896
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L004/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 137.04829199923552
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.318750001635635
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L004",
+          "cycle": 1,
+          "code": 200,
+          "ms": 22.608833998674527
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 19.518291999702342
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L004",
+          "cycle": 2,
+          "code": 200,
+          "ms": 27.122249997773906
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L004/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 14.912375001586042
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 2,
+          "code": 200,
+          "ms": 22.343124997860286
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L004",
+          "cycle": 2,
+          "code": 200,
+          "ms": 21.81462500084308
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 17.90183300181525
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L004",
+          "cycle": 3,
+          "code": 200,
+          "ms": 23.32037499945727
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L004/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 16.01779199700104
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 3,
+          "code": 200,
+          "ms": 10.611666999466252
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L004",
+          "cycle": 3,
+          "code": 200,
+          "ms": 12.168000001111068
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 95.34854199955589
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L004",
+          "cycle": 0,
+          "code": 200,
+          "ms": 15.529500000411645
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 27.556666002055863
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L004/self-reports",
+          "cycle": 0,
+          "code": 200,
+          "ms": 55.89424999925541
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 19.99574999717879
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 45.5190840002615
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L004",
+          "cycle": 1,
+          "code": 200,
+          "ms": 19.12620899747708
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.1219589986722
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L004/self-reports",
+          "cycle": 1,
+          "code": 200,
+          "ms": 151.55570800197893
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.170915999799035
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 37.895959001616575
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L004",
+          "cycle": 2,
+          "code": 200,
+          "ms": 19.19274999818299
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 16.144457997143036
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L004/self-reports",
+          "cycle": 2,
+          "code": 200,
+          "ms": 44.48991600293084
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 14.264790999732213
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 32.9844170009892
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L004",
+          "cycle": 3,
+          "code": 200,
+          "ms": 9.999249999964377
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 9.924207999574719
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L004/self-reports",
+          "cycle": 3,
+          "code": 200,
+          "ms": 14.560375002474757
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L004/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 11.051625002437504
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 67.8152090004005
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L001",
+          "cycle": 0,
+          "code": 200,
+          "ms": 23.06362499803072
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 16.107833002024563
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L001/self-reports",
+          "cycle": 0,
+          "code": 200,
+          "ms": 90.60924999721465
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 26.18662500026403
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 39.65887500089593
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L001",
+          "cycle": 1,
+          "code": 200,
+          "ms": 17.80079200034379
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 22.38112499981071
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L001/self-reports",
+          "cycle": 1,
+          "code": 200,
+          "ms": 150.89774999796646
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 23.909374998765998
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 39.48599999785074
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L001",
+          "cycle": 2,
+          "code": 200,
+          "ms": 17.050124999514082
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 27.619000000413507
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L001/self-reports",
+          "cycle": 2,
+          "code": 200,
+          "ms": 40.43620800075587
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 14.073333997657755
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 28.806708000047365
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L001",
+          "cycle": 3,
+          "code": 200,
+          "ms": 10.25679200029117
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 14.398375002201647
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L001/self-reports",
+          "cycle": 3,
+          "code": 200,
+          "ms": 15.643750000890577
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L001/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 5.526082997675985
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 62.48691699875053
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L002",
+          "cycle": 0,
+          "code": 200,
+          "ms": 20.325666999269743
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 17.491040998720564
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L002/self-reports",
+          "cycle": 0,
+          "code": 200,
+          "ms": 48.09274999934132
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 71.86999999976251
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 36.22579199873144
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L002",
+          "cycle": 1,
+          "code": 200,
+          "ms": 12.970540999958757
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 18.922792001831112
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L002/self-reports",
+          "cycle": 1,
+          "code": 200,
+          "ms": 200.4547079995973
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 17.08212499943329
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 39.617374997760635
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L002",
+          "cycle": 2,
+          "code": 200,
+          "ms": 18.780833001073916
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 30.606624997744802
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L002/self-reports",
+          "cycle": 2,
+          "code": 200,
+          "ms": 35.42420899975696
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 9.748500000569038
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 22.72524999716552
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L002",
+          "cycle": 3,
+          "code": 200,
+          "ms": 9.723499999381602
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 10.141667000425514
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L002/self-reports",
+          "cycle": 3,
+          "code": 200,
+          "ms": 21.184791999985464
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L002/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 1.7059579986380413
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 57.0603750020382
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L003",
+          "cycle": 0,
+          "code": 200,
+          "ms": 21.52866699907463
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 20.192125000903616
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L003/self-reports",
+          "cycle": 0,
+          "code": 200,
+          "ms": 96.59937499964144
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 30.96499999810476
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 38.38458400059608
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L003",
+          "cycle": 1,
+          "code": 200,
+          "ms": 18.0518339984701
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 21.91662499899394
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L003/self-reports",
+          "cycle": 1,
+          "code": 200,
+          "ms": 158.63537499899394
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 17.2248339986254
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 79.92333299989696
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L003",
+          "cycle": 2,
+          "code": 200,
+          "ms": 20.83241600121255
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 24.29962499809335
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L003/self-reports",
+          "cycle": 2,
+          "code": 200,
+          "ms": 30.872666000504978
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 16.444042001239723
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 21.280541997839464
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L003",
+          "cycle": 3,
+          "code": 200,
+          "ms": 7.668833000934683
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 8.430666999629466
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L003/self-reports",
+          "cycle": 3,
+          "code": 200,
+          "ms": 21.53583300241735
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L003/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 3.623333999712486
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 8.214958997996291
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L002",
+          "cycle": 0,
+          "code": 200,
+          "ms": 34.46100000292063
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L002/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 24.01783299865201
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 0,
+          "code": 200,
+          "ms": 21.411374997114763
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L002",
+          "cycle": 0,
+          "code": 200,
+          "ms": 16.3597499995376
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 39.46649999852525
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L002",
+          "cycle": 1,
+          "code": 200,
+          "ms": 34.6828750007262
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L002/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 32.63466699718265
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 1,
+          "code": 200,
+          "ms": 18.849332998797763
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L002",
+          "cycle": 1,
+          "code": 200,
+          "ms": 480.12645799826714
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 4.950582999299513
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L002",
+          "cycle": 2,
+          "code": 200,
+          "ms": 5.863875001523411
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L002/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 1.8634159969224129
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 2,
+          "code": 200,
+          "ms": 1.943332998052938
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L002",
+          "cycle": 2,
+          "code": 200,
+          "ms": 3.9649170030315872
+        },
+        {
+          "role": "doctor",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 3.4136670001316816
+        },
+        {
+          "role": "doctor",
+          "route": "/demo/L002",
+          "cycle": 3,
+          "code": 200,
+          "ms": 7.85929199992097
+        },
+        {
+          "role": "doctor",
+          "route": "/api/patients/L002/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 5.016540999349672
+        },
+        {
+          "role": "doctor",
+          "route": "/critical",
+          "cycle": 3,
+          "code": 200,
+          "ms": 2.7065829999628477
+        },
+        {
+          "role": "doctor",
+          "route": "/?q=L002",
+          "cycle": 3,
+          "code": 200,
+          "ms": 3.337665999424644
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 0,
+          "code": 200,
+          "ms": 46.326958003191976
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L000",
+          "cycle": 0,
+          "code": 200,
+          "ms": 23.01804200033075
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 47.405375000380445
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L000/self-reports",
+          "cycle": 0,
+          "code": 200,
+          "ms": 71.06158299939125
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 0,
+          "code": 200,
+          "ms": 20.27091600029962
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 1,
+          "code": 200,
+          "ms": 32.316917000571266
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L000",
+          "cycle": 1,
+          "code": 200,
+          "ms": 18.19529199929093
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 12.459666999347974
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L000/self-reports",
+          "cycle": 1,
+          "code": 200,
+          "ms": 153.36124999885214
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 1,
+          "code": 200,
+          "ms": 20.945459000358824
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 2,
+          "code": 200,
+          "ms": 45.28145799849881
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L000",
+          "cycle": 2,
+          "code": 200,
+          "ms": 21.011584001826122
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 19.238042001234135
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L000/self-reports",
+          "cycle": 2,
+          "code": 200,
+          "ms": 196.64704200113192
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 2,
+          "code": 200,
+          "ms": 3.625875000579981
+        },
+        {
+          "role": "patient",
+          "route": "/",
+          "cycle": 3,
+          "code": 200,
+          "ms": 7.6667089997499716
+        },
+        {
+          "role": "patient",
+          "route": "/demo/L000",
+          "cycle": 3,
+          "code": 200,
+          "ms": 9.279541998694185
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 4.179457999271108
+        },
+        {
+          "role": "patient",
+          "route": "/patients/L000/self-reports",
+          "cycle": 3,
+          "code": 200,
+          "ms": 6.435915998736164
+        },
+        {
+          "role": "patient",
+          "route": "/api/patients/L000/history",
+          "cycle": 3,
+          "code": 200,
+          "ms": 1.8519589975767303
+        }
+      ],
+      "raw_delivery": [
+        {
+          "ready_ms": 286.306,
+          "receipt_ms": 1376.239
+        },
+        {
+          "ready_ms": 281.117,
+          "receipt_ms": 1358.6970000000001
+        },
+        {
+          "ready_ms": 262.14,
+          "receipt_ms": 1325.1219999999998
+        },
+        {
+          "ready_ms": 256.425,
+          "receipt_ms": 1351.089
+        },
+        {
+          "ready_ms": 246.483,
+          "receipt_ms": 1348.5320000000002
+        },
+        {
+          "ready_ms": 882.976,
+          "receipt_ms": 919.0469999999999
+        },
+        {
+          "ready_ms": 867.228,
+          "receipt_ms": 942.594
+        },
+        {
+          "ready_ms": 855.468,
+          "receipt_ms": 897.914
+        },
+        {
+          "ready_ms": 835.307,
+          "receipt_ms": 886.0310000000001
+        },
+        {
+          "ready_ms": 824.984,
+          "receipt_ms": 882.4920000000001
+        }
+      ],
+      "server_log": "WARNING:waitress.queue:Task queue depth is 1\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 6\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 5\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 4\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 3\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 2\nWARNING:waitress.queue:Task queue depth is 1\n",
+      "worker_log": ""
+    }
+  ]
+}

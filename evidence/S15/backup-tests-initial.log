@@ -1,0 +1,18 @@
+test_concurrent_writer_backup_is_a_consistent_snapshot (test_backup.BackupTests.test_concurrent_writer_backup_is_a_consistent_snapshot) ... ok
+test_foreign_key_violation_refused_before_destination_creation (test_backup.BackupTests.test_foreign_key_violation_refused_before_destination_creation) ... ERROR
+test_missing_corrupt_tampered_and_symlink_refused (test_backup.BackupTests.test_missing_corrupt_tampered_and_symlink_refused) ... ok
+test_snapshot_restore_and_no_overwrite (test_backup.BackupTests.test_snapshot_restore_and_no_overwrite) ... ok
+
+======================================================================
+ERROR: test_foreign_key_violation_refused_before_destination_creation (test_backup.BackupTests.test_foreign_key_violation_refused_before_destination_creation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_backup.py", line 50, in test_foreign_key_violation_refused_before_destination_creation
+    raw.execute("UPDATE patients SET user_id='missing' WHERE id='D01'")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: active patient required
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.104s
+
+FAILED (errors=1)

@@ -655,7 +655,15 @@
         "evidence/S14/final-checks-r3.log",
         "evidence/S14/docker-tests-final.log",
         "apps/tests/test_security.py",
-        "docs/compliance/data-map.md"
+        "docs/compliance/data-map.md",
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
       ]
     },
     {
@@ -1153,8 +1161,17 @@
         }
       ],
       "evidence_expected": "Воспроизводимый отчет с нагрузкой оборудованием и долей неуспешных запросов",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
+      ]
     },
     {
       "id": "T02",
@@ -1348,8 +1365,17 @@
         }
       ],
       "evidence_expected": "Число пользователей задержки ошибки и доставка алертов под нагрузкой",
-      "fulfilment_status": "not_verified",
-      "actual_evidence": []
+      "fulfilment_status": "partial",
+      "actual_evidence": [
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
+      ]
     },
     {
       "id": "T07",
@@ -1406,7 +1432,15 @@
         "apps/tests/test_critical_delivery.py",
         "docs/architecture/critical-delivery.md",
         "docs/clinical/critical-protocol-v2.md",
-        "evidence/S10/final-browser-measurement.json"
+        "evidence/S10/final-browser-measurement.json",
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
       ]
     },
     {
@@ -1458,7 +1492,15 @@
         "docs/RUNBOOK.md",
         "evidence/S04/acceptance.md",
         "evidence/S04/checks.log",
-        "evidence/S04/docker-check.json"
+        "evidence/S04/docker-check.json",
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
       ]
     },
     {
@@ -1574,7 +1616,15 @@
         "evidence/S13/extensions.json",
         "evidence/S13/upgrade.json",
         "evidence/S13/search.json",
-        "apps/tests/test_s13.py"
+        "apps/tests/test_s13.py",
+        "evidence/S15/acceptance.md",
+        "evidence/S15/performance.json",
+        "evidence/S15/load.json",
+        "evidence/S15/performance.md",
+        "evidence/S15/recovery.json",
+        "evidence/S15/recovery.md",
+        "docs/operations/recovery.md",
+        "apps/tests/test_backup.py"
       ]
     },
     {

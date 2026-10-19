@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T22:41:37+03:00",
+  "updated_on": "2026-10-19T23:13:01+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S14",
-  "next_slice": "S15",
+  "last_accepted_slice": "S15",
+  "next_slice": "S16",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -98,8 +98,8 @@
       "reason": null
     },
     "S15": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S15",
       "handoff": "memory/sessions/S15.md",
       "reason": null
     },
@@ -186,7 +186,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S14 принят локально: evidence/S14/acceptance.md. 148 app macOS/Linux, 17 plan/data, отрицательные сценарии, безопасные ошибки, обновлённая карта данных; B12/B15/B16 и внешние/клинические пробелы открыты. Следующий только S15 в новой сессии.",
+    "next_action": "S15 принят локально: evidence/S15/acceptance.md. Нагрузка 10/50/100, реальные TCP/SIGKILL/hot journal/restore; одна поздняя критическая запись утрачена. B12/B15/B16 и внешние/клинические пробелы открыты. Следующий только S16 в новой сессии, с действительными участниками.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

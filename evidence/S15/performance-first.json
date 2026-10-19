@@ -1,0 +1,49 @@
+{
+  "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu_count": 8,
+    "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "sqlite": "3.50.4",
+    "packages": {
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "waitress": "3.0.2"
+    },
+    "hardware": "Apple M2\n17179869184",
+    "server": "Waitress CLI threads=4, SQLite DELETE/FULL, local disk",
+    "at": "2026-10-19T20:07:07.821781+00:00"
+  },
+  "load_reference": "evidence/S15/load.json",
+  "record_and_rules_transaction_ms": {
+    "n": 100,
+    "p50_ms": 5.0882920004369225,
+    "p95_ms": 7.264084000780713,
+    "max_ms": 44.23416600184282
+  },
+  "extraction_short": {
+    "bytes": 86,
+    "timings": {
+      "n": 100,
+      "p50_ms": 0.04104100298718549,
+      "p95_ms": 0.07049999840091914,
+      "max_ms": 2.0334170003479812
+    }
+  },
+  "extraction_near_limit": {
+    "bytes": 19200,
+    "timings": {
+      "n": 100,
+      "p50_ms": 70.18983400121215,
+      "p95_ms": 72.38874999893596,
+      "max_ms": 77.2508750014822
+    }
+  },
+  "manual_recommendation_draft_transaction_ms": {
+    "n": 30,
+    "p50_ms": 13.455374999466585,
+    "p95_ms": 21.170750002056593,
+    "max_ms": 32.27025000160211
+  },
+  "recommendation_limit": "No automatic recommendation generator exists; measures manual draft creation with evidence snapshot; no confirmation/treatment."
+}

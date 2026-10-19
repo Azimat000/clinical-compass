@@ -1,0 +1,16 @@
+Running 10
+Running 50
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/evidence/S15/measure.py", line 100, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/azamatsibgatullin/Documents/HAC/evidence/S15/measure.py", line 82, in main
+    print('Running',n,flush=True); runs.append(run(n))
+                                               ~~~^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/evidence/S15/measure.py", line 20, in run
+    b=Browser(server.url); logins.append(b.login(uid)); clients.append((b,role,pid))
+                                         ~~~~~~~^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/evidence/S15/common.py", line 79, in login
+    assert code==200 and 'name="csrf"' in body, (uid,code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('load-doc-5', 429)
