@@ -9,7 +9,7 @@ from .db import now, transaction
 
 KINDS = {'therapy_start': 'Назначение терапии', 'therapy_change': 'Изменение терапии',
          'therapy_stop': 'Отмена терапии', 'referral': 'Направление', 'plan_change': 'Изменение плана'}
-REFERENCE_PATH = Path(__file__).with_name('resources') / 'therapy-reference-v1.json'
+REFERENCE_PATH = Path(__file__).with_name('resources') / 'therapy-reference-v2.json'
 
 
 class DecisionError(ValueError):
@@ -72,12 +72,42 @@ def snapshot(db, patient_id, relationship_id):
     return canonical(result)
 
 
+def therapy_review(form, kind):
+    """Record the physician's source-based assessment, never infer drug suitability."""
+    if kind not in ('therapy_start', 'therapy_change', 'therapy_stop'):
+        return None
+    ref = reference()
+    if form.get('therapy_reference') != ref['version']:
+        raise DecisionError('Справка изменилась или не просмотрена. Обновите форму.', 409)
+    conclusion = form.get('aviandr_conclusion')
+    if conclusion not in ('not_selected', 'insufficient_data', 'individual_review'):
+        raise DecisionError('Запишите результат рассмотрения Авиандра.')
+    checks = []
+    for area in ref['review_areas']:
+        status = form.get('review_' + area['id'], 'unknown')
+        if status not in ('reviewed', 'concern', 'unknown', 'conflicting'):
+            raise DecisionError('Недопустимое состояние проверки терапии.')
+        note = checked_text(form, 'note_' + area['id'], 1500)
+        checks.append({'id': area['id'], 'status': status, 'note': note})
+    unresolved = [c['id'] for c in checks if c['status'] in ('unknown', 'conflicting')]
+    concerns = [c['id'] for c in checks if c['status'] == 'concern']
+    if conclusion == 'individual_review' and (unresolved or concerns):
+        raise DecisionError('Есть риск, неизвестность или противоречие. Выберите отказ от выбора препарата либо недостаток данных.', 409)
+    return {'reference_version': ref['version'], 'conclusion': conclusion,
+            'checks': checks, 'unresolved': unresolved, 'concerns': concerns,
+            'automatic_recommendation': False, 'eligibility_established': False,
+            'basis': checked_text(form, 'aviandr_basis', 2000)}
+
+
 def draft(db, user, patient_id, form):
     kind = checked_text(form, 'kind', 40)
     if kind not in KINDS:
         raise DecisionError('Выберите вид решения.')
     payload = {name: checked_text(form, name) for name in ('content', 'basis', 'uncertainties')}
     payload.update(kind=kind, mode='manual_synthetic', automatic=False)
+    review = therapy_review(form, kind)
+    if review is not None:
+        payload['therapy_review'] = review
     parent = checked_text(form, 'parent_id', 64, False)
     token = checked_text(form, 'request_key', 32)
     if not re.fullmatch('[0-9a-f]{32}', token):
@@ -156,6 +186,8 @@ def history(db, user, patient_id):
         entry = {k: r[k] for k in ('id','kind','version','created_at','actor_id','parent_proposal_id',
                                   'decision','rationale','doctor_id','confirmed_at','action_id','supersedes_id')}
         entry['payload'] = json.loads(r['payload_json'])
+        if user['role'] != 'doctor':
+            entry['payload'].pop('therapy_review', None)
         if user['role'] == 'doctor':
             entry['reference'] = json.loads(r['reference_json'])
             entry['input_snapshot'] = json.loads(r['input_snapshot_json'])

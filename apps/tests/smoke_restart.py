@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT))
 
 def main():
     from apps.compass.access import seed_accounts
+    from apps.compass.decisions import reference
     from apps.compass.db import connect, now
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / 'fresh.sqlite3'
@@ -105,7 +106,10 @@ def main():
                             assessment_tasks.append(task)
                         decision_page = get(doctor, '/patients/D01/decisions')
                         decision_key = re.search(r'name="request_key" value="([^"]+)"', decision_page).group(1)
-                        post(doctor, '/patients/D01/decisions', {'request_key':decision_key,'kind':'plan_change',
+                        post(doctor, '/patients/D01/decisions', {'request_key':decision_key,'kind':'therapy_change',
+                            'therapy_reference': reference()['version'],
+                            'aviandr_conclusion':'insufficient_data','aviandr_basis':'Синтетика: препарат не выбран, данные неполны',
+                            **{'note_'+area['id']: 'Синтетика: требует проверки врачом' for area in reference()['review_areas']},
                             'content':'Синтетический план после просмотра','basis':'Вымышленный визит',
                             'uncertainties':'Профессиональная проверка правил не выполнена'})
                         drafts = json.loads(get(doctor, '/api/patients/D01/decisions'))['decisions']
@@ -143,6 +147,8 @@ def main():
                         assert len(actions) == 1 and actions[0]['decision'] == 'approved'
                         assert 'Синтетический план после просмотра' in get(browser, '/patients/D01/decisions')
                     assert 'input_snapshot' not in json.loads(get(patient, '/api/patients/D01/decisions'))['decisions'][0]
+                    assert 'therapy_review' not in json.loads(get(patient, '/api/patients/D01/decisions'))['decisions'][0]['payload']
+                    assert len(json.loads(get(doctor, '/api/patients/D01/decisions'))['decisions'][0]['payload']['therapy_review']['unresolved']) == 8
                     result.append({'manual_decision_preserved': True, 'restart_round': round_number, 'health': status, 'shared_report': True,
                                    'foreign_denied': True, 'shared_clinical_history': True,
                                    'doctor_assessments_preserved': True, 'patient_scores_hidden': True})

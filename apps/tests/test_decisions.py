@@ -22,7 +22,10 @@ class DecisionTests(unittest.TestCase):
     def values(self, **kw):
         return {'request_key': secrets.token_hex(16), 'kind': 'therapy_start',
                 'content': 'Синтетическое решение, не для лечения', 'basis': 'Вымышленный визит',
-                'uncertainties': 'Почечная функция неизвестна; требует проверки', **kw}
+                'uncertainties': 'Почечная функция неизвестна; требует проверки',
+                'therapy_reference': decisions.reference()['version'],
+                'aviandr_conclusion': 'insufficient_data', 'aviandr_basis': 'Синтетика: нет данных для выбора',
+                **{'note_'+a['id']: 'Синтетические сведения отсутствуют' for a in decisions.reference()['review_areas']}, **kw}
 
     def draft(self, **kw):
         response = self.post('doc-a','/patients/D01/decisions',self.values(**kw))
