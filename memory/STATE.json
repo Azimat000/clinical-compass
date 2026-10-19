@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T18:37:15+03:00",
+  "updated_on": "2026-10-19T18:42:51+03:00",
   "current_slice": null,
   "last_accepted_slice": "S08A",
   "next_slice": "S08",
@@ -169,5 +169,14 @@
       "handoff": "memory/sessions/S08A.md",
       "reason": null
     }
+  },
+  "latest_audit": {
+    "report": "evidence/audits/2026-10-19-s08a/report.json",
+    "commit_ref": "refs/tags/audit/2026-10-19-s08a",
+    "open_findings": [
+      "B13",
+      "B14"
+    ],
+    "next_action": "Отдельно исправить контроль возраста B13/B14 перед клинической демонстрацией S08; аудит не является приёмкой нового среза."
   }
 }

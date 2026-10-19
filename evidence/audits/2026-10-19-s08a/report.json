@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-19T18:42:51+03:00",
+  "base_commit": "00b85b01faa370d5eb880f6c2ece68b2dc2cd5e3",
+  "scope": "Полный аудит текущего состояния после S08A; следующий продуктовый срез не начат; исправления кода не выполнялись.",
+  "verdict": "Основа технически работает, но полное соответствие конкурсу не доказано. Найдены два дефекта возрастной проверки и риск лишних ограничений плана.",
+  "coverage": {
+    "groups": 83,
+    "subchecks": 160,
+    "fulfilled": 0,
+    "partial": 37,
+    "not_verified": 46
+  },
+  "verification": {
+    "make_check": "PASS: 58 app tests, real two-process Waitress restart, pip check, synthetic validation, 17 tools tests",
+    "validate_plan": "PASS: 27 slices, 9 accepted, next S08; this checks planning only",
+    "age_http_probes": "Two findings reproduced; see age-results.json",
+    "new_docker_run": false,
+    "existing_linux_evidence": "evidence/S08A/docker-tests.log and docker-restart.log from previous accepted work; not a new run"
+  },
+  "findings": [
+    {
+      "id": "A01",
+      "priority": "Исправить перед дальнейшей клинической демонстрацией",
+      "file": "apps/compass/assessments.py",
+      "line": 113,
+      "problem": "Проверяется исходное age_years, но исходная birth_date не сопоставляется с возрастом формы. При профиле birth_date=2010-01-01 и форме age_years=35 сервер выдаёт303 и создаёт предложение взрослой DASS.",
+      "evidence": "age-results.json:birth_date_2010_vs_form_age_35",
+      "limit": "Воспроизведено на временной синтетической БД допустимой схемы. Изменение birth_date через публичный интерфейс сейчас не доступно; дефект относится к поддерживаемой модели/будущему импорту, не доказанному инциденту с реальным пациентом.",
+      "required_fix": "Сопоставить все известные источники возраста, включая дату рождения, перед назначением и приёмом; проверить несовершеннолетнего/ровно18/расхождение/день рождения."
+    },
+    {
+      "id": "A02",
+      "priority": "Исправить путь уточнения сведений",
+      "file": "apps/compass/assessments.py",
+      "line": 111,
+      "problem": "Исходный age_status=conflicting запрещает предложение формы даже после нового визита врача с явным сверенным возрастом. Веб-пути исправления исходного профиля нет.",
+      "evidence": "age-results.json:initial_conflict_after_new_doctor_record",
+      "required_fix": "Добавить явное проверяемое разрешение конфликта врачом с основаниями/ссылкой на прежние источники и сохранением истории; простая поздняя запись пациента не должна молча снимать конфликт."
+    },
+    {
+      "id": "A03",
+      "priority": "Уточнить рамки S08, не ждать лишних условий",
+      "problem": "Собственные политики местами прочитаны как условия конкурса: обязательный внешний эксперт до любой реализации, отдельная ОХЛП для любой справки, автоматический лекарственный алгоритм. F02 допускает справочную информацию; M05 требует автоматичность только для критических сигналов.",
+      "required_action": "Источниковая проверка конкретной справки и машинных условий обязательна по фактической функции; отсутствие отдельной ОХЛП/внешней подписи не блокирует всякую подготовку/верную справку. Не выдавать листок за ОХЛП и не активировать недоказанное правило. Исходные критерии S08 не удалены."
+    },
+    {
+      "id": "A04",
+      "priority": "До защиты",
+      "problem": "F06/F07/F08 и M05/M06 ещё не реализованы в полном виде, апробация и измерения T01–T08 не доказаны.",
+      "required_action": "Закончить обязательные функции и фактическую апробацию; не заменять их числом тегов или тестов."
+    },
+    {
+      "id": "A05",
+      "priority": "Проверить организационные вводные заранее",
+      "problem": "Закрытый чат/обязательные ответы, метрики/формат сдачи, профили/допуск/согласия/вклад участников, формат апробации не проверены.",
+      "required_action": "Доступ к почте через /mcp/настройки коннекторов; фактический контроль чата капитаном. Не отправлять вопросы/материалы без поручения."
+    }
+  ],
+  "external_research": {
+    "agent": "/root/contest_audit",
+    "read_only": true,
+    "official_url": "https://clinicalcompass2026.ru/",
+    "regulations_url": "https://clinicalcompass2026.ru/wp-content/themes/clinical-compass/assets/documents/championship-regulations.docx?ver=1.2.8",
+    "downloaded_bytes": 63252,
+    "downloaded_sha256": "7106584c95391fef5c22445781faa1e2b78aa6cda16df67e9a56f091e2265df3",
+    "result": "MATCH with previous official DOCX; dates 28/30 October retained. case.pdf checked against CSV. Closed chat not accessed, Gmail UNAUTHORIZED retry deliberately omitted."
+  },
+  "source_boundaries": {
+    "case_pdf": "37 F/M/E/T items are from case.pdf pp1–3; implementation/evidence CSV columns are project decisions, not contest commands.",
+    "regulations": "46 condition groups tracked; source references: team6.4, predefence5.1/8.2–8.3, final1.3/1.5.6/5.1/8.9, chat5.4.6 and7.7–7.8, rights12.2–12.7.",
+    "contest_does_not_prescribe": [
+      "PHQ/GAD by name",
+      "numerical scale scores to patient",
+      "real patient data",
+      "external expert signature before every implementation",
+      "automatic drug prescribing algorithm",
+      "separate public OXLP file as a prerequisite for every reference display"
+    ],
+    "retained_constraints": [
+      "registered-indication/contraindication/dose limits for generated recommendations",
+      "current approved sources and rights",
+      "physician confirmation for all clinical actions",
+      "scientifically supported automatic critical alerts",
+      "real documented appraisal rather than self-test relabelling"
+    ]
+  },
+  "budget": {
+    "spent": 0,
+    "commitments": 0,
+    "limit": 5000,
+    "travel_poster_not_yet_priced": true
+  },
+  "history": "Existing accepted tags retained as historical scope-specific evidence; these new probes identify a gap in the former age-test coverage. No S08 acceptance, medical clearance, real patient action or contest completeness claimed.",
+  "next_actions": [
+    "Correct A01/A02 with scoped implementation and regressions before clinical demonstration",
+    "Finish source-backed S08 without blanket unsupported waiting requirements",
+    "Implement routes/critical alerts/delivery/communication/adherence",
+    "Arrange actual lawful appraisal and obtain contest clarifications before protection"
+  ]
+}
