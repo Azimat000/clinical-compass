@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "scope": "synthetic_test only; not clinical plug-in activation",
+  "scores": {
+    "v1": {
+      "test": 42
+    },
+    "v2": {
+      "test": 21
+    }
+  },
+  "drugs": {
+    "v1": {
+      "medical_use": false,
+      "title": "Вымышленный препарат v1"
+    },
+    "v2": {
+      "medical_use": false,
+      "title": "Вымышленный препарат v2"
+    }
+  },
+  "rules": {
+    "v1": {
+      "version": "v1",
+      "simulation": true,
+      "result": "matched",
+      "message": "Тестовое совпадение; не медицинский сигнал"
+    },
+    "v2": {
+      "version": "v2",
+      "simulation": true,
+      "result": "matched",
+      "message": "Тестовое совпадение; не медицинский сигнал"
+    }
+  },
+  "versions": [
+    {
+      "id": "test-scale-v1",
+      "status": "inactive"
+    },
+    {
+      "id": "test-drug-v1",
+      "status": "inactive"
+    },
+    {
+      "id": "test-rule-v1",
+      "status": "inactive"
+    },
+    {
+      "id": "test-scale-v2",
+      "status": "inactive"
+    },
+    {
+      "id": "test-drug-v2",
+      "status": "inactive"
+    },
+    {
+      "id": "test-rule-v2",
+      "status": "inactive"
+    }
+  ],
+  "independent_feature": {
+    "records": 1,
+    "known": 0,
+    "unknown": 4,
+    "denied": 0,
+    "conflicting": 0
+  },
+  "old_rows_preserved": true,
+  "incomplete_no_score": true,
+  "overwrite_rejected": true,
+  "atomic_rollback": true,
+  "core_sha256": {
+    "db.py": "da902157f62e298bc9c63f0896195c289ffff7c3d7ccc684a93c3d688f6b3d17",
+    "assessments.py": "6bcd168d067aa73a6ce0a26c6403f67a1f5b6169bef400e12256716f2b20f005",
+    "clinical_rules.py": "c3ea0ef72ce182d88de491f3bf0632ed7bb1b1bb4e084906464d0bb9294bb4aa",
+    "decisions.py": "b37de64d83707a787c0c79bb0fc58aa888d3421bc6bd5aec38b77dfd00cd1b30",
+    "events.py": "38ab76c21feac86737a64c800f41237e4b0a9347dbdfe32131ac684b48bd543a",
+    "records.py": "210b1acea092777a90585403426c6350bff1a557321cac410e66c2c42cae4b62"
+  },
+  "core_unchanged_during_extension": true
+}

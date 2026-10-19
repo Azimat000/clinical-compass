@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-19 Europe/Moscow",
+  "method": "CUA self-check; synthetic fixtures; not S16 user testing",
+  "engines": [
+    {"name":"Codex IAB", "version":"Chrome/155.0.0.0 reduced HTTP UA; full patch unavailable", "desktop":true, "mobile_device":false},
+    {"name":"Safari", "version":"26.6.2 (21624.5.1.11.3), Safari/605.1.15 UA", "desktop":true, "mobile_device":false}
+  ],
+  "viewports": [{"width":320,"height":740},{"width":768,"height":900},{"width":1024,"height":900},{"width":1440,"height":900}],
+  "page_overflow": "clientWidth == scrollWidth at tested widths, both roles; wide tables scroll inside region",
+  "doctor": {
+    "login_search_card_dynamics":"PASS",
+    "case_insensitive_cyrillic_search":"PASS: демо 01 found D01 on final schema",
+    "draft_then_separate_confirmation":"PASS: 28952ded737c108ae273250137696129; synthetic plan_change",
+    "critical_seen_acknowledged_reacted":"PASS: 8546b57e148a80cff16493c4dcd2f30d; no real medical action",
+    "categories":"mandatory/desirable text, warning/diamond signs, solid/dashed borders; both drafts explicitly inactive",
+    "empty_search":"PASS"
+  },
+  "patient": {
+    "report_and_history":"PASS: better, long Russian summary, unknown statuses retained",
+    "message":"PASS: server saved, no fabricated reading",
+    "error":"PASS: 400, summary retained, focus record-error, complaints_text aria-invalid and adjacent error",
+    "decision_scope":"PASS: approved plan visible, two referral drafts hidden",
+    "assessment_empty":"PASS: no pending assignment",
+    "safari_text_report":"PASS after native scroll into view; exact text found in AX history, safari-patient-final-ax.txt"
+  },
+  "navigation":{"keyboard_skip_to_main":"PASS: main focused then Tab to input q", "hash_history_back":"PASS: history/current -> overview/current", "decision_fields":"PASS: plan_change hides route/therapy controls; reference collapsed"},
+  "console_errors_final_decision_page":[],
+  "limitations":["No physical iOS/Android/mobile browsers connected","No screen reader or axe/pa11y audit","Exact 200% zoom not established","Chrome extension timed out; not counted as a successful engine test","Times are automated CUA fragments, not human usability times"],
+  "corrections":["Error focus initially overridden by heading; fixed and retested","Canonical card anchors initially missed aria-current selector; fixed and retested","Input border contrast 2.95:1 corrected and recomputed","First Safari offscreen input attempt did not enter text; recovered window, scrolled, entered and verified text"]
+}

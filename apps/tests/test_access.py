@@ -216,8 +216,8 @@ class AccessTests(unittest.TestCase):
         self.assertEqual(401, c.get('/api/patients/D01', headers={'X-User-ID': 'doc-a', 'X-Role': 'doctor'}).status_code)
         self.db.execute("UPDATE encounters SET narrative='HiddenSensitiveMarker' WHERE patient_id='D02'")
         html = self.clients['doc-a'].get('/?q=HiddenSensitiveMarker').get_data(as_text=True)
-        self.assertNotIn('<h3>Демо 02</h3>', html)
-        self.assertIn('Случаи не найдены', html)
+        self.assertNotIn('href="/demo/D02"', html)
+        self.assertIn('Пациенты не найдены', html)
 
     def test_secure_configuration_and_no_secrets_in_audit(self):
         self.app.config['AUTH_COOKIE_SECURE'] = True

@@ -1,7 +1,7 @@
 <section id="clinical-rules"><h2>Рекомендации по зафиксированным фактам</h2>
 <p class="notice">Синтетический прототип сопоставляет сведения с источником. Диагноз, тяжесть и назначение он не устанавливает. Эти факты записывает врач по существующему документу. Клинико-экспертная апробация остаётся отдельной задачей.</p>
 {% set advice=clinical_panel.advice %}
-<div class="notice {{ 'warning' if advice.category=='mandatory' else '' }}"><strong>{{ '⚠ Обязательно' if advice.category=='mandatory' else '◇ Желательно' if advice.category=='desirable' else 'Нужна оценка и уточнение данных' }}</strong>
+<div class="notice {{ 'route-mandatory' if advice.category=='mandatory' else 'route-desirable' if advice.category=='desirable' else '' }}"><strong>{{ '⚠ Обязательно' if advice.category=='mandatory' else '◇ Желательно' if advice.category=='desirable' else 'Нужна оценка и уточнение данных' }}</strong>
 <p>{{ advice.reason }}</p>{% if advice.alternative=='psychotherapist' %}<p>КР также допускает наблюдение врачом-психотерапевтом.</p>{% endif %}<p>«Обязательно» и «Желательно» — категории команды для рассмотрения проекта врачом. Срочность не определена источником; её выбирает врач отдельно. Рекомендация не является направлением.</p>
 {% if advice.source_url %}<p><a href="{{ advice.source_url }}" target="_blank" rel="noopener noreferrer">Клиническая рекомендация · {{ advice.source_section }}</a></p>{% endif %}
 {% if advice.category in ['mandatory','desirable'] %}<a href="{{ url_for('decisions_page',patient_id=patient.id,from_context=advice.context_id) }}#new-decision">Подготовить проект направления для проверки врачом</a>{% endif %}</div>

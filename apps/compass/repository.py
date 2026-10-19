@@ -35,7 +35,9 @@ def seed_demo(db):
                        ('demo.seeded', code, stamp, json.dumps({'synthetic': True})))
 
 
-def patient_list(db, query='', age_status='', doctor_id=None):
+def patient_list(db, query='', age_status='', doctor_id=None, record_kind='', route_category='', attention=''):
+    if age_status not in ('', 'known', 'unknown', 'conflicting') or record_kind not in ('', 'self_report', 'visit') or route_category not in ('', 'mandatory', 'desirable') or attention not in ('', 'pending'):
+        raise ValueError('Invalid patient filter')
     sql = 'SELECT p.* FROM patients p WHERE 1=1'
     params = []
     if doctor_id is not None:
@@ -44,12 +46,31 @@ def patient_list(db, query='', age_status='', doctor_id=None):
     if query:
         # Quote the whole input as an FTS literal; users cannot inject its grammar.
         literal = '"' + query.replace('"', '""') + '"'
-        sql += ''' AND (p.code LIKE ? ESCAPE '\\' OR p.id IN (
+        sql += """ AND (p.id LIKE ? ESCAPE '\\' OR p.code LIKE ? ESCAPE '\\'
+            OR p.id IN (SELECT patient_id FROM patient_search WHERE patient_search MATCH ?) OR p.id IN (
             SELECT e.patient_id FROM encounters e JOIN encounter_search s ON s.encounter_id=e.id
-            WHERE encounter_search MATCH ?))'''
+            WHERE encounter_search MATCH ?)
+            OR p.id IN (SELECT c.patient_id FROM clinical_entries c JOIN clinical_entry_search s ON s.entry_id=c.id
+                        WHERE clinical_entry_search MATCH ?)
+            OR p.id IN (SELECT t.patient_id FROM text_imports t JOIN import_search s ON s.import_id=t.id
+                        WHERE import_search MATCH ?))"""
         escaped = query.replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_')
-        params += [f'%{escaped}%', literal]
+        params += [f'%{escaped}%', f'%{escaped}%', literal, literal, literal, literal]
     if age_status:
         sql += ' AND p.age_status=?'
         params.append(age_status)
+    if record_kind:
+        sql += ' AND EXISTS (SELECT 1 FROM clinical_entries c WHERE c.patient_id=p.id AND c.kind=?)'
+        params.append(record_kind)
+    if route_category:
+        sql += """ AND EXISTS (SELECT 1 FROM proposals v WHERE v.patient_id=p.id AND v.kind='referral'
+            AND coalesce(json_extract(v.payload_json,'$.routing_review.category'),
+                         json_extract(v.payload_json,'$.route.category'))=?)"""
+        params.append(route_category)
+    if attention:
+        sql += """ AND EXISTS (SELECT 1 FROM critical_events c LEFT JOIN critical_delivery d ON d.event_id=c.id
+            JOIN care_relationships r ON r.id=c.relationship_id
+            WHERE c.patient_id=p.id AND d.reacted_at IS NULL AND c.recipient_id=?
+            AND r.doctor_id=c.recipient_id AND r.ends_at IS NULL AND r.starts_at<=?)"""
+        params += [doctor_id, now()]
     return db.execute(sql + ' ORDER BY p.code LIMIT 100', params).fetchall()

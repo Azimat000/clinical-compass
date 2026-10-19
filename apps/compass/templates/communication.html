@@ -13,7 +13,7 @@
 {% if m.recipient_id==current_user.id %}{% for op,label in [('received','Подтвердить получение'),('read','Отметить прочитанным')] %}<form method="post" action="{{ url_for('communication_write',patient_id=patient.id,operation=op) }}"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="message_id" value="{{ m.id }}"><button class="secondary">{{ label }}</button></form>{% endfor %}{% endif %}</article>{% else %}<p>Сообщений пока нет.</p>{% endfor %}
 <form class="auth-form retry-form" method="post" action="{{ url_for('communication_write',patient_id=patient.id,operation='send') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ message_key }}">
 <label>Сообщение<textarea name="body" maxlength="4000" required></textarea></label>
-<label>Связать с самоотчётом / визитом<select name="entry_id"><option value="">Без связи</option>{% for e in data.entries %}<option value="{{ e.id }}">{{ e.observed_on }} · {{ e.kind }} · {{ e.id }}</option>{% endfor %}</select></label>
+<label>Связать с самоотчётом / визитом<select name="entry_id"><option value="">Без связи</option>{% for e in data.entries %}<option value="{{ e.id }}">{{ e.observed_on }} · {{ 'Самоотчёт' if e.kind=='self_report' else 'Визит' }} · {{ e.id }}</option>{% endfor %}</select></label>
 <label>Связать с пунктом плана<select name="task_id"><option value="">Без связи</option>{% for t in data.tasks %}<option value="{{ t.id }}">{{ t.label }} · {{ t.due_at }}</option>{% endfor %}</select></label>
 <button>Отправить сообщение</button><p role="status" class="retry-status"></p></form>
 <h2>Выполнение плана</h2>

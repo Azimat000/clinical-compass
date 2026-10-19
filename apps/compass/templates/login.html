@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<span class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</span><h1>Вход в компас</h1><p>Войдите под демонстрационной учётной записью врача или пациента.</p>
+<h1>Вход в компас</h1><p>Войдите под демонстрационной учётной записью врача или пациента.</p>
 {% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
 <form method="post" class="auth-form"><input type="hidden" name="csrf" value="{{ challenge }}"><label>Логин<input name="login" autocomplete="username" maxlength="100" required></label><label>Пароль<input name="password" type="password" autocomplete="current-password" maxlength="256" required></label><button>Войти</button></form>
 {% endblock %}

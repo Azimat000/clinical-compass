@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T20:45:20+03:00",
+  "updated_on": "2026-10-19T21:53:01+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S12",
-  "next_slice": "S13",
+  "last_accepted_slice": "S13",
+  "next_slice": "S14",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -86,8 +86,8 @@
       "reason": null
     },
     "S13": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S13",
       "handoff": "memory/sessions/S13.md",
       "reason": null
     },
@@ -186,7 +186,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S12 принят как измеренный локальный помощник сверки: evidence/S12/acceptance.md. Holdout precision72,09%/recall44,93%,20пропускриск-утверждений,B15open;неавтономный/клиническидостаточныйразбор. B12/внешниепробелы сохраняются. Следующий S13 только в новой сессии.",
+    "next_action": "S13 принят локально: evidence/S13/acceptance.md. Две роли, IAB/Safari, адаптация320–1440, поиск/индексы/тестовые расширения/сохранность проверены; реальные мобильные устройства/люди/полный аудит доступности не присвоены. B12/B15 и внешние пробелы остаются. Следующий только S14 в новой сессии.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

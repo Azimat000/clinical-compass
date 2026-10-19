@@ -1,10 +1,13 @@
 <!doctype html>
 <html lang="ru">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"><script src="{{ url_for('static',filename='interface.js') }}" defer></script></head>
 <body>
-<header><a class="brand" href="/">✳ Клинический компас</a><span class="badge">Синтетическое демо</span>{% if current_user %}<nav aria-label="Кабинет"><span>{{ current_user.display_name }} · {{ 'Врач' if current_user.role=='doctor' else 'Пациент' }}</span><form action="{{ url_for('logout') }}" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Выйти</button></form></nav>{% endif %}</header>
-<main>{% if current_user and current_user.role=='doctor' %}<p><a href="{{ url_for('notification_inbox') }}">Входящие самоотчёты</a> · <a href="{{ url_for('critical_inbox') }}">Критические сигналы</a></p>
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="app-header"><a class="brand" href="/">Клинический <span>компас</span></a><span class="badge">Синтетическое демо</span>{% if current_user %}<div class="account"><span>{{ current_user.display_name }}<small>{{ 'Кабинет врача' if current_user.role=='doctor' else 'Кабинет пациента' }}</small></span><form action="{{ url_for('logout') }}" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Выйти</button></form></div>{% endif %}</header>
+<div class="app-shell {% if not current_user %}signed-out{% endif %}">
+{% if current_user %}<aside class="sidebar"><nav aria-label="Кабинет"><a href="/" {% if request.endpoint in ['dashboard','demo_patient'] %}aria-current="page"{% endif %}>{{ 'Пациенты' if current_user.role=='doctor' else 'Моя карточка' }}</a>{% if current_user.role=='doctor' %}<a href="{{ url_for('notification_inbox') }}" {% if request.endpoint=='notification_inbox' %}aria-current="page"{% endif %}>Входящие самоотчёты</a><a class="safety-link" href="{{ url_for('critical_inbox') }}" {% if request.endpoint=='critical_inbox' %}aria-current="page"{% endif %}>Критические сигналы</a>{% endif %}</nav><p class="sidebar-note">Локальный прототип<br>Только вымышленные данные</p></aside>{% endif %}
+<main id="main" tabindex="-1">{% if current_user and current_user.role=='doctor' %}
 <div id="critical-banner" role="alert" aria-live="assertive" hidden data-csrf="{{ csrf }}"><strong>Критический сигнал: требуется внимание врача.</strong> <a href="{{ url_for('critical_inbox') }}">Открыть сигналы</a><span id="critical-connection"></span></div>
-<script src="{{ url_for('static', filename='critical.js') }}" defer></script>{% endif %}{% block content %}{% endblock %}</main>
-<footer>Демонстрационные данные вымышлены. Медицинские рекомендации пока недоступны.</footer>
+<script src="{{ url_for('static', filename='critical.js') }}" defer></script>{% endif %}{% block content %}{% endblock %}</main></div>
+<footer>Клинический компас · синтетический прототип. Для реального лечения не используется. Круглосуточное наблюдение недоступно.</footer>
 </body></html>

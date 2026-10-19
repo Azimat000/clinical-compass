@@ -2,12 +2,12 @@
 <h2>{{ 'Самоотчёт' if current_user.role=='patient' else 'Записать визит' }}</h2>
 <p>Только вымышленные сведения. Запись сохранится в обоих кабинетах. Исправления добавляйте новой записью с пояснением: прежние источники останутся в истории.</p>
 {% if current_user.role=='patient' %}<p class="notice">Самоотчёт поступает в очередь обычных сообщений врачу. Когда врач откроет входящие, он сможет отдельно отметить просмотр и принятие к работе. Это не экстренный канал; круглосуточное наблюдение и немедленный ответ недоступны.</p>{% endif %}
-{% if form_error %}<p class="error" role="alert">{{ form_error }} Запись не сохранена; проверьте поля ниже.</p>{% endif %}
-<form method="post" action="{{ url_for('self_report' if current_user.role=='patient' else 'visit', patient_id=patient.id) }}">
+{% if form_error %}<p class="error" role="alert" id="record-error" tabindex="-1">{{ form_error }} Запись не сохранена; проверьте поля ниже.</p>{% endif %}
+<form {% if form_error %}aria-describedby="record-error"{% endif %} method="post" action="{{ url_for('self_report' if current_user.role=='patient' else 'visit', patient_id=patient.id) }}">
 <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}">
 {% if current_user.role=='patient' %}{% include 'medication_safety_form.html' %}{% endif %}
 <div class="form-grid">
-<label>Дата наблюдения (Москва)<input type="date" name="observed_on" min="1900-01-01" max="{{ today }}" required value="{{ form_values.get('observed_on',today) }}"></label>
+<label>Дата наблюдения (Москва), обязательно<input type="date" name="observed_on" min="1900-01-01" max="{{ today }}" required value="{{ form_values.get('observed_on',today) }}"></label>
 <label>Самочувствие по сравнению с предыдущей записью<select name="wellbeing">{% for value,label in wellbeing.items() %}<option value="{{ value }}" {% if form_values.get('wellbeing','unknown')==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
 </div><p class="muted">Самочувствие — ваше субъективное описание, без балла и медицинской интерпретации.</p>
 <fieldset><legend>Возраст на дату наблюдения</legend><div class="form-grid">
@@ -16,9 +16,10 @@
 <label>Дата рождения, если известна<input type="date" name="birth_date" min="1900-01-01" max="{{ today }}" value="{{ form_values.get('birth_date','') }}"></label>
 <label>Пояснение противоречия<textarea name="age_detail" maxlength="1000" rows="2">{{ form_values.get('age_detail','') }}</textarea></label>
 </div><p class="muted">Неизвестно — оставьте значения пустыми. Противоречие — опишите его. Перед сохранением возраст и дата рождения сверяются. Пропуск не считается совершеннолетием.</p></fieldset>
-{% for code,label in record_fields.items() %}<fieldset><legend>{{ label }}</legend>
-<label>Состояние сведений<select name="{{ code }}_status">{% for value,label in statuses.items() %}<option value="{{ value }}" {% if form_values.get(code+'_status','unknown')==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
-<label>Описание<textarea name="{{ code }}_text" maxlength="2000" rows="2">{{ form_values.get(code+'_text','') }}</textarea></label>
+{% for code,label in record_fields.items() %}{% set field_status=form_values.get(code+'_status','unknown') %}{% set field_text=form_values.get(code+'_text','')|trim %}{% set field_invalid=form_error and ((field_status in ['known','conflicting'] and not field_text) or (field_status in ['unknown','denied'] and field_text)) %}<fieldset><legend>{{ label }}</legend>
+<label>Состояние сведений: {{ label|lower }}<select name="{{ code }}_status">{% for value,label in statuses.items() %}<option value="{{ value }}" {% if form_values.get(code+'_status','unknown')==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+{% if field_invalid %}<p class="field-error" id="error-{{ code }}"><strong>Ошибка в разделе «{{ label }}».</strong> {{ 'Добавьте описание сведений.' if not field_text else 'Удалите описание или выберите соответствующее ему состояние сведений.' }}</p>{% endif %}
+<label>Описание: {{ label|lower }}<textarea {% if field_invalid %}aria-invalid="true" aria-describedby="error-{{ code }}"{% endif %} name="{{ code }}_text" maxlength="2000" rows="2">{{ form_values.get(code+'_text','') }}</textarea></label>
 <p class="muted">При наличии сведений или противоречии нужен текст. Для «неизвестно» и явного отрицания оставьте описание пустым.</p></fieldset>{% endfor %}
 <label>Свободное резюме (необязательно)<textarea name="summary" maxlength="4000" rows="3">{{ form_values.get('summary','') }}</textarea></label>
 <button>{{ 'Отправить самоотчёт' if current_user.role=='patient' else 'Сохранить визит' }}</button>

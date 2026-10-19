@@ -2,10 +2,12 @@
 {% block title %}Решения врача — {{ patient.code }}{% endblock %}
 {% block content %}
 <a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}</a>
-<span class="eyebrow">СИНТЕТИЧЕСКОЕ ДЕМО</span><h1>Решения врача</h1>
+<h1>Решения врача</h1>
 <p class="notice">Вымышленный случай. Записанные решения показывают процесс согласования в прототипе. Они не предназначены для реального лечения.</p>
 {% if error %}<p role="alert" class="notice warning">{{ error }}</p>{% endif %}
+<nav class="card-nav" aria-label="Разделы решений">{% if current_user.role=='doctor' %}<a href="#new-decision">Новый проект</a>{% endif %}<a href="#decisions-history">История решений</a>{% if current_user.role=='doctor' %}<a href="#decision-reference">Справочные материалы</a>{% endif %}</nav>
 {% if current_user.role=='doctor' %}
+<details id="decision-reference"><summary>Справка: терапия, источники и маршрутизация</summary>
 <section><h2>Варианты терапии для обсуждения с врачом</h2>{% for option in reference.options %}<h3>{{ option.title }}</h3><p>{{ option.text }}</p><p class="muted">{{ option.source }}</p>{% endfor %}</section>
 <section><h2>Справочные источники</h2><p>{{ reference.scope }}</p><p>{{ reference.blocker }}</p>
 {% for source in reference.sources %}<details><summary>{{ source.title }}</summary><p><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">Открыть первоисточник</a></p>
@@ -13,15 +15,15 @@
 {% if source.sha256 %}<p class="muted">Контрольная сумма: {{ source.sha256 }}</p>{% endif %}
 {% for section in source.sections %}<h3>{{ section.topic }} · {{ section.location }}</h3>{% if section.source_summary %}<p>{{ section.source_summary }}</p>{% endif %}<p>{{ section.limitation }}</p>{% endfor %}</details>{% endfor %}
 <p class="muted">Версия справки {{ reference.version }}. Подбор препарата, дозы и проверка рисков автоматически не выполняются. Неизвестность не означает допуск.</p></section>
-{% include 'routing_reference.html' %}
+{% include 'routing_reference.html' %}</details>
 <section id="new-decision"><h2>Новый проект решения</h2><p>Сначала изучите карточку, историю, возраст, текущую терапию и нежелательные явления. Текст решения вводится вручную. Сохранение проекта не изменяет план.</p>
 <form method="post" class="auth-form"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}">
 <label>Вид решения<select name="kind" required>{% for code,label in kinds.items() %}<option value="{{ code }}" {% if values.get('kind')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
 <label>Решение для вымышленного случая<textarea name="content" maxlength="4000" required>{{ values.get('content','') }}</textarea></label>
 <label>Основание и использованные источники<textarea name="basis" maxlength="4000" required>{{ values.get('basis','') }}</textarea></label>
 <label>Что неизвестно, противоречиво или требует проверки<textarea name="uncertainties" maxlength="4000" required>{{ values.get('uncertainties','') }}</textarea></label>
-{% include 'routing_form.html' %}
-<details open><summary>Рассмотрение Авиандра и индивидуальных рисков</summary>
+<div data-decision-fields="referral">{% include 'routing_form.html' %}</div>
+<details open data-decision-fields="therapy"><summary>Рассмотрение Авиандра и индивидуальных рисков</summary>
 <p>Обязательно для назначения, изменения и отмены терапии. Для направления и изменения плана эта форма не требуется. Здесь записывается оценка врача; автоматического допуска препарата нет. Если сведения о рисках неполные, нельзя отметить завершённую сверку.</p>
 <p><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#age-review">Просмотреть источники возраста и сверку</a></p>
 <input type="hidden" name="therapy_reference" value="{{ reference.version }}">
@@ -37,7 +39,7 @@
 <label>Предыдущий проект, если это новая редакция<select name="parent_id"><option value="">Отдельный проект</option>{% for item in decisions %}<option value="{{ item.id }}" {% if values.get('parent_id')==item.id %}selected{% endif %}>Версия {{ item.version }} · {{ kinds[item.kind] }}</option>{% endfor %}</select></label>
 <button>Сохранить проект</button></form></section>
 {% endif %}
-<section><h2>{{ 'История проектов и решений' if current_user.role=='doctor' else 'Подтверждённые решения' }}</h2>
+<section id="decisions-history"><h2>{{ 'История проектов и решений' if current_user.role=='doctor' else 'Подтверждённые решения' }}</h2>
 {% for item in decisions %}<article class="record" id="decision-{{ item.id }}"><h3>{{ kinds[item.kind] }} · версия {{ item.version }}</h3>
 <p><strong>{{ 'Подтверждено врачом' if item.decision=='approved' else 'Отклонено врачом' if item.decision=='rejected' else 'Проект — план не изменён' }}</strong></p>
 {% include 'routing_summary.html' %}

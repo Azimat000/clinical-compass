@@ -1,0 +1,621 @@
+{
+  "scope": "6 synthetic patients, 1 active pair, 1 self-report, 1 import; warm single-connection queries, 30 repeats; not S15 load test",
+  "sqlite": "3.50.4",
+  "results": [
+    {
+      "filters": {
+        "query": "D01"
+      },
+      "ids": [
+        "D01"
+      ],
+      "median_ms": 0.072,
+      "max_ms": 0.0913,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          18,
+          0,
+          0,
+          "LIST SUBQUERY 2"
+        ],
+        [
+          21,
+          18,
+          132,
+          "SCAN patient_search VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          30,
+          18,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          42,
+          0,
+          0,
+          "LIST SUBQUERY 3"
+        ],
+        [
+          47,
+          42,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          52,
+          42,
+          46,
+          "SEARCH e USING INDEX sqlite_autoindex_encounters_1 (id=?)"
+        ],
+        [
+          62,
+          42,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          74,
+          0,
+          0,
+          "LIST SUBQUERY 4"
+        ],
+        [
+          79,
+          74,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          84,
+          74,
+          46,
+          "SEARCH c USING INDEX sqlite_autoindex_clinical_entries_1 (id=?)"
+        ],
+        [
+          94,
+          74,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          106,
+          0,
+          0,
+          "LIST SUBQUERY 5"
+        ],
+        [
+          111,
+          106,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          116,
+          106,
+          46,
+          "SEARCH t USING INDEX sqlite_autoindex_text_imports_1 (id=?)"
+        ],
+        [
+          126,
+          106,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          135,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          139,
+          135,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "query": "Уникальныйсамоотчёт"
+      },
+      "ids": [
+        "D01"
+      ],
+      "median_ms": 0.0763,
+      "max_ms": 0.0838,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          18,
+          0,
+          0,
+          "LIST SUBQUERY 2"
+        ],
+        [
+          21,
+          18,
+          132,
+          "SCAN patient_search VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          30,
+          18,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          42,
+          0,
+          0,
+          "LIST SUBQUERY 3"
+        ],
+        [
+          47,
+          42,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          52,
+          42,
+          46,
+          "SEARCH e USING INDEX sqlite_autoindex_encounters_1 (id=?)"
+        ],
+        [
+          62,
+          42,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          74,
+          0,
+          0,
+          "LIST SUBQUERY 4"
+        ],
+        [
+          79,
+          74,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          84,
+          74,
+          46,
+          "SEARCH c USING INDEX sqlite_autoindex_clinical_entries_1 (id=?)"
+        ],
+        [
+          94,
+          74,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          106,
+          0,
+          0,
+          "LIST SUBQUERY 5"
+        ],
+        [
+          111,
+          106,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          116,
+          106,
+          46,
+          "SEARCH t USING INDEX sqlite_autoindex_text_imports_1 (id=?)"
+        ],
+        [
+          126,
+          106,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          135,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          139,
+          135,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "query": "Уникальныйимпорт"
+      },
+      "ids": [
+        "D01"
+      ],
+      "median_ms": 0.0754,
+      "max_ms": 0.0925,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          18,
+          0,
+          0,
+          "LIST SUBQUERY 2"
+        ],
+        [
+          21,
+          18,
+          132,
+          "SCAN patient_search VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          30,
+          18,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          42,
+          0,
+          0,
+          "LIST SUBQUERY 3"
+        ],
+        [
+          47,
+          42,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          52,
+          42,
+          46,
+          "SEARCH e USING INDEX sqlite_autoindex_encounters_1 (id=?)"
+        ],
+        [
+          62,
+          42,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          74,
+          0,
+          0,
+          "LIST SUBQUERY 4"
+        ],
+        [
+          79,
+          74,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          84,
+          74,
+          46,
+          "SEARCH c USING INDEX sqlite_autoindex_clinical_entries_1 (id=?)"
+        ],
+        [
+          94,
+          74,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          106,
+          0,
+          0,
+          "LIST SUBQUERY 5"
+        ],
+        [
+          111,
+          106,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          116,
+          106,
+          46,
+          "SEARCH t USING INDEX sqlite_autoindex_text_imports_1 (id=?)"
+        ],
+        [
+          126,
+          106,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          135,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          139,
+          135,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "age_status": "known",
+        "record_kind": "self_report"
+      },
+      "ids": [
+        "D01"
+      ],
+      "median_ms": 0.0101,
+      "max_ms": 0.0125,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          62,
+          "SEARCH p USING INDEX patients_age_code (age_status=?)"
+        ],
+        [
+          12,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          16,
+          12,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ],
+        [
+          30,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 2"
+        ],
+        [
+          34,
+          30,
+          54,
+          "SEARCH c USING COVERING INDEX entry_patient_kind (patient_id=? AND kind=?)"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "attention": "pending"
+      },
+      "ids": [],
+      "median_ms": 0.01,
+      "max_ms": 0.0285,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          10,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          14,
+          10,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ],
+        [
+          28,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 2"
+        ],
+        [
+          37,
+          28,
+          61,
+          "SEARCH c USING INDEX critical_events_patient (patient_id=?)"
+        ],
+        [
+          44,
+          28,
+          46,
+          "SEARCH r USING INDEX sqlite_autoindex_care_relationships_1 (id=?)"
+        ],
+        [
+          58,
+          28,
+          46,
+          "SEARCH d USING INDEX sqlite_autoindex_critical_delivery_1 (event_id=?) LEFT-JOIN"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "route_category": "desirable"
+      },
+      "ids": [],
+      "median_ms": 0.0084,
+      "max_ms": 0.0102,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          10,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          14,
+          10,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ],
+        [
+          28,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 2"
+        ],
+        [
+          33,
+          28,
+          61,
+          "SEARCH v USING INDEX proposal_patient_kind (patient_id=? AND kind=?)"
+        ]
+      ]
+    },
+    {
+      "filters": {
+        "query": "%_\" OR 1=1"
+      },
+      "ids": [],
+      "median_ms": 0.0739,
+      "max_ms": 0.1172,
+      "explain_query_plan": [
+        [
+          6,
+          0,
+          222,
+          "SCAN p USING INDEX sqlite_autoindex_patients_3"
+        ],
+        [
+          18,
+          0,
+          0,
+          "LIST SUBQUERY 2"
+        ],
+        [
+          21,
+          18,
+          132,
+          "SCAN patient_search VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          30,
+          18,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          42,
+          0,
+          0,
+          "LIST SUBQUERY 3"
+        ],
+        [
+          47,
+          42,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          52,
+          42,
+          46,
+          "SEARCH e USING INDEX sqlite_autoindex_encounters_1 (id=?)"
+        ],
+        [
+          62,
+          42,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          74,
+          0,
+          0,
+          "LIST SUBQUERY 4"
+        ],
+        [
+          79,
+          74,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          84,
+          74,
+          46,
+          "SEARCH c USING INDEX sqlite_autoindex_clinical_entries_1 (id=?)"
+        ],
+        [
+          94,
+          74,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          106,
+          0,
+          0,
+          "LIST SUBQUERY 5"
+        ],
+        [
+          111,
+          106,
+          132,
+          "SCAN s VIRTUAL TABLE INDEX 0:M2"
+        ],
+        [
+          116,
+          106,
+          46,
+          "SEARCH t USING INDEX sqlite_autoindex_text_imports_1 (id=?)"
+        ],
+        [
+          126,
+          106,
+          0,
+          "CREATE BLOOM FILTER"
+        ],
+        [
+          135,
+          0,
+          0,
+          "CORRELATED SCALAR SUBQUERY 1"
+        ],
+        [
+          139,
+          135,
+          50,
+          "SEARCH r USING COVERING INDEX relationship_doctor_patients (doctor_id=? AND ends_at=? AND patient_id=? AND starts_at<?)"
+        ]
+      ]
+    }
+  ],
+  "integrity": "ok",
+  "foreign_keys": []
+}
