@@ -418,6 +418,47 @@
       "acceptance_tag": "slice/S08A"
     },
     {
+      "id": "S08B",
+      "title": "Исправление проверки и врачебной сверки возраста",
+      "target_date": "19.10",
+      "depends_on": [
+        "S08A"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Сопоставлять дату рождения и все известные сведения возраста перед предложением и приёмом анкеты.",
+        "Добавить явную сверку ведущим врачом с основаниями и неизменяемой историей.",
+        "Проверить границы возраста, новые конфликты, доступ и сохранность прежних данных."
+      ],
+      "outputs": [
+        "apps/compass/ages.py",
+        "apps/compass/migrations/006_age_reviews.sql",
+        "apps/tests/test_ages.py",
+        "docs/architecture/age-reviews.md"
+      ],
+      "acceptance": [
+        "Несовершеннолетний, неизвестный и противоречивый возраст не получают допуск; ровно 18 и день рождения проверены.",
+        "Только ведущий врач явно разрешает конфликт с датой рождения, основаниями и снимком всех прежних источников; история не перезаписывается.",
+        "Новые сведения повторно проверяются при приёме; устаревшие сверки и предложения не обходят контроль; прежние данные и проверки сохранены."
+      ],
+      "handoff_path": "memory/sessions/S08B.md",
+      "evidence_dir": "evidence/S08B",
+      "requirement_ids": [
+        "F01",
+        "M07",
+        "M08",
+        "T05",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py"
+      ],
+      "planned_commit": "slice(S08B): correct age consistency and physician reconciliation",
+      "acceptance_tag": "slice/S08B"
+    },
+    {
       "id": "S08",
       "title": "Терапевтическая справка, риски и подтверждение врачом",
       "target_date": "21–22.10",
@@ -425,7 +466,8 @@
         "S02",
         "S03",
         "S07",
-        "S08A"
+        "S08A",
+        "S08B"
       ],
       "condition": "always",
       "stage": "contest",

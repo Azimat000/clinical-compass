@@ -1,12 +1,12 @@
 """Source-verified synthetic measurements; computed results are doctor-only."""
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 import hashlib
 import json
 from pathlib import Path
 import re
 import secrets
 
-from . import access, records
+from . import access, records, ages
 from .db import now, transaction
 
 DEFINITION_PATH = Path(__file__).with_name('resources') / 'dass42-ru-v1.json'
@@ -108,25 +108,11 @@ def checked_age(db, patient, values):
     years = age['years'] if age['years'] is not None else age['calculated_years']
     if age['status'] != 'known' or years is None or not 18 <= years <= 120 or not basis:
         raise AssessmentError('Нужны сверенный возраст от 18 лет и источник сведений. Неизвестный возраст не даёт допуск.')
-    if patient['age_status'] == 'conflicting':
-        raise AssessmentError('В исходном профиле противоречие возраста. Сначала требуется сверка данных.', 409)
-    if patient['age_status'] == 'known' and patient['age_years'] is not None:
-        elapsed = records.today().year - date.fromisoformat(patient['created_at'][:10]).year
-        low = patient['age_years'] + max(0, elapsed - 1)
-        high = patient['age_years'] + elapsed + 1
-        if not low <= years <= high or (patient['created_at'][:10] == records.today().isoformat() and years != patient['age_years']):
-            raise AssessmentError('Возраст расходится с исходным профилем; сначала сверьте источники.', 409)
-    entries = records.history(db, patient['id'])
-    latest_age = next((e['payload']['age'] for e in entries if e['payload']['age']['status'] != 'unknown'), None)
-    if latest_age and latest_age['status'] == 'conflicting':
-        raise AssessmentError('Последние сведения о возрасте противоречивы. Сначала нужна новая сверенная запись врача.', 409)
-    for entry in entries:
-        if entry['observed_on'] != records.today().isoformat():
-            continue
-        reported = entry['payload']['age']
-        reported_years = reported['years'] if reported['years'] is not None else reported['calculated_years']
-        if reported['status'] == 'conflicting' or (reported['status'] == 'known' and reported_years != years):
-            raise AssessmentError('Есть несовпадающие сведения о возрасте на эту дату. Сначала сверьте источники.', 409)
+    try:
+        token = ages.verify(db, patient, years)
+    except ages.AgeError as error:
+        raise AssessmentError(str(error), error.status) from None
+    age['verification_token'] = token
     return years, basis, age
 
 
@@ -188,7 +174,9 @@ def submit(db, user, request_id, values):
         if values.get('form_version_id') != form['id']:
             raise AssessmentError('Версия анкеты не совпадает с предложенной.', 409)
         patient = access.visible_patient(db, user, task['patient_id'])
-        checked_age(db, patient, {'age_status': 'known', 'age_years': str(task['age_years']), 'age_basis': task['age_basis']})
+        _, _, current_age = checked_age(db, patient, {'age_status': 'known', 'age_years': str(task['age_years']), 'age_basis': task['age_basis']})
+        if json.loads(task['age_snapshot_json']).get('verification_token') != current_age['verification_token']:
+            raise AssessmentError('Сведения или сверка возраста изменились. Врач должен предложить новую анкету.', 409)
         answers = parse_answers(values)
         scores = score_answers(answers, form)
         encoded = canonical(answers)

@@ -59,7 +59,7 @@ def snapshot(db, patient_id, relationship_id):
     result = {'policy': 'synthetic-inputs-v1', 'day': records.today().isoformat(), 'relationship': relationship_id,
               'reference': hashlib.sha256(canonical(reference()).encode()).hexdigest()}
     for table in ('patients', 'encounters', 'observations', 'clinical_entries', 'assessments',
-                  'self_reports', 'adverse_events', 'therapy_courses', 'alerts', 'documents'):
+                  'self_reports', 'adverse_events', 'therapy_courses', 'alerts', 'documents', 'age_reviews'):
         key = 'id' if table == 'patients' else 'patient_id'
         result[table] = [dict(r) for r in db.execute(f'SELECT * FROM {table} WHERE {key}=? ORDER BY id', (patient_id,))]
     result['assessment_results'] = [dict(r) for r in db.execute('''SELECT ar.* FROM assessment_results ar

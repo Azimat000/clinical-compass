@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T18:42:51+03:00",
+  "updated_on": "2026-10-19T18:58:01+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S08A",
+  "last_accepted_slice": "S08B",
   "next_slice": "S08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -168,15 +168,22 @@
       "commit_ref": "refs/tags/slice/S08A",
       "handoff": "memory/sessions/S08A.md",
       "reason": null
+    },
+    "S08B": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S08B",
+      "handoff": "memory/sessions/S08B.md",
+      "reason": null
     }
   },
   "latest_audit": {
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
-    "open_findings": [
-      "B13",
-      "B14"
-    ],
-    "next_action": "Отдельно исправить контроль возраста B13/B14 перед клинической демонстрацией S08; аудит не является приёмкой нового среза."
+    "open_findings": [],
+    "next_action": "B13/B14 исправлены в S08B; исходный S08 продолжить в новой сессии по конкретным источниковым основаниям без лишнего общего ожидания.",
+    "resolved_findings": {
+      "B13": "evidence/S08B/acceptance.md",
+      "B14": "evidence/S08B/acceptance.md"
+    }
   }
 }

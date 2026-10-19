@@ -154,7 +154,8 @@ class AssessmentsTests(unittest.TestCase):
         record={'request_key':secrets.token_hex(16),'observed_on':records.today().isoformat(),
                 'age_status':'known','age_years':'35','summary':'Врач сверил вымышленные источники возраста.'}
         records.save(self.db,{'id':'doc-a','role':'doctor'},'D01','visit',record)
-        self.assertEqual(303,self.post('doc-a','/patients/D01/assessment-requests',self.assignment()).status_code)
+        # A normal visit no longer silently resolves an earlier explicit conflict.
+        self.assertEqual(409,self.post('doc-a','/patients/D01/assessment-requests',self.assignment()).status_code)
 
     def test_own_receipt_survives_relationship_end_without_reopening_submission(self):
         task=self.offer(); self.post('pat-a','/assessments/'+task,self.answers())

@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions
+from . import access, records, assessments, decisions, ages
 
 
 def create_app(database=None):
@@ -125,7 +125,7 @@ def create_app(database=None):
     def demo_patient(patient_id):
         return render_patient(patient_id)
 
-    def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None):
+    def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)
         db = get_db()
         encounters = db.execute('SELECT * FROM encounters WHERE patient_id=? ORDER BY occurred_at DESC', (patient_id,)).fetchall()
@@ -137,6 +137,8 @@ def create_app(database=None):
         measured = assessments.history(db, g.user, patient_id)
         return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                entries=entries, record_warnings=records.warnings(patient, entries),
+                               age_view=ages.view(db, patient), age_error=age_error, age_values=age_values or {},
+                               age_request_key=secrets.token_hex(16),
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
                                pending_assessments=assessments.pending(db, g.user, patient_id), assessment_form=assessments.definition(),
@@ -215,6 +217,16 @@ def create_app(database=None):
         # Opaque retry hashes are internal and do not belong in the read API.
         return jsonify({'entries': [{k: v for k, v in e.items() if k not in ('request_key', 'payload_json')} for e in entries],
                         'warnings': records.warnings(patient, entries)})
+
+    @app.post('/patients/<patient_id>/age-reviews')
+    def review_age(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        try:
+            ages.reconcile(get_db(), g.user, patient_id, request.form)
+        except ages.AgeError as error:
+            return render_patient(patient_id, age_error=str(error), age_values=request.form), error.status
+        return redirect(url_for('demo_patient', patient_id=patient_id)+'#age-review', code=303)
 
     @app.post('/patients/<patient_id>/assessment-requests')
     def request_assessment(patient_id):
