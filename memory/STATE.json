@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T23:28:18+03:00",
+  "updated_on": "2026-10-19T23:36:59+03:00",
   "current_slice": null,
   "last_accepted_slice": "S15",
-  "next_slice": "S17",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -104,10 +104,10 @@
       "reason": null
     },
     "S17": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S17.md",
-      "reason": null
+      "reason": "NO-GO: E06 — фактической апробации нет; E02/B04 — клиническая применимость реализации не подтверждена; закрытые обязательные условия и индивидуальные подтверждения допуска/согласий/авторства остаются неизвестными. Свод83/160 подготовлен, критерии не снижены; возобновить после фактических оснований, без тега приёмки."
     },
     "S18": {
       "status": "planned",
@@ -180,7 +180,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "По прямому поручению пользователя S16 удалён из действующего плана; S17A отменён до реализации. Следующий только S17 в новой сессии, зависит от S15. E06 not_verified: апробация не проведена, её отсутствие проверить и явно отразить в S17. История evidence/S16 и memory/sessions/S16.md архивная, не результат испытания.",
+    "next_action": "S17 blocked: свод83/160 подготовлен, но E06/клиническая применимость/закрытые условия/индивидуальные подтверждения не закрыты. Без тега, без S18. Новые фактические основания → повторная проверка и возобновление S17; evidence/S17/acceptance.md и docs/release/known-limitations.md. S16 исключён, S17A отменён.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
