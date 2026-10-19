@@ -147,7 +147,7 @@ for row in rows:
         txt = sub['text'].replace('|','\\|').replace('\n',' ')
         lines.append('| '+sub['id']+' '+txt+' | '+row['observed']+'. '+row['remaining']+' |')
     lines += ['']
-(ROOT/'evidence/S17/acceptance-matrix.md').write_text('\n'.join(lines)+'\n')
+(ROOT/'evidence/S17/acceptance-matrix.md').write_text('\n'.join(lines).rstrip()+'\n')
 # A bounded list of baseline tracked files, not a distribution archive or grant of rights.
 entries=[]
 for p, sha in base['files'].items():
