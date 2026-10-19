@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T23:22:34+03:00",
+  "updated_on": "2026-10-19T23:28:18+03:00",
   "current_slice": null,
   "last_accepted_slice": "S15",
-  "next_slice": null,
+  "next_slice": "S17",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -103,12 +103,6 @@
       "handoff": "memory/sessions/S15.md",
       "reason": null
     },
-    "S16": {
-      "status": "blocked",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S16.md",
-      "reason": "Участники доступны со слов пользователя; инструкция подготовлена. Ожидаются фактические задания, проверка врача и разрешённые обезличенные результаты; E06 not_verified, B04/B05 открыты."
-    },
     "S17": {
       "status": "planned",
       "commit_ref": null,
@@ -186,7 +180,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S16 подготовлен, blocked до фактических результатов участников. Пользователь подтвердил их доступность; инструкция docs/validation/S16-guide.md. Возобновить только S16, E06 not_verified; S17 не готов. См. evidence/S16/validation-summary.md.",
+    "next_action": "По прямому поручению пользователя S16 удалён из действующего плана; S17A отменён до реализации. Следующий только S17 в новой сессии, зависит от S15. E06 not_verified: апробация не проведена, её отсутствие проверить и явно отразить в S17. История evidence/S16 и memory/sessions/S16.md архивная, не результат испытания.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
@@ -198,7 +192,7 @@
       "report": "memory/sessions/interface-skills.md",
       "lock": "docs/design/skills.lock.json",
       "commit_ref": "refs/tags/setup/interface-skills",
-      "scope": "Инструменты для S13 и интерфейсных задач S14–S16/S18/S20; ни один срез не принят этой настройкой."
+      "scope": "Инструменты для S13 и интерфейсных задач S14–S15/S18/S20; ни один срез не принят этой настройкой. Исторический S16 исключён из действующего плана."
     }
   }
 }

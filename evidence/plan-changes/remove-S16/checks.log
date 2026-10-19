@@ -1,0 +1,119 @@
+test_budget_overflow (test_plan_validation.PlanTests.test_budget_overflow) ... ok
+test_dependency_cycle (test_plan_validation.PlanTests.test_dependency_cycle) ... ok
+test_false_fulfilment (test_plan_validation.PlanTests.test_false_fulfilment) ... ok
+test_finalist_cannot_skip_final_preparation (test_plan_validation.PlanTests.test_finalist_cannot_skip_final_preparation) ... ok
+test_independent_work_after_clinical_block (test_plan_validation.PlanTests.test_independent_work_after_clinical_block) ... ok
+test_lost_subcondition (test_plan_validation.PlanTests.test_lost_subcondition) ... ok
+test_missing_requirement (test_plan_validation.PlanTests.test_missing_requirement) ... Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+    ~~~~^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/main.py", line 104, in __init__
+    self.runTests()
+    ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/main.py", line 270, in runTests
+    self.result = testRunner.run(self.test)
+                  ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/runner.py", line 240, in run
+    test(result)
+    ~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 122, in run
+    test(result)
+    ~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 122, in run
+    test(result)
+    ~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/suite.py", line 122, in run
+    test(result)
+    ~~~~^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/case.py", line 707, in __call__
+    return self.run(*args, **kwds)
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/case.py", line 647, in run
+    self._callSetUp()
+    ~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/case.py", line 603, in _callSetUp
+    self.setUp()
+    ~~~~~~~~~~^^
+  File "/Users/azamatsibgatullin/Documents/HAC/tools/test_plan_validation.py", line 15, in setUp
+    shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns('.git', 'tmp', '__pycache__'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 529, in _copytree
+    copytree(srcobj, dstname, symlinks, ignore, copy_function,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ignore_dangling_symlinks, dirs_exist_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 529, in _copytree
+    copytree(srcobj, dstname, symlinks, ignore, copy_function,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ignore_dangling_symlinks, dirs_exist_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 529, in _copytree
+    copytree(srcobj, dstname, symlinks, ignore, copy_function,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ignore_dangling_symlinks, dirs_exist_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 529, in _copytree
+    copytree(srcobj, dstname, symlinks, ignore, copy_function,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ignore_dangling_symlinks, dirs_exist_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 529, in _copytree
+    copytree(srcobj, dstname, symlinks, ignore, copy_function,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ignore_dangling_symlinks, dirs_exist_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 593, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+                     ignore=ignore, copy_function=copy_function,
+                     ignore_dangling_symlinks=ignore_dangling_symlinks,
+                     dirs_exist_ok=dirs_exist_ok)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 533, in _copytree
+    copy_function(srcobj, dstname)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 468, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 266, in copyfile
+    _fastcopy_fcopyfile(fsrc, fdst, posix._COPYFILE_DATA)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/shutil.py", line 103, in _fastcopy_fcopyfile
+    posix._fcopyfile(infd, outfd, flags)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
