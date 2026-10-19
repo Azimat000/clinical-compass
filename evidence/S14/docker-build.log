@@ -1,0 +1,57 @@
+#0 building with "colima" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 858B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#2 DONE 1.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 384B done
+#4 DONE 0.0s
+
+#5 [1/8] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#5 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 58.49kB 0.0s done
+#6 DONE 0.0s
+
+#7 [3/8] COPY apps/requirements.lock /app/apps/requirements.lock
+#7 CACHED
+
+#8 [2/8] WORKDIR /app
+#8 CACHED
+
+#9 [4/8] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#9 CACHED
+
+#10 [5/8] COPY apps /app/apps
+#10 DONE 0.0s
+
+#11 [6/8] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#11 DONE 0.0s
+
+#12 [7/8] COPY evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf /app/evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf
+#12 DONE 0.0s
+
+#13 [8/8] COPY evidence/S09/completion-review/sources/kr457.pdf /app/evidence/S09/completion-review/sources/kr457.pdf
+#13 DONE 0.0s
+
+#14 exporting to image
+#14 exporting layers 0.1s done
+#14 exporting manifest sha256:877b1d43dc3dc1b26aa2bc2084140031677cce1f7216edcd5678330cc303e047 done
+#14 exporting config sha256:d1190c7b2165cb9bc1f3366032864a81627a7791762e236bc86ddd16517d474f done
+#14 exporting attestation manifest sha256:8acc4267f33a9297963f3784d1f8ba3eb26dc603f197c5c5edc98de4af72044c done
+#14 exporting manifest list sha256:561030a49801ab9d4fe154dcf50e57222c63c3ac07f671754f72a837b88c3580 done
+#14 naming to docker.io/library/hac-s14:local done
+#14 unpacking to docker.io/library/hac-s14:local 0.0s done
+#14 DONE 0.1s

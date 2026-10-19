@@ -1,0 +1,392 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "sqlite": "3.50.4",
+  "routes": [
+    {
+      "endpoint": "static",
+      "rule": "/static/<path:filename>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "healthz",
+      "rule": "/healthz",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "login",
+      "rule": "/login",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "logout",
+      "rule": "/logout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "dashboard",
+      "rule": "/",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "demo_patient",
+      "rule": "/demo/<patient_id>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "communication_page",
+      "rule": "/patients/<patient_id>/communication",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "communication_write",
+      "rule": "/patients/<patient_id>/communication/<operation>",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "notification_inbox",
+      "rule": "/notifications",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "notification_mark",
+      "rule": "/notifications/<notification_id>/<action>",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "critical_inbox",
+      "rule": "/critical",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "critical_status",
+      "rule": "/api/critical",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "critical_mark",
+      "rule": "/critical/<event_id>/<action>",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "imports_page",
+      "rule": "/patients/<patient_id>/imports",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "review_import",
+      "rule": "/patients/<patient_id>/imports/<import_id>/review",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "clinical_context",
+      "rule": "/patients/<patient_id>/clinical-context",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "create_invitation",
+      "rule": "/invitations",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "revoke_invitation",
+      "rule": "/invitations/<token_hash>/revoke",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "accept_invitation",
+      "rule": "/link",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "connection_check",
+      "rule": "/patients/<patient_id>/connection-check",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "self_report",
+      "rule": "/patients/<patient_id>/self-reports",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "visit",
+      "rule": "/patients/<patient_id>/visits",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "history_api",
+      "rule": "/api/patients/<patient_id>/history",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "review_age",
+      "rule": "/patients/<patient_id>/age-reviews",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "request_assessment",
+      "rule": "/patients/<patient_id>/assessment-requests",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "assessment_form",
+      "rule": "/assessments/<request_id>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "assessments_api",
+      "rule": "/api/patients/<patient_id>/assessments",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "patient_api",
+      "rule": "/api/patients/<patient_id>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "documents_api",
+      "rule": "/api/patients/<patient_id>/documents",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "document_api",
+      "rule": "/api/documents/<document_id>",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "reports_api",
+      "rule": "/api/patients/<patient_id>/reports",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "decisions_page",
+      "rule": "/patients/<patient_id>/decisions",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "confirm_decision",
+      "rule": "/patients/<patient_id>/decisions/<proposal_id>/confirm",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    },
+    {
+      "endpoint": "decisions_api",
+      "rule": "/api/patients/<patient_id>/decisions",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    {
+      "endpoint": "actions_api",
+      "rule": "/api/patients/<patient_id>/actions",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ]
+    }
+  ],
+  "mutating_routes": 19,
+  "patient_routes": 20,
+  "dependencies": [
+    {
+      "name": "blinker",
+      "version": "1.9.0",
+      "license": null
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "Flask",
+      "version": "3.1.3",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "license": null
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "license": null
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "pip",
+      "version": "25.3",
+      "license": "MIT"
+    },
+    {
+      "name": "waitress",
+      "version": "3.0.2",
+      "license": "ZPL 2.1"
+    },
+    {
+      "name": "Werkzeug",
+      "version": "3.1.9",
+      "license": "BSD-3-Clause"
+    }
+  ],
+  "tracked_files_scanned": 646,
+  "secret_pattern_findings": [],
+  "scan_limits": "Narrow pattern scan, not a guarantee of no PII/secrets. No values emitted; known public test passwords are fixtures.",
+  "protected_files": {
+    ".agents/THIRD_PARTY_LICENSES/addyosmani-agent-skills-LICENSE": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+    ".agents/references/accessibility-checklist.md": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+    ".agents/skills/frontend-design/LICENSE.txt": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    ".agents/skills/frontend-design/SKILL.md": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+    ".agents/skills/frontend-ui-engineering/SKILL.md": "29a3e53d57c0a128831a20730ae874a8c4fda40c001fcdc15f8e9ad4b5f72f1b",
+    ".agents/skills/hac-interface/SKILL.md": "791c2344778c45236368dea6ca53e69232071493bbc18f91a47af02560ccf110",
+    "apps/compass/migrations/001_initial.sql": "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea",
+    "apps/compass/migrations/002_access.sql": "3e54d342a50f15cf37d123babf929970646ea15d45c8b1dba5a00621f8c7a527",
+    "apps/compass/migrations/003_records.sql": "ee35f35792316b234ff05396c318e10440d98248c9f8a1f5b53f57437d25a7ae",
+    "apps/compass/migrations/004_assessments.sql": "bae2cacc4b7d6aa191d5281d0ecc7494c294c103db1c1800dbf280ee77923baf",
+    "apps/compass/migrations/005_decisions.sql": "5d14919fe4c3acaaad253dbbc63ff5d64fa1f5538b07c0cfd7769b2746ebd17e",
+    "apps/compass/migrations/006_age_reviews.sql": "66dfdb300868003f87c07dae5758091f4a757b19bf13103bc454dea087658159",
+    "apps/compass/migrations/007_routine_notifications.sql": "f52f53eddc6a40635d5368cd0ff701c58cbbafa8566d4307ac9abb0724076028",
+    "apps/compass/migrations/008_clinical_rules.sql": "93df58040a56488ca92e91ca505db429fbc73ae00362a168b286ff74dcd50814",
+    "apps/compass/migrations/009_critical_delivery.sql": "dd8fc0a531d0eab9ac9639f1916dd9d143b782fc52e4f04cf2b85c683fc8df99",
+    "apps/compass/migrations/010_communication.sql": "82ef22d8a134a4ff8c8a0491c5e346670c40f0add3d35a0eaf0aa6a9884df07c",
+    "apps/compass/migrations/011_extraction.sql": "e153f9717e4b9e02f844a5da722e293726b52fafa1e51507936b1c96b8c54b14",
+    "apps/compass/migrations/012_search.sql": "ec81d473603e89c15a37dd52bcea33a7b359a30d76e44a87ea5353331a15eafc",
+    "apps/compass/resources/clinical-rules-v1.json": "bc46d2e685588ebe3e7a36999a5fe801b335153a9001b04956e96f8323da3e5e",
+    "apps/compass/resources/dass42-ru-v1.json": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2",
+    "apps/compass/resources/routing-reference-v1.json": "f5491c1756e8ee1823666c006a5412e2e91bc896d3e213534e2c27e6d28ddde9",
+    "apps/compass/resources/therapy-reference-v1.json": "aa839703ec2e18c658d08eacd84e22eaa590d768702d638269f3b580ccb8b906",
+    "apps/compass/resources/therapy-reference-v2.json": "6d8ba2bed9415f247df488b7ea6fc9e3b44a3acbca0be2e75e4a91894595338b",
+    "apps/requirements.lock": "c44e0c8622e8b58e0d13eeb0b6cb02d63188bd63b9837b0f8f7de2d9051bde85",
+    "data/synthetic/cases.json": "2b990334661c1d0ac588753cc72e915a07a35743884cb71584f79a72f621da8f",
+    "data/synthetic/extraction-development.json": "5c827aca7a31711eeb19dee93a2e6c8fabd5edd86a836f4faa7773cc78ffa79d",
+    "data/synthetic/extraction-holdout.json": "7829d17ca57b65a1c00b371d81387799d8567299d88cccb76c274c71826012b0",
+    "data/synthetic/manifest.json": "e1f61241e541609829c126539d8f9f147bd566bb1cdeec969d66bec730d34789"
+  }
+}

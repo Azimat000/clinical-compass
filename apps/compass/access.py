@@ -1,6 +1,7 @@
 """Opaque sessions and recipient-bound invitations. No clinical actions."""
 from datetime import datetime, timedelta, timezone
 import hashlib
+import re
 import secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import now, transaction
@@ -34,8 +35,16 @@ def login_challenge(db):
     return token
 
 
+def matches_token(expected, supplied):
+    """Reject malformed browser input before the constant-time ASCII comparison."""
+    return (isinstance(expected, str) and isinstance(supplied, str)
+            and re.fullmatch(r'[A-Za-z0-9_-]{43}', expected) is not None
+            and re.fullmatch(r'[A-Za-z0-9_-]{43}', supplied) is not None
+            and secrets.compare_digest(expected, supplied))
+
+
 def consume_challenge(db, cookie, form):
-    if not cookie or len(cookie) > 128 or not secrets.compare_digest(cookie, form):
+    if not matches_token(cookie, form):
         return False
     with transaction(db):
         return db.execute('DELETE FROM login_challenges WHERE token_hash=? AND expires_at>?',

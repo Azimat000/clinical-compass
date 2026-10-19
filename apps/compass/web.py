@@ -3,6 +3,9 @@ import os
 import re
 import json
 import secrets
+import sqlite3
+from html import escape
+from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
@@ -30,6 +33,45 @@ def create_app(database=None):
         if g.user['role'] != required:
             abort(403)
 
+    def error_page(title, message):
+        try:
+            return render_template('error.html', title=title, message=message)
+        except Exception:
+            # Even a failed template must not trigger Flask's traceback logger.
+            return ('<!doctype html><html lang="ru"><meta charset="utf-8">'
+                    '<title>Клинический компас</title><main><h1>' + escape(title) +
+                    '</h1><p role="alert">' + escape(message) +
+                    '</p><a href="/">Вернуться в кабинет</a></main></html>')
+
+    @app.errorhandler(Exception)
+    def request_failure(error):
+        if isinstance(error, HTTPException):
+            code = error.code
+            title, message = {
+                400: ('Неверный запрос', 'Проверьте введённые значения и откройте форму заново.'),
+                401: ('Требуется вход', 'Сеанс завершён или недействителен. Войдите снова.'),
+                403: ('Действие недоступно', 'Не хватает прав или код защиты формы устарел. Откройте форму заново.'),
+                404: ('Запись недоступна', 'Запись не найдена или недоступна этому кабинету.'),
+                405: ('Действие недоступно', 'Используйте соответствующую форму в кабинете.'),
+            }.get(code, ('Запрос не выполнен', 'Откройте кабинет и проверьте состояние операции.'))
+            response = error.get_response()
+            response.set_data(error_page(title, message))
+            response.content_type = 'text/html; charset=utf-8'
+            return response
+        # Never log exception text, URLs, headers, form bodies or traceback: they
+        # can contain clinical text, credentials, SQL parameters or private paths.
+        incident = secrets.token_hex(8)
+        app.logger.error('request_failure incident=%s type=%s endpoint=%s',
+                         incident, type(error).__name__, request.endpoint or 'unmatched')
+        unavailable = isinstance(error, (sqlite3.Error, OSError))
+        message = ('Не удалось завершить запрос; результат операции неизвестен. Отсутствие сигнала не означает отсутствие риска. '
+                   'После восстановления откройте кабинет и проверьте сохранённые записи перед повтором. '
+                   'Не ожидайте помощи через демо. Код ошибки: ' + incident)
+        response = app.make_response((error_page('Сервис временно недоступен', message), 503 if unavailable else 500))
+        if unavailable:
+            response.headers['Retry-After'] = '5'
+        return response
+
     @app.errorhandler(413)
     def request_too_large(error):
         return render_template('result.html',title='Ввод слишком большой',
@@ -52,6 +94,11 @@ def create_app(database=None):
 
     @app.before_request
     def authorize():
+        if request.method not in ('GET', 'HEAD', 'OPTIONS'):
+            if (any(len(request.form.getlist(key)) != 1 for key in request.form)
+                    or any(len(request.files.getlist(key)) != 1 for key in request.files)
+                    or set(request.form).intersection(request.files)):
+                abort(400)
         if request.endpoint in ('static', 'healthz', 'login') or request.endpoint is None:
             return
         g.user = access.resolve_session(get_db(), request.cookies.get(access.COOKIE, ''))
@@ -61,7 +108,7 @@ def create_app(database=None):
             return redirect(url_for('login'))
         if request.method not in ('GET', 'HEAD', 'OPTIONS'):
             supplied = request.headers.get('X-CSRF-Token', '') or request.form.get('csrf', '')
-            if not secrets.compare_digest(g.user['csrf_token'], supplied):
+            if not access.matches_token(g.user['csrf_token'], supplied):
                 abort(403)
 
     @app.context_processor
@@ -77,7 +124,7 @@ def create_app(database=None):
 
     @app.after_request
     def headers(response):
-        response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+        response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['Referrer-Policy'] = 'no-referrer'
         response.headers['Cache-Control'] = 'no-store'

@@ -1,0 +1,180 @@
+test_all_five_actions_require_doctor_and_fresh_review (test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review) ... ok
+test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf (test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf) ... ok
+test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed) ... [2026-10-19 22:31:07,046] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 136, in dashboard
+    rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'],
+                        record_kind=record_kind, route_category=route_category, attention=attention)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1228, in _execute_mock_call
+    raise effect
+sqlite3.OperationalError: private db path
+FAIL
+test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected) ... FAIL
+test_every_mutation_requires_session_and_csrf (test_security.SecurityTests.test_every_mutation_requires_session_and_csrf) ... ok
+test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds) ... [2026-10-19 22:31:08,257] ERROR in app: Exception on /patients/D01/self-reports [POST]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 353, in self_report
+    return submit_record(patient_id, 'self_report')
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 343, in submit_record
+    entry_id = records.save(get_db(), g.user, patient_id, kind, request.form)
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/records.py", line 150, in save
+    access.audit(db, user['id'], 'record.' + kind + '_created', entry_id)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1228, in _execute_mock_call
+    raise effect
+sqlite3.OperationalError: synthetic disk fault
+FAIL
+test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) ... [2026-10-19 22:31:08,659] ERROR in app: Exception on /logout [POST]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 64, in authorize
+    if not secrets.compare_digest(g.user['csrf_token'], supplied):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: comparing strings with non-ASCII characters is not supported
+
+  test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) (token='кириллица') ... FAIL
+[2026-10-19 22:31:08,661] ERROR in app: Exception on /logout [POST]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 64, in authorize
+    if not secrets.compare_digest(g.user['csrf_token'], supplied):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: comparing strings with non-ASCII characters is not supported
+  test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) (token='🔑') ... FAIL
+test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input) ... FAIL
+test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log) ... [2026-10-19 22:31:09,388] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 136, in dashboard
+    rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'],
+                        record_kind=record_kind, route_category=route_category, attention=attention)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1228, in _execute_mock_call
+    raise effect
+RuntimeError: SYNTHETIC_PRIVATE_SENTINEL_PASSWORD_TOKEN
+FAIL
+
+======================================================================
+FAIL: test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 108, in test_database_fault_is_unavailable_not_safe_and_retry_can_succeed
+    self.assertEqual(503,r.status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 503 != 500
+
+======================================================================
+FAIL: test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 86, in test_duplicate_security_and_clinical_fields_are_rejected
+    self.assertEqual(400,c.post('/patients/D01/self-reports',data=MultiDict(fields)).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 400 != 303
+
+======================================================================
+FAIL: test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 121, in test_mid_write_fault_rolls_back_and_original_retry_succeeds
+    self.assertEqual(503,r.status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 503 != 500
+
+======================================================================
+FAIL: test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) (token='кириллица')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 74, in test_non_ascii_and_oversized_security_tokens_are_rejected
+    self.assertEqual(403,r.status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 403 != 500
+
+======================================================================
+FAIL: test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) (token='🔑')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 74, in test_non_ascii_and_oversized_security_tokens_are_rejected
+    self.assertEqual(403,r.status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 403 != 500
+
+======================================================================
+FAIL: test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 129, in test_private_files_and_headers_hosts_forwarding_and_oversized_input
+    self.assertEqual(0o600,self.path.stat().st_mode & 0o777)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 384 != 420
+
+======================================================================
+FAIL: test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 97, in test_unexpected_exception_hides_text_from_response_and_log
+    self.assertIn('не выполнена',r.text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'не выполнена' not found in '<!doctype html>\n<html lang=en>\n<title>500 Internal Server Error</title>\n<h1>Internal Server Error</h1>\n<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\n'
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.757s
+
+FAILED (failures=7)

@@ -1,0 +1,19 @@
+test_all_five_actions_require_doctor_and_fresh_review (test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review) ... ok
+test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf (test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf) ... ok
+test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed) ... [2026-10-19 22:37:56,122] ERROR in web: request_failure incident=f99f4d5cca124aef type=OperationalError endpoint=dashboard
+ok
+test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected) ... ok
+test_every_mutation_requires_session_and_csrf (test_security.SecurityTests.test_every_mutation_requires_session_and_csrf) ... ok
+test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds) ... [2026-10-19 22:37:57,194] ERROR in web: request_failure incident=ddfecbf3d1ecacad type=OperationalError endpoint=self_report
+ok
+test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) ... ok
+test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input) ... ok
+test_template_fault_has_safe_fallback_without_rethrow_or_secret (test_security.SecurityTests.test_template_fault_has_safe_fallback_without_rethrow_or_secret) ... [2026-10-19 22:37:58,285] ERROR in web: request_failure incident=5173ab45fe4a5cc2 type=RuntimeError endpoint=dashboard
+ok
+test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log) ... [2026-10-19 22:37:58,628] ERROR in web: request_failure incident=8b68e5a838b7ddc1 type=RuntimeError endpoint=dashboard
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 3.843s
+
+OK

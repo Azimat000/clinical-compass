@@ -1,0 +1,17 @@
+test_all_five_actions_require_doctor_and_fresh_review (test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review) ... ok
+test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf (test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf) ... ok
+test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed) ... [2026-10-19 22:32:07,827] ERROR in web: request_failure incident=aff8b8493444ddb3 type=OperationalError endpoint=dashboard
+ok
+test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected) ... ok
+test_every_mutation_requires_session_and_csrf (test_security.SecurityTests.test_every_mutation_requires_session_and_csrf) ... ok
+test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds) ... [2026-10-19 22:32:08,922] ERROR in web: request_failure incident=e711e28973f4f642 type=OperationalError endpoint=self_report
+ok
+test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) ... ok
+test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input) ... ok
+test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log) ... [2026-10-19 22:32:10,047] ERROR in web: request_failure incident=232146f3e3df8549 type=RuntimeError endpoint=dashboard
+ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.523s
+
+OK

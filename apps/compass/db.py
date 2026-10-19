@@ -2,6 +2,7 @@
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import hashlib
+import os
 from pathlib import Path
 import sqlite3
 
@@ -14,7 +15,16 @@ def now():
 
 def connect(path):
     path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
+    # Create private BEFORE SQLite opens it, including its rollback journal.
+    # Existing databases are tightened; never chmod unrelated parent folders.
+    try:
+        descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    except FileExistsError:
+        if os.name == 'posix':
+            path.chmod(0o600)
+    else:
+        os.close(descriptor)
     db = sqlite3.connect(path, timeout=10, isolation_level=None)
     db.row_factory = sqlite3.Row
     db.execute('PRAGMA foreign_keys=ON')

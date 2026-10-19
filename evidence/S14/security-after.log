@@ -1,0 +1,201 @@
+test_all_five_actions_require_doctor_and_fresh_review (test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review) ... ok
+test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf (test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf) ... ok
+test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed) ... [2026-10-19 22:31:32,168] ERROR in web: request_failure incident=d9ac5e120dac6cbc type=OperationalError endpoint=dashboard
+ok
+test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected) ... ok
+test_every_mutation_requires_session_and_csrf (test_security.SecurityTests.test_every_mutation_requires_session_and_csrf) ... ok
+test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds) ... [2026-10-19 22:31:33,171] ERROR in web: request_failure incident=dab3a851c507e90d type=OperationalError endpoint=self_report
+ok
+test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) ... ok
+test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input) ... [2026-10-19 22:31:33,864] ERROR in app: Exception on /login [GET]
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/ctx.py", line 323, in __init__
+    self.url_adapter = app.create_url_adapter(self.request)
+                       ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 450, in create_url_adapter
+    request.host = get_host(request.environ, request.trusted_hosts)  # pyright: ignore
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/wsgi.py", line 120, in get_host
+    return _sansio_utils.get_host(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        environ["wsgi.url_scheme"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        trusted_hosts,
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/sansio/utils.py", line 154, in get_host
+    raise SecurityError(f"Host {host!r} is not trusted.")
+werkzeug.exceptions.SecurityError: 400 Bad Request: Host 'attacker.example' is not trusted.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 47, in request_failure
+    response.set_data(render_template('result.html', title=title, message=message))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/result.html", line 1, in top-level template code
+    {% extends "base.html" %}{% block content %}<h1>{{ title }}</h1><p role="alert">{{ message }}</p><a href="/">Вернуться в кабинет</a>{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/base.html", line 3, in top-level template code
+    <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"><script src="{{ url_for('static',filename='interface.js') }}" defer></script></head>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'build'
+ERROR
+test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log) ... [2026-10-19 22:31:34,190] ERROR in web: request_failure incident=43a67e8125ae9761 type=RuntimeError endpoint=dashboard
+ok
+
+======================================================================
+ERROR: test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/ctx.py", line 323, in __init__
+    self.url_adapter = app.create_url_adapter(self.request)
+                       ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 450, in create_url_adapter
+    request.host = get_host(request.environ, request.trusted_hosts)  # pyright: ignore
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/wsgi.py", line 120, in get_host
+    return _sansio_utils.get_host(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        environ["wsgi.url_scheme"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        trusted_hosts,
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/sansio/utils.py", line 154, in get_host
+    raise SecurityError(f"Host {host!r} is not trusted.")
+werkzeug.exceptions.SecurityError: 400 Bad Request: Host 'attacker.example' is not trusted.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 47, in request_failure
+    response.set_data(render_template('result.html', title=title, message=message))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/result.html", line 1, in top-level template code
+    {% extends "base.html" %}{% block content %}<h1>{{ title }}</h1><p role="alert">{{ message }}</p><a href="/">Вернуться в кабинет</a>{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/base.html", line 3, in top-level template code
+    <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"><script src="{{ url_for('static',filename='interface.js') }}" defer></script></head>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'build'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py", line 142, in test_private_files_and_headers_hosts_forwarding_and_oversized_input
+    self.assertEqual(400,c.get('/login',headers={'Host':'attacker.example'}).status_code)
+                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/test.py", line 1166, in get
+    return self.open(*args, **kw)
+           ~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/testing.py", line 235, in open
+    response = super().open(
+        request,
+        buffered=buffered,
+        follow_redirects=follow_redirects,
+    )
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/test.py", line 1120, in open
+    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/test.py", line 992, in run_wsgi_app
+    rv = run_wsgi_app(self.application, environ, buffered=buffered)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/werkzeug/test.py", line 1268, in run_wsgi_app
+    app_rv = app(environ, start_response)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py", line 47, in request_failure
+    response.set_data(render_template('result.html', title=title, message=message))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/result.html", line 1, in top-level template code
+    {% extends "base.html" %}{% block content %}<h1>{{ title }}</h1><p role="alert">{{ message }}</p><a href="/">Вернуться в кабинет</a>{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/base.html", line 3, in top-level template code
+    <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}Клинический компас{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"><script src="{{ url_for('static',filename='interface.js') }}" defer></script></head>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/Documents/HAC/.venv/lib/python3.13/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'build'
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.476s
+
+FAILED (errors=1)
