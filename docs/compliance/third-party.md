@@ -18,3 +18,7 @@
 Новых пакетов S07 нет. Восемь runtime-зависимостей закреплены в apps/requirements.lock; версии/лицензии — evidence/S04/dependencies.json и evidence/S04/licenses/. Образ/системные компоненты и весь комплект перед передачей проверяются отдельно.
 
 Codex используется для разработки; продукт к внешнему ИИ не обращается. Это не подменяет неуточнённые правила конкурса об ИИ/старом коде/заимствованиях. Q08–Q10/Q23/B06 остаются открытыми.
+
+## Навыки интерфейса — 19.10.2026
+
+Инструменты разработки в `.agents/`, не runtime приложения: Anthropic frontend-design (Apache-2.0) и Addy Osmani frontend-ui-engineering с памяткой доступности (MIT). Полные лицензии/уведомления сохранены в `.agents/skills/frontend-design/LICENSE.txt` и `.agents/THIRD_PARTY_LICENSES/addyosmani-agent-skills-LICENSE`. Точные исходники/версии/хеши: `docs/design/skills.lock.json`, сравнение и ограничения: `evidence/interface-skills/research.md`. Собственный адаптер: `.agents/skills/hac-interface/SKILL.md`. Права на upstream не выдаются за исключительное авторство команды; при включении в передаваемый комплект сохранить лицензии и учитывать отдельно в S17/S22. Уточнения конкурса об ИИ/заимствованиях остаются открытыми. Новых пакетов приложения и расходов нет.
