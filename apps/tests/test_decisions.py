@@ -23,6 +23,12 @@ class DecisionTests(unittest.TestCase):
         return {'request_key': secrets.token_hex(16), 'kind': 'therapy_start',
                 'content': 'Синтетическое решение, не для лечения', 'basis': 'Вымышленный визит',
                 'uncertainties': 'Почечная функция неизвестна; требует проверки',
+                'routing_reference': 'routing-reference-v1', 'route_specialty': 'Терапевт',
+                'route_category': 'mandatory', 'route_urgency': 'urgent',
+                'route_population_status': 'known', 'route_age_years': '35',
+                'route_severity': 'Синтетическая оценка врача', 'route_population': 'Требует оценки врача',
+                'route_evidence': 'Синтетическое основание, не клиническая рекомендация',
+                'route_unavailable': 'Синтетический резервный порядок',
                 'therapy_reference': decisions.reference()['version'],
                 'aviandr_conclusion': 'insufficient_data', 'aviandr_basis': 'Синтетика: нет данных для выбора',
                 **{'note_'+a['id']: 'Синтетические сведения отсутствуют' for a in decisions.reference()['review_areas']}, **kw}

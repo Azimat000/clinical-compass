@@ -1,0 +1,5 @@
+<section id="routing"><h2>Маршрутизация к психиатру</h2><p>{{ route_reference.scope }}</p>
+<p class="notice warning"><strong>⚠ Критические правила не включены</strong>. {{ route_reference.blocker }} Неизвестные сведения не означают отсутствие риска. Возрастная применимость требует отдельной оценки. При недоступности врача кабинет не заменяет экстренную помощь.</p>
+<p>Категория «Обязательно» или «Желательно» — оценка потребности в направлении. Срочность указывается независимо. Эти категории проекта не являются автоматическими порогами клинических рекомендаций.</p>
+{% for source in route_reference.sources %}<p><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }}</a> · {{ source.section }}. {{ source.summary }}</p>{% endfor %}
+<p class="muted">Версия {{ route_reference.version }}; проверка {{ route_reference.checked_on }}. A01–A05 неактивны.</p></section>

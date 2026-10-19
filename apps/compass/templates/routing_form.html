@@ -1,0 +1,14 @@
+<details open><summary>Направление к психиатру — заполняет врач</summary>
+<p>Обязательно только для вида решения «Направление». Проект не является направлением до отдельного подтверждения. Пустые значения сохраняются как «Не определена», а не «Планово».</p>
+<input type="hidden" name="routing_reference" value="{{ route_reference.version }}">
+<label>Специальность направляющего врача<input name="route_specialty" maxlength="2000" value="{{ values.get('route_specialty','') }}"></label>
+<label>Категория<select name="route_category">{% for code,label in route_categories.items() %}<option value="{{ code }}" {% if values.get('route_category','unknown')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+<label>Срочность<select name="route_urgency">{% for code,label in route_urgencies.items() %}<option value="{{ code }}" {% if values.get('route_urgency','unknown')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+{% for name,title in [('severity','Тяжесть и признаки случая'),('population','Возраст и применимость источника')] %}
+<label>{{ title }} — состояние данных<select name="route_{{ name }}_status">{% for code,label in route_statuses.items() %}<option value="{{ code }}" {% if values.get('route_'+name+'_status','unknown')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+<label>{{ title }} — данные, дата и оценка<textarea name="route_{{ name }}" maxlength="2000">{{ values.get('route_'+name,'') }}</textarea></label>{% endfor %}
+<label>Проверенный возраст на сегодня (лет)<input name="route_age_years" type="number" min="0" max="120" value="{{ values.get('route_age_years','') }}"></label>
+<label>Научное основание: источник, версия, раздел и связь с данными случая<textarea name="route_evidence" maxlength="2000">{{ values.get('route_evidence','') }}</textarea></label>
+<label>Действия и резервный порядок при недоступности врача<textarea name="route_unavailable" maxlength="2000">{{ values.get('route_unavailable','') }}</textarea></label>
+<p>Резервный порядок вводит врач. Система не связывается с внешней службой и не обещает получение сообщения.</p>
+</details>

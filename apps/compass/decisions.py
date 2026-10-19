@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import re
 import secrets
-from . import access, records
+from . import access, records, routing
 from .db import now, transaction
 
 KINDS = {'therapy_start': 'Назначение терапии', 'therapy_change': 'Изменение терапии',
@@ -105,6 +105,8 @@ def draft(db, user, patient_id, form):
         raise DecisionError('Выберите вид решения.')
     payload = {name: checked_text(form, name) for name in ('content', 'basis', 'uncertainties')}
     payload.update(kind=kind, mode='manual_synthetic', automatic=False)
+    if kind == 'referral':
+        payload['routing_review'] = routing.review(form)
     review = therapy_review(form, kind)
     if review is not None:
         payload['therapy_review'] = review
@@ -159,6 +161,8 @@ def confirm(db, user, patient_id, proposal_id, form):
             return previous['id']
         if proposal['status'] != 'draft':
             raise DecisionError('Проект закрыт.', 409)
+        if decision == 'approved' and proposal['kind'] == 'referral':
+            routing.confirmable(db, patient_id, json.loads(proposal['payload_json']))
         if decision == 'approved' and proposal['input_snapshot_json'] != snapshot(db, patient_id, relationship):
             raise DecisionError('После создания проекта изменились данные, план, источник или день. Изучите сведения и создайте новую версию.', 409)
         cid, stamp = secrets.token_hex(16), now()
@@ -188,6 +192,9 @@ def history(db, user, patient_id):
         entry['payload'] = json.loads(r['payload_json'])
         if user['role'] != 'doctor':
             entry['payload'].pop('therapy_review', None)
+            review = entry['payload'].pop('routing_review', None)
+            if review:
+                entry['payload']['route'] = {k: review[k] for k in ('target', 'category', 'urgency')}
         if user['role'] == 'doctor':
             entry['reference'] = json.loads(r['reference_json'])
             entry['input_snapshot'] = json.loads(r['input_snapshot_json'])

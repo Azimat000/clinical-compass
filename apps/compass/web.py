@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages
+from . import access, records, assessments, decisions, ages, routing
 
 
 def create_app(database=None):
@@ -54,7 +54,8 @@ def create_app(database=None):
 
     @app.context_processor
     def auth_context():
-        return {'current_user': g.get('user'), 'csrf': g.user['csrf_token'] if g.get('user') else ''}
+        return {'current_user': g.get('user'), 'csrf': g.user['csrf_token'] if g.get('user') else '',
+                'route_categories': routing.CATEGORIES, 'route_urgencies': routing.URGENCIES}
 
     @app.teardown_appcontext
     def close_db(error):
@@ -119,7 +120,8 @@ def create_app(database=None):
         rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'])
         offers = get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
             WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
-        return render_template('dashboard.html', patients=rows, query=query, age_status=age_status, offers=offers)
+        route_summaries = {p['id']: routing.summaries(get_db(), g.user, p['id']) for p in rows}
+        return render_template('dashboard.html', route_summaries=route_summaries, patients=rows, query=query, age_status=age_status, offers=offers)
 
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
@@ -136,6 +138,7 @@ def create_app(database=None):
         entries = records.history(db, patient_id)
         measured = assessments.history(db, g.user, patient_id)
         return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+                               route_items=routing.summaries(db, g.user, patient_id),
                                entries=entries, record_warnings=records.warnings(patient, entries),
                                age_view=ages.view(db, patient), age_error=age_error, age_values=age_values or {},
                                age_request_key=secrets.token_hex(16),
@@ -302,6 +305,8 @@ def create_app(database=None):
         items = decisions.history(get_db(), g.user, patient_id)
         return render_template('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
+                               route_reference=routing.reference() if g.user['role']=='doctor' else None,
+                               route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
                                error=error, values=request.form if request.method=='POST' else {},
                                request_key=request.form.get('request_key', secrets.token_hex(16))), status
 

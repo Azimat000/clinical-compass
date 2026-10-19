@@ -5,6 +5,7 @@
 {% for check in checks %}<article class="record"><strong>Проверка связи получена</strong><p>Технический отчёт {{ check.id }}</p><span class="muted">{{ check.received_at }}</span></article>{% endfor %}
 {% else %}<p>Ведущий врач пока не связан с кабинетом.</p>{% if current_user.role=='patient' %}<form method="post" action="{{ url_for('accept_invitation') }}" class="auth-form"><input type="hidden" name="csrf" value="{{ csrf }}"><label>Код приглашения от врача<input name="invitation" maxlength="128" required autocomplete="off"></label><button>Принять приглашение</button></form>{% endif %}{% endif %}</section>
 <section class="record"><h2>Исходный возраст</h2><p>{{ statuses[patient.age_status] }}{% if patient.age_years is not none %}: {{ patient.age_years }} лет на дату исходного профиля{% endif %}</p><p class="muted">Источник: синтетический профиль S03, импорт {{ patient.created_at }}. Исходный профиль не перезаписывается новыми сообщениями. Автоматический допуск к инструментам по возрасту здесь не выполняется.</p></section>
+{% include 'routing_badges.html' %}
 {% include 'age_reviews.html' %}
 {% if record_warnings %}<section class="notice warning"><h2>Нужно уточнить данные</h2>{% if age_view.current %}<p>Для возраста действует отдельная сверка врача выше. Ниже сохранены исходные расхождения; остальные сведения требуют своей проверки.</p>{% endif %}<ul>{% for warning in record_warnings %}<li>{{ warning }}</li>{% endfor %}</ul></section>{% endif %}
 {% if relationship or current_user.role=='doctor' %}{% include 'record_form.html' %}{% endif %}

@@ -1,0 +1,5 @@
+{% set route=item.payload.get('routing_review',item.payload.get('route')) %}
+{% if route %}<section class="notice {{ 'warning' if route.category=='mandatory' else '' }}"><strong>{{ '⚠' if route.category=='mandatory' else '◇' }} Психиатр · {{ route_categories.get(route.category,route.category) }}</strong>
+<p>Срочность: {{ route_urgencies.get(route.urgency,route.urgency) }}. {{ 'Направление подтверждено врачом' if item.action_id else 'Не действует — нет подтверждённого направления' }}.</p>
+{% if current_user.role=='doctor' %}<p>Направляющий врач: {{ route.specialty }}. Тяжесть: {{ route_statuses[route.severity_status] }} — {{ route.severity }}</p><p>Возраст/применимость: {{ route_statuses[route.population_status] }} — {{ route.population }}</p>
+<p>Основание: {{ route.evidence }}</p><p>При недоступности врача: {{ route.unavailable }}</p><p class="muted">Ручная оценка · {{ route.reference.version }}. Автоматического определения критичности нет.</p>{% endif %}</section>{% endif %}

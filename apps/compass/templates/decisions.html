@@ -13,12 +13,14 @@
 {% if source.sha256 %}<p class="muted">Контрольная сумма: {{ source.sha256 }}</p>{% endif %}
 {% for section in source.sections %}<h3>{{ section.topic }} · {{ section.location }}</h3>{% if section.source_summary %}<p>{{ section.source_summary }}</p>{% endif %}<p>{{ section.limitation }}</p>{% endfor %}</details>{% endfor %}
 <p class="muted">Версия справки {{ reference.version }}. Подбор препарата, дозы и проверка рисков автоматически не выполняются. Неизвестность не означает допуск.</p></section>
+{% include 'routing_reference.html' %}
 <section id="new-decision"><h2>Новый проект решения</h2><p>Сначала изучите карточку, историю, возраст, текущую терапию и нежелательные явления. Текст решения вводится вручную. Сохранение проекта не изменяет план.</p>
 <form method="post" class="auth-form"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}">
 <label>Вид решения<select name="kind" required>{% for code,label in kinds.items() %}<option value="{{ code }}" {% if values.get('kind')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
 <label>Решение для вымышленного случая<textarea name="content" maxlength="4000" required>{{ values.get('content','') }}</textarea></label>
 <label>Основание и использованные источники<textarea name="basis" maxlength="4000" required>{{ values.get('basis','') }}</textarea></label>
 <label>Что неизвестно, противоречиво или требует проверки<textarea name="uncertainties" maxlength="4000" required>{{ values.get('uncertainties','') }}</textarea></label>
+{% include 'routing_form.html' %}
 <details open><summary>Рассмотрение Авиандра и индивидуальных рисков</summary>
 <p>Обязательно для назначения, изменения и отмены терапии. Для направления и изменения плана эта форма не требуется. Здесь записывается оценка врача; автоматического допуска препарата нет. Если сведения о рисках неполные, нельзя отметить завершённую сверку.</p>
 <p><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#age-review">Просмотреть источники возраста и сверку</a></p>
@@ -38,6 +40,7 @@
 <section><h2>{{ 'История проектов и решений' if current_user.role=='doctor' else 'Подтверждённые решения' }}</h2>
 {% for item in decisions %}<article class="record" id="decision-{{ item.id }}"><h3>{{ kinds[item.kind] }} · версия {{ item.version }}</h3>
 <p><strong>{{ 'Подтверждено врачом' if item.decision=='approved' else 'Отклонено врачом' if item.decision=='rejected' else 'Проект — план не изменён' }}</strong></p>
+{% include 'routing_summary.html' %}
 <p class="narrative">{{ item.payload.content }}</p><p><strong>Основание:</strong> {{ item.payload.basis }}</p><p><strong>Неопределённость:</strong> {{ item.payload.uncertainties }}</p>
 <p class="muted">Создано {{ item.created_at }} · {{ item.actor_id }} · {{ item.id }}{% if item.parent_proposal_id %} · предыдущий проект {{ item.parent_proposal_id }}{% endif %}</p>
 {% if item.decision %}<p>Решение принял {{ item.doctor_id }} · {{ item.confirmed_at }}. {{ item.rationale }}</p>{% endif %}

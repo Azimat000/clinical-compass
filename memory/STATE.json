@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T19:07:36+03:00",
+  "updated_on": "2026-10-19T19:18:19+03:00",
   "current_slice": null,
   "last_accepted_slice": "S08",
-  "next_slice": "S09",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -62,10 +62,10 @@
       "reason": null
     },
     "S09": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S09.md",
-      "reason": null
+      "reason": "B04: не подтверждены точные машинные признаки, карта категорий/срочности и протокол реакции/резервных действий; КР не задают готового алгоритма. Ручная часть реализована, A01–A05 неактивны; реальных критических событий нет. Условия возобновления: evidence/S09/acceptance.md."
     },
     "S10": {
       "status": "planned",
@@ -180,7 +180,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "B13/B14 исправлены в S08B; S08 принят в справочном режиме без активации клинических алгоритмов. Следующий S09 в новой сессии; конкретные научные основания маршрутов/критических признаков и B04 проверить перед включением.",
+    "next_action": "B13/B14 закрыты в S08B; S08 принят справочно. S09 теперь blocked: ручные категории/подтверждение реализованы, A01–A05 неактивны. Перед продолжением проверить конкретные основания/протокол B04 по evidence/S09/acceptance.md; готового независимого среза нет, S10 не начинать через блокер.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
