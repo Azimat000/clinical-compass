@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules
+from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery
 
 
 def create_app(database=None):
@@ -149,6 +149,31 @@ def create_app(database=None):
         except notifications.NotificationError as error:
             return render_template('result.html', title='Отметка не сохранена', message=str(error)), error.status
         return redirect(url_for('notification_inbox'), code=303)
+
+    @app.get('/critical')
+    def critical_inbox():
+        role('doctor')
+        items = critical_delivery.inbox(get_db(), g.user)
+        logs = {r['id']: get_db().execute('SELECT * FROM critical_delivery_log WHERE event_id=? ORDER BY sequence',
+                                        (r['id'],)).fetchall() for r in items}
+        return render_template('critical.html', items=items, logs=logs)
+
+    @app.get('/api/critical')
+    def critical_status():
+        role('doctor')
+        return jsonify([{'id':r['id'], 'received':r['received_at'] is not None}
+                        for r in critical_delivery.inbox(get_db(),g.user) if r['acknowledged_at'] is None])
+
+    @app.post('/critical/<event_id>/<action>')
+    def critical_mark(event_id, action):
+        role('doctor')
+        try:
+            critical_delivery.mark(get_db(), g.user, event_id, action, request.form.get('reaction',''))
+        except notifications.NotificationError as error:
+            return render_template('result.html', title='Отметка не сохранена', message=str(error)), error.status
+        if action == 'received':
+            return '', 204
+        return redirect(url_for('critical_inbox'),code=303)
 
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)

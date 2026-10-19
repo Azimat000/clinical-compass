@@ -21,20 +21,25 @@ def record_demo_receipt(db, event):
     db.execute('INSERT OR IGNORE INTO event_receipts VALUES(?,?,?)', (event['id'], 'demo_receipt_v1', now()))
 
 
+def ready_critical(db, event):
+    from .critical_delivery import ready
+    ready(db, event)
+
+
 def ready_routine_report(db, event):
     from .notifications import ready_report
     ready_report(db, event)
 
 
 HANDLERS = {'demo.patient_created.v1': record_demo_receipt,
-            'routine.self_report.v1': ready_routine_report}
+            'routine.self_report.v1': ready_routine_report,
+            'clinical.critical.medication_safety.v1': ready_critical}
 
 
 def process_one(db, handlers=None):
     handlers = HANDLERS if handlers is None else handlers
     with transaction(db):
-        # S09 creates real critical events. Their delivery belongs to S10; a
-        # routine-report worker must retain them, not retry an absent consumer.
+        # Custom consumers without a critical handler must leave critical jobs intact.
         deferred = 'clinical.critical.medication_safety.v1'
         clause = '' if deferred in handlers else ' AND topic<>?'
         parameters = (now(),) if deferred in handlers else (now(), deferred)

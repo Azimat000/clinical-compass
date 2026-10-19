@@ -44,3 +44,9 @@ section { scroll-margin-top:20px; }
 .trend a:focus-visible circle { stroke:#c28627; stroke-width:4; }
 .hash { overflow-wrap:anywhere; }
 summary { cursor:pointer; font-weight:650; padding:14px 0; }
+
+#critical-banner,.critical-card {border:3px solid #a52121;background:#fff0ed;color:#6e1717;padding:1rem;margin:1rem 0}
+#critical-banner[hidden] {display:none}
+.critical-card textarea {display:block;min-height:6rem;width:95%}
+
+#critical-banner {position:sticky;top:0;z-index:10}

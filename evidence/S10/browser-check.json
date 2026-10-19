@@ -1,0 +1,104 @@
+{
+  "browser": "Codex IAB",
+  "measured_fixture": "var/s10-ui.sqlite3 (synthetic, separate database)",
+  "delivery": {
+    "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+    "ready_at": "2026-10-19T17:08:26.919220+00:00",
+    "received_at": "2026-10-19T17:08:28.312993+00:00",
+    "seen_at": "2026-10-19T17:10:19.081604+00:00",
+    "acknowledged_at": "2026-10-19T17:10:21.596319+00:00",
+    "reacted_at": "2026-10-19T17:10:25.848936+00:00",
+    "reaction": "Синтетическая проверка: просмотрены исходные сведения и инструкция. Реального контакта с пациентом не было. Терапия не изменялась.",
+    "reserve_attempts": 2,
+    "reserve_after": "2026-10-19T17:10:12.100616+00:00",
+    "reserve_token": null,
+    "reserve_state": "operator_received",
+    "accepted_at": "2026-10-19T17:08:26.735888+00:00"
+  },
+  "intake_to_browser_receipt_seconds": 1.577105,
+  "visual_signal_observed_in_AX_and_screenshot": true,
+  "browser_closed_before_console_reserve": true,
+  "actual_console_receipt_in_cli": true,
+  "native_macos_dialog_delivery_verified": false,
+  "operator_not_physician_identity": true,
+  "log": [
+    {
+      "sequence": 1,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": null,
+      "action": "ready",
+      "recorded_at": "2026-10-19T17:08:26.919459+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 2,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": "doc-a",
+      "action": "received",
+      "recorded_at": "2026-10-19T17:08:28.313304+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 3,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": null,
+      "action": "reserve_started",
+      "recorded_at": "2026-10-19T17:08:41.895111+00:00",
+      "detail": "1"
+    },
+    {
+      "sequence": 4,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": null,
+      "action": "reserve_failed",
+      "recorded_at": "2026-10-19T17:09:02.211893+00:00",
+      "detail": "TimeoutError"
+    },
+    {
+      "sequence": 5,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": null,
+      "action": "reserve_started",
+      "recorded_at": "2026-10-19T17:10:04.712281+00:00",
+      "detail": "2"
+    },
+    {
+      "sequence": 6,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": null,
+      "action": "reserve_operator_received",
+      "recorded_at": "2026-10-19T17:10:08.101510+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 7,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": "doc-a",
+      "action": "seen",
+      "recorded_at": "2026-10-19T17:10:19.081795+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 8,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": "doc-a",
+      "action": "acknowledged",
+      "recorded_at": "2026-10-19T17:10:21.596515+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 9,
+      "event_id": "64177e62116b1a2719ada0b3ac106f6d",
+      "actor_id": "doc-a",
+      "action": "reacted",
+      "recorded_at": "2026-10-19T17:10:25.849188+00:00",
+      "detail": ""
+    }
+  ],
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]"
+  },
+  "limitations": "Single synthetic case, agent controls demo doctor; no clinical trial, background screen, 24/7 or external delivery.",
+  "actual_forced_restart_all_fields_preserved": true
+}

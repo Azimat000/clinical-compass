@@ -192,7 +192,7 @@ class ClinicalRuleTests(unittest.TestCase):
                         {'observed_on':(records.today()+timedelta(days=1)).isoformat()}, {'clinical_basis':'x'*2001}):
             with self.assertRaises(rules.RuleError): self.context(**changes)
 
-    def test_record_retry_atomic_rollback_and_outbox_pending_s10(self):
+    def test_record_retry_atomic_rollback_and_critical_consumer(self):
         form = self.form()
         first = records.save(self.db,self.pat,'D01','self_report',form)
         self.assertEqual(first,records.save(self.db,self.pat,'D01','self_report',form))
@@ -204,11 +204,13 @@ class ClinicalRuleTests(unittest.TestCase):
         with patch.object(rules.events,'enqueue',side_effect=RuntimeError('injected outbox failure')):
             with self.assertRaises(RuntimeError): self.save()
         self.assertEqual(before,{t:self.count(t) for t in tables})
-        while events.process_one(self.db):
+        while events.process_one(self.db, {k:v for k,v in events.HANDLERS.items() if k != rules.TOPIC}):
             pass
         outbox = self.db.execute('SELECT * FROM outbox_events WHERE topic=?',(rules.TOPIC,)).fetchone()
         self.assertEqual(('pending',0), (outbox['status'],outbox['attempts']))
         self.assertEqual(1,self.count('critical_events'))
+        self.assertTrue(events.process_one(self.db))
+        self.assertEqual(1,self.count('critical_delivery'))
         self.assertEqual('ok',self.db.execute('PRAGMA integrity_check').fetchone()[0])
         self.assertEqual([],self.db.execute('PRAGMA foreign_key_check').fetchall())
 

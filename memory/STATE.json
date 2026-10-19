@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T19:59:36+03:00",
+  "updated_on": "2026-10-19T20:17:06+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S09",
-  "next_slice": "S10",
+  "last_accepted_slice": "S10",
+  "next_slice": "S11",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -68,8 +68,8 @@
       "reason": null
     },
     "S10": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S10",
       "handoff": "memory/sessions/S10.md",
       "reason": null
     },
@@ -186,7 +186,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S09 принят: источниковые рекомендации двух категорий и реальный A02-v2 по ГРЛС, без новой шкалы/фиктивной экспертизы. Следующий готовый S10: доставить и измерить критические события, с резервом/раздельными состояниями. S10A уже принят только для обычных отчётов. Клиническая валидация/апробация и другие неподтверждённые правила B04 остаются; evidence/S09/completion-review/boundary-review.md.",
+    "next_action": "S10 принят в локальной синтетической области: критический web-сигнал, отдельная реакция врача, реальная CLI/PTY-консоль с синтетическим оператором, сбои/повторы. Физическое окно резерва/реальный врач/внешняя служба не подтверждены. Следующий S11 в новой сессии. Доказательства evidence/S10/acceptance.md; B04/апробация/полное восстановление остаются.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

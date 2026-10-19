@@ -1,0 +1,47 @@
+{
+  "real_process": 33010,
+  "real_pseudo_terminal": true,
+  "browser_not_launched": true,
+  "signal_stdout": "\u0007\r\n⚠ КЛИНИЧЕСКИЙ КОМПАС — СИНТЕТИЧЕСКИЙ РЕЗЕРВ\r\nЕсть критический сигнал. Откройте кабинет врача. Это не служба 24/7.\r\nВведите SIGNAL в течение 20 секунд, чтобы отметить получение местным оператором.\r\n",
+  "operator_input": "SIGNAL (agent acting as synthetic local operator)",
+  "result": {
+    "event_id": "219c2c77cb5d93d82574d75bf717f16f",
+    "ready_at": "2026-10-19T17:13:35.659428+00:00",
+    "received_at": null,
+    "seen_at": null,
+    "acknowledged_at": null,
+    "reacted_at": null,
+    "reaction": null,
+    "reserve_attempts": 1,
+    "reserve_after": "2026-10-19T17:13:37.966631+00:00",
+    "reserve_token": null,
+    "reserve_state": "operator_received"
+  },
+  "log": [
+    {
+      "sequence": 1,
+      "event_id": "219c2c77cb5d93d82574d75bf717f16f",
+      "actor_id": null,
+      "action": "ready",
+      "recorded_at": "2026-10-19T17:13:35.659610+00:00",
+      "detail": ""
+    },
+    {
+      "sequence": 2,
+      "event_id": "219c2c77cb5d93d82574d75bf717f16f",
+      "actor_id": null,
+      "action": "reserve_started",
+      "recorded_at": "2026-10-19T17:13:35.965603+00:00",
+      "detail": "reserve-console:1"
+    },
+    {
+      "sequence": 3,
+      "event_id": "219c2c77cb5d93d82574d75bf717f16f",
+      "actor_id": null,
+      "action": "reserve_operator_received",
+      "recorded_at": "2026-10-19T17:13:35.966804+00:00",
+      "detail": ""
+    }
+  ],
+  "scope": "Actual console transport and separate operator receipt; no native window/sound/human physician receipt claimed."
+}

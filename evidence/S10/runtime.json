@@ -1,0 +1,28 @@
+{
+  "server_processes": [
+    33098,
+    33114,
+    33115,
+    33122
+  ],
+  "forced_restarts": 3,
+  "two_worker_processes": [
+    33108,
+    33109
+  ],
+  "accepted_event_preserved": true,
+  "single_queue_processing_attempt": true,
+  "duplicate_intake_single_event": true,
+  "socket_closed_before_receipt_response": true,
+  "receipt_retry_single_log": true,
+  "all_delivery_fields_and_logs_survived": true,
+  "clinical_action_counts": {
+    "care_actions": 0,
+    "proposals": 0,
+    "doctor_confirmations": 0,
+    "therapy_courses": 0
+  },
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "scope": "Actual HTTP transport; this script has no browser and claims no visual delivery measurement."
+}

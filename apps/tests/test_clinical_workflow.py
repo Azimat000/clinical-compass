@@ -74,7 +74,8 @@ class ClinicalWorkflowTests(unittest.TestCase):
         while events.process_one(self.db):
             pass
         queued = self.db.execute('SELECT * FROM outbox_events WHERE id=?', (event['outbox_event_id'],)).fetchone()
-        self.assertEqual(('pending', 0), (queued['status'], queued['attempts']))
+        self.assertEqual(('processed', 1), (queued['status'], queued['attempts']))
+        self.assertEqual(1,self.db.execute('SELECT count(*) FROM critical_delivery').fetchone()[0])
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
         self.assertEqual(3, self.db.execute('SELECT schema_version FROM self_reports').fetchone()[0])
         self.db.execute("UPDATE users SET disabled=0 WHERE id='doc-a'")
