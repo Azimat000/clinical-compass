@@ -1,6 +1,7 @@
 <details open><summary>Направление к психиатру — заполняет врач</summary>
 <p>Обязательно только для вида решения «Направление». Проект не является направлением до отдельного подтверждения. Пустые значения сохраняются как «Не определена», а не «Планово».</p>
 <input type="hidden" name="routing_reference" value="{{ route_reference.version }}">
+{% if values.get('route_rule_context_id') %}<input type="hidden" name="route_rule_context_id" value="{{ values.route_rule_context_id }}"><p class="notice">Поля заполнены из источниковой рекомендации по данным случая. Проверьте их, укажите свою специальность и выберите срочность отдельно.</p>{% endif %}
 <label>Специальность направляющего врача<input name="route_specialty" maxlength="2000" value="{{ values.get('route_specialty','') }}"></label>
 <label>Категория<select name="route_category">{% for code,label in route_categories.items() %}<option value="{{ code }}" {% if values.get('route_category','unknown')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
 <label>Срочность<select name="route_urgency">{% for code,label in route_urgencies.items() %}<option value="{{ code }}" {% if values.get('route_urgency','unknown')==code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>

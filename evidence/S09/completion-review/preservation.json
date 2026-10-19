@@ -1,0 +1,22 @@
+{
+  "baseline_clean": true,
+  "protected_old_migrations_resources": 11,
+  "protected_hashes_unchanged": true,
+  "dataset_sources_dependency_lock_unchanged": true,
+  "requirements": 83,
+  "subchecks": 160,
+  "original_texts_cards_dependencies_primary_owners_preserved": true,
+  "previous_evidence_references_preserved": true,
+  "previous_blocked_acceptance_archived": "history-before-completion.md",
+  "only_status_change": "M05 not_verified -> partial; no fulfilled/not_applicable",
+  "other_slice_states_unchanged": true,
+  "worker_complete_and_scope_verified": true,
+  "unexpected_paths": [],
+  "main_independent_checks": [
+    "make check:111 app +17 plan/data PASS",
+    "Linux Docker:111 app PASS and real 2-process smoke PASS",
+    "verify_runtime:actual HTTP+forced kill/restart+durable event PASS",
+    "verify_upgrade:real prior commit database48tables/22nonempty preserved PASS",
+    "actual IAB both advice categories and critical event after restart PASS"
+  ]
+}

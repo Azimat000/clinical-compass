@@ -33,7 +33,13 @@ HANDLERS = {'demo.patient_created.v1': record_demo_receipt,
 def process_one(db, handlers=None):
     handlers = HANDLERS if handlers is None else handlers
     with transaction(db):
-        event = db.execute("SELECT * FROM outbox_events WHERE status='pending' AND available_at<=? ORDER BY created_at,id LIMIT 1", (now(),)).fetchone()
+        # S09 creates real critical events. Their delivery belongs to S10; a
+        # routine-report worker must retain them, not retry an absent consumer.
+        deferred = 'clinical.critical.medication_safety.v1'
+        clause = '' if deferred in handlers else ' AND topic<>?'
+        parameters = (now(),) if deferred in handlers else (now(), deferred)
+        event = db.execute("SELECT * FROM outbox_events WHERE status='pending' AND available_at<=?" + clause +
+                           ' ORDER BY created_at,id LIMIT 1', parameters).fetchone()
         if event is None:
             return False
         attempt = event['attempts'] + 1

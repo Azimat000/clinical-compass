@@ -1,1 +1,1 @@
-"""Local synthetic demonstration; clinical features remain inactive."""
+"""Local synthetic demonstration; source-bound rules do not authorize real clinical use."""

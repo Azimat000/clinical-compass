@@ -81,6 +81,13 @@ def validate(form):
     if wellbeing not in WELLBEING:
         raise RecordError('Проверьте значение самочувствия.')
     payload['wellbeing'] = wellbeing
+    from . import clinical_rules
+    try:
+        safety = clinical_rules.parse_safety(form)
+    except clinical_rules.RuleError as error:
+        raise RecordError(str(error), error.status) from None
+    if safety is not None:
+        payload['medication_safety'] = safety
     return payload
 
 
@@ -98,8 +105,9 @@ def save(db, user, patient_id, kind, form):
         # Recheck authorization while holding the write transaction.
         if access.visible_patient(db, user, patient_id) is None:
             raise RecordError('Карточка недоступна.', 404)
-        if kind == 'self_report' and db.execute('''SELECT 1 FROM care_relationships r JOIN users u ON u.id=r.doctor_id
-                WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=? AND u.disabled=0''', (patient_id, now())).fetchone() is None:
+        available_doctor = db.execute('''SELECT 1 FROM care_relationships r JOIN users u ON u.id=r.doctor_id
+                WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=? AND u.disabled=0''', (patient_id, now())).fetchone()
+        if kind == 'self_report' and not available_doctor and 'medication_safety' not in payload:
             raise RecordError('Сначала установите связь с ведущим врачом.', 409)
         existing = db.execute('SELECT id,payload_json FROM clinical_entries WHERE request_key=?', (key,)).fetchone()
         if existing:
@@ -113,8 +121,9 @@ def save(db, user, patient_id, kind, form):
             db.execute('INSERT INTO encounters(id,patient_id,occurred_at,author_id,narrative,origin) VALUES(?,?,?,?,?,?)',
                        (entry_id, patient_id, payload['observed_on'], user['id'], payload['summary'], 'doctor_visit / ' + entry_id))
         else:
-            db.execute('INSERT INTO self_reports VALUES(?,?,?,?,?,?,2)',
-                       (entry_id, patient_id, stamp, payload['observed_on'], canonical, key))
+            db.execute('INSERT INTO self_reports VALUES(?,?,?,?,?,?,?)',
+                       (entry_id, patient_id, stamp, payload['observed_on'], canonical, key,
+                        3 if 'medication_safety' in payload else 2))
         db.execute('INSERT INTO clinical_entries VALUES(?,?,?,?,?,?,?,?,?,?,?)',
                    (entry_id, patient_id, user['id'], kind, payload['observed_on'], stamp, payload['summary'], canonical, key, encounter_id, report_id))
         provenance = json.dumps({'entry_id': entry_id, 'actor_id': user['id'], 'role': user['role'],
@@ -132,9 +141,12 @@ def save(db, user, patient_id, kind, form):
                       VALUES(?,?,?,?,?,?,?,?,?)''', (secrets.token_hex(16), patient_id, encounter_id, 'reported_age',
                       None if payload['age']['status'] == 'unknown' else json.dumps(payload['age'], ensure_ascii=False),
                       payload['age']['status'], payload['observed_on'], stamp, provenance))
-        if kind == 'self_report':
+        if kind == 'self_report' and available_doctor:
             from .notifications import enqueue_report
             enqueue_report(db, entry_id, patient_id)
+        if kind == 'self_report':
+            from .clinical_rules import evaluate_safety
+            evaluate_safety(db, user, patient_id, entry_id, payload)
         access.audit(db, user['id'], 'record.' + kind + '_created', entry_id)
         return entry_id
 

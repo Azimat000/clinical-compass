@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import re
 import secrets
-from . import access, records, routing
+from . import access, records, routing, clinical_rules
 from .db import now, transaction
 
 KINDS = {'therapy_start': 'Назначение терапии', 'therapy_change': 'Изменение терапии',
@@ -57,9 +57,11 @@ def doctor_relationship(db, user, patient_id):
 def snapshot(db, patient_id, relationship_id):
     """Conservative exact comparison: ANY new clinical information requires rereview."""
     result = {'policy': 'synthetic-inputs-v1', 'day': records.today().isoformat(), 'relationship': relationship_id,
-              'reference': hashlib.sha256(canonical(reference()).encode()).hexdigest()}
+              'reference': hashlib.sha256(canonical(reference()).encode()).hexdigest(),
+              'clinical_rule_release': clinical_rules.fingerprint()}
     for table in ('patients', 'encounters', 'observations', 'clinical_entries', 'assessments',
-                  'self_reports', 'adverse_events', 'therapy_courses', 'alerts', 'documents', 'age_reviews'):
+                  'self_reports', 'adverse_events', 'therapy_courses', 'alerts', 'documents', 'age_reviews',
+                  'clinical_contexts', 'clinical_rule_evaluations', 'critical_events'):
         key = 'id' if table == 'patients' else 'patient_id'
         result[table] = [dict(r) for r in db.execute(f'SELECT * FROM {table} WHERE {key}=? ORDER BY id', (patient_id,))]
     result['assessment_results'] = [dict(r) for r in db.execute('''SELECT ar.* FROM assessment_results ar
@@ -115,9 +117,14 @@ def draft(db, user, patient_id, form):
     if not re.fullmatch('[0-9a-f]{32}', token):
         raise DecisionError('Обновите форму.')
     retry = hashlib.sha256(f'{user["id"]}:{patient_id}:{token}'.encode()).hexdigest()
-    text = canonical(payload)
     with transaction(db):
         relationship = doctor_relationship(db, user, patient_id)
+        if kind == 'referral' and form.get('route_rule_context_id'):
+            advice = clinical_rules.recommendation(db, user, patient_id)
+            if advice['category'] == 'unknown' or advice['context_id'] != form['route_rule_context_id']:
+                raise DecisionError('Источниковая рекомендация изменилась. Обновите карточку.', 409)
+            payload['routing_review']['suggestion'] = advice
+        text = canonical(payload)
         old = db.execute('''SELECT p.*,d.parent_proposal_id FROM proposals p JOIN decision_drafts d ON d.proposal_id=p.id
             WHERE d.request_key=?''', (retry,)).fetchone()
         if old:

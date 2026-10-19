@@ -7,8 +7,9 @@
 <section class="record"><h2>Исходный возраст</h2><p>{{ statuses[patient.age_status] }}{% if patient.age_years is not none %}: {{ patient.age_years }} лет на дату исходного профиля{% endif %}</p><p class="muted">Источник: синтетический профиль S03, импорт {{ patient.created_at }}. Исходный профиль не перезаписывается новыми сообщениями. Автоматический допуск к инструментам по возрасту здесь не выполняется.</p></section>
 {% include 'routing_badges.html' %}
 {% include 'age_reviews.html' %}
+{% if current_user.role=='doctor' %}{% include 'clinical_rules_panel.html' %}{% endif %}
 {% if record_warnings %}<section class="notice warning"><h2>Нужно уточнить данные</h2>{% if age_view.current %}<p>Для возраста действует отдельная сверка врача выше. Ниже сохранены исходные расхождения; остальные сведения требуют своей проверки.</p>{% endif %}<ul>{% for warning in record_warnings %}<li>{{ warning }}</li>{% endfor %}</ul></section>{% endif %}
-{% if relationship or current_user.role=='doctor' %}{% include 'record_form.html' %}{% endif %}
+{% include 'record_form.html' %}
 <section id="dynamics"><h2>Динамика по вашим записям</h2><p class="muted">Даты наблюдения и получения различаются. Каждая строка — отдельный источник; «неизвестно» не означает отсутствие риска. Сначала более поздние даты наблюдения.</p>
 {% if wellbeing_trend %}<h3>Самочувствие по самоотчётам пациента</h3><p class="muted">Каждая точка — отдельный самоотчёт по порядку дат, до 30 последних. Это субъективное изменение относительно предыдущей записи, без медицинского балла. «Не указано» отображается отдельно.</p>
 <svg class="trend" viewBox="0 0 560 232" role="img" aria-label="История субъективного самочувствия пациента. Даты и описания доступны в таблице ниже.">

@@ -5,6 +5,8 @@ COPY apps/requirements.lock /app/apps/requirements.lock
 RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
 COPY apps /app/apps
 COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+COPY evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf /app/evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf
+COPY evidence/S09/completion-review/sources/kr457.pdf /app/evidence/S09/completion-review/sources/kr457.pdf
 USER compass
 EXPOSE 8000
 CMD ["python", "-m", "apps.compass", "serve", "--host", "0.0.0.0"]

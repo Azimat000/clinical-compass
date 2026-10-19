@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing, notifications
+from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules
 
 
 def create_app(database=None):
@@ -27,6 +27,11 @@ def create_app(database=None):
     def role(required):
         if g.user['role'] != required:
             abort(403)
+
+    @app.errorhandler(clinical_rules.RuleError)
+    def rule_failure(error):
+        return render_template('result.html', title='Источниковая проверка не выполнена',
+                               message=str(error)), error.status
 
     def patient_or_404(patient_id):
         patient = access.visible_patient(get_db(), g.user, patient_id)
@@ -156,6 +161,8 @@ def create_app(database=None):
         entries = records.history(db, patient_id)
         measured = assessments.history(db, g.user, patient_id)
         return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+                               clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
+                               clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
                                entries=entries, record_warnings=records.warnings(patient, entries),
                                age_view=ages.view(db, patient), age_error=age_error, age_values=age_values or {},
@@ -168,6 +175,16 @@ def create_app(database=None):
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
                                request_key=(form_values.get('request_key', '') if form_values is not None else secrets.token_hex(16)),
                                today=records.today().isoformat(), form_values=form_values or {}, form_error=form_error)
+
+    @app.post('/patients/<patient_id>/clinical-context')
+    def clinical_context(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        try:
+            clinical_rules.save_context(get_db(), g.user, patient_id, request.form)
+        except clinical_rules.RuleError as error:
+            return render_template('result.html', title='Сведения не сохранены', message=str(error)), error.status
+        return redirect(url_for('demo_patient', patient_id=patient_id) + '#clinical-rules', code=303)
 
     @app.post('/invitations')
     def create_invitation():
@@ -321,11 +338,28 @@ def create_app(database=None):
             except decisions.DecisionError as failure:
                 error, status = str(failure), failure.status
         items = decisions.history(get_db(), g.user, patient_id)
+        values = request.form if request.method == 'POST' else {}
+        if request.method == 'GET' and request.args.get('from_context'):
+            role('doctor')
+            advice = clinical_rules.recommendation(get_db(), g.user, patient_id)
+            if advice['context_id'] != request.args['from_context'] or advice['category'] == 'unknown':
+                return render_template('result.html', title='Рекомендация изменилась', message='Обновите карточку и проверьте исходные сведения.'), 409
+            alternative = 'Допустимая альтернатива по КР — врач-психотерапевт.' if advice.get('alternative') == 'psychotherapist' else ''
+            values = {'kind': 'referral', 'content': advice['reason'] + ' ' + alternative,
+                      'basis': advice['source_url'] + ' · ' + advice['source_section'],
+                      'uncertainties': 'Срочность определяет врач. Это проект; он не изменяет план до отдельного подтверждения.',
+                      'route_rule_context_id': advice['context_id'],
+                      'route_category': advice['category'], 'route_urgency': 'unknown',
+                      'route_population_status': 'known', 'route_age_years': str(advice['age_years']),
+                      'route_population': 'Взрослая применимость проверена по имеющимся возрастным источникам; требуется сверка врача.',
+                      'route_severity': advice['basis'], 'route_severity_status': 'unknown',
+                      'route_evidence': advice['source_url'] + ' · ' + advice['source_section'] + ' · ' + advice['reason'],
+                      'route_unavailable': 'Не ожидать помощи через демо: использовать доступный обычный канал связи с врачом или обратиться в медицинскую организацию.'}
         return render_template('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
-                               error=error, values=request.form if request.method=='POST' else {},
+                               error=error, values=values,
                                request_key=request.form.get('request_key', secrets.token_hex(16))), status
 
     @app.post('/patients/<patient_id>/decisions/<proposal_id>/confirm')

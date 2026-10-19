@@ -1,0 +1,36 @@
+{
+  "server_processes": [
+    30557,
+    30569
+  ],
+  "forced_server_kill_and_restart": true,
+  "both_source_categories_generated_over_http": true,
+  "source_urgency_remains_unknown": true,
+  "actual_critical_event": {
+    "id": "ee959c67338fde235d2fdcaff281d509",
+    "patient_id": "D01",
+    "evaluation_id": "8f2813e49b3dbbfc9cfcd285a210e15f",
+    "rule_version": "A02-v2",
+    "source_sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc",
+    "relationship_id": "6d545a15ebe9f9d625ba32a862622aae",
+    "recipient_id": "doctor-demo",
+    "created_at": "2026-10-19T16:50:48.613837+00:00",
+    "delivery_state": "pending_s10",
+    "outbox_event_id": "b064f3d8-5903-49ea-b060-7668988e5ac9"
+  },
+  "evaluation_result": "triggered",
+  "duplicate_request_single_report_event": true,
+  "all_event_and_evaluation_fields_survived": true,
+  "routine_worker_preserved_critical_outbox_pending": true,
+  "patient_internal_event_hidden": true,
+  "clinical_action_counts": {
+    "care_actions": 0,
+    "proposals": 0,
+    "doctor_confirmations": 0,
+    "therapy_courses": 0
+  },
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "verified_at": "2026-10-19T16:50:49.049525+00:00",
+  "scope": "S09 event creation and persistence only; no critical delivery or clinical validation claimed."
+}

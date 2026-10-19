@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T19:34:32+03:00",
+  "updated_on": "2026-10-19T19:59:36+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S10A",
-  "next_slice": null,
+  "last_accepted_slice": "S09",
+  "next_slice": "S10",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -62,10 +62,10 @@
       "reason": null
     },
     "S09": {
-      "status": "blocked",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S09",
       "handoff": "memory/sessions/S09.md",
-      "reason": "B04: не подтверждены точные машинные признаки/применимость, категории/срочность, клинические действия и местный протокол реакции/резерва. Новый ASQ также без подтверждения точной русской валидации; не активирован. S09 blocked; независимая доставка обычных отчётов выделена в planned S10A, исходный S10 требует S09."
+      "reason": null
     },
     "S10": {
       "status": "planned",
@@ -186,7 +186,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S10A принят только как локальная доставка обычных самоотчётов; evidence/S10A/acceptance.md. S09 blocked по B04, исходный S10 по-прежнему требует S09. Следующего независимого готового среза нет; при следующем старте проверить конкретные новые клинические/организационные основания, не выдавать транспорт за M05.",
+    "next_action": "S09 принят: источниковые рекомендации двух категорий и реальный A02-v2 по ГРЛС, без новой шкалы/фиктивной экспертизы. Следующий готовый S10: доставить и измерить критические события, с резервом/раздельными состояниями. S10A уже принят только для обычных отчётов. Клиническая валидация/апробация и другие неподтверждённые правила B04 остаются; evidence/S09/completion-review/boundary-review.md.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

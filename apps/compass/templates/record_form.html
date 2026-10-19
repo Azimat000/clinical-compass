@@ -5,6 +5,7 @@
 {% if form_error %}<p class="error" role="alert">{{ form_error }} Запись не сохранена; проверьте поля ниже.</p>{% endif %}
 <form method="post" action="{{ url_for('self_report' if current_user.role=='patient' else 'visit', patient_id=patient.id) }}">
 <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}">
+{% if current_user.role=='patient' %}{% include 'medication_safety_form.html' %}{% endif %}
 <div class="form-grid">
 <label>Дата наблюдения (Москва)<input type="date" name="observed_on" min="1900-01-01" max="{{ today }}" required value="{{ form_values.get('observed_on',today) }}"></label>
 <label>Самочувствие по сравнению с предыдущей записью<select name="wellbeing">{% for value,label in wellbeing.items() %}<option value="{{ value }}" {% if form_values.get('wellbeing','unknown')==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>

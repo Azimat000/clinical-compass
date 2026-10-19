@@ -1,0 +1,49 @@
+{
+  "version": "clinical-rules-v1",
+  "mode": "synthetic_prototype",
+  "clinical_validation": false,
+  "active_rules": ["A02-v2"],
+  "inactive_rules": ["A01", "A03", "A04", "A05"],
+  "context_freshness": "observed_on_equals_today_synthetic_demo_only",
+  "sources": {
+    "aviandr": {
+      "path": "evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf",
+      "sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc",
+      "bytes": 327709,
+      "url": "https://grls.rosminzdrav.ru/InstrImg/2026/07/29/1532717/94ba54dc-ce1c-40ed-96f4-5c3a31f13805.pdf",
+      "section": "§1; §4, стр. 4",
+      "population": "adults_older_than_18",
+      "min_completed_years": 19
+    },
+    "gtr": {
+      "path": "evidence/S09/completion-review/sources/kr457.pdf",
+      "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+      "bytes": 1763250,
+      "url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+      "section": "§5, стр. 38",
+      "version": "457_3 / 2024 v3",
+      "population": "adults_with_documented_F41.1",
+      "min_completed_years": 18
+    }
+  },
+  "critical_rule": {
+    "id": "A02-v2",
+    "source": "aviandr",
+    "requires": ["synthetic", "proven_age_at_least_19", "current_doctor_recorded_active_prescription_with_basis", "reported_taken", "reported_after_dose", "reported_current"],
+    "any_reaction": ["rigidity", "trismus", "hyperhidrosis", "hemoglobin"],
+    "action": "Немедленно сообщите лечащему врачу по инструкции Авиандра.",
+    "scope": "Сопоставление сообщения с инструкцией; не доказательство причинности, угрозы жизни, оценка риска или автоматическая отмена терапии.",
+    "hemoglobin_scope": "Только уже документированное снижение гемоглобина; приложение не измеряет и не задаёт порог.",
+    "event_delivery": "pending_S10_or_unassigned",
+    "no_match_meaning": "Условие не совпало; это не заключение об отсутствии риска."
+  },
+  "referral_rule": {
+    "source": "gtr",
+    "requires": ["synthetic", "proven_age_at_least_18", "current_doctor_documented_F41.1"],
+    "mandatory_any": ["severe", "suicide_risk_present", "psychiatric_comorbidity_present", "treatment_resistance_present"],
+    "desirable_requires": ["nonsevere", "suicide_risk_denied", "psychiatric_comorbidity_denied", "treatment_resistance_denied"],
+    "desirable_alternative": "psychotherapist",
+    "urgency": "unknown",
+    "scope": "Категории продукта для проекта рассмотрения; не юридическое обязательство. Только врач может подтвердить направление."
+  }
+}
