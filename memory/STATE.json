@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-19T13:19:22+03:00",
+  "updated_on": "2026-10-19T13:29:30+03:00",
   "current_slice": null,
   "last_accepted_slice": "S06",
-  "next_slice": "S07",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -50,10 +50,10 @@
       "reason": null
     },
     "S07": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S07.md",
-      "reason": null
+      "reason": "B03: точная русская валидация официальных PHQ-9/GAD-7 не подтверждена. Альтернативная DASS-42 имеет точный бланк и исследование, но официальные указания исключают прямой показ вычисленных баллов респонденту; совместимость с пациентской динамикой S07 не подтверждена. Требуется подходящая форма с полной научной/правовой цепочкой и допустимым режимом двух кабинетов."
     },
     "S08": {
       "status": "planned",
