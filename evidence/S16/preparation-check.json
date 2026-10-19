@@ -1,0 +1,31 @@
+{
+  "scope": "CLI preparation on fresh temporary synthetic DB; no human participation; no passwords retained in evidence",
+  "checks": [
+    {
+      "command": "seed-demo",
+      "exit_code": 0,
+      "result": null
+    },
+    {
+      "command": "seed-accounts",
+      "exit_code": 0,
+      "account_count": 8,
+      "credentials_mode": "0o600"
+    },
+    {
+      "command": "status",
+      "exit_code": 0,
+      "result": {
+        "status": "ok",
+        "schema_version": "012_search",
+        "foreign_keys": true,
+        "journal_mode": "delete"
+      }
+    },
+    {
+      "existing_round_directory": "refused"
+    }
+  ],
+  "database_mode": "0o600",
+  "temporary_directory_removed": true
+}
