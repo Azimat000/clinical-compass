@@ -1,0 +1,42 @@
+{
+  "scenario": "S10A synthetic ordinary self report",
+  "server": "Waitress localhost HTTP",
+  "real_server_processes": [
+    28428,
+    28432,
+    28433
+  ],
+  "restarts": 2,
+  "pending_survived_server_stop": true,
+  "worker_processed_while_cabinet_closed": true,
+  "duplicate_submission_single_notification": true,
+  "server_stamps_survived_restart": true,
+  "other_role_and_ended_relationship_denied": true,
+  "clinical_actions_created": false,
+  "measurement": {
+    "definition": "server recorded_at to HTTP HTML response fully received; includes deliberate process restarts",
+    "server_received_at": "2026-10-19T16:30:18.854914+00:00",
+    "http_html_received_at": "2026-10-19T16:30:19.245724+00:00",
+    "elapsed_wall_ms": 390.81,
+    "request_to_html_monotonic_ms": 395.631,
+    "browser_visibility_measured": false,
+    "errors": 0
+  },
+  "notification_stamps": {
+    "created_at": "2026-10-19T16:30:18.855491+00:00",
+    "ready_at": "2026-10-19T16:30:19.010596+00:00",
+    "delivered_at": "2026-10-19T16:30:19.238078+00:00",
+    "seen_at": "2026-10-19T16:30:19.255345+00:00",
+    "acknowledged_at": "2026-10-19T16:30:19.265681+00:00"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "processed",
+      "error": null
+    }
+  ],
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "limitations": "Synthetic local HTTP evidence only; no external channel, clinical validation or 24/7 monitoring."
+}

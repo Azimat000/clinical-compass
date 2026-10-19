@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Входящие самоотчёты</h1>
+<section class="notice"><p>Здесь появляются обычные самоотчёты связанных пациентов. Обновите страницу, чтобы получить новые записи. Это не экстренное оповещение. Внешние сообщения и круглосуточное наблюдение недоступны.</p><p>Передача в кабинет означает подготовку страницы сервером. Просмотр и принятие к работе врач отмечает отдельно. Эти отметки не изменяют лечение или план.</p></section>
+{% for n in items %}
+<article class="card" id="notification-{{ n.id }}" data-notification-id="{{ n.id }}">
+<h2>{{ n.code }} · Обычный самоотчёт</h2><p>Запись {{ n.entry_id }}</p>
+{% if n.ready_at %}<p>{{ n.summary }}</p><a href="{{ url_for('demo_patient',patient_id=n.patient_id) }}">Открыть карточку и исходную запись</a>{% endif %}
+<dl><dt>Принято сервером</dt><dd>{{ n.recorded_at }}</dd>
+<dt>Подготовлено обработчиком</dt><dd>{{ n.ready_at or 'Ожидает обработки' }}</dd>
+<dt>Передано в кабинет (страница подготовлена)</dt><dd>{{ n.delivered_at or 'Ожидает открытия кабинета' }}</dd>
+<dt>Просмотрено (отметка врача)</dt><dd>{{ n.seen_at or 'Нет отметки' }}</dd>
+<dt>Принято к работе</dt><dd>{{ n.acknowledged_at or 'Нет отметки' }}</dd></dl>
+{% if n.delivered_at and not n.seen_at %}<form method="post" action="{{ url_for('notification_mark',notification_id=n.id,action='seen') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Отметить просмотр</button></form>{% endif %}
+{% if n.seen_at and not n.acknowledged_at %}<form method="post" action="{{ url_for('notification_mark',notification_id=n.id,action='acknowledged') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Принять к работе</button></form>{% endif %}
+<details><summary>Журнал доставки · попыток {{ n.attempts }}</summary>
+{% if n.queue_status=='dead' %}<p role="alert">Автоматические попытки остановлены. Запись сохранена. Требуется проверка обработчика и доступности адресата.</p>{% elif n.queue_status=='pending' %}<p>Ожидает обработки{% if n.last_error %} после ошибки{% endif %}; следующая попытка не раньше {{ n.available_at }}.</p>{% else %}<p>Обработчик подготовил запись для кабинета.</p>{% endif %}
+{% for a in n.attempt_log %}<p>Попытка {{ a.attempt }} · {{ a.attempted_at }} · {{ {'processed':'Подготовлено','retry':'Будет повтор','dead':'Попытки остановлены'}[a.outcome] }}{% if a.error %} · {{ a.error }}{% endif %}</p>{% endfor %}</details>
+</article>
+{% else %}<p class="empty">Входящих самоотчётов пока нет.</p>{% endfor %}
+{% endblock %}

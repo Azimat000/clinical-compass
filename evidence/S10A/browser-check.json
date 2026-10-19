@@ -1,0 +1,50 @@
+{
+  "scenario": "Actual browser with real server restart; synthetic routine report only",
+  "before_worker": {
+    "id": "424831495e6d212d27471f8aad5860b5",
+    "entry_id": "424831495e6d212d27471f8aad5860b5",
+    "event_id": "9782331b-aaf2-43cc-83e6-f50bc8f239c3",
+    "relationship_id": "c1c735ec1565d4b8421d19be31f216e1",
+    "recipient_id": "doc-a",
+    "created_at": "2026-10-19T16:29:20.511330+00:00",
+    "ready_at": null,
+    "delivered_at": null,
+    "seen_at": null,
+    "acknowledged_at": null,
+    "recorded_at": "2026-10-19T16:29:20.510192+00:00"
+  },
+  "after_browser": {
+    "id": "424831495e6d212d27471f8aad5860b5",
+    "entry_id": "424831495e6d212d27471f8aad5860b5",
+    "event_id": "9782331b-aaf2-43cc-83e6-f50bc8f239c3",
+    "relationship_id": "c1c735ec1565d4b8421d19be31f216e1",
+    "recipient_id": "doc-a",
+    "created_at": "2026-10-19T16:29:20.511330+00:00",
+    "ready_at": "2026-10-19T16:29:20.673721+00:00",
+    "delivered_at": "2026-10-19T16:29:46.182789+00:00",
+    "seen_at": "2026-10-19T16:29:48.645797+00:00",
+    "acknowledged_at": "2026-10-19T16:29:54.430996+00:00"
+  },
+  "browser_observed_at": "2026-10-19T16:29:46.410Z",
+  "elapsed_received_to_browser_observation_ms": 25900,
+  "measurement_limit": "Includes deliberate server restart, manual tool orchestration and page opening; not a throughput or emergency-response guarantee",
+  "before_restart_marks": {
+    "id": "424831495e6d212d27471f8aad5860b5",
+    "entry_id": "424831495e6d212d27471f8aad5860b5",
+    "event_id": "9782331b-aaf2-43cc-83e6-f50bc8f239c3",
+    "relationship_id": "c1c735ec1565d4b8421d19be31f216e1",
+    "recipient_id": "doc-a",
+    "created_at": "2026-10-19T16:29:20.511330+00:00",
+    "ready_at": "2026-10-19T16:29:20.673721+00:00",
+    "delivered_at": "2026-10-19T16:29:46.182789+00:00",
+    "seen_at": "2026-10-19T16:29:48.645797+00:00",
+    "acknowledged_at": "2026-10-19T16:29:54.430996+00:00"
+  },
+  "after_second_server_restart_marks_equal": true,
+  "actual_browser_verified": true,
+  "clinical_counts": {
+    "alerts": 0,
+    "risk_evaluations": 0,
+    "care_actions": 0
+  }
+}

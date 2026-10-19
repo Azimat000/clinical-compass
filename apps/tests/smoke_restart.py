@@ -157,7 +157,9 @@ def main():
         subprocess.run(command + ['worker', '--once'], cwd=ROOT, check=True)
         with sqlite3.connect(path) as db:
             assert db.execute('SELECT count(*) FROM patients').fetchone()[0] == 6
-            assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed'").fetchone()[0] == 6
+            assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed' AND topic='demo.patient_created.v1'").fetchone()[0] == 6
+            assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed' AND topic='routine.self_report.v1'").fetchone()[0] == 1
+            assert db.execute('SELECT count(*) FROM routine_notifications WHERE ready_at IS NOT NULL AND delivered_at IS NULL').fetchone()[0] == 1
             assert db.execute('SELECT count(*) FROM event_receipts').fetchone()[0] == 6
             assert db.execute('SELECT count(*) FROM relationship_checks').fetchone()[0] == 1
             assert db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0] == 2
@@ -168,7 +170,7 @@ def main():
             assert db.execute('SELECT count(*) FROM care_actions').fetchone()[0] == 1
             assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             assert db.execute('PRAGMA foreign_key_check').fetchall() == []
-        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 6, 'durable_technical_reports': 1,
+        print(json.dumps({'process_restart': result, 'durable_events_after_restart': 7, 'durable_routine_notifications': 1, 'durable_technical_reports': 1,
                           'durable_clinical_entries': 2, 'durable_adverse_events': 1, 'durable_assessments': 2,
                           'integrity': 'ok'}, ensure_ascii=False, indent=2))
 

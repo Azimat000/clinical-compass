@@ -1,6 +1,7 @@
 <section class="record-form" id="new-record">
 <h2>{{ 'Самоотчёт' if current_user.role=='patient' else 'Записать визит' }}</h2>
 <p>Только вымышленные сведения. Запись сохранится в обоих кабинетах. Исправления добавляйте новой записью с пояснением: прежние источники останутся в истории.</p>
+{% if current_user.role=='patient' %}<p class="notice">Самоотчёт поступает в очередь обычных сообщений врачу. Когда врач откроет входящие, он сможет отдельно отметить просмотр и принятие к работе. Это не экстренный канал; круглосуточное наблюдение и немедленный ответ недоступны.</p>{% endif %}
 {% if form_error %}<p class="error" role="alert">{{ form_error }} Запись не сохранена; проверьте поля ниже.</p>{% endif %}
 <form method="post" action="{{ url_for('self_report' if current_user.role=='patient' else 'visit', patient_id=patient.id) }}">
 <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="request_key" value="{{ request_key }}">

@@ -1,0 +1,40 @@
+{
+  "base_commit": "d2ace1ba9a381bed87ea2f5b9d66e62c29dea076",
+  "status": "",
+  "diff": "",
+  "hashes": {
+    "apps/compass/records.py": "73bf505e77b98a657e7d38dc7eaf46b2862102765b9d807d484018449e032c14",
+    "apps/compass/events.py": "fe29c5ec8d561e22ac255ae42bb358e3b0f524786f82657cab08aacc3bf5b614",
+    "apps/compass/web.py": "72f508f1e5b4b3339fdf3dd962ad6d6550982d2d760a8971b89d865f8b9768c6",
+    "apps/compass/templates/base.html": "fdd640714b01d753a1bd9f09c45c4a462f82915ee400302d1a173bc17dc6067b",
+    "plan/coverage.json": "2234379d3a7ca98f3d433b0aa3a3210655593d06a3abf74dd66554cc790846e7",
+    "memory/STATE.json": "eda2d50352ee2dda9549425f5044ebf8f946aba7eaf1e5238253c5d083a54f17",
+    "apps/compass/migrations/002_access.sql": "3e54d342a50f15cf37d123babf929970646ea15d45c8b1dba5a00621f8c7a527",
+    "apps/compass/migrations/006_age_reviews.sql": "66dfdb300868003f87c07dae5758091f4a757b19bf13103bc454dea087658159",
+    "apps/compass/migrations/003_records.sql": "ee35f35792316b234ff05396c318e10440d98248c9f8a1f5b53f57437d25a7ae",
+    "apps/compass/migrations/004_assessments.sql": "bae2cacc4b7d6aa191d5281d0ecc7494c294c103db1c1800dbf280ee77923baf",
+    "apps/compass/migrations/001_initial.sql": "f2fa607641a82669a32a29e99d14f5487f65db31b229e5bf09b4c6ba4e3a56ea",
+    "apps/compass/migrations/005_decisions.sql": "5d14919fe4c3acaaad253dbbc63ff5d64fa1f5538b07c0cfd7769b2746ebd17e",
+    "apps/compass/resources/routing-reference-v1.json": "f5491c1756e8ee1823666c006a5412e2e91bc896d3e213534e2c27e6d28ddde9",
+    "apps/compass/resources/therapy-reference-v1.json": "aa839703ec2e18c658d08eacd84e22eaa590d768702d638269f3b580ccb8b906",
+    "apps/compass/resources/dass42-ru-v1.json": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2",
+    "apps/compass/resources/therapy-reference-v2.json": "6d8ba2bed9415f247df488b7ea6fc9e3b44a3acbca0be2e75e4a91894595338b",
+    "data/synthetic/extraction-holdout.json": "7829d17ca57b65a1c00b371d81387799d8567299d88cccb76c274c71826012b0",
+    "data/synthetic/cases.json": "2b990334661c1d0ac588753cc72e915a07a35743884cb71584f79a72f621da8f",
+    "data/synthetic/manifest.json": "e1f61241e541609829c126539d8f9f147bd566bb1cdeec969d66bec730d34789",
+    "data/synthetic/extraction-development.json": "5c827aca7a31711eeb19dee93a2e6c8fabd5edd86a836f4faa7773cc78ffa79d",
+    "research/sources/regulations-text.txt": "e62b75e7f20b413d37365b1d7b1b7a2d878499ca1a982afc1acd702b6f04c43b",
+    "research/sources/case.pdf": "dbc5d5edebab94f5742f8d81ec1b727954c8b088afcc126e67f75ab5691f41ab",
+    "research/sources/regulations.docx": "7106584c95391fef5c22445781faa1e2b78aa6cda16df67e9a56f091e2265df3",
+    "research/sources/manifest.json": "e3ce7e5bb171c44fe53129bbf6c25df72ba2de2f24962e258c2dba17881e2980"
+  },
+  "worker_paths": {
+    "apps/tests/test_notifications.py": "ABSENT",
+    "evidence/S10A/verify_delivery.py": "ABSENT"
+  },
+  "ownership": {
+    "root": "app integration, migration, documentation, evidence excluding worker paths",
+    "notification_tests": "apps/tests/test_notifications.py, evidence/S10A/verify_delivery.py"
+  },
+  "active_agents": "root; s10a_external completed read-only; notification_tests to be spawned; no overlap"
+}

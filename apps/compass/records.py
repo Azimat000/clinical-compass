@@ -132,6 +132,9 @@ def save(db, user, patient_id, kind, form):
                       VALUES(?,?,?,?,?,?,?,?,?)''', (secrets.token_hex(16), patient_id, encounter_id, 'reported_age',
                       None if payload['age']['status'] == 'unknown' else json.dumps(payload['age'], ensure_ascii=False),
                       payload['age']['status'], payload['observed_on'], stamp, provenance))
+        if kind == 'self_report':
+            from .notifications import enqueue_report
+            enqueue_report(db, entry_id, patient_id)
         access.audit(db, user['id'], 'record.' + kind + '_created', entry_id)
         return entry_id
 

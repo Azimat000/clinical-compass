@@ -4,7 +4,7 @@ import secrets
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing
+from . import access, records, assessments, decisions, ages, routing, notifications
 
 
 def create_app(database=None):
@@ -126,6 +126,24 @@ def create_app(database=None):
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
         return render_patient(patient_id)
+
+    @app.get('/notifications')
+    def notification_inbox():
+        role('doctor')
+        try:
+            items = notifications.inbox(get_db(), g.user, prepare=request.method != 'HEAD')
+        except notifications.NotificationError as error:
+            abort(error.status)
+        return render_template('notifications.html', items=items)
+
+    @app.post('/notifications/<notification_id>/<action>')
+    def notification_mark(notification_id, action):
+        role('doctor')
+        try:
+            notifications.mark(get_db(), g.user, notification_id, action)
+        except notifications.NotificationError as error:
+            return render_template('result.html', title='Отметка не сохранена', message=str(error)), error.status
+        return redirect(url_for('notification_inbox'), code=303)
 
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)
