@@ -24,7 +24,9 @@ class ClinicalRuleTests(unittest.TestCase):
         self.doc = {'id': 'doc-a', 'role': 'doctor'}
         self.pat = {'id': 'pat-a', 'role': 'patient'}
         self.db.execute("INSERT INTO care_relationships VALUES('rel','D01','doc-a',?,NULL)", (now(),))
-        self.db.execute("UPDATE patients SET age_status='known',age_years=19,birth_date=NULL,created_at=? WHERE id='D01'", (now(),))
+        # Profile observation uses the same Moscow calendar as the age check.
+        # UTC receipt may still be yesterday around Moscow midnight.
+        self.db.execute("UPDATE patients SET age_status='known',age_years=19,birth_date=NULL,created_at=? WHERE id='D01'", (records.today().isoformat(),))
         self.context()
 
     def tearDown(self):

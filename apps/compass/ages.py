@@ -26,6 +26,13 @@ def source_snapshot(db, patient):
             sources.append({'id': entry['id'], 'actor_id': entry['actor_id'], 'kind': entry['kind'],
                             'observed_on': entry['observed_on'], 'recorded_at': entry['recorded_at'],
                             'age': entry['payload']['age']})
+    # First-visit notes are independent append-only sources, including drafts.
+    # New sources invalidate a prior reconciliation and outstanding forms.
+    for row in db.execute('SELECT * FROM first_visit_versions WHERE patient_id=? ORDER BY rowid', (patient['id'],)):
+        payload = json.loads(row['payload_json'])
+        sources.append({'id': row['id'], 'actor_id': row['actor_id'], 'kind': 'first_visit',
+                        'observed_on': payload['observed_on'], 'recorded_at': row['recorded_at'],
+                        'age': payload['age']})
     return canonical(sources)
 
 

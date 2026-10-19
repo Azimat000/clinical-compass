@@ -10,6 +10,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
+from . import first_visits
 
 
 def create_app(database=None):
@@ -193,6 +194,34 @@ def create_app(database=None):
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
         return render_patient(patient_id)
+
+    @app.route('/patients/<patient_id>/first-visits', methods=['GET'])
+    @app.route('/patients/<patient_id>/first-visits/<visit_id>', methods=['GET', 'POST'])
+    def first_visit_page(patient_id, visit_id='new'):
+        role('doctor')
+        patient = patient_or_404(patient_id)
+        db = get_db()
+        error, status = None, 200
+        if request.method == 'POST':
+            try:
+                saved = first_visits.save(db, g.user, patient_id, visit_id, request.form)
+                return redirect(url_for('first_visit_page', patient_id=patient_id, visit_id=saved), code=303)
+            except first_visits.Error as failure:
+                if failure.status in (403, 404):
+                    abort(failure.status)
+                error, status = str(failure), failure.status
+        items = first_visits.history(db, g.user, patient_id)
+        selected = [item for item in items if item['visit_id'] == visit_id]
+        if visit_id != 'new' and not selected:
+            abort(404)
+        current = selected[0] if selected else None
+        values = dict(request.form) if error else first_visits.form_values(current) if current else {}
+        return render_template('first_visit.html', patient=patient, visits=items,
+            current=current, visit_id=visit_id, values=values, error=error,
+            request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
+            fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES,
+            measured=assessments.history(db, g.user, patient_id),
+            decisions=decisions.history(db, g.user, patient_id)), status
 
     @app.get('/patients/<patient_id>/communication')
     def communication_page(patient_id):

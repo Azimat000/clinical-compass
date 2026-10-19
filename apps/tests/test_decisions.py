@@ -95,12 +95,9 @@ class DecisionTests(unittest.TestCase):
                 elif mutation=='source': self.db.execute("UPDATE source_versions SET status='superseded'")
                 elif mutation=='catalog': self.db.execute("UPDATE catalog_versions SET blocker='changed'")
                 if mutation=='day':
-                    from datetime import date
-                    with patch.object(records,'today',return_value=date(2026,10,20)):
-                        # The test is valid regardless of the host day.
-                        snap=json.loads(p['input_snapshot_json']);snap_day=snap['day']
-                        if snap_day=='2026-10-20':
-                            raise AssertionError('Fixture day collision')
+                    from datetime import date, timedelta
+                    snap_day=date.fromisoformat(json.loads(p['input_snapshot_json'])['day'])
+                    with patch.object(records,'today',return_value=snap_day+timedelta(days=1)):
                         self.assertEqual(409,self.confirm(p).status_code)
                 elif mutation=='reference':
                     ref=decisions.reference();ref['version']='new-source-version'

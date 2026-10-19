@@ -1,0 +1,14 @@
+{
+  "kind": "agent self-check; synthetic only",
+  "checks": [
+    "doctor opens diagnosis-free FV01, saves incomplete draft",
+    "real Waitress process restart; same authenticated doctor reopens persisted draft",
+    "Tab moves from complaint text to its source basis; native focus visible",
+    "320px viewport, no horizontal overflow; save controls available",
+    "completed revision is read-only; original revision and new text remain in history",
+    "patient retains self-report and cabinet; direct first-visit URL is 403"
+  ],
+  "browser": "151.0.7922.34",
+  "overflow": [],
+  "status": "PASS"
+}
