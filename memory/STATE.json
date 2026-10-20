@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T22:22:34+03:00",
+  "updated_on": "2026-10-20T22:43:00+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17J01",
-  "next_slice": "S17J02",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -236,10 +236,10 @@
       "reason": null
     },
     "S17J02": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02.md",
-      "reason": null
+      "reason": "Рабочий корпус пуст: для точных КР301_3, КР457_3 и листка ГРЛС не установлено основание полного хранения и индексации; все три источника в карантине. Технический импорт и отрицательные проверки выполнены, но реальный допущенный корпус и его заморозка для J03/J04 отсутствуют. Нужна документированная применимость законного режима/условий/лицензии точной версии; письменное разрешение не единственный путь. Без тега приёмки."
     },
     "S17J03": {
       "status": "planned",
@@ -377,5 +377,17 @@
     "status": "planning_only",
     "next_action": "В новой сессии только S17J01. Все новые срезы planned; S17H остаётся последним принятым.",
     "clinical_readiness": false
+  },
+  "latest_corpus_admission": {
+    "slice": "S17J02",
+    "status": "blocked",
+    "report": "memory/sessions/S17J02.md",
+    "acceptance": "evidence/S17J02/acceptance.md",
+    "registry": "data/retrieval/source-registry.json",
+    "manifest": "evidence/S17J02/corpus-manifest.json",
+    "admitted_sources": 0,
+    "quarantined_sources": 3,
+    "clinical_validation": false,
+    "next_action": "Возобновить только J02 после установления правового основания точного рабочего корпуса; J03–J08/J не начинать. Карантин не разрешает индексацию. Технический механизм импорта проверен; рабочий поиск не готов."
   }
 }
