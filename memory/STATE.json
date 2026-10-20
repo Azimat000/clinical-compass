@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T22:43:00+03:00",
+  "updated_on": "2026-10-20T23:07:22+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J01",
-  "next_slice": null,
+  "last_accepted_slice": "S17J02",
+  "next_slice": "S17J03",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -236,10 +236,10 @@
       "reason": null
     },
     "S17J02": {
-      "status": "blocked",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17J02",
       "handoff": "memory/sessions/S17J02.md",
-      "reason": "Рабочий корпус пуст: для точных КР301_3, КР457_3 и листка ГРЛС не установлено основание полного хранения и индексации; все три источника в карантине. Технический импорт и отрицательные проверки выполнены, но реальный допущенный корпус и его заморозка для J03/J04 отсутствуют. Нужна документированная применимость законного режима/условий/лицензии точной версии; письменное разрешение не единственный путь. Без тега приёмки."
+      "reason": null
     },
     "S17J03": {
       "status": "planned",
@@ -380,14 +380,21 @@
   },
   "latest_corpus_admission": {
     "slice": "S17J02",
-    "status": "blocked",
+    "status": "accepted",
     "report": "memory/sessions/S17J02.md",
     "acceptance": "evidence/S17J02/acceptance.md",
     "registry": "data/retrieval/source-registry.json",
     "manifest": "evidence/S17J02/corpus-manifest.json",
-    "admitted_sources": 0,
-    "quarantined_sources": 3,
+    "admitted_sources": 3,
+    "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "Возобновить только J02 после установления правового основания точного рабочего корпуса; J03–J08/J не начинать. Карантин не разрешает индексацию. Технический механизм импорта проверен; рабочий поиск не готов."
+    "next_action": "Только новая сессия S17J03: сверка/контекст/координаты и раздельный версионированный протокол authored_fact/original_quote, реальные вопросы/разметка до настройки J04. ПолныеPDFне допущены; G01–G09 не снижены.",
+    "representation": "reviewed_cards",
+    "authored_fact_cards": 15,
+    "original_quotes": 2,
+    "full_text_admission": false,
+    "legal_basis": "GK1259(5) authored facts; GK1274(1)(1) two purpose-specific KR citations",
+    "legal_review": "evidence/S17J02/legal-resolution/research.md",
+    "commit_ref": "refs/tags/slice/S17J02"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "registry_sha256": "da9635c940169c8f7ad9c336445df601ea293a476fea9d5789359fccbc4c0b69",
+  "schema_version": 2,
+  "registry_sha256": "bae9a50066edc2ca3d69ea31bd68fdcec941702938f336234c98fd41b240e19f",
   "mode": "current",
   "sources": [
     {
@@ -16,9 +16,9 @@
         "source_version": "301_3 / 2024 / version=3",
         "official_status": "current",
         "official_origin_verified": true,
-        "status": "quarantine",
-        "admission_id": "S17J02-KR301_3",
-        "decision_origin": "Codex: точные байты и статус подтверждены read-only исследованием; правовое основание полного корпуса не установлено",
+        "status": "approved",
+        "admission_id": "S17J02-KR301_3-reference-1",
+        "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
         "verified_at": "2026-10-20T22:32:00+03:00",
         "review_due_at": "2026-10-21T22:32:00+03:00",
         "population": {
@@ -36,13 +36,41 @@
           ]
         },
         "rights": {
-          "status": "unknown",
-          "scopes": [],
-          "evidence": [
-            "evidence/S17J02/research.md",
-            "evidence/S17J02/rights-research.md"
+          "status": "verified",
+          "representation": "reviewed_cards",
+          "scopes": [
+            "local_store",
+            "local_index",
+            "display_reference",
+            "display_excerpt"
           ],
-          "limitation": "Полное хранение/индексация профессионального корпуса не имеют установленного основания; цитирование условно возможно по ст.1274, но точные фрагменты/цели/атрибуция не проверены. Это не установленный запрет и не требование письма как единственного пути."
+          "index_fields": [
+            "paraphrase"
+          ],
+          "evidence": [
+            "evidence/S17J02/legal-resolution/research.md",
+            "evidence/S17J02/legal-resolution/content-review.json"
+          ],
+          "content_review": {
+            "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+            "purpose_and_volume_reviewed": true,
+            "attribution_reviewed": true,
+            "fragment_ids": [
+              "KR301_3-F01",
+              "KR301_3-F02",
+              "KR301_3-F03",
+              "KR301_3-F04",
+              "KR301_3-F05"
+            ],
+            "quoted_characters": 101,
+            "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+            "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+          },
+          "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+          "evidence_sha256": {
+            "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+            "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
+          }
         },
         "verification": {
           "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
@@ -56,13 +84,21 @@
           ],
           "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
           "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+        },
+        "representation": "reviewed_cards",
+        "artifact_path": "data/retrieval/reference-cards/KR301_3.json",
+        "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+        "full_text_rights": {
+          "status": "unknown",
+          "scopes": [],
+          "evidence": [
+            "evidence/S17J02/rights-research.md"
+          ],
+          "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
         }
       },
-      "disposition": "quarantined",
-      "reasons": [
-        "admission_quarantine",
-        "rights_unverified"
-      ]
+      "disposition": "admitted",
+      "reasons": []
     },
     {
       "document_id": "KR457_3",
@@ -77,9 +113,9 @@
         "source_version": "457_3 / 2024 / version=3",
         "official_status": "current",
         "official_origin_verified": true,
-        "status": "quarantine",
-        "admission_id": "S17J02-KR457_3",
-        "decision_origin": "Codex: точные байты и статус подтверждены read-only исследованием; правовое основание полного корпуса не установлено",
+        "status": "approved",
+        "admission_id": "S17J02-KR457_3-reference-1",
+        "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
         "verified_at": "2026-10-20T22:32:00+03:00",
         "review_due_at": "2026-10-21T22:32:00+03:00",
         "population": {
@@ -97,13 +133,41 @@
           ]
         },
         "rights": {
-          "status": "unknown",
-          "scopes": [],
-          "evidence": [
-            "evidence/S17J02/research.md",
-            "evidence/S17J02/rights-research.md"
+          "status": "verified",
+          "representation": "reviewed_cards",
+          "scopes": [
+            "local_store",
+            "local_index",
+            "display_reference",
+            "display_excerpt"
           ],
-          "limitation": "Полное хранение/индексация профессионального корпуса не имеют установленного основания; цитирование условно возможно по ст.1274, но точные фрагменты/цели/атрибуция не проверены. Это не установленный запрет и не требование письма как единственного пути."
+          "index_fields": [
+            "paraphrase"
+          ],
+          "evidence": [
+            "evidence/S17J02/legal-resolution/research.md",
+            "evidence/S17J02/legal-resolution/content-review.json"
+          ],
+          "content_review": {
+            "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+            "purpose_and_volume_reviewed": true,
+            "attribution_reviewed": true,
+            "fragment_ids": [
+              "KR457_3-F01",
+              "KR457_3-F02",
+              "KR457_3-F03",
+              "KR457_3-F04",
+              "KR457_3-F05"
+            ],
+            "quoted_characters": 159,
+            "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+            "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+          },
+          "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+          "evidence_sha256": {
+            "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+            "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
+          }
         },
         "verification": {
           "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
@@ -117,13 +181,21 @@
           ],
           "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
           "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+        },
+        "representation": "reviewed_cards",
+        "artifact_path": "data/retrieval/reference-cards/KR457_3.json",
+        "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+        "full_text_rights": {
+          "status": "unknown",
+          "scopes": [],
+          "evidence": [
+            "evidence/S17J02/rights-research.md"
+          ],
+          "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
         }
       },
-      "disposition": "quarantined",
-      "reasons": [
-        "admission_quarantine",
-        "rights_unverified"
-      ]
+      "disposition": "admitted",
+      "reasons": []
     },
     {
       "document_id": "AVIANDR_LEAFLET_160726",
@@ -138,9 +210,9 @@
         "source_version": "ЛП-№(002445)-(РГ-RU)-160726 / 2026-07-16",
         "official_status": "current",
         "official_origin_verified": true,
-        "status": "quarantine",
-        "admission_id": "S17J02-AVIANDR_LEAFLET_160726",
-        "decision_origin": "Codex: точные байты и статус подтверждены read-only исследованием; правовое основание полного корпуса не установлено",
+        "status": "approved",
+        "admission_id": "S17J02-AVIANDR_LEAFLET_160726-reference-1",
+        "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
         "verified_at": "2026-10-20T22:32:00+03:00",
         "review_due_at": "2026-10-21T22:32:00+03:00",
         "population": {
@@ -158,13 +230,40 @@
           ]
         },
         "rights": {
-          "status": "unknown",
-          "scopes": [],
-          "evidence": [
-            "evidence/S17J02/research.md",
-            "evidence/S17J02/rights-research.md"
+          "status": "verified",
+          "representation": "reviewed_cards",
+          "scopes": [
+            "local_store",
+            "local_index",
+            "display_reference"
           ],
-          "limitation": "Полное хранение/индексация профессионального корпуса не имеют установленного основания; цитирование условно возможно по ст.1274, но точные фрагменты/цели/атрибуция не проверены. Это не установленный запрет и не требование письма как единственного пути."
+          "index_fields": [
+            "paraphrase"
+          ],
+          "evidence": [
+            "evidence/S17J02/legal-resolution/research.md",
+            "evidence/S17J02/legal-resolution/content-review.json"
+          ],
+          "content_review": {
+            "basis": "GK1259_5_FACTS",
+            "purpose_and_volume_reviewed": true,
+            "attribution_reviewed": true,
+            "fragment_ids": [
+              "AVIANDR_LEAFLET_160726-F01",
+              "AVIANDR_LEAFLET_160726-F02",
+              "AVIANDR_LEAFLET_160726-F03",
+              "AVIANDR_LEAFLET_160726-F04",
+              "AVIANDR_LEAFLET_160726-F05"
+            ],
+            "quoted_characters": 0,
+            "artifact_sha256": "218e7ff22df42b9be19f03e5b287f30e8435f18ee7f624b60681de8bdc85b535",
+            "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+          },
+          "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+          "evidence_sha256": {
+            "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+            "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
+          }
         },
         "verification": {
           "sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc",
@@ -178,15 +277,32 @@
           ],
           "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
           "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+        },
+        "representation": "reviewed_cards",
+        "artifact_path": "data/retrieval/reference-cards/AVIANDR_LEAFLET_160726.json",
+        "artifact_sha256": "218e7ff22df42b9be19f03e5b287f30e8435f18ee7f624b60681de8bdc85b535",
+        "full_text_rights": {
+          "status": "unknown",
+          "scopes": [],
+          "evidence": [
+            "evidence/S17J02/rights-research.md"
+          ],
+          "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
         }
       },
-      "disposition": "quarantined",
-      "reasons": [
-        "admission_quarantine",
-        "rights_unverified"
-      ]
+      "disposition": "admitted",
+      "reasons": []
     }
   ],
-  "blob_sha256": [],
-  "corpus_version": "10022a3c25f6e5bef5364a507dc590656c319c71f783a66cd8e3d8a56b6f4f2c"
+  "blob_sha256": [
+    "218e7ff22df42b9be19f03e5b287f30e8435f18ee7f624b60681de8bdc85b535",
+    "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+    "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2"
+  ],
+  "blob_formats": {
+    "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2": "json",
+    "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34": "json",
+    "218e7ff22df42b9be19f03e5b287f30e8435f18ee7f624b60681de8bdc85b535": "json"
+  },
+  "corpus_version": "337dd3f854db79acd1870dbd753c46e402a3ef8e3e042c5e45c9ab8aedf5dd62"
 }

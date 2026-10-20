@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Administrator-only offline import of the three reviewed local originals."""
+"""Administrator-only offline import of reviewed source representations."""
 import argparse
 from datetime import datetime, timezone
 import json

@@ -1,50 +1,46 @@
 {
-  "status": "TECHNICAL_CHECKS_PASS_WORKING_CORPUS_BLOCKED",
+  "status": "SCOPED_CORPUS_ACCEPTED",
+  "representation": "reviewed_cards",
   "checks": [
     {
       "command": "make check",
       "exit_code": 0,
-      "log": "evidence/S17J02/final-make-check.log",
-      "application_tests": 220,
-      "application_seconds": 50.086,
-      "tool_tests": 40,
-      "tool_seconds": 86.864,
-      "restart_rounds": 2,
-      "pip_check": "No broken requirements found",
-      "synthetic_validation": "PASS"
+      "application_tests": 270,
+      "tools_tests": 40,
+      "log": "evidence/S17J02/legal-resolution/final-make-check.log"
     },
     {
       "command": ".venv/bin/python -m unittest apps.tests.test_retrieval_corpus -v",
       "exit_code": 0,
-      "tests": 39,
-      "log": "evidence/S17J02/resume-corpus-tests.log"
+      "tests": 89,
+      "log": "evidence/S17J02/legal-resolution/corpus-tests.log"
     },
     {
-      "command": "python3 tools/validate_plan.py",
+      "command": "python3 evidence/S17J02/legal-resolution/verify.py",
       "exit_code": 0,
-      "log": "evidence/S17J02/plan-validation.log",
-      "clinical_safety_verified": false
+      "log": "evidence/S17J02/legal-resolution/preservation.json"
     },
     {
-      "command": "python3 tools/session.py status",
+      "command": ".venv/bin/python tools/evaluate_retrieval.py --validate",
       "exit_code": 0,
-      "result": "current=null,last_accepted=S17J01,next=null"
-    },
-    {
-      "command": "python3 tools/render_coverage.py",
-      "exit_code": 0,
-      "result": "COVERAGE.md remains consistent with coverage.json"
-    },
-    {
-      "command": "python3 evidence/S17J02/verify.py",
-      "exit_code": 0,
-      "log": "evidence/S17J02/preservation.json"
+      "log": "evidence/S17J02/legal-resolution/frozen-j01-validation.log",
+      "control_run": false
     },
     {
       "command": ".venv/bin/python tools/import_retrieval_corpus.py --destination evidence/S17J02/corpus --at <evaluated_at from import-results.json> (twice)",
       "exit_code": 0,
-      "log": "evidence/S17J02/import-results.json",
-      "result": "NO_ADMITTED_SOURCE; repeated without duplicates;0newPDFcopies"
+      "admitted": 3,
+      "repeated_without_duplicates": true,
+      "log": "evidence/S17J02/import-results.json"
+    },
+    {
+      "command": "python3 tools/render_coverage.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17J02",
+      "exit_code": 0,
+      "log": "evidence/S17J02/legal-resolution/plan-validation.log"
     },
     {
       "command": "git diff --check",
@@ -52,19 +48,17 @@
     }
   ],
   "sha256": {
-    "apps/compass/retrieval_corpus.py": "42b5d1eef2f0076ec3f678b670adf0ed2ba4a73a35f3b7eeca1b0a9f6dbfa21a",
-    "apps/tests/test_retrieval_corpus.py": "e8a43b34ee0edf2546f6cd8f78dbb84abf72909b8e58f3180d9fa043d31c7fa8",
-    "tools/import_retrieval_corpus.py": "58b0f673a53da908cd8db912ba5a93783a04aeb65d763e9ed26c99f00d35f982",
-    "data/retrieval/source-registry.json": "88d168db31739b19df20efcd3780ea04255e3949472af38351f97c66c6385d7e",
-    "evidence/S17J02/research.md": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
-    "evidence/S17J02/rights-research.md": "ac03c32af8d743234e0961ce0b883b6dd2091470c75ccc54dc5bb312adcb3625"
+    "apps/compass/retrieval_corpus.py": "7668ffbcf093c003f53c4793cb93870c52367f88338fb40ef99984991eeacd8a",
+    "apps/tests/test_retrieval_corpus.py": "b38ada7ad1f8fe2e2918d74193b431fe78c2b3a7e89a9b6b26d9d2166b4cb643",
+    "tools/import_retrieval_corpus.py": "414f92709ef4e1b716de427028837eabdf5a5b26eecd6f939ac6a96f8d2b9603",
+    "data/retrieval/source-registry.json": "b8100267819071441fb0882e0b11e422569707b4c8c10f8349f0ef7e93f5b86e",
+    "docs/architecture/retrieval-reference-contract.md": "6f4b72cd4bea4e8de369d95d370df1cdbb2ae70a0dfe14771488ab4ef8df378f",
+    "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+    "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
   },
-  "not_run": [
-    "real retrieval quality/control",
-    "semantic comparison",
-    "HTTP or UI integration for corpus",
-    "clinical validation",
-    "real-patient trial"
-  ],
-  "acceptance_tag_created": false
+  "full_text_admission": false,
+  "clinical_validation": false,
+  "search_quality_measured": false,
+  "search_implemented": false,
+  "acceptance_ref": "refs/tags/slice/S17J02"
 }

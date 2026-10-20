@@ -1,0 +1,44 @@
+test_all_sources_removed (apps.tests.test_retrieval_corpus.CorpusTests.test_all_sources_removed) ... ok
+test_archive_never_current (apps.tests.test_retrieval_corpus.CorpusTests.test_archive_never_current) ... ok
+test_archive_preserves_quarantined_original (apps.tests.test_retrieval_corpus.CorpusTests.test_archive_preserves_quarantined_original) ... ok
+test_changed_or_missing_review_blocks_snapshot (apps.tests.test_retrieval_corpus.CorpusTests.test_changed_or_missing_review_blocks_snapshot) ... ok
+test_corrupt_manifest (apps.tests.test_retrieval_corpus.CorpusTests.test_corrupt_manifest) ... ok
+test_corrupt_stored_blob (apps.tests.test_retrieval_corpus.CorpusTests.test_corrupt_stored_blob) ... ok
+test_duplicate_bytes_different_id (apps.tests.test_retrieval_corpus.CorpusTests.test_duplicate_bytes_different_id) ... ok
+test_duplicate_id_with_changed_content (apps.tests.test_retrieval_corpus.CorpusTests.test_duplicate_id_with_changed_content) ... ok
+test_extra_blob_and_no_silent_overwrite (apps.tests.test_retrieval_corpus.CorpusTests.test_extra_blob_and_no_silent_overwrite) ... ok
+test_future_review (apps.tests.test_retrieval_corpus.CorpusTests.test_future_review) ... ok
+test_invalid_manifest_json_types_fail_closed (apps.tests.test_retrieval_corpus.CorpusTests.test_invalid_manifest_json_types_fail_closed) ... ok
+test_later_repeat_before_expiry_same_version (apps.tests.test_retrieval_corpus.CorpusTests.test_later_repeat_before_expiry_same_version) ... ok
+test_lifecycle_all_metadata_rechecked (apps.tests.test_retrieval_corpus.CorpusTests.test_lifecycle_all_metadata_rechecked) ... ok
+test_malformed_document_type_quarantined (apps.tests.test_retrieval_corpus.CorpusTests.test_malformed_document_type_quarantined) ... ok
+test_malformed_rights_fail_closed (apps.tests.test_retrieval_corpus.CorpusTests.test_malformed_rights_fail_closed) ... ok
+test_manufacturer_cannot_replace_official_grls (apps.tests.test_retrieval_corpus.CorpusTests.test_manufacturer_cannot_replace_official_grls) ... ok
+test_missing_original (apps.tests.test_retrieval_corpus.CorpusTests.test_missing_original) ... ok
+test_modified_bytes (apps.tests.test_retrieval_corpus.CorpusTests.test_modified_bytes) ... ok
+test_no_network_even_for_official_source_url (apps.tests.test_retrieval_corpus.CorpusTests.test_no_network_even_for_official_source_url) ... ok
+test_path_traversal_and_url (apps.tests.test_retrieval_corpus.CorpusTests.test_path_traversal_and_url) ... ok
+test_pdf_header (apps.tests.test_retrieval_corpus.CorpusTests.test_pdf_header) ... ok
+test_proof_bound_to_bytes_type_and_version (apps.tests.test_retrieval_corpus.CorpusTests.test_proof_bound_to_bytes_type_and_version) ... ok
+test_publish_rejects_invalid_blob_before_write (apps.tests.test_retrieval_corpus.CorpusTests.test_publish_rejects_invalid_blob_before_write) ... ok
+test_publish_rejects_version_traversal_before_write (apps.tests.test_retrieval_corpus.CorpusTests.test_publish_rejects_version_traversal_before_write) ... ok
+test_removed_source (apps.tests.test_retrieval_corpus.CorpusTests.test_removed_source) ... ok
+test_review_evidence_paths_fail_closed (apps.tests.test_retrieval_corpus.CorpusTests.test_review_evidence_paths_fail_closed) ... ok
+test_review_expiry_at_exact_boundary (apps.tests.test_retrieval_corpus.CorpusTests.test_review_expiry_at_exact_boundary) ... ok
+test_revocation_and_official_status (apps.tests.test_retrieval_corpus.CorpusTests.test_revocation_and_official_status) ... ok
+test_rights_lost_after_import (apps.tests.test_retrieval_corpus.CorpusTests.test_rights_lost_after_import) ... ok
+test_rights_require_each_scope (apps.tests.test_retrieval_corpus.CorpusTests.test_rights_require_each_scope) ... ok
+test_symlink_destination (apps.tests.test_retrieval_corpus.CorpusTests.test_symlink_destination) ... ok
+test_symlink_snapshot (apps.tests.test_retrieval_corpus.CorpusTests.test_symlink_snapshot) ... ok
+test_symlink_source (apps.tests.test_retrieval_corpus.CorpusTests.test_symlink_source) ... ok
+test_timezone_required (apps.tests.test_retrieval_corpus.CorpusTests.test_timezone_required) ... ok
+test_unknown_disposition_rejected_even_with_consistent_hash (apps.tests.test_retrieval_corpus.CorpusTests.test_unknown_disposition_rejected_even_with_consistent_hash) ... ok
+test_unknown_metadata (apps.tests.test_retrieval_corpus.CorpusTests.test_unknown_metadata) ... ok
+test_valid_import_and_repeat (apps.tests.test_retrieval_corpus.CorpusTests.test_valid_import_and_repeat) ... ok
+test_version_changes_with_policy_or_time (apps.tests.test_retrieval_corpus.CorpusTests.test_version_changes_with_policy_or_time) ... ok
+test_wrong_type (apps.tests.test_retrieval_corpus.CorpusTests.test_wrong_type) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.079s
+
+OK

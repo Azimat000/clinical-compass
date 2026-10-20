@@ -4,10 +4,11 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from apps.compass.retrieval_corpus import (CorpusError,
     build_manifest, digest, eligible_sources as check_eligible_sources, load_snapshot, moment,
-    publish_snapshot, sha)
+    publish_snapshot, sha, indexable_cards)
 
 
 class CorpusTests(unittest.TestCase):
@@ -104,11 +105,11 @@ class CorpusTests(unittest.TestCase):
         self.assertEqual(load_snapshot(path)['sources'][0]['disposition'],'archived')
         self.assertFalse(self.eligible_sources(path,self.registry,self.at)['admitted'])
 
-    def test_archive_preserves_quarantined_original(self):
+    def test_archive_cannot_copy_unknown_rights(self):
         self.item['rights']['status']='unknown'
         path=self.publish(archive=True)
-        self.assertTrue((path/(self.item['sha256']+'.pdf')).is_file())
-        self.assertIn('rights_unverified',load_snapshot(path)['sources'][0]['reasons'])
+        self.assertFalse(list(path.glob('*.pdf')))
+        self.assertIn('archive_storage_not_authorized',load_snapshot(path)['sources'][0]['reasons'])
         self.assertFalse(self.eligible_sources(path,self.registry,self.at)['admitted'])
 
     def assert_quarantine(self, reason):
@@ -263,6 +264,132 @@ class CorpusTests(unittest.TestCase):
         with patch('socket.socket',side_effect=AssertionError('network forbidden')):
             path=self.publish()
             self.assertEqual(self.eligible_sources(path,self.registry,self.at)['status'],'AVAILABLE')
+
+
+class CitationCorpusTests(CorpusTests):
+    """Same lifecycle invariants also apply to the separately reviewed artifact."""
+
+    def setUp(self):
+        super().setUp()
+        self.item.update(representation='reviewed_cards', artifact_path='citation.json')
+        patcher = patch.dict('apps.compass.retrieval_corpus.LOCAL_REFERENCE_CARDS', {'citation.json':'D1'})
+        patcher.start(); self.addCleanup(patcher.stop)
+        self.bundle = dict(schema_version=1, representation='reviewed_cards',
+            document_id='D1', source_sha256=self.item['sha256'], source_version=self.item['source_version'],
+            source_url=self.item['source_url'], document_type='patient_leaflet',
+            attribution=dict(title='Test title', authors='Test author', source='Official test fixture', locator='p1'),
+            fragments=[dict(fragment_id='F1', page=1, section='Test', claim_type='fact_with_quote', paraphrase='An independently written test fact.', quote='Artificial reference quotation.',
+                required_context=[], purpose='Explain a test fact', volume_justification='One necessary test sentence')])
+        self.item['rights'].update(representation='reviewed_cards',
+            scopes=['local_store','local_index','display_reference','display_excerpt'], index_fields=['paraphrase'],
+            evidence=['review.md'], evidence_sha256={'review.md':sha((self.root/'review.md').read_bytes())},
+            content_review=dict(basis='GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS', purpose_and_volume_reviewed=True,
+                attribution_reviewed=True, fragment_ids=['F1'], quoted_characters=len(self.bundle['fragments'][0]['quote'])))
+        self.save_bundle(approve=True)
+
+    def save_bundle(self, approve=False):
+        data = (json.dumps(self.bundle, ensure_ascii=False, sort_keys=True)+'\n').encode()
+        (self.root/'citation.json').write_bytes(data)
+        self.item['artifact_sha256'] = sha(data)
+        self.item['rights']['content_review']['artifact_sha256'] = sha(data)
+        if approve:
+            review=self.item['rights']['content_review']
+            review['record_path']='admission.json'
+            record={'source_sha256':self.item['sha256'], 'artifact_sha256':sha(data),
+                'fragment_ids':review['fragment_ids'], 'quoted_characters':review['quoted_characters'],
+                'basis':review['basis'], 'text_and_context_verified':True}
+            (self.root/'admission.json').write_text(json.dumps({'documents':{'D1':record}}))
+            self.item['rights']['evidence']=['review.md','admission.json']
+            self.item['rights']['evidence_sha256']={p:sha((self.root/p).read_bytes()) for p in self.item['rights']['evidence']}
+
+    def test_only_json_copied_no_full_original(self):
+        path = self.publish()
+        self.assertFalse(list(path.glob('*.pdf')))
+        self.assertEqual(len(list(path.glob('*.json'))), 2)
+        self.assertEqual((path/(self.item['artifact_sha256']+'.json')).read_bytes(), (self.root/'citation.json').read_bytes())
+        self.assertEqual(self.eligible_sources(path,self.registry,self.at)['status'], 'AVAILABLE')
+
+    def test_full_pdf_not_authorized_by_citation_review(self):
+        self.item['representation'] = 'full_pdf'
+        self.assert_quarantine('rights_representation_mismatch')
+
+    def test_quotation_expansion_without_new_review_rejected(self):
+        self.bundle['fragments'][0]['quote'] += ' Extra unreviewed text.'
+        (self.root/'citation.json').write_text(json.dumps(self.bundle))
+        self.assert_quarantine('citation_review_mismatch')
+
+    def test_expansion_with_updated_sha_but_old_selection_rejected(self):
+        self.bundle['fragments'].append(dict(self.bundle['fragments'][0], fragment_id='F2',claim_type='fact',quote=None))
+        self.save_bundle()
+        self.assert_quarantine('citation_review_mismatch')
+
+    def test_more_than_one_quote_per_source_requires_policy_revision(self):
+        self.bundle['fragments'].append(dict(self.bundle['fragments'][0],fragment_id='F2'))
+        self.save_bundle()
+        self.assert_quarantine('citation_collection_limit')
+
+    def test_attribution_purpose_source_context_required(self):
+        original = deepcopy(self.bundle)
+        mutations = [('authors', ''), ('purpose', ''), ('source_sha256', '0'*64), ('required_context', None)]
+        for field, value in mutations:
+            self.bundle = deepcopy(original)
+            if field == 'authors':self.bundle['attribution'][field] = value
+            elif field == 'source_sha256':self.bundle[field] = value
+            else:self.bundle['fragments'][0][field] = value
+            self.save_bundle()
+            manifest, blobs = self.build()
+            self.assertFalse(blobs)
+            self.assertEqual(manifest['sources'][0]['disposition'], 'quarantined')
+
+    def test_missing_or_changed_rights_report_blocks_current_snapshot(self):
+        path = self.publish()
+        (self.root/'review.md').write_text('Changed rights rationale')
+        self.assertIn('citation_rights_evidence_integrity', self.eligible_sources(path,self.registry,self.at)['refused']['D1'])
+
+    def test_unknown_blob_format_rejected(self):
+        manifest, blobs = self.build()
+        manifest['blob_formats'][self.item['artifact_sha256']] = '../../outside'
+        manifest['corpus_version'] = digest({k:v for k,v in manifest.items() if k != 'corpus_version'})
+        with self.assertRaises(CorpusError):publish_snapshot(self.root/'store',manifest,blobs)
+
+    def test_index_projection_contains_only_authored_paraphrase(self):
+        path = self.publish()
+        result = indexable_cards(path, self.registry, self.at, evidence_root=self.root)
+        self.assertEqual(result['cards'], [{'document_id':'D1', 'fragment_id':'F1',
+            'text':self.bundle['fragments'][0]['paraphrase']}])
+        self.assertNotIn(self.bundle['fragments'][0]['quote'], json.dumps(result))
+        self.item['rights']['status'] = 'revoked'
+        self.assertFalse(indexable_cards(path,self.registry,self.at,evidence_root=self.root)['cards'])
+
+    def test_facts_only_mode_never_claims_verbatim_permission(self):
+        self.bundle['fragments'][0].update(claim_type='fact',quote=None)
+        self.bundle['attribution']['authors'] = 'NOT_STATED_IN_DOCUMENT'
+        self.item['rights']['content_review'].update(basis='GK1259_5_FACTS', quoted_characters=0)
+        self.item['rights']['scopes'].remove('display_excerpt')
+        self.save_bundle(approve=True)
+        path = self.publish()
+        self.assertEqual(self.eligible_sources(path,self.registry,self.at)['status'], 'AVAILABLE')
+        self.bundle['fragments'][0]['quote'] = 'Unreviewed original text'
+        self.save_bundle()
+        self.assert_quarantine('fact_contains_verbatim')
+
+    def test_changed_fact_with_updated_hash_but_old_record_rejected(self):
+        self.bundle['fragments'][0]['paraphrase']='A different unreviewed factual statement.'
+        self.save_bundle()
+        self.assert_quarantine('citation_approval_record_mismatch')
+
+    # The base tests below intentionally mutate PDF-specific content/proof,
+    # while their shared assertions still apply to the JSON representation.
+    def test_archive_cannot_copy_unknown_rights(self):
+        self.item['rights']['status']='unknown'
+        path=self.publish(archive=True)
+        self.assertFalse(list(path.glob('*.pdf')))
+        self.assertEqual({p.name for p in path.iterdir()}, {'manifest.json'})
+        self.assertFalse(self.eligible_sources(path,self.registry,self.at)['admitted'])
+
+    def test_corrupt_stored_blob(self):
+        path=self.publish();(path/(self.item['artifact_sha256']+'.json')).write_text('{}')
+        with self.assertRaises(CorpusError):self.eligible_sources(path,self.registry,self.at)
 
 
 if __name__ == '__main__':

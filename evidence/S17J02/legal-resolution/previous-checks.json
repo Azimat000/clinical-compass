@@ -1,0 +1,70 @@
+{
+  "status": "TECHNICAL_CHECKS_PASS_WORKING_CORPUS_BLOCKED",
+  "checks": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "log": "evidence/S17J02/final-make-check.log",
+      "application_tests": 220,
+      "application_seconds": 50.086,
+      "tool_tests": 40,
+      "tool_seconds": 86.864,
+      "restart_rounds": 2,
+      "pip_check": "No broken requirements found",
+      "synthetic_validation": "PASS"
+    },
+    {
+      "command": ".venv/bin/python -m unittest apps.tests.test_retrieval_corpus -v",
+      "exit_code": 0,
+      "tests": 39,
+      "log": "evidence/S17J02/resume-corpus-tests.log"
+    },
+    {
+      "command": "python3 tools/validate_plan.py",
+      "exit_code": 0,
+      "log": "evidence/S17J02/plan-validation.log",
+      "clinical_safety_verified": false
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "result": "current=null,last_accepted=S17J01,next=null"
+    },
+    {
+      "command": "python3 tools/render_coverage.py",
+      "exit_code": 0,
+      "result": "COVERAGE.md remains consistent with coverage.json"
+    },
+    {
+      "command": "python3 evidence/S17J02/verify.py",
+      "exit_code": 0,
+      "log": "evidence/S17J02/preservation.json"
+    },
+    {
+      "command": ".venv/bin/python tools/import_retrieval_corpus.py --destination evidence/S17J02/corpus --at <evaluated_at from import-results.json> (twice)",
+      "exit_code": 0,
+      "log": "evidence/S17J02/import-results.json",
+      "result": "NO_ADMITTED_SOURCE; repeated without duplicates;0newPDFcopies"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "sha256": {
+    "apps/compass/retrieval_corpus.py": "42b5d1eef2f0076ec3f678b670adf0ed2ba4a73a35f3b7eeca1b0a9f6dbfa21a",
+    "apps/tests/test_retrieval_corpus.py": "e8a43b34ee0edf2546f6cd8f78dbb84abf72909b8e58f3180d9fa043d31c7fa8",
+    "tools/import_retrieval_corpus.py": "58b0f673a53da908cd8db912ba5a93783a04aeb65d763e9ed26c99f00d35f982",
+    "data/retrieval/source-registry.json": "88d168db31739b19df20efcd3780ea04255e3949472af38351f97c66c6385d7e",
+    "evidence/S17J02/research.md": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+    "evidence/S17J02/rights-research.md": "ac03c32af8d743234e0961ce0b883b6dd2091470c75ccc54dc5bb312adcb3625"
+  },
+  "not_run": [
+    "real retrieval quality/control",
+    "semantic comparison",
+    "HTTP or UI integration for corpus",
+    "clinical validation",
+    "real-patient trial"
+  ],
+  "acceptance_tag_created": false
+}
