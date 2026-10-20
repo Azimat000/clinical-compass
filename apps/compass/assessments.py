@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import hashlib
 import json
 from pathlib import Path
+from zoneinfo import ZoneInfo
 import re
 import secrets
 
@@ -151,18 +152,29 @@ def assign(db, user, patient_id, values):
         return request_id
 
 
+def with_deadline(task):
+    """Display the same earlier boundary enforced by submit: expiry or Moscow midnight."""
+    task = dict(task)
+    zone = ZoneInfo('Europe/Moscow')
+    midnight = (datetime.fromisoformat(task['age_on']) + timedelta(days=1)).replace(tzinfo=zone)
+    deadline = min(datetime.fromisoformat(task['expires_at']), midnight).astimezone(zone)
+    task['deadline_iso'] = deadline.isoformat()
+    task['deadline_label'] = deadline.strftime('%d.%m.%Y %H:%M') + ' МСК'
+    return task
+
+
 def visible_request(db, user, request_id, read_completed=False):
     task = db.execute('SELECT * FROM assessment_requests WHERE id=?', (request_id,)).fetchone()
     if task is None or access.visible_patient(db, user, task['patient_id']) is None:
         raise AssessmentError('Анкета недоступна.', 404)
     if read_completed and db.execute('SELECT 1 FROM assessment_results WHERE request_id=?', (request_id,)).fetchone():
-        return task
+        return with_deadline(task)
     # A new doctor-patient relationship must never inherit an outstanding invitation.
     relationship = db.execute('''SELECT r.* FROM care_relationships r JOIN users d ON d.id=r.doctor_id
         WHERE r.id=? AND r.ends_at IS NULL AND r.starts_at<=? AND d.disabled=0''', (task['relationship_id'], now())).fetchone()
     if not relationship or (user['role'] == 'doctor' and relationship['doctor_id'] != user['id']):
         raise AssessmentError('Связь для этой анкеты больше не действует.', 409)
-    return task
+    return with_deadline(task)
 
 
 def submit(db, user, request_id, values):
@@ -219,7 +231,7 @@ def history(db, user, patient_id):
 def pending(db, user, patient_id):
     if access.visible_patient(db, user, patient_id) is None:
         return []
-    return [dict(r) for r in db.execute('''SELECT q.id,q.requested_at,q.form_version_id FROM assessment_requests q
+    return [with_deadline(r) for r in db.execute('''SELECT q.id,q.requested_at,q.form_version_id,q.expires_at,q.age_on FROM assessment_requests q
         JOIN care_relationships r ON r.id=q.relationship_id JOIN users d ON d.id=r.doctor_id
         WHERE q.patient_id=? AND q.expires_at>? AND q.age_on=? AND r.ends_at IS NULL AND d.disabled=0
         AND NOT EXISTS(SELECT 1 FROM assessment_results a WHERE a.request_id=q.id)

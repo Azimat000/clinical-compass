@@ -47,6 +47,24 @@ class AssessmentsTests(unittest.TestCase):
         self.assertEqual(303, self.post('doc-a', '/patients/D01/assessment-requests', self.assignment()).status_code)
         return self.db.execute('SELECT id FROM assessment_requests ORDER BY requested_at DESC').fetchone()[0]
 
+    def test_patient_sees_actual_deadline_in_moscow_including_error_page(self):
+        # A 24h storage timestamp may extend beyond the allowed Moscow calendar day.
+        task = assessments.with_deadline({'age_on': '2026-10-20', 'expires_at': '2026-10-21T18:00:00+00:00'})
+        self.assertEqual('21.10.2026 00:00 МСК', task['deadline_label'])
+        self.assertEqual('2026-10-21T00:00:00+03:00', task['deadline_iso'])
+        earlier = assessments.with_deadline({'age_on': '2026-10-20', 'expires_at': '2026-10-20T17:30:00+00:00'})
+        self.assertEqual('20.10.2026 20:30 МСК', earlier['deadline_label'])
+        request_id = self.offer()
+        expected = assessments.with_deadline(self.db.execute('SELECT * FROM assessment_requests WHERE id=?', (request_id,)).fetchone())
+        for route in ('/demo/D01', '/assessments/' + request_id):
+            html = self.clients['pat-a'].get(route).get_data(as_text=True)
+            self.assertIn(expected['deadline_label'], html)
+            self.assertIn('datetime="' + expected['deadline_iso'] + '"', html)
+        error = self.post('pat-a', '/assessments/' + request_id, self.answers('4'))
+        self.assertEqual(400, error.status_code)
+        self.assertIn(expected['deadline_label'], error.get_data(as_text=True))
+        self.assertEqual(0, self.db.execute('SELECT count(*) FROM assessment_results').fetchone()[0])
+
     def answers(self, value='3'):
         return {'form_version_id': self.form['id'], **{f'answer_{i}': value for i in range(1, 43)}}
 

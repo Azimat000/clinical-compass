@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T18:00:36.179106+00:00",
+  "updated_on": "2026-10-20T21:29:21+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17E",
-  "next_slice": "S17G",
+  "last_accepted_slice": "S17G",
+  "next_slice": "S17H",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -206,8 +206,8 @@
       "reason": null
     },
     "S17G": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17G",
       "handoff": "memory/sessions/S17G.md",
       "reason": null
     },
@@ -228,7 +228,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "После встречи 20.10 следующий независимый S17G: предварительный показ психиатр→пациент дома, без клинической активации. Далее S17H/I, S17F ждёт D/E/I; S17/S17D и E02/E06 остаются blocked/неподтверждёнными.",
+    "next_action": "Только сервис: следующий S17H, основания рекомендаций. S17G принят в явно изменённом пользователем объёме; презентации/организация отложены, S17/S17D и E02/E06 не закрыты.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
@@ -290,6 +290,19 @@
       "S17I"
     ],
     "status": "planning_only",
-    "next_action": "Подготовить только S17G в новой сессии; S17/S17D blocked, S17H/I/F/S18 не приняты."
+    "next_action": "S17G принят только как сервисный домашний путь/срок анкеты по изменённому прямому поручению. Следующий сервисный S17H. Презентации/организация отложены до нового прямого поручения; S17/S17D blocked."
+  },
+  "work_policy": {
+    "services_only": true,
+    "set_on": "2026-10-20",
+    "source": "Прямое поручение пользователя: Не надо мне пока презентацию и орг моменты делать, делай только сервис. Запомни это и на остальные сессии.",
+    "deferred_until_explicit_request": [
+      "presentations",
+      "posters",
+      "meeting_preparation",
+      "submission_preparation",
+      "organizational_questions"
+    ],
+    "retained_requirements": "83/160 сохраняются; отложенное не считается выполненным. Клиническая безопасность/права/источники сервиса обязательны."
   }
 }

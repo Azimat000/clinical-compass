@@ -1,0 +1,28 @@
+{
+  "kind": "agent self-check; synthetic; no participants or clinical validation",
+  "checks": [
+    "server rejects unknown and 17-year age; zero requests",
+    "cycle 1: separate browser contexts; 42 exact form items, patient receipt/API without computed scores; doctor 42 answers and three sums 28",
+    "cycle 2: separate browser contexts; 42 exact form items, patient receipt/API without computed scores; doctor 42 answers and three sums 14",
+    "deadline visible on patient form, semantic time element, 320px no horizontal page overflow",
+    "two same-day synthetic measurements, not longitudinal efficacy or real trial",
+    "manual plan separately approved; scheduled item; patient missed outcome/reason and message visible to doctor; diary visible in both roles; F08 categories visible",
+    "expired request POST rejected 409; original same-day/24h rule retained"
+  ],
+  "started_at": "2026-10-20T18:25:37.686Z",
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "viewport": "1440x1000",
+    "platform": "darwin"
+  },
+  "request": {
+    "id": "0d545693f3cc44dfef5ae56d658ed3eb",
+    "requested_at": "2026-10-20T18:25:39.505986+00:00",
+    "expires_at": "2026-10-21T18:25:39.505986+00:00",
+    "age_on": "2026-10-20",
+    "age_years": 35
+  },
+  "status": "PASS",
+  "finished_at": "2026-10-20T18:25:45.672Z"
+}
