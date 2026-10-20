@@ -40,6 +40,9 @@ def copy_database(source, target, expected_sha256=None):
             with closing(sqlite3.connect(target)) as dst:
                 src.backup(dst, pages=128)
                 versions = checked(dst)
+                # Describe the actual copied snapshot, not a concurrently changing source.
+                tables=[row[0] for row in dst.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")]
+                snapshot_rows={name:dst.execute('SELECT count(*) FROM "'+name.replace('"','""')+'"').fetchone()[0] for name in tables}
             with target.open('rb') as stream:
                 os.fsync(stream.fileno())
             directory = os.open(target.parent, os.O_RDONLY)
@@ -49,7 +52,9 @@ def copy_database(source, target, expected_sha256=None):
                 os.close(directory)
             return {'completed_at': now(), 'bytes': target.stat().st_size,
                     'sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
-                    'migrations': versions, 'integrity_check': 'ok', 'foreign_key_check': []}
+                    'migrations': versions, 'integrity_check': 'ok', 'foreign_key_check': [],
+                    'snapshot_rows':snapshot_rows,
+                    'recovery_limit':'Only rows in this snapshot are retained. Later records, critical events and receipts require reconciliation; their absence does not mean no risk.'}
         except BaseException:
             target.unlink(missing_ok=True)
             raise

@@ -1,0 +1,88 @@
+{
+  "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu_count": 8,
+    "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "sqlite": "3.50.4",
+    "packages": {
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "waitress": "3.0.2"
+    },
+    "hardware": "Apple M2\n17179869184",
+    "server": "Waitress CLI threads=4, SQLite DELETE/FULL, local disk",
+    "at": "2026-10-20T04:57:10.607798+00:00"
+  },
+  "load_reference": "evidence/audits/2026-10-20-technical-r2/load.json",
+  "record_and_rules_transaction_ms": {
+    "n": 100,
+    "p50_ms": 4.422457997861784,
+    "p95_ms": 5.543125000258442,
+    "max_ms": 39.895082998555154
+  },
+  "extraction_short": {
+    "bytes": 86,
+    "timings": {
+      "n": 100,
+      "p50_ms": 0.11516700033098459,
+      "p95_ms": 0.1552500034449622,
+      "max_ms": 5.884124999283813
+    }
+  },
+  "extraction_near_limit": {
+    "bytes": 19200,
+    "timings": {
+      "n": 100,
+      "p50_ms": 23.22950000234414,
+      "p95_ms": 24.1605420014821,
+      "max_ms": 24.66416599781951
+    }
+  },
+  "manual_recommendation_draft_transaction_ms": {
+    "n": 30,
+    "p50_ms": 11.35220899595879,
+    "p95_ms": 14.982332999352366,
+    "max_ms": 15.5969589977758
+  },
+  "recommendation_limit": "No automatic recommendation generator exists; measures manual draft creation with evidence snapshot; no confirmation/treatment.",
+  "idle_http_full_response_ms": {
+    "/": {
+      "n": 30,
+      "p50_ms": 266.6077920002863,
+      "p95_ms": 343.76666600292083,
+      "max_ms": 360.4207500029588
+    },
+    "/?q=L000": {
+      "n": 30,
+      "p50_ms": 252.26195799768902,
+      "p95_ms": 314.10645799769554,
+      "max_ms": 320.76799999776995
+    },
+    "/demo/L000": {
+      "n": 30,
+      "p50_ms": 269.9506659992039,
+      "p95_ms": 300.09000000427477,
+      "max_ms": 382.2465830016881
+    },
+    "/patients/L000/decisions": {
+      "n": 30,
+      "p50_ms": 506.89175000297837,
+      "p95_ms": 609.7495829963009,
+      "max_ms": 618.9848750000237
+    },
+    "/patients/L000/imports": {
+      "n": 30,
+      "p50_ms": 1.6164160042535514,
+      "p95_ms": 2.076584001770243,
+      "max_ms": 9.88300000608433
+    },
+    "/critical": {
+      "n": 30,
+      "p50_ms": 1.7321670020464808,
+      "p95_ms": 2.016042002651375,
+      "max_ms": 5.8759159946930595
+    }
+  },
+  "interface_limit": "HTTP bytes received and server HTML generation; browser paint/interaction latency is not measured"
+}

@@ -187,8 +187,8 @@ class AccessTests(unittest.TestCase):
 
     def test_login_throttle_persistent_and_generic_errors(self):
         c = self.app.test_client()
-        for _ in range(6):
-            # Existing successes also count in the IP window (four setup logins).
+        for _ in range(10):
+            # Failed attempts remain counted; successful setup logins refund themselves.
             self.assertEqual(401, login(c, 'unknown-user').status_code)
         self.assertEqual(429, login(c, 'doc-a').status_code)
         fresh = create_app(self.path).test_client()
@@ -198,6 +198,59 @@ class AccessTests(unittest.TestCase):
         wrong = login(c, 'doc-a', 'wrong').get_data(as_text=True)
         self.assertIn('Не удалось войти', missing); self.assertIn('Не удалось войти', wrong)
         self.assertEqual(302, login(c, 'doc-a').status_code)
+
+    def test_successful_shared_ip_logins_refund_only_their_own_attempt(self):
+        client=self.app.test_client()
+        for n in range(16):
+            self.assertEqual(302,login(client,'doc-a' if n%2 else 'pat-a').status_code)
+        address=access.digest('address:127.0.0.1')
+        self.assertEqual(0,self.db.execute('SELECT attempts FROM login_limits WHERE subject_hash=?',(address,)).fetchone()[0])
+        self.assertEqual(401,login(client,'doc-b','wrong').status_code)
+        self.assertEqual(302,login(client,'doc-a').status_code)
+        self.assertEqual(1,self.db.execute('SELECT attempts FROM login_limits WHERE subject_hash=?',(address,)).fetchone()[0])
+        for _ in range(9):self.assertEqual(401,login(client,'doc-b','wrong').status_code)
+        self.assertEqual(429,login(client,'doc-a').status_code)
+        self.assertEqual(429,login(create_app(self.path).test_client(),'doc-b').status_code)
+
+    def test_successful_auth_never_refunds_a_replaced_limit_window(self):
+        from unittest.mock import patch
+        original=access.check_password_hash
+        account=access.digest('account:doc-a')
+        def check(hashed,password):
+            result=original(hashed,password)
+            self.db.execute("UPDATE login_limits SET attempts=7,window_end='2099-01-01' WHERE subject_hash=?",(account,))
+            return result
+        with patch.object(access,'check_password_hash',side_effect=check):
+            self.assertEqual(302,login(self.app.test_client(),'doc-a').status_code)
+        self.assertEqual(7,self.db.execute('SELECT attempts FROM login_limits WHERE subject_hash=?',(account,)).fetchone()[0])
+
+    def test_failed_audit_rolls_back_session_rotation_and_refund(self):
+        from unittest.mock import patch
+        previous=self.clients['doc-a'].get_cookie(access.COOKIE).value
+        before=[tuple(r) for r in self.db.execute('SELECT * FROM sessions ORDER BY token_hash')]
+        with patch.object(access,'audit',side_effect=RuntimeError('synthetic audit failure')):
+            with self.assertRaises(RuntimeError):
+                access.authenticate(self.db,'doc-a',PASSWORD,'rollback-test',previous)
+        self.assertEqual(before,[tuple(r) for r in self.db.execute('SELECT * FROM sessions ORDER BY token_hash')])
+        for subject in ('account:doc-a','address:rollback-test'):
+            self.assertEqual(1,self.db.execute('SELECT attempts FROM login_limits WHERE subject_hash=?',(access.digest(subject),)).fetchone()[0])
+
+    def test_account_changed_during_password_check_never_creates_session(self):
+        from unittest.mock import patch
+        original=access.check_password_hash
+        count=self.db.execute('SELECT count(*) FROM sessions').fetchone()[0]
+        for change in ('disabled','password_hash'):
+            self.db.execute('DELETE FROM login_limits')
+            self.db.execute("UPDATE users SET disabled=0,password_hash=? WHERE id='doc-a'",(PASSWORD_HASH,))
+            def check(hashed,password):
+                result=original(hashed,password)
+                if change=='disabled':self.db.execute("UPDATE users SET disabled=1 WHERE id='doc-a'")
+                else:self.db.execute("UPDATE users SET password_hash='changed-during-check' WHERE id='doc-a'")
+                return result
+            with patch.object(access,'check_password_hash',side_effect=check):
+                self.assertEqual((None,'invalid'),access.authenticate(self.db,'doc-a',PASSWORD,'race-test'))
+            self.assertEqual(count,self.db.execute('SELECT count(*) FROM sessions').fetchone()[0])
+            self.assertEqual([1,1],[r[0] for r in self.db.execute('SELECT attempts FROM login_limits')])
 
     def test_recipient_reassignment_and_future_relationship_do_not_grant_access(self):
         token = self.offer()

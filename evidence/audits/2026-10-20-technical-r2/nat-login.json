@@ -1,0 +1,451 @@
+{
+  "status": "PASS",
+  "scope": "synthetic HTTP test, not human trial",
+  "machine": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu_count": 8,
+    "python": "3.13.11 (v3.13.11:627894459a8, Dec  5 2025, 11:26:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "sqlite": "3.50.4",
+    "packages": {
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "waitress": "3.0.2"
+    },
+    "hardware": "Apple M2\n17179869184",
+    "server": "Waitress CLI threads=4, SQLite DELETE/FULL, local disk",
+    "at": "2026-10-20T05:07:24.038712+00:00"
+  },
+  "same_ip": "127.0.0.1",
+  "users": 100,
+  "client_threads": 20,
+  "server_threads": 4,
+  "includes_password_check": true,
+  "successful": 100,
+  "failure_reservations_after_successes": 0,
+  "invalid_statuses": [
+    401,
+    401,
+    401,
+    401,
+    401,
+    401,
+    401,
+    401,
+    401,
+    401,
+    429
+  ],
+  "after_restart_status": 429,
+  "duration_seconds": 3.0500624170017545,
+  "login_latency": {
+    "n": 100,
+    "p50_ms": 322.45249999687076,
+    "p95_ms": 476.42404199723387,
+    "max_ms": 668.5701250025886
+  },
+  "raw": [
+    {
+      "login": "load-doc-0",
+      "duration_ms": 382.6829169993289
+    },
+    {
+      "login": "load-pat-0",
+      "duration_ms": 471.0815829967032
+    },
+    {
+      "login": "load-doc-1",
+      "duration_ms": 455.17362499958836
+    },
+    {
+      "login": "load-pat-1",
+      "duration_ms": 467.41508299601264
+    },
+    {
+      "login": "load-doc-2",
+      "duration_ms": 436.76808400050504
+    },
+    {
+      "login": "load-pat-2",
+      "duration_ms": 477.6471670047613
+    },
+    {
+      "login": "load-doc-3",
+      "duration_ms": 378.9574999973411
+    },
+    {
+      "login": "load-pat-3",
+      "duration_ms": 500.97174999973504
+    },
+    {
+      "login": "load-doc-4",
+      "duration_ms": 382.64237499970477
+    },
+    {
+      "login": "load-pat-4",
+      "duration_ms": 476.70879200450145
+    },
+    {
+      "login": "load-doc-5",
+      "duration_ms": 385.40225000178907
+    },
+    {
+      "login": "load-pat-5",
+      "duration_ms": 471.3420420011971
+    },
+    {
+      "login": "load-doc-6",
+      "duration_ms": 386.1669580001035
+    },
+    {
+      "login": "load-pat-6",
+      "duration_ms": 668.5701250025886
+    },
+    {
+      "login": "load-doc-7",
+      "duration_ms": 380.4609579965472
+    },
+    {
+      "login": "load-pat-7",
+      "duration_ms": 476.4857909976854
+    },
+    {
+      "login": "load-doc-8",
+      "duration_ms": 387.08679100091103
+    },
+    {
+      "login": "load-pat-8",
+      "duration_ms": 471.34641699813074
+    },
+    {
+      "login": "load-doc-9",
+      "duration_ms": 387.02091600134736
+    },
+    {
+      "login": "load-pat-9",
+      "duration_ms": 476.42404199723387
+    },
+    {
+      "login": "load-doc-10",
+      "duration_ms": 217.5526249993709
+    },
+    {
+      "login": "load-pat-10",
+      "duration_ms": 403.95012500084704
+    },
+    {
+      "login": "load-doc-11",
+      "duration_ms": 222.1369170001708
+    },
+    {
+      "login": "load-pat-11",
+      "duration_ms": 426.13395799708087
+    },
+    {
+      "login": "load-doc-12",
+      "duration_ms": 299.6440420029103
+    },
+    {
+      "login": "load-pat-12",
+      "duration_ms": 438.58975000330247
+    },
+    {
+      "login": "load-doc-13",
+      "duration_ms": 351.2143339976319
+    },
+    {
+      "login": "load-pat-13",
+      "duration_ms": 440.0529589984217
+    },
+    {
+      "login": "load-doc-14",
+      "duration_ms": 385.7745830027852
+    },
+    {
+      "login": "load-pat-14",
+      "duration_ms": 456.20320799935143
+    },
+    {
+      "login": "load-doc-15",
+      "duration_ms": 305.73537499731174
+    },
+    {
+      "login": "load-pat-15",
+      "duration_ms": 381.330958000035
+    },
+    {
+      "login": "load-doc-16",
+      "duration_ms": 305.808375000197
+    },
+    {
+      "login": "load-pat-16",
+      "duration_ms": 386.01029200071935
+    },
+    {
+      "login": "load-doc-17",
+      "duration_ms": 299.0314999988186
+    },
+    {
+      "login": "load-pat-17",
+      "duration_ms": 343.4143749982468
+    },
+    {
+      "login": "load-doc-18",
+      "duration_ms": 284.52691699931165
+    },
+    {
+      "login": "load-pat-18",
+      "duration_ms": 376.36775000282796
+    },
+    {
+      "login": "load-doc-19",
+      "duration_ms": 305.7215409935452
+    },
+    {
+      "login": "load-pat-19",
+      "duration_ms": 428.1596670043655
+    },
+    {
+      "login": "load-doc-20",
+      "duration_ms": 300.88770799920894
+    },
+    {
+      "login": "load-pat-20",
+      "duration_ms": 412.3095420000027
+    },
+    {
+      "login": "load-doc-21",
+      "duration_ms": 274.395624997851
+    },
+    {
+      "login": "load-pat-21",
+      "duration_ms": 389.9884589991416
+    },
+    {
+      "login": "load-doc-22",
+      "duration_ms": 280.897416996595
+    },
+    {
+      "login": "load-pat-22",
+      "duration_ms": 343.668624998827
+    },
+    {
+      "login": "load-doc-23",
+      "duration_ms": 256.3919169988367
+    },
+    {
+      "login": "load-pat-23",
+      "duration_ms": 345.6775419981568
+    },
+    {
+      "login": "load-doc-24",
+      "duration_ms": 302.7415420001489
+    },
+    {
+      "login": "load-pat-24",
+      "duration_ms": 342.7162500011036
+    },
+    {
+      "login": "load-doc-25",
+      "duration_ms": 302.592125000956
+    },
+    {
+      "login": "load-pat-25",
+      "duration_ms": 339.6214590029558
+    },
+    {
+      "login": "load-doc-26",
+      "duration_ms": 310.8943330007605
+    },
+    {
+      "login": "load-pat-26",
+      "duration_ms": 355.8697080006823
+    },
+    {
+      "login": "load-doc-27",
+      "duration_ms": 244.6302079988527
+    },
+    {
+      "login": "load-pat-27",
+      "duration_ms": 297.2418329954962
+    },
+    {
+      "login": "load-doc-28",
+      "duration_ms": 202.1999999997206
+    },
+    {
+      "login": "load-pat-28",
+      "duration_ms": 425.3103749942966
+    },
+    {
+      "login": "load-doc-29",
+      "duration_ms": 296.56279199843993
+    },
+    {
+      "login": "load-pat-29",
+      "duration_ms": 294.3062500053202
+    },
+    {
+      "login": "load-doc-30",
+      "duration_ms": 250.74312500510132
+    },
+    {
+      "login": "load-pat-30",
+      "duration_ms": 331.29758299764944
+    },
+    {
+      "login": "load-doc-31",
+      "duration_ms": 252.4562499966123
+    },
+    {
+      "login": "load-pat-31",
+      "duration_ms": 322.6874169995426
+    },
+    {
+      "login": "load-doc-32",
+      "duration_ms": 253.8096249991213
+    },
+    {
+      "login": "load-pat-32",
+      "duration_ms": 324.87625000067055
+    },
+    {
+      "login": "load-doc-33",
+      "duration_ms": 292.47204100101953
+    },
+    {
+      "login": "load-pat-33",
+      "duration_ms": 308.1033339985879
+    },
+    {
+      "login": "load-doc-34",
+      "duration_ms": 234.72887500247452
+    },
+    {
+      "login": "load-pat-34",
+      "duration_ms": 272.3000000041793
+    },
+    {
+      "login": "load-doc-35",
+      "duration_ms": 248.48808399838163
+    },
+    {
+      "login": "load-pat-35",
+      "duration_ms": 351.6171250012121
+    },
+    {
+      "login": "load-doc-36",
+      "duration_ms": 251.95479200192494
+    },
+    {
+      "login": "load-pat-36",
+      "duration_ms": 332.9956250017858
+    },
+    {
+      "login": "load-doc-37",
+      "duration_ms": 242.61183299677214
+    },
+    {
+      "login": "load-pat-37",
+      "duration_ms": 424.76895800064085
+    },
+    {
+      "login": "load-doc-38",
+      "duration_ms": 246.75974999991013
+    },
+    {
+      "login": "load-pat-38",
+      "duration_ms": 342.7460829989286
+    },
+    {
+      "login": "load-doc-39",
+      "duration_ms": 208.19374999700813
+    },
+    {
+      "login": "load-pat-39",
+      "duration_ms": 326.6077909938758
+    },
+    {
+      "login": "load-doc-40",
+      "duration_ms": 233.486917000846
+    },
+    {
+      "login": "load-pat-40",
+      "duration_ms": 305.19366699445527
+    },
+    {
+      "login": "load-doc-41",
+      "duration_ms": 252.74370899569476
+    },
+    {
+      "login": "load-pat-41",
+      "duration_ms": 327.5639589992352
+    },
+    {
+      "login": "load-doc-42",
+      "duration_ms": 256.0662499963655
+    },
+    {
+      "login": "load-pat-42",
+      "duration_ms": 334.60112499597017
+    },
+    {
+      "login": "load-doc-43",
+      "duration_ms": 246.50162499892758
+    },
+    {
+      "login": "load-pat-43",
+      "duration_ms": 322.45249999687076
+    },
+    {
+      "login": "load-doc-44",
+      "duration_ms": 221.4659999954165
+    },
+    {
+      "login": "load-pat-44",
+      "duration_ms": 311.5631660039071
+    },
+    {
+      "login": "load-doc-45",
+      "duration_ms": 222.66649999801302
+    },
+    {
+      "login": "load-pat-45",
+      "duration_ms": 270.6723749943194
+    },
+    {
+      "login": "load-doc-46",
+      "duration_ms": 223.5959579993505
+    },
+    {
+      "login": "load-pat-46",
+      "duration_ms": 203.1125420035096
+    },
+    {
+      "login": "load-doc-47",
+      "duration_ms": 161.7400839968468
+    },
+    {
+      "login": "load-pat-47",
+      "duration_ms": 162.22729199944297
+    },
+    {
+      "login": "load-doc-48",
+      "duration_ms": 132.12029199348763
+    },
+    {
+      "login": "load-pat-48",
+      "duration_ms": 137.80737500201212
+    },
+    {
+      "login": "load-doc-49",
+      "duration_ms": 142.26537499780534
+    },
+    {
+      "login": "load-pat-49",
+      "duration_ms": 142.15629100363003
+    }
+  ],
+  "source_note": "Authentication source unchanged since this run; later extraction/CSS-only corrections irrelevant to login behavior.",
+  "tested_authentication_sha256": "00f0b101dbeb5cc042bce1716fdf4184316f7fe7ae5c2e1535939ba9ce4231ca"
+}

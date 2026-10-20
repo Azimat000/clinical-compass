@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T01:00:39+03:00",
+  "updated_on": "2026-10-20T05:20:22.380154+00:00",
   "current_slice": null,
   "last_accepted_slice": "S17E",
   "next_slice": null,
@@ -241,5 +241,21 @@
       "official": false,
       "scale": "six equally weighted diagnostic AI ratings, not official contest weights"
     }
+  },
+  "latest_technical_audit": {
+    "report": "evidence/audits/2026-10-20-technical-r2/acceptance.md",
+    "results": "evidence/audits/2026-10-20-technical-r2/cycles.json",
+    "jury": "evidence/audits/2026-10-20-technical-r2/jury-review.md",
+    "commit_ref": "refs/tags/audit/2026-10-20-technical-r2",
+    "technical_status": "PASS",
+    "contest_readiness": "NO_GO",
+    "real_user_trial": false,
+    "independent_clinical_validation": false,
+    "technical_jury_score": 85,
+    "technical_jury_maximum": 130,
+    "technical_jury_previous": 77,
+    "E06_conditional_shortfall": 9,
+    "official_weights_known": false,
+    "next_action": "S17/S17D remain blocked; S17F/S18 not accepted. Future technical improvements require scoped work, new blind corpora/endurance/large histories/backup scheduling; real clinical review/trial and closed conditions need factual evidence."
   }
 }

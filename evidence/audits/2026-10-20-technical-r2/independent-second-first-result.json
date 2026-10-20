@@ -1,0 +1,1752 @@
+{
+  "scope": "Synthetic technical evidence, not clinical validation. Exposed corpora are regression only.",
+  "matching": "S12 unchanged: field + assertion + normalized value + overlapping spans; one-to-one; all gold including unsupported",
+  "source_sha256": {
+    "evidence/audits/2026-10-20-technical-r2/frozen-second/extraction.py": "0b4550b9caeefb17b5afe8a1c3fbd709ace69d7552da3790f3013dab2fe3bfcc",
+    "evidence/audits/2026-10-20-technical-r2/frozen-second/extraction_literals.py": "789b54ed243bfdefc248e3e577a888a83cf076641197fcee960a5e37c15abbe8"
+  },
+  "splits": [
+    {
+      "split": "independent-second-corpus",
+      "dataset_version": "independent-technical-r2-v2",
+      "dataset_sha256": "08d1bd251f6779cd6942ec0b2fb7700f4eec250cd43f90a8022252c48d26056d",
+      "records": [
+        {
+          "id": "R301",
+          "profile_id": "SYN-R301",
+          "template": "correction_note",
+          "metrics": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.25,
+            "recall": 0.25
+          },
+          "prediction_count_all_fields": 4,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "age_years",
+              "assertion": "conflicting",
+              "value": 19,
+              "quote": "19 лет",
+              "span": {
+                "start": 21,
+                "end": 27
+              },
+              "id": "0"
+            },
+            {
+              "field": "age_years",
+              "assertion": "conflicting",
+              "value": 21,
+              "quote": "21 год",
+              "span": {
+                "start": 54,
+                "end": 60
+              },
+              "id": "1"
+            },
+            {
+              "field": "medication",
+              "assertion": "stopped",
+              "value": "препарат Z",
+              "quote": "Препарат Z",
+              "span": {
+                "start": 63,
+                "end": 73
+              },
+              "id": "2"
+            },
+            {
+              "field": "dose",
+              "assertion": "present",
+              "value": {
+                "value": 4,
+                "unit": "mg"
+              },
+              "quote": "4 мг",
+              "span": {
+                "start": 107,
+                "end": 111
+              },
+              "id": "3"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R301-F03",
+              "candidate_id": "2"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "age_years",
+              "assertion": "conflicting",
+              "value": 19,
+              "quote": "19 лет",
+              "span": {
+                "start": 21,
+                "end": 27
+              },
+              "id": "0"
+            },
+            {
+              "field": "age_years",
+              "assertion": "conflicting",
+              "value": 21,
+              "quote": "21 год",
+              "span": {
+                "start": 54,
+                "end": 60
+              },
+              "id": "1"
+            },
+            {
+              "field": "dose",
+              "assertion": "present",
+              "value": {
+                "value": 4,
+                "unit": "mg"
+              },
+              "quote": "4 мг",
+              "span": {
+                "start": 107,
+                "end": 111
+              },
+              "id": "3"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "invalid",
+              "field": "age_years",
+              "id": "R301-F01",
+              "quote": "«19 лет» вписано ошибочно",
+              "span": {
+                "end": 45,
+                "start": 20
+              },
+              "value": null
+            },
+            {
+              "assertion": "present",
+              "field": "age_years",
+              "id": "R301-F02",
+              "quote": "верно «21 год»",
+              "span": {
+                "end": 61,
+                "start": 47
+              },
+              "value": 21
+            },
+            {
+              "assertion": "stopped",
+              "field": "dose",
+              "id": "R301-F04",
+              "quote": "Отменённая доза: 4 мг",
+              "span": {
+                "end": 111,
+                "start": 90
+              },
+              "value": {
+                "unit": "mg",
+                "value": 4
+              }
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "invalid",
+              "field": "age_years",
+              "id": "R301-F01",
+              "quote": "«19 лет» вписано ошибочно",
+              "span": {
+                "end": 45,
+                "start": 20
+              },
+              "value": null
+            },
+            {
+              "assertion": "present",
+              "field": "age_years",
+              "id": "R301-F02",
+              "quote": "верно «21 год»",
+              "span": {
+                "end": 61,
+                "start": 47
+              },
+              "value": 21
+            },
+            {
+              "assertion": "stopped",
+              "field": "dose",
+              "id": "R301-F04",
+              "quote": "Отменённая доза: 4 мг",
+              "span": {
+                "end": 111,
+                "start": 90
+              },
+              "value": {
+                "unit": "mg",
+                "value": 4
+              }
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R302",
+          "profile_id": "SYN-R302",
+          "template": "separate_respondents",
+          "metrics": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333
+          },
+          "prediction_count_all_fields": 2,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "medication_allergy",
+              "assertion": "present",
+              "value": true,
+              "quote": "лекарственная аллергия есть».",
+              "span": {
+                "start": 68,
+                "end": 97
+              },
+              "id": "0"
+            },
+            {
+              "field": "symptom",
+              "assertion": "present",
+              "value": "нарушение сна",
+              "quote": "бессонницу",
+              "span": {
+                "start": 169,
+                "end": 179
+              },
+              "id": "1"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R302-F03",
+              "candidate_id": "1"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "medication_allergy",
+              "assertion": "present",
+              "value": true,
+              "quote": "лекарственная аллергия есть».",
+              "span": {
+                "start": 68,
+                "end": 97
+              },
+              "id": "0"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "third_party",
+              "field": "medication_allergy",
+              "id": "R302-F01",
+              "quote": "У меня лекарственная аллергия есть",
+              "span": {
+                "end": 95,
+                "start": 61
+              },
+              "value": true
+            },
+            {
+              "assertion": "unknown",
+              "field": "medication_allergy",
+              "id": "R302-F02",
+              "quote": "О своей аллергии ничего не знаю",
+              "span": {
+                "end": 146,
+                "start": 115
+              },
+              "value": null
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "third_party",
+              "field": "medication_allergy",
+              "id": "R302-F01",
+              "quote": "У меня лекарственная аллергия есть",
+              "span": {
+                "end": 95,
+                "start": 61
+              },
+              "value": true
+            },
+            {
+              "assertion": "unknown",
+              "field": "medication_allergy",
+              "id": "R302-F02",
+              "quote": "О своей аллергии ничего не знаю",
+              "span": {
+                "end": 146,
+                "start": 115
+              },
+              "value": null
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R303",
+          "profile_id": "SYN-R303",
+          "template": "negated_negation",
+          "metrics": {
+            "tp": 2,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.5,
+            "recall": 0.6666666666666666
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "nausea",
+              "assertion": "negated",
+              "value": false,
+              "quote": "тошноты",
+              "span": {
+                "start": 13,
+                "end": 20
+              },
+              "id": "0"
+            },
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "тошнота",
+              "quote": "тошноты",
+              "span": {
+                "start": 13,
+                "end": 20
+              },
+              "id": "1"
+            },
+            {
+              "field": "nausea",
+              "assertion": "negated",
+              "value": false,
+              "quote": "тошнота",
+              "span": {
+                "start": 26,
+                "end": 33
+              },
+              "id": "2"
+            },
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "тошнота",
+              "quote": "тошнота",
+              "span": {
+                "start": 26,
+                "end": 33
+              },
+              "id": "3"
+            },
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "сердцебиение",
+              "quote": "Сердцебиения",
+              "span": {
+                "start": 47,
+                "end": 59
+              },
+              "id": "4"
+            },
+            {
+              "field": "event_date",
+              "assertion": "present",
+              "value": "2027-03-06",
+              "quote": "6 марта 2027 года",
+              "span": {
+                "start": 90,
+                "end": 107
+              },
+              "id": "5"
+            }
+          ],
+          "out_of_target_predictions": [
+            {
+              "field": "nausea",
+              "assertion": "negated",
+              "value": false,
+              "quote": "тошноты",
+              "span": {
+                "start": 13,
+                "end": 20
+              },
+              "id": "0"
+            },
+            {
+              "field": "nausea",
+              "assertion": "negated",
+              "value": false,
+              "quote": "тошнота",
+              "span": {
+                "start": 26,
+                "end": 33
+              },
+              "id": "2"
+            }
+          ],
+          "matches": [
+            {
+              "gold_id": "R303-F02",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "R303-F03",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "тошнота",
+              "quote": "тошноты",
+              "span": {
+                "start": 13,
+                "end": 20
+              },
+              "id": "1"
+            },
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "тошнота",
+              "quote": "тошнота",
+              "span": {
+                "start": 26,
+                "end": 33
+              },
+              "id": "3"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "present",
+              "field": "symptom",
+              "id": "R303-F01",
+              "quote": "Неверно, что тошноты нет: тошнота сохраняется",
+              "span": {
+                "end": 45,
+                "start": 0
+              },
+              "value": "тошнота"
+            }
+          ],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R304",
+          "profile_id": "SYN-R304",
+          "template": "future_plan_date",
+          "metrics": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.25,
+            "recall": 0.25
+          },
+          "prediction_count_all_fields": 4,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "event_date",
+              "assertion": "present",
+              "value": "2027-04-09",
+              "quote": "2027-04-09",
+              "span": {
+                "start": 17,
+                "end": 27
+              },
+              "id": "0"
+            },
+            {
+              "field": "medication",
+              "assertion": "listed",
+              "value": "препарат X",
+              "quote": "препарат X",
+              "span": {
+                "start": 56,
+                "end": 66
+              },
+              "id": "1"
+            },
+            {
+              "field": "dose",
+              "assertion": "present",
+              "value": {
+                "value": 6,
+                "unit": "mg"
+              },
+              "quote": "6 мг",
+              "span": {
+                "start": 105,
+                "end": 109
+              },
+              "id": "2"
+            },
+            {
+              "field": "dose",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "доза неизвестна",
+              "span": {
+                "start": 129,
+                "end": 144
+              },
+              "id": "3"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R304-F04",
+              "candidate_id": "3"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "event_date",
+              "assertion": "present",
+              "value": "2027-04-09",
+              "quote": "2027-04-09",
+              "span": {
+                "start": 17,
+                "end": 27
+              },
+              "id": "0"
+            },
+            {
+              "field": "medication",
+              "assertion": "listed",
+              "value": "препарат X",
+              "quote": "препарат X",
+              "span": {
+                "start": 56,
+                "end": 66
+              },
+              "id": "1"
+            },
+            {
+              "field": "dose",
+              "assertion": "present",
+              "value": {
+                "value": 6,
+                "unit": "mg"
+              },
+              "quote": "6 мг",
+              "span": {
+                "start": 105,
+                "end": 109
+              },
+              "id": "2"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "not_due",
+              "field": "event_date",
+              "id": "R304-F01",
+              "quote": "Приём намечен на 2027-04-09, ещё не состоялся",
+              "span": {
+                "end": 45,
+                "start": 0
+              },
+              "value": null
+            },
+            {
+              "assertion": "considered",
+              "field": "medication",
+              "id": "R304-F02",
+              "quote": "Обсудить препарат X планируют, не назначали",
+              "span": {
+                "end": 90,
+                "start": 47
+              },
+              "value": "препарат X"
+            },
+            {
+              "assertion": "cancelled_proposal",
+              "field": "dose",
+              "id": "R304-F03",
+              "quote": "Предлагаемые 6 мг отклонены",
+              "span": {
+                "end": 119,
+                "start": 92
+              },
+              "value": {
+                "unit": "mg",
+                "value": 6
+              }
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "considered",
+              "field": "medication",
+              "id": "R304-F02",
+              "quote": "Обсудить препарат X планируют, не назначали",
+              "span": {
+                "end": 90,
+                "start": 47
+              },
+              "value": "препарат X"
+            },
+            {
+              "assertion": "cancelled_proposal",
+              "field": "dose",
+              "id": "R304-F03",
+              "quote": "Предлагаемые 6 мг отклонены",
+              "span": {
+                "end": 119,
+                "start": 92
+              },
+              "value": {
+                "unit": "mg",
+                "value": 6
+              }
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R305",
+          "profile_id": "SYN-R305",
+          "template": "pill_unit_missing",
+          "metrics": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 3,
+            "precision": 1.0,
+            "recall": 0.4
+          },
+          "prediction_count_all_fields": 2,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "medication",
+              "assertion": "listed",
+              "value": "Авиандр",
+              "quote": "Авиандр",
+              "span": {
+                "start": 13,
+                "end": 20
+              },
+              "id": "0"
+            },
+            {
+              "field": "age_years",
+              "assertion": "present",
+              "value": 38,
+              "quote": "38 лет",
+              "span": {
+                "start": 119,
+                "end": 125
+              },
+              "id": "1"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R305-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "R305-F05",
+              "candidate_id": "1"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [
+            {
+              "assertion": "incomplete",
+              "field": "dose",
+              "id": "R305-F02",
+              "quote": "«по 5», единица измерения не вписана",
+              "span": {
+                "end": 59,
+                "start": 23
+              },
+              "value": {
+                "unit": null,
+                "value": 5
+              }
+            },
+            {
+              "assertion": "unknown",
+              "field": "frequency_per_day",
+              "id": "R305-F03",
+              "quote": "Кратность — неизвестна",
+              "span": {
+                "end": 83,
+                "start": 61
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "medication_start",
+              "id": "R305-F04",
+              "quote": "Начало приёма не помнит",
+              "span": {
+                "end": 108,
+                "start": 85
+              },
+              "value": null
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "incomplete",
+              "field": "dose",
+              "id": "R305-F02",
+              "quote": "«по 5», единица измерения не вписана",
+              "span": {
+                "end": 59,
+                "start": 23
+              },
+              "value": {
+                "unit": null,
+                "value": 5
+              }
+            },
+            {
+              "assertion": "unknown",
+              "field": "frequency_per_day",
+              "id": "R305-F03",
+              "quote": "Кратность — неизвестна",
+              "span": {
+                "end": 83,
+                "start": 61
+              },
+              "value": null
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R306",
+          "profile_id": "SYN-R306",
+          "template": "quoted_old_self",
+          "metrics": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "prediction_count_all_fields": 1,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "self_harm_report",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "причинить себе вред",
+              "span": {
+                "start": 37,
+                "end": 56
+              },
+              "id": "0"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [],
+          "false_positives": [
+            {
+              "field": "self_harm_report",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "причинить себе вред",
+              "span": {
+                "start": 37,
+                "end": 56
+              },
+              "id": "0"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "historical",
+              "field": "historical_self_harm_report",
+              "id": "R306-F01",
+              "quote": "Старое письмо самого пациента: «Хочу причинить себе вред»",
+              "span": {
+                "end": 57,
+                "start": 0
+              },
+              "value": true
+            },
+            {
+              "assertion": "negated",
+              "field": "self_harm_report",
+              "id": "R306-F02",
+              "quote": "Сегодня на этот вопрос отвечает «Нет»",
+              "span": {
+                "end": 96,
+                "start": 59
+              },
+              "value": false
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "historical",
+              "field": "historical_self_harm_report",
+              "id": "R306-F01",
+              "quote": "Старое письмо самого пациента: «Хочу причинить себе вред»",
+              "span": {
+                "end": 57,
+                "start": 0
+              },
+              "value": true
+            },
+            {
+              "assertion": "negated",
+              "field": "self_harm_report",
+              "id": "R306-F02",
+              "quote": "Сегодня на этот вопрос отвечает «Нет»",
+              "span": {
+                "end": 96,
+                "start": 59
+              },
+              "value": false
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R307",
+          "profile_id": "SYN-R307",
+          "template": "uncertain_diagnosis",
+          "metrics": {
+            "tp": 1,
+            "fp": 2,
+            "fn": 3,
+            "precision": 0.3333333333333333,
+            "recall": 0.25
+          },
+          "prediction_count_all_fields": 3,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "diagnosis",
+              "assertion": "present",
+              "value": "F41.1",
+              "quote": "F41.1",
+              "span": {
+                "start": 30,
+                "end": 35
+              },
+              "id": "0"
+            },
+            {
+              "field": "diagnosis",
+              "assertion": "present",
+              "value": "F32.0",
+              "quote": "F32.0",
+              "span": {
+                "start": 41,
+                "end": 46
+              },
+              "id": "1"
+            },
+            {
+              "field": "symptom",
+              "assertion": "negated",
+              "value": "усталость",
+              "quote": "Усталость",
+              "span": {
+                "start": 77,
+                "end": 86
+              },
+              "id": "2"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R307-F03",
+              "candidate_id": "2"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "diagnosis",
+              "assertion": "present",
+              "value": "F41.1",
+              "quote": "F41.1",
+              "span": {
+                "start": 30,
+                "end": 35
+              },
+              "id": "0"
+            },
+            {
+              "field": "diagnosis",
+              "assertion": "present",
+              "value": "F32.0",
+              "quote": "F32.0",
+              "span": {
+                "start": 41,
+                "end": 46
+              },
+              "id": "1"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "suspected",
+              "field": "diagnosis",
+              "id": "R307-F01",
+              "quote": "Рассматриваются два варианта: F41.1",
+              "span": {
+                "end": 35,
+                "start": 0
+              },
+              "value": "F41.1"
+            },
+            {
+              "assertion": "suspected",
+              "field": "diagnosis",
+              "id": "R307-F02",
+              "quote": "либо F32.0; ни один пока не подтверждён",
+              "span": {
+                "end": 75,
+                "start": 36
+              },
+              "value": "F32.0"
+            },
+            {
+              "assertion": "negated",
+              "field": "concomitant_medications",
+              "id": "R307-F04",
+              "quote": "Сопутствующих лекарств нет",
+              "span": {
+                "end": 125,
+                "start": 99
+              },
+              "value": []
+            }
+          ],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R308",
+          "profile_id": "SYN-R308",
+          "template": "patient_caregiver",
+          "metrics": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "prediction_count_all_fields": 3,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "pregnancy_status",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "беременность исключена.",
+              "span": {
+                "start": 41,
+                "end": 64
+              },
+              "id": "0"
+            },
+            {
+              "field": "pregnancy_status",
+              "assertion": "negated",
+              "value": false,
+              "quote": "беременности самой пациентки данных нет.",
+              "span": {
+                "start": 67,
+                "end": 107
+              },
+              "id": "1"
+            },
+            {
+              "field": "lactation_status",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Грудное вскармливание у пациентки прекращено в прошлом году;",
+              "span": {
+                "start": 108,
+                "end": 168
+              },
+              "id": "2"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [],
+          "false_positives": [
+            {
+              "field": "pregnancy_status",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "беременность исключена.",
+              "span": {
+                "start": 41,
+                "end": 64
+              },
+              "id": "0"
+            },
+            {
+              "field": "pregnancy_status",
+              "assertion": "negated",
+              "value": false,
+              "quote": "беременности самой пациентки данных нет.",
+              "span": {
+                "start": 67,
+                "end": 107
+              },
+              "id": "1"
+            },
+            {
+              "field": "lactation_status",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Грудное вскармливание у пациентки прекращено в прошлом году;",
+              "span": {
+                "start": 108,
+                "end": 168
+              },
+              "id": "2"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "third_party",
+              "field": "pregnancy_status",
+              "id": "R308-F01",
+              "quote": "у матери беременность исключена",
+              "span": {
+                "end": 63,
+                "start": 32
+              },
+              "value": false
+            },
+            {
+              "assertion": "unknown",
+              "field": "pregnancy_status",
+              "id": "R308-F02",
+              "quote": "О беременности самой пациентки данных нет",
+              "span": {
+                "end": 106,
+                "start": 65
+              },
+              "value": null
+            },
+            {
+              "assertion": "negated",
+              "field": "lactation_status",
+              "id": "R308-F03",
+              "quote": "Грудное вскармливание у пациентки прекращено в прошлом году; сейчас его нет",
+              "span": {
+                "end": 183,
+                "start": 108
+              },
+              "value": false
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "third_party",
+              "field": "pregnancy_status",
+              "id": "R308-F01",
+              "quote": "у матери беременность исключена",
+              "span": {
+                "end": 63,
+                "start": 32
+              },
+              "value": false
+            },
+            {
+              "assertion": "unknown",
+              "field": "pregnancy_status",
+              "id": "R308-F02",
+              "quote": "О беременности самой пациентки данных нет",
+              "span": {
+                "end": 106,
+                "start": 65
+              },
+              "value": null
+            },
+            {
+              "assertion": "negated",
+              "field": "lactation_status",
+              "id": "R308-F03",
+              "quote": "Грудное вскармливание у пациентки прекращено в прошлом году; сейчас его нет",
+              "span": {
+                "end": 183,
+                "start": 108
+              },
+              "value": false
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R309",
+          "profile_id": "SYN-R309",
+          "template": "mixed_ledger",
+          "metrics": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 4,
+            "precision": 0.3333333333333333,
+            "recall": 0.3333333333333333
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "medication",
+              "assertion": "listed",
+              "value": "препарат X",
+              "quote": "препарат X",
+              "span": {
+                "start": 15,
+                "end": 25
+              },
+              "id": "0"
+            },
+            {
+              "field": "dose",
+              "assertion": "conflicting",
+              "value": {
+                "value": 3,
+                "unit": "mg"
+              },
+              "quote": "3 мг",
+              "span": {
+                "start": 28,
+                "end": 32
+              },
+              "id": "1"
+            },
+            {
+              "field": "frequency_per_day",
+              "assertion": "conflicting",
+              "value": 1,
+              "quote": "1 раз в сутки",
+              "span": {
+                "start": 35,
+                "end": 48
+              },
+              "id": "2"
+            },
+            {
+              "field": "medication",
+              "assertion": "stopped",
+              "value": "препарат Y",
+              "quote": "препарат Y",
+              "span": {
+                "start": 63,
+                "end": 73
+              },
+              "id": "3"
+            },
+            {
+              "field": "dose",
+              "assertion": "conflicting",
+              "value": {
+                "value": 2,
+                "unit": "ml"
+              },
+              "quote": "2 мл",
+              "span": {
+                "start": 76,
+                "end": 80
+              },
+              "id": "4"
+            },
+            {
+              "field": "frequency_per_day",
+              "assertion": "conflicting",
+              "value": 2,
+              "quote": "2 раза в сутки",
+              "span": {
+                "start": 83,
+                "end": 97
+              },
+              "id": "5"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [
+            {
+              "gold_id": "R309-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "R309-F04",
+              "candidate_id": "3"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "dose",
+              "assertion": "conflicting",
+              "value": {
+                "value": 3,
+                "unit": "mg"
+              },
+              "quote": "3 мг",
+              "span": {
+                "start": 28,
+                "end": 32
+              },
+              "id": "1"
+            },
+            {
+              "field": "frequency_per_day",
+              "assertion": "conflicting",
+              "value": 1,
+              "quote": "1 раз в сутки",
+              "span": {
+                "start": 35,
+                "end": 48
+              },
+              "id": "2"
+            },
+            {
+              "field": "dose",
+              "assertion": "conflicting",
+              "value": {
+                "value": 2,
+                "unit": "ml"
+              },
+              "quote": "2 мл",
+              "span": {
+                "start": 76,
+                "end": 80
+              },
+              "id": "4"
+            },
+            {
+              "field": "frequency_per_day",
+              "assertion": "conflicting",
+              "value": 2,
+              "quote": "2 раза в сутки",
+              "span": {
+                "start": 83,
+                "end": 97
+              },
+              "id": "5"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "present",
+              "field": "dose",
+              "id": "R309-F02",
+              "quote": "3 мг",
+              "span": {
+                "end": 32,
+                "start": 28
+              },
+              "value": {
+                "unit": "mg",
+                "value": 3
+              }
+            },
+            {
+              "assertion": "present",
+              "field": "frequency_per_day",
+              "id": "R309-F03",
+              "quote": "1 раз в сутки",
+              "span": {
+                "end": 48,
+                "start": 35
+              },
+              "value": 1
+            },
+            {
+              "assertion": "stopped",
+              "field": "dose",
+              "id": "R309-F05",
+              "quote": "2 мл",
+              "span": {
+                "end": 80,
+                "start": 76
+              },
+              "value": {
+                "unit": "ml",
+                "value": 2
+              }
+            },
+            {
+              "assertion": "stopped",
+              "field": "frequency_per_day",
+              "id": "R309-F06",
+              "quote": "2 раза в сутки",
+              "span": {
+                "end": 97,
+                "start": 83
+              },
+              "value": 2
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "present",
+              "field": "dose",
+              "id": "R309-F02",
+              "quote": "3 мг",
+              "span": {
+                "end": 32,
+                "start": 28
+              },
+              "value": {
+                "unit": "mg",
+                "value": 3
+              }
+            },
+            {
+              "assertion": "present",
+              "field": "frequency_per_day",
+              "id": "R309-F03",
+              "quote": "1 раз в сутки",
+              "span": {
+                "end": 48,
+                "start": 35
+              },
+              "value": 1
+            },
+            {
+              "assertion": "stopped",
+              "field": "dose",
+              "id": "R309-F05",
+              "quote": "2 мл",
+              "span": {
+                "end": 80,
+                "start": 76
+              },
+              "value": {
+                "unit": "ml",
+                "value": 2
+              }
+            },
+            {
+              "assertion": "stopped",
+              "field": "frequency_per_day",
+              "id": "R309-F06",
+              "quote": "2 раза в сутки",
+              "span": {
+                "end": 97,
+                "start": 83
+              },
+              "value": 2
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "R310",
+          "profile_id": "SYN-R310",
+          "template": "question_without_answer",
+          "metrics": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 4,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "prediction_count_all_fields": 3,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "all_predictions": [
+            {
+              "field": "symptom",
+              "assertion": "present",
+              "value": "сыпь",
+              "quote": "сыпь",
+              "span": {
+                "start": 44,
+                "end": 48
+              },
+              "id": "0"
+            },
+            {
+              "field": "dyspnea",
+              "assertion": "present",
+              "value": true,
+              "quote": "одышка",
+              "span": {
+                "start": 58,
+                "end": 64
+              },
+              "id": "1"
+            },
+            {
+              "field": "medication",
+              "assertion": "suspected",
+              "value": "Авиандр",
+              "quote": "Авиандр",
+              "span": {
+                "start": 80,
+                "end": 87
+              },
+              "id": "2"
+            }
+          ],
+          "out_of_target_predictions": [],
+          "matches": [],
+          "false_positives": [
+            {
+              "field": "symptom",
+              "assertion": "present",
+              "value": "сыпь",
+              "quote": "сыпь",
+              "span": {
+                "start": 44,
+                "end": 48
+              },
+              "id": "0"
+            },
+            {
+              "field": "dyspnea",
+              "assertion": "present",
+              "value": true,
+              "quote": "одышка",
+              "span": {
+                "start": 58,
+                "end": 64
+              },
+              "id": "1"
+            },
+            {
+              "field": "medication",
+              "assertion": "suspected",
+              "value": "Авиандр",
+              "quote": "Авиандр",
+              "span": {
+                "start": 80,
+                "end": 87
+              },
+              "id": "2"
+            }
+          ],
+          "false_negatives": [
+            {
+              "assertion": "unknown",
+              "field": "symptom",
+              "id": "R310-F01",
+              "quote": "Есть ли сыпь?",
+              "span": {
+                "end": 49,
+                "start": 36
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "dyspnea",
+              "id": "R310-F02",
+              "quote": "Есть ли одышка?",
+              "span": {
+                "end": 65,
+                "start": 50
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "medication",
+              "id": "R310-F03",
+              "quote": "Принимаете ли Авиандр?",
+              "span": {
+                "end": 88,
+                "start": 66
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "age_years",
+              "id": "R310-F04",
+              "quote": "Сведения о возрасте отсутствуют",
+              "span": {
+                "end": 121,
+                "start": 90
+              },
+              "value": null
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "assertion": "unknown",
+              "field": "dyspnea",
+              "id": "R310-F02",
+              "quote": "Есть ли одышка?",
+              "span": {
+                "end": 65,
+                "start": 50
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "medication",
+              "id": "R310-F03",
+              "quote": "Принимаете ли Авиандр?",
+              "span": {
+                "end": 88,
+                "start": 66
+              },
+              "value": null
+            },
+            {
+              "assertion": "unknown",
+              "field": "age_years",
+              "id": "R310-F04",
+              "quote": "Сведения о возрасте отсутствуют",
+              "span": {
+                "end": 121,
+                "start": 90
+              },
+              "value": null
+            }
+          ],
+          "critical_missing_fields": [],
+          "unsupported_target_fields": []
+        }
+      ],
+      "micro": {
+        "tp": 10,
+        "fp": 22,
+        "fn": 28,
+        "precision": 0.3125,
+        "recall": 0.2631578947368421
+      },
+      "per_field": {
+        "age_years": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.3333333333333333,
+          "recall": 0.25
+        },
+        "concomitant_medications": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "precision": null,
+          "recall": 0.0
+        },
+        "diagnosis": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "dose": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.2,
+          "recall": 0.16666666666666666
+        },
+        "dyspnea": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "event_date": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.5
+        },
+        "frequency_per_day": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "historical_self_harm_report": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "precision": null,
+          "recall": 0.0
+        },
+        "lactation_status": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "medication": {
+          "tp": 4,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666
+        },
+        "medication_allergy": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "medication_start": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "precision": null,
+          "recall": 0.0
+        },
+        "pregnancy_status": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "self_harm_report": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "symptom": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.6
+        }
+      },
+      "per_template": {
+        "correction_note": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 3,
+          "precision": 0.25,
+          "recall": 0.25
+        },
+        "future_plan_date": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 3,
+          "precision": 0.25,
+          "recall": 0.25
+        },
+        "mixed_ledger": {
+          "tp": 2,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333
+        },
+        "negated_negation": {
+          "tp": 2,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.6666666666666666
+        },
+        "patient_caregiver": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "pill_unit_missing": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 3,
+          "precision": 1.0,
+          "recall": 0.4
+        },
+        "question_without_answer": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "quoted_old_self": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "separate_respondents": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.3333333333333333
+        },
+        "uncertain_diagnosis": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.3333333333333333,
+          "recall": 0.25
+        }
+      },
+      "risk_field_false_negative_count": 21,
+      "critical_missing_asserted_known_count": 0,
+      "empty_extraction_count": 0
+    }
+  ]
+}

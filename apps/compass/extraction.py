@@ -7,11 +7,11 @@ from datetime import date
 from . import access, decisions
 from .db import now, transaction
 
-VERSION = 'literal-v1'
+VERSION = 'literal-v2'
 MAX_BYTES = 24000
 ASSERTIONS = ('present', 'negated', 'unknown', 'conflicting', 'suspected', 'considered',
-              'historical', 'patient_reported', 'stopped', 'listed', 'incomplete', 'invalid', 'third_party')
-ASSERTION_LABELS = dict(zip(ASSERTIONS, ('Указано', 'Явно отрицается', 'Неизвестно', 'Противоречие', 'Предположение', 'Обсуждается', 'В прошлом', 'Со слов пациента', 'Отменено в источнике', 'В списке', 'Неполно', 'Некорректно', 'О другом человеке')))
+              'historical', 'patient_reported', 'stopped', 'listed', 'incomplete', 'invalid', 'third_party', 'cancelled_proposal', 'not_due')
+ASSERTION_LABELS = dict(zip(ASSERTIONS, ('Указано', 'Явно отрицается', 'Неизвестно', 'Противоречие', 'Предположение', 'Обсуждается', 'В прошлом', 'Со слов пациента', 'Отменено в источнике', 'В списке', 'Неполно', 'Некорректно', 'О другом человеке', 'Отменённый проект', 'Срок ещё не наступил')))
 FIELDS = {
     'age_years': 'Возраст', 'event_date': 'Дата записи/события', 'diagnosis': 'Диагноз в источнике',
     'medication': 'Упоминание препарата', 'dose': 'Доза в источнике',
@@ -19,6 +19,20 @@ FIELDS = {
     'pregnancy_status': 'Беременность', 'lactation_status': 'Грудное вскармливание',
     'symptom': 'Жалоба/симптом', 'self_harm_report': 'Высказывание о самоповреждении',
     'concomitant_medications': 'Сопутствующие лекарства', 'medication_start': 'Начало приёма',
+    'received_date': 'Дата получения', 'historical_self_harm_report': 'Прошлое высказывание о самоповреждении',
+    'third_party_self_harm_report': 'Высказывание о другом человеке', 'medication_use': 'Фактический приём',
+    'medication_name': 'Название лекарства', 'current_medications': 'Текущие лекарства', 'current_prescriptions': 'Текущие назначения',
+    'current_complaints': 'Текущие жалобы', 'current_condition': 'Текущее состояние',
+    'tablet_strength': 'Сила таблетки/концентрация', 'allergen': 'Название аллергена',
+    'anxiety': 'Тревога в источнике', 'dizziness': 'Головокружение', 'nausea': 'Тошнота',
+    'itch': 'Зуд', 'dyspnea': 'Затруднение дыхания', 'diagnosis_text': 'Уточнение диагноза в источнике',
+    'sleep_change': 'Изменение сна', 'insomnia_timing': 'Время появления бессонницы',
+    'symptom_onset': 'Начало жалоб', 'adverse_event_causality': 'Сведения о причинности НЯ',
+    'scale_name': 'Шкала в источнике', 'scale_complete': 'Полнота анкеты в источнике',
+    'scale_version': 'Версия формы в источнике', 'plan_change': 'Изменение плана в источнике',
+    'adherence_morning': 'Утреннее выполнение', 'adherence_evening': 'Вечернее выполнение',
+    'adherence': 'Выполнение в источнике', 'report_schedule': 'Расписание самоотчёта',
+    'missing_report_days': 'Дни без самоотчёта',
 }
 WARNING = ('Кандидаты могут содержать ошибки и пропуски. Не являются диагнозом, назначением или '
            'проверкой критичности. Просмотрите весь исходник; отсутствие кандидата не означает отсутствие риска.')
@@ -56,123 +70,10 @@ def upload_text(file):
 
 def extract(text):
     text_input(text)
-    candidates = []
-
-    def add(field, assertion, value, start, end):
-        item = {'field': field, 'assertion': assertion, 'value': value,
-                'quote': text[start:end], 'span': {'start': start, 'end': end}}
-        if item not in candidates:
-            candidates.append(item)
-
-    def scan(pattern, field, transform, flags=re.I):
-        for m in re.finditer(pattern, text, flags):
-            assertion, value = transform(m)
-            add(field, assertion, value, m.start(), m.end())
-
-    def clause(m):
-        # Periods in decimal numbers/ICD/date are not sentence boundaries.
-        prefix = text[:m.start()]
-        suffix = text[m.end():]
-        left = list(re.finditer(r'[;\n]|\.(?=\s|$)', prefix))
-        right = re.search(r'[;\n]|\.(?=\s|$)', suffix)
-        return text[left[-1].end() if left else 0:m.end() + (right.start() if right else len(suffix))].lower()
-
-    scan(r'\b(\d{1,3})\s*(?:лет|года?|л\.)\b', 'age_years', lambda m: ('present', int(m[1])))
-    scan(r'возраст\s*[:—-]?\s*(?:неизвестен|не заполнен|не указан)', 'age_years', lambda m: ('unknown', None))
-    scan(r'сколько лет\?\s*—\s*(\d{1,3})', 'age_years', lambda m: ('present', int(m[1])))
-
-    def numeric_date(m):
-        parts = re.split(r'[./-]', m[0])
-        y, mo, d = map(int, parts if len(parts[0]) == 4 else parts[::-1])
-        try:
-            return 'present', date(y, mo, d).isoformat()
-        except ValueError:
-            return 'invalid', None
-    scan(r'\b(?:\d{4}-\d{2}-\d{2}|\d{2}[./]\d{2}[./]\d{4})\b', 'event_date', numeric_date)
-    months = {'января':1,'февраля':2,'марта':3,'апреля':4,'мая':5,'июня':6,'июля':7,'августа':8,'сентября':9,'октября':10,'ноября':11,'декабря':12}
-    def word_date(m):
-        try:
-            return 'present', date(int(m[3]), months[m[2].lower()], int(m[1])).isoformat()
-        except ValueError:
-            return 'invalid', None
-    scan(r'\b(\d{1,2})\s+('+'|'.join(months)+r')\s+(\d{4})(?:\s+года)?', 'event_date', word_date)
-
-    def state(m):
-        c = clause(m)
-        if re.search(r'неизвест|не помнит|нет подтверждения|не уверен', c):
-            return 'unknown'
-        if re.search(r'не принимает|не назначал|не упомина|не начинал|отрица|не подтвержд', c):
-            return 'negated'
-        if re.search(r'отмен[её]н', c):
-            return 'stopped'
-        if re.search(r'обсужд|рассмотр|вопрос врачу', c):
-            return 'considered'
-        if re.search(r'ранее|архив|старой|до этого|в прошлом', c):
-            return 'historical'
-        if re.search(r'подозрев|уточнен|\?', c):
-            return 'suspected'
-        if re.search(r'со слов|самоотч[её]т|пациент', c):
-            return 'patient_reported'
-        return 'listed'
-
-    def diagnosis(m):
-        s = state(m)
-        return (s if s in ('historical', 'suspected', 'unknown', 'negated') else 'present'), m[0].upper() if re.fullmatch(r'[fF]\d{2}(?:\.\d)?', m[0]) else m[0]
-    scan(r'\b[Ff]\d{2}(?:\.\d)?\b', 'diagnosis', diagnosis)
-    # Named diagnoses only when no code follows in the same clause; no diagnosis from symptoms.
-    for m in re.finditer(r'\b(?:ГТР|генерализованное тревожное расстройство|депрессивный эпизод)\b', text, re.I):
-        if not re.search(r'\bf\d{2}', clause(m)):
-            s, v = diagnosis(m)
-            add('diagnosis', s, v, m.start(), m.end())
-    scan(r'(?:диагноз\s+(?:не установлен|отсутствует|не вписан)|без установленного диагноза|врачебного диагноза нет)', 'diagnosis', lambda m: ('unknown', None))
-    scan(r'\b(?:Авиандр[а]?|препарат\s+[XYZ])\b', 'medication',
-         lambda m: (state(m), None if state(m) == 'unknown' else ('Авиандр' if m[0].lower().startswith('авиандр') else 'препарат '+m[0][-1].upper())))
-
-    def dose(m):
-        value = float(m[1].replace(',', '.'))
-        unit = {'мг':'mg','г':'g','мл':'ml'}[m[2].lower()]
-        return ('historical' if state(m) == 'historical' else 'present'), {'value':value, 'unit':unit}
-    scan(r'\b(\d+(?:[.,]\d+)?)\s*(мг|мл|г)\b', 'dose', dose)
-    scan(r'доз[ау]\s+(?:не помнит|неизвестна)|доза неизвестна', 'dose', lambda m: ('unknown', None))
-    scan(r'\b(\d+)\s*раз[а]?\s*(?:в сутки|в день)', 'frequency_per_day', lambda m: ('present', int(m[1])))
-    scan(r'один раз в день', 'frequency_per_day', lambda m: ('present', 1))
-
-    def risk(m):
-        c = clause(m)
-        if re.search(r'неизвест|не заполн|нет сведений|отсутствуют сведения|не сообщает', c):
-            return 'unknown', None
-        if 'противореч' in c:
-            return 'conflicting', None
-        if re.search(r'отрица|:\s*нет\b|не беремен', c) and 'не отрица' not in c:
-            return 'negated', False
-        if re.search(r'подтвержд|:\s*да\b|есть|имеется', c):
-            return ('patient_reported' if 'со слов' in c else 'present'), True
-        return 'unknown', None
-    for field, pattern in (
-        ('medication_allergy', r'(?:лекарственная аллергия|аллерги[юяи]\s+на лекарства|сведения об аллергии)'),
-        ('pregnancy_status', r'беременность|беременна'),
-        ('lactation_status', r'грудно(?:м|е) вскармливани[еи]'),
-    ):
-        scan(pattern, field, risk)
-    # A deliberately small literal vocabulary; unknown variants remain for manual review.
-    for pattern, value in [(r'сердцебиение', 'сердцебиение'), (r'сплю хуже|бессонница', 'нарушение сна'),
-                           (r'подавленного настроения','сниженное настроение'), (r'усталость','усталость'),
-                           (r'тошнота','тошнота'), (r'сыпь','сыпь'), (r'от[её]к губ','отёк губ')]:
-        scan(pattern, 'symptom', lambda m, v=value: (('negated' if state(m)=='negated' else 'historical' if state(m)=='historical' else 'present'), v))
-    # High-risk wording is flagged as unresolved, never used to assert an emergency or its absence.
-    scan(r'причинить себе вред|суицид\w*|самоповрежден\w*', 'self_harm_report', lambda m: ('unknown', None))
-
-    # Multiple incompatible literal values are retained and visibly marked, never silently chosen.
-    for field in ('age_years', 'dose'):
-        items = [c for c in candidates if c['field'] == field and c['assertion']=='present']
-        if len({json.dumps(c['value'], sort_keys=True) for c in items}) > 1:
-            for c in items:
-                c['assertion'] = 'conflicting'
-    candidates.sort(key=lambda c: (c['span']['start'], c['field']))
-    for i, c in enumerate(candidates):
-        c['id'] = str(i)
-    missing = [f for f in FIELDS if not any(c['field']==f for c in candidates)]
-    return {'version':VERSION, 'candidates':candidates, 'unextracted_fields':missing, 'warning':WARNING}
+    if re.search(r'\d{101}', text):
+        raise ExtractionError('Числовой фрагмент длиннее 100 цифр не поддерживается.')
+    from .extraction_literals import extract_literals
+    return extract_literals(text, FIELDS, VERSION, WARNING)
 
 
 def canonical(value):

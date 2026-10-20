@@ -1,0 +1,1177 @@
+{
+  "status": "PASS",
+  "synthetic": true,
+  "independent_clinical_validation": false,
+  "head": "a17d1b6d55ea102dfea6156d39dc7f697cc3adcd",
+  "script_sha256": "801142c48fefe1a72224597fba95382b04bc6ce800b713593406749f687a051b",
+  "transport": "Flask HTTP test client; not browser/network timing",
+  "checks": 3394,
+  "duration_seconds": 81.827,
+  "post_count": 2564,
+  "post_mean_ms": 4.357,
+  "post_max_ms": 1062.037,
+  "counts": {
+    "patients": 18,
+    "text_imports": 18,
+    "self_reports": 109,
+    "first_visit_versions": 108,
+    "assessments": 168,
+    "proposals": 272,
+    "doctor_confirmations": 164,
+    "care_actions": 164,
+    "adherence_tasks": 108,
+    "adherence_entries": 108,
+    "messages": 324,
+    "message_receipts": 432,
+    "adverse_events": 3,
+    "critical_events": 1
+  },
+  "events_processed": 116,
+  "profiles": [
+    {
+      "id": "D01",
+      "age_status": "known",
+      "age": 35,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "age_status": "known",
+      "age": 18,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "age_status": "known",
+      "age": 47,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "age_status": "known",
+      "age": 52,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "D05",
+      "age_status": "known",
+      "age": 28,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "D06",
+      "age_status": "conflicting",
+      "age": null,
+      "scenario": "original-S03",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY01",
+      "age_status": "known",
+      "age": 35,
+      "scenario": "improving",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY02",
+      "age_status": "known",
+      "age": 45,
+      "scenario": "persistent",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY03",
+      "age_status": "known",
+      "age": 65,
+      "scenario": "worsening",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": true,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY04",
+      "age_status": "known",
+      "age": 19,
+      "scenario": "adverse-event",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": true,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY05",
+      "age_status": "known",
+      "age": 17,
+      "scenario": "minor",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY06",
+      "age_status": "known",
+      "age": 18,
+      "scenario": "boundary-18",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY07",
+      "age_status": "unknown",
+      "age": null,
+      "scenario": "unknown-age",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY08",
+      "age_status": "conflicting",
+      "age": null,
+      "scenario": "conflicting-age",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "blocked-age",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY09",
+      "age_status": "known",
+      "age": 28,
+      "scenario": "missed-task",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY10",
+      "age_status": "known",
+      "age": 54,
+      "scenario": "unknown-outcome",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY11",
+      "age_status": "known",
+      "age": 38,
+      "scenario": "conflicting-outcome",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    },
+    {
+      "id": "CY12",
+      "age_status": "known",
+      "age": 72,
+      "scenario": "critical-transport",
+      "rounds": [
+        {
+          "observed_on": "2026-09-15",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-22",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-09-29",
+          "wellbeing": "worse",
+          "adverse_event": true,
+          "assessment": "completed",
+          "outcome": "missed",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-06",
+          "wellbeing": "unknown",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "unknown",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-13",
+          "wellbeing": "same",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "conflicting",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        },
+        {
+          "observed_on": "2026-10-20",
+          "wellbeing": "better",
+          "adverse_event": false,
+          "assessment": "completed",
+          "outcome": "taken",
+          "plan": "separate simulated physician confirmation",
+          "stale_confirmation": 409
+        }
+      ]
+    }
+  ],
+  "confirmed_kinds": {
+    "plan_change": 108,
+    "referral": 14,
+    "therapy_change": 14,
+    "therapy_start": 14,
+    "therapy_stop": 14
+  },
+  "psychiatrist_referrals": 14,
+  "referral_categories": [
+    "desirable",
+    "mandatory"
+  ],
+  "limitations": [
+    "All clinical actors are simulated; no medical expert participated",
+    "Backdated synthetic observations, not elapsed real follow-up",
+    "No new clinical rules, no short instrument, no real patients",
+    "Therapy actions are explicitly labelled placeholders without drug, dose or medical validation",
+    "Fixture patients and accounts are inserted directly; histories and decisions use HTTP handlers",
+    "Application recreation is not an OS restart; make smoke tests actual process restart",
+    "No claim of extraction accuracy, usability with humans or external deployment readiness"
+  ],
+  "runtime_source_sha256": {
+    "apps/compass/extraction.py": "0b4550b9caeefb17b5afe8a1c3fbd709ace69d7552da3790f3013dab2fe3bfcc",
+    "apps/compass/extraction_literals.py": "2170f3604a54304916a9eba83ac6a623e0dbc47b5ca8b071f4ceec918924252d",
+    "apps/compass/backup.py": "12adc2aa04f7d6d2869ce10701a98496d2615e2da9f21f31b8c515bb49bf8357",
+    "apps/compass/templates/imports.html": "8d5ef76363b48e07092741f31ebb349b22c24ba31f8038b834ef804d961d1062",
+    "apps/compass/access.py": "00f0b101dbeb5cc042bce1716fdf4184316f7fe7ae5c2e1535939ba9ce4231ca"
+  },
+  "scope_css_note": "Python runtime matched this final freeze during cycles; final CSS-only logout wrap fix verified separately by three browser engines."
+}

@@ -1,3 +1,4 @@
+from contextlib import closing
 """Backup failures must not create a source or overwrite another file."""
 import hashlib
 from pathlib import Path
@@ -19,13 +20,30 @@ class BackupTests(unittest.TestCase):
             self.assertEqual(0o600, backup.stat().st_mode & 0o777)
             db.execute("UPDATE patients SET code='changed' WHERE id='D01'")
             copy_database(backup, restored, result['sha256'])
-            with sqlite3.connect(restored) as other:
+            with closing(sqlite3.connect(restored)) as other, other:
                 self.assertNotEqual('changed', other.execute("SELECT code FROM patients WHERE id='D01'").fetchone()[0])
             digest = hashlib.sha256(backup.read_bytes()).hexdigest()
             with self.assertRaises(FileExistsError): copy_database(source, backup)
             self.assertEqual(digest, hashlib.sha256(backup.read_bytes()).hexdigest())
             with self.assertRaises(ValueError): copy_database(source, source)
             db.close()
+
+    def test_manifest_counts_describe_snapshot_not_later_source(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);source=root/'source';target=root/'snapshot'
+            db=connect(source)
+            try:
+                migrate(db);seed_demo(db)
+                db.execute('CREATE TABLE late_events(id INTEGER PRIMARY KEY)')
+                db.execute('INSERT INTO late_events VALUES(1)')
+                report=copy_database(source,target)
+                db.execute('INSERT INTO late_events VALUES(2)')
+                self.assertEqual(1,report['snapshot_rows']['late_events'])
+                self.assertIn('Later records',report['recovery_limit'])
+                with closing(sqlite3.connect(target)) as saved:
+                    self.assertEqual(1,saved.execute('SELECT count(*) FROM late_events').fetchone()[0])
+                self.assertEqual(2,db.execute('SELECT count(*) FROM late_events').fetchone()[0])
+            finally:db.close()
 
     def test_missing_corrupt_tampered_and_symlink_refused(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -46,7 +64,7 @@ class BackupTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             source,target=Path(folder)/'live',Path(folder)/'backup'
             db=connect(source);migrate(db);seed_demo(db);db.close()
-            with sqlite3.connect(source) as raw:
+            with closing(sqlite3.connect(source)) as raw, raw:
                 raw.execute("CREATE TABLE s15_broken_fk(user_id TEXT REFERENCES users(id))")
                 raw.execute("INSERT INTO s15_broken_fk VALUES('missing')")
             with self.assertRaises(ValueError): copy_database(source,target)
@@ -76,6 +94,6 @@ class BackupTests(unittest.TestCase):
                 self.assertTrue(started.wait(5));copy_database(source,target)
             finally:stop.set();thread.join(timeout=10)
             self.assertFalse(thread.is_alive());self.assertEqual([],errors)
-            with sqlite3.connect(target) as snapshot:
+            with closing(sqlite3.connect(target)) as snapshot, snapshot:
                 a,b=snapshot.execute('SELECT a,b FROM s15_pair').fetchone()
                 self.assertEqual(a,b);self.assertGreaterEqual(a,1)

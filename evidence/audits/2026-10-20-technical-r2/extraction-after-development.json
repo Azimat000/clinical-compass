@@ -1,0 +1,3200 @@
+{
+  "extractor_version": "literal-v2",
+  "extractor_sha256": "27bbc680837fb2bd1cfae594fd0bd56a5bef444626f04bf030d3619f542fb8f4",
+  "scope": "Synthetic technical evaluation, not external blind or clinical validation",
+  "matching": "field + assertion + normalized value + overlapping source spans; one-to-one; all gold target fields including unsupported; micro exact precision/recall",
+  "splits": [
+    {
+      "split": "development",
+      "dataset_version": "S03-v1",
+      "dataset_sha256": "5c827aca7a31711eeb19dee93a2e6c8fabd5edd86a836f4faa7773cc78ffa79d",
+      "records": [
+        {
+          "id": "DEV01",
+          "profile_id": "SYN-DEV01",
+          "template": "chronological",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV01-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV01-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV01-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV01-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV01-F05",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "pregnancy_status",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV02",
+          "profile_id": "SYN-DEV02",
+          "template": "sections",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 5,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV02-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV02-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV02-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV02-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV02-F05",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV03",
+          "profile_id": "SYN-DEV03",
+          "template": "dialogue",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 5,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV03-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV03-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV03-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV03-F04",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV03-F05",
+              "candidate_id": "3"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "event_date",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV04",
+          "profile_id": "SYN-DEV04",
+          "template": "brief",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV04-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV04-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV04-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV04-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV04-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV04-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV05",
+          "profile_id": "SYN-DEV05",
+          "template": "narrative",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV05-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV05-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV05-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV05-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV05-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV05-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "self_harm_report",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV06",
+          "profile_id": "SYN-DEV06",
+          "template": "timeline",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV06-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV06-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV06-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV06-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV06-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV06-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "current_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV07",
+          "profile_id": "SYN-DEV07",
+          "template": "prescription_first",
+          "metrics": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV07-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV07-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV07-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV07-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV07-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV07-F06",
+              "candidate_id": "6"
+            },
+            {
+              "gold_id": "DEV07-F07",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV08",
+          "profile_id": "SYN-DEV08",
+          "template": "self_report",
+          "metrics": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV08-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV08-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV08-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV08-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV08-F05",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "dose",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "дозу не написал",
+              "span": {
+                "start": 89,
+                "end": 104
+              },
+              "id": "4"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_name",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "dose",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "dose",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "дозу не написал",
+                  "span": {
+                    "start": 89,
+                    "end": 104
+                  },
+                  "id": "4"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "medication_name"
+          ]
+        },
+        {
+          "id": "DEV09",
+          "profile_id": "SYN-DEV09",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV09-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV09-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV09-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV09-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV09-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV09-F06",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "DEV09-F07",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "confirmed_current_regimen",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "confirmed_current_regimen"
+          ]
+        },
+        {
+          "id": "DEV10",
+          "profile_id": "SYN-DEV10",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8571428571428571,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV10-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV10-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV10-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV10-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV10-F05",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "DEV10-F06",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "medication",
+              "assertion": "listed",
+              "value": "препарат X",
+              "quote": "препарат X",
+              "span": {
+                "start": 91,
+                "end": 101
+              },
+              "id": "4"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "frequency_per_day",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV11",
+          "profile_id": "SYN-DEV11",
+          "template": "list",
+          "metrics": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8571428571428571,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV11-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV11-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV11-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV11-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV11-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV11-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "concomitant_medications",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Другие препараты: список отсутствует",
+              "span": {
+                "start": 155,
+                "end": 191
+              },
+              "id": "6"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "concomitant_medications",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "Другие препараты: список отсутствует",
+                  "span": {
+                    "start": 155,
+                    "end": 191
+                  },
+                  "id": "6"
+                }
+              ],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV12",
+          "profile_id": "SYN-DEV12",
+          "template": "narrative",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV12-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV12-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV12-F03",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV12-F04",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV12-F05",
+              "candidate_id": "6"
+            },
+            {
+              "gold_id": "DEV12-F06",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "symptom_onset",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV13",
+          "profile_id": "SYN-DEV13",
+          "template": "self_report",
+          "metrics": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV13-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV13-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV13-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV13-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV13-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV13-F06",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "DEV13-F07",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "frequency_per_day",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV14",
+          "profile_id": "SYN-DEV14",
+          "template": "archival",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 5,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV14-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV14-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV14-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV14-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV14-F05",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "current_diagnosis",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "self_harm_report",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "current_diagnosis"
+          ]
+        },
+        {
+          "id": "DEV15",
+          "profile_id": "SYN-DEV15",
+          "template": "narrative",
+          "metrics": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV15-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV15-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV15-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV15-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV15-F05",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "diagnosis",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Диагноз отсутствует",
+              "span": {
+                "start": 156,
+                "end": 175
+              },
+              "id": "5"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "diagnosis",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "Диагноз отсутствует",
+                  "span": {
+                    "start": 156,
+                    "end": 175
+                  },
+                  "id": "5"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "gestational_age",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "gestational_age"
+          ]
+        },
+        {
+          "id": "DEV16",
+          "profile_id": "SYN-DEV16",
+          "template": "quote",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV16-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV16-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV16-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV16-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV16-F05",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "DEV16-F06",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV17",
+          "profile_id": "SYN-DEV17",
+          "template": "chronological",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV17-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV17-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV17-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV17-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV17-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV17-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_name",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "dose",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "medication_name"
+          ]
+        },
+        {
+          "id": "DEV18",
+          "profile_id": "SYN-DEV18",
+          "template": "brief",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV18-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV18-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV18-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV18-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV18-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV18-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_name",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "scale_total",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "medication_name",
+            "scale_total"
+          ]
+        },
+        {
+          "id": "DEV19",
+          "profile_id": "SYN-DEV19",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV19-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV19-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV19-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV19-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV19-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "diagnosis",
+              "assertion": "present",
+              "value": "F41.1",
+              "quote": "F41.1",
+              "span": {
+                "start": 37,
+                "end": 42
+              },
+              "id": "2"
+            }
+          ],
+          "false_negatives": [
+            {
+              "id": "DEV19-F03",
+              "field": "diagnosis",
+              "assertion": "conflicting",
+              "value": "F41.1",
+              "quote": "F41.1",
+              "span": {
+                "start": 37,
+                "end": 42
+              }
+            }
+          ],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "dose",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "frequency_per_day",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "confirmed_diagnosis",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "confirmed_diagnosis"
+          ]
+        },
+        {
+          "id": "DEV20",
+          "profile_id": "SYN-DEV20",
+          "template": "prescription_first",
+          "metrics": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8571428571428571,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV20-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV20-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV20-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV20-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV20-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV20-F06",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "medication",
+              "assertion": "negated",
+              "value": "Авиандр",
+              "quote": "Авиандр",
+              "span": {
+                "start": 96,
+                "end": 103
+              },
+              "id": "6"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concentration",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "concentration"
+          ]
+        },
+        {
+          "id": "DEV21",
+          "profile_id": "SYN-DEV21",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV21-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV21-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV21-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV21-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV21-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV21-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV22",
+          "profile_id": "SYN-DEV22",
+          "template": "self_report",
+          "metrics": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV22-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV22-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV22-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV22-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV22-F06",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "medication",
+              "assertion": "patient_reported",
+              "value": "Авиандр",
+              "quote": "Авиандр",
+              "span": {
+                "start": 166,
+                "end": 173
+              },
+              "id": "5"
+            }
+          ],
+          "false_negatives": [
+            {
+              "id": "DEV22-F05",
+              "field": "medication",
+              "assertion": "historical",
+              "value": "Авиандр",
+              "quote": "принимал Авиандр",
+              "span": {
+                "start": 157,
+                "end": 173
+              }
+            }
+          ],
+          "risk_field_false_negatives": [
+            {
+              "id": "DEV22-F05",
+              "field": "medication",
+              "assertion": "historical",
+              "value": "Авиандр",
+              "quote": "принимал Авиандр",
+              "span": {
+                "start": 157,
+                "end": 173
+              }
+            }
+          ],
+          "critical_missing_fields": [
+            {
+              "field": "current_adherence",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "dose",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "current_adherence"
+          ]
+        },
+        {
+          "id": "DEV23",
+          "profile_id": "SYN-DEV23",
+          "template": "chronological",
+          "metrics": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8571428571428571,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV23-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV23-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV23-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV23-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV23-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV23-F06",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "concomitant_medications",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Другие лекарства не перечислены",
+              "span": {
+                "start": 102,
+                "end": 133
+              },
+              "id": "5"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "concomitant_medications",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "Другие лекарства не перечислены",
+                  "span": {
+                    "start": 102,
+                    "end": 133
+                  },
+                  "id": "5"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "dose",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "DEV24",
+          "profile_id": "SYN-DEV24",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 6,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.75,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "DEV24-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "DEV24-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "DEV24-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "DEV24-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "DEV24-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "DEV24-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "frequency_per_day",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "кратность не указана",
+              "span": {
+                "start": 136,
+                "end": 156
+              },
+              "id": "6"
+            },
+            {
+              "field": "diagnosis",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Диагноз не вписан",
+              "span": {
+                "start": 158,
+                "end": 175
+              },
+              "id": "7"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "frequency_per_day",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "frequency_per_day",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "кратность не указана",
+                  "span": {
+                    "start": 136,
+                    "end": 156
+                  },
+                  "id": "6"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "diagnosis",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "Диагноз не вписан",
+                  "span": {
+                    "start": 158,
+                    "end": 175
+                  },
+                  "id": "7"
+                }
+              ],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        }
+      ],
+      "micro": {
+        "tp": 139,
+        "fp": 10,
+        "fn": 2,
+        "precision": 0.9328859060402684,
+        "recall": 0.9858156028368794
+      },
+      "per_field": {
+        "adherence": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "adherence_evening": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "adherence_morning": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "adverse_event_causality": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "age_years": {
+          "tp": 25,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "allergen": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "anxiety": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "concomitant_medications": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "current_condition": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "current_medications": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "current_prescriptions": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "diagnosis": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 1,
+          "precision": 0.7692307692307693,
+          "recall": 0.9090909090909091
+        },
+        "diagnosis_text": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "dizziness": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "dose": {
+          "tp": 9,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9,
+          "recall": 1.0
+        },
+        "dyspnea": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "event_date": {
+          "tp": 23,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "frequency_per_day": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.6666666666666666,
+          "recall": 1.0
+        },
+        "historical_self_harm_report": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "insomnia_timing": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "itch": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "lactation_status": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication": {
+          "tp": 19,
+          "fp": 3,
+          "fn": 1,
+          "precision": 0.8636363636363636,
+          "recall": 0.95
+        },
+        "medication_allergy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication_start": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication_use": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "missing_report_days": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "nausea": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "pregnancy_status": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "received_date": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "report_schedule": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_complete": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_name": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_version": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "self_harm_report": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "symptom": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "symptom_onset": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "third_party_self_harm_report": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "per_template": {
+        "archival": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "brief": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "chronological": {
+          "tp": 17,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9444444444444444,
+          "recall": 1.0
+        },
+        "dialogue": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "list": {
+          "tp": 6,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.8571428571428571,
+          "recall": 1.0
+        },
+        "mixed_sources": {
+          "tp": 30,
+          "fp": 4,
+          "fn": 1,
+          "precision": 0.8823529411764706,
+          "recall": 0.967741935483871
+        },
+        "narrative": {
+          "tp": 17,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9444444444444444,
+          "recall": 1.0
+        },
+        "prescription_first": {
+          "tp": 13,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9285714285714286,
+          "recall": 1.0
+        },
+        "quote": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "sections": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "self_report": {
+          "tp": 17,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.8947368421052632,
+          "recall": 0.9444444444444444
+        },
+        "timeline": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "risk_field_false_negative_count": 1,
+      "critical_missing_asserted_known_count": 0,
+      "empty_extraction_count": 0
+    },
+    {
+      "split": "holdout",
+      "dataset_version": "S03-v1",
+      "dataset_sha256": "7829d17ca57b65a1c00b371d81387799d8567299d88cccb76c274c71826012b0",
+      "records": [
+        {
+          "id": "H01",
+          "profile_id": "SYN-H01",
+          "template": "sections",
+          "metrics": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H01-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H01-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H01-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H01-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H01-F05",
+              "candidate_id": "4"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "concomitant_medications",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "полный список лекарств будет позже",
+              "span": {
+                "start": 200,
+                "end": 234
+              },
+              "id": "5"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "concomitant_medications",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "полный список лекарств будет позже",
+                  "span": {
+                    "start": 200,
+                    "end": 234
+                  },
+                  "id": "5"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "H02",
+          "profile_id": "SYN-H02",
+          "template": "narrative",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H02-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H02-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H02-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H02-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H02-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "H02-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "H03",
+          "profile_id": "SYN-H03",
+          "template": "brief",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H03-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H03-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H03-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H03-F04",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "H03-F05",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "current_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "H04",
+          "profile_id": "SYN-H04",
+          "template": "quote",
+          "metrics": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 4,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H04-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H04-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H04-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H04-F04",
+              "candidate_id": "3"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "location",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "current_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "location"
+          ]
+        },
+        {
+          "id": "H05",
+          "profile_id": "SYN-H05",
+          "template": "self_report",
+          "metrics": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 9,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H05-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H05-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H05-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H05-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H05-F05",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "H05-F06",
+              "candidate_id": "6"
+            },
+            {
+              "gold_id": "H05-F07",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "confirmed_current_regimen",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "confirmed_current_regimen"
+          ]
+        },
+        {
+          "id": "H06",
+          "profile_id": "SYN-H06",
+          "template": "mixed_sources",
+          "metrics": {
+            "tp": 8,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H06-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H06-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H06-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H06-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H06-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "H06-F06",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "H06-F07",
+              "candidate_id": "6"
+            },
+            {
+              "gold_id": "H06-F08",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "confirmed_current_regimen",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "confirmed_current_regimen"
+          ]
+        },
+        {
+          "id": "H07",
+          "profile_id": "SYN-H07",
+          "template": "archival",
+          "metrics": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H07-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H07-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H07-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H07-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H07-F05",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "H08",
+          "profile_id": "SYN-H08",
+          "template": "brief",
+          "metrics": {
+            "tp": 7,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.875,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 9,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H08-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H08-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H08-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H08-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H08-F05",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "H08-F06",
+              "candidate_id": "6"
+            },
+            {
+              "gold_id": "H08-F07",
+              "candidate_id": "7"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "scale_version",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "версия не обозначена",
+              "span": {
+                "start": 114,
+                "end": 134
+              },
+              "id": "8"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "scale_version",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "scale_version",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "версия не обозначена",
+                  "span": {
+                    "start": 114,
+                    "end": 134
+                  },
+                  "id": "8"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "scale_total",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_allergy",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "scale_total"
+          ]
+        },
+        {
+          "id": "H09",
+          "profile_id": "SYN-H09",
+          "template": "timeline",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 6,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H09-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H09-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H09-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H09-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H09-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "H09-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "dose",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "plan_change_reason",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "plan_change_reason"
+          ]
+        },
+        {
+          "id": "H10",
+          "profile_id": "SYN-H10",
+          "template": "narrative",
+          "metrics": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 7,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H10-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H10-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H10-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H10-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H10-F05",
+              "candidate_id": "4"
+            },
+            {
+              "gold_id": "H10-F06",
+              "candidate_id": "5"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "primary_diagnosis",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "medication_name",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "symptom_onset",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "confirmed_current_regimen",
+              "explicitly_unextracted": false,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": [
+            "confirmed_current_regimen",
+            "medication_name",
+            "primary_diagnosis"
+          ]
+        },
+        {
+          "id": "H11",
+          "profile_id": "SYN-H11",
+          "template": "quote",
+          "metrics": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 4,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H11-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H11-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H11-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H11-F04",
+              "candidate_id": "3"
+            }
+          ],
+          "false_positives": [],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "age_years",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "event_date",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        },
+        {
+          "id": "H12",
+          "profile_id": "SYN-H12",
+          "template": "prescription_first",
+          "metrics": {
+            "tp": 6,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.75,
+            "recall": 1.0
+          },
+          "prediction_count_all_fields": 8,
+          "all_prediction_spans_valid": true,
+          "empty_extraction": false,
+          "matches": [
+            {
+              "gold_id": "H12-F01",
+              "candidate_id": "0"
+            },
+            {
+              "gold_id": "H12-F02",
+              "candidate_id": "1"
+            },
+            {
+              "gold_id": "H12-F03",
+              "candidate_id": "2"
+            },
+            {
+              "gold_id": "H12-F04",
+              "candidate_id": "3"
+            },
+            {
+              "gold_id": "H12-F05",
+              "candidate_id": "5"
+            },
+            {
+              "gold_id": "H12-F06",
+              "candidate_id": "6"
+            }
+          ],
+          "false_positives": [
+            {
+              "field": "tablet_strength",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "Сила таблетки неизвестна",
+              "span": {
+                "start": 81,
+                "end": 105
+              },
+              "id": "4"
+            },
+            {
+              "field": "concomitant_medications",
+              "assertion": "unknown",
+              "value": null,
+              "quote": "полный список препаратов не собран",
+              "span": {
+                "start": 156,
+                "end": 190
+              },
+              "id": "7"
+            }
+          ],
+          "false_negatives": [],
+          "risk_field_false_negatives": [],
+          "critical_missing_fields": [
+            {
+              "field": "tablet_strength",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "tablet_strength",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "Сила таблетки неизвестна",
+                  "span": {
+                    "start": 81,
+                    "end": 105
+                  },
+                  "id": "4"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "concomitant_medications",
+              "explicitly_unextracted": false,
+              "predictions": [
+                {
+                  "field": "concomitant_medications",
+                  "assertion": "unknown",
+                  "value": null,
+                  "quote": "полный список препаратов не собран",
+                  "span": {
+                    "start": 156,
+                    "end": 190
+                  },
+                  "id": "7"
+                }
+              ],
+              "asserted_known": false
+            },
+            {
+              "field": "diagnosis",
+              "explicitly_unextracted": true,
+              "predictions": [],
+              "asserted_known": false
+            }
+          ],
+          "unsupported_target_fields": []
+        }
+      ],
+      "micro": {
+        "tp": 69,
+        "fp": 4,
+        "fn": 0,
+        "precision": 0.9452054794520548,
+        "recall": 1.0
+      },
+      "per_field": {
+        "adherence_evening": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "adherence_morning": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "age_years": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "concomitant_medications": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "current_complaints": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "current_medications": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "diagnosis": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "dose": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "event_date": {
+          "tp": 10,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "frequency_per_day": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "historical_self_harm_report": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "lactation_status": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication": {
+          "tp": 10,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication_allergy": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication_start": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "medication_use": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "plan_change": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "pregnancy_status": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "received_date": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_complete": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_name": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "scale_version": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "self_harm_report": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "sleep_change": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "symptom": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "tablet_strength": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        }
+      },
+      "per_template": {
+        "archival": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "brief": {
+          "tp": 12,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9230769230769231,
+          "recall": 1.0
+        },
+        "mixed_sources": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "narrative": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "prescription_first": {
+          "tp": 6,
+          "fp": 2,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "quote": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "sections": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.8333333333333334,
+          "recall": 1.0
+        },
+        "self_report": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "timeline": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "risk_field_false_negative_count": 0,
+      "critical_missing_asserted_known_count": 0,
+      "empty_extraction_count": 0
+    }
+  ]
+}

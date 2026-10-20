@@ -52,9 +52,10 @@ def consume_challenge(db, cookie, form):
 
 
 def authenticate(db, user_id, password, address, previous_token=''):
-    """Persistent fixed-window limits per account and IP; no IP/password in audit."""
+    """Persistent failed/in-flight limits per account and IP; success refunds itself."""
     subjects = [digest('account:' + user_id), digest('address:' + address)]
     stamp = now()
+    reservations=[]
     with transaction(db):
         for subject in subjects:
             row = db.execute('SELECT * FROM login_limits WHERE subject_hash=?', (subject,)).fetchone()
@@ -66,6 +67,7 @@ def authenticate(db, user_id, password, address, previous_token=''):
                        attempts=CASE WHEN window_end<=? THEN 1 ELSE attempts+1 END,
                        window_end=CASE WHEN window_end<=? THEN excluded.window_end ELSE window_end END''',
                        (subject, future(minutes=15), stamp, stamp))
+            reservations.append((subject,db.execute('SELECT window_end FROM login_limits WHERE subject_hash=?',(subject,)).fetchone()[0]))
     user = db.execute('SELECT * FROM users WHERE id=?', (user_id,)).fetchone()
     valid = check_password_hash((user['password_hash'] if user and user['password_hash'] else DUMMY_HASH), password)
     if not valid or not user or user['disabled']:
@@ -76,6 +78,10 @@ def authenticate(db, user_id, password, address, previous_token=''):
         current = db.execute('SELECT * FROM users WHERE id=? AND disabled=0', (user_id,)).fetchone()
         if not current or current['password_hash'] != user['password_hash']:
             return None, 'invalid'
+        # Subtract only this validated attempt from the exact reserved window.
+        # Other failures/reservations survive; a newer window is never cleared.
+        for subject,window_end in reservations:
+            db.execute('UPDATE login_limits SET attempts=MAX(0,attempts-1) WHERE subject_hash=? AND window_end=?',(subject,window_end))
         if previous_token:
             db.execute('UPDATE sessions SET revoked_at=? WHERE token_hash=? AND revoked_at IS NULL',
                        (now(), digest(previous_token)))

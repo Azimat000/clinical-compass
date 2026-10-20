@@ -1,0 +1,22 @@
+test_account_changed_during_password_check_never_creates_session (apps.tests.test_access.AccessTests.test_account_changed_during_password_check_never_creates_session) ... ok
+test_ended_relationship_immediately_revokes_doctor_access (apps.tests.test_access.AccessTests.test_ended_relationship_immediately_revokes_doctor_access) ... ok
+test_expired_revoked_disabled_doctor_and_wrong_owner_invites (apps.tests.test_access.AccessTests.test_expired_revoked_disabled_doctor_and_wrong_owner_invites) ... ok
+test_failed_audit_rolls_back_session_rotation_and_refund (apps.tests.test_access.AccessTests.test_failed_audit_rolls_back_session_rotation_and_refund) ... ok
+test_forged_cookie_and_hidden_patient_search (apps.tests.test_access.AccessTests.test_forged_cookie_and_hidden_patient_search) ... ok
+test_invitation_bound_to_recipient_single_use_competing_offer_invalidated (apps.tests.test_access.AccessTests.test_invitation_bound_to_recipient_single_use_competing_offer_invalidated) ... ok
+test_login_csrf_replay_and_authenticated_csrf (apps.tests.test_access.AccessTests.test_login_csrf_replay_and_authenticated_csrf) ... ok
+test_login_throttle_persistent_and_generic_errors (apps.tests.test_access.AccessTests.test_login_throttle_persistent_and_generic_errors) ... ok
+test_no_anonymous_cards_or_api (apps.tests.test_access.AccessTests.test_no_anonymous_cards_or_api) ... ok
+test_patient_document_reports_and_actions_access_matrix (apps.tests.test_access.AccessTests.test_patient_document_reports_and_actions_access_matrix) ... ok
+test_recipient_reassignment_and_future_relationship_do_not_grant_access (apps.tests.test_access.AccessTests.test_recipient_reassignment_and_future_relationship_do_not_grant_access) ... ok
+test_roles_invitation_pair_and_shared_technical_report_after_restart (apps.tests.test_access.AccessTests.test_roles_invitation_pair_and_shared_technical_report_after_restart) ... ok
+test_secure_configuration_and_no_secrets_in_audit (apps.tests.test_access.AccessTests.test_secure_configuration_and_no_secrets_in_audit) ... ok
+test_seed_accounts_random_idempotent_and_no_implicit_relationship (apps.tests.test_access.AccessTests.test_seed_accounts_random_idempotent_and_no_implicit_relationship) ... ok
+test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled (apps.tests.test_access.AccessTests.test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled) ... ok
+test_successful_auth_never_refunds_a_replaced_limit_window (apps.tests.test_access.AccessTests.test_successful_auth_never_refunds_a_replaced_limit_window) ... ok
+test_successful_shared_ip_logins_refund_only_their_own_attempt (apps.tests.test_access.AccessTests.test_successful_shared_ip_logins_refund_only_their_own_attempt) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 8.689s
+
+OK

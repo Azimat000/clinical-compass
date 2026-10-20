@@ -1,3 +1,4 @@
+from contextlib import closing
 """Real WSGI restart: authenticated pair, private access and durable report/outbox."""
 import http.cookiejar
 import json
@@ -45,7 +46,7 @@ def main():
                     return response.read().decode()
             except HTTPError as error:
                 # Synthetic diagnostics only, deliberately exclude cookies/tokens/passwords.
-                with sqlite3.connect(path) as diagnostic:
+                with closing(sqlite3.connect(path)) as diagnostic, diagnostic:
                     print(json.dumps({'failed_route': route, 'status': error.code, 'server_check_time': now(),
                         'relationships': diagnostic.execute('SELECT patient_id,doctor_id,starts_at,ends_at FROM care_relationships').fetchall(),
                         'accounts': diagnostic.execute('SELECT id,role,disabled FROM users').fetchall()}, ensure_ascii=False))
@@ -155,7 +156,7 @@ def main():
                 finally:
                     process.terminate(); process.wait(timeout=10)
         subprocess.run(command + ['worker', '--once'], cwd=ROOT, check=True)
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db, db:
             assert db.execute('SELECT count(*) FROM patients').fetchone()[0] == 6
             assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed' AND topic='demo.patient_created.v1'").fetchone()[0] == 6
             assert db.execute("SELECT count(*) FROM outbox_events WHERE status='processed' AND topic='routine.self_report.v1'").fetchone()[0] == 1

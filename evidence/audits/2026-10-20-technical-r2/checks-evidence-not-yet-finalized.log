@@ -1,0 +1,317 @@
+.venv/bin/python -m unittest discover -s apps/tests -v
+test_account_changed_during_password_check_never_creates_session (test_access.AccessTests.test_account_changed_during_password_check_never_creates_session) ... ok
+test_ended_relationship_immediately_revokes_doctor_access (test_access.AccessTests.test_ended_relationship_immediately_revokes_doctor_access) ... ok
+test_expired_revoked_disabled_doctor_and_wrong_owner_invites (test_access.AccessTests.test_expired_revoked_disabled_doctor_and_wrong_owner_invites) ... ok
+test_failed_audit_rolls_back_session_rotation_and_refund (test_access.AccessTests.test_failed_audit_rolls_back_session_rotation_and_refund) ... ok
+test_forged_cookie_and_hidden_patient_search (test_access.AccessTests.test_forged_cookie_and_hidden_patient_search) ... ok
+test_invitation_bound_to_recipient_single_use_competing_offer_invalidated (test_access.AccessTests.test_invitation_bound_to_recipient_single_use_competing_offer_invalidated) ... ok
+test_login_csrf_replay_and_authenticated_csrf (test_access.AccessTests.test_login_csrf_replay_and_authenticated_csrf) ... ok
+test_login_throttle_persistent_and_generic_errors (test_access.AccessTests.test_login_throttle_persistent_and_generic_errors) ... ok
+test_no_anonymous_cards_or_api (test_access.AccessTests.test_no_anonymous_cards_or_api) ... ok
+test_patient_document_reports_and_actions_access_matrix (test_access.AccessTests.test_patient_document_reports_and_actions_access_matrix) ... ok
+test_recipient_reassignment_and_future_relationship_do_not_grant_access (test_access.AccessTests.test_recipient_reassignment_and_future_relationship_do_not_grant_access) ... ok
+test_roles_invitation_pair_and_shared_technical_report_after_restart (test_access.AccessTests.test_roles_invitation_pair_and_shared_technical_report_after_restart) ... ok
+test_secure_configuration_and_no_secrets_in_audit (test_access.AccessTests.test_secure_configuration_and_no_secrets_in_audit) ... ok
+test_seed_accounts_random_idempotent_and_no_implicit_relationship (test_access.AccessTests.test_seed_accounts_random_idempotent_and_no_implicit_relationship) ... ok
+test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled (test_access.AccessTests.test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled) ... ok
+test_successful_auth_never_refunds_a_replaced_limit_window (test_access.AccessTests.test_successful_auth_never_refunds_a_replaced_limit_window) ... ok
+test_successful_shared_ip_logins_refund_only_their_own_attempt (test_access.AccessTests.test_successful_shared_ip_logins_refund_only_their_own_attempt) ... ok
+test_age_review_blocks_previously_prepared_decision (test_ages.AgeTests.test_age_review_blocks_previously_prepared_decision) ... ok
+test_eighteenth_birthday_and_one_day_before (test_ages.AgeTests.test_eighteenth_birthday_and_one_day_before) ... ok
+test_even_compatible_new_age_information_requires_new_offer (test_ages.AgeTests.test_even_compatible_new_age_information_requires_new_offer) ... ok
+test_explicit_doctor_resolution_preserves_original_conflict_and_history (test_ages.AgeTests.test_explicit_doctor_resolution_preserves_original_conflict_and_history) ... ok
+test_integer_age_observation_date_range (test_ages.AgeTests.test_integer_age_observation_date_range) ... ok
+test_invalid_review_and_stale_source_snapshot (test_ages.AgeTests.test_invalid_review_and_stale_source_snapshot) ... ok
+test_new_patient_information_cannot_reuse_resolution_or_old_offer (test_ages.AgeTests.test_new_patient_information_cannot_reuse_resolution_or_old_offer) ... ok
+test_original_birthdate_probe_and_all_historical_sources (test_ages.AgeTests.test_original_birthdate_probe_and_all_historical_sources) ... ok
+test_patient_cannot_clear_conflict_and_access_csrf (test_ages.AgeTests.test_patient_cannot_clear_conflict_and_access_csrf) ... ok
+test_retries_atomic_failure_escaping_and_decision_snapshot (test_ages.AgeTests.test_retries_atomic_failure_escaping_and_decision_snapshot) ... ok
+test_underage_review_never_grants_adulthood_and_source_changes_rechecked (test_ages.AgeTests.test_underage_review_never_grants_adulthood_and_source_changes_rechecked) ... ok
+test_upgrade_preserves_every_s08a_table_and_row (test_ages.AgeTests.test_upgrade_preserves_every_s08a_table_and_row) ... ok
+test_age_unknown_conflicting_underage_and_fresh_explicit_source (test_assessments.AssessmentsTests.test_age_unknown_conflicting_underage_and_fresh_explicit_source) ... ok
+test_full_patient_submission_doctor_results_and_patient_receipt_only (test_assessments.AssessmentsTests.test_full_patient_submission_doctor_results_and_patient_receipt_only) ... ok
+test_historical_latest_age_conflict_is_not_silently_ignored (test_assessments.AssessmentsTests.test_historical_latest_age_conflict_is_not_silently_ignored) ... ok
+test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero (test_assessments.AssessmentsTests.test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero) ... ok
+test_invalid_answers_duplicate_fields_versions_expiry_and_retirement (test_assessments.AssessmentsTests.test_invalid_answers_duplicate_fields_versions_expiry_and_retirement) ... ok
+test_manual_reference_vectors_and_every_missing_position (test_assessments.AssessmentsTests.test_manual_reference_vectors_and_every_missing_position) ... ok
+test_migration_from_s06_preserves_every_prior_row (test_assessments.AssessmentsTests.test_migration_from_s06_preserves_every_prior_row) ... ok
+test_new_age_conflict_after_assignment_is_rechecked_on_submission (test_assessments.AssessmentsTests.test_new_age_conflict_after_assignment_is_rechecked_on_submission) ... ok
+test_own_receipt_survives_relationship_end_without_reopening_submission (test_assessments.AssessmentsTests.test_own_receipt_survives_relationship_end_without_reopening_submission) ... ok
+test_patient_cannot_choose_a_task_or_other_role_and_csrf_is_enforced (test_assessments.AssessmentsTests.test_patient_cannot_choose_a_task_or_other_role_and_csrf_is_enforced) ... ok
+test_retry_atomicity_immutable_results_and_no_fake_expert (test_assessments.AssessmentsTests.test_retry_atomicity_immutable_results_and_no_fake_expert) ... ok
+test_source_provenance_xss_doctor_capture_and_restart (test_assessments.AssessmentsTests.test_source_provenance_xss_doctor_capture_and_restart) ... ok
+test_versions_are_separate_and_patient_diary_is_not_a_score (test_assessments.AssessmentsTests.test_versions_are_separate_and_patient_diary_is_not_a_score) ... ok
+test_withdrawn_source_disables_measurement_without_destroying_diary (test_assessments.AssessmentsTests.test_withdrawn_source_disables_measurement_without_destroying_diary) ... ok
+test_concurrent_writer_backup_is_a_consistent_snapshot (test_backup.BackupTests.test_concurrent_writer_backup_is_a_consistent_snapshot) ... ok
+test_foreign_key_violation_refused_before_destination_creation (test_backup.BackupTests.test_foreign_key_violation_refused_before_destination_creation) ... ok
+test_manifest_counts_describe_snapshot_not_later_source (test_backup.BackupTests.test_manifest_counts_describe_snapshot_not_later_source) ... ok
+test_missing_corrupt_tampered_and_symlink_refused (test_backup.BackupTests.test_missing_corrupt_tampered_and_symlink_refused) ... ok
+test_snapshot_restore_and_no_overwrite (test_backup.BackupTests.test_snapshot_restore_and_no_overwrite) ... ok
+test_age_18_19_unknown_conflicting_and_all_source_intersection (test_clinical_rules.ClinicalRuleTests.test_age_18_19_unknown_conflicting_and_all_source_intersection) ... ok
+test_age_range_crossing_boundary_does_not_choose_adult (test_clinical_rules.ClinicalRuleTests.test_age_range_crossing_boundary_does_not_choose_adult) ... ok
+test_append_only_and_transaction_requirement (test_clinical_rules.ClinicalRuleTests.test_append_only_and_transaction_requirement) ... ok
+test_context_idempotency_conflict_and_role_current_authorization (test_clinical_rules.ClinicalRuleTests.test_context_idempotency_conflict_and_role_current_authorization) ... ok
+test_context_rx_denied_unknown_conflicting_missing_and_stale_historical_report (test_clinical_rules.ClinicalRuleTests.test_context_rx_denied_unknown_conflicting_missing_and_stale_historical_report) ... ok
+test_context_transaction_rolls_back_and_event_failure_rolls_back_entire_report (test_clinical_rules.ClinicalRuleTests.test_context_transaction_rolls_back_and_event_failure_rolls_back_entire_report) ... ok
+test_disabled_doctor_and_ended_relationship_preserve_events_and_context (test_clinical_rules.ClinicalRuleTests.test_disabled_doctor_and_ended_relationship_preserve_events_and_context) ... ok
+test_each_of_four_source_reactions_creates_event_with_complete_evidence (test_clinical_rules.ClinicalRuleTests.test_each_of_four_source_reactions_creates_event_with_complete_evidence) ... ok
+test_legacy_reports_and_non_synthetic_case_never_activate_rule (test_clinical_rules.ClinicalRuleTests.test_legacy_reports_and_non_synthetic_case_never_activate_rule) ... ok
+test_reaction_unknown_conflict_negative_and_positive_with_uncertainty (test_clinical_rules.ClinicalRuleTests.test_reaction_unknown_conflict_negative_and_positive_with_uncertainty) ... ok
+test_record_retry_atomic_rollback_and_critical_consumer (test_clinical_rules.ClinicalRuleTests.test_record_retry_atomic_rollback_and_critical_consumer) ... ok
+test_referral_mandatory_desirable_alternative_unknown_and_age (test_clinical_rules.ClinicalRuleTests.test_referral_mandatory_desirable_alternative_unknown_and_age) ... ok
+test_source_hash_and_release_fail_closed_and_fingerprint (test_clinical_rules.ClinicalRuleTests.test_source_hash_and_release_fail_closed_and_fingerprint) ... ok
+test_three_required_facts_missing_denied_conflicting (test_clinical_rules.ClinicalRuleTests.test_three_required_facts_missing_denied_conflicting) ... ok
+test_validation_duplicates_and_required_prescription_basis (test_clinical_rules.ClinicalRuleTests.test_validation_duplicates_and_required_prescription_basis) ... ok
+test_advice_prefill_two_categories_confirmation_and_stale_context (test_clinical_workflow.ClinicalWorkflowTests.test_advice_prefill_two_categories_confirmation_and_stale_context) ... ok
+test_context_auth_csrf_and_changed_source_fail_closed (test_clinical_workflow.ClinicalWorkflowTests.test_context_auth_csrf_and_changed_source_fail_closed) ... ok
+test_real_safety_event_survives_unavailable_recipient_and_routine_worker (test_clinical_workflow.ClinicalWorkflowTests.test_real_safety_event_survives_unavailable_recipient_and_routine_worker) ... ok
+test_all_eight_functions_connected_two_cabinets (test_communication.CommunicationTests.test_all_eight_functions_connected_two_cabinets) ... ok
+test_atomic_rollback_concurrency_immutability (test_communication.CommunicationTests.test_atomic_rollback_concurrency_immutability) ... ok
+test_bidirectional_receipts_retry_restart_and_escaping (test_communication.CommunicationTests.test_bidirectional_receipts_retry_restart_and_escaping) ... ok
+test_context_links_never_suppress_adverse_event (test_communication.CommunicationTests.test_context_links_never_suppress_adverse_event) ... ok
+test_denominator_unknown_conflicts_corrections_and_future (test_communication.CommunicationTests.test_denominator_unknown_conflicts_corrections_and_future) ... ok
+test_intermediate_plan_stop_stays_excluded_after_another_change (test_communication.CommunicationTests.test_intermediate_plan_stop_stays_excluded_after_another_change) ... ok
+test_isolation_csrf_link_expiry_and_context (test_communication.CommunicationTests.test_isolation_csrf_link_expiry_and_context) ... ok
+test_missing_report_never_becomes_missed_or_zero_percent (test_communication.CommunicationTests.test_missing_report_never_becomes_missed_or_zero_percent) ... ok
+test_new_accompaniment_information_invalidates_pending_decision (test_communication.CommunicationTests.test_new_accompaniment_information_invalidates_pending_decision) ... ok
+test_plan_confirmation_change_and_schedule_idempotency (test_communication.CommunicationTests.test_plan_confirmation_change_and_schedule_idempotency) ... ok
+test_console_refuses_redirected_output (test_critical_delivery.CriticalDeliveryTests.test_console_refuses_redirected_output) ... ok
+test_disabled_unassigned_and_ended_relationship_no_reserve_retargeting (test_critical_delivery.CriticalDeliveryTests.test_disabled_unassigned_and_ended_relationship_no_reserve_retargeting) ... ok
+test_handler_failure_rollback_and_retry (test_critical_delivery.CriticalDeliveryTests.test_handler_failure_rollback_and_retry) ... ok
+test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data (test_critical_delivery.CriticalDeliveryTests.test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data) ... ok
+test_native_dialog_receipt_requires_exact_button_and_no_timeout (test_critical_delivery.CriticalDeliveryTests.test_native_dialog_receipt_requires_exact_button_and_no_timeout) ... ok
+test_receipt_read_accept_reaction_are_ordered_idempotent_no_medical_mutation (test_critical_delivery.CriticalDeliveryTests.test_receipt_read_accept_reaction_are_ordered_idempotent_no_medical_mutation) ... ok
+test_reserve_five_failures_retained_and_log_immutable (test_critical_delivery.CriticalDeliveryTests.test_reserve_five_failures_retained_and_log_immutable) ... ok
+test_reserve_timeout_retry_lease_recovery_and_no_duplicate_effect (test_critical_delivery.CriticalDeliveryTests.test_reserve_timeout_retry_lease_recovery_and_no_duplicate_effect) ... ok
+test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal (test_decisions.DecisionTests.test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal) ... ok
+test_concurrent_approvals_cannot_overwrite_new_plan (test_decisions.DecisionTests.test_concurrent_approvals_cannot_overwrite_new_plan) ... ok
+test_decision_auth_csrf_other_patient_and_expired_link (test_decisions.DecisionTests.test_decision_auth_csrf_other_patient_and_expired_link) ... ok
+test_disabled_doctor_rechecked_inside_transaction (test_decisions.DecisionTests.test_disabled_doctor_rechecked_inside_transaction) ... ok
+test_five_actions_draft_separate_review_and_patient_projection (test_decisions.DecisionTests.test_five_actions_draft_separate_review_and_patient_projection) ... ok
+test_new_report_including_backdated_unknown_blocks_old_then_new_revision_works (test_decisions.DecisionTests.test_new_report_including_backdated_unknown_blocks_old_then_new_revision_works) ... ok
+test_other_plan_changes_invalidate_parallel_project (test_decisions.DecisionTests.test_other_plan_changes_invalidate_parallel_project) ... ok
+test_reject_never_applies_and_is_hidden_from_patient (test_decisions.DecisionTests.test_reject_never_applies_and_is_hidden_from_patient) ... ok
+test_retry_validation_wrong_version_and_required_review (test_decisions.DecisionTests.test_retry_validation_wrong_version_and_required_review) ... ok
+test_rollbacks_immutability_restart_and_html_escaping (test_decisions.DecisionTests.test_rollbacks_immutability_restart_and_html_escaping) ... ok
+test_source_age_date_and_catalog_change_block_confirmation (test_decisions.DecisionTests.test_source_age_date_and_catalog_change_block_confirmation) ... ok
+test_access_csrf_ended_pair_and_other_import_review (test_extraction.ExtractionTests.test_access_csrf_ended_pair_and_other_import_review) ... ok
+test_import_retries_review_correction_add_reject_persistence_and_no_actions (test_extraction.ExtractionTests.test_import_retries_review_correction_add_reject_persistence_and_no_actions) ... ok
+test_literal_spans_negation_conflicts_dates_and_high_risk_uncertainty (test_extraction.ExtractionTests.test_literal_spans_negation_conflicts_dates_and_high_risk_uncertainty) ... ok
+test_new_import_and_review_require_rereview_of_pending_decision (test_extraction.ExtractionTests.test_new_import_and_review_require_rereview_of_pending_decision) ... ok
+test_unsupported_input_limits_and_atomic_rollback (test_extraction.ExtractionTests.test_unsupported_input_limits_and_atomic_rollback) ... ok
+test_adversarial_unknown_subject_and_negated_cancellation (test_extraction_v2.LiteralV2Tests.test_adversarial_unknown_subject_and_negated_cancellation) ... ok
+test_cancellations_and_non_due_tasks_are_source_facts_only (test_extraction_v2.LiteralV2Tests.test_cancellations_and_non_due_tasks_are_source_facts_only) ... ok
+test_common_scope_rules_apply_to_every_boolean_and_risk_branch (test_extraction_v2.LiteralV2Tests.test_common_scope_rules_apply_to_every_boolean_and_risk_branch) ... ok
+test_corrections_unknown_forms_and_ledger_do_not_create_known_conflicts (test_extraction_v2.LiteralV2Tests.test_corrections_unknown_forms_and_ledger_do_not_create_known_conflicts) ... ok
+test_different_drugs_or_historical_doses_are_not_current_conflicts (test_extraction_v2.LiteralV2Tests.test_different_drugs_or_historical_doses_are_not_current_conflicts) ... ok
+test_disclosed_jury_temporal_and_inflection_regressions (test_extraction_v2.LiteralV2Tests.test_disclosed_jury_temporal_and_inflection_regressions) ... ok
+test_explicit_nonconfirmation_family_morphology_and_absence (test_extraction_v2.LiteralV2Tests.test_explicit_nonconfirmation_family_morphology_and_absence) ... ok
+test_long_input_is_bounded_and_has_exact_quotes (test_extraction_v2.LiteralV2Tests.test_long_input_is_bounded_and_has_exact_quotes) ... ok
+test_negation_scope_is_not_shared_across_objects_or_sentences (test_extraction_v2.LiteralV2Tests.test_negation_scope_is_not_shared_across_objects_or_sentences) ... ok
+test_question_unknown_and_own_historical_speech_are_not_current_alarms (test_extraction_v2.LiteralV2Tests.test_question_unknown_and_own_historical_speech_are_not_current_alarms) ... ok
+test_third_party_age_dose_and_medication_are_not_patient_values (test_extraction_v2.LiteralV2Tests.test_third_party_age_dose_and_medication_are_not_patient_values) ... ok
+test_unicode_offsets_date_roles_and_invalid_date (test_extraction_v2.LiteralV2Tests.test_unicode_offsets_date_roles_and_invalid_date) ... ok
+test_units_do_not_match_years_or_word_prefixes (test_extraction_v2.LiteralV2Tests.test_units_do_not_match_years_or_word_prefixes) ... ok
+test_concurrent_stale_save_and_transaction_rollback (test_first_visits.FirstVisitTests.test_concurrent_stale_save_and_transaction_rollback) ... ok
+test_new_age_sources_block_dass_and_invalidate_prior_review (test_first_visits.FirstVisitTests.test_new_age_sources_block_dass_and_invalidate_prior_review) ... ok
+test_new_visit_invalidates_age_reconciliation_and_outstanding_dass (test_first_visits.FirstVisitTests.test_new_visit_invalidates_age_reconciliation_and_outstanding_dass) ... ok
+test_new_visit_invalidates_existing_plan_confirmation (test_first_visits.FirstVisitTests.test_new_visit_invalidates_existing_plan_confirmation) ... ok
+test_no_diagnosis_draft_retry_restart_revision_complete_without_action (test_first_visits.FirstVisitTests.test_no_diagnosis_draft_retry_restart_revision_complete_without_action) ... ok
+test_repeat_visit_and_exact_dass_results_remain_separate (test_first_visits.FirstVisitTests.test_repeat_visit_and_exact_dass_results_remain_separate) ... ok
+test_roles_csrf_other_patient_revocation_and_xss (test_first_visits.FirstVisitTests.test_roles_csrf_other_patient_revocation_and_xss) ... ok
+test_sources_dates_unknown_denial_conflict_and_summary_sections (test_first_visits.FirstVisitTests.test_sources_dates_unknown_denial_conflict_and_summary_sections) ... ok
+test_upgrade_preserves_previous_rows_and_checksums (test_first_visits.FirstVisitTests.test_upgrade_preserves_previous_rows_and_checksums) ... ok
+test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) ... ok
+test_atomic_data_and_event_rollback (test_foundation.FoundationTests.test_atomic_data_and_event_rollback) ... ok
+test_authenticated_shell_escapes_input_and_rejects_other_hosts (test_foundation.FoundationTests.test_authenticated_shell_escapes_input_and_rejects_other_hosts) ... ok
+test_catalog_extension_keeps_versions_and_blocks_incomplete_scores (test_foundation.FoundationTests.test_catalog_extension_keeps_versions_and_blocks_incomplete_scores) ... ok
+test_confirmation_requires_doctor_relationship_version_and_approval (test_foundation.FoundationTests.test_confirmation_requires_doctor_relationship_version_and_approval) ... ok
+test_event_retry_rolls_back_partial_handler_and_recovers (test_foundation.FoundationTests.test_event_retry_rolls_back_partial_handler_and_recovers) ... ok
+test_immutable_migrations_and_atomic_failure (test_foundation.FoundationTests.test_immutable_migrations_and_atomic_failure) ... ok
+test_model_guards_unknowns_foreign_keys_and_audit (test_foundation.FoundationTests.test_model_guards_unknowns_foreign_keys_and_audit) ... ok
+test_schema_extension_preserves_existing_data (test_foundation.FoundationTests.test_schema_extension_preserves_existing_data) ... ok
+test_search_filter_and_index_update (test_foundation.FoundationTests.test_search_filter_and_index_update) ... ok
+test_seed_is_idempotent_and_survives_connection_restart (test_foundation.FoundationTests.test_seed_is_idempotent_and_survives_connection_restart) ... ok
+test_unknown_topic_goes_to_dead_queue (test_foundation.FoundationTests.test_unknown_topic_goes_to_dead_queue) ... ok
+test_atomic_enqueue_failure_and_request_and_processing_duplicates (test_notifications.NotificationTests.test_atomic_enqueue_failure_and_request_and_processing_duplicates) ... ok
+test_concurrent_same_request_serializes_to_one_report_event_notification (test_notifications.NotificationTests.test_concurrent_same_request_serializes_to_one_report_event_notification) ... ok
+test_delivery_seen_ack_order_idempotency_and_no_clinical_actions (test_notifications.NotificationTests.test_delivery_seen_ack_order_idempotency_and_no_clinical_actions) ... ok
+test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen (test_notifications.NotificationTests.test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen) ... ok
+test_pending_old_or_future_link_and_disabled_doctor_cannot_deliver (test_notifications.NotificationTests.test_pending_old_or_future_link_and_disabled_doctor_cannot_deliver) ... ok
+test_role_csrf_foreign_and_ended_or_replaced_relationship (test_notifications.NotificationTests.test_role_csrf_foreign_and_ended_or_replaced_relationship) ... ok
+test_transient_failure_recovers_without_duplicate_and_summary_is_escaped (test_notifications.NotificationTests.test_transient_failure_recovers_without_duplicate_and_summary_is_escaped) ... ok
+test_upgrade_s09_database_preserves_every_existing_table_row (test_notifications.NotificationTests.test_upgrade_s09_database_preserves_every_existing_table_row) ... ok
+test_atomic_failure_rolls_back_report_observations_event_audit (test_records.RecordsTests.test_atomic_failure_rolls_back_report_observations_event_audit) ... ok
+test_authorization_csrf_ended_relationship_and_xss (test_records.RecordsTests.test_authorization_csrf_ended_relationship_and_xss) ... ok
+test_migration_preserves_s05_and_prior_migrations_are_unchanged (test_records.RecordsTests.test_migration_preserves_s05_and_prior_migrations_are_unchanged) ... ok
+test_pair_same_report_provenance_and_separate_adverse_event (test_records.RecordsTests.test_pair_same_report_provenance_and_separate_adverse_event) ... ok
+test_retry_idempotency_changed_body_and_distinct_observation_dates (test_records.RecordsTests.test_retry_idempotency_changed_body_and_distinct_observation_dates) ... ok
+test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) ... ok
+test_unknown_denied_conflicting_and_age_mismatch (test_records.RecordsTests.test_unknown_denied_conflicting_and_age_mismatch) ... ok
+test_unknown_initial_age_is_never_adult (test_records.RecordsTests.test_unknown_initial_age_is_never_adult) ... ok
+test_visit_and_report_disagreements_same_day_preserved_not_merged (test_records.RecordsTests.test_visit_and_report_disagreements_same_day_preserved_not_merged) ... ok
+test_adult_reference_never_silently_applies_to_child_unknown_or_conflict (test_routing.RoutingTests.test_adult_reference_never_silently_applies_to_child_unknown_or_conflict) ... ok
+test_categories_separate_from_urgency_and_approval_only_patient (test_routing.RoutingTests.test_categories_separate_from_urgency_and_approval_only_patient) ... ok
+test_inactive_critical_rules_never_create_alerts_or_outbox (test_routing.RoutingTests.test_inactive_critical_rules_never_create_alerts_or_outbox) ... ok
+test_missing_data_not_negative_or_planned_and_confirmation_requires_choice (test_routing.RoutingTests.test_missing_data_not_negative_or_planned_and_confirmation_requires_choice) ... ok
+test_retry_conflicting_change_data_and_restart (test_routing.RoutingTests.test_retry_conflicting_change_data_and_restart) ... ok
+test_source_update_obsolete_legacy_draft_and_missing_access (test_routing.RoutingTests.test_source_update_obsolete_legacy_draft_and_missing_access) ... ok
+test_validation_no_made_up_categories_sources_or_empty_rationale (test_routing.RoutingTests.test_validation_no_made_up_categories_sources_or_empty_rationale) ... ok
+test_pending_before_delivery_then_reaction_and_ended_relationship (test_s13.CriticalFilterTests.test_pending_before_delivery_then_reaction_and_ended_relationship) ... ok
+test_all_search_sources_literals_filters_and_pair_isolation (test_s13.SearchTests.test_all_search_sources_literals_filters_and_pair_isolation) ... ok
+test_error_retains_inputs_and_opens_report_panel (test_s13.SearchTests.test_error_retains_inputs_and_opens_report_panel) ... ok
+test_route_history_filter_without_claiming_current_decision (test_s13.SearchTests.test_route_history_filter_without_claiming_current_decision) ... ok
+test_all_five_actions_require_doctor_and_fresh_review (test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review) ... ok
+test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf (test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf) ... ok
+test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed) ... [2026-10-20 08:11:36,916] ERROR in web: request_failure incident=03f66bb34429a03d type=OperationalError endpoint=dashboard
+ok
+test_duplicate_security_and_clinical_fields_are_rejected (test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected) ... ok
+test_every_mutation_requires_session_and_csrf (test_security.SecurityTests.test_every_mutation_requires_session_and_csrf) ... ok
+test_mid_write_fault_rolls_back_and_original_retry_succeeds (test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds) ... [2026-10-20 08:11:38,007] ERROR in web: request_failure incident=d6cf7673e80f3e83 type=OperationalError endpoint=self_report
+ok
+test_non_ascii_and_oversized_security_tokens_are_rejected (test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected) ... ok
+test_private_files_and_headers_hosts_forwarding_and_oversized_input (test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input) ... ok
+test_template_fault_has_safe_fallback_without_rethrow_or_secret (test_security.SecurityTests.test_template_fault_has_safe_fallback_without_rethrow_or_secret) ... [2026-10-20 08:11:39,100] ERROR in web: request_failure incident=7b684a34e3eb3b37 type=RuntimeError endpoint=dashboard
+ok
+test_unexpected_exception_hides_text_from_response_and_log (test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log) ... [2026-10-20 08:11:39,453] ERROR in web: request_failure incident=7e9bc69372e5de1f type=RuntimeError endpoint=dashboard
+ok
+test_each_synthetic_case_can_document_consideration_without_automatic_treatment (test_therapy.TherapyTests.test_each_synthetic_case_can_document_consideration_without_automatic_treatment) ... ok
+test_every_unknown_conflicting_or_concern_blocks_completed_review (test_therapy.TherapyTests.test_every_unknown_conflicting_or_concern_blocks_completed_review) ... ok
+test_full_physician_review_still_does_not_establish_suitability (test_therapy.TherapyTests.test_full_physician_review_still_does_not_establish_suitability) ... ok
+test_missing_version_notes_and_invalid_states_are_rejected (test_therapy.TherapyTests.test_missing_version_notes_and_invalid_states_are_rejected) ... ok
+test_negative_consideration_retains_specific_risk (test_therapy.TherapyTests.test_negative_consideration_retains_specific_risk) ... ok
+test_retry_cannot_replace_review_and_source_change_invalidates_project (test_therapy.TherapyTests.test_retry_cannot_replace_review_and_source_change_invalidates_project) ... ok
+test_review_html_escapes_notes_and_preserves_error_values (test_therapy.TherapyTests.test_review_html_escapes_notes_and_preserves_error_values) ... ok
+test_unknowns_saved_as_unknown_not_drug_clearance (test_therapy.TherapyTests.test_unknowns_saved_as_unknown_not_drug_clearance) ... ok
+
+----------------------------------------------------------------------
+Ran 180 tests in 52.084s
+
+OK
+.venv/bin/python apps/tests/smoke_restart.py
+{
+  "process_restart": [
+    {
+      "manual_decision_preserved": true,
+      "restart_round": 1,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "013_first_visits",
+        "status": "ok"
+      },
+      "shared_report": true,
+      "foreign_denied": true,
+      "shared_clinical_history": true,
+      "doctor_assessments_preserved": true,
+      "patient_scores_hidden": true
+    },
+    {
+      "manual_decision_preserved": true,
+      "restart_round": 2,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "013_first_visits",
+        "status": "ok"
+      },
+      "shared_report": true,
+      "foreign_denied": true,
+      "shared_clinical_history": true,
+      "doctor_assessments_preserved": true,
+      "patient_scores_hidden": true
+    }
+  ],
+  "durable_events_after_restart": 7,
+  "durable_routine_notifications": 1,
+  "durable_technical_reports": 1,
+  "durable_clinical_entries": 2,
+  "durable_adverse_events": 1,
+  "durable_assessments": 2,
+  "integrity": "ok"
+}
+.venv/bin/python -m pip check
+No broken requirements found.
+python3 tools/validate_synthetic.py
+{
+  "status": "PASS",
+  "errors": [],
+  "counts": {
+    "demonstration": 6,
+    "development": 24,
+    "holdout": 12
+  },
+  "unique_profiles_including_demo": 42,
+  "fact_count": 210,
+  "template_count": 12,
+  "assertion_counts": {
+    "present": 104,
+    "considered": 7,
+    "negated": 21,
+    "suspected": 4,
+    "unknown": 24,
+    "patient_reported": 11,
+    "conflicting": 15,
+    "historical": 10,
+    "stopped": 1,
+    "third_party": 2,
+    "listed": 5,
+    "invalid": 2,
+    "incomplete": 1,
+    "cancelled_proposal": 2,
+    "not_due": 1
+  },
+  "dose_units": {
+    "mg": 7,
+    "g": 2,
+    "ml": 1,
+    "None": 1,
+    "tablet": 1
+  },
+  "max_cross_split_text_similarity": 0.4661,
+  "nearest_pair": [
+    "DEV06",
+    "H04"
+  ],
+  "scope": "Structural/textual fixture integrity only; no extraction or clinical performance measured.",
+  "privacy_limit": "Contact pattern scan supplements authored provenance; it does not prove anonymization."
+}
+python3 -m unittest discover -s tools -p 'test_*.py' -v
+test_budget_overflow (test_plan_validation.PlanTests.test_budget_overflow) ... ok
+test_dependency_cycle (test_plan_validation.PlanTests.test_dependency_cycle) ... ok
+test_false_fulfilment (test_plan_validation.PlanTests.test_false_fulfilment) ... ok
+test_finalist_cannot_skip_final_preparation (test_plan_validation.PlanTests.test_finalist_cannot_skip_final_preparation) ... ok
+test_independent_work_after_clinical_block (test_plan_validation.PlanTests.test_independent_work_after_clinical_block) ... ok
+test_lost_subcondition (test_plan_validation.PlanTests.test_lost_subcondition) ... ok
+test_missing_requirement (test_plan_validation.PlanTests.test_missing_requirement) ... ok
+test_source_changed (test_plan_validation.PlanTests.test_source_changed) ... ok
+test_unauthorized_postcontest (test_plan_validation.PlanTests.test_unauthorized_postcontest) ... ok
+test_valid_plan (test_plan_validation.PlanTests.test_valid_plan) ... FAIL
+test_active_recommendation_rejected (test_synthetic_validation.DatasetIntegrityTests.test_active_recommendation_rejected) ... ok
+test_age_and_date_only_paraphrase_rejected (test_synthetic_validation.DatasetIntegrityTests.test_age_and_date_only_paraphrase_rejected) ... ok
+test_false_clinical_validation_rejected (test_synthetic_validation.DatasetIntegrityTests.test_false_clinical_validation_rejected) ... ok
+test_frozen_text_change_rejected (test_synthetic_validation.DatasetIntegrityTests.test_frozen_text_change_rejected) ... ok
+test_invented_source_span_rejected (test_synthetic_validation.DatasetIntegrityTests.test_invented_source_span_rejected) ... ok
+test_profile_leakage_rejected (test_synthetic_validation.DatasetIntegrityTests.test_profile_leakage_rejected) ... ok
+test_unknown_replaced_with_no_risk_rejected (test_synthetic_validation.DatasetIntegrityTests.test_unknown_replaced_with_no_risk_rejected) ... ok
+
+======================================================================
+FAIL: test_valid_plan (test_plan_validation.PlanTests.test_valid_plan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/tools/test_plan_validation.py", line 30, in test_valid_plan
+    self.assertEqual(self.errors(), [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['F03: не существует доказательство eviden[2089 chars]son'] != []
+
+First list contains 24 additional elements.
+First extra element 0:
+'F03: не существует доказательство evidence/audits/2026-10-20-technical-r2/cycles.json'
+
+Diff is 2357 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 17 tests in 13.209s
+
+FAILED (failures=1)
+make: *** [check] Error 1

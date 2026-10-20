@@ -1,0 +1,90 @@
+ Image hac-technical-r2-worker Building
+ Image hac-technical-r2-web Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#2 [worker internal] load build definition from Dockerfile
+#2 transferring dockerfile: 858B done
+#2 DONE 0.0s
+
+#3 [worker internal] load metadata for docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#3 DONE 0.0s
+
+#4 [web internal] load .dockerignore
+#4 transferring context: 384B done
+#4 DONE 0.0s
+
+#5 [web internal] load build context
+#5 transferring context: 19.69kB done
+#5 DONE 0.0s
+
+#6 [worker 1/8] FROM docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e
+#6 resolve docker.io/library/python:3.13.11-slim@sha256:2b9c9803c6a287cafa0a8c917211dddd23dcd2016f049690ee5219f5d3f1636e 0.0s done
+#6 DONE 0.0s
+
+#7 [web 2/8] WORKDIR /app
+#7 CACHED
+
+#8 [web 3/8] COPY apps/requirements.lock /app/apps/requirements.lock
+#8 CACHED
+
+#9 [web 4/8] RUN pip install --no-cache-dir -r apps/requirements.lock && useradd --uid 10001 --create-home compass && mkdir /app/var && chown compass:compass /app/var
+#9 CACHED
+
+#10 [web 5/8] COPY apps /app/apps
+#10 DONE 0.0s
+
+#11 [worker 6/8] COPY data/synthetic/cases.json /app/data/synthetic/cases.json
+#11 DONE 0.0s
+
+#12 [web 7/8] COPY evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf /app/evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf
+#12 DONE 0.0s
+
+#13 [web 8/8] COPY evidence/S09/completion-review/sources/kr457.pdf /app/evidence/S09/completion-review/sources/kr457.pdf
+#13 DONE 0.0s
+
+#14 [worker] exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:140cf333cbbc530f99c4736a3e5b64526dd122a82dbed1c0b77ba310fa9ada0a done
+#14 exporting config sha256:26753a71147ac5a37064c1300f75a4ab4bd2f9d74810cb906f36255880cc2ac2 done
+#14 exporting attestation manifest sha256:66035b599d85c42dea3c9caa920d99335272699c5df3ba25a54266bf7f70aa6c 0.0s done
+#14 exporting manifest list sha256:3672e0fbea4c7da6fb7f1cd31e066b508b544ff6b9e2f89b95cce8d696c29b48 done
+#14 naming to docker.io/library/hac-technical-r2-worker:latest done
+#14 unpacking to docker.io/library/hac-technical-r2-worker:latest 0.0s done
+#14 DONE 0.1s
+
+#15 [web] exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:e7c3e7b85c29cd481f0879339e33a4bb9d8d614782ccf8e918558039923c53c3 done
+#15 exporting config sha256:b6e7a70dc8e3fe9883375ae09ab1faf122e8df92422eb313e777aa2a45a03333 done
+#15 exporting attestation manifest sha256:ef65917c64ac3f18ca7ffb96562fb0b7a54a5d660ebf7a9e9bad75a77f68665a 0.0s done
+#15 exporting manifest list sha256:ef28638779c536acb751d0096f809117a7a8e59e5e2c648c1b7e89a09bf9935e done
+#15 naming to docker.io/library/hac-technical-r2-web:latest done
+#15 unpacking to docker.io/library/hac-technical-r2-web:latest 0.0s done
+#15 DONE 0.1s
+
+#16 [worker] resolving provenance for metadata file
+#16 DONE 0.0s
+
+#17 [web] resolving provenance for metadata file
+#17 DONE 0.0s
+ Image hac-technical-r2-web Built
+ Image hac-technical-r2-worker Built
+ Container hac-technical-r2-web-1 Recreate
+ Container hac-technical-r2-web-1 Recreated
+ Container hac-technical-r2-worker-1 Recreate
+ Container hac-technical-r2-worker-1 Recreated
+ Container hac-technical-r2-web-1 Starting
+ Container hac-technical-r2-web-1 Started
+ Container hac-technical-r2-web-1 Waiting
+ Container hac-technical-r2-web-1 Healthy
+ Container hac-technical-r2-worker-1 Starting
+ Container hac-technical-r2-worker-1 Started
+ Container hac-technical-r2-web-1 Waiting
+ Container hac-technical-r2-worker-1 Waiting
+ Container hac-technical-r2-worker-1 Healthy
+ Container hac-technical-r2-web-1 Healthy
