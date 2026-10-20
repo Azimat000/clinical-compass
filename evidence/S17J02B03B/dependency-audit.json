@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKING_ACCEPTANCE_PREREQUISITE_CONFLICT",
+  "graph_cycle": false,
+  "dependency_path": [
+    "S17J02C",
+    "S17J02B",
+    "S17J02B03",
+    "S17J02B03B"
+  ],
+  "blocked_at": "S17J02B03B",
+  "requirements": {
+    "required_cells": 58,
+    "dossier_dependent_cells": 38,
+    "required_dossiers": 9,
+    "required_sections": 90
+  },
+  "facts": [
+    {
+      "path": "plan/slices/S17J02B03B.md",
+      "finding": "Все обязательные вопросы/аспекты должны иметь достаточное допущенное основание; обязательный пробел блокирует приёмку."
+    },
+    {
+      "path": "plan/slices/S17J02B03.md",
+      "finding": "Не принимать неполного родителя и не обходить зависимость J02C планом."
+    },
+    {
+      "path": "tools/check_retrieval_coverage.py",
+      "finding": "38 requires_dossiers ячеек не считаются полными без полных9досье/90разделов."
+    },
+    {
+      "path": "plan/manifest.json",
+      "finding": "J02C, в котором собираются досье, ждёт принятияB;B ждётB03/B03B."
+    }
+  ],
+  "effect": "При текущих критериях подготовка лекарственных досье заблокирована до приёмки, для которой эти досье уже обязательны. Обычная проверка графа зависимостей не обнаруживает этот конфликт содержательных предусловий.",
+  "changed_dependencies": false,
+  "changed_frozen_scope": false,
+  "changed_acceptance_criteria": false,
+  "clinical_activation": false,
+  "required_resolution": "Отдельное явное решение о порядке подготовки/итоговой приёмки с сохранением всех требований. До этого C/J03 не начинать и B03B/B03/B не принимать."
+}

@@ -1,0 +1,57 @@
+{
+  "status": "PASS_TECHNICAL_CHECKS_SLICE_NOT_ACCEPTED",
+  "checked_at": "2026-10-20T22:23:12.459584+00:00",
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/make-check.log",
+      "log_sha256": "205bc97473ba59420c9008cd6802cbe6fa9873c50365014abdfad8ef056b2885"
+    },
+    {
+      "command": "PYTHONPATH=tools:. .venv/bin/python -m unittest apps.tests.test_retrieval_primary apps.tests.test_retrieval_corpus apps.tests.test_retrieval_packages -q",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/legacy-admission-tests.log",
+      "log_sha256": "df2bac603f9ed549ecd4699d81aeefd5ae70d57063f26842ea3ab681490d728a"
+    },
+    {
+      "command": "PYTHONPATH=tools:. .venv/bin/python -m unittest apps.tests.test_retrieval_guideline_receipts -v",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/new-admission-tests.log",
+      "log_sha256": "b848b12eaf09281de291259be7435b82879f81410ddae1460971158a04802a81"
+    },
+    {
+      "command": "python3 evidence/S17J02B03B/verify.py",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/verify.log",
+      "log_sha256": "3b31c16ada6917c05a8ef41228e9c4f3f5d043819636df4c9cf35e623d724b6a"
+    },
+    {
+      "command": "python3 tools/validate_plan.py",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/plan-check.log",
+      "log_sha256": "6377123badeb771b8ff12ec2495c33be284592e3f5e53d9362c75c2e6b9cb56e"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03B/session-status.log",
+      "log_sha256": "fa4008b9e725214fe9c4d6a61aa047ae3d0c79165514cbd57f1d2e3d50af7fe1"
+    }
+  ],
+  "application_tests": 297,
+  "tool_tests": 70,
+  "legacy_admission_tests": 109,
+  "new_admission_tests": 7,
+  "restart_smoke": "PASS",
+  "pip_check": "No broken requirements found",
+  "synthetic_data": "PASS",
+  "diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "main_agent_executed": true,
+  "clinical_approval": false,
+  "B03B_accepted": false,
+  "proposal_applied": false
+}

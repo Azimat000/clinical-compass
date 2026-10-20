@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D09-depression-differential",
+  "requirement_sha256": "d742561e7c9e7e9f2c305b9fd00f982eeec363c6a3c1f94c9d4538ef564283ed",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Составная граница оценки депрессивных симптомов: КР301 F10 требует выяснять манию/гипоманию/смешанные эпизоды для исключения БАР; КР456 F01 рассматривает панические проявления в контексте депрессии/БАР, без автоматического отдельного панического диагноза; КР451 F01 ограничена хронологией G1.1/G1.2 при F20.0–F20.3 и аффективном эпизоде. Наличие паники/психотического проявления не создаёт диагноз из анкеты и не переносит основания лечения. Соматические причины и оценка врача поддержаны прежними КР301 F09/F21/F01/F10; no_diagnosis_from_question — отдельная политика HAC. Комплект не устанавливает числовой возраст КР, персональную применимость или клиническое одобрение.",
+  "checked_at": "2026-10-20T22:16:13.502743+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "other_disorders_including_bipolar_psychotic_and_panic": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F10",
+          "page": 17,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "0c4b3f04b4fac201f02217bfb854fdae968a97dc28f2a1299df91740f49ac939"
+        },
+        {
+          "document_id": "KR456_3",
+          "fragment_id": "KR456_3-F01",
+          "page": 17,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "456_3 / 2024 / version=3",
+          "source_sha256": "a0f23668c4cf498d08a82d0d5bf67a209c33a113c8c61bd8a0873d5a9139c94d",
+          "artifact_sha256": "cec3fc2e26f5f4186ad4d6302dfb59657f6b55812d7f93da9b78a7ff2a65a39e",
+          "fragment_sha256": "54825406878818587a58e93f37171dcf10a69566b2d8b89dff7339e8dbc7791e"
+        },
+        {
+          "document_id": "KR451_3",
+          "fragment_id": "KR451_3-F01",
+          "page": 16,
+          "section": "1.6 Клиническая картина; критерии F20.0–F20.3, исключения после G1",
+          "source_version": "451_3 / 2024 / version=3",
+          "source_sha256": "f70d8021ba33cb61538049758a586ae1d8f8b605f65a3c157ae65c30eea4fa10",
+          "artifact_sha256": "1c4f7b2fd7ff6fd4e90d8a28e93172d711842d83af20a537678132e61446a026",
+          "fragment_sha256": "e86c0a969b0c494b2e09e56953630db0863e70c66e2d3a6c31b3cdf5cd8f2a35"
+        }
+      ],
+      "policy_references": []
+    },
+    "somatic_causes": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F09",
+          "page": 18,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F21",
+          "page": 22,
+          "section": "2.5 Иные диагностические исследования",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+        }
+      ],
+      "policy_references": []
+    },
+    "physician_assessment": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F01",
+          "page": 12,
+          "section": "2. Диагностика",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "087d5f7c0f7cbe8e800f73f463130b774d0fc8dc4151cbc6c7d777fb3022efd3"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F09",
+          "page": 18,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F10",
+          "page": 17,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "0c4b3f04b4fac201f02217bfb854fdae968a97dc28f2a1299df91740f49ac939"
+        }
+      ],
+      "policy_references": []
+    },
+    "no_diagnosis_from_question": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_diagnosis_from_question",
+          "record_sha256": "5fa67a29036aad6f45b28241f94068b018ebf6dcd63afe55c14f80a29381d963"
+        }
+      ]
+    }
+  }
+}

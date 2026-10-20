@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "slice": "S17J02B03B",
+  "checked_at": "2026-10-20T22:18:39.242625+00:00",
+  "verdict": "NOT_ACCEPTED",
+  "status": "BLOCKED",
+  "counts": {
+    "sufficient_cells": 18,
+    "required_cells": 58,
+    "non_dossier_sufficient": 18,
+    "non_dossier_required": 20,
+    "dossier_dependent_incomplete_cells": 38,
+    "complete_dossiers": 0,
+    "required_dossiers": 9,
+    "complete_sections": 0,
+    "required_sections": 90
+  },
+  "criterion_reviews": {
+    "S17J02B": {
+      "tasks": [
+        {
+          "text": "По замороженной матрице собрать достаточные комплекты по обоим направлениям: динамика/функционирование, эффект/переносимость/приверженность/рецидив, наблюдение, немедикаментозная помощь, шкалы и границы применимости. Дополнительные КР находить по конкретному пробелу через исследователя.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Для каждого нового источника/утверждения проверить текущую официальную версию, популяцию, правомерное представление, страницу, контекст и самостоятельную формулировку. Полный текст допускать только при доказанных правах; не расширять старый scoped-допуск задним числом.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Импортировать новые проверенные пакеты воспроизводимо, сверить каждую индексируемую единицу и достаточные комплекты с оригиналом; зафиксировать все пробелы/карантин/противоречия. Не подменять содержание источника медицинским эталоном модели.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "path": "evidence/S17J02B/core-coverage.json",
+          "status": "HISTORICAL_CHILD_RESULTS_PRESERVED_NOT_FINAL_PARENT_ACCEPTANCE"
+        },
+        {
+          "path": "evidence/S17J02B/source-content-review.json",
+          "status": "HISTORICAL_CHILD_RESULTS_PRESERVED_NOT_FINAL_PARENT_ACCEPTANCE"
+        },
+        {
+          "path": "evidence/S17J02B/corpus-manifest.json",
+          "status": "HISTORICAL_CHILD_RESULTS_PRESERVED_NOT_FINAL_PARENT_ACCEPTANCE"
+        },
+        {
+          "path": "evidence/S17J02B/acceptance.md",
+          "status": "HISTORICAL_CHILD_RESULTS_PRESERVED_NOT_FINAL_PARENT_ACCEPTANCE"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "Каждая обязательная ячейка клинического ядра имеет достаточное допущенное основание обоих применимых направлений либо честный провал; отсутствие по обязательной ячейке блокирует приёмку.",
+          "verdict": "FAIL",
+          "explanation": "Обязательные пробелы:две возрастные применимости DASS и38ячеек с неполными досье;полный COVERAGE-1 NOT_READY."
+        },
+        {
+          "text": "Все новые единицы связаны с точной версией/правами/страницей/проверкой и не теряют ограничения. Повтор импорта/история/сохранность проверены.",
+          "verdict": "PASS_FOR_COMPLETED_MATERIAL_ONLY",
+          "explanation": "Все фактически добавленные2источника/2факта/1комплект проверены;права/страницы/сроки/повтор/история/сохранность прослеживаются. Полнота родителя не утверждается."
+        },
+        {
+          "text": "Клиническое одобрение не выдумано, FU не активированы; международные кандидаты не заменяют российские показания и не попадают в индекс без допуска.",
+          "verdict": "PASS",
+          "explanation": "Клиническое одобрение не присвоено;FUнеактивны;международные/новые полные тексты не подключены."
+        }
+      ]
+    },
+    "S17J02B03": {
+      "tasks": [
+        {
+          "text": "Прочитать сохранённые86источниковыхсвязей/74политики/64пробела из исходных224аспектов. Проверить каждый противfrozenматрицы; агрегатный счётчик не является полнотой.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Закрыть оставшиеся клинические пробелы достаточными допустимыми источниками/контекстом по двум направлениям; числовой возраст не выводить автоматически. Источники искать по конкретному пробелу.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Провести покомплектную приёмку всех исходных критериевS17J02B. Явно сохранить зависимость лекарственных аспектов отJ02C и полный COVERAGE-1 доJ03. Если критерии родителя не выполнены, родителя не принимать и не обходить зависимость планом.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "path": "evidence/S17J02B03/core-coverage.json",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        },
+        {
+          "path": "evidence/S17J02B03/parent-acceptance-review.json",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        },
+        {
+          "path": "evidence/S17J02B03/acceptance.md",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "Каждый обязательный клинический вопрос/аспект обоих направлений имеет достаточное допущенное основание по неизменённым критериям родителя; обязательный пробел блокирует итоговую приёмку.",
+          "verdict": "FAIL",
+          "explanation": "Обязательные пробелы:две возрастные применимости DASS и38ячеек с неполными досье;полный COVERAGE-1 NOT_READY."
+        },
+        {
+          "text": "Все достаточные комплекты связаны с точными допущенными карточками и актуальными проверками, а политики отдельно обозначены; повтор/история/сохранность проверены.",
+          "verdict": "PASS_FOR_COMPLETED_MATERIAL_ONLY",
+          "explanation": "Все фактически добавленные2источника/2факта/1комплект проверены;права/страницы/сроки/повтор/история/сохранность прослеживаются. Полнота родителя не утверждается."
+        },
+        {
+          "text": "Исходные задачи/результаты/три критерияS17J02B полностью проверены, неполное неaccepted. Полные9досье/90разделов и все58ячеек остаются обязательнымиCOVERAGE-1 вJ02C, без снижения или кругового объявления готовности.",
+          "verdict": "FAIL",
+          "explanation": "Обязательные пробелы:две возрастные применимости DASS и38ячеек с неполными досье;полный COVERAGE-1 NOT_READY."
+        }
+      ]
+    },
+    "S17J02B03B": {
+      "tasks": [
+        {
+          "text": "Прочитать сохранённые86источниковыхсвязей/74политики/64пробела из исходных224аспектов. Проверить каждый противfrozenматрицы; агрегатный счётчик не является полнотой.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Закрыть оставшиеся клинические пробелы достаточными допустимыми источниками/контекстом по двум направлениям; числовой возраст не выводить автоматически. Источники искать по конкретному пробелу.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        },
+        {
+          "text": "Провести покомплектную приёмку всех исходных критериевS17J02B. Явно сохранить зависимость лекарственных аспектов отJ02C и полный COVERAGE-1 доJ03. Если критерии родителя не выполнены, родителя не принимать и не обходить зависимость планом.",
+          "status": "PARTIAL_OR_BLOCKED",
+          "evidence": [
+            "evidence/S17J02B03/core-coverage.json",
+            "evidence/S17J02B03B/source-review.json",
+            "evidence/S17J02B03B/verification.json"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "path": "evidence/S17J02B03/core-coverage.json",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        },
+        {
+          "path": "evidence/S17J02B03/parent-acceptance-review.json",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        },
+        {
+          "path": "evidence/S17J02B03/acceptance.md",
+          "status": "RESULT_WITH_EXPLICIT_NOT_ACCEPTED_VERDICT"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "Каждый обязательный клинический вопрос/аспект обоих направлений имеет достаточное допущенное основание по неизменённым критериям родителя; обязательный пробел блокирует итоговую приёмку.",
+          "verdict": "FAIL",
+          "explanation": "Обязательные пробелы:две возрастные применимости DASS и38ячеек с неполными досье;полный COVERAGE-1 NOT_READY."
+        },
+        {
+          "text": "Все достаточные комплекты связаны с точными допущенными карточками и актуальными проверками, а политики отдельно обозначены; повтор/история/сохранность проверены.",
+          "verdict": "PASS_FOR_COMPLETED_MATERIAL_ONLY",
+          "explanation": "Все фактически добавленные2источника/2факта/1комплект проверены;права/страницы/сроки/повтор/история/сохранность прослеживаются. Полнота родителя не утверждается."
+        },
+        {
+          "text": "Исходные задачи/результаты/три критерияS17J02B полностью проверены, неполное неaccepted. Полные9досье/90разделов и все58ячеек остаются обязательнымиCOVERAGE-1 вJ02C, без снижения или кругового объявления готовности.",
+          "verdict": "FAIL",
+          "explanation": "Обязательные пробелы:две возрастные применимости DASS и38ячеек с неполными досье;полный COVERAGE-1 NOT_READY."
+        }
+      ]
+    }
+  },
+  "blockers": [
+    {
+      "id": "DASS-RU-AGE",
+      "kind": "missing_primary_population_evidence",
+      "finding": "Полный первичныйPDFточной статьи проверен;возраста/взрослой популяции нет. Нужен фактический первичный материал о возрастной применимости точного перевода;не подстановка FAQ/согласия/политики.",
+      "affected_units": [
+        "D12-depression-scale_identity",
+        "D12-generalized_anxiety_disorder-scale_identity"
+      ]
+    },
+    {
+      "id": "DOSSIER-PREREQUISITE-CONFLICT",
+      "kind": "contradictory_work_order",
+      "finding": "B03B требует досье,а ихCзаблокирован доB/B03/B03B. Действующие зависимости и критерии не обойдены.",
+      "evidence": "evidence/S17J02B03B/dependency-audit.json"
+    }
+  ],
+  "closed_gap": {
+    "unit": "D09-depression-differential",
+    "sources": [
+      "KR301_3-F10",
+      "KR456_3-F01",
+      "KR451_3-F01"
+    ],
+    "scope": "Only factual boundaries of physician differential assessment; no independent medical approval"
+  },
+  "source_admission": "Two exact reviewed-source facts admitted; overall slice not accepted",
+  "clinical_approval": false,
+  "FU_activated": false,
+  "J02C_started": false,
+  "dependencies_changed": false,
+  "approval_request": {
+    "status": "AWAITING_EXPLICIT_USER_RESPONSE",
+    "proposal": "evidence/S17J02B03B/plan-amendment-proposal.md",
+    "applied": false
+  }
+}

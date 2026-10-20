@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T01:04:43+03:00",
+  "updated_on": "2026-10-21T01:20:06+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17J02B03A",
-  "next_slice": "S17J02B03B",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -320,10 +320,10 @@
       "reason": null
     },
     "S17J02B03B": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02B03B.md",
-      "reason": null
+      "reason": "NOT_ACCEPTED: две age_boundary русской DASS не подтверждены даже полным первичным PDF; 38 ячеек требуют 9 досье/90 разделов, а C запрещён до приёмки B/B03/B03B. Подготовлен точный проект изменения порядка, требуется явное решение пользователя; зависимости и критерии не обойдены."
     }
   },
   "latest_audit": {
@@ -469,23 +469,24 @@
     "commit_ref": "refs/tags/slice/S17J02A"
   },
   "latest_coverage_core": {
-    "slice": "S17J02B03A",
+    "slice": "S17J02B03B",
     "parent": "S17J02B",
-    "report": "evidence/S17J02B03A/core-coverage.json",
-    "source_supported_aspects": 98,
+    "report": "evidence/S17J02B03/core-coverage.json",
+    "source_supported_aspects": 99,
     "policy_supported_aspects": 90,
     "mixed_aspects": 10,
-    "unresolved_clinical_aspects": 46,
+    "unresolved_clinical_aspects": 45,
     "required_aspects": 224,
     "required_cells": 58,
-    "sufficient_cells": 17,
+    "sufficient_cells": 18,
     "non_dossier_cells": 20,
-    "non_dossier_gap_cells": 3,
+    "non_dossier_gap_cells": 2,
     "dossier_dependent_gap_cells": 38,
     "clinical_validation": false,
     "coverage_status": "NOT_READY",
-    "coverage_report": "evidence/S17J02B03A/coverage-readiness.json",
-    "commit_ref": "refs/tags/slice/S17J02B03A"
+    "coverage_report": "evidence/S17J02B03B/coverage-readiness.json",
+    "slice_status": "blocked",
+    "commit_ref": null
   },
   "latest_primary_admission": {
     "slice": "S17J02B02",
@@ -514,6 +515,45 @@
       "sufficient_cells": 0,
       "clinical_validation": false,
       "coverage_status": "NOT_READY"
+    },
+    {
+      "slice": "S17J02B03A",
+      "parent": "S17J02B",
+      "report": "evidence/S17J02B03A/core-coverage.json",
+      "source_supported_aspects": 98,
+      "policy_supported_aspects": 90,
+      "mixed_aspects": 10,
+      "unresolved_clinical_aspects": 46,
+      "required_aspects": 224,
+      "required_cells": 58,
+      "sufficient_cells": 17,
+      "non_dossier_cells": 20,
+      "non_dossier_gap_cells": 3,
+      "dossier_dependent_gap_cells": 38,
+      "clinical_validation": false,
+      "coverage_status": "NOT_READY",
+      "coverage_report": "evidence/S17J02B03A/coverage-readiness.json",
+      "commit_ref": "refs/tags/slice/S17J02B03A"
     }
-  ]
+  ],
+  "latest_supplemental_admission": {
+    "slice": "S17J02B03B",
+    "slice_status": "blocked",
+    "source_admission": "Two exact supplemental source facts admitted; not overall slice acceptance",
+    "source_review": "evidence/S17J02B03B/source-review.json",
+    "new_sources": 2,
+    "new_authored_facts": 2,
+    "current_sources": 11,
+    "current_cards": 63,
+    "new_quotes": 0,
+    "new_original_copies": 0,
+    "clinical_validation": false,
+    "commit_ref": null
+  },
+  "pending_plan_amendment": {
+    "status": "awaiting_explicit_user_response",
+    "proposal": "evidence/S17J02B03B/plan-amendment-proposal.md",
+    "applied": false,
+    "reason": "Direct B03/B03B instruction forbids bypassing C dependency; content prerequisite conflict requires explicit work-order decision"
+  }
 }

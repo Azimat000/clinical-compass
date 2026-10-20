@@ -1,4 +1,4 @@
-"""Six exact DASS primary identities; offline provenance, never a web loader."""
+"""Closed primary identities and receipts; offline provenance, never a web loader."""
 import json
 
 from .retrieval_corpus import CorpusError, local_file, sha
@@ -16,6 +16,15 @@ IDENTITIES = {
     'DASS42_RU_VALIDATION_2025': ('validation_study', 'html_section', {'https://www.mediasphera.ru/issues/zhurnal-nevrologii-i-psikhiatrii-im-s-s-korsakova/2025/5/1199772982025051103'}),
 }
 TYPES = {v[0] for v in IDENTITIES.values()}
+# Separate trust domain: these guidelines cannot inherit instrument permissions,
+# resource bindings or the original six-source policy.
+GUIDELINE_POLICY = 'data/retrieval/guideline-source-policy.json'
+GUIDELINE_PREFIX = 'data/retrieval/packages/J02B03B/'
+GUIDELINE_STORAGE = 'verified_guideline_receipt'
+GUIDELINE_IDENTITIES = {
+    'KR456_3': ('clinical_guideline', 'pdf_page', {'https://apicr.minzdrav.gov.ru/api.ashx?id=456_3&op=GetClinrecPdf'}),
+    'KR451_3': ('clinical_guideline', 'pdf_page', {'https://apicr.minzdrav.gov.ru/api.ashx?id=451_3&op=GetClinrecPdf'}),
+}
 PIN_FIELDS = {'document_id', 'document_type', 'source_url', 'source_version', 'sha256',
               'artifact_path', 'artifact_sha256', 'path', 'receipt_sha256', 'locator_kind',
               'byte_length', 'media_type', 'verified_at'}
@@ -26,12 +35,12 @@ RECEIPT_FIELDS = {'schema_version', 'document_id', 'source_url', 'source_sha256'
 
 def is_primary(item):
     return ((isinstance(item.get('document_type'), str) and item['document_type'] in TYPES)
-            or (isinstance(item.get('document_id'), str) and item['document_id'] in IDENTITIES)
-            or item.get('original_storage') == STORAGE)
+            or (isinstance(item.get('document_id'), str) and item['document_id'] in IDENTITIES.keys() | GUIDELINE_IDENTITIES.keys())
+            or item.get('original_storage') in (STORAGE, GUIDELINE_STORAGE))
 
 
 def locator_kind(item):
-    identity = IDENTITIES.get(item.get('document_id'))
+    identity = IDENTITIES.get(item.get('document_id')) or GUIDELINE_IDENTITIES.get(item.get('document_id'))
     return identity[1] if identity else 'pdf_page'
 
 
@@ -41,18 +50,23 @@ def validate_primary(item, root):
     A receipt proves the reviewed acquisition, not possession or a licence of the
     source text. Only independently reviewed authored cards enter a snapshot.
     """
-    identity = IDENTITIES.get(item.get('document_id'))
+    guideline = item.get('document_id') in GUIDELINE_IDENTITIES
+    identities = GUIDELINE_IDENTITIES if guideline else IDENTITIES
+    policy_path = GUIDELINE_POLICY if guideline else POLICY
+    prefix = GUIDELINE_PREFIX if guideline else PREFIX
+    storage = GUIDELINE_STORAGE if guideline else STORAGE
+    identity = identities.get(item.get('document_id'))
     if not identity or item.get('document_type') != identity[0] or item.get('source_url') not in identity[2]:
         raise CorpusError('primary_identity_not_allowed')
-    if item.get('representation') != 'reviewed_cards' or item.get('original_storage') != STORAGE:
+    if item.get('representation') != 'reviewed_cards' or item.get('original_storage') != storage:
         raise CorpusError('primary_representation_not_allowed')
     if item.get('locator_kind') != identity[1]:
         raise CorpusError('primary_locator_kind')
-    policy = json.loads(local_file(root, POLICY, {POLICY}))
+    policy = json.loads(local_file(root, policy_path, {policy_path}))
     if set(policy) != {'schema_version', 'sources'} or policy['schema_version'] != 1 or not isinstance(policy['sources'], list):
         raise CorpusError('primary_policy_schema')
     ids = [p['document_id'] for p in policy['sources']]
-    if len(ids) != len(set(ids)) or any(i not in IDENTITIES for i in ids):
+    if len(ids) != len(set(ids)) or any(i not in identities for i in ids):
         raise CorpusError('primary_policy_identity')
     matches = [p for p in policy['sources'] if p['document_id'] == item['document_id']]
     if len(matches) != 1 or set(matches[0]) != PIN_FIELDS | {'status', 'resource_bindings'}:
@@ -61,7 +75,7 @@ def validate_primary(item, root):
     if pin['status'] != 'approved' or any(pin[k] != item.get(k) for k in PIN_FIELDS):
         raise CorpusError('primary_pin_changed_or_revoked')
     for key, suffix in [('path', '.receipt.json'), ('artifact_path', '.cards.json')]:
-        if pin[key] != PREFIX + item['document_id'] + suffix:
+        if pin[key] != prefix + item['document_id'] + suffix:
             raise CorpusError('primary_path_not_allowed')
     data = local_file(root, pin['path'], {pin['path']})
     if sha(data) != pin['receipt_sha256']:
@@ -91,6 +105,8 @@ def validate_primary(item, root):
         raise CorpusError('primary_acquisition_not_verified')
     if not isinstance(pin['resource_bindings'], list):
         raise CorpusError('primary_resource_binding')
+    if guideline and pin['resource_bindings']:
+        raise CorpusError('guideline_cannot_bind_instrument')
     for binding in pin['resource_bindings']:
         if set(binding) != {'path', 'sha256'} or binding['path'] != 'apps/compass/resources/dass42-ru-v1.json':
             raise CorpusError('primary_resource_binding')

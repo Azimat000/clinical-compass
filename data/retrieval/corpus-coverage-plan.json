@@ -25,13 +25,17 @@
     "medication_roster": "data/retrieval/planned-medications.json; frozen9required dossiers with exact trade/form/strength/RU research targets; current status and complete GRLS dossiers not verified"
   },
   "current_corpus": {
-    "accepted_slice": "S17J02B02",
-    "sources": 9,
-    "authored_fact_cards": 61,
+    "accepted_slice": null,
+    "sources": 11,
+    "authored_fact_cards": 63,
     "original_quotes": 2,
     "full_text_admission": false,
     "sufficient_for_service": false,
-    "clinical_validation": false
+    "clinical_validation": false,
+    "last_accepted_admission_slice": "S17J02B02",
+    "latest_change_slice": "S17J02B03B",
+    "latest_change_slice_status": "blocked",
+    "source_admission": "11sources/63facts admitted; unfinished slice not accepted"
   },
   "coverage_gate": {
     "id": "COVERAGE-1",
@@ -39,9 +43,9 @@
     "before": "S17J03",
     "detailed_cells_frozen": true,
     "medication_roster_frozen": true,
-    "complete_cells": 17,
+    "complete_cells": 18,
     "required_cells": 58,
-    "coverage_percent": 29.31,
+    "coverage_percent": 31.03,
     "preserve_gates": [
       "G01",
       "G02",
@@ -64,7 +68,7 @@
     "complete_medications": 0,
     "required_dossier_sections": 90,
     "complete_dossier_sections": 0,
-    "note": "B03A:17/58 technical reference bundles, not parent B/B03 acceptance or clinical approval;38 cells still need dossiers,3 non-dossier cells have explicit clinical gaps.0/90 sections,0/9dossiers. Refusal behavior not tested. Sources/reviews retain their own expiry."
+    "note": "B03B NOT_ACCEPTED:18/58 technical reference bundles;2DASSage cells and38dossier-dependent cells incomplete;0/90sections,0/9dossiers. Work-order conflict documented;proposal not applied. No clinical approval or RAGrefusal behavior claim."
   },
   "domains": [
     {
@@ -404,9 +408,9 @@
     "new_models_installed": false,
     "new_expenses_rub": 0
   },
-  "assessment_scope": "Проверка прежних 9 допущенных источников и 61 карточки B01/B02; B03A добавляет17технически достаточных справочных комплектов, не клиническое одобрение. Остальные источники/функции не получают допуска от наличия в сервисе. Сроки/права не продлены.",
+  "assessment_scope": "Допущены11источников/63карточки;B03Bдобавляет2коротких факта и1справочный комплект. Сам B03B/B03/B не принят:18/58,двавозрастных пробелаDASSи38досье-зависимых вопросов. Сроки старых источников не продлены,клинического допуска нет.",
   "detailed_matrix": "data/retrieval/coverage-matrix.json",
   "scope_freeze": "data/retrieval/coverage-freeze.json",
-  "coverage_report": "evidence/S17J02B03A/coverage-readiness.json",
+  "coverage_report": "evidence/S17J02B03B/coverage-readiness.json",
   "updated_on": "2026-10-21"
 }
