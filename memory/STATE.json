@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T21:52:27+03:00",
+  "updated_on": "2026-10-20T22:01:09+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17H",
-  "next_slice": "S17J",
+  "next_slice": "S17J01",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -228,6 +228,54 @@
       "commit_ref": null,
       "handoff": "memory/sessions/S17J.md",
       "reason": null
+    },
+    "S17J01": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J01.md",
+      "reason": null
+    },
+    "S17J02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02.md",
+      "reason": null
+    },
+    "S17J03": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J03.md",
+      "reason": null
+    },
+    "S17J04": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J04.md",
+      "reason": null
+    },
+    "S17J05": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J05.md",
+      "reason": null
+    },
+    "S17J06": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J06.md",
+      "reason": null
+    },
+    "S17J07": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J07.md",
+      "reason": null
+    },
+    "S17J08": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J08.md",
+      "reason": null
     }
   },
   "latest_audit": {
@@ -318,7 +366,16 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "Локальный поиск по проверенному версионированному корпусу; следующий S17J, ещё не реализован",
+    "rag_direction": "План S17J разделён на S17J01–S17J08 и итоговую приёмку S17J; следующий S17J01. Поиск ещё не реализован.",
     "commit_ref": "refs/tags/slice/S17H"
+  },
+  "latest_retrieval_plan": {
+    "report": "memory/sessions/plan-S17J-2026-10-20.md",
+    "plan": "plan/S17J-production.md",
+    "register": "plan/s17j-subdivision.json",
+    "planning_ref": "refs/tags/plan/s17j-production-split-2026-10-20",
+    "status": "planning_only",
+    "next_action": "В новой сессии только S17J01. Все новые срезы planned; S17H остаётся последним принятым.",
+    "clinical_readiness": false
   }
 }
