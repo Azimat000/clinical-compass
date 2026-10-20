@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "course_and_dates",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Возвращение жалоб сопоставляют с датами курса и прежними наблюдениями, не восстанавливая отсутствующие даты.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D03-depression-relapse",
+      "aspect": "course_and_dates",
+      "requirement_sha256": "15a5a1b72fbfe80a6b0fb1430c5c4871531e689dda4c5f0292ddc43b7256a0b8"
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-relapse",
+      "aspect": "course_and_dates",
+      "requirement_sha256": "8e5967227293603c9d637318e1508560d67d668025d208f7c89dbee077846d67"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:course_and_dates"
+    }
+  ],
+  "verification": null
+}

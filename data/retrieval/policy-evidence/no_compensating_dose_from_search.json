@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_compensating_dose_from_search",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Поиск не рассчитывает компенсирующую дозу после пропуска.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D07-depression-missed_dose",
+      "aspect": "no_compensating_dose_from_search",
+      "requirement_sha256": "f3d19848731977d4d24ecc4a828a1d064a47b30d00e2134930e8256ac5720f56"
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-missed_dose",
+      "aspect": "no_compensating_dose_from_search",
+      "requirement_sha256": "2a50fa3240561068833fff21a10c3510917d2ce4e557122e88b6d48e1d5a2712"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_compensating_dose_from_search"
+    }
+  ],
+  "verification": null
+}

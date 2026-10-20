@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_invented_window",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Источник сроков и этап наблюдения должны быть указаны; универсальное окно осмотра не выдумывается.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D11-depression-review",
+      "aspect": "no_invented_window",
+      "requirement_sha256": "ae1ada63475eba8f241a91e9c8ed59076f258774de2372b2f2a8a5185a7f48bb"
+    },
+    {
+      "unit_id": "D11-generalized_anxiety_disorder-review",
+      "aspect": "no_invented_window",
+      "requirement_sha256": "dcb764cb4a4e204df49437338620f002c838b39226e77a6cc3c93c28d331c661"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_invented_window"
+    }
+  ],
+  "verification": null
+}

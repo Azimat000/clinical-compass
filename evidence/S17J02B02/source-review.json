@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "slice": "S17J02B02",
+  "researcher": "/root/b02_dass_primary; isolated read-only context",
+  "primary_sources": {
+    "DASS42_RU_FORM": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+      "source_version": "DASS-42; перевод Фаттахов–Горобец,2024; exact-PDF-5d3fa16c",
+      "checked_at": "2026-10-20T21:32:47.102091+00:00",
+      "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+      "byte_length": 478406,
+      "media_type": "application/pdf",
+      "locator_kind": "pdf_page",
+      "resource_match_verified": true,
+      "resource_sha256": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2"
+    },
+    "DASS42_EN_KEY": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://dass.psy.unsw.edu.au/Download%20files/Dass_template.pdf",
+      "source_version": "UNSW DASS template; exact-PDF-5ceafc67",
+      "checked_at": "2026-10-20T21:32:48.824516+00:00",
+      "sha256": "5ceafc6731340b382bdd6eea256ea5f394dfe9897440615911f2cef84a977892",
+      "byte_length": 15550,
+      "media_type": "application/pdf",
+      "locator_kind": "pdf_page",
+      "resource_match_verified": true,
+      "resource_sha256": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2"
+    },
+    "DASS42_RU_TRANSLATION": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov%20Russian.htm",
+      "source_version": "Перевод Фаттахова и коллег, официальная страница UNSW; acquisition-2026-10-21",
+      "checked_at": "2026-10-20T21:32:44.277931+00:00",
+      "sha256": "2678f43db388d18dcc0e071e7bdbf8fd3eef16a30b653d6f511f12473b3fd21f",
+      "byte_length": 42572,
+      "media_type": "text/html",
+      "locator_kind": "html_section"
+    },
+    "DASS42_GUIDANCE": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://dass.psy.unsw.edu.au/DASSFAQ.htm",
+      "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+      "checked_at": "2026-10-20T21:32:50.871039+00:00",
+      "sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+      "byte_length": 98485,
+      "media_type": "text/html",
+      "locator_kind": "html_section"
+    },
+    "DASS42_DOWNLOAD_TERMS": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://dass.psy.unsw.edu.au/down.htm",
+      "source_version": "UNSW DASS download terms; acquisition-2026-10-21-0afb51a8",
+      "checked_at": "2026-10-20T21:32:52.840601+00:00",
+      "sha256": "0afb51a8737cc9c895ebfdf01d5ff37e7541d6d2ff68a30ab8a32fbbe554bd39",
+      "byte_length": 42252,
+      "media_type": "text/html",
+      "locator_kind": "html_section"
+    },
+    "DASS42_RU_VALIDATION_2025": {
+      "verified": true,
+      "tls_verified": true,
+      "transport": "/usr/bin/curl; default certificate verification; HTTPS-only; TLS>=1.2; HTTP200/exit0",
+      "source_url": "https://www.mediasphera.ru/issues/zhurnal-nevrologii-i-psikhiatrii-im-s-s-korsakova/2025/5/1199772982025051103",
+      "source_version": "2025;125(5):103–107; DOI10.17116/jnevro2025125051103; HTML acquisition-2026-10-21",
+      "checked_at": "2026-10-20T21:32:53.681713+00:00",
+      "sha256": "26816da0c47c02e14bd8bd0479688e00dfe4d1bcc7181771f58adb4d86b94d17",
+      "byte_length": 264960,
+      "media_type": "text/html",
+      "locator_kind": "html_section",
+      "doi": "10.17116/jnevro2025125051103",
+      "response_media_type": "text/html; charset=utf-8",
+      "dynamic_html": true
+    }
+  },
+  "independent_clinical_validation": false,
+  "form_comparison": {
+    "resource_path": "apps/compass/resources/dass42-ru-v1.json",
+    "resource_sha256": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2",
+    "instruction": "MATCH",
+    "options": "4/4 MATCH",
+    "items": "42/42 MATCH",
+    "key_numbers": "42/42 MATCH",
+    "method": "Researcher compared verified-TLS original PDFs in memory; only technical line-break/hyphen normalization; no file mutations"
+  },
+  "superseded_transport_attempt": "Initial Python acquisition lacked certificate-chain verification and is NOT an admission basis. Repeated /usr/bin/curl with default verified TLS, no -k/--insecure, HTTPS-only, TLS>=1.2, all HTTP200/exit0.",
+  "limitation": "HTML article SHA is a receipt for one dynamic response, not an eternal work identity. No original response bytes/fulltexts retained or indexed. Current means available at checked acquisition, not Ministry clinical approval."
+}

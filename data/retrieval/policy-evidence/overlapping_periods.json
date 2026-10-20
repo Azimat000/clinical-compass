@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "overlapping_periods",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Пересечение недельных периодов DASS обозначает ограничение сравнения, а не самостоятельные независимые изменения.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D12-depression-scale_interpretation",
+      "aspect": "overlapping_periods",
+      "requirement_sha256": "b26112261de98548db3788cbdaacfadfcbd5d1caf425d419d56791c5b705720c"
+    },
+    {
+      "unit_id": "D12-generalized_anxiety_disorder-scale_interpretation",
+      "aspect": "overlapping_periods",
+      "requirement_sha256": "370dabd1dac43e9bb9c1d197a4ef5546dace884d7096efa97b89efc0c33c84b7"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:overlapping_periods"
+    }
+  ],
+  "verification": null
+}

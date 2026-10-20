@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_DASS_threshold",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Сумма DASS не устанавливает ремиссию и не задаёт порог изменения терапии.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D03-depression-remission",
+      "aspect": "no_DASS_threshold",
+      "requirement_sha256": "d0843494c398b529229979abd26c69a9a3ac686517145931e54a961a4e6b0078"
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-remission",
+      "aspect": "no_DASS_threshold",
+      "requirement_sha256": "cc83dbd7cd9db1d48510a6ecbed0c9e89dfcf1a77a2acba0f417f7e4ebbf7a4d"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_DASS_threshold"
+    }
+  ],
+  "verification": null
+}

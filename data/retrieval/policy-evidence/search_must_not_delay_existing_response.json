@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "search_must_not_delay_existing_response",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Ожидание результата поиска не должно задерживать действующее реагирование на критические сведения; проверка будущей интеграции остаётся отдельной.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D08-depression-critical",
+      "aspect": "search_must_not_delay_existing_response",
+      "requirement_sha256": "d7d607399e7a22833d48ffaec6d04d4738a70ee854e9e7678fd8d9b3d7f82c28"
+    },
+    {
+      "unit_id": "D08-generalized_anxiety_disorder-critical",
+      "aspect": "search_must_not_delay_existing_response",
+      "requirement_sha256": "306a7b25122debc5001f4f95bce42c07866d3f70e40b807cef7e387f630dcab8"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:search_must_not_delay_existing_response"
+    }
+  ],
+  "verification": null
+}

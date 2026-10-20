@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "missing_not_no_risk",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Нет подходящего основания — нет ответа из корпуса, а не вывод об отсутствии риска.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D08-depression-no_answer",
+      "aspect": "missing_not_no_risk",
+      "requirement_sha256": "b8697e5a8ebf7ddb76053ccb6964274551025c57073e0376162b2d89fcbc7d62"
+    },
+    {
+      "unit_id": "D08-generalized_anxiety_disorder-no_answer",
+      "aspect": "missing_not_no_risk",
+      "requirement_sha256": "dd684e4708f519ac2fc43c9dda81289d78a4bc54edbe84d9bf16010acf875a5f"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:missing_not_no_risk"
+    }
+  ],
+  "verification": null
+}

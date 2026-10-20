@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "absence_not_exclusion",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Отсутствие сообщения о нежелательном явлении не признаётся доказательством его отсутствия.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D04-depression-adverse",
+      "aspect": "absence_not_exclusion",
+      "requirement_sha256": "4fc5e18b18cc3f59e2fdbc5ea1376277a9ac2341f0858433212d8a5010fb3131"
+    },
+    {
+      "unit_id": "D04-generalized_anxiety_disorder-adverse",
+      "aspect": "absence_not_exclusion",
+      "requirement_sha256": "3d7e6191397100d3e6b52374ea15a5ea1093bce24ecfa1f0b95c8f0a74bc0931"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:absence_not_exclusion"
+    }
+  ],
+  "verification": null
+}

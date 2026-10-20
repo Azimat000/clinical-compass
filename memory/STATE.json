@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T00:24:16+03:00",
+  "updated_on": "2026-10-21T00:46:22+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J02B01",
-  "next_slice": "S17J02B02",
+  "last_accepted_slice": "S17J02B02",
+  "next_slice": "S17J02B03",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -302,8 +302,8 @@
       "reason": null
     },
     "S17J02B02": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17J02B02",
       "handoff": "memory/sessions/S17J02B02.md",
       "reason": null
     },
@@ -402,7 +402,7 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "Приняты J01/J02/J02A и дочерний J02B01(49карточек). РодительB не принят; далееB02/B03→приёмкаB→J02C/COVERAGE-1→J03–J08. FUinactive.",
+    "rag_direction": "Приняты J01/J02/J02A и B01/B02:9 источников/61 карточка, отдельные ограничения HAC. Далее B03→приёмка B→J02C/COVERAGE-1→J03–J08. FU неактивны, поиск не принят.",
     "commit_ref": "refs/tags/slice/S17H"
   },
   "latest_retrieval_plan": {
@@ -411,30 +411,34 @@
     "register": "plan/s17j-subdivision.json",
     "planning_ref": "refs/tags/plan/rag-corpus-expansion-2026-10-20",
     "status": "planning_only",
-    "next_action": "S17J02B01 принят как проверенные факты КР/карта пробелов. Далее отдельные B02→B03→приёмка родителяB, затемJ02C/COVERAGE-1. Родитель не принят.",
+    "next_action": "Приняты B01/B02; следующая отдельная сессия B03 — достаточные клинические комплекты и исходная приёмка родителя. Затем J02C/COVERAGE-1; родитель B ещё не принят.",
     "clinical_readiness": false,
     "coverage_plan": "data/retrieval/corpus-coverage-plan.json",
     "coverage_gate": "COVERAGE-1",
     "coverage_status": "NOT_READY"
   },
   "latest_corpus_admission": {
-    "slice": "S17J02B01",
+    "slice": "S17J02B02",
     "status": "accepted",
-    "report": "memory/sessions/S17J02B01.md",
-    "acceptance": "evidence/S17J02B/acceptance.md",
+    "report": "memory/sessions/S17J02B02.md",
+    "acceptance": "evidence/S17J02B02/acceptance.md",
     "registry": "data/retrieval/admission-packages.json",
-    "manifest": "evidence/S17J02B/corpus-manifest.json",
-    "admitted_sources": 3,
+    "manifest": "evidence/S17J02B02/corpus-manifest.json",
+    "admitted_sources": 9,
     "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "B01 accepted only as verified KR package/map. Bparent not accepted. Next B02 exact DASS/policy evidence then B03 sufficient core, then J02C. COVERAGE-1 remains NOT_READY.",
+    "next_action": "Допущены точные DASS-первоисточники и отдельные доказательства HAC. Далее только B03: достаточные клинические комплекты и исходная приёмка B. Родитель не принят; COVERAGE-1 NOT_READY.",
     "representation": "reviewed_cards",
-    "authored_fact_cards": 49,
+    "authored_fact_cards": 61,
     "original_quotes": 2,
     "full_text_admission": false,
     "legal_basis": "GK1259(5) authored facts; GK1274(1)(1) two purpose-specific KR citations",
-    "legal_review": "evidence/S17J02B/rights-decision.md",
-    "commit_ref": "refs/tags/slice/S17J02B01"
+    "legal_review": "evidence/S17J02B02/rights-decision.md",
+    "commit_ref": "refs/tags/slice/S17J02B02",
+    "legacy_legal_reviews": [
+      "evidence/S17J02B/rights-decision.md",
+      "evidence/S17J02/legal-resolution/research.md"
+    ]
   },
   "latest_coverage_scope": {
     "slice": "S17J02A",
@@ -464,5 +468,19 @@
     "sufficient_cells": 0,
     "clinical_validation": false,
     "coverage_status": "NOT_READY"
+  },
+  "latest_primary_admission": {
+    "slice": "S17J02B02",
+    "source_review": "evidence/S17J02B02/source-review.json",
+    "admission_checks": "evidence/S17J02B02/admission-checks.json",
+    "policy_registry": "data/retrieval/hac-policy-registry.json",
+    "primary_sources": 6,
+    "new_authored_facts": 12,
+    "policy_records": 45,
+    "policy_bindings": 90,
+    "tested_existing_policy_records": 4,
+    "documented_constraints": 41,
+    "clinical_validation": false,
+    "commit_ref": "refs/tags/slice/S17J02B02"
   }
 }

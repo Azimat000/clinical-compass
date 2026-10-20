@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "uncertainty",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Неопределённость и пробелы сохраняются явно, без замены наиболее вероятным вариантом.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D09-depression-substances",
+      "aspect": "uncertainty",
+      "requirement_sha256": "b768154fbca8cb8c35db442ab2cfcad75d057fb5214d35e778d9436b59434d48"
+    },
+    {
+      "unit_id": "D09-generalized_anxiety_disorder-substances",
+      "aspect": "uncertainty",
+      "requirement_sha256": "2494b4f9ba30dd216d496628eb3989617d25ced7fe45f554cbe3ad4ea9276792"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:uncertainty"
+    }
+  ],
+  "verification": null
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "comparable_measurements",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Сопоставляют только измерения одной точной формы, версии, ключа и источника. Разные серии не объединяются автоматически.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D02-depression-trajectory",
+      "aspect": "comparable_measurements",
+      "requirement_sha256": "fe334f8c45aaa37b6d62a13fa8cbc92c56e4f72832b9d84bad08907c2b602ae4"
+    },
+    {
+      "unit_id": "D02-generalized_anxiety_disorder-trajectory",
+      "aspect": "comparable_measurements",
+      "requirement_sha256": "f77757d66a58a6dcda8046f17ca1bc2100e665ffcfd680fb4814ffd75140ea6a"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:comparable_measurements"
+    }
+  ],
+  "verification": null
+}

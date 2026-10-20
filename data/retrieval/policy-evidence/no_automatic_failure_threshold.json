@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_automatic_failure_threshold",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Недостаточный эффект не определяется программным порогом DASS или таймером без врачебного контекста.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D03-depression-effect",
+      "aspect": "no_automatic_failure_threshold",
+      "requirement_sha256": "572bca2369128b57c16bef2e908375bcff0f15ff9fa9c8be1e883b4702066534"
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-effect",
+      "aspect": "no_automatic_failure_threshold",
+      "requirement_sha256": "dd0ad61550ec290a464e6a373d176ac0a8a4339ccb2dbd181138c4e6ae6b57a9"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_automatic_failure_threshold"
+    }
+  ],
+  "verification": null
+}

@@ -7,6 +7,10 @@ import unittest
 
 from apps.tests import test_retrieval_packages as fixtures
 from apps.compass.retrieval_corpus import CorpusError, digest, moment, publish_snapshot, sha
+from apps.tests.test_retrieval_primary import make_primary
+from apps.compass.retrieval_primary import PREFIX
+from apps.compass.retrieval_policies import aspect_mode, instrument_requirements
+from test_retrieval_policies import install_policy_fixture
 from check_retrieval_coverage import (ROOT, MATRIX, MEDICATIONS, FREEZE, EVIDENCE,
                                      assess, card_catalog, scope, validate_review)
 
@@ -26,7 +30,9 @@ class CoverageTests(unittest.TestCase):
                 registration=target.get('registration','ARTIFICIAL-'+med['id']),form=target.get('form','Artificial tablet'),
                 strength=target.get('strengths',['Artificial strength'])[0],route=target.get('route','Artificial oral route'),official_url='https://grls.rosminzdrav.ru/artificial')
         fixtures.save(self.root,'data/retrieval/packages/NEW/registry.json',dict(schema_version=1,sources=self.records))
-        fixtures.policy(self.root,['NEW'])
+        self.primary=make_primary(self.root)
+        self.policy_refs=install_policy_fixture(self.root,self.frozen,self.units)
+        fixtures.policy(self.root,['NEW','DASS42'])
         self.refresh_snapshot()
         self.evidence=json.loads((self.root/EVIDENCE).read_text())
 
@@ -46,11 +52,22 @@ class CoverageTests(unittest.TestCase):
         ref=dict(document_id=item['document_id'],fragment_id=fragment['fragment_id'],page=fragment['page'],
                  section=fragment['section'],source_version=item['source_version'],source_sha256=item['sha256'],
                  artifact_sha256=item['artifact_sha256'],fragment_sha256=digest(fragment))
-        report=dict(schema_version=1,scope_version=self.frozen['scope_version'],unit_id=uid,
+        report=dict(schema_version=2,scope_version=self.frozen['scope_version'],unit_id=uid,
             requirement_sha256=digest(unit['requirement']),verdict='sufficient',reviewer='Artificial reviewer',
             origin='Artificial tests, not medical approval',sufficiency_explanation='Artificial structure fixture only',
             checked_at='2026-10-20T22:00:00+03:00',review_due_at='2026-10-21T22:00:00+03:00',
-            aspects={a:[deepcopy(ref)] for a in unit['aspects']})
+            aspects={})
+        for a in unit['aspects']:
+            mode=aspect_mode(unit,a)
+            refs=[] if mode=='policy' else [deepcopy(ref)]
+            required=instrument_requirements(unit,a)
+            if required is not None:
+                refs=[]
+                for primary in self.primary:
+                    if primary['document_id'] not in required:continue
+                    f=json.loads((self.root/primary['artifact_path']).read_text())['fragments'][0]
+                    refs.append(dict(document_id=primary['document_id'],fragment_id=f['fragment_id'],page=f['page'],section=f['section'],source_version=primary['source_version'],source_sha256=primary['sha256'],artifact_sha256=primary['artifact_sha256'],fragment_sha256=digest(f)))
+            report['aspects'][a]=dict(source_references=refs,policy_references=[deepcopy(self.policy_refs[a])] if mode!='clinical' else [])
         if unit['kind']=='dossier':report['medication_identity']=deepcopy(item['medication_identity'])
         if uid.endswith('/safety_updates_and_version_status'):
             report['safety_check']=dict(checked_sources=['https://grls.rosminzdrav.ru/','https://roszdravnadzor.gov.ru/'],
@@ -110,7 +127,7 @@ class CoverageTests(unittest.TestCase):
         uid=next(iter(self.units));original=self.report_for(uid);aspect=next(iter(original['aspects']))
         for field,value in [('page',999),('source_version','wrong'),('source_sha256','0'*64),('fragment_sha256','0'*64),('fragment_id','missing')]:
             with self.subTest(field=field):
-                report=deepcopy(original);report['aspects'][aspect][0][field]=value;self.put_report(uid,report)
+                report=deepcopy(original);report['aspects'][aspect]['source_references'][0][field]=value;self.put_report(uid,report)
                 self.assertEqual(self.result()['counts']['cells']['complete'],0)
                 self.assertTrue(self.result()['gaps'][0]['reason'].startswith('reference_'))
 
@@ -157,7 +174,7 @@ class CoverageTests(unittest.TestCase):
         item=extra[0];item['medication_identity']=deepcopy(self.records[0]['medication_identity'])
         item['medication_identity']['strength']=med['registration_targets'][0]['strengths'][1]
         fixtures.save(self.root,'data/retrieval/packages/NEXT/registry.json',dict(schema_version=1,sources=extra))
-        fixtures.policy(self.root,['NEW','NEXT'])
+        fixtures.policy(self.root,['NEW','NEXT','DASS42'])
         self.refresh_snapshot()
         uid=med['id']+'/'+self.meds['required_sections'][0]
         report=self.report_for(uid);report['medication_identity']=item['medication_identity']
@@ -165,7 +182,7 @@ class CoverageTests(unittest.TestCase):
         ref=dict(document_id=item['document_id'],fragment_id=fragment['fragment_id'],page=fragment['page'],
             section=fragment['section'],source_version=item['source_version'],source_sha256=item['sha256'],
             artifact_sha256=item['artifact_sha256'],fragment_sha256=digest(fragment))
-        report['aspects']={a:[deepcopy(ref)] for a in report['aspects']};self.put_report(uid,report)
+        report['aspects']={a:dict(source_references=[deepcopy(ref)],policy_references=[]) for a in report['aspects']};self.put_report(uid,report)
         result=self.result()
         self.assertEqual(result['status'],'NOT_READY')
         self.assertEqual(result['counts']['medications']['complete'],8)
@@ -187,6 +204,45 @@ class CoverageTests(unittest.TestCase):
         for item,fragment in catalog.values():item['document_type']='patient_leaflet'
         with self.assertRaisesRegex(CorpusError,'professional_dossier_source_missing'):
             validate_review(self.root,uid,self.units[uid],self.evidence['units'][uid],catalog,self.frozen,moment(fixtures.AT))
+
+    def test_policy_only_cannot_be_filled_with_a_clinical_card(self):
+        uid='D02-depression-symptoms';r=self.report_for(uid)
+        r['aspects']['missing_data']=deepcopy(r['aspects']['symptoms'])
+        self.put_report(uid,r)
+        self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'policy_must_have_separate_origin')
+
+    def test_mixed_instrument_aspect_requires_both_origins(self):
+        uid='D12-depression-scale_interpretation';original=self.report_for(uid)
+        for key in ['source_references','policy_references']:
+            r=deepcopy(original);r['aspects']['three_separate_scores_for_physician'][key]=[];self.put_report(uid,r)
+            self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'mixed_evidence_requires_both_origins')
+
+    def test_DASS_sources_cannot_replace_medication_or_other_clinical_knowledge(self):
+        uid='D02-depression-symptoms';r=self.report_for(uid)
+        dass=self.report_for('D12-depression-scale_identity')['aspects']['recall_period']['source_references']
+        r['aspects']['symptoms']['source_references']=dass;self.put_report(uid,r)
+        self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'primary_source_scope_mismatch')
+
+    def test_KR_cannot_masquerade_as_exact_DASS_validation(self):
+        uid='D12-depression-scale_identity';r=self.report_for(uid)
+        old=self.report_for('D02-depression-symptoms')['aspects']['symptoms']['source_references']
+        r['aspects']['validation_population']['source_references']=old;self.put_report(uid,r)
+        self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'exact_instrument_primary_source_missing')
+
+    def test_same_age_aspect_in_FU08_cannot_use_DASS_source_or_policy(self):
+        uid='D01-generalized_anxiety_disorder-FU08';original=self.report_for(uid)
+        dass=self.report_for('D12-depression-scale_identity')['aspects']['age_boundary']
+        r=deepcopy(original);r['aspects']['age_boundary']['source_references']=dass['source_references'];self.put_report(uid,r)
+        self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'primary_source_scope_mismatch')
+        r=deepcopy(original);r['aspects']['age_boundary']=dass;self.put_report(uid,r)
+        self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'policy_cannot_replace_clinical_source')
+
+    def test_v1_remains_readable_for_clinical_only_but_cannot_hide_policy_origin(self):
+        for uid,expected in [('D01-depression-context',1),('D02-depression-symptoms',0)]:
+            r=self.report_for(uid);r['schema_version']=1
+            r['aspects']={a:e['source_references'] for a,e in r['aspects'].items()};self.put_report(uid,r)
+            self.assertEqual(self.result()['counts']['cells']['complete'],expected)
+            self.evidence['units'].clear()
 
 
 if __name__ == '__main__':unittest.main()

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_diagnosis_from_question",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Формулировка вопроса пациента сама по себе не подтверждает диагноз.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D09-depression-differential",
+      "aspect": "no_diagnosis_from_question",
+      "requirement_sha256": "d742561e7c9e7e9f2c305b9fd00f982eeec363c6a3c1f94c9d4538ef564283ed"
+    },
+    {
+      "unit_id": "D09-generalized_anxiety_disorder-differential",
+      "aspect": "no_diagnosis_from_question",
+      "requirement_sha256": "3c3f24709278f845dd499802c4bef68c6607d1c5e46f11de0e3284a0a131e1d9"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_diagnosis_from_question"
+    }
+  ],
+  "verification": null
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_absence_of_risk_claim",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Пустой результат поиска взаимодействий не означает отсутствия риска.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D06-depression-uncertain_combination",
+      "aspect": "no_absence_of_risk_claim",
+      "requirement_sha256": "f9a6a57b8b2f85fcd342bda91c02349a1698b8c80ed8c907c471d061082e57fc"
+    },
+    {
+      "unit_id": "D06-generalized_anxiety_disorder-uncertain_combination",
+      "aspect": "no_absence_of_risk_claim",
+      "requirement_sha256": "3e4560b7df0d4f139ea8fff26c7c143f450c762112d9816c3f69cc5f46451a67"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_absence_of_risk_claim"
+    }
+  ],
+  "verification": null
+}

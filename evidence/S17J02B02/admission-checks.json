@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-20T21:52:29.098220+00:00",
+  "admitted_sources": 9,
+  "primary_sources": 6,
+  "new_authored_facts": 12,
+  "indexable_authored_facts": 61,
+  "new_original_copies": 0,
+  "new_quotes": 0,
+  "receipt_kind": "verified acquisition metadata, not retained source text",
+  "verified_TLS": true,
+  "repeat_same_snapshot": true,
+  "old_snapshot_preserved": true,
+  "old_three_source_records_unchanged": true,
+  "policy_records": 45,
+  "policy_bindings": 90,
+  "tested_existing_policy_records": 4,
+  "documented_constraints": 41,
+  "policy_validation": "All90actualbindings revalidated, including code/tests/results for4records",
+  "policy_not_in_clinical_index": true,
+  "source_revocation_expiry_receipt_and_pin_tamper_refused": true,
+  "drug_age_cannot_use_DASS": true,
+  "snapshot": "var/retrieval/1230a69cdfbee338e039c4b1af0fbe7f30432824ac57d1865a4a60bc9680b14e",
+  "corpus_version": "1230a69cdfbee338e039c4b1af0fbe7f30432824ac57d1865a4a60bc9680b14e",
+  "coverage_gate": "NOT_READY",
+  "clinical_approval": false,
+  "preservation": {
+    "unexpected_changes": [],
+    "pre_existing_user_files_preserved": [
+      "evidence/audits/2026-10-20-cycles/checks.log",
+      "evidence/audits/2026-10-20-cycles/external-check.md",
+      "evidence/audits/2026-10-20-cycles/results.json",
+      "tools/run_synthetic_cycles.py"
+    ],
+    "protected_files": [
+      "data/retrieval/coverage-matrix.json",
+      "data/retrieval/planned-medications.json",
+      "data/retrieval/coverage-freeze.json",
+      "data/retrieval/coverage-evidence.json",
+      "apps/compass/resources/dass42-ru-v1.json",
+      "apps/requirements.lock",
+      "data/retrieval/source-registry.json"
+    ],
+    "other_slice_statuses_unchanged": true,
+    "requirements_statuses_subchecks_unchanged": true
+  }
+}

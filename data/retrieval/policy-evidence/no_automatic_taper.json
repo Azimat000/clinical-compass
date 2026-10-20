@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "no_automatic_taper",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Поиск не формирует персональную схему снижения дозы или прекращения курса.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D07-depression-discontinuation",
+      "aspect": "no_automatic_taper",
+      "requirement_sha256": "3a7999730838030950498bc1349b120a57143c95c0a8bf34266ab23b60fd1a83"
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-discontinuation",
+      "aspect": "no_automatic_taper",
+      "requirement_sha256": "80e161e7e857df4a107022f72e2ed469a19790a57011e186e36db1e56d6cf59d"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:no_automatic_taper"
+    }
+  ],
+  "verification": null
+}

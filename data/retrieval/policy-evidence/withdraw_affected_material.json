@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "withdraw_affected_material",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Отзыв прав, срока или источника исключает затронутый материал из допустимой выдачи до повторной проверки.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D11-depression-updates",
+      "aspect": "withdraw_affected_material",
+      "requirement_sha256": "95351033c35ce86e1263273f6361f17a3c2cd562bc7ec0fb85ebf48f4dad1d05"
+    },
+    {
+      "unit_id": "D11-generalized_anxiety_disorder-updates",
+      "aspect": "withdraw_affected_material",
+      "requirement_sha256": "06239feca735b2371df3084d8a0b3cc5775d76f6e0a2926f7badcae33c4f2745"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:withdraw_affected_material"
+    }
+  ],
+  "verification": null
+}

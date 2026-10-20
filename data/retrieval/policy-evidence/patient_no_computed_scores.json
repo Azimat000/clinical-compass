@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "policy_id": "patient_no_computed_scores",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "В существующем сервисе пациенту выдаётся квитанция без вычисленных сумм DASS и автоматической интерпретации; результаты доступны врачу.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "tested_existing_control",
+  "bindings": [
+    {
+      "unit_id": "D12-depression-scale_interpretation",
+      "aspect": "patient_no_computed_scores",
+      "requirement_sha256": "b26112261de98548db3788cbdaacfadfcbd5d1caf425d419d56791c5b705720c"
+    },
+    {
+      "unit_id": "D12-generalized_anxiety_disorder-scale_interpretation",
+      "aspect": "patient_no_computed_scores",
+      "requirement_sha256": "370dabd1dac43e9bb9c1d197a4ef5546dace884d7096efa97b89efc0c33c84b7"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:patient_no_computed_scores"
+    },
+    {
+      "path": "apps/compass/assessments.py",
+      "sha256": "e64babd5216ad7ddb1aade0327260cea9d7be20c77814012b70017d63f973d99",
+      "locator": "def history("
+    }
+  ],
+  "verification": {
+    "test_path": "apps/tests/test_assessments.py",
+    "test_sha256": "b06f5ccb98916a01b581d0101c32eec6297f5be60223ddf4b507bdbabeefe087",
+    "test_name": "test_full_patient_submission_doctor_results_and_patient_receipt_only",
+    "run_path": "evidence/S17J02B02/policy-control-tests.json",
+    "run_sha256": "4af576c5e5b2746b56581c81b19b6baab89178e23c59bd4b616f5cefe8f93083"
+  }
+}

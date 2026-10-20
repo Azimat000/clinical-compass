@@ -12,6 +12,8 @@ sys.path.insert(0, str(ROOT))
 from apps.compass.retrieval_corpus import (CorpusError, digest, eligible_sources,
     local_file, moment, reference_reasons, sha)
 from apps.compass.retrieval_packages import package_registry
+from apps.compass.retrieval_policies import (aspect_mode, validate_policy_reference, instrument_requirements)
+from apps.compass.retrieval_primary import TYPES as PRIMARY_TYPES
 
 MATRIX = 'data/retrieval/coverage-matrix.json'
 MEDICATIONS = 'data/retrieval/planned-medications.json'
@@ -135,7 +137,7 @@ def validate_review(root, unit_id, unit, pointer, catalog, frozen, at):
         fields.add('medication_identity')
         if unit_id.endswith('/safety_updates_and_version_status'):
             fields.add('safety_check')
-    if not isinstance(review, dict) or set(review) != fields or review['schema_version'] != 1:
+    if not isinstance(review, dict) or set(review) != fields or review['schema_version'] not in (1, 2):
         raise CorpusError('review_schema')
     if review['scope_version'] != frozen['scope_version'] or review['unit_id'] != unit_id or review['requirement_sha256'] != digest(unit['requirement']):
         raise CorpusError('review_requirement_mismatch')
@@ -158,9 +160,27 @@ def validate_review(root, unit_id, unit, pointer, catalog, frozen, at):
         if targets and not any(all(identity[k] == t[k] for k in ('registration', 'form', 'trade_name')) and identity['strength'] in t['strengths'] and identity['route'] == t['route'] for t in targets):
             raise CorpusError('medication_target_mismatch')
     professional_source = False
-    for refs in review['aspects'].values():
-        if not isinstance(refs, list) or not refs:
+    for aspect, evidence in review['aspects'].items():
+        mode = aspect_mode(unit, aspect)
+        if review['schema_version'] == 1:
+            if mode != 'clinical':
+                raise CorpusError('separate_policy_evidence_required')
+            refs, policies = evidence, []
+        else:
+            if not isinstance(evidence, dict) or set(evidence) != {'source_references', 'policy_references'}:
+                raise CorpusError('aspect_evidence_schema')
+            refs, policies = evidence['source_references'], evidence['policy_references']
+        if not isinstance(refs, list) or not isinstance(policies, list):
             raise CorpusError('aspect_reference_missing')
+        if mode == 'clinical' and (not refs or policies):
+            raise CorpusError('policy_cannot_replace_clinical_source')
+        if mode == 'policy' and (refs or not policies):
+            raise CorpusError('policy_must_have_separate_origin')
+        if mode == 'mixed' and (not refs or not policies):
+            raise CorpusError('mixed_evidence_requires_both_origins')
+        for policy in policies:
+            validate_policy_reference(root, policy, unit_id, unit, aspect, frozen, at)
+        seen_sources = set()
         for ref in refs:
             if not isinstance(ref, dict) or set(ref) != {'document_id', 'fragment_id', 'page', 'section', 'source_version', 'source_sha256', 'artifact_sha256', 'fragment_sha256'}:
                 raise CorpusError('reference_schema')
@@ -170,9 +190,15 @@ def validate_review(root, unit_id, unit, pointer, catalog, frozen, at):
             item, fragment = pair
             if ref['source_sha256'] != item['sha256'] or ref['artifact_sha256'] != item['artifact_sha256'] or ref['source_version'] != item['source_version'] or ref['fragment_sha256'] != digest(fragment) or ref['page'] != fragment['page'] or ref['section'] != fragment['section']:
                 raise CorpusError('reference_coordinates_or_version_mismatch')
+            if item['document_type'] in PRIMARY_TYPES and instrument_requirements(unit, aspect) is None:
+                raise CorpusError('primary_source_scope_mismatch')
             if identity is not None and (item.get('medication_identity') != identity or item['document_type'] not in {'patient_leaflet', 'medication_instruction', 'sm_pc', 'safety_update'}):
                 raise CorpusError('dossier_source_identity_mismatch')
             professional_source |= item['document_type'] in {'medication_instruction', 'sm_pc'}
+            seen_sources.add(item['document_id'])
+        required_primary = instrument_requirements(unit, aspect)
+        if required_primary is not None and not required_primary <= seen_sources:
+            raise CorpusError('exact_instrument_primary_source_missing')
     if identity is not None and not professional_source:
         raise CorpusError('professional_dossier_source_missing')
     if unit_id.endswith('/safety_updates_and_version_status'):

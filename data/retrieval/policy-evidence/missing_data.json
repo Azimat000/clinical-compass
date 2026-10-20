@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "missing_data",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Пустое поле не означает отсутствия симптома или риска. Для пропущенного ответа нельзя подставлять ноль.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D02-depression-symptoms",
+      "aspect": "missing_data",
+      "requirement_sha256": "9beecb231c66962ff49a968dde071c48564fc79fd40d06b4b6b58f200ed450fe"
+    },
+    {
+      "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+      "aspect": "missing_data",
+      "requirement_sha256": "c4b9e9708c0a0fe231c9ad372264b60d7743355fd84a30ec726b294bc55d095b"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:missing_data"
+    }
+  ],
+  "verification": null
+}

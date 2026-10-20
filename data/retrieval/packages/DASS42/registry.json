@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "policy_version": "corpus-admission-primary-receipts-1",
+  "sources": [
+    {
+      "document_id": "DASS42_RU_FORM",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_RU_FORM.receipt.json",
+      "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+      "publisher": "Официальный сайт DASS, UNSW",
+      "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+      "document_type": "instrument_form",
+      "source_version": "DASS-42; перевод Фаттахов–Горобец,2024; exact-PDF-5d3fa16c",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_RU_FORM-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:47.102091+00:00",
+      "review_due_at": "2026-10-21T21:32:47.102091+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_RU_FORM.cards.json",
+      "artifact_sha256": "919db845f54d5458f98f31ef93e5f8cc407ff3abafba18bbe4a2fe62466fc72f",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "pdf_page",
+      "byte_length": 478406,
+      "media_type": "application/pdf",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_RU_FORM-F01",
+            "DASS42_RU_FORM-F02"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "919db845f54d5458f98f31ef93e5f8cc407ff3abafba18bbe4a2fe62466fc72f",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+        "document_type": "instrument_form",
+        "source_version": "DASS-42; перевод Фаттахов–Горобец,2024; exact-PDF-5d3fa16c",
+        "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+        "publisher": "Официальный сайт DASS, UNSW",
+        "checked_at": "2026-10-20T21:32:47.102091+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "354ad18d11f5417baf8a8a84429b87722cd395276e4f9987d38c000d1a8240b6"
+    },
+    {
+      "document_id": "DASS42_EN_KEY",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_EN_KEY.receipt.json",
+      "sha256": "5ceafc6731340b382bdd6eea256ea5f394dfe9897440615911f2cef84a977892",
+      "publisher": "Официальный сайт DASS, UNSW",
+      "source_url": "https://dass.psy.unsw.edu.au/Download%20files/Dass_template.pdf",
+      "document_type": "instrument_key",
+      "source_version": "UNSW DASS template; exact-PDF-5ceafc67",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_EN_KEY-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:48.824516+00:00",
+      "review_due_at": "2026-10-21T21:32:48.824516+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_EN_KEY.cards.json",
+      "artifact_sha256": "bdf537565b416a72e99208cf0a3efcb31d5fe3c54dc524cdbbc0d388570a2dec",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "pdf_page",
+      "byte_length": 15550,
+      "media_type": "application/pdf",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_EN_KEY-F01",
+            "DASS42_EN_KEY-F02"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "bdf537565b416a72e99208cf0a3efcb31d5fe3c54dc524cdbbc0d388570a2dec",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "5ceafc6731340b382bdd6eea256ea5f394dfe9897440615911f2cef84a977892",
+        "document_type": "instrument_key",
+        "source_version": "UNSW DASS template; exact-PDF-5ceafc67",
+        "source_url": "https://dass.psy.unsw.edu.au/Download%20files/Dass_template.pdf",
+        "publisher": "Официальный сайт DASS, UNSW",
+        "checked_at": "2026-10-20T21:32:48.824516+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "a4651244dbf265d089edaeb5c88b789af573065091e4b06dab3f0e39ed514511"
+    },
+    {
+      "document_id": "DASS42_RU_TRANSLATION",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_RU_TRANSLATION.receipt.json",
+      "sha256": "2678f43db388d18dcc0e071e7bdbf8fd3eef16a30b653d6f511f12473b3fd21f",
+      "publisher": "Официальный сайт DASS, UNSW",
+      "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov%20Russian.htm",
+      "document_type": "instrument_provenance",
+      "source_version": "Перевод Фаттахова и коллег, официальная страница UNSW; acquisition-2026-10-21",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_RU_TRANSLATION-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:44.277931+00:00",
+      "review_due_at": "2026-10-21T21:32:44.277931+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_RU_TRANSLATION.cards.json",
+      "artifact_sha256": "5031048731373faec98307ad6b45ba569ea8bbd336b456926fdb6a0a78c46f60",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "html_section",
+      "byte_length": 42572,
+      "media_type": "text/html",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_RU_TRANSLATION-F01"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "5031048731373faec98307ad6b45ba569ea8bbd336b456926fdb6a0a78c46f60",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "2678f43db388d18dcc0e071e7bdbf8fd3eef16a30b653d6f511f12473b3fd21f",
+        "document_type": "instrument_provenance",
+        "source_version": "Перевод Фаттахова и коллег, официальная страница UNSW; acquisition-2026-10-21",
+        "source_url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov%20Russian.htm",
+        "publisher": "Официальный сайт DASS, UNSW",
+        "checked_at": "2026-10-20T21:32:44.277931+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "596548a1e435ec7ef5007bbcc5d0a9000047a312e93d25a6ff0ac06777220da2"
+    },
+    {
+      "document_id": "DASS42_GUIDANCE",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_GUIDANCE.receipt.json",
+      "sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+      "publisher": "Официальный сайт DASS, UNSW",
+      "source_url": "https://dass.psy.unsw.edu.au/DASSFAQ.htm",
+      "document_type": "instrument_guidance",
+      "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_GUIDANCE-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:50.871039+00:00",
+      "review_due_at": "2026-10-21T21:32:50.871039+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_GUIDANCE.cards.json",
+      "artifact_sha256": "7a855d0d2aa298192214e044c48c09e37bb48a8845eb9ed012266a625d92a272",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "html_section",
+      "byte_length": 98485,
+      "media_type": "text/html",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_GUIDANCE-F01",
+            "DASS42_GUIDANCE-F02",
+            "DASS42_GUIDANCE-F03",
+            "DASS42_GUIDANCE-F04"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "7a855d0d2aa298192214e044c48c09e37bb48a8845eb9ed012266a625d92a272",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+        "document_type": "instrument_guidance",
+        "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+        "source_url": "https://dass.psy.unsw.edu.au/DASSFAQ.htm",
+        "publisher": "Официальный сайт DASS, UNSW",
+        "checked_at": "2026-10-20T21:32:50.871039+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "4cd0d8748fcdefea65f1af8f3769e179402a11d959908ebae305d1c819bf299f"
+    },
+    {
+      "document_id": "DASS42_DOWNLOAD_TERMS",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_DOWNLOAD_TERMS.receipt.json",
+      "sha256": "0afb51a8737cc9c895ebfdf01d5ff37e7541d6d2ff68a30ab8a32fbbe554bd39",
+      "publisher": "Официальный сайт DASS, UNSW",
+      "source_url": "https://dass.psy.unsw.edu.au/down.htm",
+      "document_type": "instrument_terms",
+      "source_version": "UNSW DASS download terms; acquisition-2026-10-21-0afb51a8",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_DOWNLOAD_TERMS-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:52.840601+00:00",
+      "review_due_at": "2026-10-21T21:32:52.840601+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_DOWNLOAD_TERMS.cards.json",
+      "artifact_sha256": "e6f0d1673be9b90060c83480017229cda159f91c61092a38624c0b29f79fcc00",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "html_section",
+      "byte_length": 42252,
+      "media_type": "text/html",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_DOWNLOAD_TERMS-F01"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "e6f0d1673be9b90060c83480017229cda159f91c61092a38624c0b29f79fcc00",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "0afb51a8737cc9c895ebfdf01d5ff37e7541d6d2ff68a30ab8a32fbbe554bd39",
+        "document_type": "instrument_terms",
+        "source_version": "UNSW DASS download terms; acquisition-2026-10-21-0afb51a8",
+        "source_url": "https://dass.psy.unsw.edu.au/down.htm",
+        "publisher": "Официальный сайт DASS, UNSW",
+        "checked_at": "2026-10-20T21:32:52.840601+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "9e457eaf7a2d5765800f63a28e67fa19f2271b83105373386cc305a209a100e9"
+    },
+    {
+      "document_id": "DASS42_RU_VALIDATION_2025",
+      "document_family": "DASS42",
+      "path": "data/retrieval/packages/DASS42/DASS42_RU_VALIDATION_2025.receipt.json",
+      "sha256": "26816da0c47c02e14bd8bd0479688e00dfe4d1bcc7181771f58adb4d86b94d17",
+      "publisher": "Медиасфера — страница публикации",
+      "source_url": "https://www.mediasphera.ru/issues/zhurnal-nevrologii-i-psikhiatrii-im-s-s-korsakova/2025/5/1199772982025051103",
+      "document_type": "validation_study",
+      "source_version": "2025;125(5):103–107; DOI10.17116/jnevro2025125051103; HTML acquisition-2026-10-21",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B02-DASS42_RU_VALIDATION_2025-facts-1",
+      "decision_origin": "Exact publisher primary source; verified TLS acquisition+SHA; authored fact cards only under separate scoped review, not fulltext licence or clinical approval",
+      "verified_at": "2026-10-20T21:32:53.681713+00:00",
+      "review_due_at": "2026-10-21T21:32:53.681713+00:00",
+      "population": {
+        "verified": true,
+        "text": "Instrument/study metadata only; Russian study age unknown; FAQ general14+ distinct from HAC demo18–120; not personal clinical applicability",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "DASS-42 source/form/key/validation/rights reference only; no diagnosis, medication indication or dosing",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ]
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/DASS42/DASS42_RU_VALIDATION_2025.cards.json",
+      "artifact_sha256": "82945be3aacddbfb3dd58e167ed5bf2e373b2470f2aa9543a47ccf3e012f561c",
+      "original_storage": "verified_primary_receipt",
+      "locator_kind": "html_section",
+      "byte_length": 264960,
+      "media_type": "text/html",
+      "full_text_rights": {
+        "status": "not_admitted",
+        "scopes": [],
+        "limitation": "No original PDF/HTML/article/key/questions retained in retrieval corpus. Reproduction of existing exact form in app remains separately governed by S07."
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B02/rights-decision.md",
+          "evidence/S17J02B02/content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS",
+          "fragment_ids": [
+            "DASS42_RU_VALIDATION_2025-F01",
+            "DASS42_RU_VALIDATION_2025-F02"
+          ],
+          "quoted_characters": 0,
+          "artifact_sha256": "82945be3aacddbfb3dd58e167ed5bf2e373b2470f2aa9543a47ccf3e012f561c",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "record_path": "evidence/S17J02B02/content-review.json"
+        },
+        "limitation": "Exact independently authored facts only, no original quotes/fulltexts/keys. New source/claim/representation requires explicit new review.",
+        "evidence_sha256": {
+          "evidence/S17J02B02/rights-decision.md": "fc2953ce7fa5cfa6a04d57c0bf6a623c3387f902080cf4b13585eb8ead756709",
+          "evidence/S17J02B02/content-review.json": "515b03f5aaff5ba7ce2e0f55b7926b4c121775cc1d6d070d96396c5995db73b1"
+        }
+      },
+      "verification": {
+        "sha256": "26816da0c47c02e14bd8bd0479688e00dfe4d1bcc7181771f58adb4d86b94d17",
+        "document_type": "validation_study",
+        "source_version": "2025;125(5):103–107; DOI10.17116/jnevro2025125051103; HTML acquisition-2026-10-21",
+        "source_url": "https://www.mediasphera.ru/issues/zhurnal-nevrologii-i-psikhiatrii-im-s-s-korsakova/2025/5/1199772982025051103",
+        "publisher": "Медиасфера — страница публикации",
+        "checked_at": "2026-10-20T21:32:53.681713+00:00",
+        "evidence": [
+          "evidence/S17J02B02/source-review.json"
+        ],
+        "evidence_sha256": "41678d9ea4845cff03d66a88dbb30f2b932161841fe5ab95a4da9d6284dbac14",
+        "method": "isolated read-only researcher; verified-TLS exact bytes; receipt only; exact form47/47 and key42/42 compared"
+      },
+      "receipt_sha256": "a8a7b1331a2d787f9eeb8a17dc80b2b1edee9772d9a8c1e05cda26f29279fd15"
+    }
+  ]
+}

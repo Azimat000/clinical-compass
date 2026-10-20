@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "policy_id": "physician_confirmation",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Существующие клинические действия требуют отдельного подтверждения врача. Текст в корпусе не создаёт назначения или отмены.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "tested_existing_control",
+  "bindings": [
+    {
+      "unit_id": "D07-depression-discontinuation",
+      "aspect": "physician_confirmation",
+      "requirement_sha256": "3a7999730838030950498bc1349b120a57143c95c0a8bf34266ab23b60fd1a83"
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-discontinuation",
+      "aspect": "physician_confirmation",
+      "requirement_sha256": "80e161e7e857df4a107022f72e2ed469a19790a57011e186e36db1e56d6cf59d"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:physician_confirmation"
+    },
+    {
+      "path": "apps/compass/decisions.py",
+      "sha256": "2853463ae07a0db41e9c5c9044de11f367cff74839a9b045fdc7c8a78a7851f4",
+      "locator": "def confirm("
+    }
+  ],
+  "verification": {
+    "test_path": "apps/tests/test_decisions.py",
+    "test_sha256": "ac11ecec7447caf6de366efa38f562109a7fc645168ee1f609498af7c7e81b86",
+    "test_name": "test_five_actions_draft_separate_review_and_patient_projection",
+    "run_path": "evidence/S17J02B02/policy-control-tests.json",
+    "run_sha256": "4af576c5e5b2746b56581c81b19b6baab89178e23c59bd4b616f5cefe8f93083"
+  }
+}

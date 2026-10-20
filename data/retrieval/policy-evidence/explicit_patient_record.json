@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "explicit_patient_record",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Выполнение или пропуск приёма фиксируется явной записью, а не выводится из молчания.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D07-depression-adherence",
+      "aspect": "explicit_patient_record",
+      "requirement_sha256": "3de83804109852bd636e6e1ffe180661c354483c2122fe9f26a0dab635506576"
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-adherence",
+      "aspect": "explicit_patient_record",
+      "requirement_sha256": "79f32d3ac21a7edee9be1b499a8542c3d47f86113f3c8a5f3bfed7cb2c654667"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:explicit_patient_record"
+    }
+  ],
+  "verification": null
+}

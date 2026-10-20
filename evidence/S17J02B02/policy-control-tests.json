@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checked_at": "2026-10-20T21:37:59.408357+00:00",
+  "command": "PYTHONPATH=apps/tests .venv/bin/python -m unittest apps.tests.test_assessments.AssessmentsTests.test_full_patient_submission_doctor_results_and_patient_receipt_only apps.tests.test_decisions.DecisionTests.test_five_actions_draft_separate_review_and_patient_projection -v",
+  "tests": [
+    "apps/tests/test_assessments.py::test_full_patient_submission_doctor_results_and_patient_receipt_only",
+    "apps/tests/test_decisions.py::test_five_actions_draft_separate_review_and_patient_projection"
+  ],
+  "log_path": "evidence/S17J02B02/policy-control-tests.log",
+  "log_sha256": "769d88927271c1cac287f70f4002eee1eed1e7549eb7e48307dc0fa192ee8333",
+  "limitation": "Only two existing controls tested; not RAG integration, independent clinical validation, or overall coverage readiness."
+}

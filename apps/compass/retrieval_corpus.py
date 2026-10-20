@@ -111,7 +111,10 @@ def reference_reasons(item, data):
         for fragment in fragments:
             if not isinstance(fragment, dict) or set(fragment) != {'fragment_id', 'page', 'section', 'claim_type', 'paraphrase', 'quote', 'required_context', 'purpose', 'volume_justification'}:
                 return ['citation_fragment_schema']
-            if type(fragment['page']) is not int or fragment['page'] < 1 or not all(isinstance(fragment[k], str) and fragment[k].strip() for k in ('fragment_id', 'section', 'paraphrase', 'purpose', 'volume_justification')):
+            from .retrieval_primary import is_primary, locator_kind
+            html_locator = is_primary(item) and locator_kind(item) == 'html_section'
+            page_valid = fragment['page'] is None if html_locator else type(fragment['page']) is int and fragment['page'] > 0
+            if not page_valid or not all(isinstance(fragment[k], str) and fragment[k].strip() for k in ('fragment_id', 'section', 'paraphrase', 'purpose', 'volume_justification')):
                 return ['citation_fragment_schema']
             if not isinstance(fragment['required_context'], list) or not all(isinstance(v, str) and v.strip() for v in fragment['required_context']):
                 return ['citation_context_schema']
@@ -127,6 +130,9 @@ def reference_reasons(item, data):
         review = item['rights']['content_review']
         if not isinstance(review, dict):
             return ['citation_rights_unverified']
+        from .retrieval_primary import is_primary
+        if is_primary(item) and any(f['claim_type'] != 'fact' for f in fragments):
+            return ['primary_quotes_not_allowed']
         if sum(f['claim_type'] == 'fact_with_quote' for f in fragments) > 1:
             return ['citation_collection_limit']
         total = sum(len(f['quote'] or '') + sum(len(c) for c in f['required_context']) for f in fragments)
@@ -180,6 +186,16 @@ def admission_reasons(item, at, *, evidence_root=PROJECT_ROOT):
         official_url = isinstance(document_type, str) and url.scheme == 'https' and url.hostname in OFFICIAL_HOSTS.get(document_type, set()) and url.username is None and url.password is None
     except (TypeError, ValueError):
         official_url = False
+    from .retrieval_primary import is_primary, validate_primary
+    if is_primary(item):
+        try:
+            validate_primary(item, evidence_root)
+            official_url = True
+        except (CorpusError, OSError, ValueError, KeyError, TypeError) as exc:
+            official_url = False
+            reasons.append('primary_admission:' + str(exc))
+    elif item.get('original_storage') is not None:
+        reasons.append('original_storage_not_allowed')
     if not official_url:
         reasons.append('official_url_missing')
     if item.get('official_origin_verified') is not True:
@@ -270,9 +286,15 @@ def build_manifest(root, registry, at, *, archive=False, allowlist=None, referen
         reasons = admission_reasons(item, at, evidence_root=root)
         data = None
         try:
-            data = local_bytes(root, item['path'], allowlist)
-            if sha(data) != item['sha256']:
-                raise CorpusError('sha_mismatch')
+            from .retrieval_primary import is_primary, validate_primary
+            if is_primary(item):
+                if item['path'] not in allowlist:
+                    raise CorpusError('path_not_allowed')
+                data = validate_primary(item, root)
+            else:
+                data = local_bytes(root, item['path'], allowlist)
+                if sha(data) != item['sha256']:
+                    raise CorpusError('sha_mismatch')
             if allowlist[item['path']] != item.get('document_type'):
                 raise CorpusError('document_type_mismatch')
             if item.get('representation') == 'reviewed_cards':

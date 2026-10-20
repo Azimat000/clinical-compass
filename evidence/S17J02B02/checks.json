@@ -1,0 +1,111 @@
+{
+  "main_agent_executed": true,
+  "checked_at": "2026-10-20T21:49:52.053259+00:00",
+  "commands": [
+    {
+      "command": ".venv/bin/python -m unittest apps.tests.test_retrieval_corpus apps.tests.test_retrieval_packages",
+      "exit_code": 0,
+      "result": "102 legacy admission tests PASS",
+      "log": "legacy-admission-tests.log"
+    },
+    {
+      "command": ".venv/bin/python -m unittest apps.tests.test_retrieval_primary -v",
+      "exit_code": 0,
+      "result": "7 narrow-primary negative/positive tests PASS",
+      "log": "primary-tests.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools -p 'test_retrieval_*.py' -v",
+      "exit_code": 0,
+      "result": "51 current coverage/policy/evaluator tests PASS",
+      "log": "coverage-policy-tests.log"
+    },
+    {
+      "command": "selected existing control tests (first invocation)",
+      "exit_code": 1,
+      "result": "Import path/class naming mistake; no product test ran, discarded as proof",
+      "log": "policy-control-invocation-error.log"
+    },
+    {
+      "command": "PYTHONPATH=apps/tests .venv/bin/python -m unittest <two exact selected tests> -v",
+      "exit_code": 0,
+      "result": "2 existing-controls tests actually run and PASS; structured proof identifies exact test selectors",
+      "log": "policy-control-tests.log"
+    },
+    {
+      "command": "make check (initial combined run)",
+      "exit_code": 0,
+      "result": "290 app tests/67 tool tests,smoke,pip check,synthetic integrity PASS before final age-name collision guard",
+      "log": "make-check-initial.log"
+    },
+    {
+      "command": "make check (final combined state)",
+      "exit_code": 0,
+      "result": "290 app tests/68 tool tests,real restart smoke,pip check,synthetic integrity PASS",
+      "log": "make-check.log"
+    },
+    {
+      "command": "python3 tools/import_retrieval_corpus.py --destination var/retrieval",
+      "exit_code": 0,
+      "result": "9 admitted sources/61 cards; only reviewed authored JSON,6 exact provenance receipts",
+      "log": "import.json"
+    },
+    {
+      "command": "python3 evidence/S17J02B02/verify.py",
+      "exit_code": 0,
+      "result": "Real repeat/history/revocation/expiry/tamper,all90policybindings/fourtestedrecords,protected files/requirements/user changes PASS",
+      "log": "verify.log"
+    },
+    {
+      "command": "python3 tools/check_retrieval_coverage.py --snapshot <exact imported snapshot> --output evidence/S17J02B02/coverage-readiness.json",
+      "exit_code": 1,
+      "result": "Expected NOT_READY:0/58,0/90,0/9;148gaps,no structural errors",
+      "log": "coverage-readiness.json"
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17J02B02",
+      "exit_code": 0,
+      "result": "51slices/29accepted/83requirements/160subchecks,next B03",
+      "log": "plan-check.log"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "result": "current null,last B02,next B03",
+      "log": "session-status.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": null
+    },
+    {
+      "command": "python3 -m unittest tools.test_retrieval_policies -v",
+      "exit_code": 1,
+      "result": "Direct module invocation missed tools import path; no product test ran; superseded by discover invocation",
+      "log": "policy-final-invocation-error.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools -p 'test_retrieval_policies.py' -v",
+      "exit_code": 0,
+      "result": "8 policy tests PASS after final whitespace correction and hash regeneration",
+      "log": "policy-final-tests.log"
+    }
+  ],
+  "logs_sha256": {
+    "legacy-admission-tests.log": "2564ae3ef61faf32bd315d1c0a201d42597e6e9077fdd283b4cf98c500b726f2",
+    "policy-control-invocation-error.log": "8f8bd271586cfdbf9c4842b466c97a722cf29f38e95eabcbee9430b06f447095",
+    "verify.log": "4383bc3479c0b7417a6ad3c88dbe7a4e74236f2b23461fea60307abed814070e",
+    "make-check-initial.log": "ee2ac33ba22baed0d22f7d8672708e51f174871a3c0fdb250f6dba565a8f69ee",
+    "plan-check.log": "21e700d18502007a2cc4c451300677f7245d28034929381626be8fa8012d9afa",
+    "coverage-policy-tests.log": "900dc732814eb615a4140dab4d58355772c94a0e673056232b768047f9aeefbb",
+    "make-check.log": "fb64f9f7d38727b03394ec6dd8e587187316768406b4fe1ab85122495ec3cdcc",
+    "primary-tests.log": "2ff8b3b99cb380b673eb0604c231cf624579e70a7514497dafe9d01ea86d4013",
+    "session-status.log": "b4207d5b55badf47f2e958c9140f730cca9ecdf773406f06e9b59c324975c701",
+    "policy-control-tests.log": "769d88927271c1cac287f70f4002eee1eed1e7549eb7e48307dc0fa192ee8333",
+    "policy-final-tests.log": "22b41fc0044b66395e78f3f90351cc78fdb1cb69a9e5b8f209cf771aae1dc649",
+    "policy-final-invocation-error.log": "ca998ddf0f1777e2c22601c46538e43afd06b3fe7dd391fa0f1fe30a5ac6f8cd"
+  },
+  "post_tag_validation": "Required after commit/tag; result recorded in tool output, not assumed in this artifact."
+}

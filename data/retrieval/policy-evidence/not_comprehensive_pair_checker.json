@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "not_comprehensive_pair_checker",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Справка не обещает полной проверки любых лекарственных сочетаний.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D06-depression-interactions",
+      "aspect": "not_comprehensive_pair_checker",
+      "requirement_sha256": "c75fe311baa3810be0be0dde19b33bc59d5701a67454e369992c3c30a1ea3d6f"
+    },
+    {
+      "unit_id": "D06-generalized_anxiety_disorder-interactions",
+      "aspect": "not_comprehensive_pair_checker",
+      "requirement_sha256": "ba60843e718893c2fc681fc413c9ab38c2fb964777fb90160ae3a87cab47e7c4"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:not_comprehensive_pair_checker"
+    }
+  ],
+  "verification": null
+}

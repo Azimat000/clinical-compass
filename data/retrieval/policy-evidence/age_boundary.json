@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "age_boundary",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Политика синтетического демо HAC: сверенный возраст18–120. Это собственная граница проекта, не возраст русской валидационной выборки; общую рекомендациюFAQ нельзя подменять ею.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D12-depression-scale_identity",
+      "aspect": "age_boundary",
+      "requirement_sha256": "74d196394603d29a53a2e3a0ea7e823e5be67f6982a80ba2ee20efe231da333d"
+    },
+    {
+      "unit_id": "D12-generalized_anxiety_disorder-scale_identity",
+      "aspect": "age_boundary",
+      "requirement_sha256": "5f31350cdba4bff0b07d37bf6225386a71377f13de0a3aea0498a7abaea13b3e"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:age_boundary"
+    }
+  ],
+  "verification": null
+}

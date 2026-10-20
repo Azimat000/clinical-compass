@@ -1,0 +1,47 @@
+{
+  "main_owner": "/root",
+  "read_only_agents": [
+    "/root/b02_dass_primary"
+  ],
+  "mutating_workers": [],
+  "owned_paths": [
+    "apps/compass/retrieval_corpus.py",
+    "apps/compass/retrieval_primary.py",
+    "apps/compass/retrieval_policies.py",
+    "apps/tests/test_retrieval_primary.py",
+    "tools/check_retrieval_coverage.py",
+    "tools/test_retrieval_coverage.py",
+    "tools/test_retrieval_policies.py",
+    "data/retrieval/primary-source-policy.json",
+    "data/retrieval/hac-policy-registry.json",
+    "data/retrieval/policy-evidence/",
+    "data/retrieval/packages/DASS42/",
+    "data/retrieval/admission-packages.json",
+    "docs/architecture/retrieval-coverage-contract.md",
+    "docs/architecture/retrieval-primary-admission.md",
+    "docs/architecture/retrieval-policy-evidence.md",
+    "evidence/S17J02B02/",
+    "memory/STATE.json",
+    "memory/DECISIONS.md",
+    "memory/BLOCKERS.md",
+    "memory/EXTERNAL.md",
+    "memory/BUDGET.json",
+    "memory/sessions/S17J02B02.md",
+    "plan/coverage.json",
+    "plan/COVERAGE.md",
+    "START_HERE.md"
+  ],
+  "forbidden_paths": [
+    "ALL_OTHER_PATHS",
+    "apps/compass/resources/dass42-ru-v1.json",
+    "data/retrieval/coverage-matrix.json",
+    "data/retrieval/planned-medications.json",
+    "data/retrieval/coverage-freeze.json",
+    "data/retrieval/coverage-evidence.json",
+    "data/retrieval/source-registry.json",
+    "data/retrieval/packages/J02B/",
+    "evidence/audits/2026-10-20-cycles/",
+    "tools/run_synthetic_cycles.py"
+  ],
+  "approved_plan": "Only B02: narrow pinned DASS primary-source provenance receipts and authored cards; no original text in index. Separately pinned policy evidence, explicit source/policy/mixed aspect modes in coverage attestations; policy cannot substitute clinical source. Tests of type/identity/hash/rights/expiry/revocation/tamper; preserve legacy imports, frozen scope and B03 sufficiency work. Main performs all writes; no separate approved implementation plan."
+}

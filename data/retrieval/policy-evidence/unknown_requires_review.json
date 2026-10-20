@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "unknown_requires_review",
+  "scope_version": "COVERAGE-1-scope-1",
+  "statement": "Неизвестная применимость в особой группе требует врачебной проверки; отсутствие сведений не даёт разрешения.",
+  "origin": "HAC_PROJECT_POLICY",
+  "reviewer": "Codex main agent: source/code/test inspection; no independent clinical approval",
+  "checked_at": "2026-10-20T21:52:03.036314+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "assurance": "documented_constraint",
+  "bindings": [
+    {
+      "unit_id": "D05-depression-special_groups",
+      "aspect": "unknown_requires_review",
+      "requirement_sha256": "f0ef1dabdb9cd2fc542e049f55b97c8b9959b13acaef118da706618895e828a8"
+    },
+    {
+      "unit_id": "D05-generalized_anxiety_disorder-special_groups",
+      "aspect": "unknown_requires_review",
+      "requirement_sha256": "61b04939510ca1029532f5846d6330b7014979dd70fb335e60d2f743f903967c"
+    }
+  ],
+  "support": [
+    {
+      "path": "docs/architecture/retrieval-policy-evidence.md",
+      "sha256": "e6ff3a93a4d43c2c20457575f2ed118cdd2f075ba2a939cda2deb4597f3c38db",
+      "locator": "## policy:unknown_requires_review"
+    }
+  ],
+  "verification": null
+}
