@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T05:20:22.380154+00:00",
+  "updated_on": "2026-10-20T18:00:36.179106+00:00",
   "current_slice": null,
   "last_accepted_slice": "S17E",
-  "next_slice": null,
+  "next_slice": "S17G",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -204,13 +204,31 @@
       "commit_ref": null,
       "handoff": "memory/sessions/S17F.md",
       "reason": null
+    },
+    "S17G": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17G.md",
+      "reason": null
+    },
+    "S17H": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17H.md",
+      "reason": null
+    },
+    "S17I": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17I.md",
+      "reason": null
     }
   },
   "latest_audit": {
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "S17E принят: четыре шага/два кабинета и реальные технические до/после; отчёт memory/sessions/S17E.md. Следующего готового независимого среза нет. S17D blocked без тега до фактического клинического заключения точной версии и источников, затем реализация/полные испытания. S17F ждёт D/E; S18 ждёт S17/S17F. B17/E02/E06 и организационные блокеры остаются; S16/S17A не возвращать.",
+    "next_action": "После встречи 20.10 следующий независимый S17G: предварительный показ психиатр→пациент дома, без клинической активации. Далее S17H/I, S17F ждёт D/E/I; S17/S17D и E02/E06 остаются blocked/неподтверждёнными.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
@@ -257,5 +275,21 @@
     "E06_conditional_shortfall": 9,
     "official_weights_known": false,
     "next_action": "S17/S17D remain blocked; S17F/S18 not accepted. Future technical improvements require scoped work, new blind corpora/endurance/large histories/backup scheduling; real clinical review/trial and closed conditions need factual evidence."
+  },
+  "latest_curator_update": {
+    "source_date": "2026-10-20",
+    "report": "memory/sessions/curator-2026-10-20.md",
+    "register": "plan/curator-followup.json",
+    "source_sha256": "2c3ce8f7ba835b6970ec244dd391a0873fd86c34ba234dcaa13b68fab882db6e",
+    "planning_ref": "refs/tags/plan/curator-2026-10-20",
+    "audio_verified": false,
+    "next_meeting_from_transcript": "2026-10-21 15:30 Europe/Moscow",
+    "new_slices": [
+      "S17G",
+      "S17H",
+      "S17I"
+    ],
+    "status": "planning_only",
+    "next_action": "Подготовить только S17G в новой сессии; S17/S17D blocked, S17H/I/F/S18 не приняты."
   }
 }
