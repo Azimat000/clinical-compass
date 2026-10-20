@@ -1,0 +1,62 @@
+{
+  "main_agent_executed": true,
+  "checked_at": "2026-10-20T21:27:00.921321+00:00",
+  "commands": [
+    {
+      "command": "make check (first run)",
+      "exit_code": 2,
+      "result": "Known pre-existing UUID substring bad false positive; original log retained",
+      "log": "make-check-first.log"
+    },
+    {
+      "command": "make check (full repeat)",
+      "exit_code": 0,
+      "result": "283 application tests,54 tools tests,restart smoke,pip check,synthetic integrity PASS",
+      "log": "make-check.log"
+    },
+    {
+      "command": "python3 tools/import_retrieval_corpus.py --destination var/retrieval",
+      "exit_code": 0,
+      "result": "3 admitted sources,49 authored cards; exact manifest saved",
+      "log": "import.json"
+    },
+    {
+      "command": "python3 evidence/S17J02B/verify.py",
+      "exit_code": 0,
+      "result": "Actual repeat/history/revocation/expiry/tamper,58/224 references,full baseline SHA preservation and parent criteria",
+      "log": "verify.log"
+    },
+    {
+      "command": "python3 tools/check_retrieval_coverage.py --snapshot <exact imported snapshot>",
+      "exit_code": 1,
+      "result": "Expected NOT_READY; repeated directly by assess() in final verify.py;0/58,0/90,0/9,no schema errors",
+      "log": "coverage-readiness.json"
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17J02B01",
+      "exit_code": 0,
+      "result": "51 slices,83 requirements,160 subchecks;B01 only accepted,B02 next",
+      "log": "plan-check.log"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "result": "current null,last B01,next B02",
+      "log": "session-status.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": null
+    }
+  ],
+  "logs_sha256": {
+    "verify.log": "5272c1836e706fd8e06ba16d47d321fee75e693fb41723d5133b1a969135af21",
+    "make-check-first.log": "adfc64cc3d5f7dbcaa5e52b5dd75c377c88ce3e3b25853ce841786754175ab89",
+    "plan-check.log": "a7993504b2f2d7bacdb39cc0f916bf6c9ad13869a1b1786e1beaf120a3546984",
+    "make-check.log": "1b0dee43b5172dd92d21fc38e2287ae02cfbbd5888d9121f9060d8f01151030d",
+    "session-status.log": "8b89323f6ce957ec102d062702854340e6ab5b796a9c674934464b42b401be17"
+  },
+  "post_tag_validation": "Run after commit/tag and record result in tool output; not assumed in this precommit artifact."
+}

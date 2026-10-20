@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T00:06:54+03:00",
+  "updated_on": "2026-10-21T00:24:16+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J02A",
-  "next_slice": "S17J02B",
+  "last_accepted_slice": "S17J02B01",
+  "next_slice": "S17J02B02",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -287,12 +287,30 @@
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02B.md",
-      "reason": null
+      "reason": "Разделён на B01–B03; исходные критерии сохранены, родитель не принят."
     },
     "S17J02C": {
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02C.md",
+      "reason": null
+    },
+    "S17J02B01": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17J02B01",
+      "handoff": "memory/sessions/S17J02B01.md",
+      "reason": null
+    },
+    "S17J02B02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02B02.md",
+      "reason": null
+    },
+    "S17J02B03": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02B03.md",
       "reason": null
     }
   },
@@ -384,7 +402,7 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "Приняты J01/J02/J02A; далее J02B/J02C/COVERAGE-1 до J03, затем J04–J08/J. Поиск ещё не реализован; FU неактивны.",
+    "rag_direction": "Приняты J01/J02/J02A и дочерний J02B01(49карточек). РодительB не принят; далееB02/B03→приёмкаB→J02C/COVERAGE-1→J03–J08. FUinactive.",
     "commit_ref": "refs/tags/slice/S17H"
   },
   "latest_retrieval_plan": {
@@ -393,30 +411,30 @@
     "register": "plan/s17j-subdivision.json",
     "planning_ref": "refs/tags/plan/rag-corpus-expansion-2026-10-20",
     "status": "planning_only",
-    "next_action": "S17J02A принят. Следующая отдельная сессия только S17J02B: достаточное клиническое ядро по frozen coverage-matrix. Затем J02C/COVERAGE-1 до J03; прежние accepted J01/J02 сохранены.",
+    "next_action": "S17J02B01 принят как проверенные факты КР/карта пробелов. Далее отдельные B02→B03→приёмка родителяB, затемJ02C/COVERAGE-1. Родитель не принят.",
     "clinical_readiness": false,
     "coverage_plan": "data/retrieval/corpus-coverage-plan.json",
     "coverage_gate": "COVERAGE-1",
     "coverage_status": "NOT_READY"
   },
   "latest_corpus_admission": {
-    "slice": "S17J02",
+    "slice": "S17J02B01",
     "status": "accepted",
-    "report": "memory/sessions/S17J02.md",
-    "acceptance": "evidence/S17J02/acceptance.md",
-    "registry": "data/retrieval/source-registry.json",
-    "manifest": "evidence/S17J02/corpus-manifest.json",
+    "report": "memory/sessions/S17J02B01.md",
+    "acceptance": "evidence/S17J02B/acceptance.md",
+    "registry": "data/retrieval/admission-packages.json",
+    "manifest": "evidence/S17J02B/corpus-manifest.json",
     "admitted_sources": 3,
     "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "S17J02A принят как контракт/общий допуск; дальше J02B → J02C/COVERAGE-1 → J03. Реальный корпус по-прежнему3источника/15фактов, новых достаточных комплектов нет.",
+    "next_action": "B01 accepted only as verified KR package/map. Bparent not accepted. Next B02 exact DASS/policy evidence then B03 sufficient core, then J02C. COVERAGE-1 remains NOT_READY.",
     "representation": "reviewed_cards",
-    "authored_fact_cards": 15,
+    "authored_fact_cards": 49,
     "original_quotes": 2,
     "full_text_admission": false,
     "legal_basis": "GK1259(5) authored facts; GK1274(1)(1) two purpose-specific KR citations",
-    "legal_review": "evidence/S17J02/legal-resolution/research.md",
-    "commit_ref": "refs/tags/slice/S17J02"
+    "legal_review": "evidence/S17J02B/rights-decision.md",
+    "commit_ref": "refs/tags/slice/S17J02B01"
   },
   "latest_coverage_scope": {
     "slice": "S17J02A",
@@ -433,5 +451,18 @@
     "coverage_report": "evidence/S17J02A/coverage-readiness.json",
     "clinical_validation": false,
     "commit_ref": "refs/tags/slice/S17J02A"
+  },
+  "latest_coverage_core": {
+    "slice": "S17J02B01",
+    "parent": "S17J02B",
+    "report": "evidence/S17J02B/core-coverage.json",
+    "source_supported_aspects": 86,
+    "project_policy_only_aspects": 74,
+    "uncovered_aspects": 64,
+    "required_aspects": 224,
+    "required_cells": 58,
+    "sufficient_cells": 0,
+    "clinical_validation": false,
+    "coverage_status": "NOT_READY"
   }
 }

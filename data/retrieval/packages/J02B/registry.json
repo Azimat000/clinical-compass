@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "policy_version": "corpus-admission-2-reviewed-cards",
+  "sources": [
+    {
+      "document_id": "KR301_3",
+      "document_family": "KR301",
+      "path": "evidence/S09/completion-review/sources/kr301.pdf",
+      "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+      "publisher": "Минздрав России — официальный распространитель",
+      "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+      "document_type": "clinical_guideline",
+      "source_version": "301_3 / 2024 / version=3",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B-KR301_3-reviewed-core-1",
+      "decision_origin": "New exact scope reviewed independently from J02: authored factual notes selected by frozen HAC matrix, GK1259(5); old two necessary quotes retained under GK1274(1)(1); no fulltext license or independent clinical validation",
+      "verified_at": "2026-10-21T00:11:23+03:00",
+      "review_due_at": "2026-10-22T00:11:23+03:00",
+      "population": {
+        "verified": true,
+        "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "Депрессивный эпизод / рекуррентное депрессивное расстройство; F32/F33",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ]
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference",
+          "display_excerpt"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B/rights-decision.md",
+          "evidence/S17J02B/source-content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "fragment_ids": [
+            "KR301_3-F01",
+            "KR301_3-F02",
+            "KR301_3-F03",
+            "KR301_3-F04",
+            "KR301_3-F05",
+            "KR301_3-F06",
+            "KR301_3-F07",
+            "KR301_3-F08",
+            "KR301_3-F09",
+            "KR301_3-F10",
+            "KR301_3-F11",
+            "KR301_3-F12",
+            "KR301_3-F13",
+            "KR301_3-F14",
+            "KR301_3-F15",
+            "KR301_3-F16",
+            "KR301_3-F17",
+            "KR301_3-F18",
+            "KR301_3-F19",
+            "KR301_3-F20",
+            "KR301_3-F21",
+            "KR301_3-F22"
+          ],
+          "quoted_characters": 101,
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "record_path": "evidence/S17J02B/source-content-review.json"
+        },
+        "limitation": "Only exact reviewed J02B JSON. Index paraphrase only; old onequote/source retained separately, no newquotes/fullPDF/OCR/tables/keys/algorithms. Not personal prescribing or complete dossiers.",
+        "evidence_sha256": {
+          "evidence/S17J02B/rights-decision.md": "5f9aed27cf85179bb433d965413db22db79d153502380da66a46de39d4006c9e",
+          "evidence/S17J02B/source-content-review.json": "5ddc1f1ae4aadc9f425debd02eff4773e7ae859851e78e2f7695f3b5991cff84"
+        }
+      },
+      "verification": {
+        "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+        "document_type": "clinical_guideline",
+        "source_version": "301_3 / 2024 / version=3",
+        "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+        "publisher": "Минздрав России — официальный распространитель",
+        "checked_at": "2026-10-21T00:11:23+03:00",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ],
+        "evidence_sha256": "89e0d19b0c4016037bedccb928cb2ba743e80282f697615c94eac199543f2573",
+        "method": "isolated_read_only_researcher_official_API_current_status_and_network_PDF_SHA_match; main_exact_local_content_review"
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/J02B/KR301_3.json",
+      "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+      "full_text_rights": {
+        "status": "unknown",
+        "scopes": [],
+        "evidence": [
+          "evidence/S17J02/rights-research.md"
+        ],
+        "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
+      }
+    },
+    {
+      "document_id": "KR457_3",
+      "document_family": "KR457",
+      "path": "evidence/S09/completion-review/sources/kr457.pdf",
+      "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+      "publisher": "Минздрав России — официальный распространитель",
+      "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+      "document_type": "clinical_guideline",
+      "source_version": "457_3 / 2024 / version=3",
+      "official_status": "current",
+      "official_origin_verified": true,
+      "status": "approved",
+      "admission_id": "S17J02B-KR457_3-reviewed-core-1",
+      "decision_origin": "New exact scope reviewed independently from J02: authored factual notes selected by frozen HAC matrix, GK1259(5); old two necessary quotes retained under GK1274(1)(1); no fulltext license or independent clinical validation",
+      "verified_at": "2026-10-21T00:11:23+03:00",
+      "review_due_at": "2026-10-22T00:11:23+03:00",
+      "population": {
+        "verified": true,
+        "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ]
+      },
+      "indications": {
+        "verified": true,
+        "text": "Генерализованное тревожное расстройство; F41.1",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ]
+      },
+      "rights": {
+        "status": "verified",
+        "representation": "reviewed_cards",
+        "scopes": [
+          "local_store",
+          "local_index",
+          "display_reference",
+          "display_excerpt"
+        ],
+        "index_fields": [
+          "paraphrase"
+        ],
+        "evidence": [
+          "evidence/S17J02B/rights-decision.md",
+          "evidence/S17J02B/source-content-review.json"
+        ],
+        "content_review": {
+          "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+          "purpose_and_volume_reviewed": true,
+          "attribution_reviewed": true,
+          "fragment_ids": [
+            "KR457_3-F01",
+            "KR457_3-F02",
+            "KR457_3-F03",
+            "KR457_3-F04",
+            "KR457_3-F05",
+            "KR457_3-F06",
+            "KR457_3-F07",
+            "KR457_3-F08",
+            "KR457_3-F09",
+            "KR457_3-F10",
+            "KR457_3-F11",
+            "KR457_3-F12",
+            "KR457_3-F13",
+            "KR457_3-F14",
+            "KR457_3-F15",
+            "KR457_3-F16",
+            "KR457_3-F17",
+            "KR457_3-F18",
+            "KR457_3-F19",
+            "KR457_3-F20",
+            "KR457_3-F21",
+            "KR457_3-F22"
+          ],
+          "quoted_characters": 159,
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "record_path": "evidence/S17J02B/source-content-review.json"
+        },
+        "limitation": "Only exact reviewed J02B JSON. Index paraphrase only; old onequote/source retained separately, no newquotes/fullPDF/OCR/tables/keys/algorithms. Not personal prescribing or complete dossiers.",
+        "evidence_sha256": {
+          "evidence/S17J02B/rights-decision.md": "5f9aed27cf85179bb433d965413db22db79d153502380da66a46de39d4006c9e",
+          "evidence/S17J02B/source-content-review.json": "5ddc1f1ae4aadc9f425debd02eff4773e7ae859851e78e2f7695f3b5991cff84"
+        }
+      },
+      "verification": {
+        "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+        "document_type": "clinical_guideline",
+        "source_version": "457_3 / 2024 / version=3",
+        "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+        "publisher": "Минздрав России — официальный распространитель",
+        "checked_at": "2026-10-21T00:11:23+03:00",
+        "evidence": [
+          "evidence/S17J02B/research.md"
+        ],
+        "evidence_sha256": "89e0d19b0c4016037bedccb928cb2ba743e80282f697615c94eac199543f2573",
+        "method": "isolated_read_only_researcher_official_API_current_status_and_network_PDF_SHA_match; main_exact_local_content_review"
+      },
+      "representation": "reviewed_cards",
+      "artifact_path": "data/retrieval/packages/J02B/KR457_3.json",
+      "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+      "full_text_rights": {
+        "status": "unknown",
+        "scopes": [],
+        "evidence": [
+          "evidence/S17J02/rights-research.md"
+        ],
+        "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
+      }
+    }
+  ]
+}

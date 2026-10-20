@@ -1,0 +1,45 @@
+{
+  "main_owner": "/root",
+  "read_only_agents": [
+    "/root/j02b_clinical_sources",
+    "/root/j02b_scales_rights",
+    "/root/j02b_scales_rights/external_dass_rights"
+  ],
+  "mutating_workers": [],
+  "approved_plan": "S17J02B only: verify current primary sources; add independently authored bounded facts in J02B package; review every frozen cell/aspect with clinical versus project-policy versus dossier evidence distinguished; import/repeat/preservation checks; honest acceptance or unresolved gaps; evidence/memory/coverage/commit. No separate approved implementation plan. Remaining work split under START_HERE before adding DASS/policy evidence adapters: B01 verified KR package/map, B02 exact DASS and policy admission, B03 remaining sufficient clinical bundles and unchanged parent acceptance. No parent acceptance or scope reduction.",
+  "owned_paths": [
+    "data/retrieval/packages/J02B/",
+    "data/retrieval/admission-packages.json",
+    "data/retrieval/coverage-evidence.json",
+    "evidence/S17J02B/",
+    "memory/sessions/S17J02B.md",
+    "memory/STATE.json",
+    "memory/DECISIONS.md",
+    "memory/BLOCKERS.md",
+    "memory/EXTERNAL.md",
+    "memory/BUDGET.json",
+    "plan/coverage.json",
+    "plan/COVERAGE.md",
+    "START_HERE.md",
+    "plan/manifest.json",
+    "plan/s17j-subdivision.json",
+    "plan/ROADMAP.md",
+    "plan/S17J-production.md",
+    "plan/slices/S17J02B.md",
+    "plan/slices/S17J02B01.md",
+    "plan/slices/S17J02B02.md",
+    "plan/slices/S17J02B03.md",
+    "memory/sessions/S17J02B01.md",
+    "memory/sessions/S17J02B02.md",
+    "memory/sessions/S17J02B03.md"
+  ],
+  "forbidden": [
+    "ALL_OTHER_PATHS",
+    "data/retrieval/coverage-matrix.json",
+    "data/retrieval/coverage-freeze.json",
+    "data/retrieval/planned-medications.json",
+    "data/retrieval/source-registry.json",
+    "evidence/audits/2026-10-20-cycles/",
+    "tools/run_synthetic_cycles.py"
+  ]
+}

@@ -142,7 +142,8 @@
     {
       "id": "S17J02B",
       "depends_on": [
-        "S17J02A"
+        "S17J02A",
+        "S17J02B03"
       ],
       "requirement_ids": [
         "F02",
@@ -309,6 +310,78 @@
         "C42",
         "C43"
       ]
+    },
+    {
+      "id": "S17J02B01",
+      "depends_on": [
+        "S17J02A"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
+    },
+    {
+      "id": "S17J02B02",
+      "depends_on": [
+        "S17J02B01"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
+    },
+    {
+      "id": "S17J02B03",
+      "depends_on": [
+        "S17J02B02"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
     }
   ],
   "original_task_mapping": {
@@ -421,6 +494,25 @@
       ],
       "strategy": "docs/architecture/rag-corpus-strategy.md",
       "coverage_plan": "data/retrieval/corpus-coverage-plan.json"
+    },
+    {
+      "date": "2026-10-21",
+      "reason": "S17J02B: при источниковой сверке выявлена необходимость отдельного допуска DASS и отделения политик; до этих изменений выделены дети, родитель не принят.",
+      "children": [
+        "S17J02B01",
+        "S17J02B02",
+        "S17J02B03"
+      ],
+      "parent": "S17J02B",
+      "original_parent_card": "evidence/S17J02B/parent-card-before-split.json",
+      "unchanged_parent_tasks_and_acceptance": true,
+      "coverage_denominators": [
+        58,
+        224,
+        9,
+        90,
+        10
+      ]
     }
   ]
 }

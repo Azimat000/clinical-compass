@@ -1,0 +1,3455 @@
+{
+  "schema_version": 1,
+  "slice": "S17J02B",
+  "scope_version": "COVERAGE-1-scope-1",
+  "scope_sha256": "2b2eff81787e1d2c6bf10e248ec496885b9b808bae8f4b7ec1e29aac49868d2d",
+  "status": "NOT_READY",
+  "independent_clinical_validation": false,
+  "counts": {
+    "required_cells": 58,
+    "source_supported_aspects": 86,
+    "project_policy_only_aspects": 74,
+    "uncovered_aspects": 64,
+    "total_aspects": 224,
+    "sufficient_cells": 0
+  },
+  "cells": [
+    {
+      "unit_id": "D01-depression-context",
+      "requirement_sha256": "93f66191fdef664ab20c435c9a0fa31e52e3025e0acba81d0178387aa3928d2e",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "diagnosis_and_population": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F06",
+              "page": 12,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "79dc76ccebcb55ddc7cbc1befaf13a418908cd1bd5e33dc5ddda3945ebbc0a92"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "exclusions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F10",
+              "page": 17,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "0c4b3f04b4fac201f02217bfb854fdae968a97dc28f2a1299df91740f49ac939"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "exact_age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "Официальный API подтверждает только adult=true/child=false. Числовой рубеж ровно18 не установлен."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D01-generalized_anxiety_disorder-context",
+      "requirement_sha256": "bfbc8f43476a4e4bb4ceb516cd9032891562b99baa48e5561adb2e0ef4fa0de6",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "diagnosis_and_population": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F06",
+              "page": 11,
+              "section": "2. Диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "496bb7847efba8ff141d8c630ff2f877511ef659d9a4f7c43d190dc39b5c0505"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "exclusions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F09",
+              "page": 12,
+              "section": "2. Диагностика — исключения",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "exact_age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "Официальный API подтверждает только adult=true/child=false. Числовой рубеж ровно18 не установлен."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D01-depression-identity",
+      "requirement_sha256": "258d57255813ddc881e806aafb1f392b4fdddadc9528834f43593ddaeb7e4e59",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_medication_identity": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "confirmed_course_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "unknown_or_conflicting_context": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D01-generalized_anxiety_disorder-identity",
+      "requirement_sha256": "e8baeee177fd713fe552a36434bda9fc8a204cfba7e2d68c5c7cab7620123e11",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_medication_identity": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "confirmed_course_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "unknown_or_conflicting_context": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D02-depression-symptoms",
+      "requirement_sha256": "9beecb231c66962ff49a968dde071c48564fc79fd40d06b4b6b58f200ed450fe",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "symptoms": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F08",
+              "page": 17,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "db75dfea8a3b960341dcad8a8e8c3623183a817f2a2e5cdf3b34bff4fa3b8163"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "functioning": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F07",
+              "page": 14,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F16",
+              "page": 42,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F20",
+              "page": 47,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "observation_period": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "missing_data": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+      "requirement_sha256": "c4b9e9708c0a0fe231c9ad372264b60d7743355fd84a30ec726b294bc55d095b",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "symptoms": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F07",
+              "page": 13,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "001b8030a95bb0b9a0b4902f5a230162dc7ba976f63bd733ff18dfc17f106aac"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "functioning": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F20",
+              "page": 38,
+              "section": "4. Медицинская реабилитация",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "observation_period": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F07",
+              "page": 13,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "001b8030a95bb0b9a0b4902f5a230162dc7ba976f63bd733ff18dfc17f106aac"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "missing_data": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D02-depression-trajectory",
+      "requirement_sha256": "fe334f8c45aaa37b6d62a13fa8cbc92c56e4f72832b9d84bad08907c2b602ae4",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "comparable_measurements": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/assessments.md",
+          "policy_sha256": "42e39a633ce2f844e44a70d2b23d59ba331e1235cb93c65764e4217fe9b959b9",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "time_overlap": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "patient_and_physician_provenance": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_diagnosis_from_score": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F08",
+              "page": 17,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "db75dfea8a3b960341dcad8a8e8c3623183a817f2a2e5cdf3b34bff4fa3b8163"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D02-generalized_anxiety_disorder-trajectory",
+      "requirement_sha256": "f77757d66a58a6dcda8046f17ca1bc2100e665ffcfd680fb4814ffd75140ea6a",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "comparable_measurements": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/assessments.md",
+          "policy_sha256": "42e39a633ce2f844e44a70d2b23d59ba331e1235cb93c65764e4217fe9b959b9",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "time_overlap": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "patient_and_physician_provenance": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_diagnosis_from_score": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F12",
+              "page": 18,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "1b0958e1a982f74ac708069747ba8c890a6467f26bb1e903a7c6e887f4c59455"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F15",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — наблюдение",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "12a4efa0e891edd884f49fdfc60ff2f82b9b55777dcc1596c7e5a95637584140"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-depression-effect",
+      "requirement_sha256": "572bca2369128b57c16bef2e908375bcff0f15ff9fa9c8be1e883b4702066534",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "course_duration_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F12",
+              "page": 24,
+              "section": "3.1 Купирующая терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "388098926715799a86afb723b22029531a58a1992849085af22cf9e9832aefaa"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect_and_tolerability": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "adherence": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_automatic_failure_threshold": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-effect",
+      "requirement_sha256": "dd0ad61550ec290a464e6a373d176ac0a8a4339ccb2dbd181138c4e6ae6b57a9",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "course_duration_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F16",
+              "page": 31,
+              "section": "3.2 Психофармакотерапия — недостаточный эффект",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "7d3e0fc05b92d6d8f0beb6092d27918bdeec01030c46411c669814bd22fb58c3"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect_and_tolerability": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "adherence": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F05",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_automatic_failure_threshold": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-depression-no_effect",
+      "requirement_sha256": "9715f1fede545b397dcc10a37c3eca1c74411bae84e4f04524ca0f2449345097",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "adequacy_of_course": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F13",
+              "page": 32,
+              "section": "3.2 Купирующая терапия ДЭ на втором этапе",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "914d88fbe31b1879e59a69b7ef41ebf91ae91a4c924858a4a998aee08da0564f"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "adherence_and_adverse_events": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F13",
+              "page": 32,
+              "section": "3.2 Купирующая терапия ДЭ на втором этапе",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "914d88fbe31b1879e59a69b7ef41ebf91ae91a4c924858a4a998aee08da0564f"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "alternative_causes": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F14",
+              "page": 33,
+              "section": "3.3 Купирующая терапия ДЭ на третьем этапе",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "dfb820681d29f1ae8b939b090d41a92e0c10c8b88b6e5853aeeafa9ecc53f8fa"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_review": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F03",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "7ec68254af928ac1a8b0a5c1f46b64e1dc6794cfe9761d4a817926d9167ebd12"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F13",
+              "page": 32,
+              "section": "3.2 Купирующая терапия ДЭ на втором этапе",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "914d88fbe31b1879e59a69b7ef41ebf91ae91a4c924858a4a998aee08da0564f"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+      "requirement_sha256": "bc13fd760847896fa22776775f82c5d0a243a445644e716ff93bbce903148a58",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "adequacy_of_course": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F16",
+              "page": 31,
+              "section": "3.2 Психофармакотерапия — недостаточный эффект",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "7d3e0fc05b92d6d8f0beb6092d27918bdeec01030c46411c669814bd22fb58c3"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "adherence_and_adverse_events": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F05",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "alternative_causes": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_review": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F16",
+              "page": 31,
+              "section": "3.2 Психофармакотерапия — недостаточный эффект",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "7d3e0fc05b92d6d8f0beb6092d27918bdeec01030c46411c669814bd22fb58c3"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-depression-remission",
+      "requirement_sha256": "d0843494c398b529229979abd26c69a9a3ac686517145931e54a961a4e6b0078",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "source_definition": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F15",
+              "page": 16,
+              "section": "2. Диагностика — F33.4",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "8bfa1e92193fc1b24f48a8e81f485e58078c278f70a1c460d0d5b6cdfa896da4"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "maintenance_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F16",
+              "page": 42,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F17",
+              "page": 44,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "f6870b1bd75386155da6e9d853c542e822e792e4da164f13a7080a27c28c9fd6"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "recurrence_monitoring": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F17",
+              "page": 44,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "f6870b1bd75386155da6e9d853c542e822e792e4da164f13a7080a27c28c9fd6"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_DASS_threshold": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/assessments.md",
+          "policy_sha256": "42e39a633ce2f844e44a70d2b23d59ba331e1235cb93c65764e4217fe9b959b9",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-remission",
+      "requirement_sha256": "cc83dbd7cd9db1d48510a6ecbed0c9e89dfcf1a77a2acba0f417f7e4ebbf7a4d",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "source_definition": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F15",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — наблюдение",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "12a4efa0e891edd884f49fdfc60ff2f82b9b55777dcc1596c7e5a95637584140"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "maintenance_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F04",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "71738c0bf50f0662b962e82733540910c16600ecd27d3a49e2cab2183c9c42d0"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "recurrence_monitoring": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F05",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_DASS_threshold": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/assessments.md",
+          "policy_sha256": "42e39a633ce2f844e44a70d2b23d59ba331e1235cb93c65764e4217fe9b959b9",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-depression-relapse",
+      "requirement_sha256": "15a5a1b72fbfe80a6b0fb1430c5c4871531e689dda4c5f0292ddc43b7256a0b8",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "recurrence_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F17",
+              "page": 44,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "f6870b1bd75386155da6e9d853c542e822e792e4da164f13a7080a27c28c9fd6"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "course_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "functioning": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F07",
+              "page": 14,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F16",
+              "page": 42,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_decision": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D03-generalized_anxiety_disorder-relapse",
+      "requirement_sha256": "8e5967227293603c9d637318e1508560d67d668025d208f7c89dbee077846d67",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "recurrence_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F05",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "course_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "functioning": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F20",
+              "page": 38,
+              "section": "4. Медицинская реабилитация",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_decision": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D04-depression-adverse",
+      "requirement_sha256": "4fc5e18b18cc3f59e2fdbc5ea1376277a9ac2341f0858433212d8a5010fb3131",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "documented_adverse_reactions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F22",
+              "page": 26,
+              "section": "3.1 Купирующая терапия — переносимость",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "timing_and_course": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "absence_not_exclusion": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_causality_or_severity_inference": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D04-generalized_anxiety_disorder-adverse",
+      "requirement_sha256": "3d7e6191397100d3e6b52374ea15a5ea1093bce24ecfa1f0b95c8f0a74bc0931",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "documented_adverse_reactions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "timing_and_course": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "absence_not_exclusion": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_causality_or_severity_inference": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D04-depression-tolerability",
+      "requirement_sha256": "bc9b0d0b54f8b61d819ab3e0296cd44a3e9cac702de787ee53c914b10a71ff05",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "tolerability": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F04",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "5be9e0bb8c385aebfcfaf057745bb84bef2e757dda15e343a002f21c1afedb4b"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F22",
+              "page": 26,
+              "section": "3.1 Купирующая терапия — переносимость",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F03",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "7ec68254af928ac1a8b0a5c1f46b64e1dc6794cfe9761d4a817926d9167ebd12"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "confounders": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F14",
+              "page": 33,
+              "section": "3.3 Купирующая терапия ДЭ на третьем этапе",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "dfb820681d29f1ae8b939b090d41a92e0c10c8b88b6e5853aeeafa9ecc53f8fa"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F21",
+              "page": 22,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_review": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F03",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "7ec68254af928ac1a8b0a5c1f46b64e1dc6794cfe9761d4a817926d9167ebd12"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F04",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "5be9e0bb8c385aebfcfaf057745bb84bef2e757dda15e343a002f21c1afedb4b"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+      "requirement_sha256": "94073127c43cb1a31c77897b44a5c83013d79f15f91c9bfb3e9f6b723addc9e7",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "tolerability": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F15",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — наблюдение",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "12a4efa0e891edd884f49fdfc60ff2f82b9b55777dcc1596c7e5a95637584140"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "confounders": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F22",
+              "page": 14,
+              "section": "2.2 Физикальное обследование",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_review": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F13",
+              "page": 21,
+              "section": "3.1 Комплексная терапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b08037f243f5ca5b67a719e1456489d90105632d21e4529b9ce1b1047552b671"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D05-depression-contraindications",
+      "requirement_sha256": "8f2b328b9e2d1b644328c723ea406f8ba7f97526e3166d918e6195f2461ba79d",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "contraindications": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "precautions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F21",
+              "page": 22,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F22",
+              "page": 26,
+              "section": "3.1 Купирующая терапия — переносимость",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "population": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F06",
+              "page": 12,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "79dc76ccebcb55ddc7cbc1befaf13a418908cd1bd5e33dc5ddda3945ebbc0a92"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_class_substitution": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D05-generalized_anxiety_disorder-contraindications",
+      "requirement_sha256": "50d6e7f92c5f0ec8900d19354f03202238f44560315055de3b63518429b72bac",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "contraindications": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "precautions": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F13",
+              "page": 21,
+              "section": "3.1 Комплексная терапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b08037f243f5ca5b67a719e1456489d90105632d21e4529b9ce1b1047552b671"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F22",
+              "page": 14,
+              "section": "2.2 Физикальное обследование",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "population": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F06",
+              "page": 11,
+              "section": "2. Диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "496bb7847efba8ff141d8c630ff2f877511ef659d9a4f7c43d190dc39b5c0505"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_class_substitution": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D05-depression-special_groups",
+      "requirement_sha256": "f0ef1dabdb9cd2fc542e049f55b97c8b9959b13acaef118da706618895e828a8",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "pregnancy_lactation": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "older_adults": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "renal_hepatic_and_somatic_conditions": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "unknown_requires_review": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D05-generalized_anxiety_disorder-special_groups",
+      "requirement_sha256": "61b04939510ca1029532f5846d6330b7014979dd70fb335e60d2f743f903967c",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "pregnancy_lactation": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "older_adults": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "renal_hepatic_and_somatic_conditions": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "unknown_requires_review": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D06-depression-interactions",
+      "requirement_sha256": "c75fe311baa3810be0be0dde19b33bc59d5701a67454e369992c3c30a1ea3d6f",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_drugs_and_forms": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "documented_interactions": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "contraindicated_combinations": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "not_comprehensive_pair_checker": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D06-generalized_anxiety_disorder-interactions",
+      "requirement_sha256": "ba60843e718893c2fc681fc413c9ab38c2fb964777fb90160ae3a87cab47e7c4",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_drugs_and_forms": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "documented_interactions": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "contraindicated_combinations": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "not_comprehensive_pair_checker": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D06-depression-uncertain_combination",
+      "requirement_sha256": "f9a6a57b8b2f85fcd342bda91c02349a1698b8c80ed8c907c471d061082e57fc",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "unknown_co_medication": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "coverage_limits": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_absence_of_risk_claim": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D06-generalized_anxiety_disorder-uncertain_combination",
+      "requirement_sha256": "3e4560b7df0d4f139ea8fff26c7c143f450c762112d9816c3f69cc5f46451a67",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "unknown_co_medication": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "coverage_limits": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_absence_of_risk_claim": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-depression-adherence",
+      "requirement_sha256": "3de83804109852bd636e6e1ffe180661c354483c2122fe9f26a0dab635506576",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "explicit_patient_record": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "course_linkage": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "reasons_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "missing_not_missed": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-adherence",
+      "requirement_sha256": "79f32d3ac21a7edee9be1b499a8542c3d47f86113f3c8a5f3bfed7cb2c654667",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "explicit_patient_record": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "course_linkage": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "reasons_and_dates": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "missing_not_missed": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/product/psychiatrist-followup-plan.md",
+          "policy_sha256": "7918e3d1135ae01b1b035725cc896f19a89acb05bfe53a5cbd81a051d0078d42",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-depression-missed_dose",
+      "requirement_sha256": "f3d19848731977d4d24ecc4a828a1d064a47b30d00e2134930e8256ac5720f56",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_instruction_or_explicit_not_documented": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "context": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "no_compensating_dose_from_search": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-missed_dose",
+      "requirement_sha256": "2a50fa3240561068833fff21a10c3510917d2ce4e557122e88b6d48e1d5a2712",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_instruction_or_explicit_not_documented": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "context": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "no_compensating_dose_from_search": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-depression-discontinuation",
+      "requirement_sha256": "3a7999730838030950498bc1349b120a57143c95c0a8bf34266ab23b60fd1a83",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "documented_discontinuation": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F18",
+              "page": 45,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "6dd76c628759c64084b5dabeed3ccc8ad7172eee6e263bf9fd2916914b75af18"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "withdrawal_if_documented": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F18",
+              "page": 45,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "6dd76c628759c64084b5dabeed3ccc8ad7172eee6e263bf9fd2916914b75af18"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_confirmation": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_automatic_taper": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D07-generalized_anxiety_disorder-discontinuation",
+      "requirement_sha256": "80e161e7e857df4a107022f72e2ed469a19790a57011e186e36db1e56d6cf59d",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "documented_discontinuation": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F18",
+              "page": 32,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "9d5023b434d6ee34b032aeff8ae4491f18646fab4528b5b3d28c2ff33a848fc3"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "withdrawal_if_documented": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F18",
+              "page": 32,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "9d5023b434d6ee34b032aeff8ae4491f18646fab4528b5b3d28c2ff33a848fc3"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_confirmation": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_automatic_taper": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D08-depression-critical",
+      "requirement_sha256": "d7d607399e7a22833d48ffaec6d04d4738a70ee854e9e7678fd8d9b3d7f82c28",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "critical_information_source": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F02",
+              "page": 16,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "903c8d30885f308524881097d5241bb6bcf7fd80074a947dfdc49be2d5d7e999"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "independent_safety_path": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_urgency_from_RAG": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "search_must_not_delay_existing_response": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D08-generalized_anxiety_disorder-critical",
+      "requirement_sha256": "306a7b25122debc5001f4f95bce42c07866d3f70e40b807cef7e387f630dcab8",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "critical_information_source": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F11",
+              "page": 14,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "0d999653939716a33dbe8b09123cfe3dd206f8020b1f778e42ddf7f5874a5c07"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "independent_safety_path": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_urgency_from_RAG": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "search_must_not_delay_existing_response": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D08-depression-no_answer",
+      "requirement_sha256": "b8697e5a8ebf7ddb76053ccb6964274551025c57073e0376162b2d89fcbc7d62",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "missing_not_no_risk": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "explicit_unavailability": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-reference-contract.md",
+          "policy_sha256": "6f4b72cd4bea4e8de369d95d370df1cdbb2ae70a0dfe14771488ab4ef8df378f",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_model_or_network_fallback": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D08-generalized_anxiety_disorder-no_answer",
+      "requirement_sha256": "dd684e4708f519ac2fc43c9dda81289d78a4bc54edbe84d9bf16010acf875a5f",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "missing_not_no_risk": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "explicit_unavailability": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-reference-contract.md",
+          "policy_sha256": "6f4b72cd4bea4e8de369d95d370df1cdbb2ae70a0dfe14771488ab4ef8df378f",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_model_or_network_fallback": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/rag-corpus-strategy.md",
+          "policy_sha256": "a1a1346435ae31f650844d11254e495142b8bd779cc36dd0cb540a28f948bedd",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D09-depression-differential",
+      "requirement_sha256": "d742561e7c9e7e9f2c305b9fd00f982eeec363c6a3c1f94c9d4538ef564283ed",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "other_disorders_including_bipolar_psychotic_and_panic": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нынешние допущенные карточки не образуют достаточный проверенный комплект для этого аспекта."
+        },
+        "somatic_causes": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F21",
+              "page": 22,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_assessment": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F01",
+              "page": 12,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "087d5f7c0f7cbe8e800f73f463130b774d0fc8dc4151cbc6c7d777fb3022efd3"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F10",
+              "page": 17,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "0c4b3f04b4fac201f02217bfb854fdae968a97dc28f2a1299df91740f49ac939"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_diagnosis_from_question": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D09-generalized_anxiety_disorder-differential",
+      "requirement_sha256": "3c3f24709278f845dd499802c4bef68c6607d1c5e46f11de0e3284a0a131e1d9",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "other_disorders_including_bipolar_psychotic_and_panic": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F09",
+              "page": 12,
+              "section": "2. Диагностика — исключения",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "somatic_causes": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F22",
+              "page": 14,
+              "section": "2.2 Физикальное обследование",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_assessment": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F01",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "cc03743f4fd75ba6021e1baefc52d65d0e6434966cdcdc5a25f49e4b50fadee0"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F09",
+              "page": 12,
+              "section": "2. Диагностика — исключения",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_diagnosis_from_question": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D09-depression-substances",
+      "requirement_sha256": "b768154fbca8cb8c35db442ab2cfcad75d057fb5214d35e778d9436b59434d48",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "substances_and_alcohol": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "coexisting_conditions": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F09",
+              "page": 18,
+              "section": "2.1 Жалобы и анамнез",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F21",
+              "page": 22,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "uncertainty": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_cross_diagnosis_transfer": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D09-generalized_anxiety_disorder-substances",
+      "requirement_sha256": "2494b4f9ba30dd216d496628eb3989617d25ced7fe45f554cbe3ad4ea9276792",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "substances_and_alcohol": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F21",
+              "page": 39,
+              "section": "5. Профилактика и диспансерное наблюдение",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "79fe1a649da3ff9fa05d68e24261b4a84459331f79e9fc3f0147db72014e82ae"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "coexisting_conditions": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F08",
+              "page": 10,
+              "section": "1.6 Клиническая картина",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F10",
+              "page": 11,
+              "section": "1.6 Клиническая картина — дифференциальная диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "uncertainty": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        },
+        "no_cross_diagnosis_transfer": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D10-depression-psychotherapy",
+      "requirement_sha256": "02441d8de541ef69cdcddd5f6a168efdacd96d2ef30ee70b9c6b29b4b7f097d5",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "documented_options": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F19",
+              "page": 46,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "indications_and_limits": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F19",
+              "page": 46,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F20",
+              "page": 47,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_confirmed_plan": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D10-generalized_anxiety_disorder-psychotherapy",
+      "requirement_sha256": "9440b3250cae2c99d1e1e049b1b842d089cc0abaf073b95c8ff5ec624747a5db",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "documented_options": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F19",
+              "page": 33,
+              "section": "3.3 Психотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "indications_and_limits": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F13",
+              "page": 21,
+              "section": "3.1 Комплексная терапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b08037f243f5ca5b67a719e1456489d90105632d21e4529b9ce1b1047552b671"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F19",
+              "page": 33,
+              "section": "3.3 Психотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "physician_confirmed_plan": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D10-depression-non_medical_followup",
+      "requirement_sha256": "ce7078c9fa4554411868fdb65b7126e4b5a288049b0165182e246912fcd1dbe7",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "followup_measures": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F19",
+              "page": 46,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F20",
+              "page": 47,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "functioning": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F07",
+              "page": 14,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F16",
+              "page": 42,
+              "section": "3.6 Противорецидивная терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F20",
+              "page": 47,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "evidence_limits": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F19",
+              "page": 46,
+              "section": "3.7 Иное лечение — психотерапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_unapproved_protocol": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+      "requirement_sha256": "a32699317c65090e2e63479a91425b24d429f0f8871060228c6ba95922f589f7",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "followup_measures": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F20",
+              "page": 38,
+              "section": "4. Медицинская реабилитация",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F21",
+              "page": 39,
+              "section": "5. Профилактика и диспансерное наблюдение",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "79fe1a649da3ff9fa05d68e24261b4a84459331f79e9fc3f0147db72014e82ae"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "functioning": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F20",
+              "page": 38,
+              "section": "4. Медицинская реабилитация",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "evidence_limits": {
+          "status": "source_support_reviewed",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F19",
+              "page": 33,
+              "section": "3.3 Психотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_unapproved_protocol": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-depression-review",
+      "requirement_sha256": "ae1ada63475eba8f241a91e9c8ed59076f258774de2372b2f2a8a5185a7f48bb",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "review_timing_with_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "course_stage": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F12",
+              "page": 24,
+              "section": "3.1 Купирующая терапия",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "388098926715799a86afb723b22029531a58a1992849085af22cf9e9832aefaa"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect_tolerability_adherence": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F05",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_invented_window": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-generalized_anxiety_disorder-review",
+      "requirement_sha256": "dcb764cb4a4e204df49437338620f002c838b39226e77a6cc3c93c28d331c661",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "review_timing_with_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "course_stage": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "effect_tolerability_adherence": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F05",
+              "page": 32,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F17",
+              "page": 31,
+              "section": "3.2 Продолженная и длительная психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "no_invented_window": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/clinical/followup-recommendation-spec.md",
+          "policy_sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-depression-monitoring",
+      "requirement_sha256": "39945313da7108feac235aa6577dfc4957e5671d063227d063978cb7133ebe6e",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "clinical_monitoring": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F21",
+              "page": 22,
+              "section": "2.5 Иные диагностические исследования",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F22",
+              "page": 26,
+              "section": "3.1 Купирующая терапия — переносимость",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "laboratory_if_documented": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F22",
+              "page": 26,
+              "section": "3.1 Купирующая терапия — переносимость",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "special_groups": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "source_version_and_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F06",
+              "page": 12,
+              "section": "2. Диагностика",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "79dc76ccebcb55ddc7cbc1befaf13a418908cd1bd5e33dc5ddda3945ebbc0a92"
+            },
+            {
+              "document_id": "KR301_3",
+              "fragment_id": "KR301_3-F11",
+              "page": 23,
+              "section": "3. Лечение",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+              "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+      "requirement_sha256": "26fec1d965595d0b2385d4e41eeb854166e3b46e727f9017ba1f32bbb75547db",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "clinical_monitoring": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F03",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F22",
+              "page": 14,
+              "section": "2.2 Физикальное обследование",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        },
+        "laboratory_if_documented": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "special_groups": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "source_version_and_context": {
+          "status": "clinical_context_only",
+          "references": [
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F06",
+              "page": 11,
+              "section": "2. Диагностика",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "496bb7847efba8ff141d8c630ff2f877511ef659d9a4f7c43d190dc39b5c0505"
+            },
+            {
+              "document_id": "KR457_3",
+              "fragment_id": "KR457_3-F14",
+              "page": 30,
+              "section": "3.2 Психофармакотерапия — переносимость",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+              "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c"
+            }
+          ],
+          "limitation": "Только конкретный клинический контекст/явно помеченная граница HAC; не достаточность персональной справки и не медицинский эталон."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-depression-updates",
+      "requirement_sha256": "95351033c35ce86e1263273f6361f17a3c2cd562bc7ec0fb85ebf48f4dad1d05",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_registration_and_version": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "official_safety_search_scope": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "checked_and_due_dates": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "withdraw_affected_material": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D11-generalized_anxiety_disorder-updates",
+      "requirement_sha256": "06239feca735b2371df3084d8a0b3cc5775d76f6e0a2926f7badcae33c4f2745",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_registration_and_version": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "official_safety_search_scope": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "checked_and_due_dates": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "withdraw_affected_material": {
+          "status": "project_policy_only",
+          "references": [],
+          "policy_path": "docs/architecture/retrieval-coverage-contract.md",
+          "policy_sha256": "cfa6e456d00ad09313db7a432e88074b1302f420dfc42ab22c051fd6a41f74c2",
+          "limitation": "Собственное ограничение HAC, не утверждение КР и не допущенный медицинский источник; формальное покрытие этим не закрыто."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D12-depression-scale_identity",
+      "requirement_sha256": "74d196394603d29a53a2e3a0ea7e823e5be67f6982a80ba2ee20efe231da333d",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "exact_Russian_form_and_key": {
+          "status": "gap",
+          "references": [],
+          "reason": "DASS42-RU-FG-2024-demo-v1 сохранена в S07, но отдельный первичный источник/ключ не допущен в RAG."
+        },
+        "validation_population": {
+          "status": "gap",
+          "references": [],
+          "reason": "Цепочка S07/статья2025 есть, но точный первичный источник и его SHA не допущены в RAG."
+        },
+        "text_rights_separately": {
+          "status": "gap",
+          "references": [],
+          "reason": "Права формы S07 и самостоятельных метаданных не дают автоматического допуска статьи/инструмента в RAG."
+        },
+        "recall_period": {
+          "status": "gap",
+          "references": [],
+          "reason": "Период DASS — прошлая неделя; источник инструмента не допущен в RAG."
+        },
+        "age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "FAQ и пределы HAC/неизвестный возраст русской выборки различаются; допустимой DASS-записи RAG нет."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D12-generalized_anxiety_disorder-scale_identity",
+      "requirement_sha256": "5f31350cdba4bff0b07d37bf6225386a71377f13de0a3aea0498a7abaea13b3e",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "exact_Russian_form_and_key": {
+          "status": "gap",
+          "references": [],
+          "reason": "DASS42-RU-FG-2024-demo-v1 сохранена в S07, но отдельный первичный источник/ключ не допущен в RAG."
+        },
+        "validation_population": {
+          "status": "gap",
+          "references": [],
+          "reason": "Цепочка S07/статья2025 есть, но точный первичный источник и его SHA не допущены в RAG."
+        },
+        "text_rights_separately": {
+          "status": "gap",
+          "references": [],
+          "reason": "Права формы S07 и самостоятельных метаданных не дают автоматического допуска статьи/инструмента в RAG."
+        },
+        "recall_period": {
+          "status": "gap",
+          "references": [],
+          "reason": "Период DASS — прошлая неделя; источник инструмента не допущен в RAG."
+        },
+        "age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "FAQ и пределы HAC/неизвестный возраст русской выборки различаются; допустимой DASS-записи RAG нет."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D12-depression-scale_interpretation",
+      "requirement_sha256": "b26112261de98548db3788cbdaacfadfcbd5d1caf425d419d56791c5b705720c",
+      "direction": "depression",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "three_separate_scores_for_physician": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "complete_same_form": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "overlapping_periods": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "no_diagnostic_or_medication_threshold": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "patient_no_computed_scores": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D12-generalized_anxiety_disorder-scale_interpretation",
+      "requirement_sha256": "370dabd1dac43e9bb9c1d197a4ef5546dace884d7096efa97b89efc0c33c84b7",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": false,
+      "verdict": "gap",
+      "aspects": {
+        "three_separate_scores_for_physician": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "complete_same_form": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "overlapping_periods": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "no_diagnostic_or_medication_threshold": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        },
+        "patient_no_computed_scores": {
+          "status": "gap",
+          "references": [],
+          "reason": "Требуется отдельный допуск точных DASS-источников и отделённая проверка политики HAC; КР это не подтверждает."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D01-depression-FU08",
+      "requirement_sha256": "3409a5c17c8696e0a2a127fbdce6168b2c18ff287366d53f4303bcb7ee610e8a",
+      "direction": "depression",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_Aviandr_identity": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "registered_indication_not_inferred_for_depression": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "FAQ и пределы HAC/неизвестный возраст русской выборки различаются; допустимой DASS-записи RAG нет."
+        },
+        "physician_eight_area_review": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    },
+    {
+      "unit_id": "D01-generalized_anxiety_disorder-FU08",
+      "requirement_sha256": "ffa06c46ac11021fdb1eff05491c70462b8498024f79b18fdebe9079cdd622e0",
+      "direction": "generalized_anxiety_disorder",
+      "requires_dossiers": true,
+      "verdict": "gap",
+      "aspects": {
+        "exact_Aviandr_identity": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "registered_indication_not_inferred_for_depression": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        },
+        "age_boundary": {
+          "status": "gap",
+          "references": [],
+          "reason": "FAQ и пределы HAC/неизвестный возраст русской выборки различаются; допустимой DASS-записи RAG нет."
+        },
+        "physician_eight_area_review": {
+          "status": "gap",
+          "references": [],
+          "reason": "Нет достаточного точного профессионального досье/основания выбранного лекарства; обязательство J02C сохраняется. Общая КР или отказ не закрывают аспект."
+        }
+      },
+      "reason": "Полный достаточный комплект не принят: политика не заменяет источниковое основание; частичное покрытие не равно sufficient."
+    }
+  ],
+  "remaining_dossier_sections": 90,
+  "dass_report": "evidence/S17J02B/scales-research.md",
+  "limitation": "Разобраны все58ячеек и всеаспекты. Ссылки — фактический вклад корпуса; ни одна неполная ячейка не помечена достаточной. Frozen scope и COVERAGE-1 не ослаблены."
+}

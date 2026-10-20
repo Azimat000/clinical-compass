@@ -1,7 +1,23 @@
 {
   "schema_version": 1,
-  "enabled": ["J02"],
+  "enabled": [
+    "J02",
+    "J02B"
+  ],
   "packages": [
-    {"id": "J02", "root": null, "registry": "data/retrieval/source-registry.json"}
+    {
+      "id": "J02",
+      "root": null,
+      "registry": "data/retrieval/source-registry.json"
+    },
+    {
+      "id": "J02B",
+      "root": "data/retrieval/packages/J02B",
+      "registry": "data/retrieval/packages/J02B/registry.json",
+      "replaces": {
+        "KR301_3": "6d2ecb1db6a732d80ac7d01206489d5837244ef53236858ad2820bfac0dcfb0a",
+        "KR457_3": "533b4e8e57c52cf63d55acc1a87f585a7bfef4afb4448c45ca90162eec8ef7a3"
+      }
+    }
   ]
 }

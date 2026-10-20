@@ -1,0 +1,1655 @@
+{
+  "version": "S17J02B-reviewed-core-1",
+  "reviewed_at": "2026-10-21T00:24:16+03:00",
+  "reviewer": "Codex main agent: direct PDF/content audit plus isolated read-only source and legal researchers; not independent clinical approval",
+  "independent_clinical_validation": false,
+  "documents": {
+    "KR301_3": {
+      "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+      "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+      "fragment_ids": [
+        "KR301_3-F01",
+        "KR301_3-F02",
+        "KR301_3-F03",
+        "KR301_3-F04",
+        "KR301_3-F05",
+        "KR301_3-F06",
+        "KR301_3-F07",
+        "KR301_3-F08",
+        "KR301_3-F09",
+        "KR301_3-F10",
+        "KR301_3-F11",
+        "KR301_3-F12",
+        "KR301_3-F13",
+        "KR301_3-F14",
+        "KR301_3-F15",
+        "KR301_3-F16",
+        "KR301_3-F17",
+        "KR301_3-F18",
+        "KR301_3-F19",
+        "KR301_3-F20",
+        "KR301_3-F21",
+        "KR301_3-F22"
+      ],
+      "quoted_characters": 101,
+      "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+      "text_and_context_verified": true,
+      "attribution_verified": true,
+      "source_type_preserved": true,
+      "full_pdf_license_verified": false,
+      "cards": [
+        {
+          "fragment_id": "KR301_3-F01",
+          "page": 12,
+          "supporting_pages": [
+            12
+          ],
+          "fragment_sha256": "087d5f7c0f7cbe8e800f73f463130b774d0fc8dc4151cbc6c7d777fb3022efd3",
+          "authored_text_sha256": "b1fa54475fa47083956b1b466feff87d27443cf605377f0a768a3095f1271da6",
+          "claim_type": "fact_with_quote",
+          "purpose": "Почему заполненная анкета не заменяет первичный диагноз?",
+          "coverage_links": [
+            {
+              "unit_id": "D09-depression-differential",
+              "aspect": "physician_assessment"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR301_3-F02",
+          "page": 16,
+          "supporting_pages": [
+            16
+          ],
+          "fragment_sha256": "903c8d30885f308524881097d5241bb6bcf7fd80074a947dfdc49be2d5d7e999",
+          "authored_text_sha256": "2522d667912880f78c24af8931b7bc06421eef74552441d6e77672fa1382a4d8",
+          "claim_type": "fact",
+          "purpose": "Почему форму пациента нельзя считать завершённой оценкой риска?",
+          "coverage_links": [
+            {
+              "unit_id": "D08-depression-critical",
+              "aspect": "critical_information_source"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR301_3-F03",
+          "page": 18,
+          "supporting_pages": [
+            18
+          ],
+          "fragment_sha256": "7ec68254af928ac1a8b0a5c1f46b64e1dc6794cfe9761d4a817926d9167ebd12",
+          "authored_text_sha256": "0a4376d4ea6d686148939f99c49414a1729e9928a25db335baba655542a78360",
+          "claim_type": "fact",
+          "purpose": "Зачем врачу повторно рассматривать эффект лечения?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "physician_review"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "effect"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "physician_review"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR301_3-F04",
+          "page": 23,
+          "supporting_pages": [
+            23
+          ],
+          "fragment_sha256": "5be9e0bb8c385aebfcfaf057745bb84bef2e757dda15e343a002f21c1afedb4b",
+          "authored_text_sha256": "4a7a8829305da3efa18dc78ff5f1a28824d59d06a07ceb0ec4e1c3746036e5e0",
+          "claim_type": "fact",
+          "purpose": "Зачем уточнять предшествующее лечение и сопутствующие сведения?",
+          "coverage_links": [
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "tolerability"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "physician_review"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR301_3-F05",
+          "page": 23,
+          "supporting_pages": [
+            23
+          ],
+          "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460",
+          "authored_text_sha256": "85276af3c8ab42b9bf9414c07c4885ba464c1d0eefbfe3f5bf9ff03f4d22e588",
+          "claim_type": "fact",
+          "purpose": "Какие стороны наблюдения дополняют изменение симптомов?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "symptoms"
+            },
+            {
+              "unit_id": "D03-depression-effect",
+              "aspect": "effect_and_tolerability"
+            },
+            {
+              "unit_id": "D03-depression-effect",
+              "aspect": "adherence"
+            },
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "adherence_and_adverse_events"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "tolerability"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "effect"
+            },
+            {
+              "unit_id": "D11-depression-review",
+              "aspect": "effect_tolerability_adherence"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR301_3-F06",
+          "page": 12,
+          "supporting_pages": [
+            12
+          ],
+          "fragment_sha256": "79dc76ccebcb55ddc7cbc1befaf13a418908cd1bd5e33dc5ddda3945ebbc0a92",
+          "authored_text_sha256": "63ccccac23eb8abf52aceef7ee6d6ae70e7356a444805f0c906b4b4e2f061fab",
+          "claim_type": "fact",
+          "purpose": "Почему справка относится к установленному расстройству?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-depression-context",
+              "aspect": "diagnosis_and_population"
+            },
+            {
+              "unit_id": "D05-depression-contraindications",
+              "aspect": "population"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "source_version_and_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F07",
+          "page": 14,
+          "supporting_pages": [
+            14
+          ],
+          "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99",
+          "authored_text_sha256": "5ef678f3b15acaeb8b6f13ac937ae8c669c69d75a507d1f464be1489009bef49",
+          "claim_type": "fact",
+          "purpose": "Зачем отдельно выяснять повседневное функционирование?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D03-depression-relapse",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "functioning"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F08",
+          "page": 17,
+          "supporting_pages": [
+            17
+          ],
+          "fragment_sha256": "db75dfea8a3b960341dcad8a8e8c3623183a817f2a2e5cdf3b34bff4fa3b8163",
+          "authored_text_sha256": "c1de9a409a7e8c6484fdab6c4ffae57bbde58a1d715482b4b40642cad2ff498d",
+          "claim_type": "fact",
+          "purpose": "Что дополняет повторные измерения симптомов?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "symptoms"
+            },
+            {
+              "unit_id": "D02-depression-trajectory",
+              "aspect": "no_diagnosis_from_score"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F09",
+          "page": 18,
+          "supporting_pages": [
+            18
+          ],
+          "fragment_sha256": "379a1b424f3a9b12320eca6ad0b044bc4407b17be3973a7d2b058e66f9091598",
+          "authored_text_sha256": "65c5420edae4a8445691441ac3e5a61a2613a541dcb649f0033ef994b7ebf5a3",
+          "claim_type": "fact",
+          "purpose": "Какие альтернативные причины уточняют при депрессивных симптомах?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-depression-context",
+              "aspect": "exclusions"
+            },
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "alternative_causes"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "confounders"
+            },
+            {
+              "unit_id": "D09-depression-differential",
+              "aspect": "somatic_causes"
+            },
+            {
+              "unit_id": "D09-depression-differential",
+              "aspect": "physician_assessment"
+            },
+            {
+              "unit_id": "D09-depression-substances",
+              "aspect": "substances_and_alcohol"
+            },
+            {
+              "unit_id": "D09-depression-substances",
+              "aspect": "coexisting_conditions"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F10",
+          "page": 17,
+          "supporting_pages": [
+            17
+          ],
+          "fragment_sha256": "0c4b3f04b4fac201f02217bfb854fdae968a97dc28f2a1299df91740f49ac939",
+          "authored_text_sha256": "711d6281a0766acc04823c4bb28aab0e4aa5554e518a4b970d9bb5cd956e0950",
+          "claim_type": "fact",
+          "purpose": "Почему уточняют прежние периоды повышенного настроения?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-depression-context",
+              "aspect": "exclusions"
+            },
+            {
+              "unit_id": "D09-depression-differential",
+              "aspect": "physician_assessment"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F11",
+          "page": 23,
+          "supporting_pages": [
+            23
+          ],
+          "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89",
+          "authored_text_sha256": "c500f5c0633f85745a0cb8286c1aebefb61e5f204217a8f67aeda89b225faa78",
+          "claim_type": "fact",
+          "purpose": "Какой контекст нужен при наблюдении острой фазы?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "observation_period"
+            },
+            {
+              "unit_id": "D03-depression-effect",
+              "aspect": "effect_and_tolerability"
+            },
+            {
+              "unit_id": "D03-depression-effect",
+              "aspect": "adherence"
+            },
+            {
+              "unit_id": "D11-depression-review",
+              "aspect": "review_timing_with_context"
+            },
+            {
+              "unit_id": "D11-depression-review",
+              "aspect": "course_stage"
+            },
+            {
+              "unit_id": "D11-depression-review",
+              "aspect": "effect_tolerability_adherence"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "clinical_monitoring"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "source_version_and_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F12",
+          "page": 24,
+          "supporting_pages": [
+            24
+          ],
+          "fragment_sha256": "388098926715799a86afb723b22029531a58a1992849085af22cf9e9832aefaa",
+          "authored_text_sha256": "e6e40a78a87870a4959f356cd209ed1f17234b1bc1d3a8882e9f0c28fa43407a",
+          "claim_type": "fact",
+          "purpose": "Почему раннее отсутствие изменений не равно неэффективности?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-effect",
+              "aspect": "course_duration_context"
+            },
+            {
+              "unit_id": "D11-depression-review",
+              "aspect": "course_stage"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F13",
+          "page": 32,
+          "supporting_pages": [
+            32
+          ],
+          "fragment_sha256": "914d88fbe31b1879e59a69b7ef41ebf91ae91a4c924858a4a998aee08da0564f",
+          "authored_text_sha256": "3a865d28e8b505706ea8154e4a52eedcaf9a61025a58f5fd2b31f7ba194d7cb7",
+          "claim_type": "fact",
+          "purpose": "Что перепроверяет врач при недостаточном эффекте?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "adequacy_of_course"
+            },
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "adherence_and_adverse_events"
+            },
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "physician_review"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F14",
+          "page": 33,
+          "supporting_pages": [
+            33,
+            34
+          ],
+          "fragment_sha256": "dfb820681d29f1ae8b939b090d41a92e0c10c8b88b6e5853aeeafa9ecc53f8fa",
+          "authored_text_sha256": "77e3b293c1c20abfd4d7bcf56acd0d182dcc929a5128a8666243d551fb7d5009",
+          "claim_type": "fact",
+          "purpose": "Что может выглядеть как устойчивость к лечению?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-no_effect",
+              "aspect": "alternative_causes"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "confounders"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F15",
+          "page": 16,
+          "supporting_pages": [
+            16
+          ],
+          "fragment_sha256": "8bfa1e92193fc1b24f48a8e81f485e58078c278f70a1c460d0d5b6cdfa896da4",
+          "authored_text_sha256": "e799f2e9b12876f34a76b2a67660c145cab13160d73797f1bfa8413c6f1c3a65",
+          "claim_type": "fact",
+          "purpose": "Что означает ремиссия в диагностическом контексте?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-remission",
+              "aspect": "source_definition"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F16",
+          "page": 42,
+          "supporting_pages": [
+            42
+          ],
+          "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c",
+          "authored_text_sha256": "fef312174662e25dfa18e20fb5b618917182a20beca600feb66599526f8f0857",
+          "claim_type": "fact",
+          "purpose": "Зачем после улучшения обсуждают функционирование?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D03-depression-remission",
+              "aspect": "maintenance_context"
+            },
+            {
+              "unit_id": "D03-depression-relapse",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "functioning"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F17",
+          "page": 44,
+          "supporting_pages": [
+            44
+          ],
+          "fragment_sha256": "f6870b1bd75386155da6e9d853c542e822e792e4da164f13a7080a27c28c9fd6",
+          "authored_text_sha256": "11332c3ac2e50a1917928f4b2b4ded2a67b531cd1334eccb628223175ba5cb52",
+          "claim_type": "fact",
+          "purpose": "Какие сведения важны при возвращении симптомов?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-depression-remission",
+              "aspect": "maintenance_context"
+            },
+            {
+              "unit_id": "D03-depression-remission",
+              "aspect": "recurrence_monitoring"
+            },
+            {
+              "unit_id": "D03-depression-relapse",
+              "aspect": "recurrence_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F18",
+          "page": 45,
+          "supporting_pages": [
+            45
+          ],
+          "fragment_sha256": "6dd76c628759c64084b5dabeed3ccc8ad7172eee6e263bf9fd2916914b75af18",
+          "authored_text_sha256": "63f5013febbe0e2a665f320b448ea23fe8e828bd39f281a4df78f29c71307b10",
+          "claim_type": "fact",
+          "purpose": "Почему прекращение курса обсуждают с врачом?",
+          "coverage_links": [
+            {
+              "unit_id": "D07-depression-discontinuation",
+              "aspect": "documented_discontinuation"
+            },
+            {
+              "unit_id": "D07-depression-discontinuation",
+              "aspect": "withdrawal_if_documented"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F19",
+          "page": 46,
+          "supporting_pages": [
+            46
+          ],
+          "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc",
+          "authored_text_sha256": "e37abccdf084a29d5023d0081d009741ed9205d3bd47ad2f6389fadc24598d4f",
+          "claim_type": "fact",
+          "purpose": "Какие немедикаментозные подходы описаны при депрессии?",
+          "coverage_links": [
+            {
+              "unit_id": "D10-depression-psychotherapy",
+              "aspect": "documented_options"
+            },
+            {
+              "unit_id": "D10-depression-psychotherapy",
+              "aspect": "indications_and_limits"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "followup_measures"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "evidence_limits"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F20",
+          "page": 47,
+          "supporting_pages": [
+            47
+          ],
+          "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19",
+          "authored_text_sha256": "7db334b105c5dbc84c36dc5bb4fc2bbdde6a91c781ea258273122f182a8af1bc",
+          "claim_type": "fact",
+          "purpose": "Что учитывают при выборе психотерапии и оценке результата?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-depression-symptoms",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D10-depression-psychotherapy",
+              "aspect": "indications_and_limits"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "followup_measures"
+            },
+            {
+              "unit_id": "D10-depression-non_medical_followup",
+              "aspect": "functioning"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F21",
+          "page": 22,
+          "supporting_pages": [
+            22
+          ],
+          "fragment_sha256": "371c4303968bd85821094ef8af95108b0a33432a043cb28f104548e51fb5578a",
+          "authored_text_sha256": "d1a405c8ee21c1f253a130096f5554726e22361422e7686cb6957e9cb07482e2",
+          "claim_type": "fact",
+          "purpose": "Почему сопутствующие состояния проверяют отдельно?",
+          "coverage_links": [
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "confounders"
+            },
+            {
+              "unit_id": "D05-depression-contraindications",
+              "aspect": "precautions"
+            },
+            {
+              "unit_id": "D09-depression-differential",
+              "aspect": "somatic_causes"
+            },
+            {
+              "unit_id": "D09-depression-substances",
+              "aspect": "coexisting_conditions"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "clinical_monitoring"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR301_3-F22",
+          "page": 26,
+          "supporting_pages": [
+            26
+          ],
+          "fragment_sha256": "d74556b647ab82d0eff77c4973a12ad6113584d1d3e69ffec3f4af548442f254",
+          "authored_text_sha256": "38a9231b79973dd9a67e75a30bf19e6c5800838461e39ba56cf016cf04f4dac5",
+          "claim_type": "fact",
+          "purpose": "Почему общий перечень НЯ не заменяет досье препарата?",
+          "coverage_links": [
+            {
+              "unit_id": "D04-depression-adverse",
+              "aspect": "documented_adverse_reactions"
+            },
+            {
+              "unit_id": "D04-depression-tolerability",
+              "aspect": "tolerability"
+            },
+            {
+              "unit_id": "D05-depression-contraindications",
+              "aspect": "precautions"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "clinical_monitoring"
+            },
+            {
+              "unit_id": "D11-depression-monitoring",
+              "aspect": "laboratory_if_documented"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        }
+      ]
+    },
+    "KR457_3": {
+      "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+      "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+      "fragment_ids": [
+        "KR457_3-F01",
+        "KR457_3-F02",
+        "KR457_3-F03",
+        "KR457_3-F04",
+        "KR457_3-F05",
+        "KR457_3-F06",
+        "KR457_3-F07",
+        "KR457_3-F08",
+        "KR457_3-F09",
+        "KR457_3-F10",
+        "KR457_3-F11",
+        "KR457_3-F12",
+        "KR457_3-F13",
+        "KR457_3-F14",
+        "KR457_3-F15",
+        "KR457_3-F16",
+        "KR457_3-F17",
+        "KR457_3-F18",
+        "KR457_3-F19",
+        "KR457_3-F20",
+        "KR457_3-F21",
+        "KR457_3-F22"
+      ],
+      "quoted_characters": 159,
+      "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+      "text_and_context_verified": true,
+      "attribution_verified": true,
+      "source_type_preserved": true,
+      "full_pdf_license_verified": false,
+      "cards": [
+        {
+          "fragment_id": "KR457_3-F01",
+          "page": 10,
+          "supporting_pages": [
+            10
+          ],
+          "fragment_sha256": "cc03743f4fd75ba6021e1baefc52d65d0e6434966cdcdc5a25f49e4b50fadee0",
+          "authored_text_sha256": "fe077b20518fd8b7909e887bbf198de8e75781b45f73588c7c115dfd045e14a2",
+          "claim_type": "fact",
+          "purpose": "Почему поиск не применяет сведения о ГТР к любой тревоге?",
+          "coverage_links": [
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "physician_assessment"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR457_3-F02",
+          "page": 22,
+          "supporting_pages": [
+            22
+          ],
+          "fragment_sha256": "914d272707a25c5baa0e9e88044616b0193b1d4fd8d3fb979ce46615231c45a2",
+          "authored_text_sha256": "fc7688dfab17e9e076713b1e70cddddc1d57343ac36e222a552b094979898a8c",
+          "claim_type": "fact",
+          "purpose": "Почему изменение тревоги в начале лечения требует врачебного контекста?",
+          "coverage_links": [],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR457_3-F03",
+          "page": 30,
+          "supporting_pages": [
+            30
+          ],
+          "fragment_sha256": "b59eadf233a859b5acbcc38ef1c220f978e0ec0d5fa44656a791d4f7abc32a24",
+          "authored_text_sha256": "c5f89cff399313dddb798936248004b4c5f1b7415bc515615219bfa5e78acac5",
+          "claim_type": "fact",
+          "purpose": "Зачем повторно оценивать эффективность и переносимость?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-effect",
+              "aspect": "effect_and_tolerability"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "tolerability"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "effect"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "physician_review"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "review_timing_with_context"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+              "aspect": "clinical_monitoring"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR457_3-F04",
+          "page": 32,
+          "supporting_pages": [
+            32
+          ],
+          "fragment_sha256": "71738c0bf50f0662b962e82733540910c16600ecd27d3a49e2cab2183c9c42d0",
+          "authored_text_sha256": "186b24bc29f6fd929180324959253a87c3863e0554ffadcc65d69958c36203f9",
+          "claim_type": "fact_with_quote",
+          "purpose": "Почему сервис не задаёт единый срок поддерживающего лечения?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-remission",
+              "aspect": "maintenance_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR457_3-F05",
+          "page": 32,
+          "supporting_pages": [
+            32
+          ],
+          "fragment_sha256": "514fa2a05853b232c7141a000568e996a0e8510dbbf35014774196b60dd685b3",
+          "authored_text_sha256": "c2e1fc5306c3b8f33752d51b864b3eba6b11619d8a385e84f2ca273e33f4798a",
+          "claim_type": "fact",
+          "purpose": "Почему длительный курс требует наблюдения врача?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-effect",
+              "aspect": "adherence"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "adherence_and_adverse_events"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-remission",
+              "aspect": "recurrence_monitoring"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-relapse",
+              "aspect": "recurrence_context"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "effect_tolerability_adherence"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": false
+        },
+        {
+          "fragment_id": "KR457_3-F06",
+          "page": 11,
+          "supporting_pages": [
+            11
+          ],
+          "fragment_sha256": "496bb7847efba8ff141d8c630ff2f877511ef659d9a4f7c43d190dc39b5c0505",
+          "authored_text_sha256": "426c8ccbea53417405e4299fe19cbd0d6e9f1f1837a60bc582c738285e943cc9",
+          "claim_type": "fact",
+          "purpose": "Почему диагноз ГТР требует временного контекста?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-generalized_anxiety_disorder-context",
+              "aspect": "diagnosis_and_population"
+            },
+            {
+              "unit_id": "D05-generalized_anxiety_disorder-contraindications",
+              "aspect": "population"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+              "aspect": "source_version_and_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F07",
+          "page": 13,
+          "supporting_pages": [
+            13
+          ],
+          "fragment_sha256": "001b8030a95bb0b9a0b4902f5a230162dc7ba976f63bd733ff18dfc17f106aac",
+          "authored_text_sha256": "23b19b63a213ec4903926973edc29f92340cf90c3a48867f6ae5f54ccf740842",
+          "claim_type": "fact",
+          "purpose": "Какие проявления тревоги сопоставляют во времени?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+              "aspect": "symptoms"
+            },
+            {
+              "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+              "aspect": "observation_period"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F08",
+          "page": 10,
+          "supporting_pages": [
+            10,
+            11,
+            12
+          ],
+          "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c",
+          "authored_text_sha256": "78cbdb21352dce4f4fa4b465b4a0819d2c9ece93f6543b48afe022f49e95fc3e",
+          "claim_type": "fact",
+          "purpose": "Почему тревога требует дифференциальной оценки?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-generalized_anxiety_disorder-context",
+              "aspect": "exclusions"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "alternative_causes"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "confounders"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "other_disorders_including_bipolar_psychotic_and_panic"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "physician_assessment"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-substances",
+              "aspect": "substances_and_alcohol"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-substances",
+              "aspect": "coexisting_conditions"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F09",
+          "page": 12,
+          "supporting_pages": [
+            12
+          ],
+          "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12",
+          "authored_text_sha256": "5ccfcb85a7a4691ff411193e2556facfab27caff350222202b3a188af8db3f52",
+          "claim_type": "fact",
+          "purpose": "Почему важно отличать панические и иные состояния?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-generalized_anxiety_disorder-context",
+              "aspect": "exclusions"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "other_disorders_including_bipolar_psychotic_and_panic"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "physician_assessment"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F10",
+          "page": 11,
+          "supporting_pages": [
+            11,
+            12
+          ],
+          "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211",
+          "authored_text_sha256": "d45950cce0436db16ec4ff7c7b90b1a68221cf4ab1c591d97ea5211dc3dee4c0",
+          "claim_type": "fact",
+          "purpose": "Какие дополнительные причины могут сопровождать тревогу?",
+          "coverage_links": [
+            {
+              "unit_id": "D01-generalized_anxiety_disorder-context",
+              "aspect": "exclusions"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "alternative_causes"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "confounders"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "other_disorders_including_bipolar_psychotic_and_panic"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "somatic_causes"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-substances",
+              "aspect": "substances_and_alcohol"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-substances",
+              "aspect": "coexisting_conditions"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F11",
+          "page": 14,
+          "supporting_pages": [
+            14
+          ],
+          "fragment_sha256": "0d999653939716a33dbe8b09123cfe3dd206f8020b1f778e42ddf7f5874a5c07",
+          "authored_text_sha256": "3fbbfa69690644960bd00d13fe4bddbc91159e343ca8390c7185bfada192b0df",
+          "claim_type": "fact",
+          "purpose": "Почему критические сведения требуют отдельной врачебной оценки?",
+          "coverage_links": [
+            {
+              "unit_id": "D08-generalized_anxiety_disorder-critical",
+              "aspect": "critical_information_source"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F12",
+          "page": 18,
+          "supporting_pages": [
+            18
+          ],
+          "fragment_sha256": "1b0958e1a982f74ac708069747ba8c890a6467f26bb1e903a7c6e887f4c59455",
+          "authored_text_sha256": "d7889b3e18481c9cdb9a91288f0a9a62261d0a7a934c015fa5ede98f2354ff4c",
+          "claim_type": "fact",
+          "purpose": "Что позволяют и чего не доказывают повторные шкалы?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-generalized_anxiety_disorder-trajectory",
+              "aspect": "no_diagnosis_from_score"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F13",
+          "page": 21,
+          "supporting_pages": [
+            21
+          ],
+          "fragment_sha256": "b08037f243f5ca5b67a719e1456489d90105632d21e4529b9ce1b1047552b671",
+          "authored_text_sha256": "982c890ca49d7a2776c480d6b921dde377fc0a36dcc407300b73ffe4530f5355",
+          "claim_type": "fact",
+          "purpose": "Как выбирают соотношение психотерапии и лекарственного лечения?",
+          "coverage_links": [
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "physician_review"
+            },
+            {
+              "unit_id": "D05-generalized_anxiety_disorder-contraindications",
+              "aspect": "precautions"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-psychotherapy",
+              "aspect": "indications_and_limits"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F14",
+          "page": 30,
+          "supporting_pages": [
+            30
+          ],
+          "fragment_sha256": "40ac568a40b3c06aa86f49402ea303f17d20d5927e4423773e76e79d67b3c27c",
+          "authored_text_sha256": "7d1ff91845cafedeec431cf3c44bae7d5cf837531b731130229b386cdda62fa4",
+          "claim_type": "fact",
+          "purpose": "Зачем оценивать нежелательные явления вместе с эффектом?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-effect",
+              "aspect": "effect_and_tolerability"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "adherence_and_adverse_events"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-adverse",
+              "aspect": "documented_adverse_reactions"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "tolerability"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "effect_tolerability_adherence"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+              "aspect": "clinical_monitoring"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+              "aspect": "source_version_and_context"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F15",
+          "page": 30,
+          "supporting_pages": [
+            30
+          ],
+          "fragment_sha256": "12a4efa0e891edd884f49fdfc60ff2f82b9b55777dcc1596c7e5a95637584140",
+          "authored_text_sha256": "36ce510973107dd1acccaaeb3e425dcbca6491444fefc953352ca726ee299be0",
+          "claim_type": "fact",
+          "purpose": "Какие измерения эффекта описаны в КР ГТР?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-generalized_anxiety_disorder-trajectory",
+              "aspect": "no_diagnosis_from_score"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-remission",
+              "aspect": "source_definition"
+            },
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "effect"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F16",
+          "page": 31,
+          "supporting_pages": [
+            31
+          ],
+          "fragment_sha256": "7d3e0fc05b92d6d8f0beb6092d27918bdeec01030c46411c669814bd22fb58c3",
+          "authored_text_sha256": "43c3c392e50a9274b47db958fbda2b3ef84b51b1f69638746b580b9682d3905f",
+          "claim_type": "fact",
+          "purpose": "Что происходит при недостаточном эффекте или непереносимости?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-effect",
+              "aspect": "course_duration_context"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "adequacy_of_course"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "physician_review"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F17",
+          "page": 31,
+          "supporting_pages": [
+            31,
+            32
+          ],
+          "fragment_sha256": "4ee7b5b2d4ca7f45db9b405269957185f88b4711a94c1f6ebfcdfad6b256d988",
+          "authored_text_sha256": "532d40aedc73c7cbe6d17f4ea7f222394109834e011cef44c1311ebaa1b1712d",
+          "claim_type": "fact",
+          "purpose": "Зачем продолжать наблюдение после улучшения?",
+          "coverage_links": [
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-effect",
+              "aspect": "adherence"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-no_effect",
+              "aspect": "adherence_and_adverse_events"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-remission",
+              "aspect": "maintenance_context"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-remission",
+              "aspect": "recurrence_monitoring"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-relapse",
+              "aspect": "recurrence_context"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "review_timing_with_context"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "course_stage"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-review",
+              "aspect": "effect_tolerability_adherence"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F18",
+          "page": 32,
+          "supporting_pages": [
+            31,
+            32
+          ],
+          "fragment_sha256": "9d5023b434d6ee34b032aeff8ae4491f18646fab4528b5b3d28c2ff33a848fc3",
+          "authored_text_sha256": "bb72650d3078559fdea888c4e8127ae084c8477cec88f394f765efb809028388",
+          "claim_type": "fact",
+          "purpose": "Почему прекращение терапии требует индивидуального решения?",
+          "coverage_links": [
+            {
+              "unit_id": "D07-generalized_anxiety_disorder-discontinuation",
+              "aspect": "documented_discontinuation"
+            },
+            {
+              "unit_id": "D07-generalized_anxiety_disorder-discontinuation",
+              "aspect": "withdrawal_if_documented"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F19",
+          "page": 33,
+          "supporting_pages": [
+            32,
+            33
+          ],
+          "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af",
+          "authored_text_sha256": "6c0ac3a458b9bdd4c94c69f9418c0b2ee61998a8fa74a432e4c1f1665ddb3edd",
+          "claim_type": "fact",
+          "purpose": "Какие психотерапевтические подходы рассмотрены при ГТР?",
+          "coverage_links": [
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-psychotherapy",
+              "aspect": "documented_options"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-psychotherapy",
+              "aspect": "indications_and_limits"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+              "aspect": "evidence_limits"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F20",
+          "page": 38,
+          "supporting_pages": [
+            38
+          ],
+          "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5",
+          "authored_text_sha256": "00be6e17dca45a9ae429a3a0ee06032746de6616302c51556d4dc5964f25713c",
+          "claim_type": "fact",
+          "purpose": "Зачем следить за социальным функционированием?",
+          "coverage_links": [
+            {
+              "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D03-generalized_anxiety_disorder-relapse",
+              "aspect": "functioning"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+              "aspect": "followup_measures"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+              "aspect": "functioning"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F21",
+          "page": 39,
+          "supporting_pages": [
+            39
+          ],
+          "fragment_sha256": "79fe1a649da3ff9fa05d68e24261b4a84459331f79e9fc3f0147db72014e82ae",
+          "authored_text_sha256": "7747f36d549b96f5eb1b697642243b484acbb284b6d472aae73bac9ae20c8eac",
+          "claim_type": "fact",
+          "purpose": "Что относится к немедикаментозной поддержке?",
+          "coverage_links": [
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-substances",
+              "aspect": "substances_and_alcohol"
+            },
+            {
+              "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+              "aspect": "followup_measures"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        },
+        {
+          "fragment_id": "KR457_3-F22",
+          "page": 14,
+          "supporting_pages": [
+            14
+          ],
+          "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548",
+          "authored_text_sha256": "3a4e5aeeee18490baf219467455641e3cb4b8e82d02f555962be1e7924d4f300",
+          "claim_type": "fact",
+          "purpose": "Почему соматические проявления не сводятся к тревоге?",
+          "coverage_links": [
+            {
+              "unit_id": "D04-generalized_anxiety_disorder-tolerability",
+              "aspect": "confounders"
+            },
+            {
+              "unit_id": "D05-generalized_anxiety_disorder-contraindications",
+              "aspect": "precautions"
+            },
+            {
+              "unit_id": "D09-generalized_anxiety_disorder-differential",
+              "aspect": "somatic_causes"
+            },
+            {
+              "unit_id": "D11-generalized_anxiety_disorder-monitoring",
+              "aspect": "clinical_monitoring"
+            }
+          ],
+          "source_check": "PASS: main agent inspected original physical page and adjacent context; read-only content auditor checked all F06–F22; five coordinate/phrasing concerns resolved in draft-audit.md",
+          "scope_check": "Selected factual reference for own frozen HAC question; independent language; no table/key/dosing grid/treatment algorithm or sequential chapter reconstruction",
+          "clinical_origin": "Only source-supported clinical clause; factual population metadata also verified in official API",
+          "boundary_origin": "Explicit HAC limitation, not Ministry guideline recommendation or approved clinical rule",
+          "policy_evidence": [
+            "docs/architecture/retrieval-coverage-contract.md",
+            "docs/clinical/followup-recommendation-spec.md"
+          ],
+          "new_fact": true
+        }
+      ]
+    }
+  },
+  "scope": "34 new authored factual notes; two old purpose-specific quotes unchanged; no full text or new quote. Source clauses and HAC policy boundaries have distinct origins."
+}
