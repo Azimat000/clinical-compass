@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D10-generalized_anxiety_disorder-non_medical_followup",
+  "requirement_sha256": "a32699317c65090e2e63479a91425b24d429f0f8871060228c6ba95922f589f7",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Для депрессии F19/F20 допускают психотерапию на этапах лечения и социальное функционирование; F07/F16 отделяют функционирование и остаточные трудности от симптомов. Для ГТР F20/F21 задают реабилитационный/профилактический контекст, F19 — варианты и ограничения методов. Политика запрещает автоматический неподтверждённый протокол. Это сведения для поддерживающего наблюдения, не индивидуальные частоты или назначения. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "followup_measures": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F20",
+          "page": 38,
+          "section": "4. Медицинская реабилитация",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F21",
+          "page": 39,
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "79fe1a649da3ff9fa05d68e24261b4a84459331f79e9fc3f0147db72014e82ae"
+        }
+      ],
+      "policy_references": []
+    },
+    "functioning": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F20",
+          "page": 38,
+          "section": "4. Медицинская реабилитация",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+        }
+      ],
+      "policy_references": []
+    },
+    "evidence_limits": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F19",
+          "page": 33,
+          "section": "3.3 Психотерапия",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+        }
+      ],
+      "policy_references": []
+    },
+    "no_unapproved_protocol": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_unapproved_protocol",
+          "record_sha256": "727fd973ca5209a97d8365b249e4006fe54397e2aca36962dda133a91e4258b4"
+        }
+      ]
+    }
+  }
+}

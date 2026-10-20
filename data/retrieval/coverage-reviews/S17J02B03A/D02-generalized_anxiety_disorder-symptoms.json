@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D02-generalized_anxiety_disorder-symptoms",
+  "requirement_sha256": "c4b9e9708c0a0fe231c9ad372264b60d7743355fd84a30ec726b294bc55d095b",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "КР описывает наблюдение симптомов вместе с функционированием. Для депрессии F05/F08 задают наблюдение и оценку динамики, F07/F16/F20 — работу/социальные контакты и неполное восстановление. F11 ограничена острой фазой с наблюдением не реже раза в неделю: это контекст этапа, не универсальное окно сравнения. Для ГТР F07 требует выяснять длительность и устойчивость жалоб, F20 отделяет социальное восстановление от тревоги. Период записи и пропуски данных сохраняются явно; универсального срока или диагноза не выводится. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "symptoms": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F07",
+          "page": 13,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "001b8030a95bb0b9a0b4902f5a230162dc7ba976f63bd733ff18dfc17f106aac"
+        }
+      ],
+      "policy_references": []
+    },
+    "functioning": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F20",
+          "page": 38,
+          "section": "4. Медицинская реабилитация",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "e13d0ff4cc0f728abc7b68595435d9bba5e4643b19a3ac3c888175b5af95a3e5"
+        }
+      ],
+      "policy_references": []
+    },
+    "observation_period": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F07",
+          "page": 13,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "001b8030a95bb0b9a0b4902f5a230162dc7ba976f63bd733ff18dfc17f106aac"
+        }
+      ],
+      "policy_references": []
+    },
+    "missing_data": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "missing_data",
+          "record_sha256": "34b9dc5debd5228ca6d280f43902ec471fe9d2d8f5adf1a5ff671a75a8c40753"
+        }
+      ]
+    }
+  }
+}

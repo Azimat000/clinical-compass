@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T00:46:22+03:00",
+  "updated_on": "2026-10-21T01:04:43+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J02B02",
-  "next_slice": "S17J02B03",
+  "last_accepted_slice": "S17J02B03A",
+  "next_slice": "S17J02B03B",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -311,6 +311,18 @@
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02B03.md",
+      "reason": "До реализации разделён на B03A/B03B; исходные работы, результаты и критерии сохранены. Родитель не принят."
+    },
+    "S17J02B03A": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17J02B03A",
+      "handoff": "memory/sessions/S17J02B03A.md",
+      "reason": null
+    },
+    "S17J02B03B": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02B03B.md",
       "reason": null
     }
   },
@@ -457,17 +469,23 @@
     "commit_ref": "refs/tags/slice/S17J02A"
   },
   "latest_coverage_core": {
-    "slice": "S17J02B01",
+    "slice": "S17J02B03A",
     "parent": "S17J02B",
-    "report": "evidence/S17J02B/core-coverage.json",
-    "source_supported_aspects": 86,
-    "project_policy_only_aspects": 74,
-    "uncovered_aspects": 64,
+    "report": "evidence/S17J02B03A/core-coverage.json",
+    "source_supported_aspects": 98,
+    "policy_supported_aspects": 90,
+    "mixed_aspects": 10,
+    "unresolved_clinical_aspects": 46,
     "required_aspects": 224,
     "required_cells": 58,
-    "sufficient_cells": 0,
+    "sufficient_cells": 17,
+    "non_dossier_cells": 20,
+    "non_dossier_gap_cells": 3,
+    "dossier_dependent_gap_cells": 38,
     "clinical_validation": false,
-    "coverage_status": "NOT_READY"
+    "coverage_status": "NOT_READY",
+    "coverage_report": "evidence/S17J02B03A/coverage-readiness.json",
+    "commit_ref": "refs/tags/slice/S17J02B03A"
   },
   "latest_primary_admission": {
     "slice": "S17J02B02",
@@ -482,5 +500,20 @@
     "documented_constraints": 41,
     "clinical_validation": false,
     "commit_ref": "refs/tags/slice/S17J02B02"
-  }
+  },
+  "coverage_core_history": [
+    {
+      "slice": "S17J02B01",
+      "parent": "S17J02B",
+      "report": "evidence/S17J02B/core-coverage.json",
+      "source_supported_aspects": 86,
+      "project_policy_only_aspects": 74,
+      "uncovered_aspects": 64,
+      "required_aspects": 224,
+      "required_cells": 58,
+      "sufficient_cells": 0,
+      "clinical_validation": false,
+      "coverage_status": "NOT_READY"
+    }
+  ]
 }

@@ -1,0 +1,101 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D12-generalized_anxiety_disorder-scale_interpretation",
+  "requirement_sha256": "370dabd1dac43e9bb9c1d197a4ef5546dace884d7096efa97b89efc0c33c84b7",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Точный английский ключ даёт три шкалы по14пунктов и отделяет множитель DASS-21. FAQ отделяет размерные баллы от диагноза и ограничивает выдачу вычисленных результатов клиницистом/исследователем. HAC отдельно требует ту же полную форму, учёт пересечения периодов, три суммы только врачу и отсутствие диагностического/лекарственного порога. Технические ограничения подсчёта не подтверждают возрастную применимость русской валидации и не дают медицинской интерпретации. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-21T21:32:48.824516+00:00",
+  "aspects": {
+    "three_separate_scores_for_physician": {
+      "source_references": [
+        {
+          "document_id": "DASS42_EN_KEY",
+          "fragment_id": "DASS42_EN_KEY-F01",
+          "page": 1,
+          "section": "Full42-item DASS — scoring template; обе стороны",
+          "source_version": "UNSW DASS template; exact-PDF-5ceafc67",
+          "source_sha256": "5ceafc6731340b382bdd6eea256ea5f394dfe9897440615911f2cef84a977892",
+          "artifact_sha256": "bdf537565b416a72e99208cf0a3efcb31d5fe3c54dc524cdbbc0d388570a2dec",
+          "fragment_sha256": "0e869454011d6f3f0cd54c6160bcfbb97a775c5c90816daad6023db79806a18e"
+        },
+        {
+          "document_id": "DASS42_EN_KEY",
+          "fragment_id": "DASS42_EN_KEY-F02",
+          "page": 1,
+          "section": "Scoring notes: full42-item DASS versus DASS21",
+          "source_version": "UNSW DASS template; exact-PDF-5ceafc67",
+          "source_sha256": "5ceafc6731340b382bdd6eea256ea5f394dfe9897440615911f2cef84a977892",
+          "artifact_sha256": "bdf537565b416a72e99208cf0a3efcb31d5fe3c54dc524cdbbc0d388570a2dec",
+          "fragment_sha256": "6365acd800c44e569527b6c94154a3f182e3017bb45762eb5006e0892506bad5"
+        },
+        {
+          "document_id": "DASS42_GUIDANCE",
+          "fragment_id": "DASS42_GUIDANCE-F04",
+          "page": null,
+          "section": "FAQ, вопросы9 и21: computer/online; website/app",
+          "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+          "source_sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+          "artifact_sha256": "7a855d0d2aa298192214e044c48c09e37bb48a8845eb9ed012266a625d92a272",
+          "fragment_sha256": "dff2aaa44ebbb8de44b6fda2421257caac81bb032f5a510f0ead44b36d68f5e5"
+        }
+      ],
+      "policy_references": [
+        {
+          "policy_id": "three_separate_scores_for_physician",
+          "record_sha256": "c339eec768dc48915b7fc8b7f117e337f72f4d361d0dead332d057f54dc4db12"
+        }
+      ]
+    },
+    "complete_same_form": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "complete_same_form",
+          "record_sha256": "bf62dff2890eeff65b94af978dc59e9e5c5d2481ffc812fa9f7f30d151e4f12b"
+        }
+      ]
+    },
+    "overlapping_periods": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "overlapping_periods",
+          "record_sha256": "31adb59c554bbec7ecb42df3f644da81aa78ca33348a87ed64c1337d2d309f6c"
+        }
+      ]
+    },
+    "no_diagnostic_or_medication_threshold": {
+      "source_references": [
+        {
+          "document_id": "DASS42_GUIDANCE",
+          "fragment_id": "DASS42_GUIDANCE-F03",
+          "page": null,
+          "section": "FAQ, вопросы5 и13: clinical cutoffs / DSM diagnoses",
+          "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+          "source_sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+          "artifact_sha256": "7a855d0d2aa298192214e044c48c09e37bb48a8845eb9ed012266a625d92a272",
+          "fragment_sha256": "4956a1e57a17093215dd635c9ac6c3667c4e7d12f116c9d0db3dc569e553cf66"
+        }
+      ],
+      "policy_references": [
+        {
+          "policy_id": "no_diagnostic_or_medication_threshold",
+          "record_sha256": "6786cc3f33a807588b90273a5dc0243d71db804f834bf16b8bfcbb47f8b95901"
+        }
+      ]
+    },
+    "patient_no_computed_scores": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "patient_no_computed_scores",
+          "record_sha256": "4b82c8e6d35686701247d390805e7b13c7f8cf49b364e3ba8d161567261e34cc"
+        }
+      ]
+    }
+  }
+}

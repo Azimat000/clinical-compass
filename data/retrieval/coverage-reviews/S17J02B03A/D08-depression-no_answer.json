@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D08-depression-no_answer",
+  "requirement_sha256": "b8697e5a8ebf7ddb76053ccb6964274551025c57073e0376162b2d89fcbc7d62",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Вопрос полностью о поведении HAC при отсутствии данных/источника: неизвестность не означает отсутствие риска, недоступность явна, сетевого или модельного запасного ответа нет. Все три аспекта имеют отдельные проектные основания. Это полнота документированных ограничений, не медицинский вывод и не проверка runtime. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-21T21:52:03.036314+00:00",
+  "aspects": {
+    "missing_not_no_risk": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "missing_not_no_risk",
+          "record_sha256": "3f7ff3ebe868b3c6fdd2cae5480e939c1576a76aa7e002e4b1be33c7002ccb74"
+        }
+      ]
+    },
+    "explicit_unavailability": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "explicit_unavailability",
+          "record_sha256": "10cea081adee77385133ae1ed12d1463aba7572c9f59b103c1909146207c95b7"
+        }
+      ]
+    },
+    "no_model_or_network_fallback": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_model_or_network_fallback",
+          "record_sha256": "0c0772e8641ccca7b3aa9667fbbebcb3bec0f8de2125b66ab2f51609522a379b"
+        }
+      ]
+    }
+  }
+}

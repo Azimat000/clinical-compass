@@ -1,0 +1,92 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D09-generalized_anxiety_disorder-substances",
+  "requirement_sha256": "2494b4f9ba30dd216d496628eb3989617d25ced7fe45f554cbe3ad4ea9276792",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Карточки соответствующего направления явно учитывают вещества, лекарства и сопутствующую соматическую/психическую патологию. Для депрессии F09 описывает ПАВ и лекарственные причины; F21 — соматический контекст. Для ГТР F08/F10/F21 описывают зависимость, вещества/отмену/лекарства и ограничение алкоголя. Политики сохраняют неизвестность и запрещают перенос оснований между диагнозами. Лекарственное взаимодействие и индивидуальная причинность этим не установлены. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "substances_and_alcohol": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F08",
+          "page": 10,
+          "section": "1.6 Клиническая картина",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F10",
+          "page": 11,
+          "section": "1.6 Клиническая картина — дифференциальная диагностика",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F21",
+          "page": 39,
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "79fe1a649da3ff9fa05d68e24261b4a84459331f79e9fc3f0147db72014e82ae"
+        }
+      ],
+      "policy_references": []
+    },
+    "coexisting_conditions": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F08",
+          "page": 10,
+          "section": "1.6 Клиническая картина",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F10",
+          "page": 11,
+          "section": "1.6 Клиническая картина — дифференциальная диагностика",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+        }
+      ],
+      "policy_references": []
+    },
+    "uncertainty": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "uncertainty",
+          "record_sha256": "915302115d9c7c6f085d6bd5dc77f8978f8509c675b90c1c8f9131751ee9c4ea"
+        }
+      ]
+    },
+    "no_cross_diagnosis_transfer": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_cross_diagnosis_transfer",
+          "record_sha256": "12ab4e32c09cf4dbeb2188a3761501209e9351ca1cd4c33e8be7db1c359a92b1"
+        }
+      ]
+    }
+  }
+}

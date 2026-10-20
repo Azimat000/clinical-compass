@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "parent": "S17J02B",
+  "reviewed_by": "Codex main technical reviewer, not independent clinician",
+  "checked_at": "2026-10-20T22:03:05.660306+00:00",
+  "verdict": "NOT_ACCEPTED",
+  "tasks": [
+    {
+      "text": "По замороженной матрице собрать достаточные комплекты по обоим направлениям: динамика/функционирование, эффект/переносимость/приверженность/рецидив, наблюдение, немедикаментозная помощь, шкалы и границы применимости. Дополнительные КР находить по конкретному пробелу через исследователя.",
+      "status": "PARTIAL",
+      "evidence": [
+        "evidence/S17J02B03A/core-coverage.json",
+        "evidence/S17J02B03A/verification.json"
+      ],
+      "reason": "Все224аспекта рассмотрены,17достаточных справочных комплектов приняты. Остальные41ячейка не принята:3NON-DOSSIER/38сдосье."
+    },
+    {
+      "text": "Для каждого нового источника/утверждения проверить текущую официальную версию, популяцию, правомерное представление, страницу, контекст и самостоятельную формулировку. Полный текст допускать только при доказанных правах; не расширять старый scoped-допуск задним числом.",
+      "status": "PARTIAL",
+      "evidence": [
+        "evidence/S17J02B03A/core-coverage.json",
+        "evidence/S17J02B03A/verification.json"
+      ],
+      "reason": "Новых источников/утверждений не допущено. Прежние точные версии/права/проверки повторно валидированы; возрастные пробелы не закрыты."
+    },
+    {
+      "text": "Импортировать новые проверенные пакеты воспроизводимо, сверить каждую индексируемую единицу и достаточные комплекты с оригиналом; зафиксировать все пробелы/карантин/противоречия. Не подменять содержание источника медицинским эталоном модели.",
+      "status": "PARTIAL",
+      "evidence": [
+        "evidence/S17J02B03A/core-coverage.json",
+        "evidence/S17J02B03A/verification.json"
+      ],
+      "reason": "Повтор9источников/61карточки и история проверены. Все пробелы сохранены; полное расширение/досье не завершены."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "evidence/S17J02B/core-coverage.json",
+      "status": "PRESERVED_HISTORICAL_NOT_FINAL_PARENT_RESULT",
+      "current_successor": "evidence/S17J02B03A/core-coverage.json"
+    },
+    {
+      "path": "evidence/S17J02B/source-content-review.json",
+      "status": "PRESERVED_HISTORICAL_NOT_FINAL_PARENT_RESULT",
+      "current_successor": "evidence/S17J02B/source-content-review.json"
+    },
+    {
+      "path": "evidence/S17J02B/corpus-manifest.json",
+      "status": "PRESERVED_HISTORICAL_NOT_FINAL_PARENT_RESULT",
+      "current_successor": "evidence/S17J02B03A/corpus-manifest.json"
+    },
+    {
+      "path": "evidence/S17J02B/acceptance.md",
+      "status": "PRESERVED_HISTORICAL_NOT_FINAL_PARENT_RESULT",
+      "current_successor": "evidence/S17J02B03A/acceptance.md"
+    }
+  ],
+  "criteria": [
+    {
+      "text": "Каждая обязательная ячейка клинического ядра имеет достаточное допущенное основание обоих применимых направлений либо честный провал; отсутствие по обязательной ячейке блокирует приёмку.",
+      "verdict": "FAIL",
+      "reason": "FAIL:17/58достаточных комплектов,41обязательная ячейка неполна; отсутствие блокирует приёмку."
+    },
+    {
+      "text": "Все новые единицы связаны с точной версией/правами/страницей/проверкой и не теряют ограничения. Повтор импорта/история/сохранность проверены.",
+      "verdict": "PASS_FOR_SUBSET",
+      "reason": "PASS_FOR_CURRENT_SUBSET:17комплектов имеют точные ссылки/права/страницы/сроки; повтор/история/сохранность проверены. Не утверждает полноту всех будущих единиц."
+    },
+    {
+      "text": "Клиническое одобрение не выдумано, FU не активированы; международные кандидаты не заменяют российские показания и не попадают в индекс без допуска.",
+      "verdict": "PASS",
+      "reason": "PASS:clinical_validationне получена, FUнеактивны; международные кандидаты/новые источники не импортировались."
+    }
+  ],
+  "B03_criteria": [
+    {
+      "text": "Каждый обязательный клинический вопрос/аспект обоих направлений имеет достаточное допущенное основание по неизменённым критериям родителя; обязательный пробел блокирует итоговую приёмку.",
+      "verdict": "FAIL",
+      "reason": "Оригинальный критерий сохранён; B03B и итоговый B03 ещё не выполнены. ПолныйCOVERAGE-1 NOT_READY,17/58,0/90,0/9."
+    },
+    {
+      "text": "Все достаточные комплекты связаны с точными допущенными карточками и актуальными проверками, а политики отдельно обозначены; повтор/история/сохранность проверены.",
+      "verdict": "PASS_FOR_SUBSET",
+      "reason": "Оригинальный критерий сохранён; B03B и итоговый B03 ещё не выполнены. ПолныйCOVERAGE-1 NOT_READY,17/58,0/90,0/9."
+    },
+    {
+      "text": "Исходные задачи/результаты/три критерияS17J02B полностью проверены, неполное неaccepted. Полные9досье/90разделов и все58ячеек остаются обязательнымиCOVERAGE-1 вJ02C, без снижения или кругового объявления готовности.",
+      "verdict": "FAIL",
+      "reason": "Оригинальный критерий сохранён; B03B и итоговый B03 ещё не выполнены. ПолныйCOVERAGE-1 NOT_READY,17/58,0/90,0/9."
+    }
+  ],
+  "non_dossier_gaps": [
+    "D09-depression-differential.other_disorders_including_bipolar_psychotic_and_panic",
+    "D12-depression-scale_identity.age_boundary",
+    "D12-generalized_anxiety_disorder-scale_identity.age_boundary"
+  ],
+  "remaining_dossier_cells": 38,
+  "remaining_dossier_sections": 90,
+  "remaining_dossiers": 9,
+  "source_freshness_extended": false,
+  "independent_clinical_approval": false,
+  "FU_activated": false,
+  "J02C_started": false,
+  "J02C_dependency": [
+    "S17J02B"
+  ],
+  "requirements_preserved": "83/160;G01-G09;58cells/224aspects/9dossiers/90sections",
+  "next_slice": "S17J02B03B",
+  "next_work": "Точный источник для полного дифференциального перечня депрессии; первичные возрастные основания без подстановки. Затем исходная покомплектная приёмка B03/B; обязательные пробелы и зависимостьJ02C не обходить. Если оставшийся объём не помещается, разделить до расширения, сохранив критерии."
+}

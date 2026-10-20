@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D08-depression-critical",
+  "requirement_sha256": "d7d607399e7a22833d48ffaec6d04d4738a70ee854e9e7678fd8d9b3d7f82c28",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Точная карточка КР подтверждает необходимость врачебной оценки суицидального риска в соответствующем направлении. Остальные аспекты — независимость существующего пути безопасности, отсутствие определения срочности поиском и недопустимость задержки — собственные ограничения HAC. Это достаточные справочные границы вопроса; проверка поведения будущего поиска и клинический протокол не засчитаны. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "critical_information_source": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F02",
+          "page": 16,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "903c8d30885f308524881097d5241bb6bcf7fd80074a947dfdc49be2d5d7e999"
+        }
+      ],
+      "policy_references": []
+    },
+    "independent_safety_path": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "independent_safety_path",
+          "record_sha256": "ea6dc466be02e978023a1ca088d38f728d87e53a6a33864719bbd1f0278174e4"
+        }
+      ]
+    },
+    "no_urgency_from_RAG": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_urgency_from_RAG",
+          "record_sha256": "16b4c7aa9b2c05674193ef849c3873aebf22b47886fbb7d774a18d2d5e2a969a"
+        }
+      ]
+    },
+    "search_must_not_delay_existing_response": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "search_must_not_delay_existing_response",
+          "record_sha256": "9656c9bafc2b1d4c192a74700657e4b1d405eaeb6ec150c5137270b56068e2a7"
+        }
+      ]
+    }
+  }
+}

@@ -35,6 +35,8 @@ class CoverageTests(unittest.TestCase):
         fixtures.policy(self.root,['NEW','DASS42'])
         self.refresh_snapshot()
         self.evidence=json.loads((self.root/EVIDENCE).read_text())
+        # Real reviews refer to the real source catalog, never to this fixture.
+        self.evidence['units']={}
 
     def refresh_snapshot(self):
         self.registry,manifest,blobs=fixtures.build(self.root)
@@ -147,7 +149,7 @@ class CoverageTests(unittest.TestCase):
             self.assertEqual(self.result()['counts']['cells']['complete'],0)
 
     def test_rights_revoked_after_snapshot_invalidates_coverage(self):
-        uid=next(iter(self.units));self.put_report(uid,self.report_for(uid))
+        uid='D02-depression-symptoms';self.put_report(uid,self.report_for(uid))
         self.assertEqual(self.result()['counts']['cells']['complete'],1)
         self.records[0]['rights']['status']='revoked'
         fixtures.save(self.root,'data/retrieval/packages/NEW/registry.json',dict(schema_version=1,sources=self.records))
@@ -187,6 +189,7 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(result['status'],'NOT_READY')
         self.assertEqual(result['counts']['medications']['complete'],8)
         self.assertEqual(sum(g['reason']=='dossier_identity_conflict' for g in result['gaps']),10)
+        self.assertEqual(result['counts']['cells']['complete'],20)
 
     def test_no_snapshot_or_unknown_evidence_cannot_be_ready(self):
         self.complete_fixture();fixtures.save(self.root,EVIDENCE,self.evidence)
@@ -238,11 +241,34 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(next(g for g in self.result()['gaps'] if g['unit_id']==uid)['reason'],'policy_cannot_replace_clinical_source')
 
     def test_v1_remains_readable_for_clinical_only_but_cannot_hide_policy_origin(self):
-        for uid,expected in [('D01-depression-context',1),('D02-depression-symptoms',0)]:
+        catalog,_=card_catalog(self.snapshot,self.registry,moment(fixtures.AT),self.root)
+        for uid,valid in [('D01-depression-context',True),('D02-depression-symptoms',False)]:
             r=self.report_for(uid);r['schema_version']=1
             r['aspects']={a:e['source_references'] for a,e in r['aspects'].items()};self.put_report(uid,r)
-            self.assertEqual(self.result()['counts']['cells']['complete'],expected)
+            if valid:
+                validate_review(self.root,uid,self.units[uid],self.evidence['units'][uid],catalog,self.frozen,moment(fixtures.AT))
+            else:
+                with self.assertRaisesRegex(CorpusError,'separate_policy_evidence_required'):
+                    validate_review(self.root,uid,self.units[uid],self.evidence['units'][uid],catalog,self.frozen,moment(fixtures.AT))
             self.evidence['units'].clear()
+
+    def test_cell_attestations_cannot_bypass_required_dossiers(self):
+        for uid,unit in self.units.items():
+            if unit['kind']=='cell':self.put_report(uid,self.report_for(uid))
+        result=self.result()
+        self.assertEqual(result['counts']['cells']['complete'],20)
+        blocked=[g for g in result['gaps'] if g['reason']=='required_dossiers_incomplete']
+        self.assertEqual(len(blocked),38)
+        self.assertTrue(all(len(g['missing_dossiers'])==9 for g in blocked))
+
+    def test_one_missing_dossier_section_withdraws_dependent_cells(self):
+        self.complete_fixture()
+        uid=self.meds['medications'][0]['id']+'/monitoring'
+        del self.evidence['units'][uid]
+        result=self.result()
+        self.assertEqual(result['counts']['cells']['complete'],20)
+        self.assertEqual(result['counts']['medications']['complete'],8)
+        self.assertEqual(sum(g['reason']=='required_dossiers_incomplete' for g in result['gaps']),38)
 
 
 if __name__ == '__main__':unittest.main()

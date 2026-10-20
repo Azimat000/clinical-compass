@@ -1,0 +1,98 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D10-depression-non_medical_followup",
+  "requirement_sha256": "ce7078c9fa4554411868fdb65b7126e4b5a288049b0165182e246912fcd1dbe7",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Для депрессии F19/F20 допускают психотерапию на этапах лечения и социальное функционирование; F07/F16 отделяют функционирование и остаточные трудности от симптомов. Для ГТР F20/F21 задают реабилитационный/профилактический контекст, F19 — варианты и ограничения методов. Политика запрещает автоматический неподтверждённый протокол. Это сведения для поддерживающего наблюдения, не индивидуальные частоты или назначения. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "followup_measures": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F19",
+          "page": 46,
+          "section": "3.7 Иное лечение — психотерапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F20",
+          "page": 47,
+          "section": "3.7 Иное лечение — психотерапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+        }
+      ],
+      "policy_references": []
+    },
+    "functioning": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F07",
+          "page": 14,
+          "section": "2. Диагностика",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F16",
+          "page": 42,
+          "section": "3.6 Противорецидивная терапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F20",
+          "page": 47,
+          "section": "3.7 Иное лечение — психотерапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+        }
+      ],
+      "policy_references": []
+    },
+    "evidence_limits": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F19",
+          "page": 46,
+          "section": "3.7 Иное лечение — психотерапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "27978074c6ed6d670da0a2965d6f35293e95be24fb6ef7a7e399985a4908f1dc"
+        }
+      ],
+      "policy_references": []
+    },
+    "no_unapproved_protocol": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_unapproved_protocol",
+          "record_sha256": "727fd973ca5209a97d8365b249e4006fe54397e2aca36962dda133a91e4258b4"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D02-generalized_anxiety_disorder-trajectory",
+  "requirement_sha256": "f77757d66a58a6dcda8046f17ca1bc2100e665ffcfd680fb4814ffd75140ea6a",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Сопоставимость одной формы, периодов и происхождение записей — отдельные ограничения HAC. FAQ DASS F03 отделяет размерные симптомы от категориального диагноза. Смешанный аспект имеет оба происхождения; КР не выдаётся за валидацию DASS. Комплект объясняет пределы сравнения, не доказывает валидность русской шкалы для конкретного возраста. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-21T21:32:50.871039+00:00",
+  "aspects": {
+    "comparable_measurements": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "comparable_measurements",
+          "record_sha256": "64518aba579a512c41e36cb60652a84e284c9c56bb13d711dca692987b51fe1a"
+        }
+      ]
+    },
+    "time_overlap": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "time_overlap",
+          "record_sha256": "0174d2cd462f27686f3209f67cfc1576903333732f964603d191247f0e61edc6"
+        }
+      ]
+    },
+    "patient_and_physician_provenance": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "patient_and_physician_provenance",
+          "record_sha256": "3621e3aaa2d3dc3a71248421c132398b895e2f12c0574ddd63409cde109fae8b"
+        }
+      ]
+    },
+    "no_diagnosis_from_score": {
+      "source_references": [
+        {
+          "document_id": "DASS42_GUIDANCE",
+          "fragment_id": "DASS42_GUIDANCE-F03",
+          "page": null,
+          "section": "FAQ, вопросы5 и13: clinical cutoffs / DSM diagnoses",
+          "source_version": "UNSW DASS FAQ; acquisition-2026-10-21-a4800f94",
+          "source_sha256": "a4800f9439e4828d57c4bcd243e4a848b50c404740cae05d4990c2a77bd638b5",
+          "artifact_sha256": "7a855d0d2aa298192214e044c48c09e37bb48a8845eb9ed012266a625d92a272",
+          "fragment_sha256": "4956a1e57a17093215dd635c9ac6c3667c4e7d12f116c9d0db3dc569e553cf66"
+        }
+      ],
+      "policy_references": [
+        {
+          "policy_id": "no_diagnosis_from_score",
+          "record_sha256": "11d339a83872ef2cf6856fab77068efd8d56c2767f462c84730d991e78266dd7"
+        }
+      ]
+    }
+  }
+}

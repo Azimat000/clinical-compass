@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D09-generalized_anxiety_disorder-differential",
+  "requirement_sha256": "3c3f24709278f845dd499802c4bef68c6607d1c5e46f11de0e3284a0a131e1d9",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Для ГТР F08/F09/F10 различают депрессивные/биполярные, панические и психотические/органические состояния; F10/F22 — соматические причины; F01/F08/F09 — врачебная дифференциальная оценка. Политика запрещает вывод диагноза из вопроса. Для депрессии F10 поддерживает только БАР; полного перечня frozen-аспекта нет и эта ячейка не принимается. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "other_disorders_including_bipolar_psychotic_and_panic": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F08",
+          "page": 10,
+          "section": "1.6 Клиническая картина",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F09",
+          "page": 12,
+          "section": "2. Диагностика — исключения",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F10",
+          "page": 11,
+          "section": "1.6 Клиническая картина — дифференциальная диагностика",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+        }
+      ],
+      "policy_references": []
+    },
+    "somatic_causes": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F10",
+          "page": 11,
+          "section": "1.6 Клиническая картина — дифференциальная диагностика",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "381f4ba011a0aeb4f2987b193f24d8a30d8f7c674b9691986d68945b5e6b8211"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F22",
+          "page": 14,
+          "section": "2.2 Физикальное обследование",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "a78b7ef33a7f2a1648f89a3a0c5a6f073480f48ce0208b5bd18debb3d64cf548"
+        }
+      ],
+      "policy_references": []
+    },
+    "physician_assessment": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F01",
+          "page": 10,
+          "section": "1.6 Клиническая картина",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "cc03743f4fd75ba6021e1baefc52d65d0e6434966cdcdc5a25f49e4b50fadee0"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F08",
+          "page": 10,
+          "section": "1.6 Клиническая картина",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "f4549ae340a733f72af5975d4665e2e9132fd9ab94fd36664c1393e5d7bb438c"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F09",
+          "page": 12,
+          "section": "2. Диагностика — исключения",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "800a097ae472ffea8411027bfcc04390a18a253db52c8bc29f577aab409c5b12"
+        }
+      ],
+      "policy_references": []
+    },
+    "no_diagnosis_from_question": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "no_diagnosis_from_question",
+          "record_sha256": "5fa67a29036aad6f45b28241f94068b018ebf6dcd63afe55c14f80a29381d963"
+        }
+      ]
+    }
+  }
+}

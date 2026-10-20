@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-20T22:06:25.767927+00:00",
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03A/make-check.log",
+      "log_sha256": "665319294d787e822832774f3c9fc967bfb16ec3258c6283c93502604d597b4e"
+    },
+    {
+      "command": "PYTHONPATH=tools:. .venv/bin/python -m unittest tools.test_retrieval_coverage -v",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03A/coverage-tests.log",
+      "log_sha256": "a63683b4569a6cafa8cf007e0dd45a462ccd4ccbc0ee04760b7f7860b82d30a8"
+    },
+    {
+      "command": "python3 evidence/S17J02B03A/verify.py",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03A/verify.log",
+      "log_sha256": "78c6a63b34f110ff537388422ac3e0a911f8f8f7c720adc9f6c794d8900420e9"
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17J02B03A",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03A/plan-check.log",
+      "log_sha256": "d03b144f063eff77d05068576a9902d50d702be069662e5e78448d024160db74"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "log_path": "evidence/S17J02B03A/session-status.log",
+      "log_sha256": "2023400fd6189b9915f0695a0140b9a1a363346ce1c71e7ebeae05368a81dd7e"
+    }
+  ],
+  "additional_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "full_application_tests": 290,
+  "full_tool_tests": 70,
+  "targeted_coverage_tests": 22,
+  "restart_smoke": "PASS",
+  "dependency_check": "No broken requirements found",
+  "synthetic_dataset_integrity": "PASS",
+  "main_agent_executed": true,
+  "technical_checks_not_clinical_approval": true
+}

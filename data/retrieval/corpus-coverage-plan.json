@@ -25,9 +25,9 @@
     "medication_roster": "data/retrieval/planned-medications.json; frozen9required dossiers with exact trade/form/strength/RU research targets; current status and complete GRLS dossiers not verified"
   },
   "current_corpus": {
-    "accepted_slice": "S17J02",
-    "sources": 3,
-    "authored_fact_cards": 15,
+    "accepted_slice": "S17J02B02",
+    "sources": 9,
+    "authored_fact_cards": 61,
     "original_quotes": 2,
     "full_text_admission": false,
     "sufficient_for_service": false,
@@ -39,9 +39,9 @@
     "before": "S17J03",
     "detailed_cells_frozen": true,
     "medication_roster_frozen": true,
-    "complete_cells": 0,
+    "complete_cells": 17,
     "required_cells": 58,
-    "coverage_percent": 0,
+    "coverage_percent": 29.31,
     "preserve_gates": [
       "G01",
       "G02",
@@ -64,7 +64,7 @@
     "complete_medications": 0,
     "required_dossier_sections": 90,
     "complete_dossier_sections": 0,
-    "note": "0/58 means no new sufficient bundle has yet been attested; existing 15 references remain admitted. Definitions of 10 refusals are frozen, behavior not tested by this gate."
+    "note": "B03A:17/58 technical reference bundles, not parent B/B03 acceptance or clinical approval;38 cells still need dossiers,3 non-dossier cells have explicit clinical gaps.0/90 sections,0/9dossiers. Refusal behavior not tested. Sources/reviews retain their own expiry."
   },
   "domains": [
     {
@@ -404,8 +404,9 @@
     "new_models_installed": false,
     "new_expenses_rub": 0
   },
-  "assessment_scope": "Оценка только допущенных 15 карточек RAG J02. Наличие других источников, шкал и функций в сервисе не означает их допуска в этот индекс; существующие функции не удаляются.",
+  "assessment_scope": "Проверка прежних 9 допущенных источников и 61 карточки B01/B02; B03A добавляет17технически достаточных справочных комплектов, не клиническое одобрение. Остальные источники/функции не получают допуска от наличия в сервисе. Сроки/права не продлены.",
   "detailed_matrix": "data/retrieval/coverage-matrix.json",
   "scope_freeze": "data/retrieval/coverage-freeze.json",
-  "coverage_report": "evidence/S17J02A/coverage-readiness.json"
+  "coverage_report": "evidence/S17J02B03A/coverage-readiness.json",
+  "updated_on": "2026-10-21"
 }

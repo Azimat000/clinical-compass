@@ -1,0 +1,27 @@
+test_DASS_sources_cannot_replace_medication_or_other_clinical_knowledge (tools.test_retrieval_coverage.CoverageTests.test_DASS_sources_cannot_replace_medication_or_other_clinical_knowledge) ... ok
+test_KR_cannot_masquerade_as_exact_DASS_validation (tools.test_retrieval_coverage.CoverageTests.test_KR_cannot_masquerade_as_exact_DASS_validation) ... ok
+test_cell_attestations_cannot_bypass_required_dossiers (tools.test_retrieval_coverage.CoverageTests.test_cell_attestations_cannot_bypass_required_dossiers) ... ok
+test_complete_artificial_attestations_only_structure_ready (tools.test_retrieval_coverage.CoverageTests.test_complete_artificial_attestations_only_structure_ready) ... ok
+test_invalid_audit_time_fails_closed (tools.test_retrieval_coverage.CoverageTests.test_invalid_audit_time_fails_closed) ... ok
+test_missing_aspect_and_expired_or_unverified_review (tools.test_retrieval_coverage.CoverageTests.test_missing_aspect_and_expired_or_unverified_review) ... ok
+test_missing_exact_medication_identity_and_safety_check (tools.test_retrieval_coverage.CoverageTests.test_missing_exact_medication_identity_and_safety_check) ... ok
+test_mixed_dossier_identities_block_medication (tools.test_retrieval_coverage.CoverageTests.test_mixed_dossier_identities_block_medication) ... ok
+test_mixed_instrument_aspect_requires_both_origins (tools.test_retrieval_coverage.CoverageTests.test_mixed_instrument_aspect_requires_both_origins) ... ok
+test_no_snapshot_or_unknown_evidence_cannot_be_ready (tools.test_retrieval_coverage.CoverageTests.test_no_snapshot_or_unknown_evidence_cannot_be_ready) ... ok
+test_one_missing_dossier_section_withdraws_dependent_cells (tools.test_retrieval_coverage.CoverageTests.test_one_missing_dossier_section_withdraws_dependent_cells) ... ok
+test_one_missing_unit_blocks_complete_fixture (tools.test_retrieval_coverage.CoverageTests.test_one_missing_unit_blocks_complete_fixture) ... ok
+test_patient_leaflet_cannot_replace_professional_dossier (tools.test_retrieval_coverage.CoverageTests.test_patient_leaflet_cannot_replace_professional_dossier) ... ok
+test_policy_only_cannot_be_filled_with_a_clinical_card (tools.test_retrieval_coverage.CoverageTests.test_policy_only_cannot_be_filled_with_a_clinical_card) ... ok
+test_ready_flag_never_replaces_evidence (tools.test_retrieval_coverage.CoverageTests.test_ready_flag_never_replaces_evidence) ... ok
+test_real_scope_denominators_not_card_count (tools.test_retrieval_coverage.CoverageTests.test_real_scope_denominators_not_card_count) ... ok
+test_review_tampering_and_escaping_paths (tools.test_retrieval_coverage.CoverageTests.test_review_tampering_and_escaping_paths) ... ok
+test_rights_revoked_after_snapshot_invalidates_coverage (tools.test_retrieval_coverage.CoverageTests.test_rights_revoked_after_snapshot_invalidates_coverage) ... ok
+test_same_age_aspect_in_FU08_cannot_use_DASS_source_or_policy (tools.test_retrieval_coverage.CoverageTests.test_same_age_aspect_in_FU08_cannot_use_DASS_source_or_policy) ... ok
+test_scope_change_and_empty_denominator_rejected (tools.test_retrieval_coverage.CoverageTests.test_scope_change_and_empty_denominator_rejected) ... ok
+test_v1_remains_readable_for_clinical_only_but_cannot_hide_policy_origin (tools.test_retrieval_coverage.CoverageTests.test_v1_remains_readable_for_clinical_only_but_cannot_hide_policy_origin) ... ok
+test_wrong_page_version_hash_or_unadmitted_card_is_gap (tools.test_retrieval_coverage.CoverageTests.test_wrong_page_version_hash_or_unadmitted_card_is_gap) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.956s
+
+OK

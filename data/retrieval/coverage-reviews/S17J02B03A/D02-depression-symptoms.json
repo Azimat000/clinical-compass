@@ -1,0 +1,98 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D02-depression-symptoms",
+  "requirement_sha256": "9beecb231c66962ff49a968dde071c48564fc79fd40d06b4b6b58f200ed450fe",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "КР описывает наблюдение симптомов вместе с функционированием. Для депрессии F05/F08 задают наблюдение и оценку динамики, F07/F16/F20 — работу/социальные контакты и неполное восстановление. F11 ограничена острой фазой с наблюдением не реже раза в неделю: это контекст этапа, не универсальное окно сравнения. Для ГТР F07 требует выяснять длительность и устойчивость жалоб, F20 отделяет социальное восстановление от тревоги. Период записи и пропуски данных сохраняются явно; универсального срока или диагноза не выводится. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "symptoms": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F05",
+          "page": 23,
+          "section": "3. Лечение",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "1962494c2eeaad7190520d3e4fe739fc9de2bb5510a568ec8e216a708881c460"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F08",
+          "page": 17,
+          "section": "2.1 Жалобы и анамнез",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "db75dfea8a3b960341dcad8a8e8c3623183a817f2a2e5cdf3b34bff4fa3b8163"
+        }
+      ],
+      "policy_references": []
+    },
+    "functioning": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F07",
+          "page": 14,
+          "section": "2. Диагностика",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "fb84b54339421ac7d2849131a63a8e624537d6915a87a2161dcd7bd44e0a1f99"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F16",
+          "page": 42,
+          "section": "3.6 Противорецидивная терапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "55945d279e1472997b2396dcb7e5c1fb49c046be992200db8136da31d1f2d05c"
+        },
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F20",
+          "page": 47,
+          "section": "3.7 Иное лечение — психотерапия",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "93d47e284526719c3b656b6a43800eca6b982f67c5c4521f4714182032bbae19"
+        }
+      ],
+      "policy_references": []
+    },
+    "observation_period": {
+      "source_references": [
+        {
+          "document_id": "KR301_3",
+          "fragment_id": "KR301_3-F11",
+          "page": 23,
+          "section": "3. Лечение",
+          "source_version": "301_3 / 2024 / version=3",
+          "source_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+          "artifact_sha256": "dd1eb832f38c11fc09f3e60ce015b8adaac37d1b019c2e76c8f1326f3056d988",
+          "fragment_sha256": "c4b98fdffc73ff85aef4da51b9adff4d5aa17b84fd4a65d22d2101ec04d17f89"
+        }
+      ],
+      "policy_references": []
+    },
+    "missing_data": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "missing_data",
+          "record_sha256": "34b9dc5debd5228ca6d280f43902ec471fe9d2d8f5adf1a5ff671a75a8c40753"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "scope_version": "COVERAGE-1-scope-1",
+  "unit_id": "D10-generalized_anxiety_disorder-psychotherapy",
+  "requirement_sha256": "9440b3250cae2c99d1e1e049b1b842d089cc0abaf073b95c8ff5ec624747a5db",
+  "verdict": "sufficient",
+  "reviewer": "Codex main agent, technical content review; not an independent clinician",
+  "origin": "HAC_TECHNICAL_REFERENCE_CONTENT_REVIEW_NOT_CLINICAL_APPROVAL",
+  "sufficiency_explanation": "Допущенные карточки перечисляют методы и их границы: для депрессии F19/F20 — КПТ/ИПТ/ПДТ, различия доказательств и обстоятельства выбора; для ГТР F13/F19 — стратегия, релаксация/КПТ, ограничения участия и сочетания. Подтверждённый врачом индивидуальный план — отдельная политика. Комплект отвечает о вариантах, не назначает курс. Популяция и стадия ограничены точным frozen-вопросом; источниковый/правовой допуск взят из B01/B02 без продления сроков. Техническая достаточность справочных оснований; не независимый клинический допуск, не персональная применимость, не работающий RAG.",
+  "checked_at": "2026-10-20T22:00:42.677080+00:00",
+  "review_due_at": "2026-10-22T00:11:23+03:00",
+  "aspects": {
+    "documented_options": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F19",
+          "page": 33,
+          "section": "3.3 Психотерапия",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+        }
+      ],
+      "policy_references": []
+    },
+    "indications_and_limits": {
+      "source_references": [
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F13",
+          "page": 21,
+          "section": "3.1 Комплексная терапия",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "b08037f243f5ca5b67a719e1456489d90105632d21e4529b9ce1b1047552b671"
+        },
+        {
+          "document_id": "KR457_3",
+          "fragment_id": "KR457_3-F19",
+          "page": 33,
+          "section": "3.3 Психотерапия",
+          "source_version": "457_3 / 2024 / version=3",
+          "source_sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+          "artifact_sha256": "3a37d5c9cfc6ead97bb06210451afff40d95857710631367903dcfffe2677769",
+          "fragment_sha256": "66791ed0f155fb0e9974a5054e7a4a1cd3b6c823a190d5e53c18fd9e5a8aa8af"
+        }
+      ],
+      "policy_references": []
+    },
+    "physician_confirmed_plan": {
+      "source_references": [],
+      "policy_references": [
+        {
+          "policy_id": "physician_confirmed_plan",
+          "record_sha256": "a9b6b423c01a5d9c6d82cfa0a4736dc10c13cbf33c3101edfc0983fdf63ec34a"
+        }
+      ]
+    }
+  }
+}

@@ -124,7 +124,7 @@ def card_catalog(snapshot, registry, at, root):
 
 
 def validate_review(root, unit_id, unit, pointer, catalog, frozen, at):
-    """A human-authored attestation is required; hashes do not prove its truth."""
+    """An explicit content review is required; hashes do not prove its truth."""
     if not isinstance(pointer, dict) or set(pointer) != {'review_path', 'review_sha256'}:
         raise CorpusError('review_pointer_invalid')
     data = local_file(root, pointer['review_path'], {pointer['review_path']})
@@ -264,6 +264,18 @@ def assess(root, snapshot, at, package_ids=None):
                         report['gaps'].append({'unit_id': unit_id, 'kind': 'dossier', 'reason': 'dossier_identity_conflict'})
             if all(med['id'] + '/' + s in completed for s in meds['required_sections']):
                 report['counts']['medications']['complete'] += 1
+        # An attested cell cannot bypass its frozen prerequisite. A partial or
+        # conflicting dossier remains a gap even if every cell aspect has refs.
+        missing_dossiers = [med['id'] for med in meds['medications']
+                            if not all(med['id'] + '/' + s in completed
+                                       for s in meds['required_sections'])]
+        if missing_dossiers:
+            for cell in matrix['cells']:
+                if cell['requires_dossiers'] and cell['id'] in completed:
+                    completed.remove(cell['id'])
+                    report['gaps'].append({'unit_id': cell['id'], 'kind': 'cell',
+                                          'reason': 'required_dossiers_incomplete',
+                                          'missing_dossiers': missing_dossiers})
         report['counts']['cells']['complete'] = sum(units[u]['kind'] == 'cell' for u in completed)
         report['counts']['dossier_sections']['complete'] = sum(units[u]['kind'] == 'dossier' for u in completed)
         if not report['errors'] and not report['gaps'] and all(c['required'] > 0 and c['complete'] == c['required'] for c in report['counts'].values()):
