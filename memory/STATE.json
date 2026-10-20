@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T01:20:06+03:00",
+  "updated_on": "2026-10-21T01:45:30+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17J02B03A",
-  "next_slice": null,
+  "next_slice": "S17J02C01",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -323,7 +323,61 @@
       "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S17J02B03B.md",
-      "reason": "NOT_ACCEPTED: две age_boundary русской DASS не подтверждены даже полным первичным PDF; 38 ячеек требуют 9 досье/90 разделов, а C запрещён до приёмки B/B03/B03B. Подготовлен точный проект изменения порядка, требуется явное решение пользователя; зависимости и критерии не обойдены."
+      "reason": "NOT_ACCEPTED: две age_boundary русской DASS не подтверждены;38ячеек ждут9досье/90разделов. Пользователь21.10одобрил отдельную подготовку C01–C09 перед итоговой приёмкой;конфликт порядка устранён,но сами досье/возрастные основания ещё не готовы."
+    },
+    "S17J02C01": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C01.md",
+      "reason": null
+    },
+    "S17J02C02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C02.md",
+      "reason": null
+    },
+    "S17J02C03": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C03.md",
+      "reason": null
+    },
+    "S17J02C04": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C04.md",
+      "reason": null
+    },
+    "S17J02C05": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C05.md",
+      "reason": null
+    },
+    "S17J02C06": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C06.md",
+      "reason": null
+    },
+    "S17J02C07": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C07.md",
+      "reason": null
+    },
+    "S17J02C08": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C08.md",
+      "reason": null
+    },
+    "S17J02C09": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C09.md",
+      "reason": null
     }
   },
   "latest_audit": {
@@ -551,9 +605,29 @@
     "commit_ref": null
   },
   "pending_plan_amendment": {
-    "status": "awaiting_explicit_user_response",
+    "status": "approved_and_applied",
     "proposal": "evidence/S17J02B03B/plan-amendment-proposal.md",
-    "applied": false,
-    "reason": "Direct B03/B03B instruction forbids bypassing C dependency; content prerequisite conflict requires explicit work-order decision"
+    "applied": true,
+    "reason": "Direct user authorization: Разрешить подготовку досье; exact proposed slices/dependencies applied; existing acceptance criteria preserved",
+    "approval": "evidence/dossier-order-2026-10-21/approval.json",
+    "applied_plan_ref": "refs/tags/plan/dossier-order-2026-10-21"
+  },
+  "latest_plan_change": {
+    "kind": "dossier_preparation_order",
+    "date": "2026-10-21",
+    "report": "memory/sessions/dossier-order-2026-10-21.md",
+    "commit_ref": "refs/tags/plan/dossier-order-2026-10-21",
+    "prepared_slice_ids": [
+      "S17J02C01",
+      "S17J02C02",
+      "S17J02C03",
+      "S17J02C04",
+      "S17J02C05",
+      "S17J02C06",
+      "S17J02C07",
+      "S17J02C08",
+      "S17J02C09"
+    ],
+    "implementation_started": false
   }
 }

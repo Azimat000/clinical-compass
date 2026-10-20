@@ -1,0 +1,39 @@
+{
+  "status": "PASS_PLAN_ONLY",
+  "checked_at": "2026-10-20T22:48:48.146797+00:00",
+  "commands": [
+    {
+      "command": "PYTHONPATH=tools:. python3 -m unittest tools.test_plan_validation -v",
+      "exit_code": 0,
+      "log_path": "evidence/dossier-order-2026-10-21/plan-tests.log",
+      "log_sha256": "f1d74684e5f8e99fc71dd39e81300d8fea0392b2cdd0c12f2ccd80f87214be95"
+    },
+    {
+      "command": "python3 tools/validate_plan.py",
+      "exit_code": 0,
+      "log_path": "evidence/dossier-order-2026-10-21/plan-check.log",
+      "log_sha256": "bcb496629a472162ccad108cd53021f843795c3abfafbacf60629c4ac98cdc01"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "log_path": "evidence/dossier-order-2026-10-21/session-status.log",
+      "log_sha256": "b2762d54e066059647b117839122b99f543cb53ed8f4eaf12e58a7ff8173ca17"
+    },
+    {
+      "command": "python3 evidence/dossier-order-2026-10-21/verify.py",
+      "exit_code": 0,
+      "log_path": "evidence/dossier-order-2026-10-21/verify.log",
+      "log_sha256": "00c674ed7eff09e9e0b240c181cc5aed9a229c2df3cd02e7ac3c71a9f8fb0e9a"
+    }
+  ],
+  "existing_plan_tests": 10,
+  "diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "application_regression": "Not rerun: application/source corpus/frozen data unchanged",
+  "user_approval_applied": true,
+  "dossiers_started": 0,
+  "clinical_approval": false
+}
