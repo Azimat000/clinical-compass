@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T01:45:30+03:00",
+  "updated_on": "2026-10-21T02:11:05+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17J02B03A",
-  "next_slice": "S17J02C01",
+  "next_slice": "S17I01",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -218,16 +218,10 @@
       "reason": null
     },
     "S17I": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/S17I.md",
-      "reason": null
-    },
-    "S17J": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J.md",
-      "reason": null
+      "reason": "Для активации проектов FU нет фактического независимого клинического заключения точной версии/применимости. RAG больше не является зависимостью. Независимая техническая сводка выполняется в S17I01; рекомендации и исходные критерии I не приняты."
     },
     "S17J01": {
       "status": "accepted",
@@ -241,58 +235,10 @@
       "handoff": "memory/sessions/S17J02.md",
       "reason": null
     },
-    "S17J03": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J03.md",
-      "reason": null
-    },
-    "S17J04": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J04.md",
-      "reason": null
-    },
-    "S17J05": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J05.md",
-      "reason": null
-    },
-    "S17J06": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J06.md",
-      "reason": null
-    },
-    "S17J07": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J07.md",
-      "reason": null
-    },
-    "S17J08": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J08.md",
-      "reason": null
-    },
     "S17J02A": {
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S17J02A",
       "handoff": "memory/sessions/S17J02A.md",
-      "reason": null
-    },
-    "S17J02B": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02B.md",
-      "reason": "Разделён на B01–B03; исходные критерии сохранены, родитель не принят."
-    },
-    "S17J02C": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C.md",
       "reason": null
     },
     "S17J02B01": {
@@ -307,76 +253,16 @@
       "handoff": "memory/sessions/S17J02B02.md",
       "reason": null
     },
-    "S17J02B03": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02B03.md",
-      "reason": "До реализации разделён на B03A/B03B; исходные работы, результаты и критерии сохранены. Родитель не принят."
-    },
     "S17J02B03A": {
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S17J02B03A",
       "handoff": "memory/sessions/S17J02B03A.md",
       "reason": null
     },
-    "S17J02B03B": {
-      "status": "blocked",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02B03B.md",
-      "reason": "NOT_ACCEPTED: две age_boundary русской DASS не подтверждены;38ячеек ждут9досье/90разделов. Пользователь21.10одобрил отдельную подготовку C01–C09 перед итоговой приёмкой;конфликт порядка устранён,но сами досье/возрастные основания ещё не готовы."
-    },
-    "S17J02C01": {
+    "S17I01": {
       "status": "planned",
       "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C01.md",
-      "reason": null
-    },
-    "S17J02C02": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C02.md",
-      "reason": null
-    },
-    "S17J02C03": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C03.md",
-      "reason": null
-    },
-    "S17J02C04": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C04.md",
-      "reason": null
-    },
-    "S17J02C05": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C05.md",
-      "reason": null
-    },
-    "S17J02C06": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C06.md",
-      "reason": null
-    },
-    "S17J02C07": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C07.md",
-      "reason": null
-    },
-    "S17J02C08": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C08.md",
-      "reason": null
-    },
-    "S17J02C09": {
-      "status": "planned",
-      "commit_ref": null,
-      "handoff": "memory/sessions/S17J02C09.md",
+      "handoff": "memory/sessions/S17I01.md",
       "reason": null
     }
   },
@@ -384,7 +270,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "Только сервис: следующий S17H, основания рекомендаций. S17G принят в явно изменённом пользователем объёме; презентации/организация отложены, S17/S17D и E02/E06 не закрыты.",
+    "next_action": "Следующий сервисный срез S17I01: фактическая сводка повторного приёма. Клинические/реальные проверки остаются отдельными; RAG отложен.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"
@@ -459,7 +345,9 @@
       "submission_preparation",
       "organizational_questions"
     ],
-    "retained_requirements": "83/160 сохраняются; отложенное не считается выполненным. Клиническая безопасность/права/источники сервиса обязательны."
+    "retained_requirements": "83/160 сохраняются; отложенное не считается выполненным. Клиническая безопасность/права/источники сервиса обязательны.",
+    "rag_required": false,
+    "technical_memory": "One concise current route; detailed historical evidence remains in Git/evidence; no automatic new source-program slices."
   },
   "latest_followup_spec": {
     "version": "FU-spec-0.1",
@@ -468,7 +356,7 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "Приняты J01/J02/J02A и B01/B02:9 источников/61 карточка, отдельные ограничения HAC. Далее B03→приёмка B→J02C/COVERAGE-1→J03–J08. FU неактивны, поиск не принят.",
+    "rag_direction": "RAG optional/deferred by direct user instruction21.10; core service uses existing structured data and independently validated versioned rules. Next S17I01 factual followup summary; FU not activated.",
     "commit_ref": "refs/tags/slice/S17H"
   },
   "latest_retrieval_plan": {
@@ -476,8 +364,8 @@
     "plan": "plan/S17J-production.md",
     "register": "plan/s17j-subdivision.json",
     "planning_ref": "refs/tags/plan/rag-corpus-expansion-2026-10-20",
-    "status": "planning_only",
-    "next_action": "Приняты B01/B02; следующая отдельная сессия B03 — достаточные клинические комплекты и исходная приёмка родителя. Затем J02C/COVERAGE-1; родитель B ещё не принят.",
+    "status": "optional_deferred_not_service_gate",
+    "next_action": "Do not auto-resume RAG/corpus expansion; accepted source checks retained and applied to enabled functions. Current service route: docs/architecture/service-path.md.",
     "clinical_readiness": false,
     "coverage_plan": "data/retrieval/corpus-coverage-plan.json",
     "coverage_gate": "COVERAGE-1",
@@ -493,7 +381,7 @@
     "admitted_sources": 9,
     "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "Допущены точные DASS-первоисточники и отдельные доказательства HAC. Далее только B03: достаточные клинические комплекты и исходная приёмка B. Родитель не принят; COVERAGE-1 NOT_READY.",
+    "next_action": "Historical accepted source admission retained. Recheck exact source/status/rights/population/expiry before use; no automatic expansion or expiry renewal.",
     "representation": "reviewed_cards",
     "authored_fact_cards": 61,
     "original_quotes": 2,
@@ -520,7 +408,9 @@
     "coverage_status": "NOT_READY",
     "coverage_report": "evidence/S17J02A/coverage-readiness.json",
     "clinical_validation": false,
-    "commit_ref": "refs/tags/slice/S17J02A"
+    "commit_ref": "refs/tags/slice/S17J02A",
+    "scope": "optional_source_program",
+    "service_release_gate": false
   },
   "latest_coverage_core": {
     "slice": "S17J02B03B",
@@ -540,7 +430,9 @@
     "coverage_status": "NOT_READY",
     "coverage_report": "evidence/S17J02B03B/coverage-readiness.json",
     "slice_status": "blocked",
-    "commit_ref": null
+    "commit_ref": null,
+    "scope": "optional_source_program",
+    "service_release_gate": false
   },
   "latest_primary_admission": {
     "slice": "S17J02B02",
@@ -605,19 +497,26 @@
     "commit_ref": null
   },
   "pending_plan_amendment": {
-    "status": "approved_and_applied",
+    "status": "applied_then_superseded_by_simplification",
     "proposal": "evidence/S17J02B03B/plan-amendment-proposal.md",
     "applied": true,
     "reason": "Direct user authorization: Разрешить подготовку досье; exact proposed slices/dependencies applied; existing acceptance criteria preserved",
     "approval": "evidence/dossier-order-2026-10-21/approval.json",
-    "applied_plan_ref": "refs/tags/plan/dossier-order-2026-10-21"
+    "applied_plan_ref": "refs/tags/plan/dossier-order-2026-10-21",
+    "current_scope": "Nine-dossier sequence retained as optional; source checks still apply per enabled function"
   },
   "latest_plan_change": {
-    "kind": "dossier_preparation_order",
+    "kind": "service_simplification_RAG_optional",
     "date": "2026-10-21",
-    "report": "memory/sessions/dossier-order-2026-10-21.md",
-    "commit_ref": "refs/tags/plan/dossier-order-2026-10-21",
-    "prepared_slice_ids": [
+    "report": "memory/sessions/service-simplification-2026-10-21.md",
+    "commit_ref": "refs/tags/plan/service-simplification-2026-10-21",
+    "implementation_started": false,
+    "authorization": "evidence/service-simplification-2026-10-21/authorization.json"
+  },
+  "optional_source_program": {
+    "status": "deferred_not_mandatory",
+    "register": "plan/optional-rag.json",
+    "deferred_slice_ids": [
       "S17J02C01",
       "S17J02C02",
       "S17J02C03",
@@ -626,8 +525,41 @@
       "S17J02C06",
       "S17J02C07",
       "S17J02C08",
-      "S17J02C09"
+      "S17J02C09",
+      "S17J02B03B",
+      "S17J02B03",
+      "S17J02B",
+      "S17J02C",
+      "S17J03",
+      "S17J04",
+      "S17J05",
+      "S17J06",
+      "S17J07",
+      "S17J08",
+      "S17J"
     ],
-    "implementation_started": false
-  }
+    "service_gate": false,
+    "readiness": "NOT_READY, unchanged; not clinical approval",
+    "reactivation": "New explicit request only"
+  },
+  "plan_change_history": [
+    {
+      "kind": "dossier_preparation_order",
+      "date": "2026-10-21",
+      "report": "memory/sessions/dossier-order-2026-10-21.md",
+      "commit_ref": "refs/tags/plan/dossier-order-2026-10-21",
+      "prepared_slice_ids": [
+        "S17J02C01",
+        "S17J02C02",
+        "S17J02C03",
+        "S17J02C04",
+        "S17J02C05",
+        "S17J02C06",
+        "S17J02C07",
+        "S17J02C08",
+        "S17J02C09"
+      ],
+      "implementation_started": false
+    }
+  ]
 }

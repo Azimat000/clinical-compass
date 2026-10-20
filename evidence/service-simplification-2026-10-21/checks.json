@@ -1,0 +1,39 @@
+{
+  "status": "PASS_PLAN_ONLY",
+  "checked_at": "2026-10-20T23:15:25.697023+00:00",
+  "commands": [
+    {
+      "command": "PYTHONPATH=tools:. python3 -m unittest tools.test_plan_validation -v",
+      "exit_code": 0,
+      "log_path": "evidence/service-simplification-2026-10-21/plan-tests.log",
+      "log_sha256": "467eff0d8a0fb7f43ecc8679485ff7d69bccccbe74dfc8dc9412b9d56eb85b9c"
+    },
+    {
+      "command": "python3 tools/validate_plan.py",
+      "exit_code": 0,
+      "log_path": "evidence/service-simplification-2026-10-21/plan-check.log",
+      "log_sha256": "4362449f72579553bc5ad1c69a9425cbdff5289d6811495cb26c39a5b600fc13"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "log_path": "evidence/service-simplification-2026-10-21/session-status.log",
+      "log_sha256": "ab860f4c3460b2267440040f0fdbc8da523107b6f532a50a67690cbb678f38fb"
+    },
+    {
+      "command": "python3 evidence/service-simplification-2026-10-21/verify.py",
+      "exit_code": 0,
+      "log_path": "evidence/service-simplification-2026-10-21/verify.log",
+      "log_sha256": "c179464ab0267120a8cdaee74285266983e743251b2d10e0ea3327b1d21cc934"
+    }
+  ],
+  "plan_tests": 10,
+  "diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "application_tests": "Not rerun: code/corpus/frozen/resources unchanged",
+  "RAG_mandatory": false,
+  "service_implementation_started": false,
+  "clinical_approval": false
+}
