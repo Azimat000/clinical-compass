@@ -1,0 +1,74 @@
+{
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "result": "283 app +54 tools; smoke restart, pip check, synthetic structure PASS",
+      "log": "evidence/S17J02A/make-check.log"
+    },
+    {
+      "command": "python3 -m unittest apps.tests.test_retrieval_corpus apps.tests.test_retrieval_packages -v",
+      "exit_code": 0,
+      "result": "102 tests PASS",
+      "log": "evidence/S17J02A/corpus-tests.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools -p test_retrieval_coverage.py -v",
+      "exit_code": 0,
+      "result": "14 tests PASS",
+      "log": "evidence/S17J02A/coverage-tests.log"
+    },
+    {
+      "command": "python3 tools/import_retrieval_corpus.py --destination var/retrieval-j02a (current audit date)",
+      "exit_code": 0,
+      "result": "same accepted J02 version,3admitted sources,repeat without duplicates",
+      "log": "evidence/S17J02A/import-current.json"
+    },
+    {
+      "command": "python3 tools/check_retrieval_coverage.py --snapshot <J02 version> --at <current audit timestamp> --output evidence/S17J02A/coverage-readiness.json",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "result": "NOT_READY;0/58cells,0/90sections,0/9dossiers,148gaps,no structural errors",
+      "log": "evidence/S17J02A/coverage-readiness.json"
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17J02A",
+      "exit_code": 0,
+      "result": "48 slices,83requirements,160subchecks,next=S17J02B",
+      "log": "evidence/S17J02A/plan-validation.log"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "result": "current=null,last accepted S17J02A,next S17J02B",
+      "log": "evidence/S17J02A/session-status.log"
+    },
+    {
+      "command": "python3 evidence/S17J02A/verify.py",
+      "exit_code": 0,
+      "result": "admission scenarios and baseline/ownership preservation PASS",
+      "log": "evidence/S17J02A/preservation.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "historical_failure": {
+    "log": "evidence/S17J02A/make-check-first.log",
+    "reason": "Existing extraction audit test searches bad in full random UUID; UUID contained a9bbad7b. Source payload not shown leaked by this failure. No unrelated test/code edits."
+  },
+  "log_sha256": {
+    "evidence/S17J02A/make-check.log": "8beffc7d0eb5e37bfa562280e42d7b00761e423d0c6bcea69252aa90625fc354",
+    "evidence/S17J02A/corpus-tests.log": "fc07dd96624caf1e4c0130a3a6b37498e7d277685d6ac23fa29166516ba4c57a",
+    "evidence/S17J02A/coverage-tests.log": "467a2ecc7ca1b8395c2a577197ea3975e3ce3b5be5dd01821ab116ad708e896d",
+    "evidence/S17J02A/import-current.json": "09ec80fd5f1ddab21978c00c2214808fff0b57388d12f369d45f0316ebf3196d",
+    "evidence/S17J02A/coverage-readiness.json": "6b194ac00f3cedf5caddf720e575c01bc5aec8a73a943b552394c739700dba21",
+    "evidence/S17J02A/plan-validation.log": "6e62ece2aa45df44632d714838262449382e6b7875a5c8e120541abb6330ce92",
+    "evidence/S17J02A/session-status.log": "a98ecb26c182e75d91e93ddcfdc6648c171ce3a0322ac419fb4ac041804ecaa8",
+    "evidence/S17J02A/preservation.log": "40b062a39e82331caf7021f5a6c5eb88072103e1c8928e4ae3bc0f1a62341810"
+  },
+  "post_commit_required": "git commit; create refs/tags/slice/S17J02A without force; validate_plan.py; compare existing tags; git status. Outputs stay in conversation; memory uses stable tag, not its own commit hash.",
+  "scope_freeze_file_sha256": "9e8907d3399cdf4777413874e3b2e7fb58d087053e118d66eedfb55c685ef255"
+}

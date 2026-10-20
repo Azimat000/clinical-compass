@@ -1,0 +1,1423 @@
+{
+  "schema_version": 1,
+  "version": "coverage-matrix-1",
+  "status": "FROZEN_SCOPE",
+  "directions": [
+    "depression",
+    "generalized_anxiety_disorder"
+  ],
+  "fu_ids": [
+    "FU01",
+    "FU02",
+    "FU03",
+    "FU04",
+    "FU05",
+    "FU06",
+    "FU07",
+    "FU08"
+  ],
+  "domains": [
+    {
+      "id": "D01",
+      "title": "Диагноз, возраст и применимость"
+    },
+    {
+      "id": "D02",
+      "title": "Симптомы, функционирование и динамика"
+    },
+    {
+      "id": "D03",
+      "title": "Эффект, отсутствие эффекта, ремиссия и рецидив"
+    },
+    {
+      "id": "D04",
+      "title": "Переносимость и нежелательные реакции"
+    },
+    {
+      "id": "D05",
+      "title": "Противопоказания и особые группы"
+    },
+    {
+      "id": "D06",
+      "title": "Взаимодействия и сопутствующие лекарства"
+    },
+    {
+      "id": "D07",
+      "title": "Приверженность, пропуски и прекращение"
+    },
+    {
+      "id": "D08",
+      "title": "Критические сведения и границы поиска"
+    },
+    {
+      "id": "D09",
+      "title": "Сопутствующие состояния и иной диагноз"
+    },
+    {
+      "id": "D10",
+      "title": "Психотерапия и немедикаментозная помощь"
+    },
+    {
+      "id": "D11",
+      "title": "Наблюдение и необходимые проверки"
+    },
+    {
+      "id": "D12",
+      "title": "Шкалы, форма, валидация и права"
+    }
+  ],
+  "cells": [
+    {
+      "id": "D01-depression-context",
+      "domain": "D01",
+      "direction": "depression",
+      "question": "К какому подтверждённому диагнозу и возрастной группе относится основание?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "diagnosis_and_population",
+        "exclusions",
+        "exact_age_boundary"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D01-generalized_anxiety_disorder-context",
+      "domain": "D01",
+      "direction": "generalized_anxiety_disorder",
+      "question": "К какому подтверждённому диагнозу и возрастной группе относится основание?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "diagnosis_and_population",
+        "exclusions",
+        "exact_age_boundary"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D01-depression-identity",
+      "domain": "D01",
+      "direction": "depression",
+      "question": "Какие сведения о препарате, форме, РУ и курсе врач должен подтвердить перед персональной справкой?",
+      "stage": "before_medication_reference",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_medication_identity",
+        "confirmed_course_and_dates",
+        "unknown_or_conflicting_context"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D01-generalized_anxiety_disorder-identity",
+      "domain": "D01",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие сведения о препарате, форме, РУ и курсе врач должен подтвердить перед персональной справкой?",
+      "stage": "before_medication_reference",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_medication_identity",
+        "confirmed_course_and_dates",
+        "unknown_or_conflicting_context"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D02-depression-symptoms",
+      "domain": "D02",
+      "direction": "depression",
+      "question": "Какие симптомы и сведения о функционировании сопоставлять при повторной оценке?",
+      "stage": "repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02",
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "symptoms",
+        "functioning",
+        "observation_period",
+        "missing_data"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D02-generalized_anxiety_disorder-symptoms",
+      "domain": "D02",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие симптомы и сведения о функционировании сопоставлять при повторной оценке?",
+      "stage": "repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02",
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "symptoms",
+        "functioning",
+        "observation_period",
+        "missing_data"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D02-depression-trajectory",
+      "domain": "D02",
+      "direction": "depression",
+      "question": "Что можно сопоставить между двумя наблюдениями и где предел вывода о динамике?",
+      "stage": "between_visits",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "comparable_measurements",
+        "time_overlap",
+        "patient_and_physician_provenance",
+        "no_diagnosis_from_score"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D02-generalized_anxiety_disorder-trajectory",
+      "domain": "D02",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что можно сопоставить между двумя наблюдениями и где предел вывода о динамике?",
+      "stage": "between_visits",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "comparable_measurements",
+        "time_overlap",
+        "patient_and_physician_provenance",
+        "no_diagnosis_from_score"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D03-depression-effect",
+      "domain": "D03",
+      "direction": "depression",
+      "question": "Какие данные и длительность курса нужны врачу для оценки эффекта?",
+      "stage": "early_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "course_duration_context",
+        "effect_and_tolerability",
+        "adherence",
+        "no_automatic_failure_threshold"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-generalized_anxiety_disorder-effect",
+      "domain": "D03",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие данные и длительность курса нужны врачу для оценки эффекта?",
+      "stage": "early_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "course_duration_context",
+        "effect_and_tolerability",
+        "adherence",
+        "no_automatic_failure_threshold"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-depression-no_effect",
+      "domain": "D03",
+      "direction": "depression",
+      "question": "Что уточнить при отсутствии ожидаемых изменений до пересмотра плана?",
+      "stage": "persistent_symptoms",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "adequacy_of_course",
+        "adherence_and_adverse_events",
+        "alternative_causes",
+        "physician_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-generalized_anxiety_disorder-no_effect",
+      "domain": "D03",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что уточнить при отсутствии ожидаемых изменений до пересмотра плана?",
+      "stage": "persistent_symptoms",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "adequacy_of_course",
+        "adherence_and_adverse_events",
+        "alternative_causes",
+        "physician_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-depression-remission",
+      "domain": "D03",
+      "direction": "depression",
+      "question": "Каковы источниковые основания наблюдения при улучшении и ремиссии?",
+      "stage": "maintenance",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "source_definition",
+        "maintenance_context",
+        "recurrence_monitoring",
+        "no_DASS_threshold"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-generalized_anxiety_disorder-remission",
+      "domain": "D03",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Каковы источниковые основания наблюдения при улучшении и ремиссии?",
+      "stage": "maintenance",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "source_definition",
+        "maintenance_context",
+        "recurrence_monitoring",
+        "no_DASS_threshold"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-depression-relapse",
+      "domain": "D03",
+      "direction": "depression",
+      "question": "Какие сведения нужны для врачебной повторной оценки при возвращении симптомов?",
+      "stage": "recurrence",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "recurrence_context",
+        "course_and_dates",
+        "functioning",
+        "physician_decision"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D03-generalized_anxiety_disorder-relapse",
+      "domain": "D03",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие сведения нужны для врачебной повторной оценки при возвращении симптомов?",
+      "stage": "recurrence",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "recurrence_context",
+        "course_and_dates",
+        "functioning",
+        "physician_decision"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D04-depression-adverse",
+      "domain": "D04",
+      "direction": "depression",
+      "question": "Что сообщает источник о НЯ подтверждённого лекарства и какие данные ещё уточнить?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_adverse_reactions",
+        "timing_and_course",
+        "absence_not_exclusion",
+        "no_causality_or_severity_inference"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D04-generalized_anxiety_disorder-adverse",
+      "domain": "D04",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что сообщает источник о НЯ подтверждённого лекарства и какие данные ещё уточнить?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_adverse_reactions",
+        "timing_and_course",
+        "absence_not_exclusion",
+        "no_causality_or_severity_inference"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D04-depression-tolerability",
+      "domain": "D04",
+      "direction": "depression",
+      "question": "Как сопоставлять переносимость и эффект при повторном рассмотрении?",
+      "stage": "repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "tolerability",
+        "effect",
+        "confounders",
+        "physician_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D04-generalized_anxiety_disorder-tolerability",
+      "domain": "D04",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Как сопоставлять переносимость и эффект при повторном рассмотрении?",
+      "stage": "repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "tolerability",
+        "effect",
+        "confounders",
+        "physician_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D05-depression-contraindications",
+      "domain": "D05",
+      "direction": "depression",
+      "question": "Какие противопоказания и ограничения указаны в точной инструкции?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "contraindications",
+        "precautions",
+        "population",
+        "no_class_substitution"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D05-generalized_anxiety_disorder-contraindications",
+      "domain": "D05",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие противопоказания и ограничения указаны в точной инструкции?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "contraindications",
+        "precautions",
+        "population",
+        "no_class_substitution"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D05-depression-special_groups",
+      "domain": "D05",
+      "direction": "depression",
+      "question": "Какие ограничения для беременности, лактации, пожилого возраста и соматических нарушений описаны источником?",
+      "stage": "special_population_reference",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "pregnancy_lactation",
+        "older_adults",
+        "renal_hepatic_and_somatic_conditions",
+        "unknown_requires_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D05-generalized_anxiety_disorder-special_groups",
+      "domain": "D05",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие ограничения для беременности, лактации, пожилого возраста и соматических нарушений описаны источником?",
+      "stage": "special_population_reference",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "pregnancy_lactation",
+        "older_adults",
+        "renal_hepatic_and_somatic_conditions",
+        "unknown_requires_review"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D06-depression-interactions",
+      "domain": "D06",
+      "direction": "depression",
+      "question": "Какие взаимодействия указаны для точного лекарства и подтверждённого сопутствующего лечения?",
+      "stage": "concomitant_treatment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_drugs_and_forms",
+        "documented_interactions",
+        "contraindicated_combinations",
+        "not_comprehensive_pair_checker"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D06-generalized_anxiety_disorder-interactions",
+      "domain": "D06",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие взаимодействия указаны для точного лекарства и подтверждённого сопутствующего лечения?",
+      "stage": "concomitant_treatment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_drugs_and_forms",
+        "documented_interactions",
+        "contraindicated_combinations",
+        "not_comprehensive_pair_checker"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D06-depression-uncertain_combination",
+      "domain": "D06",
+      "direction": "depression",
+      "question": "Что делать со справкой при неизвестном составе или отсутствии пары в источнике?",
+      "stage": "concomitant_treatment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "unknown_co_medication",
+        "coverage_limits",
+        "no_absence_of_risk_claim"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D06-generalized_anxiety_disorder-uncertain_combination",
+      "domain": "D06",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что делать со справкой при неизвестном составе или отсутствии пары в источнике?",
+      "stage": "concomitant_treatment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "unknown_co_medication",
+        "coverage_limits",
+        "no_absence_of_risk_claim"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-depression-adherence",
+      "domain": "D07",
+      "direction": "depression",
+      "question": "Что уточнять по выполнению назначений и причинам пропуска?",
+      "stage": "between_visits",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05"
+      ],
+      "required": true,
+      "required_aspects": [
+        "explicit_patient_record",
+        "course_linkage",
+        "reasons_and_dates",
+        "missing_not_missed"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-generalized_anxiety_disorder-adherence",
+      "domain": "D07",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что уточнять по выполнению назначений и причинам пропуска?",
+      "stage": "between_visits",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05"
+      ],
+      "required": true,
+      "required_aspects": [
+        "explicit_patient_record",
+        "course_linkage",
+        "reasons_and_dates",
+        "missing_not_missed"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-depression-missed_dose",
+      "domain": "D07",
+      "direction": "depression",
+      "question": "Есть ли в точной инструкции указания по пропуску приёма и их ограничения?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_instruction_or_explicit_not_documented",
+        "context",
+        "no_compensating_dose_from_search"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-generalized_anxiety_disorder-missed_dose",
+      "domain": "D07",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Есть ли в точной инструкции указания по пропуску приёма и их ограничения?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_instruction_or_explicit_not_documented",
+        "context",
+        "no_compensating_dose_from_search"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-depression-discontinuation",
+      "domain": "D07",
+      "direction": "depression",
+      "question": "Какие источниковые ограничения прекращения и отмены нужно показать врачу?",
+      "stage": "course_end_or_interruption",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_discontinuation",
+        "withdrawal_if_documented",
+        "physician_confirmation",
+        "no_automatic_taper"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D07-generalized_anxiety_disorder-discontinuation",
+      "domain": "D07",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие источниковые ограничения прекращения и отмены нужно показать врачу?",
+      "stage": "course_end_or_interruption",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU05",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_discontinuation",
+        "withdrawal_if_documented",
+        "physician_confirmation",
+        "no_automatic_taper"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D08-depression-critical",
+      "domain": "D08",
+      "direction": "depression",
+      "question": "Каковы границы поиска при новых критических сведениях?",
+      "stage": "any_stage",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "critical_information_source",
+        "independent_safety_path",
+        "no_urgency_from_RAG",
+        "search_must_not_delay_existing_response"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D08-generalized_anxiety_disorder-critical",
+      "domain": "D08",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Каковы границы поиска при новых критических сведениях?",
+      "stage": "any_stage",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "critical_information_source",
+        "independent_safety_path",
+        "no_urgency_from_RAG",
+        "search_must_not_delay_existing_response"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D08-depression-no_answer",
+      "domain": "D08",
+      "direction": "depression",
+      "question": "Что означает отсутствие ответа, данных или источника в потенциально опасном контексте?",
+      "stage": "any_stage",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "missing_not_no_risk",
+        "explicit_unavailability",
+        "no_model_or_network_fallback"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D08-generalized_anxiety_disorder-no_answer",
+      "domain": "D08",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Что означает отсутствие ответа, данных или источника в потенциально опасном контексте?",
+      "stage": "any_stage",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "missing_not_no_risk",
+        "explicit_unavailability",
+        "no_model_or_network_fallback"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D09-depression-differential",
+      "domain": "D09",
+      "direction": "depression",
+      "question": "Какие границы применимости связаны с иным диагнозом и соматическими причинами?",
+      "stage": "initial_and_repeat_assessment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "other_disorders_including_bipolar_psychotic_and_panic",
+        "somatic_causes",
+        "physician_assessment",
+        "no_diagnosis_from_question"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D09-generalized_anxiety_disorder-differential",
+      "domain": "D09",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие границы применимости связаны с иным диагнозом и соматическими причинами?",
+      "stage": "initial_and_repeat_assessment",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04"
+      ],
+      "required": true,
+      "required_aspects": [
+        "other_disorders_including_bipolar_psychotic_and_panic",
+        "somatic_causes",
+        "physician_assessment",
+        "no_diagnosis_from_question"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D09-depression-substances",
+      "domain": "D09",
+      "direction": "depression",
+      "question": "Какие сведения о веществах и сопутствующих состояниях ограничивают применимость?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "substances_and_alcohol",
+        "coexisting_conditions",
+        "uncertainty",
+        "no_cross_diagnosis_transfer"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D09-generalized_anxiety_disorder-substances",
+      "domain": "D09",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие сведения о веществах и сопутствующих состояниях ограничивают применимость?",
+      "stage": "during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU06"
+      ],
+      "required": true,
+      "required_aspects": [
+        "substances_and_alcohol",
+        "coexisting_conditions",
+        "uncertainty",
+        "no_cross_diagnosis_transfer"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D10-depression-psychotherapy",
+      "domain": "D10",
+      "direction": "depression",
+      "question": "Какие психотерапевтические и немедикаментозные варианты описаны для направления?",
+      "stage": "treatment_planning",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_options",
+        "indications_and_limits",
+        "physician_confirmed_plan"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D10-generalized_anxiety_disorder-psychotherapy",
+      "domain": "D10",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие психотерапевтические и немедикаментозные варианты описаны для направления?",
+      "stage": "treatment_planning",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "documented_options",
+        "indications_and_limits",
+        "physician_confirmed_plan"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D10-depression-non_medical_followup",
+      "domain": "D10",
+      "direction": "depression",
+      "question": "Какие немедикаментозные меры и наблюдение описаны в поддерживающем этапе?",
+      "stage": "maintenance",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "followup_measures",
+        "functioning",
+        "evidence_limits",
+        "no_unapproved_protocol"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D10-generalized_anxiety_disorder-non_medical_followup",
+      "domain": "D10",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие немедикаментозные меры и наблюдение описаны в поддерживающем этапе?",
+      "stage": "maintenance",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU02",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "followup_measures",
+        "functioning",
+        "evidence_limits",
+        "no_unapproved_protocol"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D11-depression-review",
+      "domain": "D11",
+      "direction": "depression",
+      "question": "Какие сроки и сведения повторного осмотра заданы источником?",
+      "stage": "early_and_repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "review_timing_with_context",
+        "course_stage",
+        "effect_tolerability_adherence",
+        "no_invented_window"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D11-generalized_anxiety_disorder-review",
+      "domain": "D11",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какие сроки и сведения повторного осмотра заданы источником?",
+      "stage": "early_and_repeat_visit",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU03",
+        "FU04",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "review_timing_with_context",
+        "course_stage",
+        "effect_tolerability_adherence",
+        "no_invented_window"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D11-depression-monitoring",
+      "domain": "D11",
+      "direction": "depression",
+      "question": "Какое клиническое и лабораторное наблюдение требуется по точному досье?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "clinical_monitoring",
+        "laboratory_if_documented",
+        "special_groups",
+        "source_version_and_context"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D11-generalized_anxiety_disorder-monitoring",
+      "domain": "D11",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какое клиническое и лабораторное наблюдение требуется по точному досье?",
+      "stage": "before_and_during_course",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07"
+      ],
+      "required": true,
+      "required_aspects": [
+        "clinical_monitoring",
+        "laboratory_if_documented",
+        "special_groups",
+        "source_version_and_context"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D11-depression-updates",
+      "domain": "D11",
+      "direction": "depression",
+      "question": "Проверены ли действующая инструкция и официальные обновления безопасности?",
+      "stage": "source_update",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_registration_and_version",
+        "official_safety_search_scope",
+        "checked_and_due_dates",
+        "withdraw_affected_material"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D11-generalized_anxiety_disorder-updates",
+      "domain": "D11",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Проверены ли действующая инструкция и официальные обновления безопасности?",
+      "stage": "source_update",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU06",
+        "FU07",
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_registration_and_version",
+        "official_safety_search_scope",
+        "checked_and_due_dates",
+        "withdraw_affected_material"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D12-depression-scale_identity",
+      "domain": "D12",
+      "direction": "depression",
+      "question": "Какая точная форма DASS разрешена, для какой популяции и периода?",
+      "stage": "home_questionnaire",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_Russian_form_and_key",
+        "validation_population",
+        "text_rights_separately",
+        "recall_period",
+        "age_boundary"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D12-generalized_anxiety_disorder-scale_identity",
+      "domain": "D12",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Какая точная форма DASS разрешена, для какой популяции и периода?",
+      "stage": "home_questionnaire",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_Russian_form_and_key",
+        "validation_population",
+        "text_rights_separately",
+        "recall_period",
+        "age_boundary"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D12-depression-scale_interpretation",
+      "domain": "D12",
+      "direction": "depression",
+      "question": "Каковы ограничения сравнения и интерпретации DASS?",
+      "stage": "repeat_measurement",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "three_separate_scores_for_physician",
+        "complete_same_form",
+        "overlapping_periods",
+        "no_diagnostic_or_medication_threshold",
+        "patient_no_computed_scores"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D12-generalized_anxiety_disorder-scale_interpretation",
+      "domain": "D12",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Каковы ограничения сравнения и интерпретации DASS?",
+      "stage": "repeat_measurement",
+      "population": "Источник отдельно подтверждает взрослую популяцию; персональная применимость только по подтверждённому контексту врача.",
+      "fu_ids": [
+        "FU01",
+        "FU02"
+      ],
+      "required": true,
+      "required_aspects": [
+        "three_separate_scores_for_physician",
+        "complete_same_form",
+        "overlapping_periods",
+        "no_diagnostic_or_medication_threshold",
+        "patient_no_computed_scores"
+      ],
+      "sufficient_bundle": "Все перечисленные аспекты с точными допущенными карточками и содержательной проверкой контекста; одного тематического совпадения недостаточно.",
+      "requires_dossiers": false,
+      "status": "gap"
+    },
+    {
+      "id": "D01-depression-FU08",
+      "domain": "D01",
+      "direction": "depression",
+      "question": "Каковы точные показания и границы рассмотрения Авиандра в FU08, без привилегии или назначения?",
+      "stage": "medication_consideration",
+      "population": "Точная популяция ГРЛС; ровно 18 не разрешается по догадке.",
+      "fu_ids": [
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_Aviandr_identity",
+        "registered_indication_not_inferred_for_depression",
+        "age_boundary",
+        "physician_eight_area_review"
+      ],
+      "sufficient_bundle": "Точная инструкция/листок и источниковые ограничения; листок не подменяет профессиональное досье.",
+      "requires_dossiers": true,
+      "status": "gap"
+    },
+    {
+      "id": "D01-generalized_anxiety_disorder-FU08",
+      "domain": "D01",
+      "direction": "generalized_anxiety_disorder",
+      "question": "Каковы точные показания и границы рассмотрения Авиандра в FU08, без привилегии или назначения?",
+      "stage": "medication_consideration",
+      "population": "Точная популяция ГРЛС; ровно 18 не разрешается по догадке.",
+      "fu_ids": [
+        "FU08"
+      ],
+      "required": true,
+      "required_aspects": [
+        "exact_Aviandr_identity",
+        "registered_indication_not_inferred_for_depression",
+        "age_boundary",
+        "physician_eight_area_review"
+      ],
+      "sufficient_bundle": "Точная инструкция/листок и источниковые ограничения; листок не подменяет профессиональное досье.",
+      "requires_dossiers": true,
+      "status": "gap"
+    }
+  ],
+  "optional": [
+    {
+      "id": "international_context",
+      "scope": "NICE/WHO/обзоры — только дополнительные проверенные основания; российские показания не заменяются.",
+      "required": false
+    }
+  ],
+  "mandatory_refusals": [
+    {
+      "id": "unknown_age",
+      "trigger": "Неизвестный, противоречивый возраст или ровно 18 без проверенного разрешения.",
+      "expected_reason": "applicability_unverified",
+      "required": true
+    },
+    {
+      "id": "other_diagnosis",
+      "trigger": "Неподтверждённый/иной диагноз; тревога не равна ГТР.",
+      "expected_reason": "context_unverified",
+      "required": true
+    },
+    {
+      "id": "outside_medication",
+      "trigger": "Препарат, форма, РУ или путь введения вне точного досье.",
+      "expected_reason": "medication_not_supported",
+      "required": true
+    },
+    {
+      "id": "missing_course",
+      "trigger": "Неизвестные курс, даты или противоречащие режимы.",
+      "expected_reason": "insufficient_context",
+      "required": true
+    },
+    {
+      "id": "personal_action",
+      "trigger": "Выбрать/назначить/изменить/отменить дозу, направить или изменить план из поиска.",
+      "expected_reason": "physician_action_required",
+      "required": true
+    },
+    {
+      "id": "source_unavailable",
+      "trigger": "Нет достаточного основания, права неизвестны/отозваны, проверка просрочена, конфликт источников.",
+      "expected_reason": "source_unavailable_or_conflict",
+      "required": true
+    },
+    {
+      "id": "patient_request",
+      "trigger": "Пациент, анонимный, чужая/отозванная связь запрашивает врачебную справку/баллы.",
+      "expected_reason": "access_denied",
+      "required": true
+    },
+    {
+      "id": "request_path",
+      "trigger": "URL/локальный путь/инструкция внутри вопроса или источника.",
+      "expected_reason": "no_import_from_query",
+      "required": true
+    },
+    {
+      "id": "uncomparable_scale",
+      "trigger": "Разные формы/ключи, неполные ответы или перекрывающиеся периоды для клинического вывода.",
+      "expected_reason": "incomparable",
+      "required": true
+    },
+    {
+      "id": "acute_triage",
+      "trigger": "Запрос срочности/безопасности на основе ранга поиска.",
+      "expected_reason": "independent_critical_path",
+      "required": true
+    }
+  ],
+  "outside_scope": [
+    "Детские лечебные рекомендации",
+    "Диагностика или выбор лечения по DASS/вопросу",
+    "Полный каталог психиатрии и универсальная проверка всех пар лекарств",
+    "Лечение иных диагнозов и аугментации без отдельного среза"
+  ],
+  "change_policy": "После заморозки новый scope_version и отдельное решение с историей; запрещено исключать трудные ячейки после результатов."
+}

@@ -8,6 +8,8 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import os
+import tempfile
 from urllib.parse import urlsplit
 
 
@@ -25,7 +27,10 @@ LOCAL_REFERENCE_CARDS = {
 RIGHTS_SCOPES = {'local_store', 'local_index', 'display_excerpt'}
 OFFICIAL_HOSTS = {
     'clinical_guideline': {'apicr.minzdrav.gov.ru', 'cr.minzdrav.gov.ru'},
-    'patient_leaflet': {'grls.rosminzdrav.ru'},
+    'patient_leaflet': {'grls.rosminzdrav.ru', 'grls.rosminzdrav.gov.ru'},
+    'medication_instruction': {'grls.rosminzdrav.ru', 'grls.rosminzdrav.gov.ru'},
+    'sm_pc': {'grls.rosminzdrav.ru', 'grls.rosminzdrav.gov.ru'},
+    'safety_update': {'roszdravnadzor.gov.ru', 'www.roszdravnadzor.gov.ru'},
 }
 
 
@@ -53,7 +58,7 @@ def moment(value):
 
 
 def local_file(root, relative, allowlist):
-    if not isinstance(relative, str) or relative not in allowlist:
+    if not isinstance(relative, str) or Path(relative).is_absolute() or relative not in allowlist:
         raise CorpusError('path_not_allowed')
     path = Path(root)
     for part in Path(relative).parts:
@@ -256,9 +261,10 @@ def admission_reasons(item, at, *, evidence_root=PROJECT_ROOT):
     return sorted(set(reasons))
 
 
-def build_manifest(root, registry, at, *, archive=False, allowlist=None):
+def build_manifest(root, registry, at, *, archive=False, allowlist=None, reference_allowlist=None):
     at = moment(at)
     allowlist = LOCAL_ORIGINALS if allowlist is None else allowlist
+    reference_allowlist = LOCAL_REFERENCE_CARDS if reference_allowlist is None else reference_allowlist
     decisions, blobs = [], {}
     for item in validate_registry(registry):
         reasons = admission_reasons(item, at, evidence_root=root)
@@ -270,13 +276,13 @@ def build_manifest(root, registry, at, *, archive=False, allowlist=None):
             if allowlist[item['path']] != item.get('document_type'):
                 raise CorpusError('document_type_mismatch')
             if item.get('representation') == 'reviewed_cards':
-                if not isinstance(item.get('artifact_path'), str) or LOCAL_REFERENCE_CARDS.get(item['artifact_path']) != item['document_id']:
+                if not isinstance(item.get('artifact_path'), str) or reference_allowlist.get(item['artifact_path']) != item['document_id']:
                     raise CorpusError('citation_path_not_allowed')
-                data = local_file(root, item['artifact_path'], LOCAL_REFERENCE_CARDS)
+                data = local_file(root, item['artifact_path'], reference_allowlist)
                 errors = reference_reasons(item, data)
                 if errors:
                     raise CorpusError(errors[0])
-        except CorpusError as exc:
+        except (CorpusError, OSError) as exc:
             reasons.append(str(exc))
             data = None
         if archive and any(r.startswith(('rights_', 'citation_rights_', 'citation_approval_', 'citation_basis_')) for r in reasons):
@@ -299,11 +305,7 @@ def build_manifest(root, registry, at, *, archive=False, allowlist=None):
 
 
 def publish_snapshot(destination, manifest, blobs):
-    """Exclusive, deterministic publication; repeated import must match bytes.
-
-    A partial directory after interruption is deliberately not loadable. Retry
-    fails integrity rather than repairing or silently overwriting an old version.
-    """
+    """Validate in staging, then atomically publish an immutable version."""
     version = manifest.get('corpus_version', '')
     if not isinstance(version, str) or not re.fullmatch(r'[a-f0-9]{64}', version) or digest({k: v for k, v in manifest.items() if k != 'corpus_version'}) != version:
         raise CorpusError('snapshot_integrity')
@@ -321,14 +323,23 @@ def publish_snapshot(destination, manifest, blobs):
         if existing != manifest:
             raise CorpusError('snapshot_collision')
         return target, False
-    target.mkdir(parents=True)
-    for key, data in blobs.items():
-        with (target / (key + '.' + formats[key])).open('xb') as stream:
-            stream.write(data)
-    with (target / 'manifest.json').open('x') as stream:
-        json.dump(manifest, stream, ensure_ascii=False, indent=2)
-        stream.write('\n')
-    load_snapshot(target)
+    destination.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.building-', dir=destination) as staging:
+        prepared = Path(staging) / version
+        prepared.mkdir()
+        for key, data in blobs.items():
+            with (prepared / (key + '.' + formats[key])).open('xb') as stream:
+                stream.write(data)
+        with (prepared / 'manifest.json').open('x') as stream:
+            json.dump(manifest, stream, ensure_ascii=False, indent=2)
+            stream.write('\n')
+        load_snapshot(prepared)
+        try:
+            os.rename(prepared, target)
+        except OSError:
+            if not target.exists() or load_snapshot(target) != manifest:
+                raise
+            return target, False
     return target, True
 
 

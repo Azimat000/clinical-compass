@@ -1,0 +1,41 @@
+{
+  "main_owner": "/root",
+  "read_only_agents": [
+    "/root/rag_medication_scope"
+  ],
+  "mutating_workers": [],
+  "approved_plan": "Only S17J02A: freeze questions/medications, registered offline packages, fail-closed COVERAGE-1, tests/evidence/memory/commit/tag. No separate implementation plan.",
+  "owned_files": [
+    "apps/compass/retrieval_corpus.py",
+    "apps/compass/retrieval_packages.py",
+    "apps/tests/test_retrieval_packages.py",
+    "tools/import_retrieval_corpus.py",
+    "tools/check_retrieval_coverage.py",
+    "tools/test_retrieval_coverage.py",
+    "data/retrieval/admission-packages.json",
+    "data/retrieval/coverage-matrix.json",
+    "data/retrieval/planned-medications.json",
+    "data/retrieval/coverage-freeze.json",
+    "data/retrieval/coverage-evidence.json",
+    "data/retrieval/corpus-coverage-plan.json",
+    "docs/architecture/retrieval-coverage-contract.md",
+    "docs/architecture/rag-corpus-strategy.md",
+    "START_HERE.md",
+    "plan/ROADMAP.md",
+    "plan/S17J-production.md",
+    "plan/slices/S17J02A.md",
+    "plan/coverage.json",
+    "plan/COVERAGE.md",
+    "memory/STATE.json",
+    "memory/DECISIONS.md",
+    "memory/BLOCKERS.md",
+    "memory/EXTERNAL.md",
+    "memory/BUDGET.json",
+    "memory/sessions/S17J02A.md"
+  ],
+  "owned_evidence_directory": "evidence/S17J02A",
+  "preserve_untracked": [
+    "tools/run_synthetic_cycles.py",
+    "evidence/audits/2026-10-20-cycles/"
+  ]
+}

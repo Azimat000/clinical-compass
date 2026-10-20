@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T23:23:00+03:00",
+  "updated_on": "2026-10-21T00:06:54+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J02",
-  "next_slice": "S17J02A",
+  "last_accepted_slice": "S17J02A",
+  "next_slice": "S17J02B",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -278,8 +278,8 @@
       "reason": null
     },
     "S17J02A": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17J02A",
       "handoff": "memory/sessions/S17J02A.md",
       "reason": null
     },
@@ -384,7 +384,7 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "Приняты J01/J02; далее J02A/J02B/J02C расширяют корпус до J03, затем J04–J08/J. Поиск ещё не реализован; FU неактивны.",
+    "rag_direction": "Приняты J01/J02/J02A; далее J02B/J02C/COVERAGE-1 до J03, затем J04–J08/J. Поиск ещё не реализован; FU неактивны.",
     "commit_ref": "refs/tags/slice/S17H"
   },
   "latest_retrieval_plan": {
@@ -393,7 +393,7 @@
     "register": "plan/s17j-subdivision.json",
     "planning_ref": "refs/tags/plan/rag-corpus-expansion-2026-10-20",
     "status": "planning_only",
-    "next_action": "Следующая отдельная сессия только S17J02A: контракт покрытия/плановые лекарства/масштабируемый допуск. Далее J02B/J02C до J03; J01/J02 accepted сохранены.",
+    "next_action": "S17J02A принят. Следующая отдельная сессия только S17J02B: достаточное клиническое ядро по frozen coverage-matrix. Затем J02C/COVERAGE-1 до J03; прежние accepted J01/J02 сохранены.",
     "clinical_readiness": false,
     "coverage_plan": "data/retrieval/corpus-coverage-plan.json",
     "coverage_gate": "COVERAGE-1",
@@ -409,7 +409,7 @@
     "admitted_sources": 3,
     "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "S17J02A → J02B → J02C/COVERAGE-1 → J03. Новые источники ещё не импортированы; нынешние 15 фактов не являются полным RAG. G01–G09/frozen J01 сохранены.",
+    "next_action": "S17J02A принят как контракт/общий допуск; дальше J02B → J02C/COVERAGE-1 → J03. Реальный корпус по-прежнему3источника/15фактов, новых достаточных комплектов нет.",
     "representation": "reviewed_cards",
     "authored_fact_cards": 15,
     "original_quotes": 2,
@@ -417,5 +417,21 @@
     "legal_basis": "GK1259(5) authored facts; GK1274(1)(1) two purpose-specific KR citations",
     "legal_review": "evidence/S17J02/legal-resolution/research.md",
     "commit_ref": "refs/tags/slice/S17J02"
+  },
+  "latest_coverage_scope": {
+    "slice": "S17J02A",
+    "report": "memory/sessions/S17J02A.md",
+    "contract": "docs/architecture/retrieval-coverage-contract.md",
+    "freeze": "data/retrieval/coverage-freeze.json",
+    "matrix": "data/retrieval/coverage-matrix.json",
+    "medications": "data/retrieval/planned-medications.json",
+    "required_cells": 58,
+    "required_medications": 9,
+    "required_dossier_sections": 90,
+    "required_refusals": 10,
+    "coverage_status": "NOT_READY",
+    "coverage_report": "evidence/S17J02A/coverage-readiness.json",
+    "clinical_validation": false,
+    "commit_ref": "refs/tags/slice/S17J02A"
   }
 }

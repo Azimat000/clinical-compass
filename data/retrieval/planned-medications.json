@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "version": "planned-medications-1",
+  "status": "FROZEN_SCOPE_NOT_RUNTIME",
+  "research": "evidence/S17J02A/medication-research.md",
+  "medications": [
+    {
+      "id": "escitalopram",
+      "inn": "эсциталопрам",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Эсциталопрам",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "5 мг",
+            "10 мг",
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-005230-020523",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=3cb23d24-d020-45bb-b599-0afd13e82a89",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "sertraline",
+      "inn": "сертралин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Серената",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "50 мг",
+            "100 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(006156)-(РГ-RU)-080724",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=8811fb4d-80a3-4da9-b173-59947c5a0d4f",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "paroxetine",
+      "inn": "пароксетин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Пароксетин",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(013656)-(РГ-RU)",
+          "official_url": "https://pots.minzdrav.gov.ru/public_price_limit/1000170985",
+          "status": "research_target_unverified_current_status",
+          "document_type": "official_price_registry_identity_only",
+          "limitation": "Текущий статус через форму ГРЛС не проверен из-за CAPTCHA; перед допуском J02C проверить точную инструкцию/тип/версию/права/показания и каждый раздел. Ценовая запись не инструкция."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "venlafaxine",
+      "inn": "венлафаксин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "капсулы с пролонгированным высвобождением",
+      "registration_targets": [
+        {
+          "trade_name": "Алвента®",
+          "form": "капсулы с пролонгированным высвобождением",
+          "strengths": [
+            "37,5 мг",
+            "75 мг",
+            "150 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(001294)-(РГ-RU)-291025",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=1bc1447a-3bcb-4953-9ffd-8b243d302916",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "duloxetine",
+      "inn": "дулоксетин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "капсулы кишечнорастворимые",
+      "registration_targets": [
+        {
+          "trade_name": "Дулоксетин",
+          "form": "капсулы кишечнорастворимые",
+          "strengths": [
+            "30 мг",
+            "60 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(016560)-(РГ-RU)-100926",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=66d0af84-1986-4dc6-b563-95823aa7a7e3",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "agomelatine",
+      "inn": "агомелатин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression",
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            21,
+            22
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Вальдоксан®",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "25 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(000528)-(РГ-RU)-281224",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=995d1874-55e2-4ed9-83f5-9b03fddb8b1f",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "mirtazapine",
+      "inn": "миртазапин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Миртазапин Канон",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "15 мг",
+            "30 мг",
+            "45 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(004694)-(РГ-RU)-230626",
+          "official_url": "https://grls.rosminzdrav.gov.ru/Grls_View_v2.aspx?routingGuid=411b1e9c-ed5b-49f1-b9b2-f799bae2096a",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "vortioxetine",
+      "inn": "вортиоксетин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "depression"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR301_3",
+          "section": "3.1.1–3.1.3",
+          "pdf_pages": [
+            26,
+            27,
+            28
+          ]
+        }
+      ],
+      "synthetic_basis": "Существующие сценарии препарат A–Z не задают МНН; выбор заранее по КР.",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой",
+      "registration_targets": [
+        {
+          "trade_name": "Бринтелликс",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "5 мг",
+            "10 мг",
+            "15 мг",
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-003422-210116",
+          "official_url": "https://grls.rosminzdrav.gov.ru/Grls_View_v2.aspx?routingGuid=d6405653-cdf5-4c31-ae06-de1a1e558553",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ],
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_task": "Исследовать зафиксированные торговое имя/форму/РУ и перечисленные зарегистрированные дозировки. В J02C подтвердить текущий статус, точный документ/версию/права/показания и выбрать явно поддерживаемую точную дозировку досье; прочие не обещаны автоматически. Цена/МНН/КР не заменяют инструкцию.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    },
+    {
+      "id": "maritupirdine",
+      "inn": "маритупирдин",
+      "required": true,
+      "priority": "equal_dossier_requirement",
+      "candidate_directions": [
+        "generalized_anxiety_disorder"
+      ],
+      "selection_basis": [
+        {
+          "document_id": "KR457_3",
+          "section": "3.2",
+          "pdf_pages": [
+            25,
+            26,
+            27
+          ]
+        }
+      ],
+      "synthetic_basis": "FU08 и существующий синтетический сценарий",
+      "target_form_for_research": "таблетки, покрытые плёночной оболочкой, 20 мг",
+      "registration_targets": [
+        {
+          "trade_name": "Авиандр",
+          "registration": "ЛП-№(002445)-(РГ-RU)",
+          "form": "таблетки, покрытые плёночной оболочкой, 20 мг",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=d3c01c29-cddf-4151-9e15-888e6c301e80",
+          "status": "existing_leaflet_only",
+          "strengths": [
+            "20 мг"
+          ],
+          "route": "внутрь"
+        }
+      ],
+      "identity_status": "leaflet_only_not_complete_dossier",
+      "research_task": "Выбрать минимум одно точное действующее РУ/торговое имя/форму, подтвердить тип документа и показания; подобрать ОХЛП/инструкцию и листок где доступны. МНН и КР не доказывают зарегистрированное показание каждой формы.",
+      "required_sections": [
+        "exact_identity_and_registration",
+        "indications_and_population",
+        "contraindications",
+        "precautions_and_special_populations",
+        "interactions",
+        "adverse_reactions",
+        "adherence_and_discontinuation_if_documented",
+        "dose_information_with_complete_context_if_supported",
+        "monitoring",
+        "safety_updates_and_version_status"
+      ],
+      "status": "gap"
+    }
+  ],
+  "required_sections": [
+    "exact_identity_and_registration",
+    "indications_and_population",
+    "contraindications",
+    "precautions_and_special_populations",
+    "interactions",
+    "adverse_reactions",
+    "adherence_and_discontinuation_if_documented",
+    "dose_information_with_complete_context_if_supported",
+    "monitoring",
+    "safety_updates_and_version_status"
+  ],
+  "excluded_without_new_scope": [
+    "ТЦА",
+    "миансерин",
+    "тразодон",
+    "имипрамин",
+    "гидроксизин",
+    "буспирон",
+    "прегабалин",
+    "бензодиазепины",
+    "кветиапин",
+    "антипсихотические аугментации"
+  ],
+  "boundary": "Ограниченный первый перечень, не все варианты КР. Иные лекарства сохраняются как подтверждённые записи плана врача, но RAG отказывает без точного досье. Исключение из RAG не клиническое суждение о препарате.",
+  "new_source_rights": "not_granted",
+  "clinical_validation": false,
+  "section_aspects": {
+    "exact_identity_and_registration": [
+      "inn_trade_name_form_strength_route_registration",
+      "official_document_type_and_version",
+      "confirmed_indications_not_class_inference"
+    ],
+    "indications_and_population": [
+      "registered_indications",
+      "age_boundaries",
+      "not_guideline_as_registration"
+    ],
+    "contraindications": [
+      "complete_contraindications",
+      "qualifiers_and_exclusions"
+    ],
+    "precautions_and_special_populations": [
+      "precautions",
+      "pregnancy_lactation",
+      "older_adults",
+      "renal_hepatic"
+    ],
+    "interactions": [
+      "documented_interactions",
+      "prohibited_combinations",
+      "coverage_limits"
+    ],
+    "adverse_reactions": [
+      "documented_reactions_and_frequencies",
+      "not_exhaustive_for_patient",
+      "no_causality_inference"
+    ],
+    "adherence_and_discontinuation_if_documented": [
+      "missed_dose_or_explicit_not_documented",
+      "withdrawal_or_explicit_not_documented",
+      "no_automatic_action"
+    ],
+    "dose_information_with_complete_context_if_supported": [
+      "exact_route_form_population",
+      "complete_context_or_explicit_not_documented",
+      "no_personal_dose_selection"
+    ],
+    "monitoring": [
+      "clinical_control",
+      "laboratory_control_or_explicit_not_documented",
+      "timing_context"
+    ],
+    "safety_updates_and_version_status": [
+      "official_GRLS_and_RZN_review",
+      "search_scope_and_results",
+      "checked_and_due_dates",
+      "affected_cards_withdrawal_policy"
+    ]
+  }
+}

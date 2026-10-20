@@ -1,0 +1,342 @@
+{
+  "scope_version": "COVERAGE-1-scope-1",
+  "domain_counts": {
+    "D01": 6,
+    "D02": 4,
+    "D03": 8,
+    "D04": 4,
+    "D05": 4,
+    "D06": 4,
+    "D07": 6,
+    "D08": 4,
+    "D09": 4,
+    "D10": 4,
+    "D11": 6,
+    "D12": 4
+  },
+  "fu_links": {
+    "FU01": [
+      "D08-depression-no_answer",
+      "D08-generalized_anxiety_disorder-no_answer",
+      "D12-depression-scale_identity",
+      "D12-generalized_anxiety_disorder-scale_identity",
+      "D12-depression-scale_interpretation",
+      "D12-generalized_anxiety_disorder-scale_interpretation"
+    ],
+    "FU02": [
+      "D02-depression-symptoms",
+      "D02-generalized_anxiety_disorder-symptoms",
+      "D02-depression-trajectory",
+      "D02-generalized_anxiety_disorder-trajectory",
+      "D10-depression-non_medical_followup",
+      "D10-generalized_anxiety_disorder-non_medical_followup",
+      "D12-depression-scale_identity",
+      "D12-generalized_anxiety_disorder-scale_identity",
+      "D12-depression-scale_interpretation",
+      "D12-generalized_anxiety_disorder-scale_interpretation"
+    ],
+    "FU03": [
+      "D01-depression-context",
+      "D01-generalized_anxiety_disorder-context",
+      "D02-depression-symptoms",
+      "D02-generalized_anxiety_disorder-symptoms",
+      "D03-depression-effect",
+      "D03-generalized_anxiety_disorder-effect",
+      "D03-depression-no_effect",
+      "D03-generalized_anxiety_disorder-no_effect",
+      "D03-depression-remission",
+      "D03-generalized_anxiety_disorder-remission",
+      "D03-depression-relapse",
+      "D03-generalized_anxiety_disorder-relapse",
+      "D04-depression-tolerability",
+      "D04-generalized_anxiety_disorder-tolerability",
+      "D09-depression-differential",
+      "D09-generalized_anxiety_disorder-differential",
+      "D09-depression-substances",
+      "D09-generalized_anxiety_disorder-substances",
+      "D11-depression-review",
+      "D11-generalized_anxiety_disorder-review"
+    ],
+    "FU04": [
+      "D01-depression-context",
+      "D01-generalized_anxiety_disorder-context",
+      "D02-depression-symptoms",
+      "D02-generalized_anxiety_disorder-symptoms",
+      "D03-depression-effect",
+      "D03-generalized_anxiety_disorder-effect",
+      "D03-depression-no_effect",
+      "D03-generalized_anxiety_disorder-no_effect",
+      "D03-depression-remission",
+      "D03-generalized_anxiety_disorder-remission",
+      "D03-depression-relapse",
+      "D03-generalized_anxiety_disorder-relapse",
+      "D04-depression-tolerability",
+      "D04-generalized_anxiety_disorder-tolerability",
+      "D09-depression-differential",
+      "D09-generalized_anxiety_disorder-differential",
+      "D09-depression-substances",
+      "D09-generalized_anxiety_disorder-substances",
+      "D11-depression-review",
+      "D11-generalized_anxiety_disorder-review"
+    ],
+    "FU05": [
+      "D07-depression-adherence",
+      "D07-generalized_anxiety_disorder-adherence",
+      "D07-depression-missed_dose",
+      "D07-generalized_anxiety_disorder-missed_dose",
+      "D07-depression-discontinuation",
+      "D07-generalized_anxiety_disorder-discontinuation"
+    ],
+    "FU06": [
+      "D04-depression-adverse",
+      "D04-generalized_anxiety_disorder-adverse",
+      "D04-depression-tolerability",
+      "D04-generalized_anxiety_disorder-tolerability",
+      "D05-depression-contraindications",
+      "D05-generalized_anxiety_disorder-contraindications",
+      "D05-depression-special_groups",
+      "D05-generalized_anxiety_disorder-special_groups",
+      "D06-depression-interactions",
+      "D06-generalized_anxiety_disorder-interactions",
+      "D06-depression-uncertain_combination",
+      "D06-generalized_anxiety_disorder-uncertain_combination",
+      "D08-depression-critical",
+      "D08-generalized_anxiety_disorder-critical",
+      "D08-depression-no_answer",
+      "D08-generalized_anxiety_disorder-no_answer",
+      "D09-depression-substances",
+      "D09-generalized_anxiety_disorder-substances",
+      "D11-depression-monitoring",
+      "D11-generalized_anxiety_disorder-monitoring",
+      "D11-depression-updates",
+      "D11-generalized_anxiety_disorder-updates"
+    ],
+    "FU07": [
+      "D01-depression-identity",
+      "D01-generalized_anxiety_disorder-identity",
+      "D03-depression-effect",
+      "D03-generalized_anxiety_disorder-effect",
+      "D03-depression-no_effect",
+      "D03-generalized_anxiety_disorder-no_effect",
+      "D03-depression-remission",
+      "D03-generalized_anxiety_disorder-remission",
+      "D03-depression-relapse",
+      "D03-generalized_anxiety_disorder-relapse",
+      "D05-depression-contraindications",
+      "D05-generalized_anxiety_disorder-contraindications",
+      "D05-depression-special_groups",
+      "D05-generalized_anxiety_disorder-special_groups",
+      "D06-depression-interactions",
+      "D06-generalized_anxiety_disorder-interactions",
+      "D06-depression-uncertain_combination",
+      "D06-generalized_anxiety_disorder-uncertain_combination",
+      "D07-depression-discontinuation",
+      "D07-generalized_anxiety_disorder-discontinuation",
+      "D10-depression-psychotherapy",
+      "D10-generalized_anxiety_disorder-psychotherapy",
+      "D10-depression-non_medical_followup",
+      "D10-generalized_anxiety_disorder-non_medical_followup",
+      "D11-depression-review",
+      "D11-generalized_anxiety_disorder-review",
+      "D11-depression-monitoring",
+      "D11-generalized_anxiety_disorder-monitoring",
+      "D11-depression-updates",
+      "D11-generalized_anxiety_disorder-updates"
+    ],
+    "FU08": [
+      "D01-depression-identity",
+      "D01-generalized_anxiety_disorder-identity",
+      "D05-depression-contraindications",
+      "D05-generalized_anxiety_disorder-contraindications",
+      "D05-depression-special_groups",
+      "D05-generalized_anxiety_disorder-special_groups",
+      "D11-depression-updates",
+      "D11-generalized_anxiety_disorder-updates",
+      "D01-depression-FU08",
+      "D01-generalized_anxiety_disorder-FU08"
+    ]
+  },
+  "medications": [
+    {
+      "inn": "эсциталопрам",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Эсциталопрам",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "5 мг",
+            "10 мг",
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-005230-020523",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=3cb23d24-d020-45bb-b599-0afd13e82a89",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "сертралин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Серената",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "50 мг",
+            "100 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(006156)-(РГ-RU)-080724",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=8811fb4d-80a3-4da9-b173-59947c5a0d4f",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "пароксетин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Пароксетин",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(013656)-(РГ-RU)",
+          "official_url": "https://pots.minzdrav.gov.ru/public_price_limit/1000170985",
+          "status": "research_target_unverified_current_status",
+          "document_type": "official_price_registry_identity_only",
+          "limitation": "Текущий статус через форму ГРЛС не проверен из-за CAPTCHA; перед допуском J02C проверить точную инструкцию/тип/версию/права/показания и каждый раздел. Ценовая запись не инструкция."
+        }
+      ]
+    },
+    {
+      "inn": "венлафаксин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Алвента®",
+          "form": "капсулы с пролонгированным высвобождением",
+          "strengths": [
+            "37,5 мг",
+            "75 мг",
+            "150 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(001294)-(РГ-RU)-291025",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=1bc1447a-3bcb-4953-9ffd-8b243d302916",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "дулоксетин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Дулоксетин",
+          "form": "капсулы кишечнорастворимые",
+          "strengths": [
+            "30 мг",
+            "60 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(016560)-(РГ-RU)-100926",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=66d0af84-1986-4dc6-b563-95823aa7a7e3",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "агомелатин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Вальдоксан®",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "25 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(000528)-(РГ-RU)-281224",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=995d1874-55e2-4ed9-83f5-9b03fddb8b1f",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "миртазапин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Миртазапин Канон",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "15 мг",
+            "30 мг",
+            "45 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-№(004694)-(РГ-RU)-230626",
+          "official_url": "https://grls.rosminzdrav.gov.ru/Grls_View_v2.aspx?routingGuid=411b1e9c-ed5b-49f1-b9b2-f799bae2096a",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "вортиоксетин",
+      "identity_status": "exact_research_target_found_current_status_and_dossier_not_verified",
+      "research_targets": [
+        {
+          "trade_name": "Бринтелликс",
+          "form": "таблетки, покрытые плёночной оболочкой",
+          "strengths": [
+            "5 мг",
+            "10 мг",
+            "15 мг",
+            "20 мг"
+          ],
+          "route": "внутрь",
+          "registration": "ЛП-003422-210116",
+          "official_url": "https://grls.rosminzdrav.gov.ru/Grls_View_v2.aspx?routingGuid=d6405653-cdf5-4c31-ae06-de1a1e558553",
+          "status": "research_target_unverified_current_status",
+          "document_type": "GRLS_instruction_section_not_full_document_review",
+          "limitation": "Точная регистрационная цель, не допуск. Название раздела карточки не заменяет сверку полного документа и его актуальности в J02C."
+        }
+      ]
+    },
+    {
+      "inn": "маритупирдин",
+      "identity_status": "leaflet_only_not_complete_dossier",
+      "research_targets": [
+        {
+          "trade_name": "Авиандр",
+          "registration": "ЛП-№(002445)-(РГ-RU)",
+          "form": "таблетки, покрытые плёночной оболочкой, 20 мг",
+          "official_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=d3c01c29-cddf-4151-9e15-888e6c301e80",
+          "status": "existing_leaflet_only",
+          "strengths": [
+            "20 мг"
+          ],
+          "route": "внутрь"
+        }
+      ]
+    }
+  ],
+  "clinical_activation": false
+}

@@ -22,7 +22,7 @@
       "FU08"
     ],
     "population": "Применимость каждого источника отдельно; неизвестный/противоречивый возраст не взрослый по умолчанию.",
-    "medication_roster": "to_be_frozen_in_S17J02A; заранее по целевым КР и синтетическим сценариям; Авиандр без приоритета"
+    "medication_roster": "data/retrieval/planned-medications.json; frozen9required dossiers with exact trade/form/strength/RU research targets; current status and complete GRLS dossiers not verified"
   },
   "current_corpus": {
     "accepted_slice": "S17J02",
@@ -37,11 +37,11 @@
     "id": "COVERAGE-1",
     "status": "NOT_READY",
     "before": "S17J03",
-    "detailed_cells_frozen": false,
-    "medication_roster_frozen": false,
-    "complete_cells": null,
-    "required_cells": null,
-    "coverage_percent": null,
+    "detailed_cells_frozen": true,
+    "medication_roster_frozen": true,
+    "complete_cells": 0,
+    "required_cells": 58,
+    "coverage_percent": 0,
     "preserve_gates": [
       "G01",
       "G02",
@@ -59,7 +59,12 @@
       "Отказ в обещанном сценарии считается пробелом; смена области после результата запрещена без отдельного решения и истории.",
       "До J04 заморожены новые реальные вопросы/достаточные комплекты/protocol authored_fact-original_quote в J03; J01 не переписан.",
       "Техническая сверка/поисковая точность не являются независимым клиническим допуском."
-    ]
+    ],
+    "required_medications": 9,
+    "complete_medications": 0,
+    "required_dossier_sections": 90,
+    "complete_dossier_sections": 0,
+    "note": "0/58 means no new sufficient bundle has yet been attested; existing 15 references remain admitted. Definitions of 10 refusals are frozen, behavior not tested by this gate."
   },
   "domains": [
     {
@@ -319,7 +324,7 @@
       "title": "Досье планового перечня поддерживаемых лекарств",
       "url": "https://grls.rosminzdrav.ru/",
       "status": "discovery_required",
-      "verification": "Перечень определяется в J02A по целевым КР и синтетическим сценариям; точные РУ/формы/версии ещё не найдены.",
+      "verification": "J02A: planned-medications.json содержит9МНН с точными торговыми/формами/дозировками/РУ как целями исследования. Сегодняшний статус8новыхРУ и полные досье не проверены; пароксетин идентифицирован ценовым реестром,не инструкцией. Рабочего допуска нет.",
       "rights": "unknown; нет допуска от включения в план"
     },
     {
@@ -399,5 +404,8 @@
     "new_models_installed": false,
     "new_expenses_rub": 0
   },
-  "assessment_scope": "Оценка только допущенных 15 карточек RAG J02. Наличие других источников, шкал и функций в сервисе не означает их допуска в этот индекс; существующие функции не удаляются."
+  "assessment_scope": "Оценка только допущенных 15 карточек RAG J02. Наличие других источников, шкал и функций в сервисе не означает их допуска в этот индекс; существующие функции не удаляются.",
+  "detailed_matrix": "data/retrieval/coverage-matrix.json",
+  "scope_freeze": "data/retrieval/coverage-freeze.json",
+  "coverage_report": "evidence/S17J02A/coverage-readiness.json"
 }

@@ -1,0 +1,29 @@
+{
+  "fixture": "artificial only, no clinical or legal admission of new real sources",
+  "scenarios": {
+    "registered_four_new_sources": {
+      "status": "PASS",
+      "admitted": 4,
+      "version": "833bba24748bae7fac4ac8042566dfcdfdafd0c1893278f5f6774bbabab863ff"
+    },
+    "repeat_without_duplicates": "PASS",
+    "combined_two_packages_six_sources": "PASS",
+    "atomic_failure_no_partial_release": "PASS",
+    "unknown_rights_quarantine_and_immediate_revocation": "PASS",
+    "previous_snapshot_byte_preservation": "PASS",
+    "explicit_reviewed_replacement_without_copying_full_original": "PASS"
+  },
+  "previous_snapshot_hashes": {
+    "22d92bc2df5a05e738bf9de84dc258be7c81a761358b2785cdffe5e95919d6d2.json": "22d92bc2df5a05e738bf9de84dc258be7c81a761358b2785cdffe5e95919d6d2",
+    "a9a434e11dfb3ef4aac9a6736f689851e00393259a2a1f2faee73de1e8d5f706.json": "a9a434e11dfb3ef4aac9a6736f689851e00393259a2a1f2faee73de1e8d5f706",
+    "manifest.json": "e4dc522655ec5d15c3ecf0cb5081b2176a99f3e715997193236991b4602287ba",
+    "13aec9746b20fde25a4b496c410ab7a099a80260060f6a6ce9d096249f0ecbc8.json": "13aec9746b20fde25a4b496c410ab7a099a80260060f6a6ce9d096249f0ecbc8",
+    "b1e35797bde22bdd6fc21c1db4f21ebb380550cf8e17f08cf56d3146c610323b.json": "b1e35797bde22bdd6fc21c1db4f21ebb380550cf8e17f08cf56d3146c610323b"
+  },
+  "replacement": {
+    "previous_version": "833bba24748bae7fac4ac8042566dfcdfdafd0c1893278f5f6774bbabab863ff",
+    "new_version": "2f070484d1300c1e5373dddde7b76ed12d24a873036423eb5578b43bc9d04d99",
+    "unchanged_other_sources": 3,
+    "new_PDF_copies": 0
+  }
+}
