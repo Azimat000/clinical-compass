@@ -1,0 +1,45 @@
+test_budget_overflow (test_plan_validation.PlanTests.test_budget_overflow) ... ok
+test_dependency_cycle (test_plan_validation.PlanTests.test_dependency_cycle) ... ok
+test_false_fulfilment (test_plan_validation.PlanTests.test_false_fulfilment) ... ok
+test_finalist_cannot_skip_final_preparation (test_plan_validation.PlanTests.test_finalist_cannot_skip_final_preparation) ... ok
+test_independent_work_after_clinical_block (test_plan_validation.PlanTests.test_independent_work_after_clinical_block) ... ok
+test_lost_subcondition (test_plan_validation.PlanTests.test_lost_subcondition) ... ok
+test_missing_requirement (test_plan_validation.PlanTests.test_missing_requirement) ... ok
+test_source_changed (test_plan_validation.PlanTests.test_source_changed) ... ok
+test_unauthorized_postcontest (test_plan_validation.PlanTests.test_unauthorized_postcontest) ... ok
+test_valid_plan (test_plan_validation.PlanTests.test_valid_plan) ... ok
+test_all_safety_effects_fail (test_retrieval_evaluation.RetrievalEvaluationTests.test_all_safety_effects_fail) ... ok
+test_alternative_complete_set (test_retrieval_evaluation.RetrievalEvaluationTests.test_alternative_complete_set) ... ok
+test_boolean_page_is_not_numeric_page (test_retrieval_evaluation.RetrievalEvaluationTests.test_boolean_page_is_not_numeric_page) ... ok
+test_correct_refusal_cannot_raise_recall (test_retrieval_evaluation.RetrievalEvaluationTests.test_correct_refusal_cannot_raise_recall) ... ok
+test_duplicate_and_extra_prediction_rejected (test_retrieval_evaluation.RetrievalEvaluationTests.test_duplicate_and_extra_prediction_rejected) ... ok
+test_duplicate_hit_fails (test_retrieval_evaluation.RetrievalEvaluationTests.test_duplicate_hit_fails) ... ok
+test_empty_dataset_never_passes (test_retrieval_evaluation.RetrievalEvaluationTests.test_empty_dataset_never_passes) ... ok
+test_every_citation_field_is_checked (test_retrieval_evaluation.RetrievalEvaluationTests.test_every_citation_field_is_checked) ... ok
+test_frozen_dataset_structure_and_negative_labels (test_retrieval_evaluation.RetrievalEvaluationTests.test_frozen_dataset_structure_and_negative_labels) ... ok
+test_incomplete_multiset_is_not_relevant (test_retrieval_evaluation.RetrievalEvaluationTests.test_incomplete_multiset_is_not_relevant) ... ok
+test_late_wrong_citation_fails_despite_rank_one (test_retrieval_evaluation.RetrievalEvaluationTests.test_late_wrong_citation_fails_despite_rank_one) ... ok
+test_leak_on_refusal (test_retrieval_evaluation.RetrievalEvaluationTests.test_leak_on_refusal) ... ok
+test_manifest_hash_tampering_rejected (test_retrieval_evaluation.RetrievalEvaluationTests.test_manifest_hash_tampering_rejected) ... ok
+test_missing_prediction (test_retrieval_evaluation.RetrievalEvaluationTests.test_missing_prediction) ... ok
+test_multipart_rank_is_completion_position (test_retrieval_evaluation.RetrievalEvaluationTests.test_multipart_rank_is_completion_position) ... ok
+test_no_predictions_fails (test_retrieval_evaluation.RetrievalEvaluationTests.test_no_predictions_fails) ... ok
+test_perfect_microfixture_and_no_release_claim (test_retrieval_evaluation.RetrievalEvaluationTests.test_perfect_microfixture_and_no_release_claim) ... ok
+test_refusals_only_not_a_ranking_pass (test_retrieval_evaluation.RetrievalEvaluationTests.test_refusals_only_not_a_ranking_pass) ... ok
+test_self_test (test_retrieval_evaluation.RetrievalEvaluationTests.test_self_test) ... ok
+test_unknown_payload_field_is_not_ignored (test_retrieval_evaluation.RetrievalEvaluationTests.test_unknown_payload_field_is_not_ignored) ... ok
+test_unknown_source (test_retrieval_evaluation.RetrievalEvaluationTests.test_unknown_source) ... ok
+test_versions_required (test_retrieval_evaluation.RetrievalEvaluationTests.test_versions_required) ... ok
+test_wrong_refusal_reduces_recall (test_retrieval_evaluation.RetrievalEvaluationTests.test_wrong_refusal_reduces_recall) ... ok
+test_active_recommendation_rejected (test_synthetic_validation.DatasetIntegrityTests.test_active_recommendation_rejected) ... ok
+test_age_and_date_only_paraphrase_rejected (test_synthetic_validation.DatasetIntegrityTests.test_age_and_date_only_paraphrase_rejected) ... ok
+test_false_clinical_validation_rejected (test_synthetic_validation.DatasetIntegrityTests.test_false_clinical_validation_rejected) ... ok
+test_frozen_text_change_rejected (test_synthetic_validation.DatasetIntegrityTests.test_frozen_text_change_rejected) ... ok
+test_invented_source_span_rejected (test_synthetic_validation.DatasetIntegrityTests.test_invented_source_span_rejected) ... ok
+test_profile_leakage_rejected (test_synthetic_validation.DatasetIntegrityTests.test_profile_leakage_rejected) ... ok
+test_unknown_replaced_with_no_risk_rejected (test_synthetic_validation.DatasetIntegrityTests.test_unknown_replaced_with_no_risk_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 124.918s
+
+OK

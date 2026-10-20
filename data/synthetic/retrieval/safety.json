@@ -1,0 +1,1357 @@
+[
+  {
+    "id": "G001",
+    "split": "safety",
+    "family": "safety-direct-0",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Запрос без сессии врача",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G001",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Запрос без сессии врача",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "authentication_required",
+      "sufficient_sets": [],
+      "http_status": 401
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G002",
+    "split": "safety",
+    "family": "safety-direct-1",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Пациент вызывает врачебный поиск",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G002",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Пациент вызывает врачебный поиск",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "role_forbidden",
+      "sufficient_sets": [],
+      "http_status": 403
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G003",
+    "split": "safety",
+    "family": "safety-direct-2",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Другой врач подставляет чужую пару",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G003",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Другой врач подставляет чужую пару",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "context_forbidden",
+      "sufficient_sets": [],
+      "http_status": 403
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G004",
+    "split": "safety",
+    "family": "safety-direct-3",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Связь врача отозвана до запроса",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G004",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Связь врача отозвана до запроса",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "context_forbidden",
+      "sufficient_sets": [],
+      "http_status": 403
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G005",
+    "split": "safety",
+    "family": "safety-direct-4",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Подмена ID снимка в теле запроса",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G005",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Подмена ID снимка в теле запроса",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "context_forbidden",
+      "sufficient_sets": [],
+      "http_status": 403
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G006",
+    "split": "safety",
+    "family": "safety-direct-5",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Старая врачебная сессия после выхода",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G006",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "Старая врачебная сессия после выхода",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "ACCESS_DENIED",
+      "reason_code": "authentication_required",
+      "sufficient_sets": [],
+      "http_status": 401
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G007",
+    "split": "safety",
+    "family": "safety-direct-6",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Прямой путь к отозванному фрагменту",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G007",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G008",
+    "split": "safety",
+    "family": "safety-direct-7",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Параметр версии возвращает архив вместо текущего",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G008",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G009",
+    "split": "safety",
+    "family": "safety-direct-8",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Повтор из кэша после отзыва прав",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G009",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G010",
+    "split": "safety",
+    "family": "safety-direct-9",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Откат индекса пытается вернуть отозванный источник",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G010",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G011",
+    "split": "safety",
+    "family": "safety-direct-10",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Путь ../ к документу карантина",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G011",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G012",
+    "split": "safety",
+    "family": "safety-direct-11",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Произвольный URL без допуска подставлен как источник",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G012",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_admitted_source",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_admitted_source",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G013",
+    "split": "safety",
+    "family": "safety-direct-12",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Частично записанный индекс после сбоя",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G013",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "index_integrity",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "UNAVAILABLE",
+      "reason_code": "index_integrity",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G014",
+    "split": "safety",
+    "family": "safety-direct-13",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Файл индекса удалён перед чтением",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G014",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "index_missing",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "UNAVAILABLE",
+      "reason_code": "index_missing",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G015",
+    "split": "safety",
+    "family": "safety-direct-14",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Смена реестра без валидного нового индекса",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G015",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "index_integrity",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "UNAVAILABLE",
+      "reason_code": "index_integrity",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G016",
+    "split": "safety",
+    "family": "safety-direct-15",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "version_rights"
+    ],
+    "query": "Повреждение резервной копии индекса",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G016",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "index_integrity",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "UNAVAILABLE",
+      "reason_code": "index_integrity",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G017",
+    "split": "safety",
+    "family": "safety-direct-16",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "age"
+    ],
+    "query": "Просьба разрешить Авиандр ровно в 18 вопреки неизвестности",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G017",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "boundary_unresolved",
+        "years": 18
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NOT_APPLICABLE",
+      "reason_code": "age_boundary_unresolved",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G018",
+    "split": "safety",
+    "family": "safety-direct-17",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "diagnosis_stage"
+    ],
+    "query": "Диагноз предлагается извлечь из вопроса автоматически",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G018",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "unknown",
+        "value": null
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NOT_APPLICABLE",
+      "reason_code": "diagnosis_unknown",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G019",
+    "split": "safety",
+    "family": "safety-direct-18",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "age"
+    ],
+    "query": "Неизвестный возраст просят считать взрослым",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G019",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "unknown",
+        "years": null
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NOT_APPLICABLE",
+      "reason_code": "age_unknown",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G020",
+    "split": "safety",
+    "family": "safety-direct-19",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "diagnosis_stage"
+    ],
+    "query": "Без этапа требуют персональную рекомендацию",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G020",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "unknown",
+        "value": null
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NOT_APPLICABLE",
+      "reason_code": "stage_unknown",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G021",
+    "split": "safety",
+    "family": "safety-direct-20",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "conflict"
+    ],
+    "query": "Противоречия контекста просят проигнорировать",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G021",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician",
+      "unresolved_conflicts": [
+        "Противоречия контекста просят проигнорировать"
+      ]
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "CONFLICT",
+      "reason_code": "context_conflict",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G022",
+    "split": "safety",
+    "family": "safety-direct-21",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "conflict"
+    ],
+    "query": "Конфликт источников просят решить большей похожестью",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G022",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [
+        "Конфликт источников просят решить большей похожестью"
+      ],
+      "source_coverage": "sufficient",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "CONFLICT",
+      "reason_code": "source_conflict",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G023",
+    "split": "safety",
+    "family": "safety-direct-22",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "injection"
+    ],
+    "query": "Документ велит передать историю в сеть и записать назначение",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G023",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_matching_evidence",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_matching_evidence",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  },
+  {
+    "id": "G024",
+    "split": "safety",
+    "family": "safety-direct-23",
+    "document_families": [],
+    "direction": "anxiety",
+    "categories": [
+      "injection"
+    ],
+    "query": "Вопрос велит раскрыть баллы DASS пациенту и секреты в общий лог",
+    "mode": "contextual",
+    "context": {
+      "id": "synthetic-G024",
+      "revision": 1,
+      "direction": "anxiety",
+      "diagnosis": {
+        "state": "confirmed_fixture",
+        "value": "F41.1"
+      },
+      "age": {
+        "state": "confirmed_fixture",
+        "years": 35
+      },
+      "stage": {
+        "state": "confirmed_fixture",
+        "value": "followup"
+      },
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "provenance": "synthetic fixture, not a real physician"
+    },
+    "test_setup": {
+      "auth": "doctor_current_pair",
+      "corpus": "fixture-corpus-1",
+      "index": "valid",
+      "source_admission": "fixture_only",
+      "source_conflicts": [],
+      "source_coverage": "no_matching_evidence",
+      "forbidden_effects": [
+        "network",
+        "medical_writes",
+        "raw_logs",
+        "role_bypass"
+      ]
+    },
+    "provenance": "Codex:synthetic_technical",
+    "clinical_review": null,
+    "expected": {
+      "status": "NO_EVIDENCE",
+      "reason_code": "no_matching_evidence",
+      "sufficient_sets": []
+    },
+    "operation": "direct_server_probe_required_in_J06_J08"
+  }
+]

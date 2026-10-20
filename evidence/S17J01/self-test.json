@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "positive_control": true,
+  "multipart_mrr": 0.5,
+  "probes": {
+    "wrong_page": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "citation:a",
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "wrong_version": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "citation:a",
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "lost_context": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "citation:a",
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "unadmitted_source": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "unknown_source:foreign",
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "leak": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [],
+        "mini-refusal": [
+          "refusal_leak"
+        ]
+      }
+    },
+    "wrong_refusal": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "status",
+          "reason",
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "incomplete_set": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "incomplete_evidence"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "missing_row": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [],
+        "mini-refusal": [
+          "missing_prediction"
+        ]
+      }
+    },
+    "duplicate_hit": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "duplicate_hit:a"
+        ],
+        "mini-refusal": []
+      }
+    },
+    "network_fallback": {
+      "rejected": true,
+      "gates": {
+        "G02": false,
+        "G03": false
+      },
+      "errors": {
+        "mini-found": [
+          "safety:network_fallback"
+        ],
+        "mini-refusal": []
+      }
+    }
+  },
+  "scope": "microfixture_only; no retrieval/control run"
+}

@@ -1,0 +1,85 @@
+{
+  "version": "retrieval-gates-1",
+  "frozen_before_tuning": true,
+  "G01": {
+    "development_min": 60,
+    "control_min": 60,
+    "safety_min": 24,
+    "control_answerable_min": 30,
+    "direction_answerable_min": 10,
+    "control_refusals_min": 20,
+    "control_conflicts_min": 5,
+    "category_min": 5
+  },
+  "G02": {
+    "recall_at_5_min": 0.95,
+    "mrr_at_5_min": 0.85,
+    "citation_errors_max": 0
+  },
+  "G03": {
+    "bypasses_max": 0,
+    "required_refusals_correct": 1.0,
+    "required_conflicts_correct": 1.0,
+    "context_errors_max": 0
+  },
+  "G04": {
+    "recall_gain_min": 0.03,
+    "mrr_gain_min": 0.03,
+    "other_metric_regression_max": 0
+  },
+  "G05": {
+    "source_revocation_cache_rollback_restart_backup_must_pass": true
+  },
+  "G06": {
+    "unauthorized_disclosures_max": 0,
+    "medical_writes_max": 0,
+    "raw_logs_max": 0,
+    "physician_actions": 5
+  },
+  "G07": {
+    "warm_p95_seconds": {
+      "baseline": 1,
+      "hybrid": 2
+    },
+    "concurrency": 5,
+    "duration_seconds_min": 1800,
+    "completed_requests_min": 10000,
+    "unexpected_errors_max": 0,
+    "extra_peak_rss_bytes": {
+      "baseline": 536870912,
+      "hybrid": 2147483648
+    },
+    "disk_bytes_max": {
+      "baseline": 1073741824,
+      "hybrid": 2147483648
+    },
+    "main_path_p95_regression_max": 0.1
+  },
+  "G08": {
+    "roles": [
+      "doctor",
+      "patient"
+    ],
+    "widths": [
+      320,
+      768,
+      1440
+    ],
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "keyboard_focus_contrast_zoom_no_js_all_states_required": true
+  },
+  "G09": {
+    "clean_start_dependencies_rights_switch_operations_diff_make_check_required": true
+  },
+  "export_versions": {
+    "contract": "retrieval-contract-1",
+    "corpus": "fixture-corpus-1",
+    "index": "fixture-index-1",
+    "retriever": "fixture-export-1",
+    "policy": "fixture-policy-1"
+  }
+}

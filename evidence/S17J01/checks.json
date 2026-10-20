@@ -1,0 +1,82 @@
+[
+  {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 124.981,
+    "log": "evidence/S17J01/plan-tests.log"
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "tools/evaluate_retrieval.py",
+      "--validate",
+      "--output",
+      "evidence/S17J01/dataset-validation.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.133,
+    "log": "evidence/S17J01/check-1.log"
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "tools/evaluate_retrieval.py",
+      "--self-test",
+      "--output",
+      "evidence/S17J01/self-test.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.034,
+    "log": "evidence/S17J01/check-2.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/validate_plan.py",
+      "--pending-tag",
+      "S17J01"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.922,
+    "log": "evidence/S17J01/check-3.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/session.py",
+      "status"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.064,
+    "log": "evidence/S17J01/check-4.log"
+  },
+  {
+    "command": [
+      "python3",
+      "evidence/S17J01/verify.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.238,
+    "log": "evidence/S17J01/check-5.log"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.023,
+    "log": "evidence/S17J01/check-6.log"
+  }
+]

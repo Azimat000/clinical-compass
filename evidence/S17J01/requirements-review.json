@@ -1,0 +1,414 @@
+{
+  "slice": "S17J01",
+  "clinical_validation": false,
+  "requirements": [
+    {
+      "id": "F02",
+      "subchecks": [
+        {
+          "id": "F02.1",
+          "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "M03",
+      "subchecks": [
+        {
+          "id": "M03.1",
+          "text": "Назначение терапии"
+        },
+        {
+          "id": "M03.2",
+          "text": "Изменение терапии"
+        },
+        {
+          "id": "M03.3",
+          "text": "Отмена терапии"
+        },
+        {
+          "id": "M03.4",
+          "text": "Направление к психиатру"
+        },
+        {
+          "id": "M03.5",
+          "text": "Изменение плана"
+        },
+        {
+          "id": "M03.6",
+          "text": "Подтверждение врачом перед каждым действием"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "M07",
+      "subchecks": [
+        {
+          "id": "M07.1",
+          "text": "Регистрация препарата в РФ"
+        },
+        {
+          "id": "M07.2",
+          "text": "Показания"
+        },
+        {
+          "id": "M07.3",
+          "text": "Противопоказания"
+        },
+        {
+          "id": "M07.4",
+          "text": "Режимы дозирования"
+        },
+        {
+          "id": "M07.5",
+          "text": "Вне инструкции решает только врач"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "M08",
+      "subchecks": [
+        {
+          "id": "M08.1",
+          "text": "Действующие КР РФ"
+        },
+        {
+          "id": "M08.2",
+          "text": "Одобрение Минздравом"
+        },
+        {
+          "id": "M08.3",
+          "text": "Международные только дополнение"
+        },
+        {
+          "id": "M08.4",
+          "text": "Явный источник международных"
+        },
+        {
+          "id": "M08.5",
+          "text": "Действующая инструкция/ОХЛП именно ГРЛС"
+        },
+        {
+          "id": "M08.6",
+          "text": "Валидированный инструмент"
+        },
+        {
+          "id": "M08.7",
+          "text": "Валидированная русская версия"
+        },
+        {
+          "id": "M08.8",
+          "text": "Источник валидации"
+        },
+        {
+          "id": "M08.9",
+          "text": "Авторские права и лицензия"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "M09",
+      "subchecks": [
+        {
+          "id": "M09.1",
+          "text": "Соответствие требованиям законодательства РФ"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "M10",
+      "subchecks": [
+        {
+          "id": "M10.1",
+          "text": "Соблюдение конфиденциальности"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "E01",
+      "subchecks": [
+        {
+          "id": "E01.1",
+          "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "E02",
+      "subchecks": [
+        {
+          "id": "E02.1",
+          "text": "Клиническая применимость"
+        }
+      ],
+      "preserved_status": "not_verified",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "T03",
+      "subchecks": [
+        {
+          "id": "T03.1",
+          "text": "Число сбоев сценариев"
+        },
+        {
+          "id": "T03.2",
+          "text": "Неполнота ввода"
+        },
+        {
+          "id": "T03.3",
+          "text": "Некорректность ввода"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "T05",
+      "subchecks": [
+        {
+          "id": "T05.1",
+          "text": "Выводы с релевантными источниками"
+        },
+        {
+          "id": "T05.2",
+          "text": "Методы/шкалы как основания"
+        },
+        {
+          "id": "T05.3",
+          "text": "Связь с конкретными данными пациента"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "T12",
+      "subchecks": [
+        {
+          "id": "T12.1",
+          "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "T13",
+      "subchecks": [
+        {
+          "id": "T13.1",
+          "text": "Защищенность данных"
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C23",
+      "subchecks": [
+        {
+          "id": "C23.1",
+          "text": "Академическая честность: не выдавать чужие или приобретённые вне чемпионата решения за собственные; использовать чужую ИС только с разрешением. Возможна проверка заимствований, отстранение и аннулирование призов."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C24",
+      "subchecks": [
+        {
+          "id": "C24.1",
+          "text": "Материалы организаторов разрешены только для участия. Нельзя передавать доступ, использовать вне целей или воспроизводить без предусмотренного согласия."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C25",
+      "subchecks": [
+        {
+          "id": "C25.1",
+          "text": "Конфиденциальность охватывает обозначенные сведения, кейсы/метрики до публикации, пациентские и коммерческие данные, переданные материалы, обсуждения/оценки до объявления и другие сведения участия. Срок — пять лет после окончания, предусмотрены санкции."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C41",
+      "subchecks": [
+        {
+          "id": "C41.1",
+          "text": "Специальных публичных норм о Codex/ИИ, собственном старом коде, open source, SaaS и внешних API нет. Требуются уточнения, проверка лицензий и отсутствие самовольной передачи материалов. Состав доступных данных/ресурсов не гарантирован."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C42",
+      "subchecks": [
+        {
+          "id": "C42.1",
+          "text": "Веса/приоритет, входные форматы/поля, критерии апробации, питч/Q&A, слайды/видео, загрузка, размеры постера и инфраструктура публично не конкретизированы. Получить ответы или сохранить явные пробелы, не придумывать разрешения."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    },
+    {
+      "id": "C43",
+      "subchecks": [
+        {
+          "id": "C43.1",
+          "text": "Сохранить версии и хеши PDF/положения. Новые дополнения чата учитывать отдельным слоем, не заменять исходные формулировки молча."
+        }
+      ],
+      "preserved_status": "partial",
+      "scope": "Только контракт/синтетическая техническая разметка/оценщик; не рабочий поиск, клинический допуск или выполнение группы.",
+      "evidence": [
+        "docs/architecture/source-retrieval-contract.md",
+        "docs/validation/retrieval-protocol.md",
+        "evidence/S17J01/dataset-manifest.json",
+        "evidence/S17J01/self-test.json"
+      ],
+      "remaining": "Допущенный реальный корпус/разметка до настройки J04; проверки J02–J08/J и фактическая независимая клиническая проверка."
+    }
+  ]
+}
