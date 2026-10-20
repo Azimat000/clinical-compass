@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T21:29:21+03:00",
+  "updated_on": "2026-10-20T21:52:27+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17G",
-  "next_slice": "S17H",
+  "last_accepted_slice": "S17H",
+  "next_slice": "S17J",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -212,8 +212,8 @@
       "reason": null
     },
     "S17H": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17H",
       "handoff": "memory/sessions/S17H.md",
       "reason": null
     },
@@ -221,6 +221,12 @@
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/S17I.md",
+      "reason": null
+    },
+    "S17J": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J.md",
       "reason": null
     }
   },
@@ -304,5 +310,15 @@
       "organizational_questions"
     ],
     "retained_requirements": "83/160 сохраняются; отложенное не считается выполненным. Клиническая безопасность/права/источники сервиса обязательны."
+  },
+  "latest_followup_spec": {
+    "version": "FU-spec-0.1",
+    "report": "memory/sessions/S17H.md",
+    "acceptance": "evidence/S17H/acceptance.md",
+    "review_packet": "evidence/S17H/review-packet.json",
+    "clinical_validation": false,
+    "all_cards_active": false,
+    "rag_direction": "Локальный поиск по проверенному версионированному корпусу; следующий S17J, ещё не реализован",
+    "commit_ref": "refs/tags/slice/S17H"
   }
 }

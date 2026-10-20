@@ -1,0 +1,781 @@
+{
+  "preservation": {
+    "status": "PASS",
+    "base_commit": "92d58bbe49fb37a411fc42aec8f06d24cfd9a49a",
+    "tracked_preserved_or_allowed": 1028,
+    "pre_existing_untracked_preserved": [
+      "evidence/audits/2026-10-20-cycles/checks.log",
+      "evidence/audits/2026-10-20-cycles/external-check.md",
+      "evidence/audits/2026-10-20-cycles/results.json",
+      "tools/run_synthetic_cycles.py"
+    ],
+    "changed_tracked": [
+      "START_HERE.md",
+      "docs/product/psychiatrist-followup-plan.md",
+      "memory/BLOCKERS.md",
+      "memory/BUDGET.json",
+      "memory/DECISIONS.md",
+      "memory/EXTERNAL.md",
+      "memory/STATE.json",
+      "plan/COVERAGE.md",
+      "plan/ROADMAP.md",
+      "plan/coverage.json",
+      "plan/manifest.json",
+      "plan/slices/S17I.md"
+    ],
+    "requirements": 83,
+    "subchecks": 160,
+    "all_requirement_statuses_preserved": true,
+    "runtime_sources_forms_dependencies_preserved": true,
+    "sibling_states_preserved": true,
+    "new_slice_planned_only": "S17J",
+    "s17i_change": "Additional S17J dependency only; original tasks and acceptance retained",
+    "review_packet_hashes_match": true,
+    "clinical_validation": false,
+    "local_document_links_valid": true,
+    "budget_spent_and_commitments": 0
+  },
+  "requirements": [
+    {
+      "id": "F01",
+      "subchecks": [
+        "F01.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "F02",
+      "subchecks": [
+        "F02.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "F03",
+      "subchecks": [
+        "F03.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "F04",
+      "subchecks": [
+        "F04.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "F05",
+      "subchecks": [
+        "F05.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "F06",
+      "subchecks": [
+        "F06.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "F07",
+      "subchecks": [
+        "F07.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "F08",
+      "subchecks": [
+        "F08.1",
+        "F08.2",
+        "F08.3",
+        "F08.4",
+        "F08.5",
+        "F08.6"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M01",
+      "subchecks": [
+        "M01.1",
+        "M01.2",
+        "M01.3",
+        "M01.4"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M02",
+      "subchecks": [
+        "M02.1",
+        "M02.2",
+        "M02.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M03",
+      "subchecks": [
+        "M03.1",
+        "M03.2",
+        "M03.3",
+        "M03.4",
+        "M03.5",
+        "M03.6"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M04",
+      "subchecks": [
+        "M04.1",
+        "M04.2",
+        "M04.3",
+        "M04.4"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M05",
+      "subchecks": [
+        "M05.1",
+        "M05.2",
+        "M05.3",
+        "M05.4",
+        "M05.5"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "M06",
+      "subchecks": [
+        "M06.1",
+        "M06.2",
+        "M06.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "M07",
+      "subchecks": [
+        "M07.1",
+        "M07.2",
+        "M07.3",
+        "M07.4",
+        "M07.5"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M08",
+      "subchecks": [
+        "M08.1",
+        "M08.2",
+        "M08.3",
+        "M08.4",
+        "M08.5",
+        "M08.6",
+        "M08.7",
+        "M08.8",
+        "M08.9"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M09",
+      "subchecks": [
+        "M09.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "M10",
+      "subchecks": [
+        "M10.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "E01",
+      "subchecks": [
+        "E01.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "E02",
+      "subchecks": [
+        "E02.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "E03",
+      "subchecks": [
+        "E03.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "E04",
+      "subchecks": [
+        "E04.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "E05",
+      "subchecks": [
+        "E05.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "E06",
+      "subchecks": [
+        "E06.1",
+        "E06.2",
+        "E06.3"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T01",
+      "subchecks": [
+        "T01.1",
+        "T01.2",
+        "T01.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T02",
+      "subchecks": [
+        "T02.1",
+        "T02.2",
+        "T02.3",
+        "T02.4",
+        "T02.5",
+        "T02.6",
+        "T02.7"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "T03",
+      "subchecks": [
+        "T03.1",
+        "T03.2",
+        "T03.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "T04",
+      "subchecks": [
+        "T04.1",
+        "T04.2",
+        "T04.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T05",
+      "subchecks": [
+        "T05.1",
+        "T05.2",
+        "T05.3"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "T06",
+      "subchecks": [
+        "T06.1",
+        "T06.2"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T07",
+      "subchecks": [
+        "T07.1",
+        "T07.2",
+        "T07.3",
+        "T07.4",
+        "T07.5"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T08",
+      "subchecks": [
+        "T08.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T09",
+      "subchecks": [
+        "T09.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T10",
+      "subchecks": [
+        "T10.1",
+        "T10.2",
+        "T10.3",
+        "T10.4",
+        "T10.5"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "T11",
+      "subchecks": [
+        "T11.1",
+        "T11.2",
+        "T11.3",
+        "T11.4",
+        "T11.5",
+        "T11.6"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "T12",
+      "subchecks": [
+        "T12.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "T13",
+      "subchecks": [
+        "T13.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C01",
+      "subchecks": [
+        "C01.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C02",
+      "subchecks": [
+        "C02.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C03",
+      "subchecks": [
+        "C03.1",
+        "C03.2",
+        "C03.3",
+        "C03.4",
+        "C03.5",
+        "C03.6",
+        "C03.7",
+        "C03.8"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C04",
+      "subchecks": [
+        "C04.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C05",
+      "subchecks": [
+        "C05.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C06",
+      "subchecks": [
+        "C06.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C07",
+      "subchecks": [
+        "C07.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C08",
+      "subchecks": [
+        "C08.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C09",
+      "subchecks": [
+        "C09.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C10",
+      "subchecks": [
+        "C10.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C11",
+      "subchecks": [
+        "C11.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C12",
+      "subchecks": [
+        "C12.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C13",
+      "subchecks": [
+        "C13.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C14",
+      "subchecks": [
+        "C14.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C15",
+      "subchecks": [
+        "C15.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C16",
+      "subchecks": [
+        "C16.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C17",
+      "subchecks": [
+        "C17.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C18",
+      "subchecks": [
+        "C18.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C19",
+      "subchecks": [
+        "C19.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C20",
+      "subchecks": [
+        "C20.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C21",
+      "subchecks": [
+        "C21.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C22",
+      "subchecks": [
+        "C22.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C23",
+      "subchecks": [
+        "C23.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C24",
+      "subchecks": [
+        "C24.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C25",
+      "subchecks": [
+        "C25.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C26",
+      "subchecks": [
+        "C26.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C27",
+      "subchecks": [
+        "C27.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C28",
+      "subchecks": [
+        "C28.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C29",
+      "subchecks": [
+        "C29.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C30",
+      "subchecks": [
+        "C30.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C31",
+      "subchecks": [
+        "C31.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C32",
+      "subchecks": [
+        "C32.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C33",
+      "subchecks": [
+        "C33.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C34",
+      "subchecks": [
+        "C34.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C35",
+      "subchecks": [
+        "C35.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C36",
+      "subchecks": [
+        "C36.1",
+        "C36.2",
+        "C36.3",
+        "C36.4",
+        "C36.5"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C37",
+      "subchecks": [
+        "C37.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C38",
+      "subchecks": [
+        "C38.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C39",
+      "subchecks": [
+        "C39.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C40",
+      "subchecks": [
+        "C40.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C41",
+      "subchecks": [
+        "C41.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C42",
+      "subchecks": [
+        "C42.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C43",
+      "subchecks": [
+        "C43.1"
+      ],
+      "status_preserved": "partial",
+      "s17h_disposition": "Подготовительная спецификация/источники/пакет; клинического выполнения не заявлено."
+    },
+    {
+      "id": "C44",
+      "subchecks": [
+        "C44.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C45",
+      "subchecks": [
+        "C45.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    },
+    {
+      "id": "C46",
+      "subchecks": [
+        "C46.1"
+      ],
+      "status_preserved": "not_verified",
+      "s17h_disposition": "Без нового выполнения; прежние доказательства/статус сохранены."
+    }
+  ]
+}

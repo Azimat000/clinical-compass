@@ -1,0 +1,616 @@
+{
+  "scope": "Подготовительная спецификация, не новое выполнение83/160",
+  "requirements": [
+    {
+      "id": "F01",
+      "subchecks": [
+        {
+          "id": "F01.1",
+          "text": "Предлагать стандартизированные методы оценки состояния пациента"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "evidence/S17H/source-map.md",
+        "evidence/S17H/review-packet.json"
+      ],
+      "acceptance_evidence": "Точная DASS, возраст/неполнота/периоды/права сохранены; актуальность КР отдельно от клинического допуска. Новая форма/интерпретация не активирована."
+    },
+    {
+      "id": "M08",
+      "subchecks": [
+        {
+          "id": "M08.1",
+          "text": "Действующие КР РФ"
+        },
+        {
+          "id": "M08.2",
+          "text": "Одобрение Минздравом"
+        },
+        {
+          "id": "M08.3",
+          "text": "Международные только дополнение"
+        },
+        {
+          "id": "M08.4",
+          "text": "Явный источник международных"
+        },
+        {
+          "id": "M08.5",
+          "text": "Действующая инструкция/ОХЛП именно ГРЛС"
+        },
+        {
+          "id": "M08.6",
+          "text": "Валидированный инструмент"
+        },
+        {
+          "id": "M08.7",
+          "text": "Валидированная русская версия"
+        },
+        {
+          "id": "M08.8",
+          "text": "Источник валидации"
+        },
+        {
+          "id": "M08.9",
+          "text": "Авторские права и лицензия"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "evidence/S17H/source-map.md",
+        "evidence/S17H/review-packet.json"
+      ],
+      "acceptance_evidence": "Точная DASS, возраст/неполнота/периоды/права сохранены; актуальность КР отдельно от клинического допуска. Новая форма/интерпретация не активирована."
+    },
+    {
+      "id": "F02",
+      "subchecks": [
+        {
+          "id": "F02.1",
+          "text": "Предоставлять рекомендации или справочную информацию по возможным вариантам терапии"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU01–FU08 и контракт отдельного подтверждения пяти действий; это проект, не реализованные рекомендации."
+    },
+    {
+      "id": "M03",
+      "subchecks": [
+        {
+          "id": "M03.1",
+          "text": "Назначение терапии"
+        },
+        {
+          "id": "M03.2",
+          "text": "Изменение терапии"
+        },
+        {
+          "id": "M03.3",
+          "text": "Отмена терапии"
+        },
+        {
+          "id": "M03.4",
+          "text": "Направление к психиатру"
+        },
+        {
+          "id": "M03.5",
+          "text": "Изменение плана"
+        },
+        {
+          "id": "M03.6",
+          "text": "Подтверждение врачом перед каждым действием"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU01–FU08 и контракт отдельного подтверждения пяти действий; это проект, не реализованные рекомендации."
+    },
+    {
+      "id": "F03",
+      "subchecks": [
+        {
+          "id": "F03.1",
+          "text": "Учитывать и оценивать индивидуальные риски и нежелательные явления"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU02–FU07: данные по периодам, НЯ/выполнение/пропуски отдельно, без причинности/диагноза/самостоятельной отмены; профилиFU-T01–T08."
+    },
+    {
+      "id": "F04",
+      "subchecks": [
+        {
+          "id": "F04.1",
+          "text": "Мониторинг динамики состояния пациента"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU02–FU07: данные по периодам, НЯ/выполнение/пропуски отдельно, без причинности/диагноза/самостоятельной отмены; профилиFU-T01–T08."
+    },
+    {
+      "id": "F07",
+      "subchecks": [
+        {
+          "id": "F07.1",
+          "text": "Оценивать приверженность лечению и рекомендациям врача"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU02–FU07: данные по периодам, НЯ/выполнение/пропуски отдельно, без причинности/диагноза/самостоятельной отмены; профилиFU-T01–T08."
+    },
+    {
+      "id": "F08",
+      "subchecks": [
+        {
+          "id": "F08.1",
+          "text": "Врач другой специальности"
+        },
+        {
+          "id": "F08.2",
+          "text": "Выявление потребности в психиатре"
+        },
+        {
+          "id": "F08.3",
+          "text": "Маршрут по данным пациента"
+        },
+        {
+          "id": "F08.4",
+          "text": "Категория обязательно"
+        },
+        {
+          "id": "F08.5",
+          "text": "Категория желательно"
+        },
+        {
+          "id": "F08.6",
+          "text": "Учёт тяжести"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Терапевтический вход и обе категории сохранены; runtime маршрутизации неизменён по SHA, клинический S17D не принят."
+    },
+    {
+      "id": "M01",
+      "subchecks": [
+        {
+          "id": "M01.1",
+          "text": "Роль Врач"
+        },
+        {
+          "id": "M01.2",
+          "text": "Роль Пациент"
+        },
+        {
+          "id": "M01.3",
+          "text": "Раздельные функции"
+        },
+        {
+          "id": "M01.4",
+          "text": "Серверные права доступа"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/architecture/ai-decision.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "Разделены авторы/даты/роль/источник; одна ведущая пара и проекции;FU-T12. Нет нового совместного доступа или передачи данных."
+    },
+    {
+      "id": "M02",
+      "subchecks": [
+        {
+          "id": "M02.1",
+          "text": "Ведущий лечащий врач"
+        },
+        {
+          "id": "M02.2",
+          "text": "Самоотчёт попадает именно в его карточку"
+        },
+        {
+          "id": "M02.3",
+          "text": "Нет ручного посредника"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/architecture/ai-decision.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "Разделены авторы/даты/роль/источник; одна ведущая пара и проекции;FU-T12. Нет нового совместного доступа или передачи данных."
+    },
+    {
+      "id": "M10",
+      "subchecks": [
+        {
+          "id": "M10.1",
+          "text": "Соблюдение конфиденциальности"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-recommendation-spec.md",
+        "docs/architecture/ai-decision.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "Разделены авторы/даты/роль/источник; одна ведущая пара и проекции;FU-T12. Нет нового совместного доступа или передачи данных."
+    },
+    {
+      "id": "M04",
+      "subchecks": [
+        {
+          "id": "M04.1",
+          "text": "Рассмотрение Авиандра"
+        },
+        {
+          "id": "M04.2",
+          "text": "Профиль в каждом случае"
+        },
+        {
+          "id": "M04.3",
+          "text": "Лечебные рекомендации в каждом случае"
+        },
+        {
+          "id": "M04.4",
+          "text": "Маршрутизация в каждом случае"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-review-packet.md",
+        "evidence/S17H/review-packet.json"
+      ],
+      "acceptance_evidence": "Исходные шесть случаев сохранены по SHA; FU-T14 требует рассмотрения Авиандра без назначения всем. Нового медицинского эталона/лечебных проектов в случаях не заявлено."
+    },
+    {
+      "id": "M07",
+      "subchecks": [
+        {
+          "id": "M07.1",
+          "text": "Регистрация препарата в РФ"
+        },
+        {
+          "id": "M07.2",
+          "text": "Показания"
+        },
+        {
+          "id": "M07.3",
+          "text": "Противопоказания"
+        },
+        {
+          "id": "M07.4",
+          "text": "Режимы дозирования"
+        },
+        {
+          "id": "M07.5",
+          "text": "Вне инструкции решает только врач"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "evidence/S17H/source-map.md",
+        "docs/clinical/followup-review-packet.md"
+      ],
+      "acceptance_evidence": "FU08/G06: точная ГРЛС отдельно от КР/класса, ровно18/показания/особые группы требуют проверки; лекарственные дозы не внесены."
+    },
+    {
+      "id": "M09",
+      "subchecks": [
+        {
+          "id": "M09.1",
+          "text": "Соответствие требованиям законодательства РФ"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-review-packet.md",
+        "memory/BLOCKERS.md"
+      ],
+      "acceptance_evidence": "G07/B19: профессиональные и правовые вопросы не разрешены догадкой; юридическое соответствие не заявлено."
+    },
+    {
+      "id": "E01",
+      "subchecks": [
+        {
+          "id": "E01.1",
+          "text": "Научная обоснованность: использование шкал клинических рекомендаций инструкций и другого; необходимо указать источники"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "evidence/S17H/research.md",
+        "evidence/S17H/source-map.md",
+        "docs/clinical/followup-recommendation-spec.md"
+      ],
+      "acceptance_evidence": "Точные КР/версия/место и связь с каждой FU-карточкой; источниковый абзац не утверждает цифровой триггер."
+    },
+    {
+      "id": "T05",
+      "subchecks": [
+        {
+          "id": "T05.1",
+          "text": "Выводы с релевантными источниками"
+        },
+        {
+          "id": "T05.2",
+          "text": "Методы/шкалы как основания"
+        },
+        {
+          "id": "T05.3",
+          "text": "Связь с конкретными данными пациента"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "evidence/S17H/research.md",
+        "evidence/S17H/source-map.md",
+        "docs/clinical/followup-recommendation-spec.md"
+      ],
+      "acceptance_evidence": "Точные КР/версия/место и связь с каждой FU-карточкой; источниковый абзац не утверждает цифровой триггер."
+    },
+    {
+      "id": "E02",
+      "subchecks": [
+        {
+          "id": "E02.1",
+          "text": "Клиническая применимость"
+        }
+      ],
+      "status_preserved": "not_verified",
+      "inspected_artifacts": [
+        "docs/clinical/followup-review-packet.md",
+        "evidence/S17H/review-packet.json"
+      ],
+      "acceptance_evidence": "not_reviewed, reviewer=null, clinical_validation=false; фактической независимой проверки нет."
+    },
+    {
+      "id": "T02",
+      "subchecks": [
+        {
+          "id": "T02.1",
+          "text": "Точность извлечения"
+        },
+        {
+          "id": "T02.2",
+          "text": "Полнота извлечения"
+        },
+        {
+          "id": "T02.3",
+          "text": "Разный порядок"
+        },
+        {
+          "id": "T02.4",
+          "text": "Разная детализация"
+        },
+        {
+          "id": "T02.5",
+          "text": "Разный стиль"
+        },
+        {
+          "id": "T02.6",
+          "text": "Разный формат диагнозов"
+        },
+        {
+          "id": "T02.7",
+          "text": "Разный формат назначений"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "evidence/S17H/extraction-regression.json",
+        "docs/architecture/ai-decision.md"
+      ],
+      "acceptance_evidence": "Существующее извлечение воспроизведено на известном development/holdout; это регрессия. ИИпрогонов0; протокол будущего сравнения задан, выигрыша нет."
+    },
+    {
+      "id": "T03",
+      "subchecks": [
+        {
+          "id": "T03.1",
+          "text": "Число сбоев сценариев"
+        },
+        {
+          "id": "T03.2",
+          "text": "Неполнота ввода"
+        },
+        {
+          "id": "T03.3",
+          "text": "Некорректность ввода"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/clinical/followup-review-packet.md",
+        "docs/clinical/followup-recommendation-spec.md"
+      ],
+      "acceptance_evidence": "FU-T01–T16 задают неполноту/противоречия/отказы/обновления; это будущие проверки, не исполненные клинические тесты."
+    },
+    {
+      "id": "T10",
+      "subchecks": [
+        {
+          "id": "T10.1",
+          "text": "Новые/обновлённые шкалы"
+        },
+        {
+          "id": "T10.2",
+          "text": "Новые/обновлённые препараты"
+        },
+        {
+          "id": "T10.3",
+          "text": "Новые правила алертинга"
+        },
+        {
+          "id": "T10.4",
+          "text": "Новые функции"
+        },
+        {
+          "id": "T10.5",
+          "text": "Без изменения ядра"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "docs/clinical/followup-recommendation-spec.md",
+        "plan/slices/S17J.md"
+      ],
+      "acceptance_evidence": "Версии корпуса/индекса/правил и входной снимок заданы; схема/ядро не менялись. План расширения не считается готовой гибкостью."
+    },
+    {
+      "id": "T12",
+      "subchecks": [
+        {
+          "id": "T12.1",
+          "text": "Полнота данных: модель покрывает сущности необходимые для задач инструмента"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "docs/clinical/followup-recommendation-spec.md",
+        "plan/slices/S17J.md"
+      ],
+      "acceptance_evidence": "Версии корпуса/индекса/правил и входной снимок заданы; схема/ядро не менялись. План расширения не считается готовой гибкостью."
+    },
+    {
+      "id": "T13",
+      "subchecks": [
+        {
+          "id": "T13.1",
+          "text": "Защищенность данных"
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Локальный корпус публичных оснований отдельно от медицинских записей, закрытые материалы не отправлены, серверные механизмы сохранены по SHA. Новый аудит защищённости не заявлен."
+    },
+    {
+      "id": "C23",
+      "subchecks": [
+        {
+          "id": "C23.1",
+          "text": "Академическая честность: не выдавать чужие или приобретённые вне чемпионата решения за собственные; использовать чужую ИС только с разрешением. Возможна проверка заимствований, отстранение и аннулирование призов."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "memory/EXTERNAL.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Происхождение/лицензии/права до допуска источника или модели, Codex не разрешение ИИвпродукте; новых отправок/моделей/APIнет; прежние неизвестные сохранены."
+    },
+    {
+      "id": "C24",
+      "subchecks": [
+        {
+          "id": "C24.1",
+          "text": "Материалы организаторов разрешены только для участия. Нельзя передавать доступ, использовать вне целей или воспроизводить без предусмотренного согласия."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "memory/EXTERNAL.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Происхождение/лицензии/права до допуска источника или модели, Codex не разрешение ИИвпродукте; новых отправок/моделей/APIнет; прежние неизвестные сохранены."
+    },
+    {
+      "id": "C25",
+      "subchecks": [
+        {
+          "id": "C25.1",
+          "text": "Конфиденциальность охватывает обозначенные сведения, кейсы/метрики до публикации, пациентские и коммерческие данные, переданные материалы, обсуждения/оценки до объявления и другие сведения участия. Срок — пять лет после окончания, предусмотрены санкции."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "memory/EXTERNAL.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Происхождение/лицензии/права до допуска источника или модели, Codex не разрешение ИИвпродукте; новых отправок/моделей/APIнет; прежние неизвестные сохранены."
+    },
+    {
+      "id": "C41",
+      "subchecks": [
+        {
+          "id": "C41.1",
+          "text": "Специальных публичных норм о Codex/ИИ, собственном старом коде, open source, SaaS и внешних API нет. Требуются уточнения, проверка лицензий и отсутствие самовольной передачи материалов. Состав доступных данных/ресурсов не гарантирован."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "docs/architecture/ai-decision.md",
+        "memory/EXTERNAL.md",
+        "evidence/S17H/preservation-and-requirements.json"
+      ],
+      "acceptance_evidence": "Происхождение/лицензии/права до допуска источника или модели, Codex не разрешение ИИвпродукте; новых отправок/моделей/APIнет; прежние неизвестные сохранены."
+    },
+    {
+      "id": "C42",
+      "subchecks": [
+        {
+          "id": "C42.1",
+          "text": "Веса/приоритет, входные форматы/поля, критерии апробации, питч/Q&A, слайды/видео, загрузка, размеры постера и инфраструктура публично не конкретизированы. Получить ответы или сохранить явные пробелы, не придумывать разрешения."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "memory/EXTERNAL.md",
+        "memory/BLOCKERS.md"
+      ],
+      "acceptance_evidence": "Закрытые форматы/метрики и индивидуальные условия не уточнялись в сервисном срезе, подтверждение не выдумано."
+    },
+    {
+      "id": "C43",
+      "subchecks": [
+        {
+          "id": "C43.1",
+          "text": "Сохранить версии и хеши PDF/положения. Новые дополнения чата учитывать отдельным слоем, не заменять исходные формулировки молча."
+        }
+      ],
+      "status_preserved": "partial",
+      "inspected_artifacts": [
+        "evidence/S17H/baseline.json",
+        "evidence/S17H/review-packet.json",
+        "evidence/S17H/research.md"
+      ],
+      "acceptance_evidence": "Исходные версии/хеши сохранены; новое исследование и уточнение RAG добавлены отдельным слоем. Новое сетевое побайтное совпадение не заявлено."
+    }
+  ],
+  "all83_statuses_and160_subchecks_preserved": "evidence/S17H/preservation-and-requirements.json"
+}

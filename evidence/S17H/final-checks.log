@@ -1,0 +1,58 @@
+{
+  "slices": 37,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 24,
+  "fulfilled_requirements": 0,
+  "next_slice": "S17J"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+Текущий: нет
+Последний принятый: S17H
+Следующий готовый: S17J
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+{
+  "status": "PASS",
+  "errors": [],
+  "counts": {
+    "demonstration": 6,
+    "development": 24,
+    "holdout": 12
+  },
+  "unique_profiles_including_demo": 42,
+  "fact_count": 210,
+  "template_count": 12,
+  "assertion_counts": {
+    "present": 104,
+    "considered": 7,
+    "negated": 21,
+    "suspected": 4,
+    "unknown": 24,
+    "patient_reported": 11,
+    "conflicting": 15,
+    "historical": 10,
+    "stopped": 1,
+    "third_party": 2,
+    "listed": 5,
+    "invalid": 2,
+    "incomplete": 1,
+    "cancelled_proposal": 2,
+    "not_due": 1
+  },
+  "dose_units": {
+    "mg": 7,
+    "g": 2,
+    "ml": 1,
+    "None": 1,
+    "tablet": 1
+  },
+  "max_cross_split_text_similarity": 0.4661,
+  "nearest_pair": [
+    "DEV06",
+    "H04"
+  ],
+  "scope": "Structural/textual fixture integrity only; no extraction or clinical performance measured.",
+  "privacy_limit": "Contact pattern scan supplements authored provenance; it does not prove anonymization."
+}

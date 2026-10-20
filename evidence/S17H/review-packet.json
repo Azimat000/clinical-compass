@@ -1,0 +1,134 @@
+{
+  "version": "FU-review-0.1",
+  "prepared_on": "2026-10-20 Europe/Moscow",
+  "status": "not_reviewed",
+  "independent_clinical_validation": false,
+  "reviewer": null,
+  "files": [
+    {
+      "path": "docs/clinical/followup-recommendation-spec.md",
+      "sha256": "697f6997f03a486e019d1fd778877b80a2328a864c0555fafddaff1c0498723c"
+    },
+    {
+      "path": "docs/architecture/ai-decision.md",
+      "sha256": "5bbfdd3d3e6aeff4fc521d627cf44bd3c86c5c43b881a8a08f9017ff86d0f478"
+    },
+    {
+      "path": "docs/clinical/followup-review-packet.md",
+      "sha256": "ef3aa6ddfdd02d18d679d9f47b577b52554c938cb85f581d047ba66d6ad03b65"
+    },
+    {
+      "path": "evidence/S17H/source-map.md",
+      "sha256": "90f91b1a638e06e0ca6ae58d97560de33d6d5734ddc9008e0c8a20da755126e3"
+    },
+    {
+      "path": "evidence/S17H/research.md",
+      "sha256": "4709bb5123d283d97fa47128d7e663474006165f1155d099e9378886940172e9"
+    },
+    {
+      "path": "evidence/S09/completion-review/sources/kr301.pdf",
+      "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd"
+    },
+    {
+      "path": "evidence/S09/completion-review/sources/kr457.pdf",
+      "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a"
+    },
+    {
+      "path": "evidence/S02/received/aviandr-patient-leaflet-2026-07-16.pdf",
+      "sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc"
+    },
+    {
+      "path": "apps/compass/resources/dass42-ru-v1.json",
+      "sha256": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2"
+    },
+    {
+      "path": "apps/compass/resources/therapy-reference-v2.json",
+      "sha256": "6d8ba2bed9415f247df488b7ea6fc9e3b44a3acbca0be2e75e4a91894595338b"
+    },
+    {
+      "path": "data/synthetic/cases.json",
+      "sha256": "2b990334661c1d0ac588753cc72e915a07a35743884cb71584f79a72f621da8f"
+    }
+  ],
+  "cards": [
+    {
+      "id": "FU01",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU02",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU03",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU04",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU05",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU06",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU07",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    },
+    {
+      "id": "FU08",
+      "active": false,
+      "clinical_validation": false,
+      "spec_version": "FU-spec-0.1"
+    }
+  ],
+  "unresolved_questions": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08"
+  ],
+  "synthetic_profiles": [
+    "FU-T01",
+    "FU-T02",
+    "FU-T03",
+    "FU-T04",
+    "FU-T05",
+    "FU-T06",
+    "FU-T07",
+    "FU-T08",
+    "FU-T09",
+    "FU-T10",
+    "FU-T11",
+    "FU-T12",
+    "FU-T13",
+    "FU-T14",
+    "FU-T15",
+    "FU-T16"
+  ],
+  "activation_gate": "Фактическое независимое заключение точной версии/хешей, действующие источники/права, устранение замечаний; затем S17I с технической приёмкой. Подготовка/RAG-поиск не допуск.",
+  "network_hash_match_rechecked": false,
+  "source_limitations": "Локальные PDF из прежних принятых пакетов; новый отчёт исследователя проверяет текущие официальные версии/разделы, но новый побайтный сетевой снимок не сохранён."
+}
