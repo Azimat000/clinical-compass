@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scope": "planning revision only; application and runtime corpus unchanged",
+  "main_agent_checks": [
+    {
+      "command": "python3 tools/validate_plan.py",
+      "exit_code": 0,
+      "result": "48 slices; 83 requirements; 160 subchecks; next S17J02A; no false fulfilment"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "result": "current none; last accepted S17J02; next S17J02A"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools -p 'test_*.py' -v",
+      "exit_code": 0,
+      "tests": 40,
+      "seconds": 75.609,
+      "result": "OK"
+    },
+    {
+      "command": "python3 evidence/rag-corpus-expansion/verify.py",
+      "exit_code": 0,
+      "result": "Preservation, append-only requirements mapping, original criteria, frozen J01 SHA, unchanged runtime J02 and pre-existing untracked files"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "No whitespace errors"
+    }
+  ],
+  "direct_review": [
+    "Actual diff for route/memory/dependencies/tasks/acceptance and G01–G09",
+    "All three new cards and exact manifest correspondence",
+    "12-domain assessment and candidate statuses/rights/verification gaps",
+    "Source report and architecture; no new source admitted or model installed"
+  ],
+  "not_run": [
+    "Application tests/make check and browser/load trials: application code/dependencies/runtime corpus unchanged; no claim of search or clinical quality from planning checks."
+  ],
+  "clinical_validation": false,
+  "real_corpus_expanded": false
+}

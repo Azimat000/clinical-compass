@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "version": "corpus-coverage-plan-1",
+  "created_on": "2026-10-20",
+  "status": "planning_only",
+  "runtime_registry": false,
+  "strategy": "docs/architecture/rag-corpus-strategy.md",
+  "research": "evidence/rag-corpus-expansion/research.md",
+  "scope": {
+    "directions": [
+      "depression",
+      "generalized_anxiety_disorder"
+    ],
+    "fu_cards": [
+      "FU01",
+      "FU02",
+      "FU03",
+      "FU04",
+      "FU05",
+      "FU06",
+      "FU07",
+      "FU08"
+    ],
+    "population": "Применимость каждого источника отдельно; неизвестный/противоречивый возраст не взрослый по умолчанию.",
+    "medication_roster": "to_be_frozen_in_S17J02A; заранее по целевым КР и синтетическим сценариям; Авиандр без приоритета"
+  },
+  "current_corpus": {
+    "accepted_slice": "S17J02",
+    "sources": 3,
+    "authored_fact_cards": 15,
+    "original_quotes": 2,
+    "full_text_admission": false,
+    "sufficient_for_service": false,
+    "clinical_validation": false
+  },
+  "coverage_gate": {
+    "id": "COVERAGE-1",
+    "status": "NOT_READY",
+    "before": "S17J03",
+    "detailed_cells_frozen": false,
+    "medication_roster_frozen": false,
+    "complete_cells": null,
+    "required_cells": null,
+    "coverage_percent": null,
+    "preserve_gates": [
+      "G01",
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "G07",
+      "G08",
+      "G09"
+    ],
+    "requirements": [
+      "Каждая обязательная ячейка имеет достаточный допущенный комплект оснований; все обязательные ячейки закрыты.",
+      "Каждое лекарство объявленного перечня имеет полное проверенное досье по заданным разделам и проверку официальных обновлений безопасности.",
+      "Отказ в обещанном сценарии считается пробелом; смена области после результата запрещена без отдельного решения и истории.",
+      "До J04 заморожены новые реальные вопросы/достаточные комплекты/protocol authored_fact-original_quote в J03; J01 не переписан.",
+      "Техническая сверка/поисковая точность не являются независимым клиническим допуском."
+    ]
+  },
+  "domains": [
+    {
+      "id": "D01",
+      "title": "Диагноз, возраст и применимость",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F01",
+        "KR457_3-F01",
+        "AVIANDR_LEAFLET_160726-F01",
+        "AVIANDR_LEAFLET_160726-F02"
+      ],
+      "remaining": "Подтверждённый контекст и границы каждого поддерживаемого состояния/популяции.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D02",
+      "title": "Симптомы, функционирование и динамика",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F05"
+      ],
+      "remaining": "Достаточные основания повторной оценки в обоих направлениях, включая функционирование.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D03",
+      "title": "Эффект, отсутствие эффекта, ремиссия и рецидив",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F03",
+        "KR457_3-F03",
+        "KR457_3-F04",
+        "KR457_3-F05"
+      ],
+      "remaining": "Этапы курса, необходимые сведения и границы вывода без автоматической коррекции.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D04",
+      "title": "Переносимость и нежелательные реакции",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F04",
+        "KR301_3-F05",
+        "KR457_3-F02",
+        "KR457_3-F03",
+        "AVIANDR_LEAFLET_160726-F04"
+      ],
+      "remaining": "Конкретные сведения по всем поддерживаемым лекарствам; отсутствие в списке не исключает реакцию.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D05",
+      "title": "Противопоказания и особые группы",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "AVIANDR_LEAFLET_160726-F02"
+      ],
+      "remaining": "Полные ограничения точных досье, возраст/беременность/лактация/соматические состояния по источнику.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D06",
+      "title": "Взаимодействия и сопутствующие лекарства",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F04"
+      ],
+      "remaining": "Проверенные разделы точных инструкций и ограничения охвата сочетаний.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D07",
+      "title": "Приверженность, пропуски и прекращение",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F05",
+        "KR457_3-F05"
+      ],
+      "remaining": "Не смешивать общую приверженность с конкретными указаниями по пропуску/прекращению лекарства.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D08",
+      "title": "Критические сведения и границы поиска",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F02",
+        "KR457_3-F02"
+      ],
+      "remaining": "Проверенные основания и связь с отдельным critical-path; поиск не определяет срочность.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D09",
+      "title": "Сопутствующие состояния и иной диагноз",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR457_3-F01",
+        "KR301_3-F04"
+      ],
+      "remaining": "Заданный перечень границ: иное расстройство, соматические причины, вещества; без диагностики по вопросу.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D10",
+      "title": "Психотерапия и немедикаментозная помощь",
+      "required": true,
+      "current_status": "gap",
+      "existing_card_ids": [],
+      "remaining": "Основания по целевым направлениям, границы и врачебное подтверждение плана.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D11",
+      "title": "Наблюдение и необходимые проверки",
+      "required": true,
+      "current_status": "partial",
+      "existing_card_ids": [
+        "KR301_3-F03",
+        "KR457_3-F03",
+        "KR457_3-F05"
+      ],
+      "remaining": "Клинический/лабораторный контроль и этапы для поддерживаемых сценариев/препаратов по точному источнику.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    },
+    {
+      "id": "D12",
+      "title": "Шкалы, форма, валидация и права",
+      "required": true,
+      "current_status": "gap",
+      "existing_card_ids": [],
+      "remaining": "Точная разрешённая форма, популяция/период/интерпретация; DASS не становится диагнозом или лечением.",
+      "readiness": "NOT_READY",
+      "target_slices": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "note": "Ссылки на начальные карточки показывают только затронутую тему, не полное покрытие или клиническое одобрение."
+    }
+  ],
+  "source_candidates": [
+    {
+      "id": "RF-KR301",
+      "family": "russian_clinical_guideline",
+      "priority": "P0",
+      "title": "КР301_3: депрессивный эпизод/РДР",
+      "url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+      "status": "existing_scoped_admission",
+      "verification": "Локальный accepted J02; новая проверка текущего внешнего статуса в этом исследовании не выполнена.",
+      "rights": "Только точные reviewed_cards J02; расширение требует нового доказательства.",
+      "existing_document_id": "KR301_3"
+    },
+    {
+      "id": "RF-KR457",
+      "family": "russian_clinical_guideline",
+      "priority": "P0",
+      "title": "КР457_3: ГТР",
+      "url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+      "status": "existing_scoped_admission",
+      "verification": "Локальный accepted J02; новая проверка текущего внешнего статуса в этом исследовании не выполнена.",
+      "rights": "Только точные reviewed_cards J02; расширение требует нового доказательства.",
+      "existing_document_id": "KR457_3"
+    },
+    {
+      "id": "RF-GRLS-AVIANDR",
+      "family": "registered_medication_information",
+      "priority": "P0",
+      "title": "Авиандр: точный листок ГРЛС, не ОХЛП",
+      "url": "https://grls.rosminzdrav.ru/InstrImg/2026/07/29/1532717/94ba54dc-ce1c-40ed-96f4-5c3a31f13805.pdf",
+      "status": "existing_scoped_admission",
+      "verification": "Локальный accepted J02; только пять фактов, не полное досье.",
+      "rights": "Только точные reviewed_cards J02; дословных цитат нет.",
+      "existing_document_id": "AVIANDR_LEAFLET_160726"
+    },
+    {
+      "id": "RF-GRLS-PLANNED-MEDICATIONS",
+      "family": "registered_medication_information",
+      "priority": "P0",
+      "title": "Досье планового перечня поддерживаемых лекарств",
+      "url": "https://grls.rosminzdrav.ru/",
+      "status": "discovery_required",
+      "verification": "Перечень определяется в J02A по целевым КР и синтетическим сценариям; точные РУ/формы/версии ещё не найдены.",
+      "rights": "unknown; нет допуска от включения в план"
+    },
+    {
+      "id": "RF-SAFETY",
+      "family": "regulatory_safety_updates",
+      "priority": "P0",
+      "title": "Росздравнадзор: мониторинг безопасности лекарств",
+      "url": "https://roszdravnadzor.gov.ru/drugs/monitpringlp",
+      "status": "candidate",
+      "verification": "Исследователь проверил официальный раздел; конкретные письма/соответствие досье ещё не отобраны.",
+      "rights": "unknown; проверить нужное представление и действия"
+    },
+    {
+      "id": "NICE-NG222",
+      "family": "international_guideline",
+      "priority": "P1",
+      "title": "NICE NG222: Depression in adults",
+      "url": "https://www.nice.org.uk/guidance/ng222/chapter/Recommendations",
+      "status": "candidate_reference_only",
+      "verification": "Официальные рекомендации просмотрены исследователем; terms вернули 403.",
+      "rights": "unknown; полный текст не допущен"
+    },
+    {
+      "id": "NICE-CG113",
+      "family": "international_guideline",
+      "priority": "P1",
+      "title": "NICE CG113: Generalised anxiety disorder and panic disorder",
+      "url": "https://www.nice.org.uk/guidance/cg113/chapter/Recommendations",
+      "status": "candidate_reference_only",
+      "verification": "Официальные рекомендации просмотрены исследователем; terms вернули 403.",
+      "rights": "unknown; полный текст не допущен"
+    },
+    {
+      "id": "WHO-MHGAP-2023",
+      "family": "international_guideline",
+      "priority": "P1",
+      "title": "WHO mhGAP guideline, third edition, 2023",
+      "url": "https://www.who.int/publications/i/item/9789240084278",
+      "status": "candidate",
+      "verification": "Официальная публикация проверена; указание CC BY-NC-SA 3.0 IGO получено из поисковой выдачи, не полный правовой допуск.",
+      "rights": "candidate_license_only; проверить точный файл, условия NC/SA/IGO, атрибуцию и использование проекта"
+    },
+    {
+      "id": "RF-BOUNDARIES-AND-SCALES",
+      "family": "applicability_and_measurement",
+      "priority": "P0",
+      "title": "Источники границ применимости и разрешённых шкал",
+      "url": "https://cr.minzdrav.gov.ru/",
+      "status": "discovery_required",
+      "verification": "Точные дополнительные КР/версии/публикации в этом исследовании не установлены; использовать имеющийся реестр шкал, пробелы не скрывать.",
+      "rights": "unknown; права точного текста и русская валидация раздельно"
+    }
+  ],
+  "planned_medication_dossier_sections": [
+    "exact_identity_and_registration",
+    "indications_and_population",
+    "contraindications",
+    "precautions_and_special_populations",
+    "interactions",
+    "adverse_reactions",
+    "adherence_and_discontinuation_if_documented",
+    "dose_information_with_complete_context_if_supported",
+    "monitoring",
+    "safety_updates_and_version_status"
+  ],
+  "clinical_approval": {
+    "status": "not_obtained",
+    "required_before": "activation_of_clinical_rules_and_S17I",
+    "does_not_block": "independent_technical_development_with_explicit_limitations"
+  },
+  "policy": {
+    "no_fixed_document_or_card_count": true,
+    "no_automatic_candidate_admission": true,
+    "fulltext_possible_only_with_proven_rights_and_admission": true,
+    "patient_records_in_public_index": false,
+    "no_medication_action_from_search": true,
+    "new_models_installed": false,
+    "new_expenses_rub": 0
+  },
+  "assessment_scope": "Оценка только допущенных 15 карточек RAG J02. Наличие других источников, шкал и функций в сервисе не означает их допуска в этот индекс; существующие функции не удаляются."
+}

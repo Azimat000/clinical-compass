@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20T23:07:22+03:00",
+  "updated_on": "2026-10-20T23:23:00+03:00",
   "current_slice": null,
   "last_accepted_slice": "S17J02",
-  "next_slice": "S17J03",
+  "next_slice": "S17J02A",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -276,6 +276,24 @@
       "commit_ref": null,
       "handoff": "memory/sessions/S17J08.md",
       "reason": null
+    },
+    "S17J02A": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02A.md",
+      "reason": null
+    },
+    "S17J02B": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02B.md",
+      "reason": null
+    },
+    "S17J02C": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/S17J02C.md",
+      "reason": null
     }
   },
   "latest_audit": {
@@ -366,17 +384,20 @@
     "review_packet": "evidence/S17H/review-packet.json",
     "clinical_validation": false,
     "all_cards_active": false,
-    "rag_direction": "План S17J разделён на S17J01–S17J08 и итоговую приёмку S17J; следующий S17J01. Поиск ещё не реализован.",
+    "rag_direction": "Приняты J01/J02; далее J02A/J02B/J02C расширяют корпус до J03, затем J04–J08/J. Поиск ещё не реализован; FU неактивны.",
     "commit_ref": "refs/tags/slice/S17H"
   },
   "latest_retrieval_plan": {
-    "report": "memory/sessions/plan-S17J-2026-10-20.md",
+    "report": "memory/sessions/plan-rag-corpus-expansion-2026-10-20.md",
     "plan": "plan/S17J-production.md",
     "register": "plan/s17j-subdivision.json",
-    "planning_ref": "refs/tags/plan/s17j-production-split-2026-10-20",
+    "planning_ref": "refs/tags/plan/rag-corpus-expansion-2026-10-20",
     "status": "planning_only",
-    "next_action": "В новой сессии только S17J01. Все новые срезы planned; S17H остаётся последним принятым.",
-    "clinical_readiness": false
+    "next_action": "Следующая отдельная сессия только S17J02A: контракт покрытия/плановые лекарства/масштабируемый допуск. Далее J02B/J02C до J03; J01/J02 accepted сохранены.",
+    "clinical_readiness": false,
+    "coverage_plan": "data/retrieval/corpus-coverage-plan.json",
+    "coverage_gate": "COVERAGE-1",
+    "coverage_status": "NOT_READY"
   },
   "latest_corpus_admission": {
     "slice": "S17J02",
@@ -388,7 +409,7 @@
     "admitted_sources": 3,
     "quarantined_sources": 0,
     "clinical_validation": false,
-    "next_action": "Только новая сессия S17J03: сверка/контекст/координаты и раздельный версионированный протокол authored_fact/original_quote, реальные вопросы/разметка до настройки J04. ПолныеPDFне допущены; G01–G09 не снижены.",
+    "next_action": "S17J02A → J02B → J02C/COVERAGE-1 → J03. Новые источники ещё не импортированы; нынешние 15 фактов не являются полным RAG. G01–G09/frozen J01 сохранены.",
     "representation": "reviewed_cards",
     "authored_fact_cards": 15,
     "original_quotes": 2,

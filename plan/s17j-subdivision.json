@@ -116,9 +116,83 @@
       ]
     },
     {
-      "id": "S17J03",
+      "id": "S17J02A",
       "depends_on": [
         "S17J02"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
+    },
+    {
+      "id": "S17J02B",
+      "depends_on": [
+        "S17J02A"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
+    },
+    {
+      "id": "S17J02C",
+      "depends_on": [
+        "S17J02B"
+      ],
+      "requirement_ids": [
+        "F02",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "E01",
+        "E02",
+        "T03",
+        "T05",
+        "T10",
+        "T12",
+        "T13",
+        "C23",
+        "C24",
+        "C25",
+        "C41",
+        "C43"
+      ]
+    },
+    {
+      "id": "S17J03",
+      "depends_on": [
+        "S17J02",
+        "S17J02C"
       ],
       "requirement_ids": [
         "M07",
@@ -246,12 +320,18 @@
     "2": [
       "S17J02",
       "S17J03",
-      "S17J08"
+      "S17J08",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ],
     "3": [
       "S17J03",
       "S17J04",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ],
     "4": [
       "S17J01",
@@ -263,12 +343,18 @@
       "S17J04",
       "S17J06",
       "S17J07",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ],
     "6": [
       "S17J01",
       "S17J08",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ]
   },
   "original_acceptance_mapping": {
@@ -276,12 +362,18 @@
       "S17J02",
       "S17J03",
       "S17J04",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ],
     "2": [
       "S17J01",
       "S17J05",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ],
     "3": [
       "S17J04",
@@ -293,7 +385,10 @@
     "4": [
       "S17J01",
       "S17J08",
-      "S17J"
+      "S17J",
+      "S17J02A",
+      "S17J02B",
+      "S17J02C"
     ]
   },
   "requirements_policy": "Only append verification_slices; preserve all original fields, statuses, subchecks and actual evidence.",
@@ -307,5 +402,25 @@
     "G07",
     "G08",
     "G09"
+  ],
+  "supplemental_release_gates": [
+    "COVERAGE-1"
+  ],
+  "revisions": [
+    {
+      "date": "2026-10-20",
+      "reason": "Поручение о лучшем RAG: три источника/15 карточек недостаточны; расширение до извлечения/настройки.",
+      "children": [
+        "S17J02A",
+        "S17J02B",
+        "S17J02C"
+      ],
+      "accepted_preserved": [
+        "S17J01",
+        "S17J02"
+      ],
+      "strategy": "docs/architecture/rag-corpus-strategy.md",
+      "coverage_plan": "data/retrieval/corpus-coverage-plan.json"
+    }
   ]
 }
