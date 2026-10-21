@@ -1,0 +1,152 @@
+{
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "014_report_drafts",
+    "status": "ok"
+  },
+  "checks": [
+    {
+      "login": "doc-a",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/"
+    },
+    {
+      "path": "/demo/WD01",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD01/follow-up",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD01/communication",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD01/first-visits",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD01/decisions",
+      "status": 200
+    },
+    {
+      "path": "/demo/WD02",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD02/follow-up",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD02/communication",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD02/first-visits",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD02/decisions",
+      "status": 200
+    },
+    {
+      "path": "/demo/WD03",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD03/follow-up",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD03/communication",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD03/first-visits",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD03/decisions",
+      "status": 200
+    },
+    {
+      "path": "/demo/WD04",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD04/follow-up",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD04/communication",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD04/first-visits",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD04/decisions",
+      "status": 200
+    },
+    {
+      "path": "/demo/WD05",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD05/follow-up",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD05/communication",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD05/first-visits",
+      "status": 200
+    },
+    {
+      "path": "/patients/WD05/decisions",
+      "status": 200
+    },
+    {
+      "login": "demo-anna",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/demo/WD01"
+    },
+    {
+      "login": "demo-mikhail",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/demo/WD02"
+    },
+    {
+      "login": "demo-elena",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/demo/WD03"
+    },
+    {
+      "login": "demo-sergey",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/demo/WD04"
+    },
+    {
+      "login": "demo-irina",
+      "status": "PASS",
+      "home": "http://127.0.0.1:8000/demo/WD05"
+    }
+  ],
+  "counts": {
+    "patients": 5,
+    "first_visit_versions": 15,
+    "clinical_entries": 26,
+    "assessments": 12,
+    "assessment_requests": 16,
+    "adverse_events": 3,
+    "adherence_tasks": 25,
+    "proposals": 11
+  },
+  "foreign_keys": 0,
+  "integrity": "ok"
+}
