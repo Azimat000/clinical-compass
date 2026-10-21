@@ -1,0 +1,16 @@
+{# Экран «Сегодня» кабинета пациента: одно главное действие, затем остальное по порядку. Только чтение. #}
+<section class="workspace today" aria-labelledby="today-title"><h2 id="today-title">Сегодня</h2>
+<div class="today-main"><p class="today-why">{{ today_view.action.why }}</p>
+<p><a class="button today-action" href="{{ today_view.action.href }}">{{ today_view.action.label }}</a></p></div>
+<h3>Что ещё есть в кабинете</h3>
+<ul class="today-list">
+<li><span><strong>Анкеты:</strong> {% if pending_assessments %}предложено {{ pending_assessments|length }}{% else %}новых предложений нет{% endif %}</span><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#assessments">К анкетам</a></li>
+<li><span><strong>План врача:</strong> {% if today_view.unmarked %}пунктов без вашей отметки: {{ today_view.unmarked }}{% else %}пунктов без вашей отметки нет{% endif %}</span><a href="{{ url_for('communication_page',patient_id=patient.id) }}#plan-progress">К выполнению плана</a></li>
+<li><span><strong>Сообщения:</strong> {% if today_view.unread %}не отмечено прочитанным: {{ today_view.unread }}{% else %}непрочитанных нет{% endif %}</span><a href="{{ url_for('communication_page',patient_id=patient.id) }}#correspondence">К сообщениям</a></li>
+<li><span><strong>Последняя запись:</strong> {{ entries[0].observed_on if entries else 'записей пока нет' }}{% if entries %}; самочувствие: {{ wellbeing[entries[0].payload.wellbeing] }}{% endif %}</span><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#dynamics">К динамике</a></li>
+<li><span><strong>Подтверждённый план:</strong> действует только то, что подтвердил врач</span><a href="{{ url_for('decisions_page',patient_id=patient.id) }}#decisions-history">Открыть план</a></li>
+<li><span><strong>Мои данные:</strong> исходный возраст и исходные записи</span><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#clinical-data">Открыть данные</a></li>
+</ul>
+<dl class="states-key"><dt>Сохранено на сервере</dt><dd>Запись принята сервером. Это не значит, что врач её увидел.</dd><dt>Получено и прочитано</dt><dd>Отмечает адресат сообщения отдельно, когда нажмёт соответствующую кнопку.</dd><dt>Реакция врача</dt><dd>Система её не отслеживает: ответ придёт отдельным сообщением или на приёме.</dd></dl>
+<p class="muted">Ведущий врач: <strong>{{ relationship.display_name if relationship else 'связь не установлена' }}</strong>. Кабинет не обеспечивает экстренную помощь и круглосуточное наблюдение: при ухудшении не ждите ответа здесь, используйте обычный доступный способ обращения за медицинской помощью.</p>
+</section>

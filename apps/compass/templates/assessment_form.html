@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}DASS-42 — Клинический компас{% endblock %}
 {% block content %}
-<a class="back" href="{{ url_for('demo_patient',patient_id=task.patient_id) }}#assessments">← В карточку</a>
-<span class="eyebrow">СИНТЕТИЧЕСКОЕ ДЕМО · АНКЕТА ДЛЯ ВРАЧА</span>
+{% set pid=task.patient_id %}{% set patient_section='assessments' %}{% include 'patient_nav.html' %}
+<span class="eyebrow">Синтетическое демо · анкета для врача</span>
 <h1>{{ instrument.title }}</h1>
 <p>{{ instrument.attribution }}</p>
 <section class="notice"><strong>Только вымышленные ответы</strong><p>Врач получит анкету и рассмотрит её отдельно. Анкета не устанавливает диагноз и не создаёт назначений или направлений. После отправки здесь появится квитанция. Баллы автоматически пациенту не выдаются.</p></section>
@@ -10,6 +10,7 @@
 {% if error %}<p class="error" role="alert">{{ error }} Ответы не сохранены. Проверьте форму.</p>{% endif %}
 <p>{{ instrument.instruction }}</p>
 <p>В электронной форме выберите один вариант для каждого утверждения. Можно оставить пропуск: тогда ответы передадутся врачу без расчёта результата.</p>
+<p class="progress" data-answer-progress role="status"></p>
 <form method="post" class="questionnaire">
 <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="form_version_id" value="{{ instrument.id }}">
 {% for item in instrument['items'] %}{% set number=loop.index %}
@@ -22,5 +23,6 @@
 {% endfor %}
 <button>Передать анкету врачу</button>
 </form>
+<script src="{{ url_for('static',filename='questionnaire.js') }}" defer></script>
 <p class="muted">Версия: {{ instrument.version }}. <a href="{{ instrument.source.url }}">Официальный бланк</a> · <a href="{{ instrument.validation_url }}">Исследование русской версии</a> · <a href="{{ instrument.rights_url }}">Условия применения</a>.</p>
 {% endblock %}

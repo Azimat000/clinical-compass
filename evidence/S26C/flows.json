@@ -1,0 +1,25 @@
+{
+  "kind": "agent self-check, synthetic; no screen reader, no physical device, no user trial",
+  "checks": [
+    "self-report: 5 steps open one at a time, status \"Шаг N из 5\", review lists entered values, safety block open",
+    "focus moves to the step heading on step change",
+    "Back keeps entered text",
+    "server error (400): entered text kept, all steps visible, alert shown, nothing saved",
+    "successful submission redirects to the saved entry with \"Сохранено на сервере\" status",
+    "leaving a dirty self-report form triggers the browser unsaved-changes prompt (2 time(s))",
+    "questionnaire progress counter updates (2 of 42)",
+    "questionnaire options laid out in 5 columns at 1440",
+    "questionnaire at 320: no horizontal overflow",
+    "message shows Сохранено / Получено: не отмечено / Прочитано: не отмечено as separate states",
+    "JS disabled: page renders (9109 chars of text)",
+    "JS disabled: no step carries the hidden attribute, so the whole form is reachable",
+    "JS disabled: questionnaire renders"
+  ],
+  "failures": [],
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "platform": "darwin"
+  },
+  "status": "PASS"
+}

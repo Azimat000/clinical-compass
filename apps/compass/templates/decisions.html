@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Решения врача — {{ patient.code }}{% endblock %}
 {% block content %}
-{% if current_user.role=='doctor' %}{% set card_task='' %}{% set card_section='plan' %}{% include 'card_frame.html' %}{% else %}<a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}</a>{% endif %}
+{% if current_user.role=='doctor' %}{% set card_task='' %}{% set card_section='plan' %}{% include 'card_frame.html' %}{% else %}{% set pid=patient.id %}{% set patient_section='plan' %}{% include 'patient_nav.html' %}{% endif %}
 <h1>Решения врача</h1>
 <p class="notice">Вымышленный случай. Записанные решения показывают процесс согласования в прототипе. Они не предназначены для реального лечения.</p>
 {% if error %}<p role="alert" class="notice warning">{{ error }}</p>{% endif %}

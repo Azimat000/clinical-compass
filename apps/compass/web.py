@@ -366,6 +366,35 @@ def create_app(database=None):
             return render_template('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
         return redirect(url_for('imports_page',patient_id=patient_id),code=303)
 
+    def patient_today(patient_id, relationship, pending):
+        # Read-only summary for the patient's home screen: what waits, and the one main action.
+        # Counts come from existing server records; nothing is written and no new access is granted.
+        summary = {'unmarked': 0, 'unread': 0, 'action': None}
+        if relationship is not None:
+            try:
+                data = communication.view(get_db(), g.user, patient_id)
+            except communication.Error:
+                data = None
+            if data:
+                summary['unmarked'] = sum(1 for t in data['tasks'] if not t['future'] and not t['superseded'] and not t['history'])
+                summary['unread'] = sum(1 for m in data['messages'] if m['recipient_id'] == g.user['id'] and not m['read_at'])
+        if relationship is None:
+            summary['action'] = {'label': 'Ввести код приглашения врача', 'href': '#connection',
+                                 'why': 'Пока врач не связан с кабинетом, отправлять сведения некому.'}
+        elif pending:
+            summary['action'] = {'label': 'Заполнить анкету DASS-42', 'href': url_for('assessment_form', request_id=pending[0]['id']),
+                                 'why': 'Анкету предложил врач; отправить нужно до ' + pending[0]['deadline_label'] + '.'}
+        elif summary['unmarked']:
+            summary['action'] = {'label': 'Отметить выполнение плана', 'href': url_for('communication_page', patient_id=patient_id) + '#plan-progress',
+                                 'why': 'Пунктов плана без вашей отметки: %d.' % summary['unmarked']}
+        elif summary['unread']:
+            summary['action'] = {'label': 'Прочитать сообщение', 'href': url_for('communication_page', patient_id=patient_id) + '#correspondence',
+                                 'why': 'Сообщений, которые вы ещё не отметили прочитанными: %d.' % summary['unread']}
+        else:
+            summary['action'] = {'label': 'Записать самочувствие', 'href': '#new-record',
+                                 'why': 'Срочных дел нет. Самоотчёт можно отправить в любой день.'}
+        return summary
+
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)
         db = get_db()
@@ -376,7 +405,9 @@ def create_app(database=None):
             WHERE r.patient_id=? AND r.ends_at IS NULL ORDER BY c.received_at DESC LIMIT 20''', (patient_id,)).fetchall()
         entries = records.history(db, patient_id)
         measured = assessments.history(db, g.user, patient_id)
-        return render_template('patient.html', patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+        pending = assessments.pending(db, g.user, patient_id)
+        today_view = patient_today(patient_id, relationship, pending) if g.user['role'] == 'patient' else None
+        return render_template('patient.html', today_view=today_view, patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
                                clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
@@ -385,7 +416,7 @@ def create_app(database=None):
                                age_request_key=secrets.token_hex(16),
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
-                               pending_assessments=assessments.pending(db, g.user, patient_id), assessment_form=assessments.definition(),
+                               pending_assessments=pending, assessment_form=assessments.definition(),
                                assignment_key=(assessment_values.get('assignment_key','') if assessment_values is not None else secrets.token_hex(16)),
                                assessment_values=assessment_values or {}, assessment_error=assessment_error,
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,

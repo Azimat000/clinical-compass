@@ -1,0 +1,65 @@
+{
+  "kind": "agent self-check, synthetic, not a patient trial",
+  "label": "after",
+  "tasks": [
+    {
+      "name": "P1",
+      "goal": "Главная → отправить самоотчёт с полями по умолчанию",
+      "actions": 6,
+      "reached": true
+    },
+    {
+      "name": "P2",
+      "goal": "Главная → открыта анкета DASS-42, предложенная врачом",
+      "actions": 1,
+      "reached": true
+    },
+    {
+      "name": "P3",
+      "goal": "Главная → отметить пункт плана «Выполнено»",
+      "actions": 3,
+      "reached": true
+    },
+    {
+      "name": "P4",
+      "goal": "Главная → отправить сообщение врачу",
+      "actions": 3,
+      "reached": true
+    }
+  ],
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "platform": "darwin"
+  },
+  "first_screen_1440": {
+    "viewport_height": 900,
+    "primary_buttons_in_main": [
+      {
+        "text": "Заполнить анкету DASS-42",
+        "top": 505,
+        "bottom": 557
+      },
+      {
+        "text": "Заполнить предложенную DASS-42",
+        "top": 0,
+        "bottom": 0
+      }
+    ]
+  },
+  "first_screen_375": {
+    "viewport_height": 812,
+    "primary_buttons_in_main": [
+      {
+        "text": "Заполнить анкету DASS-42",
+        "top": 743,
+        "bottom": 795
+      },
+      {
+        "text": "Заполнить предложенную DASS-42",
+        "top": 0,
+        "bottom": 0
+      }
+    ]
+  }
+}

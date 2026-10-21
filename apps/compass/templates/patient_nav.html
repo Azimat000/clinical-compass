@@ -1,0 +1,8 @@
+{# Разделы кабинета пациента. Перед подключением задать pid (код карточки в адресе) и patient_section: today|report|dynamics|assessments|plan. #}
+<nav aria-label="Разделы кабинета" class="card-nav patient-nav" {% if patient_panels %}data-panel-nav{% endif %}>
+<a href="{{ url_for('demo_patient',patient_id=pid) }}#overview" {% if patient_section=='today' %}aria-current="page"{% endif %}>Сегодня</a>
+<a href="{{ url_for('demo_patient',patient_id=pid) }}#new-record" {% if patient_section=='report' %}aria-current="page"{% endif %}>Самоотчёт</a>
+<a href="{{ url_for('demo_patient',patient_id=pid) }}#dynamics" {% if patient_section=='dynamics' %}aria-current="page"{% endif %}>Динамика</a>
+<a href="{{ url_for('demo_patient',patient_id=pid) }}#assessments" {% if patient_section=='assessments' %}aria-current="page"{% endif %}>Анкеты</a>
+<a href="{{ url_for('communication_page',patient_id=pid) }}" {% if patient_section=='plan' %}aria-current="page"{% endif %}>Сообщения и план</a>
+</nav>

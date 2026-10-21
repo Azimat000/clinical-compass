@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Сообщения и выполнение плана — {{ patient.code }}{% endblock %}
 {% block content %}
-{% if current_user.role=='doctor' %}{% set card_task='' %}{% set card_section='plan' %}{% include 'card_frame.html' %}{% else %}<a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}, НЯ и динамика</a>{% endif %}
+{% if current_user.role=='doctor' %}{% set card_task='' %}{% set card_section='plan' %}{% include 'card_frame.html' %}{% else %}{% set pid=patient.id %}{% set patient_section='plan' %}{% include 'patient_nav.html' %}{% endif %}
 <h1>Сообщения и выполнение плана</h1>
 <p class="notice">Локальное синтетическое демо. Сообщения не меняют лечение и не проверяются автоматически на критичность. Для медицинских сведений используйте самоотчёт в карточке. Этот канал не является экстренной помощью; постоянное присутствие врача не обеспечено.</p>
 <nav class="card-nav" aria-label="Связь и план"><a href="#correspondence">Написать сообщение</a><a href="{{ url_for('decisions_page',patient_id=patient.id) }}#decisions-history">Подтверждённый план</a>{% if current_user.role=='doctor' %}<a href="{{ url_for('decisions_page',patient_id=patient.id) }}#new-decision">Решения врача</a>{% endif %}<a href="#plan-progress">Выполнение плана</a></nav>
 <p class="notice">Получение и прочтение не означает реакцию врача. Решение и изменение плана подтверждаются отдельно.</p>
+{% if current_user.role=='patient' %}{% set waiting=data.tasks|rejectattr('future')|rejectattr('superseded')|selectattr('history','equalto',[])|list %}<p class="notice"><strong>Ждёт вашей отметки: {{ waiting|length }}.</strong> {% if waiting %}<a href="#task-{{ waiting[0].id }}">Перейти к первому пункту</a>{% else %}Пунктов без вашей отметки нет.{% endif %}</p>{% endif %}
 <h2 id="correspondence">Переписка</h2><p>«Сохранено» означает приём сервером. «Получено» и «Прочитано» отмечает адресат отдельно. Обновите страницу для новых сообщений.</p>
 {% for m in data.messages %}<article class="record" id="message-{{ m.id }}"><strong>{{ 'Вы' if m.sender_id==current_user.id else 'Собеседник' }}</strong> · {{ m.sent_at }} UTC
 <p class="preserve-text">{{ m.body }}</p>
-<p>Сохранено{% if m.received_at %} · Получено: {{ m.received_at }}{% endif %}{% if m.read_at %} · Прочитано: {{ m.read_at }}{% endif %}</p>
+<ul class="msg-states"><li>Сохранено на сервере</li><li>Получено адресатом: {{ (m.received_at ~ ' UTC') if m.received_at else 'не отмечено' }}</li><li>Прочитано адресатом: {{ (m.read_at ~ ' UTC') if m.read_at else 'не отмечено' }}</li></ul>
 {% if m.entry_id %}<a href="{{ url_for('demo_patient',patient_id=patient.id) }}#entry-{{ m.entry_id }}">Связанная запись: {{ m.entry_id }}</a>{% endif %}
 {% if m.task_id %}<a href="#task-{{ m.task_id }}">Связанный пункт выполнения</a>{% endif %}
 {% if m.recipient_id==current_user.id %}{% for op,label in [('received','Подтвердить получение'),('read','Отметить прочитанным')] %}<form method="post" action="{{ url_for('communication_write',patient_id=patient.id,operation=op) }}"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="message_id" value="{{ m.id }}"><button class="secondary">{{ label }}</button></form>{% endfor %}{% endif %}</article>{% else %}<p>Сообщений пока нет.</p>{% endfor %}

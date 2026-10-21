@@ -234,11 +234,43 @@ th{font-size:14.5px;font-weight:400;color:var(--muted);border-bottom:2px solid v
 .trend a:focus-visible circle{stroke:var(--focus);stroke-width:4}
 
 /* Анкеты: ряды ответов, как на бумажном бланке */
-.questionnaire{max-width:56rem}
+.questionnaire{max-width:none}
 .answer{display:flex;align-items:center;gap:0;margin:0;padding:10px 4px;border-bottom:1px solid var(--rule);cursor:pointer;font-weight:400;min-height:52px}
 .answer:hover{background:var(--white)}
 .answer input{margin-top:0}
 .answer.skip{color:var(--muted)}
+
+/* Кабинет пациента (S26C): «Сегодня», шаги самоотчёта, состояния */
+.patient-nav{margin-top:8px}
+.today{padding-top:16px}
+.today-main{border:3px solid var(--blue);background:var(--white);padding:18px 22px;margin:0 0 24px}
+.today-why{font:700 20px/1.35 var(--serif);margin:0 0 12px;max-width:none}
+.today-main p:last-child{margin:0}
+.today-action{min-height:52px;font-size:18px}
+.today-list{list-style:none;margin:0 0 24px;padding:0;border-top:2px solid var(--ink)}
+.today-list li{display:flex;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.today-list a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;white-space:nowrap}
+.states-key{border-left:4px solid var(--ink);padding:4px 0 4px 18px;margin:20px 0;max-width:62rem}
+.states-key dt{font-weight:700;margin-top:10px}
+.states-key dd{margin:2px 0 8px;white-space:normal}
+.msg-states{list-style:none;display:flex;flex-wrap:wrap;gap:2px 20px;margin:8px 0;padding:0;font-size:15px}
+.msg-states li:first-child{font-weight:700}
+.pending-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;max-width:none}
+.step-status{font:700 17px/1.3 var(--sans);border-bottom:2px solid var(--ink);padding:0 0 8px;margin:16px 0 8px;max-width:none}
+.report-step>h3{margin-top:12px}
+.report-step>h3:focus{outline:3px solid var(--focus);outline-offset:4px}
+.report-step[hidden]{display:none}
+.step-controls{display:flex;gap:12px;border-top:1px solid var(--rule);padding-top:16px;margin-top:20px}
+.review{border-left:4px solid var(--blue);padding:4px 0 4px 18px;margin:12px 0 20px}
+.review dl{margin:0}
+.review dd{margin:2px 0 10px}
+.progress{font-weight:700;border-left:4px solid var(--blue);padding:6px 14px;background:var(--white);max-width:none}
+.questionnaire fieldset{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 12px;align-items:stretch}
+.questionnaire legend{grid-column:1/-1;float:left;width:100%;padding:0 0 6px;margin:0}
+.questionnaire legend+*{clear:both}
+.questionnaire .answer{flex-direction:row;align-items:flex-start;border:1px solid var(--rule);border-bottom:2px solid var(--rule);padding:10px 10px;min-height:64px}
+.questionnaire .answer span{overflow-wrap:anywhere}
+.questionnaire .answer:has(input:checked){border-color:var(--blue);border-bottom-color:var(--blue);background:var(--white);font-weight:700}
 
 /* Критические сигналы: печать красного цвета и слова */
 #critical-banner,.critical-card{border:3px solid var(--red);background:var(--white);color:var(--ink);padding:16px 20px;margin:0 0 24px}
@@ -262,7 +294,14 @@ th{font-size:14.5px;font-weight:400;color:var(--muted);border-bottom:2px solid v
   .patient-routes:empty{display:none}
   .row-action{grid-column:2;grid-row:1}
 }
+@media(max-width:1000px){
+  .questionnaire fieldset{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}
+}
 @media(max-width:600px){
+  .today-list li{flex-direction:column;align-items:flex-start;gap:0}
+  .today-main{padding:14px 16px}
+  .today-action,.step-controls button{width:100%}
+  .step-controls{flex-direction:column-reverse}
   .case-facts{grid-template-columns:1fr}
   .case-actions .button{flex:1 1 100%}
   .signal-strip .button{width:100%}
