@@ -3,9 +3,8 @@
 {% block title %}Первый приём — {{ patient.code }}{% endblock %}
 {% block content %}
 <div class="first-visit-workspace">
-<a class="back" href="{{ url_for('demo_patient',patient_id=patient.id) }}">Карточка {{ patient.code }}</a>
+{% set card_task='first' %}{% set card_section='' %}{% include 'card_frame.html' %}
 <h1>Первый приём</h1>
-<nav class="task-choice" aria-label="Задача врача"><a aria-current="page" href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=visit_id) }}">Первый приём</a><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#overview">Наблюдение</a></nav>
 <p class="demo-note">Синтетический случай. Диагноз и назначение для начала не нужны. Это запись сведений для врача, а не подтверждённый скрининг. Новые правила безопасности пока не активны; отсутствие сигнала не означает отсутствие риска. Демо не обеспечивает экстренную помощь.</p>
 <nav class="card-nav" aria-label="Записи приёма"><a href="#visit-summary">Сводка</a><a href="#visit-history">Сохранённые приёмы</a></nav>
 {% if not current %}{% set recent=namespace(seen=[]) %}{% for item in visits %}{% if item.visit_id not in recent.seen %}{% set recent.seen=recent.seen+[item.visit_id] %}{% if item.state=='draft' %}<p><a class="button" href="{{ url_for('first_visit_page',patient_id=patient.id,visit_id=item.visit_id) }}">Продолжить черновик от {{ item.payload.observed_on }}</a></p>{% endif %}{% endif %}{% endfor %}{% endif %}

@@ -2,7 +2,7 @@
 {% block title %}Повторный приём — {{ patient.code }}{% endblock %}
 {% block content %}
 <div class="follow-up">
-<a class="back" href="{{ url_for('demo_patient',patient_id=patient.id) }}">Карточка {{ patient.code }}</a>
+{% set card_task='follow' %}{% set card_section='' %}{% include 'card_frame.html' %}
 <h1>Сводка повторного приёма</h1>
 <p>Существующие записи пациента {{ patient.code }} за выбранный период. Только синтетическое демо. Медицинские выводы и решения принимает врач.</p>
 <form method="get" class="workspace" aria-label="Период сводки">

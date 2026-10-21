@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Сообщения и выполнение плана — {{ patient.code }}{% endblock %}
 {% block content %}
-<a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}, НЯ и динамика</a>
+{% if current_user.role=='doctor' %}{% set card_task='' %}{% set card_section='plan' %}{% include 'card_frame.html' %}{% else %}<a href="{{ url_for('demo_patient',patient_id=patient.id) }}">← Карточка {{ patient.code }}, НЯ и динамика</a>{% endif %}
 <h1>Сообщения и выполнение плана</h1>
 <p class="notice">Локальное синтетическое демо. Сообщения не меняют лечение и не проверяются автоматически на критичность. Для медицинских сведений используйте самоотчёт в карточке. Этот канал не является экстренной помощью; постоянное присутствие врача не обеспечено.</p>
-<nav class="card-nav" aria-label="Связь и план"><a href="#correspondence">Написать сообщение</a><a href="{{ url_for('decisions_page',patient_id=patient.id) }}#decisions-history">Подтверждённый план</a><a href="#plan-progress">Выполнение плана</a></nav>
+<nav class="card-nav" aria-label="Связь и план"><a href="#correspondence">Написать сообщение</a><a href="{{ url_for('decisions_page',patient_id=patient.id) }}#decisions-history">Подтверждённый план</a>{% if current_user.role=='doctor' %}<a href="{{ url_for('decisions_page',patient_id=patient.id) }}#new-decision">Решения врача</a>{% endif %}<a href="#plan-progress">Выполнение плана</a></nav>
 <p class="notice">Получение и прочтение не означает реакцию врача. Решение и изменение плана подтверждаются отдельно.</p>
 <h2 id="correspondence">Переписка</h2><p>«Сохранено» означает приём сервером. «Получено» и «Прочитано» отмечает адресат отдельно. Обновите страницу для новых сообщений.</p>
 {% for m in data.messages %}<article class="record" id="message-{{ m.id }}"><strong>{{ 'Вы' if m.sender_id==current_user.id else 'Собеседник' }}</strong> · {{ m.sent_at }} UTC

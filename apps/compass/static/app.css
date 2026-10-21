@@ -10,7 +10,7 @@
   color-scheme:light;
   --ink:#1c1e26;--paper:#fbfbfd;--white:#fff;
   --blue:#2342b5;--blue-dark:#1a3290;
-  --red:#b8232c;--red-bg:#fdecee;
+  --red:#b8232c;--red-dark:#8f1b22;--red-bg:#fdecee;
   --muted:#5a5f6e;--rule:#c5c9d6;--field:#7b8194;
   --warn:#7a4a00;--warn-bg:#fff4dc;--warn-line:#b57600;
   --focus:#b57600;
@@ -127,6 +127,45 @@ dd{margin:2px 0 14px;overflow-wrap:anywhere;white-space:pre-wrap}
 .empty h3{margin-top:0}
 .invite-panel{border-top:2px solid var(--ink);padding:0}
 
+/* Кабинет врача: полоса сигналов и журнал (S26B) */
+.signal-strip{border:3px solid var(--red);background:var(--white);padding:16px 20px;margin:0 0 24px}
+.signal-strip h2{font:700 21px/1.3 var(--serif);color:var(--red);margin:0 0 6px}
+.signal-strip p{margin:0 0 12px}
+.signal-strip .button{background:var(--red);border-color:var(--red)}
+.signal-strip .button:hover{background:var(--red-dark);border-color:var(--red-dark)}
+.signal-none{border:0;border-top:1px solid var(--rule);border-left:4px solid var(--ink);padding:12px 18px}
+.signal-none h2{font:700 19px/1.3 var(--sans);color:var(--ink)}
+.signal-none p{margin:0}
+.patient-row.has-signal{border-left:4px solid var(--red);padding-left:16px}
+.signal-flag{margin:0 0 8px;color:var(--ink)}
+.signal-flag strong{color:var(--red)}
+.status-key{border-top:1px solid var(--rule);margin:12px 0 20px}
+.status-key dl{margin:0 0 8px}
+.status-key dd{margin:2px 0 12px;white-space:normal}
+
+/* Постоянная шапка карточки врача */
+.case-head{border-top:2px solid var(--ink);padding:14px 0 4px;margin:0 0 8px}
+.case-title{margin-bottom:12px}
+.case-title h1{margin:0}
+.case-code{display:inline-block;font:700 28px/1.2 var(--serif);color:var(--ink);text-decoration:none}
+.case-code:hover{text-decoration:underline}
+.case-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 24px;margin:0}
+.case-facts>div{border-top:1px solid var(--rule);padding:8px 0 10px;min-width:0}
+.case-facts dt{font-size:14.5px;font-weight:400;color:var(--muted)}
+.case-facts dd{margin:2px 0 0;white-space:normal;overflow-wrap:anywhere}
+.case-facts .case-alert{border-top:3px solid var(--red)}
+.case-facts .case-alert strong{color:var(--red)}
+.route-chip{display:inline-block;padding:2px 8px;font-weight:700;margin:0 4px 4px 0}
+.route-chip.route-mandatory{padding:2px 8px}
+.case-actions{display:flex;flex-wrap:wrap;gap:8px 12px;margin:12px 0}
+.case-actions .button{min-height:44px;padding:8px 18px}
+
+/* Состояние решения: слово и форма рамки */
+.state{display:inline-block;padding:2px 10px;font-weight:700;border:2px solid var(--ink)}
+.state-approved{border-style:solid;border-width:3px}
+.state-rejected{border-style:double;border-width:4px}
+.state-draft{border-style:dashed}
+
 /* Записи, примечания, предупреждения: линия слева и слово, не цветная плашка */
 .record,.card{padding:16px 0;margin:0;border:0;border-top:1px solid var(--rule)}
 .record h3:first-child{margin-top:0}
@@ -213,6 +252,7 @@ th{font-size:14.5px;font-weight:400;color:var(--muted);border-bottom:2px solid v
 
 @media(min-width:1400px){main{padding:40px 32px 64px}}
 @media(max-width:900px){
+  .case-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .app-header{padding:12px 20px;gap:4px 20px}
   main{padding:24px 20px 48px}
   footer{padding:16px 20px}
@@ -223,6 +263,9 @@ th{font-size:14.5px;font-weight:400;color:var(--muted);border-bottom:2px solid v
   .row-action{grid-column:2;grid-row:1}
 }
 @media(max-width:600px){
+  .case-facts{grid-template-columns:1fr}
+  .case-actions .button{flex:1 1 100%}
+  .signal-strip .button{width:100%}
   body{font-size:16.5px}
   .app-header{padding:10px 16px}
   .account{width:100%;justify-content:space-between;margin-left:0;font-size:14px}

@@ -1,0 +1,9 @@
+{% set h = card_header(patient) %}{% set top = h.routes[0] if h.routes else none %}{% set top_route = (top.payload.get('routing_review', top.payload.get('route')) if top else none) %}
+<section class="case-head" aria-label="Постоянная шапка карточки {{ patient.code }}">
+<div class="case-title"><span class="context-label">Карточка пациента · {{ patient.id }}</span>{% if case_h1 %}<h1>{{ patient.code }}</h1>{% else %}<a class="case-code" href="{{ url_for('demo_patient',patient_id=patient.id) }}#overview">{{ patient.code }}</a>{% endif %}</div>
+<dl class="case-facts">
+<div><dt>Исходный возраст</dt><dd>{% if patient.age_status=='known' %}{{ patient.age_years }} лет{% elif patient.age_status=='conflicting' %}⚠ Противоречивые сведения{% else %}Не указан{% endif %}</dd></div>
+<div class="{{ 'case-alert' if h.signals else '' }}"><dt>Критический сигнал</dt><dd>{% if h.signals %}<strong>⚠ Без записанной реакции: {{ h.signals }}</strong> <a href="{{ url_for('critical_inbox') }}">Открыть</a>{% else %}Без записанной реакции нет. Не означает отсутствие риска.{% endif %}</dd></div>
+<div><dt>Записанное направление</dt><dd>{% if top_route %}<span class="{{ 'route-mandatory' if top_route.category=='mandatory' else 'route-desirable' if top_route.category=='desirable' else '' }} route-chip">Психиатр — {{ route_categories[top_route.category] }}</span> {{ 'Подтверждено врачом' if top.action_id else 'Отклонено' if top.decision=='rejected' else 'Проект, не действует' }}{% elif top %}Есть запись прежней формы, категория не указана{% else %}Не записано. Не означает отсутствие риска.{% endif %}</dd></div>
+<div><dt>Сведения</dt><dd>{% if h.warnings %}Нужно уточнить: {{ h.warnings }}{% else %}Расхождений в записях нет{% endif %}</dd></div>
+</dl></section>

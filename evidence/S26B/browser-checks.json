@@ -1,0 +1,25 @@
+{
+  "kind": "agent self-check, synthetic; no screen reader, no physical device, no user trial",
+  "checks": [
+    "doctor: 9 pages x 4 widths (320/768/1024/1440): status 200, no page-level horizontal overflow",
+    "doctor: CSS zoom 200% at 1440 (emulation) no overflow",
+    "doctor: 29 Tab stops, first is skip link, outline visible on all",
+    "doctor: body font stack resolves to \"HAC Sans\"; PT Sans available=true",
+    "patient: 4 pages x 4 widths (320/768/1024/1440): status 200, no page-level horizontal overflow",
+    "patient: CSS zoom 200% at 1440 (emulation) no overflow",
+    "patient: 29 Tab stops, first is skip link, outline visible on all",
+    "patient: body font stack resolves to \"HAC Sans\"; PT Sans available=true",
+    "font files served from /static/fonts: PTSans-Bold.ttf 200, PTSans-Regular.ttf 200, PTSerif-Bold.ttf 200",
+    "no request left 127.0.0.1 (no external fonts/scripts/services)",
+    "JavaScript disabled: doctor home and card render",
+    "404 page uses the Blank shell",
+    "failed login shows an error message with role=alert"
+  ],
+  "failures": [],
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "platform": "darwin"
+  },
+  "status": "PASS"
+}

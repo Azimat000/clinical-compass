@@ -1,0 +1,49 @@
+{
+ "kind": "agent self-check, synthetic, not a physician trial",
+ "label": "after",
+ "tasks": [
+  {
+   "name": "T1",
+   "goal": "Главный экран → найти D01 → карточка → динамика",
+   "actions": 4,
+   "reached": true
+  },
+  {
+   "name": "T2",
+   "goal": "Карточка → форма нового проекта решения",
+   "actions": 1,
+   "reached": true
+  },
+  {
+   "name": "T3",
+   "goal": "Страница решений → сводка повторного приёма",
+   "actions": 1,
+   "reached": true
+  },
+  {
+   "name": "T4",
+   "goal": "Страница первого приёма → сообщения и выполнение плана",
+   "actions": 2,
+   "reached": true
+  },
+  {
+   "name": "T5",
+   "goal": "Главный экран → сигнал → просмотр → принятие → реакция",
+   "actions": 5,
+   "reached": true
+  }
+ ],
+ "browser": {
+  "name": "Chromium",
+  "version": "151.0.7922.34",
+  "platform": "darwin"
+ },
+ "first_screen": {
+  "viewport": "1440x900",
+  "signal_text_top": 382,
+  "route_label_top": 355,
+  "card_nav_links": 5,
+  "task_links": 3
+ },
+ "status": "DONE"
+}

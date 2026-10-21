@@ -8,7 +8,7 @@ from html import escape
 from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
-from .repository import patient_list
+from .repository import patient_list, pending_signal_counts
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
 from . import first_visits, follow_up
 
@@ -113,6 +113,16 @@ def create_app(database=None):
                 abort(403)
 
     @app.context_processor
+    def card_context():
+        def card_header(patient):
+            db = get_db()
+            counts = pending_signal_counts(db, g.user['id']) if g.user['role'] == 'doctor' else {}
+            entries = records.history(db, patient['id'])
+            return {'signals': counts.get(patient['id'], 0), 'warnings': len(records.warnings(patient, entries)),
+                    'routes': routing.summaries(db, g.user, patient['id']), 'statuses': records.STATUSES}
+        return {'card_header': card_header}
+
+    @app.context_processor
     def auth_context():
         return {'current_user': g.get('user'), 'csrf': g.user['csrf_token'] if g.get('user') else '',
                 'route_categories': routing.CATEGORIES, 'route_urgencies': routing.URGENCIES}
@@ -182,13 +192,16 @@ def create_app(database=None):
         attention = request.args.get('attention', '')
         try:
             rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'],
-                                record_kind=record_kind, route_category=route_category, attention=attention)
+                                record_kind=record_kind, route_category=route_category, attention=attention,
+                                signals_first=True)
         except ValueError:
             abort(400)
         offers = get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
             WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
         route_summaries = {p['id']: routing.summaries(get_db(), g.user, p['id']) for p in rows}
+        signal_counts = pending_signal_counts(get_db(), g.user['id'])
         return render_template('dashboard.html', route_summaries=route_summaries, patients=rows, query=query, age_status=age_status, offers=offers,
+                               signal_counts=signal_counts,
                                record_kind=record_kind, route_category=route_category, attention=attention)
 
     @app.get('/demo/<patient_id>')

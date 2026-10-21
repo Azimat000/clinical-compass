@@ -35,7 +35,13 @@ def seed_demo(db):
                        ('demo.seeded', code, stamp, json.dumps({'synthetic': True})))
 
 
-def patient_list(db, query='', age_status='', doctor_id=None, record_kind='', route_category='', attention=''):
+PENDING_SIGNAL_SQL = '''SELECT 1 FROM critical_events c LEFT JOIN critical_delivery d ON d.event_id=c.id
+    JOIN care_relationships r ON r.id=c.relationship_id
+    WHERE c.patient_id=p.id AND d.reacted_at IS NULL AND c.recipient_id=?
+    AND r.doctor_id=c.recipient_id AND r.ends_at IS NULL AND r.starts_at<=?'''
+
+
+def patient_list(db, query='', age_status='', doctor_id=None, record_kind='', route_category='', attention='', signals_first=False):
     if age_status not in ('', 'known', 'unknown', 'conflicting') or record_kind not in ('', 'self_report', 'visit') or route_category not in ('', 'mandatory', 'desirable') or attention not in ('', 'pending'):
         raise ValueError('Invalid patient filter')
     sql = 'SELECT p.* FROM patients p WHERE 1=1'
@@ -68,9 +74,19 @@ def patient_list(db, query='', age_status='', doctor_id=None, record_kind='', ro
                          json_extract(v.payload_json,'$.route.category'))=?)"""
         params.append(route_category)
     if attention:
-        sql += """ AND EXISTS (SELECT 1 FROM critical_events c LEFT JOIN critical_delivery d ON d.event_id=c.id
-            JOIN care_relationships r ON r.id=c.relationship_id
-            WHERE c.patient_id=p.id AND d.reacted_at IS NULL AND c.recipient_id=?
-            AND r.doctor_id=c.recipient_id AND r.ends_at IS NULL AND r.starts_at<=?)"""
+        sql += f' AND EXISTS ({PENDING_SIGNAL_SQL})'
         params += [doctor_id, now()]
-    return db.execute(sql + ' ORDER BY p.code LIMIT 100', params).fetchall()
+    order = 'p.code'
+    if signals_first and doctor_id is not None:
+        order = (f'(EXISTS ({PENDING_SIGNAL_SQL})) DESC, p.code')
+        params += [doctor_id, now()]
+    return db.execute(sql + ' ORDER BY ' + order + ' LIMIT 100', params).fetchall()
+
+
+def pending_signal_counts(db, doctor_id):
+    """Число критических сигналов без записанной реакции врача по каждому пациенту."""
+    rows = db.execute('''SELECT c.patient_id AS patient_id, COUNT(*) AS n FROM critical_events c
+        LEFT JOIN critical_delivery d ON d.event_id=c.id JOIN care_relationships r ON r.id=c.relationship_id
+        WHERE d.reacted_at IS NULL AND c.recipient_id=? AND r.doctor_id=c.recipient_id
+        AND r.ends_at IS NULL AND r.starts_at<=? GROUP BY c.patient_id''', (doctor_id, now())).fetchall()
+    return {row['patient_id']: row['n'] for row in rows}

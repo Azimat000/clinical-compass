@@ -22,7 +22,7 @@
   const container = document.querySelector('.patient-panels');
   if (!container) return;
   const panels = [...container.querySelectorAll(':scope > [data-panel]')];
-  const navigation = document.querySelector('.card-nav');
+  const navigation = document.querySelector('[data-panel-nav]');
   function reveal(focus = false) {
     let anchor = '';
     try { anchor = decodeURIComponent(location.hash.slice(1)); } catch (_) { /* malformed fragment */ }
