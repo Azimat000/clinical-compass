@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "downloaded_on": "2026-10-21",
+  "scope": "project-local, static assets only",
+  "permission": "Прямое согласие пользователя в чате 21.10.2026: скачать PT Sans и PT Serif (OFL) из официального открытого репозитория",
+  "origin": "https://github.com/google/fonts (каталог ofl); правообладатель ParaType Ltd; файлы получены с main без закрепления коммита, поэтому проверять по sha256",
+  "license": "SIL Open Font License 1.1; зарезервированные имена PT Sans, PT Serif, ParaType; файлы используются без изменений; тексты лицензий лежат рядом",
+  "files": [
+    {
+      "path": "apps/compass/static/fonts/PTSans-Regular.ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/PT_Sans-Web-Regular.ttf",
+      "bytes": 442960,
+      "sha256": "9cc831490532009bae2b3ce0d39c62adfc889060beb421593bfd9d2396d0f10a"
+    },
+    {
+      "path": "apps/compass/static/fonts/PTSans-Bold.ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/PT_Sans-Web-Bold.ttf",
+      "bytes": 470240,
+      "sha256": "3128bd5ecf01816e59a23d54c57a7a6b14615b07db53ff277c77376010265b05"
+    },
+    {
+      "path": "apps/compass/static/fonts/PTSerif-Bold.ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptserif/PT_Serif-Web-Bold.ttf",
+      "bytes": 339996,
+      "sha256": "038ba7336bd7ea14f12ad155bed51a4345cac5153275d521dec3ba04021c526e"
+    },
+    {
+      "path": "apps/compass/static/fonts/OFL-PTSans.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/OFL.txt",
+      "bytes": 4425,
+      "sha256": "2758cf7a872827f39661cf8cc24188113c030447aefb5ca7145993650076ca8c"
+    },
+    {
+      "path": "apps/compass/static/fonts/OFL-PTSerif.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptserif/OFL.txt",
+      "bytes": 4434,
+      "sha256": "ddf311c28ddf5a5ad9747649837346b67bed9d356789c3072bb27dbce49e514d"
+    }
+  ],
+  "coverage_check": "evidence/S26A/fonts-check.json: русские А–Я, а–я, Ё, ё, цифры, латиница, «», —, №, …, ₽, ≥ присутствуют; нет ⚠ и ◇ (подставляются системным шрифтом)"
+}

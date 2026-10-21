@@ -1,10 +1,10 @@
 /* Клинический компас · оформление «Бланк» (S26A).
    Язык русских клинических бланков: линии, подписи, журнал вместо карточек.
-   Шрифты лежат локально (static/fonts); внешние службы не используются. */
+   Шрифты PT Sans и PT Serif (ParaType, OFL 1.1) лежат в static/fonts; внешние службы не используются. */
 
-@font-face{font-family:"HAC Sans";font-weight:400;font-style:normal;font-display:swap;src:local("PT Sans"),local("PTSans-Regular"),url("fonts/PTSans-Regular.woff2") format("woff2")}
-@font-face{font-family:"HAC Sans";font-weight:700;font-style:normal;font-display:swap;src:local("PT Sans Bold"),local("PTSans-Bold"),url("fonts/PTSans-Bold.woff2") format("woff2")}
-@font-face{font-family:"HAC Serif";font-weight:700;font-style:normal;font-display:swap;src:local("PT Serif Bold"),local("PTSerif-Bold"),url("fonts/PTSerif-Bold.woff2") format("woff2")}
+@font-face{font-family:"HAC Sans";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/PTSans-Regular.ttf") format("truetype")}
+@font-face{font-family:"HAC Sans";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/PTSans-Bold.ttf") format("truetype")}
+@font-face{font-family:"HAC Serif";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/PTSerif-Bold.ttf") format("truetype")}
 
 :root{
   color-scheme:light;

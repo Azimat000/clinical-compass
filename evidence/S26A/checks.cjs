@@ -15,9 +15,10 @@ const patient=['/demo/D01','/patients/D01/communication','/patients/D01/decision
 const fail=(m)=>{report.failures.push(m);};
 (async()=>{try{
 await start();browser=await chromium.launch({headless:true});report.browser={name:'Chromium',version:browser.version(),platform:process.platform};
-const external=new Set();
+const external=new Set();const fonts=[];
 for(const [role,uid,pages] of [['doctor','doc-a',doctor],['patient','pat-a',patient]]){
  const ctx=await browser.newContext({viewport:{width:1440,height:1000}});const p=await ctx.newPage();
+ p.on('response',r=>{if(r.url().includes('/static/fonts/'))fonts.push(r.url().split('/').pop()+' '+r.status());});
  p.on('request',r=>{const u=new URL(r.url());if(!['127.0.0.1','localhost'].includes(u.hostname)&&u.protocol.startsWith('http'))external.add(u.hostname);});
  const errs=[];p.on('pageerror',e=>errs.push(String(e)));
  await login(p,uid);
@@ -38,9 +39,10 @@ for(const [role,uid,pages] of [['doctor','doc-a',doctor],['patient','pat-a',pati
  report.checks.push(`${role}: ${stops.length} Tab stops, first is skip link, outline visible on all`);
  // 3. font actually used
  await p.goto(origin+pages[0]);
- report.checks.push(`${role}: body font stack resolves to ${await p.evaluate(()=>getComputedStyle(document.body).fontFamily.split(',')[0])}; PT Sans available=${await p.evaluate(()=>document.fonts.check('16px "PT Sans"'))}`);
+ await p.waitForTimeout(300);report.checks.push(`${role}: body font stack resolves to ${await p.evaluate(()=>getComputedStyle(document.body).fontFamily.split(',')[0])}; PT Sans available=${await p.evaluate(()=>document.fonts.check('16px "PT Sans"'))}`);
  if(errs.length)fail(role+' page errors: '+errs.join('; '));
  await ctx.close();}
+const fl=[...new Set(fonts)].sort();report.checks.push('font files served from /static/fonts: '+fl.join(', '));for(const need of ['PTSans-Regular.ttf 200','PTSans-Bold.ttf 200','PTSerif-Bold.ttf 200'])if(!fl.includes(need))fail('font not served: '+need);
 if(external.size)fail('external hosts requested: '+[...external].join(','));else report.checks.push('no request left 127.0.0.1 (no external fonts/scripts/services)');
 // 4. JS disabled: doctor home and patient card still render and navigate
 const nj=await browser.newContext({javaScriptEnabled:false});const n=await nj.newPage();await login(n,'doc-a');
