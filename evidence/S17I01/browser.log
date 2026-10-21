@@ -1,0 +1,29 @@
+{
+  "kind": "agent self-check, synthetic, no clinical validation or trial",
+  "checks": [
+    "visible source: Открыть исходную запись",
+    "visible source: Открыть ответы и источник анкеты",
+    "visible source: Открыть подтверждённое решение",
+    "visible source: Открыть пункт и историю отметок",
+    "keyboard focus visible; period applies through Enter; URL retains dates",
+    "320/768/1024/1440 no horizontal page overflow; CSS zoom 200% (emulation)",
+    "patient entry absent, direct URL 403; unrelated doctor 404",
+    "period and source content available without JavaScript",
+    "real server restart retains source data and session"
+  ],
+  "started_at": "2026-10-21T08:31:00.596Z",
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "viewport": "1440x1000",
+    "platform": "darwin"
+  },
+  "open_task": {
+    "clicks": 1,
+    "elapsed_ms": 88
+  },
+  "keyboard_tabs": 4,
+  "page_errors": [],
+  "status": "PASS",
+  "finished_at": "2026-10-21T08:31:04.994Z"
+}

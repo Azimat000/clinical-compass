@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T02:11:05+03:00",
+  "updated_on": "2026-10-21T11:32:46+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S17J02B03A",
-  "next_slice": "S17I01",
+  "last_accepted_slice": "S17I01",
+  "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -260,8 +260,8 @@
       "reason": null
     },
     "S17I01": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S17I01",
       "handoff": "memory/sessions/S17I01.md",
       "reason": null
     }
@@ -270,7 +270,7 @@
     "report": "evidence/audits/2026-10-19-s08a/report.json",
     "commit_ref": "refs/tags/audit/2026-10-19-s08a",
     "open_findings": [],
-    "next_action": "Следующий сервисный срез S17I01: фактическая сводка повторного приёма. Клинические/реальные проверки остаются отдельными; RAG отложен.",
+    "next_action": "S17I01 принят: фактическая сводка повторного приёма. Следующего готового среза нет; клинические/реальные проверки остаются отдельными, RAG отложен.",
     "resolved_findings": {
       "B13": "evidence/S08B/acceptance.md",
       "B14": "evidence/S08B/acceptance.md"

@@ -229,3 +229,8 @@ body{background:white}
 .visit-brief>div{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,2fr);gap:16px;padding:12px 0;border-top:1px solid var(--line)}
 .visit-brief dt{font-weight:600}.visit-brief dd{margin:0}.visit-brief details{margin:8px 0 0}
 @media(max-width:600px){.visit-brief>div{grid-template-columns:1fr;gap:4px}}
+
+/* S17I01: long provenance and timestamps must fit the selected period on mobile. */
+.follow-up{overflow-wrap:anywhere}
+.follow-up input{min-width:0;max-width:100%}
+.follow-up a{display:inline-flex;align-items:center;min-height:44px}

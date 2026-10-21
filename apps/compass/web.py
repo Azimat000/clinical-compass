@@ -10,7 +10,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits
+from . import first_visits, follow_up
 
 
 def create_app(database=None):
@@ -194,6 +194,25 @@ def create_app(database=None):
     @app.get('/demo/<patient_id>')
     def demo_patient(patient_id):
         return render_patient(patient_id)
+
+    @app.get('/patients/<patient_id>/follow-up')
+    def follow_up_page(patient_id):
+        role('doctor')
+        patient = patient_or_404(patient_id)
+        error, data, status = None, None, 200
+        try:
+            if any(len(request.args.getlist(k)) != 1 for k in ('start', 'end') if k in request.args):
+                raise decisions.DecisionError('Укажите один период: по одной начальной и конечной дате.')
+            data = follow_up.view(get_db(), g.user, patient_id, request.args)
+        except decisions.DecisionError as failure:
+            if failure.status in (403, 404):
+                abort(failure.status)
+            error, status = str(failure), failure.status
+        return render_template('follow_up.html', patient=patient, data=data, error=error,
+            values=request.args, today=records.today().isoformat(), fields=records.FIELDS,
+            statuses=records.STATUSES, wellbeing=records.WELLBEING, kinds=decisions.KINDS,
+            labels=communication.LABELS, visit_fields=first_visits.FIELDS,
+            visit_sources=first_visits.SOURCES), status
 
     @app.route('/patients/<patient_id>/first-visits', methods=['GET'])
     @app.route('/patients/<patient_id>/first-visits/<visit_id>', methods=['GET', 'POST'])

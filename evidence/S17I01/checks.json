@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "executor": "main agent; direct code/diff/image inspection; no delegated mutations",
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "results": "304 application tests at that stage; 70 tool tests; restart, pip check and synthetic dataset PASS"
+    },
+    {
+      "command": "make test smoke",
+      "exit_code": 0,
+      "results": "final Python code: 305 application tests and restart PASS"
+    },
+    {
+      "command": ".venv/bin/python -m unittest discover -s apps/tests -p test_follow_up.py -v",
+      "exit_code": 0,
+      "results": "8 tests PASS"
+    },
+    {
+      "command": "node evidence/S17I01/browser.cjs",
+      "exit_code": 0,
+      "results": "final CSS and UI PASS; real Chromium; synthetic"
+    },
+    {
+      "command": "python3 evidence/S17I01/verify.py",
+      "exit_code": 0,
+      "results": "baseline preservation, 83/160, unchanged statuses/rules/resources/dependencies, allowed paths PASS"
+    },
+    {
+      "command": "python3 tools/validate_plan.py --pending-tag S17I01",
+      "exit_code": 0,
+      "results": "31 accepted slices, 83 requirements/160 subchecks; next null"
+    },
+    {
+      "command": "python3 tools/session.py status",
+      "exit_code": 0,
+      "results": "Текущий: нет\nПоследний принятый: S17I01\nСледующий готовый: нет — проверить блокеры/условия\nПроход в финал: unknown\nПриложение и условия конкурса не считаются выполненными из-за готового плана."
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "results": "PASS"
+    }
+  ],
+  "logs": {
+    "make-check.log": {
+      "sha256": "52f82435246d382d08dfb094843a1a52515be834330252b4caaaf4d9e417150d",
+      "bytes": 57249
+    },
+    "final-app-check.log": {
+      "sha256": "1c528f8d79152e44ca4a59ac847edae03178e88b6a4d9b6b6df4d11fa2a546d2",
+      "bytes": 46703
+    },
+    "targeted.log": {
+      "sha256": "ec27d359ef8255f4d593e6d6990005e7012b7437cb71522955f32c7a230a8662",
+      "bytes": 1326
+    },
+    "browser.log": {
+      "sha256": "dde1f39e2abf9372506acabc7f6b68d4918b9b38153d0f6a683be3a57f1d41fc",
+      "bytes": 1099
+    },
+    "browser.json": {
+      "sha256": "dde1f39e2abf9372506acabc7f6b68d4918b9b38153d0f6a683be3a57f1d41fc",
+      "bytes": 1099
+    },
+    "verification.json": {
+      "sha256": "99b2fb841bb15be38bfe2fb06746d9c77dcf597b62ad3863f983dcd8d82a6c25",
+      "bytes": 2091
+    },
+    "plan-check.log": {
+      "sha256": "d37a3ae698f3035185c826d6c03bb8e7043dd7b3f66553f7e2e251e578bf16c5",
+      "bytes": 343
+    },
+    "session-status.log": {
+      "sha256": "34871a5b2d59bdc79aa7c2516acf305cf38b9356f4777519d237a4d53a520896",
+      "bytes": 342
+    }
+  },
+  "limits": [
+    "All data synthetic; agent self-check, not independent clinical validation or user trial.",
+    "No screen reader, physical devices or WCAG certification.",
+    "Snapshot contains current knowledge of events selected by date; later corrections included.",
+    "Clinical blockers retained; no next ready slice."
+  ]
+}
