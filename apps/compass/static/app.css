@@ -1,236 +1,261 @@
-:root{color-scheme:light;--ink:#18352f;--muted:#52665f;--line:#c6d4ce;--accent:#17634d;--surface:#fff;--canvas:#f3f6f5;--soft:#e8efeb;--warning:#704508;--warning-bg:#fff4de;--danger:#861f23;--danger-bg:#fff1ef;--focus:#986000;--control:#789184;--radius:8px}
+/* Клинический компас · оформление «Бланк» (S26A).
+   Язык русских клинических бланков: линии, подписи, журнал вместо карточек.
+   Шрифты лежат локально (static/fonts); внешние службы не используются. */
+
+@font-face{font-family:"HAC Sans";font-weight:400;font-style:normal;font-display:swap;src:local("PT Sans"),local("PTSans-Regular"),url("fonts/PTSans-Regular.woff2") format("woff2")}
+@font-face{font-family:"HAC Sans";font-weight:700;font-style:normal;font-display:swap;src:local("PT Sans Bold"),local("PTSans-Bold"),url("fonts/PTSans-Bold.woff2") format("woff2")}
+@font-face{font-family:"HAC Serif";font-weight:700;font-style:normal;font-display:swap;src:local("PT Serif Bold"),local("PTSerif-Bold"),url("fonts/PTSerif-Bold.woff2") format("woff2")}
+
+:root{
+  color-scheme:light;
+  --ink:#1c1e26;--paper:#fbfbfd;--white:#fff;
+  --blue:#2342b5;--blue-dark:#1a3290;
+  --red:#b8232c;--red-bg:#fdecee;
+  --muted:#5a5f6e;--rule:#c5c9d6;--field:#7b8194;
+  --warn:#7a4a00;--warn-bg:#fff4dc;--warn-line:#b57600;
+  --focus:#b57600;
+  --sans:"HAC Sans","PT Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"HAC Serif","PT Serif",Georgia,"Times New Roman",serif;
+}
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-a{color:var(--accent);text-underline-offset:3px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 var(--sans)}
+a{color:var(--blue);text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
-button,input,select,textarea{font:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 a,button,input,select,textarea,summary{touch-action:manipulation}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
-h1,h2,h3,h4{line-height:1.25;overflow-wrap:anywhere}
-h1{font-size:clamp(28px,3vw,36px);letter-spacing:-.025em;margin:8px 0 12px;font-weight:720}
-h2{font-size:23px;margin:0 0 12px}
-h3{font-size:19px;margin:20px 0 8px}
-h4{font-size:17px;margin:16px 0 8px}
-p{margin:8px 0 16px;max-width:80ch}
-ul{padding-left:24px}
-small,.muted{color:var(--muted);font-size:14px}
-.eyebrow,.context-label{display:block;color:var(--muted);font-size:14px;font-weight:550;letter-spacing:0;text-transform:none}
-.skip-link{position:absolute;left:12px;top:-80px;z-index:30;background:white;padding:12px}
+h1,h2,h3,h4{line-height:1.25;overflow-wrap:anywhere;margin:0}
+h1{font:700 clamp(28px,3.2vw,34px)/1.2 var(--serif);margin:0 0 10px}
+h2{font:700 24px/1.25 var(--serif);margin:0 0 12px}
+h3{font:700 19px/1.3 var(--sans);margin:24px 0 8px}
+h4{font:700 17px/1.3 var(--sans);margin:18px 0 6px}
+p{margin:8px 0 16px;max-width:75ch}
+ul,ol{padding-left:24px}
+small,.muted{color:var(--muted);font-size:14.5px}
+strong{font-weight:700}
+.eyebrow,.context-label{display:block;color:var(--muted);font-size:14.5px;margin:0 0 2px}
+.skip-link{position:absolute;left:12px;top:-80px;z-index:40;background:var(--ink);color:var(--white);padding:12px 16px}
 .skip-link:focus{top:8px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+[hidden],#critical-banner[hidden]{display:none!important}
 
-.app-header{min-height:84px;padding:16px 32px;border-bottom:1px solid var(--line);background:var(--surface);display:flex;align-items:center;gap:24px}
-.brand{color:var(--ink);font-size:20px;font-weight:750;line-height:1.15;text-decoration:none;max-width:180px;letter-spacing:-.03em}
-.brand span{display:block;color:var(--accent)}
-.badge{font-size:13px;border:1px solid var(--line);border-radius:4px;padding:4px 8px}
-.account{display:flex;align-items:center;gap:24px;margin-left:auto}
+/* Каркас: верхняя панель, без боковой колонки */
+.app-header{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px;padding:12px 32px;border-bottom:2px solid var(--ink);background:var(--paper)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font:700 21px/1.15 var(--serif);text-decoration:none}
+.brand svg{flex:none}
+.brand span{display:inline}
+.main-nav{display:flex;flex-wrap:wrap;gap:4px 24px}
+.main-nav a{display:flex;align-items:center;min-height:44px;color:var(--ink);text-decoration:none;border-bottom:3px solid transparent;padding-top:3px}
+.main-nav a:hover{border-bottom-color:var(--rule)}
+.main-nav a[aria-current]{border-bottom-color:var(--blue);font-weight:700}
+.main-nav .safety-link{color:var(--red)}
+.badge{font-size:13.5px;color:var(--muted);border:1px solid var(--rule);padding:2px 8px}
+.account{display:flex;align-items:center;gap:20px;margin-left:auto;font-size:15px}
+.account>span{min-width:0;overflow-wrap:anywhere;text-align:right}
 .account small{display:block}
-.account>span{min-width:0;overflow-wrap:anywhere}
-.account form{margin:0;flex-shrink:0}
-.account button{margin:0;min-height:44px;padding:8px 16px;white-space:nowrap}
-.app-shell{display:grid;grid-template-columns:224px minmax(0,1fr);max-width:1600px;margin:auto;min-height:calc(100vh - 160px)}
-.sidebar{border-right:1px solid var(--line);padding:28px 16px;display:flex;flex-direction:column;gap:32px}
-.sidebar nav{display:grid;gap:8px}
-.sidebar a{padding:12px 16px;text-decoration:none;border-radius:6px;font-weight:550}
-.sidebar a[aria-current]{background:var(--soft);color:var(--ink);box-shadow:inset 3px 0 var(--accent)}
-.sidebar .safety-link{color:var(--danger)}
-.sidebar-note{font-size:13px;color:var(--muted);margin:16px}
-.signed-out{display:block;max-width:840px}
-.signed-out main{padding-top:56px}
-main{padding:32px 40px 56px;min-width:0}
+.account form{margin:0}
+.app-shell{max-width:1180px;margin:0 auto}
+.signed-out{max-width:760px}
+main{padding:32px 32px 56px;min-width:0}
 main:focus{outline:none}
-footer{font-size:13px;color:var(--muted);padding:20px 32px;border-top:1px solid var(--line);background:white}
+.signed-out main{padding-top:56px}
+footer{font-size:14px;color:var(--muted);padding:20px 32px;border-top:1px solid var(--rule);max-width:1180px;margin:0 auto}
+
+/* Заголовки страниц и разделы */
 .intro{margin:0 0 24px}
 .intro p{color:var(--muted);margin-bottom:0}
-.workspace{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+.workspace{border-top:2px solid var(--ink);padding:20px 0 8px;margin-bottom:24px}
 .section-heading{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.section-heading span{color:var(--muted);font-size:14px}
-.search{display:flex;flex-wrap:wrap;align-items:end;gap:16px;margin:20px 0}
-.search label{flex:1;min-width:140px;font-size:14px;font-weight:600}
-.search .search-query{flex:2;min-width:220px}
-.search-more{flex-basis:100%;border-top:1px solid var(--line);margin-top:0}
-.search-more summary{font-size:14px}
+.section-heading span{color:var(--muted);font-size:14.5px}
+section+section{margin-top:32px}
+section,[id]{scroll-margin-top:24px}
+.back{display:inline-flex;align-items:center;min-height:44px;margin-bottom:8px}
+
+/* Кнопки */
+button,.button{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:10px 22px;background:var(--blue);color:var(--white);border:2px solid var(--blue);border-radius:2px;font-weight:700;cursor:pointer;text-decoration:none;line-height:1.3}
+button:hover,.button:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+.secondary,button.secondary{background:transparent;color:var(--ink);border-color:var(--ink)}
+.secondary:hover,button.secondary:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+button:disabled{opacity:.55;cursor:default}
+
+/* Поля: подпись над полем, линия под ним */
+label{display:block;font-weight:700;margin:16px 0}
+input,select,textarea{display:block;width:100%;min-width:0;min-height:48px;margin-top:6px;padding:10px 12px;background:var(--white);border:1px solid var(--field);border-bottom:2px solid var(--ink);border-radius:0;font-weight:400}
+textarea{resize:vertical;min-height:96px}
+input[readonly]{background:var(--paper)}
+input[type=checkbox],input[type=radio]{display:inline-block;width:26px;height:26px;min-height:26px;margin:0 12px 0 0;padding:0;vertical-align:middle;flex:none;accent-color:var(--blue)}
+input[type=radio]{appearance:none;-webkit-appearance:none;border:2px solid var(--ink);border-radius:50%;background:var(--white)}
+input[type=radio]:checked{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 5px var(--white)}
+input[type=checkbox]{border:2px solid var(--ink)}
+[aria-invalid="true"]{border:2px solid var(--red);border-bottom-width:3px}
+.field-error{color:var(--red)!important;border-left:4px solid var(--red);padding:6px 12px;background:var(--red-bg)}
+fieldset{min-width:0;border:0;border-top:2px solid var(--ink);padding:14px 0 6px;margin:24px 0}
+legend{font:700 19px/1.3 var(--sans);padding:0 12px 0 0}
+dt{font-weight:700}
+dd{margin:2px 0 14px;overflow-wrap:anywhere;white-space:pre-wrap}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.auth-form{max-width:44rem;display:grid;gap:8px;margin:24px 0}
+.auth-form button{justify-self:start;margin-top:8px}
+.record-form{margin:24px 0;padding:0}
+.record-form>p{max-width:75ch}
+.record-form fieldset p{font-size:15px;color:var(--muted)}
+
+/* Поиск как строка бланка */
+.search{display:flex;flex-wrap:wrap;align-items:end;gap:8px 24px;margin:20px 0}
+.search label{flex:1;min-width:150px;margin:0;font-size:15px}
+.search .search-query{flex:2;min-width:240px}
+.search input,.search select{background:transparent;border:0;border-bottom:2px solid var(--ink)}
+.search-more{flex-basis:100%;border-top:1px solid var(--rule);margin:0}
 .reset-link{display:inline-flex;align-items:center;min-height:48px}
-.patient-row{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,1.5fr) auto;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
-.patient-code{font-size:14px;color:var(--muted)}
-.patient-row h3{margin:0 0 4px}
-.patient-row h3 a{color:var(--ink)}
+
+/* Журнал пациентов вместо карточек */
+.patient-list{border-top:2px solid var(--ink);margin-top:8px}
+.patient-row{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,2fr) auto;align-items:start;gap:8px 24px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.patient-head{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,2fr) auto;gap:8px 24px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--muted)}
+.patient-code{display:block;font-size:14.5px;color:var(--muted)}
+.patient-row h3{margin:0 0 4px;font:700 22px/1.25 var(--serif)}
+.patient-row h3 a{color:var(--ink);text-decoration:none}
+.patient-row h3 a:hover{text-decoration:underline}
 .patient-row p{margin:4px 0}
-.row-action{padding:12px 0;white-space:nowrap;font-weight:650}
-.patient-routes .record{border:0;padding:0;margin:0;background:none}
-.patient-routes .record>strong{font-size:13px;font-weight:500;color:var(--muted)}
-.patient-routes p{font-size:14px}
-.invite-panel{border:1px solid var(--line);border-radius:var(--radius);padding:0 24px;background:white}
+.row-action{display:inline-flex;align-items:center;min-height:44px;font-weight:700;white-space:nowrap}
+.patient-routes .record{border:0;padding:0;margin:0}
+.patient-routes .record>strong{font-size:14.5px;font-weight:700;color:var(--muted)}
+.patient-routes p{font-size:15px}
 .empty{padding:24px 0}
 .empty h3{margin-top:0}
+.invite-panel{border-top:2px solid var(--ink);padding:0}
 
-button,.button{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 20px;background:var(--accent);color:white;border:1px solid var(--accent);border-radius:6px;font-weight:650;cursor:pointer;text-decoration:none;line-height:1.4}
-button:hover,.button:hover{background:#104b3b}
-.secondary{background:var(--soft);color:var(--ink);border-color:var(--line)}
-.secondary:hover{background:#d6e4dc}
-.auth-form{max-width:46rem;display:grid;gap:16px;margin:24px 0}
-.auth-form button{justify-self:start}
-.auth-form label{margin:0}
-label{display:block;font-weight:600;margin:16px 0}
-input,select,textarea{display:block;width:100%;min-width:0;min-height:48px;border:1px solid var(--control);border-radius:5px;padding:10px 12px;background:white;color:var(--ink);margin-top:6px}
-textarea{resize:vertical;min-height:88px}
-input[type=checkbox],input[type=radio]{display:inline-block;width:22px;height:22px;min-height:22px;vertical-align:middle;flex-shrink:0;accent-color:var(--accent);margin:0 8px 0 0}
-input[readonly]{background:var(--canvas)}
-fieldset{min-width:0;border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin:20px 0}
-legend,dt{font-weight:650}
-legend{padding:0 6px}
-dd{margin:4px 0 16px;overflow-wrap:anywhere;white-space:pre-wrap}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}
-.first-visit-workspace{overflow-wrap:anywhere}
-.record-form{margin:24px 0;padding:24px;background:white;border:1px solid var(--line);border-radius:var(--radius)}
-.record-form>p{max-width:76ch}
-.record-form fieldset p{font-size:14px;color:var(--muted)}
-.record,.card{background:white;padding:20px;border:1px solid var(--line);border-radius:6px;margin:20px 0}
-.record form{margin-top:12px}
+/* Записи, примечания, предупреждения: линия слева и слово, не цветная плашка */
+.record,.card{padding:16px 0;margin:0;border:0;border-top:1px solid var(--rule)}
 .record h3:first-child{margin-top:0}
-.notice,.demo-note{background:var(--soft);border-left:3px solid var(--accent);padding:16px 20px;margin:20px 0;border-radius:0 4px 4px 0}
+.record form{margin-top:12px}
+.notice,.demo-note{background:var(--white);border:1px solid var(--rule);border-left:4px solid var(--ink);padding:14px 18px;margin:20px 0}
 .notice p:last-child{margin-bottom:0}
-.demo-note{font-size:14px;max-width:none}
-.error,.warning{background:var(--warning-bg);color:var(--warning);padding:16px 20px;border-left:4px solid var(--warning)}
-.error{border-style:solid;border-width:1px 1px 1px 4px}
-.route-mandatory{border:2px solid var(--warning);background:var(--warning-bg);color:var(--warning)}
-.route-desirable{border:2px dashed var(--accent);background:var(--soft)}
-.route-mandatory,.route-desirable{padding:12px}
-.patient-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.demo-note{font-size:15px;max-width:none}
+.warning{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line);border-left:5px solid var(--warn-line);padding:14px 18px}
+.error{background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-left:5px solid var(--red);padding:14px 18px}
+.saved-status{border-left:4px solid var(--blue);padding:6px 12px;background:var(--white);font-size:15px}
+/* Направление: слово + форма, не только цвет */
+.route-mandatory{border:2px solid var(--red);background:var(--white);color:var(--ink);padding:12px 14px;font-weight:700}
+.route-mandatory::first-letter{color:var(--red)}
+.route-desirable{border:2px dashed var(--ink);background:var(--white);padding:12px 14px}
+
+/* Паспорт пациента и разделы карточки */
+.patient-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:12px}
 .patient-heading p{margin:0}
-.back{display:inline-block;margin-bottom:20px;min-height:32px}
-.overview-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:24px 0}
-.overview-facts strong{display:block;font-size:18px;margin-top:4px}
-.card-nav{display:flex;flex-wrap:wrap;gap:4px;margin:24px 0;border-bottom:1px solid var(--line);padding-bottom:12px}
-.card-nav a{padding:10px 12px;font-size:14px;font-weight:600;min-height:44px;text-decoration:none;border-radius:5px}
-.card-nav a[aria-current]{background:var(--accent);color:white}
-.card-nav a:hover{background:var(--soft);color:var(--ink)}
+.overview-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:20px 0}
+.overview-facts>div{border-top:1px solid var(--rule);padding-top:8px}
+.overview-facts strong{display:block;font:700 20px/1.3 var(--serif);margin-top:2px}
+.card-nav,.task-choice,.visit-steps,.patient-actions{display:flex;flex-wrap:wrap;gap:4px 24px;margin:20px 0}
+.card-nav{border-bottom:1px solid var(--rule);padding-bottom:0}
+.card-nav a,.visit-steps a{display:flex;align-items:center;min-height:48px;padding:6px 0;text-decoration:none;border-bottom:3px solid transparent;font-weight:700}
+.card-nav a:hover,.visit-steps a:hover{border-bottom-color:var(--rule)}
+.card-nav a[aria-current],.visit-steps a[aria-current]{border-bottom-color:var(--blue);color:var(--ink)}
+.task-choice{gap:8px}
+.task-choice a,.patient-actions a{display:flex;align-items:center;min-height:48px;padding:8px 18px;border:2px solid var(--ink);color:var(--ink);font-weight:700;text-decoration:none;background:var(--white)}
+.task-choice a:hover,.patient-actions a:hover{background:var(--paper);border-color:var(--blue);color:var(--blue)}
+.task-choice a[aria-current]{background:var(--blue);border-color:var(--blue);color:var(--white)}
+.patient-actions{gap:8px}
 .patient-panels>div>section:first-child{margin-top:0}
-.preserve-text,.narrative,.import-source{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
-pre,.hash{overflow-wrap:anywhere;white-space:pre-wrap}
-details{margin:16px 0}
-summary{cursor:pointer;font-weight:600;padding:14px 0;min-height:48px}
-details[open]>summary{margin-bottom:8px}
-section,[id]{scroll-margin-top:24px}
-section+section{margin-top:32px}
-.table-scroll{overflow:auto;max-width:100%;margin:20px 0 32px;border:1px solid var(--line);border-radius:6px}
-table{width:100%;border-collapse:collapse;background:white}
-caption{text-align:left;padding:12px;background:var(--canvas);font-size:14px}
-th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:14px;background:var(--soft)}
-.questionnaire{max-width:56rem}
-.answer{display:flex;align-items:flex-start;gap:8px;margin:8px 0;padding:10px;cursor:pointer;font-weight:400;min-height:44px}
-.answer input{margin-top:2px}
-.answer.skip{color:var(--muted);border-top:1px solid var(--line)}
-.trend{display:block;width:100%;max-width:680px;height:auto;background:white;border:1px solid var(--line);border-radius:6px;margin:16px 0 28px}
-.trend text{font:20px system-ui,sans-serif;fill:var(--ink)}
-.axis{stroke:var(--muted);stroke-width:1.5}
-.grid-line{stroke:var(--line);stroke-width:1}
-.trend-dot{fill:var(--accent);stroke:white;stroke-width:2}
-.trend a:focus-visible circle{stroke:var(--focus);stroke-width:4}
-#critical-banner,.critical-card{border:3px solid var(--danger);background:var(--danger-bg);color:var(--danger);padding:16px;margin:0 0 24px}
-#critical-banner{position:sticky;top:8px;z-index:10}
-#critical-banner a,.critical-card a{color:var(--danger)}
-[hidden],#critical-banner[hidden]{display:none!important}
-.invitation-code{max-width:48rem;overflow-wrap:anywhere}
-
-@media(min-width:1400px){main{padding:40px 48px}
-}
-@media(max-width:1100px){.app-shell{grid-template-columns:192px minmax(0,1fr)}
-main{padding:28px}
-.patient-row{grid-template-columns:1fr auto}
-.patient-routes{grid-row:2;grid-column:1/-1}
-.patient-routes:empty{display:none}
-.row-action{grid-column:2;grid-row:1}
-}
-@media(max-width:800px){.app-shell{display:block}
-.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:8px 16px}
-.sidebar nav{display:flex;flex-wrap:wrap;gap:4px}
-.sidebar a{padding:10px 12px;font-size:14px}
-.sidebar-note{display:none}
-.overview-facts{gap:16px}
-.app-header{padding:16px 24px;gap:16px}
-.account{gap:16px}
-.search label{flex-basis:40%}
-.search .search-query{flex-basis:100%}
-}
-@media(max-width:520px){.app-header{padding:16px;flex-wrap:wrap}
-.brand{font-size:19px}
-.badge{margin-left:auto;font-size:12px}
-.account{width:100%;justify-content:space-between;margin-left:0;font-size:14px}
-.account small{font-size:12px}
-.sidebar{padding:8px}
-.sidebar a{font-size:13px;padding:10px 8px}
-main{padding:24px 16px 40px}
-.signed-out main{padding-top:32px}
-.workspace,.record-form,.record{padding:16px}
-.section-heading{display:block}
-.section-heading h2{margin-bottom:4px}
-.search{gap:12px}
-.search label{flex-basis:100%;margin:4px 0;min-width:0}
-.search .search-query{min-width:0}
-.search button{flex:1}
-.form-grid{grid-template-columns:1fr}
-.patient-heading{align-items:start;flex-direction:column;gap:12px}
-.patient-heading .button{width:100%}
-.overview-facts{grid-template-columns:1fr;gap:12px;margin:16px 0}
-.overview-facts>div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px}
-.overview-facts strong{font-size:16px;margin:0}
-.patient-row{gap:8px}
-.row-action{font-size:14px;white-space:normal;max-width:90px}
-.patient-routes{grid-column:1/-1}
-.patient-identity{min-width:0}
-.notice,.demo-note,.error,.warning{padding:12px 16px}
-.card-nav{gap:4px;margin:20px 0}
-.card-nav a{padding:10px 8px}
-.auth-form button,.record-form button{width:100%}
-fieldset{padding:12px;margin:16px 0}
-legend{max-width:100%;overflow-wrap:anywhere}
-footer{padding:16px}
-.invite-panel{padding:0 16px}
-.table-scroll{font-size:14px}
-#critical-banner{position:static}
-.critical-card{padding:12px}
-.critical-card button{width:100%}
-button{overflow-wrap:anywhere}
-.back{margin-bottom:12px}
-}
-
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}
-}
-@media print{.sidebar,.account,.card-nav,button,.skip-link{display:none}
-.app-shell{display:block}
-main{padding:0}
-[data-panel][hidden]{display:block!important}
-.record,.record-form{break-inside:avoid}
-body{background:white}
-}
-
-
-.saved-status{border-left:3px solid var(--accent);padding:8px 12px;background:var(--soft);font-size:14px}
-
-.field-error{color:var(--danger)!important;border-left:3px solid var(--danger);padding:8px 12px;background:var(--danger-bg)}
-[aria-invalid="true"]{border:2px solid var(--danger)}
-
-/* S17E: task choice and a single, progressively enhanced visit form. */
-.task-choice,.visit-steps,.patient-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px}
-.task-choice a,.visit-steps a,.patient-actions a{display:flex;align-items:center;min-height:48px;padding:10px 16px;border:1px solid var(--control);border-radius:4px;font-weight:600;background:var(--surface)}
-.task-choice a[aria-current],.visit-steps a[aria-current]{background:var(--accent);color:var(--surface);border-color:var(--accent);text-decoration:none}
-.visit-steps{border-bottom:1px solid var(--line);padding-bottom:16px}
+.visit-steps{border-bottom:1px solid var(--rule)}
 [data-visit-step]>h3{margin-top:0}
 [data-visit-step]>h3:focus{outline:3px solid var(--focus);outline-offset:4px}
-.visit-actions{border-top:1px solid var(--line);padding-top:20px;margin-top:24px}
-.visit-actions button:disabled{opacity:.55;cursor:default}
+.visit-actions{border-top:1px solid var(--rule);padding-top:20px;margin-top:24px}
+.first-visit-workspace{overflow-wrap:anywhere}
 .first-visit-workspace details{margin-bottom:16px}
-.patient-actions{margin-bottom:12px}
-@media(max-width:600px){.task-choice a,.visit-steps a,.patient-actions a{flex:1 1 100%;overflow-wrap:anywhere}.visit-actions>button{width:100%}}
-
-.visit-brief>div{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,2fr);gap:16px;padding:12px 0;border-top:1px solid var(--line)}
-.visit-brief dt{font-weight:600}.visit-brief dd{margin:0}.visit-brief details{margin:8px 0 0}
-@media(max-width:600px){.visit-brief>div{grid-template-columns:1fr;gap:4px}}
-
-/* S17I01: long provenance and timestamps must fit the selected period on mobile. */
+.visit-brief>div{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,2fr);gap:16px;padding:12px 0;border-top:1px solid var(--rule)}
+.visit-brief dt{font-weight:700}
+.visit-brief dd{margin:0}
+.visit-brief details{margin:8px 0 0}
 .follow-up{overflow-wrap:anywhere}
 .follow-up input{min-width:0;max-width:100%}
 .follow-up a{display:inline-flex;align-items:center;min-height:44px}
+.preserve-text,.narrative,.import-source{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+pre,.hash{overflow-wrap:anywhere;white-space:pre-wrap}
+.invitation-code{max-width:48rem;overflow-wrap:anywhere}
+
+/* Раскрывающиеся подробности */
+details{margin:16px 0}
+summary{cursor:pointer;font-weight:700;padding:12px 0;min-height:48px;color:var(--blue)}
+details[open]>summary{margin-bottom:8px}
+
+/* Таблицы и график */
+.table-scroll{overflow:auto;max-width:100%;margin:20px 0 32px}
+table{width:100%;border-collapse:collapse;background:transparent}
+caption{text-align:left;padding:0 0 8px;color:var(--muted);font-size:14.5px}
+th,td{padding:12px 12px 12px 0;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:14.5px;font-weight:400;color:var(--muted);border-bottom:2px solid var(--ink);padding-top:0}
+.trend{display:block;width:100%;max-width:680px;height:auto;margin:16px 0 28px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+.trend text{font:20px var(--sans);fill:var(--ink)}
+.axis{stroke:var(--muted);stroke-width:1.5}
+.grid-line{stroke:var(--rule);stroke-width:1}
+.trend-dot{fill:var(--blue);stroke:var(--paper);stroke-width:2}
+.trend a:focus-visible circle{stroke:var(--focus);stroke-width:4}
+
+/* Анкеты: ряды ответов, как на бумажном бланке */
+.questionnaire{max-width:56rem}
+.answer{display:flex;align-items:center;gap:0;margin:0;padding:10px 4px;border-bottom:1px solid var(--rule);cursor:pointer;font-weight:400;min-height:52px}
+.answer:hover{background:var(--white)}
+.answer input{margin-top:0}
+.answer.skip{color:var(--muted)}
+
+/* Критические сигналы: печать красного цвета и слова */
+#critical-banner,.critical-card{border:3px solid var(--red);background:var(--white);color:var(--ink);padding:16px 20px;margin:0 0 24px}
+#critical-banner{position:sticky;top:8px;z-index:20;font-weight:700}
+#critical-banner strong,.critical-card h2{color:var(--red)}
+#critical-banner a,.critical-card a{color:var(--red)}
+.critical-card h2{margin-top:0}
+
+/* Окна ввода с повтором отправки */
+.retry-status{font-size:15px;color:var(--muted)}
+
+@media(min-width:1400px){main{padding:40px 32px 64px}}
+@media(max-width:900px){
+  .app-header{padding:12px 20px;gap:4px 20px}
+  main{padding:24px 20px 48px}
+  footer{padding:16px 20px}
+  .patient-head{display:none}
+  .patient-row{grid-template-columns:1fr auto}
+  .patient-routes{grid-row:2;grid-column:1/-1}
+  .patient-routes:empty{display:none}
+  .row-action{grid-column:2;grid-row:1}
+}
+@media(max-width:600px){
+  body{font-size:16.5px}
+  .app-header{padding:10px 16px}
+  .account{width:100%;justify-content:space-between;margin-left:0;font-size:14px}
+  .main-nav{gap:0 18px;width:100%}
+  main{padding:20px 16px 40px}
+  .signed-out main{padding-top:32px}
+  .section-heading{display:block}
+  .form-grid{grid-template-columns:1fr}
+  .search label,.search .search-query{flex-basis:100%;min-width:0}
+  .search button{flex:1}
+  .patient-heading{align-items:flex-start;flex-direction:column;gap:12px}
+  .patient-heading .button{width:100%}
+  .overview-facts{grid-template-columns:1fr;gap:12px}
+  .patient-row{gap:6px}
+  .row-action{white-space:normal;max-width:100px}
+  .task-choice a,.patient-actions a{flex:1 1 100%;overflow-wrap:anywhere}
+  .visit-actions>button,.auth-form button,.record-form button{width:100%}
+  .visit-brief>div{grid-template-columns:1fr;gap:4px}
+  .notice,.demo-note,.error,.warning{padding:12px 14px}
+  .card-nav{gap:0 16px}
+  .table-scroll{font-size:15px}
+  #critical-banner{position:static}
+  .critical-card{padding:14px}
+  .critical-card button{width:100%}
+  button{overflow-wrap:anywhere}
+  legend{max-width:100%;overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media(prefers-contrast:more){:root{--rule:#7b8194;--muted:#3f4352}}
+@media print{
+  .main-nav,.account,.card-nav,button,.skip-link,.task-choice{display:none}
+  main{padding:0}
+  [data-panel][hidden]{display:block!important}
+  .record,.record-form{break-inside:avoid}
+  body{background:#fff}
+}

@@ -1,0 +1,220 @@
+{
+  "kind": "agent self-check, synthetic, no clinical validation or user trial",
+  "label": "before",
+  "pages": [
+    {
+      "role": "doctor",
+      "name": "home",
+      "url": "/",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "home",
+      "url": "/",
+      "width": 320,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "card",
+      "url": "/demo/D01",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "card",
+      "url": "/demo/D01",
+      "width": 320,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "card-signal",
+      "url": "/demo/D01#clinical-data",
+      "width": 1440,
+      "status": 0,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "dynamics",
+      "url": "/demo/D01#dynamics",
+      "width": 1440,
+      "status": 0,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "first-visit",
+      "url": "/patients/D01/first-visits",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "follow-up",
+      "url": "/patients/D01/follow-up",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "communication",
+      "url": "/patients/D01/communication",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "decisions",
+      "url": "/patients/D01/decisions",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "imports",
+      "url": "/patients/D01/imports",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "inbox",
+      "url": "/notifications",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "critical",
+      "url": "/critical",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "doctor",
+      "name": "critical",
+      "url": "/critical",
+      "width": 320,
+      "status": 200,
+      "horizontal_overflow": true,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "home",
+      "url": "/demo/D01",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "home",
+      "url": "/demo/D01",
+      "width": 320,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "report",
+      "url": "/demo/D01#new-record",
+      "width": 1440,
+      "status": 0,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "report",
+      "url": "/demo/D01#new-record",
+      "width": 320,
+      "status": 0,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "assess-list",
+      "url": "/demo/D01#assessments",
+      "width": 1440,
+      "status": 0,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "assessment",
+      "url": "/assessments/7be8c251d4380b37356702025e0a0f0d",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "assessment",
+      "url": "/assessments/7be8c251d4380b37356702025e0a0f0d",
+      "width": 320,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "communication",
+      "url": "/patients/D01/communication",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    },
+    {
+      "role": "patient",
+      "name": "decisions",
+      "url": "/patients/D01/decisions",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "body_font": "system-ui"
+    }
+  ],
+  "errors": [],
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.34",
+    "platform": "darwin"
+  },
+  "status": "DONE"
+}
