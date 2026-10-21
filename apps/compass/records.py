@@ -114,6 +114,12 @@ def save(db, user, patient_id, kind, form):
             if existing['payload_json'] != canonical:
                 raise RecordError('Эта отправка уже сохранена с другим содержимым. Откройте новую форму.', 409)
             return existing['id']
+        if kind == 'self_report':
+            from . import report_drafts
+            try:
+                report_drafts.check_submission(db, user, patient_id, form)
+            except report_drafts.Error as error:
+                raise RecordError(str(error), error.status) from None
         entry_id, stamp = secrets.token_hex(16), now()
         encounter_id = entry_id if kind == 'visit' else None
         report_id = entry_id if kind == 'self_report' else None
@@ -147,6 +153,7 @@ def save(db, user, patient_id, kind, form):
         if kind == 'self_report':
             from .clinical_rules import evaluate_safety
             evaluate_safety(db, user, patient_id, entry_id, payload)
+            report_drafts.consumed(db, user, patient_id, form)
         access.audit(db, user['id'], 'record.' + kind + '_created', entry_id)
         return entry_id
 

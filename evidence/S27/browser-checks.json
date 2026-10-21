@@ -1,0 +1,63 @@
+{
+  "kind": "synthetic agent self-check, no real participants/devices/screen reader",
+  "checks": [
+    {
+      "name": "reload restores every raw field, unknown/partial/conflicting answers and original request key; no clinical effects"
+    },
+    {
+      "name": "close/open tab and restart server restore the draft"
+    },
+    {
+      "name": "doctor and other patient cannot access draft; switching account does not restore someone else’s text"
+    },
+    {
+      "name": "explicit deletion clears the form and survives reload, without clinical records"
+    },
+    {
+      "name": "two tabs: conflicting text stays on its page; acknowledged newer version is intact"
+    },
+    {
+      "name": "offline save does not claim success; unload warns before losing unsaved input; manual retry and reload keep input"
+    },
+    {
+      "name": "expired session: no false save; login in another tab and retry preserve the draft"
+    },
+    {
+      "name": "lost draft ack: identical retry resolves revision before newer text is saved"
+    },
+    {
+      "name": "lost final receipt: reload restores no stale draft, history contains exactly one sent report"
+    },
+    {
+      "name": "late autosave after deletion is rejected and does not resurrect the draft"
+    },
+    {
+      "name": "form widths 320/768/1024/1440, CSS zoom 200% at 768, keyboard focus on draft buttons"
+    },
+    {
+      "name": "no local/session storage, external requests or observed JS errors"
+    },
+    {
+      "name": "JavaScript disabled: unfinished draft saves, reload restores, delete clears"
+    }
+  ],
+  "browsers": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "result": "PASS: autosave, closed tab restore/key, explicit send clears draft"
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "result": "PASS: autosave, closed tab restore/key, explicit send clears draft"
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "result": "PASS: autosave, closed tab restore/key, explicit send clears draft"
+    }
+  ],
+  "failures": [],
+  "status": "PASS"
+}

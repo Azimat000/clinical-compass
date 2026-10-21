@@ -1,7 +1,8 @@
-/* Два шага одного бланка. Ввод и повтор отправки живут только в памяти открытой страницы. */
+/* Два шага одного бланка. Личный черновик хранится отдельно от отправленных записей. */
 (() => {
   const form = document.querySelector('[data-report-form]');
   if (!form) return;
+  const draft = form.reportDraft;
   const steps = [...form.querySelectorAll('[data-report-step]')];
   const controls = form.querySelector('[data-step-controls]');
   const back = controls.querySelector('[data-step-back]');
@@ -57,7 +58,7 @@
   }, true);
   function markDirty() {
     dirty = true;
-    unsaved.textContent = 'Есть неотправленные ответы. Они не сохранены на сервере.';
+    unsaved.textContent = 'Самоотчёт ещё не отправлен врачу.';
   }
   form.addEventListener('input', markDirty);
   form.addEventListener('change', markDirty);
@@ -95,6 +96,19 @@
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20000);
     try {
+      if (draft && submit.dataset.draftReady !== 'yes') {
+        if (!await draft.flush()) {
+          pending = null;
+          lock(false);
+          unsaved.textContent = 'Самоотчёт не отправлен врачу. Ответы оставлены в форме.';
+          fail('Не удалось подтвердить сохранение черновика. Ответы оставлены в форме. Сначала сохраните черновик, затем отправьте самоотчёт.');
+          return;
+        }
+        draft.pause();
+        submit.dataset.draftReady = 'yes';
+        pending.set('draft_revision', form.elements.draft_revision.value);
+        pending.set('csrf', form.elements.csrf.value);
+      }
       if (needsSession) {
         // A fresh login changes CSRF. Refresh only that transport token; keep the answers and request key.
         const session = await fetch(window.location.href, {credentials: 'same-origin', cache: 'no-store', signal: controller.signal});
@@ -126,9 +140,11 @@
         } else window.location.assign(target.href);
       } else if (response.status === 400 && data?.error) {
         pending = null;
+        delete submit.dataset.draftReady;
+        draft?.resume();
         lock(false);
         show(1, false);
-        unsaved.textContent = 'Запись не сохранена. Исправьте ответы и снова проверьте их.';
+        unsaved.textContent = 'Самоотчёт не отправлен врачу. Исправьте ответы и снова проверьте их.';
         fail(data.error + ' Введённые ответы оставлены в форме.');
       } else if (response.status === 401 || response.status === 403 || (response.redirected && new URL(response.url).pathname === '/login')) {
         needsSession = true;
@@ -150,11 +166,11 @@
       submit.disabled = !newReport.hidden;
       retry.hidden = !pending || !newReport.hidden;
       submit.textContent = pending ? 'Повторить отправку' : 'Отправить самоотчёт';
-      if (!newReport.hidden) unsaved.textContent = 'Сервер отклонил эту отправку. Ответы хранятся только на этой странице; скопируйте нужное перед уходом.';
-      else if (pending) unsaved.textContent = 'Сохранение не подтверждено. До ответа сервера редактирование приостановлено. Не закрывайте страницу: ответы хранятся только здесь.';
+      if (!newReport.hidden) unsaved.textContent = 'Сервер отклонил эту отправку. Скопируйте нужное перед открытием новой формы.';
+      else if (pending) unsaved.textContent = 'Сохранение не подтверждено. До ответа сервера редактирование приостановлено. Сохранённый личный черновик можно восстановить после обновления страницы.';
     }
   });
   window.addEventListener('beforeunload', event => {
-    if (dirty) { event.preventDefault(); event.returnValue = ''; }
+    if (dirty && (!draft || !draft.clean())) { event.preventDefault(); event.returnValue = ''; }
   });
 })();

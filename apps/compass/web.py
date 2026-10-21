@@ -10,7 +10,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list, pending_signal_counts
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up
+from . import first_visits, follow_up, report_drafts
 
 
 def create_app(database=None):
@@ -398,6 +398,10 @@ def create_app(database=None):
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)
         db = get_db()
+        personal_draft = report_drafts.view(db, g.user, patient_id) if g.user['role'] == 'patient' else None
+        draft_restored = bool(personal_draft and personal_draft['active'] and form_values is None)
+        if draft_restored:
+            form_values = personal_draft['values']
         encounters = db.execute('SELECT * FROM encounters WHERE patient_id=? ORDER BY occurred_at DESC', (patient_id,)).fetchall()
         relationship = db.execute('''SELECT r.*,u.display_name FROM care_relationships r JOIN users u ON u.id=r.doctor_id
             WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=?''', (patient_id, now())).fetchone()
@@ -407,7 +411,9 @@ def create_app(database=None):
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
         today_view = patient_today(patient_id, relationship, pending) if g.user['role'] == 'patient' else None
-        return render_template('patient.html', today_view=today_view, patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+        return render_template('patient.html', today_view=today_view, personal_draft=personal_draft, draft_restored=draft_restored,
+                               draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
+                               patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
                                clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
@@ -496,6 +502,25 @@ def create_app(database=None):
     @app.post('/patients/<patient_id>/self-reports')
     def self_report(patient_id):
         return submit_record(patient_id, 'self_report')
+
+    @app.route('/patients/<patient_id>/self-report-draft', methods=['GET', 'POST'])
+    def self_report_draft(patient_id):
+        role('patient')
+        patient_or_404(patient_id)
+        if request.method == 'GET':
+            return jsonify(report_drafts.view(get_db(), g.user, patient_id))
+        try:
+            if request.form.get('draft_action', 'save') not in ('save', 'delete'):
+                raise report_drafts.Error('Неизвестное действие с черновиком.')
+            result = report_drafts.save(get_db(), g.user, patient_id, request.form,
+                                        delete=request.form.get('draft_action') == 'delete')
+        except report_drafts.Error as error:
+            if request.accept_mimetypes.best == 'application/json':
+                return jsonify(error=str(error)), error.status
+            return render_patient(patient_id, request.form, str(error)), error.status
+        if request.accept_mimetypes.best == 'application/json':
+            return jsonify(result)
+        return redirect(url_for('demo_patient', patient_id=patient_id) + '#new-record', code=303)
 
     @app.post('/patients/<patient_id>/visits')
     def visit(patient_id):
