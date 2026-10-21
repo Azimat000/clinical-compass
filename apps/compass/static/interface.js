@@ -30,6 +30,8 @@
     const requested = target?.closest('[data-panel]');
     const name = requested?.dataset.panel || (anchor === 'main' ? container.dataset.currentPanel : null) || container.dataset.defaultPanel;
     container.dataset.currentPanel = name;
+    const primary = document.querySelector('[data-today-primary]');
+    if (primary) primary.hidden = name !== 'overview';
     panels.forEach(panel => { panel.hidden = panel.dataset.panel !== name; });
     navigation.querySelectorAll('a[href*="#"]').forEach(link => {
       const dest = document.getElementById(link.hash.slice(1));

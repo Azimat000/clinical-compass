@@ -79,11 +79,11 @@ class PatientWorkspaceTests(unittest.TestCase):
             self.assertEqual(5, nav.count('<a '))
         self.assertIn('aria-current="page"', re.search(r'<nav aria-label="Разделы кабинета".*?</nav>', self.page(self.url), re.S).group(0))
 
-    def test_self_report_is_in_five_steps_with_server_fields_unchanged(self):
+    def test_self_report_is_in_two_steps_with_server_fields_unchanged(self):
         page = self.page()
         self.assertIn('data-report-form', page)
         steps = re.findall(r'data-report-step="(\d)"', page)
-        self.assertEqual(['1', '2', '3', '4', '5'], steps)
+        self.assertEqual(['1', '2'], steps)  # S26D: заполнение и проверка
         for name in ['observed_on', 'wellbeing', 'age_status', 'age_years', 'birth_date', 'age_detail', 'summary',
                      'complaints_status', 'complaints_text', 'adverse_events_status', 'safety_taken', 'safety_form_version']:
             self.assertEqual(1, len(re.findall(r'name="%s"' % name, page)), name)

@@ -1,0 +1,197 @@
+{
+  "kind": "agent self-check, synthetic data; no participants, physical devices or screen reader",
+  "checks": [
+    {
+      "name": "320×900: primary action fully visible without scrolling",
+      "evidence": {
+        "x": 35,
+        "y": 403.59375,
+        "width": 250,
+        "height": 70.78125
+      }
+    },
+    {
+      "name": "today/report responsive at 320/768/1024/1440; 200% CSS zoom today at 320"
+    },
+    {
+      "name": "2 steps; every field including summary in review; safety open; step Back and browser Back keep input"
+    },
+    {
+      "name": "Enter in editing opens review without submission"
+    },
+    {
+      "name": "disconnect before save: no write; answers/key stay, unload warning works; explicit retry saves once",
+      "evidence": {
+        "attempts": 1
+      }
+    },
+    {
+      "name": "lost response AFTER commit: identical payload retry opens existing receipt, all table counts unchanged"
+    },
+    {
+      "name": "double click in flight: button disabled, one HTTP write, one entry"
+    },
+    {
+      "name": "real server 400: no write, values remain editable; corrected form saves"
+    },
+    {
+      "name": "real CSRF 403: no write, answers retained; retry refreshes only CSRF and saves once"
+    },
+    {
+      "name": "expired session: login redirect is not success; login in another tab and retry preserve answers/key and save once"
+    },
+    {
+      "name": "real 409: changed stale send cannot overwrite original or create another record"
+    },
+    {
+      "name": "simulated HTTP 500 before write: answers remain, retry succeeds once"
+    },
+    {
+      "name": "actual 20s fetch timeout preserves input; explicit retry saves once",
+      "evidence": {
+        "elapsedMs": 20487
+      }
+    },
+    {
+      "name": "no browser storage, external requests or JS errors"
+    },
+    {
+      "name": "same-path save reloads the server receipt; new entry exists and is visible"
+    },
+    {
+      "name": "12 real Tab presses: links/buttons have visible outline"
+    },
+    {
+      "name": "JavaScript disabled: all fields accessible, normal POST saves and redirects"
+    }
+  ],
+  "browsers": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "primaryAt320": {
+        "x": 35,
+        "y": 403.59375,
+        "width": 250,
+        "height": 70.78125
+      },
+      "result": "PASS: widths, review focus, network abort and retry"
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "primaryAt320": {
+        "x": 35,
+        "y": 403.6000061035156,
+        "width": 250,
+        "height": 70.80001831054688
+      },
+      "result": "PASS: widths, review focus, network abort and retry"
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "primaryAt320": {
+        "x": 35,
+        "y": 403.59375,
+        "width": 250,
+        "height": 70.78125
+      },
+      "result": "PASS: widths, review focus, network abort and retry"
+    }
+  ],
+  "failures": [],
+  "mobile_action": {
+    "x": 35,
+    "y": 403.59375,
+    "width": 250,
+    "height": 70.78125
+  },
+  "zoom_overflows": [],
+  "task": {
+    "actions": [
+      "Самоотчёт",
+      "Проверить ответы",
+      "Отправить самоотчёт"
+    ],
+    "clicks": 3,
+    "elapsedMs": 177,
+    "scope": "synthetic agent task, elapsed includes automation and synthetic entry; no human speed claim"
+  },
+  "keyboard": [
+    {
+      "tag": "A",
+      "text": "Перейти к содержанию",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Клинический компас",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Моя карточка",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Выйти",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Заполнить анкету DASS-42",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Сегодня",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Самоотчёт",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Динамика",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Анкеты",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "Сообщения и план",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "К анкетам",
+      "outline": "solid",
+      "width": "3px"
+    },
+    {
+      "tag": "A",
+      "text": "К выполнению плана",
+      "outline": "solid",
+      "width": "3px"
+    }
+  ],
+  "actions_from_today_to_saved": 3,
+  "status": "PASS"
+}

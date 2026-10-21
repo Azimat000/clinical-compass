@@ -478,14 +478,20 @@ def create_app(database=None):
     def submit_record(patient_id, kind):
         role('patient' if kind == 'self_report' else 'doctor')
         patient_or_404(patient_id)
+        json_reply = kind == 'self_report' and request.accept_mimetypes.best == 'application/json'
         try:
             entry_id = records.save(get_db(), g.user, patient_id, kind, request.form)
         except records.RecordError as error:
+            if json_reply:
+                return jsonify(error=str(error)), error.status
             # Keep entered values on error without creating a partial record.
             if error.status == 400:
                 return render_patient(patient_id, request.form, str(error)), 400
             return render_template('result.html', title='Запись не сохранена', message=str(error)), error.status
-        return redirect(url_for('demo_patient', patient_id=patient_id) + '#entry-' + entry_id, code=303)
+        location = url_for('demo_patient', patient_id=patient_id) + '#entry-' + entry_id
+        if json_reply:
+            return jsonify(location=location)
+        return redirect(location, code=303)
 
     @app.post('/patients/<patient_id>/self-reports')
     def self_report(patient_id):

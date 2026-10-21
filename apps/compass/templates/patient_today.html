@@ -1,7 +1,5 @@
 {# Экран «Сегодня» кабинета пациента: одно главное действие, затем остальное по порядку. Только чтение. #}
 <section class="workspace today" aria-labelledby="today-title"><h2 id="today-title">Сегодня</h2>
-<div class="today-main"><p class="today-why">{{ today_view.action.why }}</p>
-<p><a class="button today-action" href="{{ today_view.action.href }}">{{ today_view.action.label }}</a></p></div>
 <h3>Что ещё есть в кабинете</h3>
 <ul class="today-list">
 <li><span><strong>Анкеты:</strong> {% if pending_assessments %}предложено {{ pending_assessments|length }}{% else %}новых предложений нет{% endif %}</span><a href="{{ url_for('demo_patient',patient_id=patient.id) }}#assessments">К анкетам</a></li>

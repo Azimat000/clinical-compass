@@ -7,6 +7,7 @@
 <p class="demo-note">Вымышленный случай. Исходные сведения не проверены врачом. Отсутствие сведений не означает отсутствие риска. Решения подтверждает врач; для реального лечения прототип не используется.</p>
 {% include 'card_nav.html' %}
 {% else %}<div class="patient-heading"><div><p class="context-label">Моя карточка</p><h1>{{ patient.code }}</h1></div></div>
+{% include 'patient_primary_action.html' %}
 <p class="demo-note">Вымышленный случай. Исходные сведения не проверены врачом. Отсутствие сведений не означает отсутствие риска. Решения подтверждает врач; для реального лечения прототип не используется.</p>
 {% set pid=patient.id %}{% set patient_section='today' %}{% set patient_panels=true %}{% include 'patient_nav.html' %}{% endif %}
 {% include 'routing_badges.html' %}
