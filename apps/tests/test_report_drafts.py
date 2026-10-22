@@ -48,7 +48,7 @@ class ReportDraftTests(unittest.TestCase):
         self.assertTrue(data['active'])
         for key,value in form.items():
             if key!='draft_revision':self.assertEqual(value,data['values'][key],key)
-        page=c.get('/demo/D01').text
+        page=c.get('/demo/D01/report').text
         self.assertIn('Черновик восстановлен',page);self.assertIn('Противоречие ещё не исправлено',page)
         self.assertIn('value="'+form['request_key']+'"',page)
         stored=self.db.execute('SELECT values_json FROM self_report_drafts').fetchone()[0]
@@ -149,7 +149,7 @@ class ReportDraftTests(unittest.TestCase):
         self.assertEqual(400,self.send(self.values(summary='bad\x00text')).status_code)
         form=self.values(summary='<script>window.BAD=true</script>')
         self.assertEqual(303,self.post('pat-a',self.url,form).status_code)
-        page=self.clients['pat-a'].get('/demo/D01').text
+        page=self.clients['pat-a'].get('/demo/D01/report').text
         self.assertIn('&lt;script&gt;window.BAD=true&lt;/script&gt;',page)
         self.assertNotIn('<script>window.BAD=true</script>',page)
         state=self.clients['pat-a'].get(self.url).json

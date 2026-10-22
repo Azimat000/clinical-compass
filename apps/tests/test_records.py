@@ -93,9 +93,9 @@ class RecordsTests(unittest.TestCase):
     def test_unknown_initial_age_is_never_adult(self):
         self.db.execute("UPDATE patients SET age_status='unknown',age_years=NULL WHERE id='D01'")
         self.submit(data=self.values())
-        page = self.clients['pat-a'].get('/demo/D01').get_data(as_text=True)
+        page = self.clients['pat-a'].get('/demo/D01/diary').get_data(as_text=True)
         self.assertIn('Взрослая применимость не установлена', page)
-        self.assertIn('Возраст: <strong>Неизвестно</strong>', page)
+        self.assertRegex(page, r'<dt>Возраст</dt>\s*<dd><span class="state state--unknown">Неизвестно</span>')
 
     def test_visit_and_report_disagreements_same_day_preserved_not_merged(self):
         self.submit(data=self.values(risk_factors_status='denied', wellbeing='better'))

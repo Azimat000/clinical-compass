@@ -43,7 +43,8 @@
 <div class="field">
   <label for="{{ fid }}">{{ label }}</label>
   {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
-  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>{{ value }}</textarea>
+  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
+{{ value }}</textarea>
   {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
 </div>
 {%- endmacro %}
@@ -98,9 +99,10 @@
 {%- endmacro %}
 
 {#- Метки самочувствия: values — список better | same | worse | unknown, слева направо. calm — у пациента «хуже» без красного. -#}
-{% macro wellbeing(values, calm=False) -%}
+{#- decorative — слово рядом уже называет значение, метку скринридеру не читаем. -#}
+{% macro wellbeing(values, calm=False, decorative=False) -%}
 {%- set words = {'better': 'лучше', 'same': 'без изменений', 'worse': 'хуже', 'unknown': 'не указано'} -%}
-<span class="wb{% if calm %} wb--calm{% endif %}" role="img" aria-label="Самочувствие по отметкам: {% for v in values %}{{ words[v] }}{% if not loop.last %}, {% endif %}{% endfor %}">{% for v in values %}<i class="{{ v }}"></i>{% endfor %}</span>
+<span class="wb{% if calm %} wb--calm{% endif %}"{% if decorative %} aria-hidden="true"{% else %} role="img" aria-label="Самочувствие по отметкам: {% for v in values %}{{ words[v] }}{% if not loop.last %}, {% endif %}{% endfor %}"{% endif %}>{% for v in values %}<i class="{{ v }}"></i>{% endfor %}</span>
 {%- endmacro %}
 
 {#- Линия состояния сведений: known | unknown | conflict | denied | new. -#}

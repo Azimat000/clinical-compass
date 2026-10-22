@@ -1,0 +1,269 @@
+{#- Кабинет пациента. section: today | diary | report | forms. Врач этот шаблон не получает (web.py). -#}
+{% extends 'patient_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = {'today': 'today', 'diary': 'diary', 'report': 'diary', 'forms': 'forms'}[section] %}
+{% set titles = {'today': 'Сегодня', 'diary': 'Дневник', 'report': 'Самочувствие', 'forms': 'Анкеты'} %}
+{% block title %}{{ titles[section] }}{% endblock %}
+{% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
+{% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
+
+{% set safety_fields = [('taken', 'Приём Авиандра зафиксирован'), ('after_dose', 'Реакция зафиксирована после приёма'), ('current', 'Реакция продолжается сейчас'),
+                        ('rigidity', 'Скованность мышц тела'), ('trismus', 'Напряжение жевательных мышц (тризм)'),
+                        ('hyperhidrosis', 'Повышенная потливость (гипергидроз)'), ('hemoglobin', 'Снижение гемоглобина уже зафиксировано в анализе')] %}
+
+{% macro heading(text) %}
+{%- set weekday, day, iso = sheet_date() -%}
+<h1>{{ text }}</h1>
+<p class="p-date"><time datetime="{{ iso }}">{{ weekday }}, {{ iso|ru_day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+{% endmacro %}
+
+{% macro marks(rows) %}
+<table class="log">
+  <caption class="visually-hidden">Ваши отметки самочувствия, сначала новые</caption>
+  <thead><tr><th scope="col">Дата</th><th scope="col">Самочувствие</th></tr></thead>
+  <tbody>
+    {% for e in rows %}
+    <tr><td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
+      <td>{{ ui.wellbeing([e.payload.wellbeing], calm=True, decorative=True) }}{{ words[e.payload.wellbeing] }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% block patient_main %}
+{% if section == 'today' %}
+  {{ heading(today_view.greeting) }}
+
+  <section class="today" aria-labelledby="h-today">
+    <h2 id="h-today" class="visually-hidden">Что сделать сегодня</h2>
+    <p>{{ today_view.why }}{% if today_view.task %} Отправить её нужно до <time datetime="{{ today_view.task.deadline_iso }}">{{ today_view.task.deadline_label }}</time>.{% endif %}</p>
+    {% if today_view.kind == 'link' %}
+      <form method="post" action="{{ url_for('accept_invitation') }}" class="link-form">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        {{ ui.field('invitation', 'Код приглашения от врача', required=True, size='lg',
+                    extra={'maxlength': '128', 'autocomplete': 'off', 'autocapitalize': 'none', 'spellcheck': 'false', 'autofocus': false}) }}
+        {{ ui.button(today_view.label, kind='primary', size='action') }}
+      </form>
+    {% else %}
+      {{ ui.button(today_view.label, kind='primary', size='action', href=today_view.href) }}
+    {% endif %}
+    {% if today_view.note %}<small>{{ today_view.note }}</small>{% endif %}
+  </section>
+
+  {% if pending_assessments and today_view.kind != 'assessment' %}
+  <section class="p-block" aria-labelledby="h-form">
+    <h2 id="h-form">Анкета от врача</h2>
+    {% for task in pending_assessments %}
+    <div class="task">
+      <p>DASS&#8209;42<small>{{ assessment_form['items']|length }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
+      {{ ui.button('Начать', href=url_for('assessment_form', request_id=task.id)) }}
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="p-block" aria-labelledby="h-log">
+    <h2 id="h-log">Ваши отметки {% if own_marks %}<a href="{{ url_for('patient_diary', patient_id=patient.id) }}">Весь дневник</a>{% endif %}</h2>
+    {% if own_marks %}{{ marks(own_marks[:5]) }}
+    {% else %}{{ ui.empty('Отметок пока нет. Первая появится после отправки самочувствия.') }}{% endif %}
+  </section>
+
+  <section class="p-block" aria-labelledby="h-link">
+    <h2 id="h-link">Связь с врачом</h2>
+    {% if relationship %}
+    <div class="note">
+      <p>Ведущий врач: <strong translate="no">{{ relationship.display_name }}</strong></p>
+      {% if checks %}<small>Последняя проверка связи получена <time datetime="{{ checks[0].received_at }}">{{ checks[0].received_at|msk }}</time>.</small>{% endif %}
+      <form method="post" action="{{ url_for('connection_check', patient_id=patient.id) }}" class="note-action">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        {{ ui.button('Отправить проверку связи') }}
+      </form>
+      <small>Врачу уходит технический отчёт без медицинских сведений.</small>
+    </div>
+    {% else %}
+    {{ ui.empty('Врач с кабинетом не связан. Введите код приглашения выше.') }}
+    {% endif %}
+  </section>
+
+{% elif section == 'diary' %}
+  {{ heading('Дневник') }}
+  <div class="p-actions">{{ ui.button('Записать самочувствие', kind='primary', size='action', href=url_for('patient_report', patient_id=patient.id)) }}</div>
+
+  {% if record_warnings %}
+  <div class="p-block">
+    {{ ui.notice('Нужно уточнить сведения', 'Записи сохранены как есть. Расхождения можно уточнить на приёме.', kind='info') }}
+    <details class="p-warn-more">
+      <summary>Что именно расходится ({{ record_warnings|length }})</summary>
+      <ul class="p-warnings">{% for w in record_warnings %}<li class="keep">{{ w }}</li>{% endfor %}</ul>
+    </details>
+  </div>
+  {% endif %}
+
+  <section class="p-block" aria-labelledby="h-entries">
+    <h2 id="h-entries">Записи</h2>
+    {% if not entries %}
+      {{ ui.empty('Записей пока нет.', href=url_for('patient_report', patient_id=patient.id), link='Записать самочувствие') }}
+    {% else %}
+    <ol class="entries">
+      {% for e in entries %}
+      <li class="entry" id="entry-{{ e.id }}">
+        <div class="entry-head">
+          <time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|full_date }}</time>
+          <span>{{ ui.wellbeing([e.payload.wellbeing], calm=True, decorative=True) }}{{ words[e.payload.wellbeing] }}</span>
+          <span class="meta">{{ 'Вы' if e.kind == 'self_report' else 'Врач' }}</span>
+        </div>
+        <p class="meta">Сохранено на сервере {{ e.recorded_at|msk }}.</p>
+        <details>
+          <summary>Что записано</summary>
+          <dl class="facts">
+            <dt>Возраст</dt>
+            <dd>{{ ui.state(state_kind[e.payload.age.status], statuses[e.payload.age.status]) }}
+              {%- if e.payload.age.years is not none %} · {{ e.payload.age.years }} лет{% endif %}
+              {%- if e.payload.age.birth_date %} · дата рождения {{ e.payload.age.birth_date|full_date }}{% endif %}
+              {%- if e.payload.age.detail %} · {{ e.payload.age.detail }}{% endif %}</dd>
+            {% for code, label in record_fields.items() %}
+            {% set f = e.payload.fields[code] %}
+            <dt>{{ label }}</dt>
+            <dd>{{ ui.state(state_kind[f.status], statuses[f.status]) }}{% if f.text %}<span class="keep"> {{ f.text }}</span>{% endif %}</dd>
+            {% endfor %}
+            {% if e.summary %}<dt>Резюме</dt><dd class="keep">{{ e.summary }}</dd>{% endif %}
+          </dl>
+        </details>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+  </section>
+
+{% elif section == 'report' %}
+  {{ heading('Самочувствие') }}
+  {% if form_error %}{{ ui.notice('Запись не сохранена', form_error ~ ' Введённые ответы оставлены в форме.', kind='error', id='record-error') }}{% endif %}
+
+  {#- Блоки раскрыты, если в них уже есть ответы (черновик, ошибка) или причина показать; иначе формулировка в заголовке зовёт открыть. -#}
+  {% set ns = namespace(extra=false, safety=false) %}
+  {% for code in record_fields %}{% if form_values.get(code ~ '_status', 'unknown') != 'unknown' or form_values.get(code ~ '_text') %}{% set ns.extra = true %}{% endif %}{% endfor %}
+  {% for key in ['age_status', 'age_years', 'birth_date', 'age_detail'] %}{% if form_values.get(key) and form_values.get(key) != 'unknown' %}{% set ns.extra = true %}{% endif %}{% endfor %}
+  {% for field, _ in safety_fields %}{% if form_values.get('safety_' ~ field, 'unknown') != 'unknown' %}{% set ns.safety = true %}{% endif %}{% endfor %}
+  {% set draft_text = 'Черновик восстановлен. Он сохранён только для вас и не отправлен врачу.' if draft_restored
+       else 'Сохраните текущие ответы как черновик, если нужно вернуться позже.' if personal_draft.active
+       else 'Черновик ещё не сохранён.' %}
+  <form class="report" method="post" action="{{ url_for('self_report', patient_id=patient.id) }}"
+        data-report-form data-draft-url="{{ url_for('self_report_draft', patient_id=patient.id) }}"
+        data-draft-restored="{{ 'yes' if draft_restored else 'no' }}" data-has-error="{{ 'yes' if form_error else 'no' }}">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <input type="hidden" name="request_key" value="{{ request_key }}">
+    <input type="hidden" name="draft_revision" value="{{ draft_revision }}">
+
+    <p class="draft-status" data-draft-status role="status">{{ draft_text }}</p>
+    <p class="meta" data-draft-help>Врач увидит ответы только после отправки. Черновик виден только вам.</p>
+    <p class="meta" data-draft-current hidden><a href="{{ url_for('patient_report', patient_id=patient.id) }}" target="_blank" rel="noopener">Открыть сохранённый черновик в другой вкладке</a></p>
+
+    <div class="report-main">
+      {{ ui.field('observed_on', 'Дата наблюдения (Москва)', type='date', value=form_values.get('observed_on', today), required=True,
+                  autocomplete='off', extra={'min': '1900-01-01', 'max': today}) }}
+
+      <fieldset class="choice wb-pick">
+        <legend>Самочувствие по сравнению с прошлой записью</legend>
+        <span class="hint">Ваше описание, без балла и медицинской оценки.</span>
+        <div class="wb-pick-list">
+          {% for value in ['better', 'same', 'worse', 'unknown'] %}
+          <label class="wb-pick-item"><input type="radio" name="wellbeing" value="{{ value }}"{% if form_values.get('wellbeing', 'unknown') == value %} checked{% endif %}>
+            <span>{{ ui.wellbeing([value], calm=True, decorative=True) }}{{ words[value] }}</span></label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      {{ ui.textarea('summary', 'Что важно рассказать врачу', value=form_values.get('summary', ''), rows=4, hint='Необязательно. Своими словами.') }}
+    </div>
+
+    <details class="more" data-more{% if ns.extra or form_error %} open{% endif %}>
+      <summary>Дополнительные сведения для врача</summary>
+      <div class="more-body">
+        <p class="meta">Неизвестно — оставьте как есть. Есть сведения или противоречие — напишите текст. Если сведений нет или вы их отрицаете, текст оставьте пустым.</p>
+        <fieldset class="more-group">
+          <legend>Возраст на дату наблюдения</legend>
+          {{ ui.select('age_status', 'Что известно о возрасте', [('unknown', statuses['unknown']), ('known', statuses['known']), ('conflicting', statuses['conflicting'])], selected=form_values.get('age_status', 'unknown')) }}
+          {{ ui.field('age_years', 'Полных лет', type='number', value=form_values.get('age_years', ''), autocomplete='off', extra={'min': '0', 'max': '120', 'inputmode': 'numeric'}) }}
+          {{ ui.field('birth_date', 'Дата рождения, если известна', type='date', value=form_values.get('birth_date', ''), autocomplete='off', extra={'min': '1900-01-01', 'max': today}) }}
+          {{ ui.textarea('age_detail', 'Пояснение, если сведения противоречат друг другу', value=form_values.get('age_detail', ''), rows=2) }}
+        </fieldset>
+        {% for code, label in record_fields.items() %}
+        {% set st = form_values.get(code ~ '_status', 'unknown') %}
+        {% set tx = form_values.get(code ~ '_text', '')|trim %}
+        {% set bad = form_error and ((st in ['known', 'conflicting'] and not tx) or (st in ['unknown', 'denied'] and tx)) %}
+        <fieldset class="more-group">
+          <legend>{{ label }}</legend>
+          {{ ui.select(code ~ '_status', 'Что известно', statuses.items()|list, selected=st) }}
+          {{ ui.textarea(code ~ '_text', 'Описание', value=form_values.get(code ~ '_text', ''), rows=2,
+                         error=(('Добавьте описание сведений.' if not tx else 'Удалите описание или выберите состояние, которому оно соответствует.') if bad else none)) }}
+        </fieldset>
+        {% endfor %}
+      </div>
+    </details>
+
+    <details class="more" data-safety{% if ns.safety or form_error %} open{% endif %}>
+      <summary>Принимали Авиандр? Отметьте реакции</summary>
+      <div class="more-body">
+        <p class="meta">Здесь только факты, без оценки и диагноза. Кабинет не назначает, не отменяет и не меняет препарат. Только вымышленные сведения.</p>
+        <input type="hidden" name="safety_form_version" value="aviandr-safety-v1">
+        {% for field, label in safety_fields %}
+        {{ ui.select('safety_' ~ field, label, [('unknown', 'Неизвестно'), ('present', 'Есть сведения'), ('denied', 'Явно отрицается'), ('conflicting', 'Противоречие')], selected=form_values.get('safety_' ~ field, 'unknown')) }}
+        {% endfor %}
+        {{ ui.notice('Не ждите ответа через кабинет', 'В листке-вкладыше при этих реакциях после приёма сказано немедленно сообщить лечащему врачу. Если врач недоступен, обратитесь за медицинской помощью обычным способом. Не ждите ответа через демонстрационный кабинет: он никому не звонит и не следит за вами круглосуточно.', kind='info') }}
+        <p class="meta"><a href="https://grls.rosminzdrav.ru/InstrImg/2026/07/29/1532717/94ba54dc-ce1c-40ed-96f4-5c3a31f13805.pdf" target="_blank" rel="noopener noreferrer">Листок-вкладыш ГРЛС · раздел 4, страница 4</a></p>
+      </div>
+    </details>
+
+    <p class="meta">Нежелательные явления сохраняются отдельно. Форма не создаёт назначений. Ответа здесь может не быть: если стало хуже, не ждите, обратитесь за помощью обычным способом.</p>
+
+    <div class="notice notice--error report-error" data-send-error role="alert" tabindex="-1" hidden></div>
+    <p class="meta" data-unsaved-status role="status"></p>
+    <div class="report-actions">
+      {{ ui.button('Отправить врачу', kind='primary', size='action', id='report-submit') }}
+      <button class="button" type="button" data-send-retry hidden>Повторить отправку</button>
+      <p class="meta" data-new-report hidden><a href="{{ url_for('patient_report', patient_id=patient.id) }}" target="_blank" rel="noopener">Открыть новую форму в другой вкладке</a></p>
+    </div>
+    <div class="draft-actions">
+      <button class="button" name="draft_action" value="save" formnovalidate formaction="{{ url_for('self_report_draft', patient_id=patient.id) }}" data-draft-save>Сохранить черновик</button>
+      <details class="draft-delete">
+        <summary>Удалить черновик</summary>
+        <p class="meta">Личный черновик и ответы в этой форме будут стёрты. Отправленные записи останутся в дневнике.</p>
+        <button class="button" name="draft_action" value="delete" formnovalidate formaction="{{ url_for('self_report_draft', patient_id=patient.id) }}" data-draft-delete>Да, удалить черновик</button>
+      </details>
+    </div>
+  </form>
+
+{% elif section == 'forms' %}
+  {{ heading('Анкеты') }}
+  <section class="p-block" aria-labelledby="h-pending">
+    <h2 id="h-pending">От врача</h2>
+    {% for task in pending_assessments %}
+    <div class="task">
+      <p>DASS&#8209;42<small>{{ assessment_form['items']|length }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
+      {{ ui.button('Начать', kind='primary', href=url_for('assessment_form', request_id=task.id)) }}
+    </div>
+    {% else %}
+    {{ ui.empty('Новых анкет от врача нет.') }}
+    {% endfor %}
+  </section>
+  <section class="p-block" aria-labelledby="h-sent">
+    <h2 id="h-sent">Отправлены врачу</h2>
+    {% if measured %}
+    <ul class="receipts">
+      {% for r in measured %}
+      <li><span>DASS&#8209;42<small>отправлена <time datetime="{{ r.recorded_at }}">{{ r.recorded_at|msk }}</time></small></span>
+        <a href="{{ url_for('assessment_form', request_id=r.request_id) }}">Квитанция</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}{{ ui.empty('Отправленных анкет пока нет.') }}{% endif %}
+    <p class="meta">Результаты анкет видит только врач. Баллы и выводы пациенту не показываются.</p>
+  </section>
+{% endif %}
+{% endblock %}
+
+{% block page_scripts %}
+{% if section == 'report' %}
+<script src="{{ url_for('static', filename='report_draft.js') }}" defer></script>
+<script src="{{ url_for('static', filename='self_report.js') }}" defer></script>
+{% endif %}
+{% endblock %}

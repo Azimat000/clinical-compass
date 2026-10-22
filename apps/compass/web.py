@@ -4,6 +4,8 @@ import re
 import json
 import secrets
 import sqlite3
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
@@ -12,7 +14,12 @@ from . import access, records, assessments, decisions, ages, routing, notificati
 from . import first_visits, follow_up, report_drafts
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
-READY_VIEWS = frozenset({'login.html', 'result.html'})
+READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
+                         'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
+# Patient cabinet screens: a doctor opening the same address still gets 503 until the doctor cabinet exists (UI04).
+PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
+MOSCOW = ZoneInfo('Europe/Moscow')
+MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
 
 def create_app(database=None):
@@ -35,6 +42,48 @@ def create_app(database=None):
         day = records.today()
         weekday = ('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье')[day.weekday()]
         return weekday, day.strftime('%d.%m.%Y'), day.isoformat()
+
+    @app.template_global()
+    def clock_msk():
+        """Time of the page as on a printed form: the moment the server composed the data."""
+        return datetime.now(MOSCOW).strftime('%H:%M')
+
+    @app.template_filter()
+    def short_date(value):
+        """2026-10-20 -> 20.10; anything else is shown as it came."""
+        try:
+            return datetime.strptime(value, '%Y-%m-%d').strftime('%d.%m')
+        except (TypeError, ValueError):
+            return value
+
+    @app.template_filter()
+    def full_date(value):
+        try:
+            return datetime.strptime(value, '%Y-%m-%d').strftime('%d.%m.%Y')
+        except (TypeError, ValueError):
+            return value
+
+    @app.template_filter()
+    def ru_day(value):
+        """2026-10-22 -> 22 октября."""
+        try:
+            day = datetime.strptime(value, '%Y-%m-%d')
+        except (TypeError, ValueError):
+            return value
+        return '%d %s' % (day.day, MONTHS[day.month - 1])
+
+    @app.template_filter()
+    def msk(value):
+        """Stored UTC stamp -> 22.10.2026 14:05 МСК."""
+        try:
+            return datetime.fromisoformat(value).astimezone(MOSCOW).strftime('%d.%m.%Y\u00a0%H:%M\u00a0МСК')
+        except (TypeError, ValueError):
+            return value
+
+    @app.context_processor
+    def session_context():
+        user = g.get('user')
+        return {'current_user': user, 'csrf': user['csrf_token'] if user else ''}
 
     def get_db():
         if 'db' not in g:
@@ -60,7 +109,8 @@ def create_app(database=None):
         Keep login/invitation/assessment receipts usable without a browser UI.
         Existing mutation handlers, validation and access checks remain in place.
         """
-        if view in READY_VIEWS and wants_html():
+        ready = view in READY_VIEWS and (view not in PATIENT_VIEWS or (g.get('user') and g.user['role'] == 'patient'))
+        if ready and wants_html():
             return render_template(view, **context)
         if view == 'login.html':
             return jsonify(csrf=context['challenge'], error=context['error'])
@@ -271,6 +321,21 @@ def create_app(database=None):
     def demo_patient(patient_id):
         return render_patient(patient_id)
 
+    @app.get('/demo/<patient_id>/diary')
+    def patient_diary(patient_id):
+        role('patient')
+        return render_patient(patient_id, section='diary')
+
+    @app.get('/demo/<patient_id>/report')
+    def patient_report(patient_id):
+        role('patient')
+        return render_patient(patient_id, section='report')
+
+    @app.get('/demo/<patient_id>/forms')
+    def patient_forms(patient_id):
+        role('patient')
+        return render_patient(patient_id, section='forms')
+
     @app.get('/patients/<patient_id>/follow-up')
     def follow_up_page(patient_id):
         role('doctor')
@@ -429,7 +494,30 @@ def create_app(database=None):
             return interface_response('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
         return redirect(url_for('imports_page',patient_id=patient_id),code=303)
 
-    def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
+    def patient_today(patient_id, relationship, pending, draft):
+        """The one request at the top of the patient's home screen. Read-only; nothing is written."""
+        hour = datetime.now(MOSCOW).hour
+        view = {'greeting': 'Доброе утро' if 5 <= hour < 12 else 'Добрый день' if 12 <= hour < 18 else 'Добрый вечер' if hour >= 18 else 'Доброй ночи',
+                'note': None}
+        if relationship is None:
+            view.update(kind='link', label='Привязать врача',
+                        why='Пока врач не связан с кабинетом, отправлять сведения некому. Код приглашения даёт врач.')
+        elif pending:
+            view.update(kind='assessment', label='Заполнить анкету DASS\u201142', task=pending[0],
+                        href=url_for('assessment_form', request_id=pending[0]['id']),
+                        why='Врач предложил анкету.',
+                        note=('Есть ещё анкеты от врача: %d. Они в разделе «Анкеты».' % (len(pending) - 1)) if len(pending) > 1 else None)
+        elif draft and draft['active']:
+            view.update(kind='draft', label='Продолжить черновик', href=url_for('patient_report', patient_id=patient_id),
+                        why='Вы начали отметку самочувствия. Черновик виден только вам и врачу не отправлен.')
+        else:
+            view.update(kind='report', label='Отметить самочувствие', href=url_for('patient_report', patient_id=patient_id),
+                        why='Срочных дел нет. Отметить самочувствие можно в любой день.',
+                        note='Черновик сохраняется, можно вернуться позже.')
+        return view
+
+    def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None,
+                       age_error=None, age_values=None, section='today'):
         patient = patient_or_404(patient_id)
         db = get_db()
         personal_draft = report_drafts.view(db, g.user, patient_id) if g.user['role'] == 'patient' else None
@@ -444,7 +532,10 @@ def create_app(database=None):
         entries = records.history(db, patient_id)
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
-        return interface_response('patient.html', personal_draft=personal_draft, draft_restored=draft_restored,
+        is_patient = g.user['role'] == 'patient'
+        return interface_response('patient.html', section=section, own_marks=[e for e in entries if e['kind'] == 'self_report'],
+                               today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
+                               personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
@@ -525,9 +616,9 @@ def create_app(database=None):
                 return jsonify(error=str(error)), error.status
             # Keep entered values on error without creating a partial record.
             if error.status == 400:
-                return render_patient(patient_id, request.form, str(error)), 400
+                return render_patient(patient_id, request.form, str(error), section='report'), 400
             return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
-        location = url_for('demo_patient', patient_id=patient_id) + '#entry-' + entry_id
+        location = url_for('patient_diary', patient_id=patient_id) + '#entry-' + entry_id
         if json_reply:
             return jsonify(location=location)
         return redirect(location, code=303)
@@ -550,10 +641,10 @@ def create_app(database=None):
         except report_drafts.Error as error:
             if request.accept_mimetypes.best == 'application/json':
                 return jsonify(error=str(error)), error.status
-            return render_patient(patient_id, request.form, str(error)), error.status
+            return render_patient(patient_id, request.form, str(error), section='report'), error.status
         if request.accept_mimetypes.best == 'application/json':
             return jsonify(result)
-        return redirect(url_for('demo_patient', patient_id=patient_id) + '#new-record', code=303)
+        return redirect(url_for('patient_report', patient_id=patient_id), code=303)
 
     @app.post('/patients/<patient_id>/visits')
     def visit(patient_id):
@@ -599,15 +690,18 @@ def create_app(database=None):
             if completed:
                 if g.user['role']=='doctor':
                     return redirect(url_for('demo_patient', patient_id=task['patient_id'])+'#assessment-'+completed['assessment_id'])
-                return interface_response('assessment_receipt.html', task=task, received_at=completed['recorded_at'])
+                return interface_response('assessment_receipt.html', task=task, received_at=completed['recorded_at'],
+                                          patient=patient_or_404(task['patient_id']))
             if task['expires_at']<=now() or task['age_on']!=records.today().isoformat():
                 raise assessments.AssessmentError('Срок предложения истёк. Врач может предложить новую анкету.',409)
             form = assessments.available_form(db, task['form_version_id'])
         except assessments.AssessmentError as error:
             if request.method == 'POST' and error.status == 400:
-                return interface_response('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form, error=str(error)),400
+                return interface_response('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form,
+                                          error=str(error), patient=patient_or_404(task['patient_id'])),400
             return interface_response('result.html', title='Анкета недоступна', message=str(error)),error.status
-        return interface_response('assessment_form.html', task=task, instrument=form, values={}, error=None)
+        return interface_response('assessment_form.html', task=task, instrument=form, values={}, error=None,
+                                  patient=patient_or_404(task['patient_id']))
 
     @app.get('/api/patients/<patient_id>/assessments')
     def assessments_api(patient_id):

@@ -50,7 +50,7 @@ class AssessmentsTests(unittest.TestCase):
     def test_patient_sees_actual_deadline_in_moscow_including_error_page(self):
         # A 24h storage timestamp may extend beyond the allowed Moscow calendar day.
         task = assessments.with_deadline({'age_on': '2026-10-20', 'expires_at': '2026-10-21T18:00:00+00:00'})
-        self.assertEqual('21.10.2026 00:00 МСК', task['deadline_label'])
+        self.assertEqual('20.10.2026 24:00 МСК', task['deadline_label'])
         self.assertEqual('2026-10-21T00:00:00+03:00', task['deadline_iso'])
         earlier = assessments.with_deadline({'age_on': '2026-10-20', 'expires_at': '2026-10-20T17:30:00+00:00'})
         self.assertEqual('20.10.2026 20:30 МСК', earlier['deadline_label'])
@@ -89,7 +89,7 @@ class AssessmentsTests(unittest.TestCase):
         page=self.clients['pat-a'].get('/assessments/'+task).get_data(as_text=True)
         self.assertIn(self.form['items'][20],page)
         self.assertIn(self.form['instruction'],page)
-        self.assertEqual(42,page.count('<fieldset>'))
+        self.assertEqual(42,page.count('<fieldset class="q"'))
         self.assertEqual(303,self.post('pat-a','/assessments/'+task,self.answers()).status_code)
         doctor=self.clients['doc-a'].get('/api/patients/D01/assessments').json['assessments'][0]
         self.assertEqual({'depression':42,'anxiety':42,'stress':42},doctor['scores'])
@@ -98,9 +98,9 @@ class AssessmentsTests(unittest.TestCase):
         self.assertEqual(self.form['source']['sha256'],doctor['source_sha256'])
         self.assertEqual(self.form['id'],doctor['scale_version_id'])
         self.assertIsNone(doctor['score'])  # Never invent an overall DASS score.
-        for path in ('/assessments/'+task,'/demo/D01'):
+        for path,heading in (('/assessments/'+task,'Анкета отправлена врачу'),('/demo/D01/forms','Отправлены врачу'),('/demo/D01','Ваши отметки')):
             html=self.clients['pat-a'].get(path).get_data(as_text=True)
-            self.assertIn('Анкета отправлена врачу',html)
+            self.assertIn(heading,html)
             for prohibited in ('Депрессивные симптомы:','42 / 42',self.form['items'][20],doctor['id'],'scores_json','answers_json'):
                 self.assertNotIn(prohibited,html)
         receipts=self.clients['pat-a'].get('/api/patients/D01/assessments').json['assessments']
@@ -256,9 +256,11 @@ class AssessmentsTests(unittest.TestCase):
                 'request_key':secrets.token_hex(16),'observed_on':day,'wellbeing':value})
         diary=records.wellbeing_trend(records.history(self.db,'D01'))
         self.assertEqual(['Хуже','Лучше'],[p['label'] for p in diary])
-        page=self.clients['pat-a'].get('/demo/D01').get_data(as_text=True)
-        self.assertIn('История субъективного самочувствия',page)
+        page=self.clients['pat-a'].get('/demo/D01/diary').get_data(as_text=True)
+        self.assertIn('Дневник',page)
+        self.assertIn('Хуже',page);self.assertIn('Лучше',page)
         self.assertNotIn('Динамика DASS-42',page)
+        self.assertNotRegex(page,r'Депрессивные|Тревожные|из 42')
 
     def test_migration_from_s06_preserves_every_prior_row(self):
         old=connect(Path(self.tmp.name)/'s06.sqlite3')

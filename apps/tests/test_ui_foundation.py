@@ -159,9 +159,12 @@ class UiFoundationTests(unittest.TestCase):
             text = template.read_text()
             with self.subTest(template=template.name):
                 self.assertNotRegex(text, r'\sstyle\s*=')
-                self.assertNotIn('<script', text)
+                # Скрипты — только внешние файлы из static/ (CSP script-src 'self'); встроенного кода нет.
+                self.assertNotRegex(text, r'<script(?![^>]*\ssrc=)')
                 self.assertNotRegex(text, r'\son[a-z]+\s*=')
-                self.assertNotRegex(text, r'(src|href)="(https?:)?//')
+                # Чужие ресурсы не подключаем; ссылки на официальные источники (ГРЛС, бланк шкалы) допустимы.
+                self.assertNotRegex(text, r'src="(https?:)?//')
+                self.assertNotRegex(text, r'<link[^>]*href="(https?:)?//')
 
     def test_static_assets_revalidate_and_stay_under_policy(self):
         client = self.app.test_client()

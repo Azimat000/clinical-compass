@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T15:30:00+00:00",
+  "generatedAt": "2026-10-22T16:00:00+00:00",
   "title": "Design System: Клинический компас",
   "extensions": {
     "colorMeta": {
@@ -378,6 +378,14 @@
       "description": "Подписанное боковое меню на поле; счётчик только у очереди.",
       "html": "<nav class=\"ds-nav\"><a aria-current=\"page\" href=\"#\">Кому нужно внимание <b>3</b></a><a href=\"#\">Все пациенты <span>5</span></a><a href=\"#\">Сообщения</a></nav>",
       "css": ".ds-nav{display:flex;flex-direction:column;gap:2px;width:208px;background:#e9edf0;padding:8px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-nav a{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 10px;border-radius:4px;color:#2b3238;text-decoration:none}.ds-nav a:hover{background:#dfe4e8}.ds-nav a[aria-current=\"page\"]{background:#fff;color:#15191d;font-weight:700;box-shadow:inset 0 0 0 1px #d3dae0}.ds-nav b{color:#b8261b;font:700 13px \"PT Mono\",Menlo,monospace}.ds-nav span{font:400 13px \"PT Mono\",Menlo,monospace}"
+    },
+    {
+      "name": "Вкладки пациента",
+      "kind": "nav",
+      "refersTo": "button-secondary",
+      "description": "Три вкладки в белой полосе: Сегодня, Дневник, Анкеты; активная подчёркнута чернилами 2px; недоступных пунктов нет.",
+      "html": "<nav class=\"ds-ptabs\"><a aria-current=\"page\" href=\"#\">Сегодня</a><a href=\"#\">Дневник</a><a href=\"#\">Анкеты</a></nav>",
+      "css": ".ds-ptabs{display:flex;gap:4px;background:#fff;border-bottom:1px solid #d3dae0;padding:0 12px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-ptabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 10px;color:#56616b;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}.ds-ptabs a[aria-current]{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
     }
   ],
   "narrative": {

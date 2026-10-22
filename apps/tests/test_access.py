@@ -54,7 +54,8 @@ class AccessTests(unittest.TestCase):
         return c.post(path, data={'csrf': csrf(c), **(data or {})})
 
     def offer(self, uid='doc-a', pid='D01'):
-        r = self.post(uid, '/invitations', {'patient_id': pid})
+        c = self.clients[uid]
+        r = c.post('/invitations', data={'csrf': csrf(c), 'patient_id': pid}, headers={'Accept': 'application/json'})
         self.assertEqual(200, r.status_code)
         return r.get_json()['invitation']
 

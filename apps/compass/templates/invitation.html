@@ -1,0 +1,18 @@
+{#- Врач видит одноразовый код приглашения один раз. Экран отдельной страницей, пока кабинет врача не пересобран (UI04). -#}
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block title %}Приглашение готово{% endblock %}
+{% block body %}
+{% call ui.solo_sheet() %}
+  <div class="solo-title"><h1>Приглашение готово</h1>
+    <p class="solo-sub">Передайте этот одноразовый код пациенту. Он действует 24 часа и подходит только его кабинету.</p></div>
+  <div class="solo-form">
+    <div class="field">
+      <label for="invitation-code">Код приглашения</label>
+      <input class="input input--lg invitation-code" id="invitation-code" value="{{ token }}" readonly spellcheck="false" autocomplete="off">
+    </div>
+    <p class="meta invitation-note">Код показывается один раз. Непринятое приглашение можно отозвать в кабинете.</p>
+  </div>
+  <div class="result-actions">{{ ui.button('Вернуться в кабинет', kind='primary', href=url_for('dashboard')) }}</div>
+{% endcall %}
+{% endblock %}

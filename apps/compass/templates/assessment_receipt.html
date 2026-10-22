@@ -1,0 +1,27 @@
+{#- Квитанция об отправке анкеты. Баллов и расшифровки здесь нет и не должно быть. -#}
+{% extends 'patient_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'forms' %}
+{% block title %}Анкета отправлена{% endblock %}
+{% block patient_main %}
+<h1>Анкета отправлена врачу</h1>
+<p class="p-date">DASS&#8209;42 · заполнена <time datetime="{{ task.age_on }}">{{ task.age_on|full_date }}</time> (Москва)</p>
+<p class="lede">Ответы доступны вашему врачу. Свою динамику смотрите в дневнике самочувствия.</p>
+
+<dl class="states">
+  <dt>{{ ui.state('known', 'Сохранено на сервере') }}</dt>
+  <dd>Да, получено <time datetime="{{ received_at }}">{{ received_at|msk }}</time>.</dd>
+  <dt>{{ ui.state('unknown', 'Прочитано врачом') }}</dt>
+  <dd>Здесь не показывается.</dd>
+  <dt>{{ ui.state('unknown', 'Реакция врача') }}</dt>
+  <dd>Здесь не показывается. Ответа здесь может не быть; если стало хуже, не ждите, обратитесь за помощью обычным способом.</dd>
+</dl>
+
+<details class="receipt-more">
+  <summary>Подробности квитанции</summary>
+  <p class="meta">Получена сервером (UTC): <span class="num">{{ received_at }}</span>.</p>
+  <p class="meta">Версия формы: <span class="num">{{ task.form_version_id }}</span>. Квитанция: <span class="num">{{ task.id }}</span>.</p>
+</details>
+
+<div class="p-actions">{{ ui.button('Открыть дневник', kind='primary', href=url_for('patient_diary', patient_id=task.patient_id)) }}</div>
+{% endblock %}

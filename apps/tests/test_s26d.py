@@ -35,7 +35,7 @@ class PatientSendTests(unittest.TestCase):
         values = self.values(adverse_events_status='known', adverse_events_text='Синтетическая реакция')
         first = self.send(values)
         self.assertEqual(200, first.status_code)
-        self.assertRegex(first.json['location'], r'^/demo/D01#entry-[0-9a-f]{32}$')
+        self.assertRegex(first.json['location'], r'^/demo/D01/diary#entry-[0-9a-f]{32}$')
         state = self.counts()
         for _ in range(3):
             retry = self.send(values)
@@ -90,5 +90,6 @@ class PatientSendTests(unittest.TestCase):
         self.assertEqual(400, error.status_code)
         self.assertIn('Синтетика S26D', error.text)
         page = self.clients['pat-a'].get('/demo/D01').text
-        self.assertLess(page.index('data-today-primary'), page.index('class="demo-note"'))
-        self.assertEqual(['1','2'], re.findall(r'data-report-step="(\d)"', page))
+        self.assertEqual(1, len(re.findall(r'button button--primary button--action', page)))
+        self.assertLess(page.index('button--action'), page.index('class="p-foot"'))
+        self.assertIn('data-report-form', self.clients['pat-a'].get('/demo/D01/report').text)

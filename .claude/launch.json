@@ -30,6 +30,21 @@
         "8020"
       ],
       "port": 8020
+    },
+    {
+      "name": "ui03-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui03-review-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8030"
+      ],
+      "port": 8030
     }
   ]
 }

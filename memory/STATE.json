@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-22T18:20:00+03:00",
+  "updated_on": "2026-10-22T22:10:00+03:00",
   "current_slice": null,
-  "last_accepted_slice": "UI02",
-  "next_slice": "UI03",
+  "last_accepted_slice": "UI03",
+  "next_slice": "UI04",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -320,8 +320,8 @@
       "reason": null
     },
     "UI03": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/UI03",
       "handoff": "memory/sessions/UI03.md",
       "reason": null
     },
@@ -692,6 +692,20 @@
       "evidence": "evidence/UI02/acceptance.md",
       "other_views": "503/interface_removed до UI03–UI06",
       "json_clients": "Accept: application/json и /api/ получают прежние технические ответы"
+    },
+    "ui03_patient_cabinet": {
+      "date": "2026-10-22",
+      "ready_views": [
+        "login.html",
+        "result.html",
+        "patient.html",
+        "patient_base.html",
+        "assessment_form.html",
+        "assessment_receipt.html",
+        "invitation.html"
+      ],
+      "evidence": "evidence/UI03/acceptance.md",
+      "doctor_views": "503/interface_removed до UI04–UI06; сообщения — UI06"
     }
   }
 }

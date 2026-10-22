@@ -1,0 +1,49 @@
+{#- Анкета DASS-42 для пациента. Тексты и порядок утверждений берутся из определения шкалы без изменений. -#}
+{% extends 'patient_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'forms' %}
+{% block title %}DASS‑42{% endblock %}
+{% block patient_main %}
+{% set total = instrument['items']|length %}
+<h1>{{ instrument.title }}</h1>
+<p class="p-date">DASS&#8209;42 · {{ total }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></p>
+
+{% if error %}{{ ui.notice('Анкета не отправлена', error ~ ' Ответы остались в форме, проверьте её.', kind='error', id='q-error') }}{% endif %}
+{{ ui.notice('Только вымышленные ответы', 'Врач получит анкету. Анкета не ставит диагноз и не создаёт назначений. После отправки вы увидите квитанцию. Баллы пациенту не показываются. Новое предложение понадобится, если срок пройдёт.') }}
+
+<p class="q-instruction">{{ instrument.instruction }}</p>
+<p class="meta">Выберите один вариант для каждого утверждения. Можно оставить пропуск: ответы передадутся врачу без расчёта результата.</p>
+
+<form class="questionnaire" method="post" data-questionnaire>
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <input type="hidden" name="form_version_id" value="{{ instrument.id }}">
+  {% for item in instrument['items'] %}
+  {% set number = loop.index %}
+  <fieldset class="q" id="q-{{ number }}" data-question>
+    <legend>{{ number }}. {{ item }}</legend>
+    <div class="choice-list">
+      {% for option in instrument.options %}
+      {% set code = loop.index0 %}
+      <label class="option"><input type="radio" name="answer_{{ number }}" value="{{ code }}"{% if values.get('answer_' ~ number) == code|string %} checked{% endif %}> <span class="opt-code num" aria-hidden="true">{{ code }}</span><span><span class="visually-hidden">{{ code }}. </span>{{ option }}</span></label>
+      {% endfor %}
+      <label class="option option--skip"><input type="radio" name="answer_{{ number }}" value=""{% if not values.get('answer_' ~ number) %} checked{% endif %}> Оставить без ответа</label>
+    </div>
+  </fieldset>
+  {% endfor %}
+
+  <p class="visually-hidden" data-submit-status role="status"></p>
+  <div class="q-skip" data-skip-notice role="alert" tabindex="-1" hidden>
+    <p class="notice-title" data-skip-text></p>
+    <p>Можно вернуться к ним или отправить анкету как есть: врач получит ответы без расчёта результата.</p>
+    <a href="#q-1" data-skip-first>Перейти к первому пропуску</a>
+  </div>
+
+  <div class="q-bar">
+    <p class="q-count" data-answer-progress>Вопросов: {{ total }}. Ответы не отправлены, пока вы не нажмёте кнопку.</p>
+    {{ ui.button('Передать анкету врачу', kind='primary', size='action', id='q-submit') }}
+  </div>
+</form>
+
+<p class="meta q-source">{{ instrument.attribution }} Версия: {{ instrument.version }}. <a href="{{ instrument.source.url }}">Официальный бланк</a> · <a href="{{ instrument.validation_url }}">Исследование русской версии</a> · <a href="{{ instrument.rights_url }}">Условия применения</a></p>
+{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='questionnaire.js') }}" defer></script>{% endblock %}

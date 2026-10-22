@@ -1,0 +1,32 @@
+{#- Оболочка кабинета пациента: угольная полоса, вкладки, колонка до 680px. Потомок задаёт nav_active: today | diary | forms. -#}
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block body %}
+{% set tabs = [('today', 'Сегодня', url_for('demo_patient', patient_id=patient.id)),
+               ('diary', 'Дневник', url_for('patient_diary', patient_id=patient.id)),
+               ('forms', 'Анкеты', url_for('patient_forms', patient_id=patient.id))] %}
+<header class="p-top carbon">
+  <div class="p-top-in">
+    {{ ui.brand(url_for('dashboard'), 'Компас') }}
+    <span class="p-top-end">
+      {{ ui.synthetic() }}
+      <form class="p-logout" method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <button class="p-logout-button" type="submit">Выйти</button>
+      </form>
+    </span>
+  </div>
+</header>
+<nav class="p-tabs" aria-label="Разделы кабинета">
+  <div class="p-tabs-in">
+    {% for key, label, href in tabs %}
+      <a href="{{ href }}"{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </div>
+</nav>
+<main class="p-main" id="main">
+  {% block patient_main %}{% endblock %}
+  <p class="p-foot">Вы вошли как <span translate="no">{{ current_user.display_name }}</span>. Сохранено на сервере не значит, что врач уже посмотрел. Ответа здесь может не быть: кабинет не обеспечивает экстренную помощь и круглосуточное наблюдение. Если стало хуже, не ждите, обратитесь за медицинской помощью обычным способом.</p>
+</main>
+{% block page_scripts %}{% endblock %}
+{% endblock %}

@@ -159,7 +159,11 @@ def with_deadline(task):
     midnight = (datetime.fromisoformat(task['age_on']) + timedelta(days=1)).replace(tzinfo=zone)
     deadline = min(datetime.fromisoformat(task['expires_at']), midnight).astimezone(zone)
     task['deadline_iso'] = deadline.isoformat()
-    task['deadline_label'] = deadline.strftime('%d.%m.%Y %H:%M') + ' МСК'
+    if deadline.hour == 0 and deadline.minute == 0:
+        # «00:00 завтрашнего дня» читается как начало суток; пациенту пишем конец сегодняшних.
+        task['deadline_label'] = (deadline - timedelta(days=1)).strftime('%d.%m.%Y') + ' 24:00 МСК'
+    else:
+        task['deadline_label'] = deadline.strftime('%d.%m.%Y %H:%M') + ' МСК'
     return task
 
 

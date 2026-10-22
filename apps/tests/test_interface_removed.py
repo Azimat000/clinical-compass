@@ -27,11 +27,12 @@ class InterfaceRemovedTests(unittest.TestCase):
                            headers={'Accept': 'application/json'})
 
     def test_only_rebuilt_templates_and_new_assets_are_served(self):
-        # UI02 rebuilt login/result from scratch; S29 assets stay removed.
+        # UI02 rebuilt login/result, UI03 the patient cabinet; the rest of the S29 assets stay removed.
         root = Path(__file__).resolve().parents[1] / 'compass'
-        self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html'},
+        self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html',
+                          'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html'},
                          {p.name for p in (root / 'templates').iterdir()})
-        for name in ('interface.js', 'self_report.js', 'report_draft.js', 'fonts/PTSerif-Bold.ttf'):
+        for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)
             self.assertEqual(404, response.status_code)
             self.assertEqual('text/html', response.mimetype)  # result page, not the removed file
@@ -133,7 +134,7 @@ class InterfaceRemovedTests(unittest.TestCase):
         answers = {'form_version_id': definition['id'],
                    **{f'answer_{i}': '2' for i in range(1, 43)}}
         self.assertEqual(303, self.post('pat-a', '/assessments/' + task, answers).status_code)
-        receipt = self.clients['pat-a'].get('/assessments/' + task)
+        receipt = self.clients['pat-a'].get('/assessments/' + task, headers={'Accept': 'application/json'})
         self.assertEqual(200, receipt.status_code)
         self.assertEqual({'status', 'request_id', 'received_at'}, set(receipt.json))
         doctor = self.clients['doc-a'].get('/api/patients/D01/assessments').json['assessments'][0]
