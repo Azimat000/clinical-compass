@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "installed_on": "2026-10-22",
+  "installed_by": "Claude Code по прямому поручению пользователя 22.10.2026",
+  "note": "Сторонние навыки, права сохраняются за авторами. Обновлять только копированием из указанного источника и командой tools/design_skills.py relock с записью в отчёт.",
+  "skills": [
+    {
+      "name": "impeccable",
+      "version": "4.7.0",
+      "engine_version": "0.1.16",
+      "repo": "https://github.com/pbakaus/impeccable",
+      "commit": "8644175285360c166e57b1e35ecadfbc85ff5209",
+      "upstream_paths": {
+        ".claude/skills/impeccable": ".claude/skills/impeccable",
+        ".agents/skills/impeccable": ".agents/skills/impeccable"
+      },
+      "license": "Apache-2.0",
+      "local_changes": [
+        "добавлены LICENSE и NOTICE.md из корня репозитория"
+      ],
+      "runtime": "Движок-бинарник загружается лаунчером один раз в ~/.impeccable/bin/0.1.16 с GitHub Releases того же репозитория с проверкой .sha256; Node не нужен. Хуки Claude Code — .claude/settings.json (копия upstream .claude/settings.json).",
+      "installs": [
+        {
+          "path": ".claude/skills/impeccable",
+          "files": {
+            "LICENSE": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+            "NOTICE.md": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+            "SKILL.md": "d0adc698e41980383076ef762a7047c8cb7a364961b24cbb3a4ec598ffbb8be6",
+            "reference/adapt.md": "5826bb4bca75d7b891bed17ff03bd3b685dff0e4f26d387fa6190d4ba3f065e4",
+            "reference/adapt.native.md": "acbeecbcbf6558d438ed4aec6b85027d72587bf181b8ae12d4dfbe8dce62e9a5",
+            "reference/android.md": "058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe",
+            "reference/animate.md": "94b4ce6299fea93d9f256b2d25705961a76bc5ea940c56db4145686ebc99df1b",
+            "reference/audit.md": "f65689c9848a120c74fbb7be8d9c0c7b4adb6c8580ab014fd59cb84b6c8bd958",
+            "reference/audit.native.md": "33a4ac3906140cfd73f65cd35026867e261adf411da0fc6da95770d9b6edeb81",
+            "reference/bolder.md": "bd217b7bc011c2346ce94902071ecd940aa017e8f563539e31c1ad38ce256401",
+            "reference/clarify.md": "6c382f8283756e8a693d832b750f7e4cbff1ca5bdcc3825b2b4ef4da9f21876a",
+            "reference/colorize.md": "d1fbd55074abb2251bdaa03749d34acc42c38e46e47549f18f5848df57d43c42",
+            "reference/component-review.md": "6996198844d6459392b816e7bfb7d256f07b6884614e88069ffab5544b4886df",
+            "reference/craft-floor.md": "f204158e35616d8d5f0dad8087ee3f1f91c0fe1337fde6e3cf616a51b496822a",
+            "reference/craft.md": "9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c",
+            "reference/critique.md": "7f67463a6417e6df65d4b77a8ac9c79e53324877bca4a96d1fc0985a2a454b7d",
+            "reference/degraded/asset-producer.md": "a83cfd24bf58bc8997540577651a485f1eca38fd324106d8bedeab2394fb169e",
+            "reference/degraded/documenter.md": "bcc05ea92faebb5c74037a9d4263a5ce9a56f5ab07c8ab3c59ee704d8cade745",
+            "reference/degraded/finish-reviewer.md": "c33c4cfa7f0ce0bedde80d4fc3b595e747d0e9b43a77f06cacb8e899802f709d",
+            "reference/degraded/manual-edit-applier.md": "5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58",
+            "reference/delight.md": "56500b1f9d2fcec8324d7f448d813048b5831a46d3feeb1055bd3eb17ec3660f",
+            "reference/distill.md": "467956ccf03d24796db860f1e2e4aa54a132f4ff905221f75c7a5cb3f96df02b",
+            "reference/doctor.md": "712a9a1cec93cc4d1bb4a4e9e47dd7c048973eebfa6f428f943386a7bc192f39",
+            "reference/document.md": "a514e830b7f7d962713f50afaf239a10e66292094d9fe6c11a43a245ceb1e42c",
+            "reference/extract.md": "29044a3df6598786b2f9023af89aa6683b9745b7cd9a0c89386da2d0e50e0166",
+            "reference/generate.md": "b174077972447e829db722dacbf6d6bb643184832b42686f17492348bab9bfe8",
+            "reference/harden.md": "98244db22d907a134cac0c94ffb829ba480ba61cfac67ae155ac2f46444da7c9",
+            "reference/hooks.md": "c1d60edf984bb238d3502395a32c1f3e4c2b166ce03eaa8efc2358ada2af6559",
+            "reference/init.md": "fd37f029837277e93f26d69ddb6cc74af2ffe7d71f56df9d9c04adec77ae77d7",
+            "reference/ios.md": "40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668",
+            "reference/layout.md": "64802d14087fc96b38ef3881fef8098b36068d07f3b942031637b18eef3dd2af",
+            "reference/live-setup.md": "6e7e3b7c4cf331cdb43f4546c164acd6c45a267ce3289dcfa87e13202d98c747",
+            "reference/live.md": "e21b71b1ea58b851ea77f942054dd110f42bdca68c1a82654a24ce3fda2c635b",
+            "reference/mode-operate.md": "7a52dd7a94ee75f6ae89542c86a1b6e1d306812b16e0d9dbf12d4acad44d148b",
+            "reference/mode-persuade.md": "21e78c8a77badb3f83290cd4577ed3b24bd4dd3b57136d7da75733d4f3ee9ac0",
+            "reference/mode-read.md": "a569989e6a3d6453b4c45e9474e162a15cc54e11732ac6baa7990a6e7cccc0b5",
+            "reference/new-work.md": "17647885e0c038ccd0f45be9056fa23f83bb59318d20f15a4ab4ad46ab0467e2",
+            "reference/onboard.md": "eb713f3d6686bac6431dd874f7b02358b4cf08e879e11bf747d75660dedd685a",
+            "reference/operate.md": "a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d",
+            "reference/optimize.md": "fb4014a4482231fbbbec71691d94aef854a1ea5380dbd7963074d14a0e579fdb",
+            "reference/overdrive.md": "83c7786c640b0e6ea61e2b2ff0f93193ba1f68e907b32f2bd56f32bb7a60018f",
+            "reference/polish.md": "b8d49a3cab3428d9f351502e9c2c5802cef187e0d2af626ef3e1cd1837fd06bf",
+            "reference/quieter.md": "b0018ae21f320aabfe3ca9d9f8e0c2c5a5bf74c6eb4e572e3d408c38cd19f5ec",
+            "reference/region-map.md": "4ea8e05d0f88d24f182ad554da84317f90b9730e29fad262143ddf423a1f8645",
+            "reference/routing.md": "56285b28b0ffe471761c2ad062d3f933ed2346ca1b617f1323a30fed99a1a852",
+            "reference/shape.md": "a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23",
+            "reference/typeset.md": "c9943e06ca311258d8aa5a5c65f5beb7a46c57c5e9a2075d2a246bf1337f00bb",
+            "reference/visualize.md": "edf294a9bb9911edf35bec8f294dd216fe57e1333ccb75f310c621e8aa133e72",
+            "scripts/VERSION": "7470694a0b5af87394b523c1a640e2ad099efbe0e6d9e6d2f7a70703e4d04457",
+            "scripts/command-metadata.json": "e8720f3aa41135211cc58cc299a39eeda86c75651f4279cc1ede8db10dcc0584",
+            "scripts/data/font-index-failures.json": "835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4",
+            "scripts/data/font-index.json": "47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da",
+            "scripts/impeccable": "f5d9fcd37559ed6af782306f71b7688ad1ec5e1a4f8ae1ef4d3168f42523b1b1",
+            "scripts/impeccable.cmd": "e0dcc4cd739c8a6ac9e8ce637c216cf8bd4ddae36a8bac458345bdb5a5d7e252",
+            "scripts/live-browser-dom.js": "4b379aff87ce0f485008a2b6a0dc711d00a869f5cf0ec2459279d6364fbf0c9e",
+            "scripts/live-browser-ignores.js": "c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f",
+            "scripts/live-browser-session.js": "2b45c12bef4e25d40b673044c9f124d1da6dfa72ef3f0c09ff30fdb419048e5d",
+            "scripts/live-browser.js": "8f26a309ae1af52d2413a39a886908721e78c55b468025054e06e8faffe90cf0",
+            "scripts/modern-screenshot.umd.js": "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b"
+          }
+        },
+        {
+          "path": ".agents/skills/impeccable",
+          "files": {
+            "LICENSE": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+            "NOTICE.md": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+            "SKILL.md": "88e9a46a91b6ddd1059f03f578bd0f9bbe6d212d6a395124379b9bb5c97c5cf2",
+            "agents/impeccable_asset_producer.toml": "4dbdb0cfdc2466961da6b22d200f3ec7bf8bb47c27448a2e6e3c03cdbf589831",
+            "agents/impeccable_documenter.toml": "2feb3768125ba6469c92a50d516727e6d42f44579165ddfd33409948e2a3803d",
+            "agents/impeccable_finish_reviewer.toml": "1b80232e22d52b06a7278b9ca1f24f871a181c62cd91f4b18728807e7cf49dbd",
+            "agents/impeccable_manual_edit_applier.toml": "6c9ce3e27ec4520ead001da3aad2a2ebba481c4e5cd22873db8890259ee579fe",
+            "agents/openai.yaml": "ce9967ad70f99cf04456f3347c266723c2fbbb600267d10a822b7cd20562c321",
+            "reference/adapt.md": "9807cdc112b8bcbdeff9cd2516cda4d07129f1d47f29df4d57645344f34950c1",
+            "reference/adapt.native.md": "2455a2613e1fa29b986521c73cbad9424ccda70ef6cbe505779dbca5e16272a2",
+            "reference/android.md": "058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe",
+            "reference/animate.md": "d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c",
+            "reference/audit.md": "4b726d8f13ca1dbb82ca8179cbfefca8c53c13766fef4d7b8870f5d4324da2d6",
+            "reference/audit.native.md": "2898eff507738f9102107809e671df3e69f889dee30073030fe96fb2483d8ea3",
+            "reference/bolder.md": "05b78fb0595e4d5afbf5f17470c84e89cf82f205fea3a6e9b6d8d779b7c4aab1",
+            "reference/clarify.md": "173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133",
+            "reference/colorize.md": "bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9",
+            "reference/component-review.md": "10489e5265e49a4ef2737cd0e674c149ed41e1f703efe922e53ea3c91e833427",
+            "reference/craft-floor.md": "52b523e92b76daff71be2ec8c732c374c670f8d03e1296388738e581479ec1bb",
+            "reference/craft.md": "9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c",
+            "reference/critique.md": "c210c9506877c6c8d88880a337fddd95d4315daf70ed6bc631ee6520481f1a0c",
+            "reference/degraded/asset-producer.md": "877d274f41500c780bad25b2bca7fa95eff1a32a7b95397dd388c72848e86a6c",
+            "reference/degraded/documenter.md": "bcc05ea92faebb5c74037a9d4263a5ce9a56f5ab07c8ab3c59ee704d8cade745",
+            "reference/degraded/finish-reviewer.md": "c33c4cfa7f0ce0bedde80d4fc3b595e747d0e9b43a77f06cacb8e899802f709d",
+            "reference/degraded/manual-edit-applier.md": "5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58",
+            "reference/delight.md": "098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c",
+            "reference/distill.md": "56ca75d680eb8b61ca3a298d18e895cd4a0dcc520c31d7938a4807ff8dcf18ea",
+            "reference/doctor.md": "3dbef3fe606de4de0f1b5cab5f19902799e05cf566eb8223e9aa1632eeb04698",
+            "reference/document.md": "531d2b6c8c9affc7b794de7904905ff9b73962b986968fd1e90273eb26930b6e",
+            "reference/extract.md": "5477ae97189e5c1236cee71a25a5ae50014429a5a2e6da28355c8021a6cdeddd",
+            "reference/generate.md": "11385badfb532196cec249e73bac2b7f58ada033ed8c4b02b9f0d64ddb46f0dc",
+            "reference/harden.md": "4167eb7fc456cdfe09ff0ac2dbcb5e59cee57e590137aab6cc8ec08aafb6d775",
+            "reference/hooks.md": "3c623f602043dcbdad8c043491e57ece96f699106f8378cc8a720e6b39c0ddcd",
+            "reference/init.md": "51349b3a32c7f907102dd680d8e2df9da27082caf46ee15c673be7ce14a5363b",
+            "reference/ios.md": "40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668",
+            "reference/layout.md": "0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c",
+            "reference/live-setup.md": "2b5b2fbf5f658f34ea1997fb1aeebe01604d05187f75c6a4f1f55a5bc78520a4",
+            "reference/live.md": "7caeecefe54d68bc915a7f2978cba5e88eda69a239cb09dcce78c6d94e93df84",
+            "reference/mode-operate.md": "7a52dd7a94ee75f6ae89542c86a1b6e1d306812b16e0d9dbf12d4acad44d148b",
+            "reference/mode-persuade.md": "21e78c8a77badb3f83290cd4577ed3b24bd4dd3b57136d7da75733d4f3ee9ac0",
+            "reference/mode-read.md": "a569989e6a3d6453b4c45e9474e162a15cc54e11732ac6baa7990a6e7cccc0b5",
+            "reference/new-work.md": "c2eb99db2f30598ef0d2e2f7163bb8a62ca2e5524de42a784b0d1f7117b1800f",
+            "reference/onboard.md": "a2b8fd01ea12139b39b3285393f805bb8c326e11b2234dbff4c26c17b4e9c280",
+            "reference/operate.md": "a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d",
+            "reference/optimize.md": "89d679ec08e55fe7661d54addc950c2ff77cf574aa97e593ec6da089fd1efedf",
+            "reference/overdrive.md": "0a0d4ae6eea720c6d6e1c073fc77192d7c2100f78a44d9a8d262ddf22270cf4d",
+            "reference/polish.md": "81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a",
+            "reference/quieter.md": "9e03b55c6bbdd4acba28cfa9c3b74ba1a4448cdbd35a7200990ab460c6eecaa0",
+            "reference/region-map.md": "778cedc9199b407d3e23fa1041e38d548b00b1101a33517aa2a2eb299f9d0edc",
+            "reference/routing.md": "77ae09542fbc10aa4e8b119d6fd19359908a47c13c30068d6a150bfdb50e3e10",
+            "reference/shape.md": "a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23",
+            "reference/typeset.md": "c26c5b4524f3ccb650ed0680c10c25fd18083f8ebfd00a54c4d983c4747aab70",
+            "reference/visualize.md": "1c81a831f9dd28b908306fa06e2f2944ca4595ff3df6570750c10bf806465f00",
+            "scripts/VERSION": "7470694a0b5af87394b523c1a640e2ad099efbe0e6d9e6d2f7a70703e4d04457",
+            "scripts/command-metadata.json": "e8720f3aa41135211cc58cc299a39eeda86c75651f4279cc1ede8db10dcc0584",
+            "scripts/data/font-index-failures.json": "835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4",
+            "scripts/data/font-index.json": "47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da",
+            "scripts/impeccable": "f5d9fcd37559ed6af782306f71b7688ad1ec5e1a4f8ae1ef4d3168f42523b1b1",
+            "scripts/impeccable.cmd": "e0dcc4cd739c8a6ac9e8ce637c216cf8bd4ddae36a8bac458345bdb5a5d7e252",
+            "scripts/live-browser-dom.js": "4b379aff87ce0f485008a2b6a0dc711d00a869f5cf0ec2459279d6364fbf0c9e",
+            "scripts/live-browser-ignores.js": "c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f",
+            "scripts/live-browser-session.js": "2b45c12bef4e25d40b673044c9f124d1da6dfa72ef3f0c09ff30fdb419048e5d",
+            "scripts/live-browser.js": "8f26a309ae1af52d2413a39a886908721e78c55b468025054e06e8faffe90cf0",
+            "scripts/modern-screenshot.umd.js": "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b"
+          }
+        }
+      ],
+      "extra_files": [
+        {
+          "path": ".claude/agents/impeccable-asset-producer.md",
+          "sha256": "854a2da0f67cbe627908aa450115e83985b7d20cf2cc345adf173f228c6130b8"
+        },
+        {
+          "path": ".claude/agents/impeccable-documenter.md",
+          "sha256": "6bc62a59f6fef0b749927c8d10e9849ab2411199d86d70772a86f8e83ac309f5"
+        },
+        {
+          "path": ".claude/agents/impeccable-finish-reviewer.md",
+          "sha256": "c6dadef4ec009dfa9d0717579e327c9cce06463f134add271f6d7f1693621b84"
+        },
+        {
+          "path": ".claude/agents/impeccable-manual-edit-applier.md",
+          "sha256": "b2d71ff0df7ed49e06dfc4acfce3d3f7eb48afa68be04763ee8c08354df50a07"
+        },
+        {
+          "path": ".claude/settings.json",
+          "sha256": "909ef7dae75efa1774f0ef395e881ee2658c20e664013d599e7ea0490e8c7fe8"
+        }
+      ]
+    },
+    {
+      "name": "design-taste-frontend",
+      "version": "tasteskill v2.1.4",
+      "repo": "https://github.com/Leonxlnx/taste-skill",
+      "commit": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "upstream_paths": {
+        "skill": "skills/taste-skill"
+      },
+      "license": "MIT",
+      "local_changes": [
+        "папка названа по имени из frontmatter: design-taste-frontend",
+        "добавлен LICENSE"
+      ],
+      "runtime": "Скрипты scripts/*.mjs: Node 22+ и установленный Chrome/Chromium; assets.mjs ходит в открытые коллекции изображений (Openverse, Wikimedia и др.). Рабочие файлы — .taste-skill/ (не коммитится).",
+      "installs": [
+        {
+          "path": ".claude/skills/design-taste-frontend",
+          "files": {
+            "LICENSE": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+            "README.md": "5e33fd716b3e1ffaca9340f645d44c193f9b446107fa67f0cce498d33025672c",
+            "SKILL.md": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+            "assets/app.css": "16518c3a999fb81b2698137f1f743128c189272e8b1d411c4b02598c6755b67f",
+            "assets/base.css": "aa6ea21613c79e06e06dea3d33200c78590c89b0346bb976ec07947bb45ceafa",
+            "assets/base.js": "8d50416125596b84c0083d5d5ffba09add57db4b06cbf0eedac2d4999b7653bc",
+            "assets/charts.js": "89071120bd09eb276d9e568bab433ed035ea8b3a1b72750a1fa204a63e3d4ab4",
+            "assets/scenes/stage.css": "b5c587dac45ac6fcc34ae7cb4aa2b3e43797b2ef5d71fd32b48483bda3fca3e0",
+            "assets/scenes/stage.js": "3012ade75e01a9c0c81b5835a60e9ade965ed310cd58d85a7ad10e4ed4a1ad16",
+            "evals/evals.json": "df0ee2a248cd5445c0e1600eb095dc0d43dd312f5b4bb4316a78471ae0d22a74",
+            "library/app.json": "3678ccbe1e8d05feff6d4f07fa16a0d610aefeea5e697e842a876713ba763cf5",
+            "library/directions.json": "d71e3824af33a92d9e1ca543e17f80baa5b7a30c815df5125cfe3300a14892c1",
+            "library/heroes.json": "98d5e01104412a5fb27936f9c686f3bc0a5f76ce0793186d3de46b982c65b172",
+            "library/motions.json": "51815dd09a823c829897f99ed9ea7dc5c35bd305ac989b8a0632ea6d42a3f08b",
+            "library/palettes.json": "a14be9f45baba848c53436f4aa44eb4f1925ad3e232c5d1dcddf4f565661a525",
+            "library/photos.json": "8fc3b76bca90f44675bd99d99bb4ce95b0756c6c5d4141b7e917d11d90e61520",
+            "library/sections.json": "7c2c8a470a22501176948661f803434db8c542a511281752c717252de80c1ad8",
+            "library/sites.json": "a2bc4d0cff8ebff481f0dfd4879c106d5e1e16cb3122f9ab3702184a5e1f3502",
+            "library/type.json": "01a36c53c4398f48ff945b0f31a256281c1c0c1075729747c11bec70867b6232",
+            "references/app-screens.md": "55e937ec30de605b53a11310b446f328a3ce7403de24fff008920a00be1a5ed4",
+            "references/colour.md": "6556bcc7eed48b7bc2d0d281c28bf57c1b75e94d7ca0bde49f5d9df8c6a09351",
+            "references/copy.md": "676edbe75d5f3cfd8a793010ea9f730525ae074b231a674c2426264d3398262e",
+            "references/critique.md": "9c2f4392674530b3f02ac529fba53d82ab37b85f401c4c1989fbe98d6217f0b4",
+            "references/imagery.md": "518def6b2c643b295e13e66b09b66f2e3fc1421d3cf6c7dbb1dc749097ad2ad9",
+            "references/layout.md": "40080640719b07737afb94a8868afef87767a1ab4892814d9b6882e2d283453b",
+            "references/motion.md": "79f94d8469898d2bf6186c198ad86ddf691a67c6536eaec36a4ec101285d9a37",
+            "references/research.md": "83433646a352cae588591e05bc0a75fe1deadff55ede8851bc8dd5dd483adfc5",
+            "references/scenes.md": "733ac7258a1a28f2f6ae8205bc36ba66c563594ad0a2e2f829c5eaaba3199a61",
+            "references/tells.md": "8e6de4411c43d3108f832b3f33bb1a2a838148a72b92a176df893b67d99a0da9",
+            "references/type.md": "6353ff1d0ce2f9913628c88fbcb7dad3cc3877e61196848bce99e33a17d20611",
+            "scripts/assets.mjs": "b4b4b99b5634735f5a0b4213169cda5240ee6bbed8ed8042ad1bcf2b6607c1fa",
+            "scripts/draw.mjs": "6c2047d207d2400d3b099956dfe2ac306203b614246e66bc8760212a7f797dbf",
+            "scripts/inspect.mjs": "9482c546288d4d5c738a915905959e99394551ec27bc202ed443af12a02bd1f7",
+            "scripts/lib/app-draw.mjs": "aa0802d341d19b53ec14ec21746e428be49a8ec3ed7b30253194105fc18a8df6",
+            "scripts/lib/cdp.mjs": "320fb75c6454a97b88458e5c33559a1188042aa0041bd5eff53455900236c88a",
+            "scripts/lib/probe.mjs": "c14fd0bed7727855a1f3fcf5ade945fba97f314562fd7430354168b2da25433b",
+            "scripts/lib/rules.mjs": "5de058543b3bd6f3dd2f85ff1c1e5e1f91918ba9f4454e7ee0b8934c607982f9",
+            "scripts/lint.mjs": "05f2fae2f56fc051b539cdbacb43a6f78fbbfb9644bb74aa11be472ff12dcaf5",
+            "scripts/scenes.mjs": "234ec582e2b841457c33033feeeba8535f9ac285495a74d08dc533a1566c90d5"
+          }
+        },
+        {
+          "path": ".agents/skills/design-taste-frontend",
+          "files": {
+            "LICENSE": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+            "README.md": "5e33fd716b3e1ffaca9340f645d44c193f9b446107fa67f0cce498d33025672c",
+            "SKILL.md": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+            "assets/app.css": "16518c3a999fb81b2698137f1f743128c189272e8b1d411c4b02598c6755b67f",
+            "assets/base.css": "aa6ea21613c79e06e06dea3d33200c78590c89b0346bb976ec07947bb45ceafa",
+            "assets/base.js": "8d50416125596b84c0083d5d5ffba09add57db4b06cbf0eedac2d4999b7653bc",
+            "assets/charts.js": "89071120bd09eb276d9e568bab433ed035ea8b3a1b72750a1fa204a63e3d4ab4",
+            "assets/scenes/stage.css": "b5c587dac45ac6fcc34ae7cb4aa2b3e43797b2ef5d71fd32b48483bda3fca3e0",
+            "assets/scenes/stage.js": "3012ade75e01a9c0c81b5835a60e9ade965ed310cd58d85a7ad10e4ed4a1ad16",
+            "evals/evals.json": "df0ee2a248cd5445c0e1600eb095dc0d43dd312f5b4bb4316a78471ae0d22a74",
+            "library/app.json": "3678ccbe1e8d05feff6d4f07fa16a0d610aefeea5e697e842a876713ba763cf5",
+            "library/directions.json": "d71e3824af33a92d9e1ca543e17f80baa5b7a30c815df5125cfe3300a14892c1",
+            "library/heroes.json": "98d5e01104412a5fb27936f9c686f3bc0a5f76ce0793186d3de46b982c65b172",
+            "library/motions.json": "51815dd09a823c829897f99ed9ea7dc5c35bd305ac989b8a0632ea6d42a3f08b",
+            "library/palettes.json": "a14be9f45baba848c53436f4aa44eb4f1925ad3e232c5d1dcddf4f565661a525",
+            "library/photos.json": "8fc3b76bca90f44675bd99d99bb4ce95b0756c6c5d4141b7e917d11d90e61520",
+            "library/sections.json": "7c2c8a470a22501176948661f803434db8c542a511281752c717252de80c1ad8",
+            "library/sites.json": "a2bc4d0cff8ebff481f0dfd4879c106d5e1e16cb3122f9ab3702184a5e1f3502",
+            "library/type.json": "01a36c53c4398f48ff945b0f31a256281c1c0c1075729747c11bec70867b6232",
+            "references/app-screens.md": "55e937ec30de605b53a11310b446f328a3ce7403de24fff008920a00be1a5ed4",
+            "references/colour.md": "6556bcc7eed48b7bc2d0d281c28bf57c1b75e94d7ca0bde49f5d9df8c6a09351",
+            "references/copy.md": "676edbe75d5f3cfd8a793010ea9f730525ae074b231a674c2426264d3398262e",
+            "references/critique.md": "9c2f4392674530b3f02ac529fba53d82ab37b85f401c4c1989fbe98d6217f0b4",
+            "references/imagery.md": "518def6b2c643b295e13e66b09b66f2e3fc1421d3cf6c7dbb1dc749097ad2ad9",
+            "references/layout.md": "40080640719b07737afb94a8868afef87767a1ab4892814d9b6882e2d283453b",
+            "references/motion.md": "79f94d8469898d2bf6186c198ad86ddf691a67c6536eaec36a4ec101285d9a37",
+            "references/research.md": "83433646a352cae588591e05bc0a75fe1deadff55ede8851bc8dd5dd483adfc5",
+            "references/scenes.md": "733ac7258a1a28f2f6ae8205bc36ba66c563594ad0a2e2f829c5eaaba3199a61",
+            "references/tells.md": "8e6de4411c43d3108f832b3f33bb1a2a838148a72b92a176df893b67d99a0da9",
+            "references/type.md": "6353ff1d0ce2f9913628c88fbcb7dad3cc3877e61196848bce99e33a17d20611",
+            "scripts/assets.mjs": "b4b4b99b5634735f5a0b4213169cda5240ee6bbed8ed8042ad1bcf2b6607c1fa",
+            "scripts/draw.mjs": "6c2047d207d2400d3b099956dfe2ac306203b614246e66bc8760212a7f797dbf",
+            "scripts/inspect.mjs": "9482c546288d4d5c738a915905959e99394551ec27bc202ed443af12a02bd1f7",
+            "scripts/lib/app-draw.mjs": "aa0802d341d19b53ec14ec21746e428be49a8ec3ed7b30253194105fc18a8df6",
+            "scripts/lib/cdp.mjs": "320fb75c6454a97b88458e5c33559a1188042aa0041bd5eff53455900236c88a",
+            "scripts/lib/probe.mjs": "c14fd0bed7727855a1f3fcf5ade945fba97f314562fd7430354168b2da25433b",
+            "scripts/lib/rules.mjs": "5de058543b3bd6f3dd2f85ff1c1e5e1f91918ba9f4454e7ee0b8934c607982f9",
+            "scripts/lint.mjs": "05f2fae2f56fc051b539cdbacb43a6f78fbbfb9644bb74aa11be472ff12dcaf5",
+            "scripts/scenes.mjs": "234ec582e2b841457c33033feeeba8535f9ac285495a74d08dc533a1566c90d5"
+          }
+        }
+      ]
+    },
+    {
+      "name": "emil-design-eng",
+      "repo": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202",
+      "upstream_paths": {
+        "skill": "skills/emil-design-eng"
+      },
+      "license": "MIT",
+      "local_changes": [
+        "добавлен LICENSE"
+      ],
+      "runtime": "только текст",
+      "installs": [
+        {
+          "path": ".claude/skills/emil-design-eng",
+          "files": {
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "ffbe68e6007fb42cb8149f089b400a1ca007d59ba23e8948e2be4476f3175939"
+          }
+        },
+        {
+          "path": ".agents/skills/emil-design-eng",
+          "files": {
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "ffbe68e6007fb42cb8149f089b400a1ca007d59ba23e8948e2be4476f3175939"
+          }
+        }
+      ]
+    },
+    {
+      "name": "review-animations",
+      "repo": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202",
+      "upstream_paths": {
+        "skill": "skills/review-animations"
+      },
+      "license": "MIT",
+      "local_changes": [
+        "добавлен LICENSE"
+      ],
+      "runtime": "только текст; disable-model-invocation: true — вызывать явно /review-animations",
+      "installs": [
+        {
+          "path": ".claude/skills/review-animations",
+          "files": {
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "6ff590d29e436766135aa3d137be1fac2a867165c7257fc315b189361f1873af",
+            "STANDARDS.md": "e7d3605034acda54ca13e43aec9e64d65b53de20f75b11b8d694e373012fbe07"
+          }
+        },
+        {
+          "path": ".agents/skills/review-animations",
+          "files": {
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "6ff590d29e436766135aa3d137be1fac2a867165c7257fc315b189361f1873af",
+            "STANDARDS.md": "e7d3605034acda54ca13e43aec9e64d65b53de20f75b11b8d694e373012fbe07"
+          }
+        }
+      ]
+    },
+    {
+      "name": "break-ui",
+      "repo": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202",
+      "upstream_paths": {
+        "skill": "skills/break-ui"
+      },
+      "license": "MIT",
+      "local_changes": [
+        "добавлен LICENSE"
+      ],
+      "runtime": "только текст",
+      "installs": [
+        {
+          "path": ".claude/skills/break-ui",
+          "files": {
+            "CATALOG.md": "7358efcc6bb48e35187be1c064cf60022dcb18c72c18fab58b606dfc5f421f15",
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "e7eec1d70ac56a04255e9c0dbe98084ea3d544cc04aaad34f32c95d6fa9dff5e"
+          }
+        },
+        {
+          "path": ".agents/skills/break-ui",
+          "files": {
+            "CATALOG.md": "7358efcc6bb48e35187be1c064cf60022dcb18c72c18fab58b606dfc5f421f15",
+            "LICENSE": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+            "SKILL.md": "e7eec1d70ac56a04255e9c0dbe98084ea3d544cc04aaad34f32c95d6fa9dff5e"
+          }
+        }
+      ]
+    },
+    {
+      "name": "web-design-guidelines",
+      "version": "1.0.0",
+      "repo": "https://github.com/vercel-labs/agent-skills",
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "upstream_paths": {
+        "skill": "skills/web-design-guidelines"
+      },
+      "license": "MIT (README репозитория; правила — LICENSE vercel-labs/web-interface-guidelines)",
+      "local_changes": [
+        "в конец SKILL.md добавлен раздел Local note (HAC project)",
+        "guidelines.pinned.md — command.md из https://github.com/vercel-labs/web-interface-guidelines @ 434b7f91364665f2f733b310ec54809bf8f37937",
+        "LICENSE — из vercel-labs/web-interface-guidelines"
+      ],
+      "runtime": "по умолчанию скачивает свежие правила с raw.githubusercontent.com; при недоступности сети — закреплённая копия guidelines.pinned.md",
+      "installs": [
+        {
+          "path": ".claude/skills/web-design-guidelines",
+          "files": {
+            "LICENSE": "6cd1609c9c12233507cdd2ce0d32e9a721e3c27494951be06b90090deeeb7af2",
+            "SKILL.md": "e6c2191f47d9e609577aba3450cbce22dd07e541169488ef7ab70f32f5b4db2e",
+            "guidelines.pinned.md": "d246b026f4f29b5823a9cc857f9edf3d2507002e055e32040cadeaf3b38e0234"
+          }
+        },
+        {
+          "path": ".agents/skills/web-design-guidelines",
+          "files": {
+            "LICENSE": "6cd1609c9c12233507cdd2ce0d32e9a721e3c27494951be06b90090deeeb7af2",
+            "SKILL.md": "e6c2191f47d9e609577aba3450cbce22dd07e541169488ef7ab70f32f5b4db2e",
+            "guidelines.pinned.md": "d246b026f4f29b5823a9cc857f9edf3d2507002e055e32040cadeaf3b38e0234"
+          }
+        }
+      ]
+    }
+  ]
+}

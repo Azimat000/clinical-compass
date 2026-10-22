@@ -3,7 +3,7 @@
   "created_on": "2026-10-18",
   "timezone": "Europe/Moscow",
   "session_contract": "Одна рабочая сессия принимает один срез. При превышении объёма до продолжения выделить дочерний срез с собственной сессией; не объявлять неполное принятым.",
-  "contest_slices": "Сервис: S00–S15 с дочерними, S17B–S17H, S17I01/S17I/S17F и проверки S17/S18–S22. Принятые проверки источников сохранены; незавершённая RAG-ветка отдельно в plan/optional-rag.json. Организационные работы отложены.",
+  "contest_slices": "Сервис: S00–S15 с дочерними, S17B–S17H, S17I01/S17I/S17F и проверки S17/S18–S22. Принятые проверки источников сохранены; незавершённая RAG-ветка отдельно в plan/optional-rag.json. Организационные работы отложены. Новый интерфейс с чистого листа: UI01–UI08 (поручение 22.10.2026, docs/design/README.md).",
   "postcontest_slices": "S23–S25, только отдельное поручение и согласованные права",
   "slices": [
     {
@@ -2055,6 +2055,305 @@
       ],
       "planned_commit": "slice(S29): remove existing interface and preserve backend",
       "acceptance_tag": "slice/S29"
+    },
+    {
+      "id": "UI01",
+      "title": "Новый интерфейс: три варианта дизайна и UX, выбор пользователя",
+      "target_date": "Отдельная сессия после S29",
+      "depends_on": [
+        "S29"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Выполнить /impeccable init с коротким интервью пользователя и записать PRODUCT.md по docs/design/BRIEF.md.",
+        "Подготовить три заметно разных направления (визуальный характер и схема UX) на экранах «Сегодня» пациента и «Кому нужно внимание» врача, статичные прототипы на синтетике WD01–WD05.",
+        "Проверить варианты impeccable critique, правилами design-taste-frontend и web-design-guidelines; показать пользователю и записать его выбор в DESIGN.md и .impeccable/design.json."
+      ],
+      "outputs": [
+        "PRODUCT.md",
+        "DESIGN.md",
+        "docs/design/prototypes/UI01/",
+        "evidence/UI01/acceptance.md"
+      ],
+      "acceptance": [
+        "`/impeccable init` выполнен с коротким интервью пользователя; PRODUCT.md в корне описывает пользователей, задачи и ограничения по docs/design/BRIEF.md и ответам пользователя. Неподтверждённое помечено как открытый вопрос.",
+        "Подготовлены три заметно разных направления (не перекраска одного): у каждого свой визуальный характер и своя схема UX/навигации. Каждое показано на двух ключевых экранах — «Сегодня» пациента (ширина телефона) и «Кому нужно внимание» врача (ширина компьютера) — на синтетике учебных историй WD01–WD05.",
+        "Варианты открываются в браузере как статичные прототипы, снимки сделаны на 375 px и 1440 px; каждый вариант прошёл короткую самокритику impeccable и проверку на шаблонные приёмы.",
+        "Выбор сделал пользователь в чате; его слова записаны в отчёт. Выбранное направление записано в DESIGN.md (корень) и `.impeccable/design.json` так, чтобы UI02 начинался без переспрашивания: принципы, черновые токены, шрифты, плотность, тон текста, навигация, запреты. Прототипы и снимки — docs/design/prototypes/UI01/ и evidence/UI01/.",
+        "Сервер, базы, клинические тексты и правила не менялись; прототипы не подключены к приложению и не содержат реальных данных; удалённый в S29 интерфейс не использован как образец."
+      ],
+      "handoff_path": "memory/sessions/UI01.md",
+      "evidence_dir": "evidence/UI01",
+      "requirement_ids": [],
+      "verification_commands": [
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI01): <конкретный результат>",
+      "acceptance_tag": "slice/UI01"
+    },
+    {
+      "id": "UI02",
+      "title": "Новый интерфейс: токены, шрифты, базовый шаблон, компоненты и вход",
+      "target_date": "Отдельная сессия после UI01",
+      "depends_on": [
+        "UI01"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Перенести выбранное направление в токены и базовый CSS с локальными шрифтами без ослабления CSP.",
+        "Подключить шаблоны и статику в web.py так, что экран без шаблона по-прежнему отвечает 503/interface_removed; собрать общие компоненты со всеми состояниями.",
+        "Сделать login.html и result.html, переписать тесты входа и проверить break-ui и web-design-guidelines."
+      ],
+      "outputs": [
+        "apps/compass/web.py",
+        "apps/compass/templates/",
+        "apps/compass/static/",
+        "evidence/UI02/acceptance.md"
+      ],
+      "acceptance": [
+        "Токены (цвет, шрифт, отступы, радиусы, тени, движение) и базовый CSS соответствуют выбранному направлению; шрифты локальные с лицензией, внешних CDN нет; CSP `default-src 'self'` без послаблений, inline-скриптов и inline-стилей нет.",
+        "Базовый шаблон Jinja и подключение шаблонов/статики в web.py: экран с готовым шаблоном рендерится, экран без шаблона по-прежнему отвечает 503/interface_removed. Серверные проверки, CSRF и права не ослаблены.",
+        "Набор общих компонентов: кнопки, поля, выбор, карточки, статусы, ошибка/пусто/загрузка, уведомление. Каждый компонент имеет состояния фокуса, ошибки и недоступности.",
+        "login.html и result.html работают в браузере на 375 px и 1440 px; ошибка входа и блокировка после попыток показаны понятно; тесты входа переписаны под новый HTML и проходят.",
+        "Контраст текста не ниже WCAG AA, клавиатурный путь входа проверен; отчёт break-ui и web-design-guidelines приложен к доказательствам."
+      ],
+      "handoff_path": "memory/sessions/UI02.md",
+      "evidence_dir": "evidence/UI02",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI02): <конкретный результат>",
+      "acceptance_tag": "slice/UI02"
+    },
+    {
+      "id": "UI03",
+      "title": "Новый интерфейс: кабинет пациента, самоотчёт, анкеты, приглашение",
+      "target_date": "Отдельная сессия после UI02",
+      "depends_on": [
+        "UI02"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Сделать patient.html для пациента с одним главным действием на 375 px.",
+        "Сохранить все гарантии самоотчёта S26D/S27 и неизменность DASS-42; сделать assessment_form, assessment_receipt и invitation.",
+        "Переписать тесты экранов пациента и пройти break-ui на худших данных."
+      ],
+      "outputs": [
+        "apps/compass/templates/",
+        "apps/compass/static/",
+        "evidence/UI03/acceptance.md"
+      ],
+      "acceptance": [
+        "patient.html для роли пациента: одно главное действие сразу видно на 375 px; лишних слов нет; пустые, ошибочные и успешные состояния описаны.",
+        "Самоотчёт сохраняет все гарантии S26D/S27: личный серверный черновик, восстановление, защита повторов и вкладок, ключ повтора, без localStorage/sessionStorage и без автоматического повтора; без JS обычная форма работает.",
+        "assessment_form.html и assessment_receipt.html: текст и порядок DASS-42 не изменены; пациент не видит сумм и интерпретации; счётчик ответов и проверка пропусков работают.",
+        "invitation.html и привязка по приглашению работают для пациента.",
+        "Тесты экранов пациента переписаны под новый HTML и проходят; break-ui (длинные тексты, пустые данные, медленная сеть, повторный клик) без поломок; снимки 375/768/1440."
+      ],
+      "handoff_path": "memory/sessions/UI03.md",
+      "evidence_dir": "evidence/UI03",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI03): <конкретный результат>",
+      "acceptance_tag": "slice/UI03"
+    },
+    {
+      "id": "UI04",
+      "title": "Новый интерфейс: кабинет врача, карточка пациента, сводка повторного приёма",
+      "target_date": "Отдельная сессия после UI03",
+      "depends_on": [
+        "UI03"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Сделать dashboard.html «Кому нужно внимание» с поиском, фильтрами и приглашениями.",
+        "Сделать patient.html для врача и follow_up.html, где неизвестность и противоречия видны.",
+        "Переписать тесты экранов врача этого среза и пройти break-ui."
+      ],
+      "outputs": [
+        "apps/compass/templates/",
+        "apps/compass/static/",
+        "evidence/UI04/acceptance.md"
+      ],
+      "acceptance": [
+        "dashboard.html: «Кому нужно внимание» — сигналы первыми, поиск и фильтры (возраст, тип записи, маршрут, внимание) работают; приглашения видны и отзываются.",
+        "patient.html для роли врача: шапка пациента, разделы и переходы к действиям; возрастные проверки, запрос анкеты, контекст и проверка связи работают.",
+        "follow_up.html: сводка повторного приёма за период с переходами к исходным наблюдениям, анкетам, плану и отметкам; неизвестность и противоречия видны, отсутствие данных не выглядит как «всё хорошо».",
+        "Тесты экранов врача этого среза переписаны под новый HTML и проходят; break-ui на длинных списках и пустых периодах; снимки 1024/1440."
+      ],
+      "handoff_path": "memory/sessions/UI04.md",
+      "evidence_dir": "evidence/UI04",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI04): <конкретный результат>",
+      "acceptance_tag": "slice/UI04"
+    },
+    {
+      "id": "UI05",
+      "title": "Новый интерфейс: решения врача, первый приём, загрузка документов",
+      "target_date": "Отдельная сессия после UI04",
+      "depends_on": [
+        "UI04"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Сделать decisions.html с подтверждением только после ответа сервера.",
+        "Сделать first_visit.html и imports.html.",
+        "Переписать тесты экранов среза и пройти break-ui."
+      ],
+      "outputs": [
+        "apps/compass/templates/",
+        "apps/compass/static/",
+        "evidence/UI05/acceptance.md"
+      ],
+      "acceptance": [
+        "decisions.html: история решений и форма; подтверждение врача отражается только после ответа сервера; назначение/изменение/отмена терапии, направление и изменение плана — только через прежний серверный механизм.",
+        "first_visit.html: первый приём с источниками полей; F08 сохранён.",
+        "imports.html: загрузка, проверка извлечённого и решение врача; ошибки разбора понятны.",
+        "Тесты экранов среза переписаны и проходят; break-ui на повторном клике, ошибке сервера и длинных документах."
+      ],
+      "handoff_path": "memory/sessions/UI05.md",
+      "evidence_dir": "evidence/UI05",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI05): <конкретный результат>",
+      "acceptance_tag": "slice/UI05"
+    },
+    {
+      "id": "UI06",
+      "title": "Новый интерфейс: сообщения, уведомления, критические события",
+      "target_date": "Отдельная сессия после UI05",
+      "depends_on": [
+        "UI05"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Сделать communication.html для обеих ролей с различимыми состояниями сообщения.",
+        "Сделать notifications.html и critical.html, где критический путь не теряется.",
+        "Переписать тесты экранов среза; после него ни один экран не отвечает 503/interface_removed."
+      ],
+      "outputs": [
+        "apps/compass/templates/",
+        "apps/compass/static/",
+        "evidence/UI06/acceptance.md"
+      ],
+      "acceptance": [
+        "communication.html для обеих ролей: три состояния сообщения различимы словами и видом; отправка и повтор безопасны.",
+        "notifications.html: список и действия над уведомлениями.",
+        "critical.html: независимый критический путь заметен и не теряется среди обычных уведомлений; действия подтверждаются сервером.",
+        "Тесты экранов среза переписаны и проходят; после этого среза ни один экран не отвечает 503/interface_removed."
+      ],
+      "handoff_path": "memory/sessions/UI06.md",
+      "evidence_dir": "evidence/UI06",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI06): <конкретный результат>",
+      "acceptance_tag": "slice/UI06"
+    },
+    {
+      "id": "UI07",
+      "title": "Новый интерфейс: движение и тонкая доводка",
+      "target_date": "Отдельная сессия после UI06",
+      "depends_on": [
+        "UI06"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Добавить короткое осмысленное движение по emil-design-eng только там, где оно помогает понять результат.",
+        "Уважать prefers-reduced-motion, анимировать только transform/opacity.",
+        "Пройти /review-animations по всем экранам и не сломать функции UI02–UI06."
+      ],
+      "outputs": [
+        "apps/compass/static/",
+        "evidence/UI07/acceptance.md"
+      ],
+      "acceptance": [
+        "Переходы, нажатия, появление ошибок и успеха имеют короткую осмысленную анимацию только там, где она помогает понять результат; ничего не задерживает работу.",
+        "`prefers-reduced-motion` уважается везде; анимации только через transform/opacity, без рывков на слабом телефоне.",
+        "review-animations пройден по всем экранам, найденное исправлено или записано с причиной.",
+        "Функции и тесты UI02–UI06 не сломаны."
+      ],
+      "handoff_path": "memory/sessions/UI07.md",
+      "evidence_dir": "evidence/UI07",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest discover -s apps/tests -v",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI07): <конкретный результат>",
+      "acceptance_tag": "slice/UI07"
+    },
+    {
+      "id": "UI08",
+      "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
+      "target_date": "Отдельная сессия после UI07",
+      "depends_on": [
+        "UI07"
+      ],
+      "condition": "always",
+      "stage": "contest",
+      "tasks": [
+        "Проверить все 13 экранов в Chromium, Firefox и WebKit на 375, 768 и 1440 px, клавиатуру, фокус, контраст и базовый скринридер.",
+        "Пройти break-ui, web-design-guidelines и /impeccable audit по всем экранам и исправить найденное.",
+        "Сделать новый браузерный smoke и добиться зелёного make check; честно записать непроверенное."
+      ],
+      "outputs": [
+        "apps/tests/",
+        "DESIGN.md",
+        "evidence/UI08/acceptance.md"
+      ],
+      "acceptance": [
+        "Все 13 экранов проверены в Chromium, Firefox и WebKit на 375, 768 и 1440 px; клавиатура, фокус, подписи полей, контраст AA, базовая проверка скринридером.",
+        "break-ui по всем экранам: длинные имена и тексты, пустые данные, ошибки сервера, медленная сеть, двойной клик, повтор — найденное исправлено.",
+        "Полный `make check` зелёный, включая новый браузерный smoke вместо удалённого.",
+        "DESIGN.md, PRODUCT.md и docs/design/README.md отражают итог; отчёт честно перечисляет, что не проверено (реальные пользователи, физические устройства)."
+      ],
+      "handoff_path": "memory/sessions/UI08.md",
+      "evidence_dir": "evidence/UI08",
+      "requirement_ids": [],
+      "verification_commands": [
+        "make check",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(UI08): <конкретный результат>",
+      "acceptance_tag": "slice/UI08"
     },
     {
       "id": "S17I",

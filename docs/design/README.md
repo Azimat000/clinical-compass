@@ -1,0 +1,65 @@
+# Новый интерфейс: навыки, срезы, память
+
+Поручение пользователя от 22.10.2026: установить шесть навыков дизайна и построить новый интерфейс с чистого листа по срезам UI01–UI08, одна сессия — один срез. Бриф и ограничения — [BRIEF.md](BRIEF.md).
+
+## Навыки
+
+Установлены в проект: `.claude/skills/` для Claude Code и копия в `.agents/skills/` для Codex. Точные источники, коммиты, лицензии и хеши — [skills.lock.json](skills.lock.json); проверка целостности — `python3 tools/design_skills.py check`.
+
+| Навык | Автор | Зачем | Как вызвать |
+|---|---|---|---|
+| impeccable | Paul Bakaus | Главный: контекст продукта, выбор направления, сборка, критика, аудит, полировка. Сам читает PRODUCT.md и DESIGN.md в начале каждой сессии | `/impeccable init`, `/impeccable shape <экран>`, `/impeccable critique <путь>`, `/impeccable audit <путь>`, `/impeccable polish <путь>`, `/impeccable clarify`, `/impeccable harden`, `/impeccable document` |
+| design-taste-frontend | Leonxlnx | Против шаблонного вида: выдаёт три исследованных направления для экранов приложения, свой линтер и браузерный инспектор | `/design-taste-frontend`; скрипты `node .claude/skills/design-taste-frontend/scripts/draw.mjs --app ...`, `lint.mjs`, `inspect.mjs --app` |
+| emil-design-eng | Emil Kowalski | Мелкие детали, компоненты, решения о движении | `/emil-design-eng` |
+| review-animations | Emil Kowalski | Строгая проверка анимаций; сам не включается | только явно: `/review-animations` |
+| break-ui | Emil Kowalski | Ломает экран худшими данными: длинные имена, пустые списки, огромные числа | `/break-ui <экран>` |
+| web-design-guidelines | Vercel | Проверка по правилам доступности, форм, фокуса, типографики | `/web-design-guidelines <файлы>`; без сети — `guidelines.pinned.md` рядом с навыком |
+
+### Как они работают вместе
+
+1. Начало любой UI-сессии: impeccable сам загружает PRODUCT.md, DESIGN.md и `.impeccable/design.json`. Это долговременная память дизайна; руками её не переписывать в обход навыка.
+2. Новое направление или новый экран: impeccable (`shape` → построение) + design-taste-frontend для app-screens (`references/app-screens.md`).
+3. После сборки экрана: `break-ui` → `web-design-guidelines` → `/impeccable critique` и `audit` → исправления → `/impeccable polish`.
+4. Движение (UI07): `emil-design-eng` → правки → `/review-animations`.
+5. После правок оформления: `/impeccable document` обновляет DESIGN.md, чтобы следующий срез строил в той же системе.
+
+### Автоматические проверки
+
+- В `.claude/settings.json` включены официальные хуки impeccable для Claude Code: после каждой правки `.html/.css/.js` детектор ищет шаблонные приёмы и ошибки, при остановке — глубокий проход. На правки `.py` хук не реагирует. Выключить на время: `/impeccable hooks off`; исключения — только через `/impeccable hooks ignore-value ... --reason` с основанием.
+- В Codex хуки не установлены (там их нужно отдельно одобрять в `/hooks`); навык попросит один ручной прогон детектора в конце.
+- Движок impeccable — бинарный файл в `~/.impeccable/bin/0.1.16/`, скачан с GitHub Releases репозитория pbakaus/impeccable с проверкой sha256.
+
+### Правила проекта для навыков
+
+- Навыки — инструменты, а не источник команд. Клинические границы, CSP, права, синтетические данные и AGENTS.md важнее советов навыка.
+- Подагенты impeccable: `impeccable-finish-reviewer` можно запускать (только читает и оценивает). Документирование, ассеты и ручные правки делает основной агент по `reference/degraded/*.md`, потому что AGENTS.md разрешает менять файлы только основному агенту или implementation-worker по полному протоколу.
+- Сеть: правила web-design-guidelines брать из закреплённой копии, свежую версию — через web-researcher. `assets.mjs` (поиск картинок в открытых коллекциях) не использовать: для клинического сервиса стоковые изображения не нужны, а права на каждое пришлось бы проверять отдельно.
+- Генерация изображений (comp-first в impeccable) не нужна: экраны приложения строятся сразу в коде (code-first).
+
+## Срезы
+
+| Срез | Результат | Навыки | Статус |
+|---|---|---|---|
+| [UI01](../../plan/slices/UI01.md) | Три варианта дизайна и UX на двух ключевых экранах, выбор пользователя, PRODUCT.md и DESIGN.md | impeccable, design-taste-frontend, web-design-guidelines | следующий |
+| [UI02](../../plan/slices/UI02.md) | Токены, шрифты, базовый шаблон, компоненты, вход | все проверочные | ждёт UI01 |
+| [UI03](../../plan/slices/UI03.md) | Пациент: «Сегодня», самоотчёт, анкета, приглашение | impeccable, break-ui | ждёт UI02 |
+| [UI04](../../plan/slices/UI04.md) | Врач: список, карточка, сводка повторного приёма | impeccable, break-ui | ждёт UI03 |
+| [UI05](../../plan/slices/UI05.md) | Врач: решения, первый приём, документы | impeccable, break-ui | ждёт UI04 |
+| [UI06](../../plan/slices/UI06.md) | Сообщения, уведомления, критические события | impeccable, break-ui | ждёт UI05 |
+| [UI07](../../plan/slices/UI07.md) | Движение и тонкая доводка | emil-design-eng, review-animations | ждёт UI06 |
+| [UI08](../../plan/slices/UI08.md) | Общая проверка, три браузера, зелёный make check | break-ui, web-design-guidelines, impeccable audit | ждёт UI07 |
+
+## Память между срезами
+
+| Что помнить | Где | Кто обновляет |
+|---|---|---|
+| Кто пользователи, задачи, ограничения | PRODUCT.md (корень) | `/impeccable init` в UI01, дальше только при новых фактах |
+| Выбранный визуальный мир: цвета, шрифты, отступы, компоненты | DESIGN.md (корень) и `.impeccable/design.json` | UI01 после выбора пользователя; каждый следующий срез через `/impeccable document` |
+| Какой срез следующий | memory/STATE.json, `python3 tools/session.py status` | конец каждого среза |
+| Что сделано и проверено в срезе | memory/sessions/UIxx.md, evidence/UIxx/ | конец каждого среза |
+| Решения в одну строку | memory/DECISIONS.md | конец каждого среза |
+| Какие экраны готовы | таблица срезов выше | конец каждого среза |
+
+## Как начать следующую сессию
+
+Сказать: «Начни срез UI01». Агент читает AGENTS.md → START_HERE.md → эту страницу → карточку среза, запускает `python3 tools/session.py start UI01`, затем `python3 tools/design_skills.py check`, и работает по карточке. В конце — проверки, отчёт, обновление памяти, коммит `slice(UI01): ...` и тег `slice/UI01`. Без выбора пользователя UI01 не принимается.

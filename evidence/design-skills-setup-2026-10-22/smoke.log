@@ -1,0 +1,68 @@
+# Smoke runs (2026-10-22 16:57 MSK); scratch paths shortened
+## impeccable engine-probe
+impeccable-engine 0.1.16
+## impeccable hooks status
+Impeccable design hook
+  state:        enabled
+  shared file:  .impeccable/config.json (using defaults; file not present)
+  local file:   .impeccable/config.local.json (not present)
+  ignoreRules:  (none)
+  ignoreFiles:  (none)
+  ignoreValues: (none)
+  maxFindings:  5
+  maxChars:     8000
+  env override: unset
+  cache file:   .impeccable/hook.cache.json (not present)
+exit=0
+## impeccable context (head)
+NO_PRODUCT_MD: This project has no PRODUCT.md yet. For `init`, `teach`, `shape`, or wording that clearly maps to a from-scratch build/shape flow, load reference/init.md, complete its human or structured simulated-user interview, and write PRODUCT.md before designing. If no answer mechanism truly exists, init may infer only from the explicit brief and must label its assumptions. It never writes DESIGN.md. For any other (scoped) command against existing code, proceed using the code as context and offer `/impeccable init` as a suggestion (do not block).
+
+---
+## impeccable detect on deliberate slop page
+
+<scratch>/slop.html
+  [gradient-text] background-clip: text + gradient
+    → Gradient text is decorative rather than meaningful — a common AI tell, especially on headings and metrics. Use solid colors for text.
+  [dark-glow] Zero-offset box-shadow glow (#a855f7)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [ai-color-palette] Purple/violet accent colors detected
+    → Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. A gradient in one of those hues is the tell on its own; flat neon ink on a dark ground is charged once a second tell hue joins it. Choose a distinctive, intentional palette.
+  [gradient-text] background-clip: text + gradient
+    → Gradient text is decorative rather than meaningful — a common AI tell, especially on headings and metrics. Use solid colors for text.
+  [dark-glow] Zero-offset box-shadow glow (#a855f7)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [marketing-buzzword] 1 buzzword phrase: "AI-powered Revolutionize your health"
+    → Generic SaaS phrases (streamline / empower / supercharge / world-class / enterprise-grade / next-generation / cutting-edge / etc) are instant AI tells. Pick a specific verb and noun that says what the product literally does.
+
+6 anti-patterns found.
+exit=2
+## impeccable hook on .md (should be silent)
+exit=0
+## taste lint on deliberate slop page
+TASTESKILL · LINT   1 file(s)
+
+FAIL
+  [gradient] Gradient fill. Use a flat colour or a real image (a neutral scrim over a photo is the one exception).  (1×)
+      ../../../..<scratch>/slop.html:1  linear-gradient(
+  [gradient-text] Gradient / clipped text. Use solid colour.  (1×)
+      ../../../..<scratch>/slop.html:1  background-clip:text
+  [shadow] Shadow. Elements at rest carry none; only real overlays (menu, dialog, sticky bar) may.  (1×)
+      ../../../..<scratch>/slop.html:1  box-shadow:
+  [purple] Indigo / violet — the generated-page accent.  (1×)
+      ../../../..<scratch>/slop.html:1  #a855f7
+  [emoji] Emoji used as UI.  (1×)
+      ../../../..<scratch>/slop.html:1  ✨
+
+WARN
+  [copy] Stock marketing phrase. Say the specific thing the product does.  (1×)
+      ../../../..<scratch>/slop.html:1  Revolutionize
+
+RESULT: 5 FAIL, 1 WARN — fix the FAILs before rendering.
+Interface fragments marked data-ui keep their own borders and shadows. Any other line that must keep a flagged pattern for a real reason can carry the comment taste-skill-ignore.
+exit=1
+## taste draw --app --list kinds (cwd scratch)
+finance        money homes, budgeting, accounting, seller balances
+wallet         consumer wallets, crypto, personal finance on the go
+commerce       seller and shop back offices: orders, payouts, products
+## node
+v26.8.1
