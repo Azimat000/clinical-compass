@@ -65,7 +65,8 @@ class FirstVisitTests(unittest.TestCase):
         fresh.set_cookie(access.COOKIE,self.clients['doc-a'].get_cookie(access.COOKIE).value)
         page = fresh.get(response.location).get_data(as_text=True)
         self.assertIn('Не хватает сил',page)
-        self.assertIn('версия 1',page.lower())
+        self.assertIn('Черновик',page)
+        self.assertIn('<span class="num">1</span>',page)
         v2 = {**values,'base_revision':'1','request_key':secrets.token_hex(16),'state':'completed',
               'complaints_text':'Сведения уточнены','action_draft':'Обсудить после уточнения'}
         self.assertEqual(303,self.post(v2,first['visit_id']).status_code)
@@ -82,7 +83,7 @@ class FirstVisitTests(unittest.TestCase):
             complaints_basis='Беседа и выписка',complaints_source='document',complaints_on='2026-10-18',
             safety_status='denied',safety_basis='Явное отрицание в беседе',
             documented_facts='Диагноз только из синтетического документа',document_basis='Врач N, 18.10.2026',
-            action_draft='Уточнить сведения')
+            action_draft='Уточнить сведения',state='completed')
         r=self.post(v)
         self.assertEqual(303,r.status_code)
         p=self.rows()[0]['payload']
@@ -219,6 +220,6 @@ class FirstVisitTests(unittest.TestCase):
         self.assertIn('Повторный приём',page)
         self.assertIn(definition['title'],page)
         self.assertIn(definition['id'],page)
-        self.assertIn('14</li>',page)
+        self.assertIn('<td class="num">14</td>',page)
         self.assertEqual(1,len(self.rows()))
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])

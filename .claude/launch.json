@@ -75,6 +75,36 @@
         "8041"
       ],
       "port": 8041
+    },
+    {
+      "name": "ui05-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui05-review-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8050"
+      ],
+      "port": 8050
+    },
+    {
+      "name": "ui05-worst",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui05-worst-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8051"
+      ],
+      "port": 8051
     }
   ]
 }

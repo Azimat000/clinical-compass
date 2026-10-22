@@ -44,8 +44,8 @@
 | [UI02](../../plan/slices/UI02.md) | Токены, шрифты, базовый шаблон, компоненты, вход | все проверочные | принят 22.10.2026 |
 | [UI03](../../plan/slices/UI03.md) | Пациент: «Сегодня», самоотчёт, анкета, приглашение | impeccable, break-ui | принят 22.10.2026 |
 | [UI04](../../plan/slices/UI04.md) | Врач: список, карточка, сводка повторного приёма | impeccable, break-ui | принят 22.10.2026 |
-| [UI05](../../plan/slices/UI05.md) | Врач: решения, первый приём, документы | impeccable, break-ui | следующий |
-| [UI06](../../plan/slices/UI06.md) | Сообщения, уведомления, критические события | impeccable, break-ui | ждёт UI05 |
+| [UI05](../../plan/slices/UI05.md) | Врач: решения, первый приём, документы | impeccable, break-ui | принят 22.10.2026 |
+| [UI06](../../plan/slices/UI06.md) | Сообщения, уведомления, критические события | impeccable, break-ui | следующий |
 | [UI07](../../plan/slices/UI07.md) | Движение и тонкая доводка | emil-design-eng, review-animations | ждёт UI06 |
 | [UI08](../../plan/slices/UI08.md) | Общая проверка, три браузера, зелёный make check | break-ui, web-design-guidelines, impeccable audit | ждёт UI07 |
 

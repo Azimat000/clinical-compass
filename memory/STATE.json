@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-22T22:28:54+03:00",
+  "updated_on": "2026-10-22T23:20:00+03:00",
   "current_slice": null,
-  "last_accepted_slice": "UI04",
-  "next_slice": "UI05",
+  "last_accepted_slice": "UI05",
+  "next_slice": "UI06",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -332,8 +332,8 @@
       "reason": null
     },
     "UI05": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/UI05",
       "handoff": "memory/sessions/UI05.md",
       "reason": null
     },
@@ -720,6 +720,17 @@
       "other_doctor_views": "503/interface_removed до UI05 (решения, первый приём, документы) и UI06 (сообщения, уведомления, критические события)",
       "open_user_decision": null,
       "resolved_user_decision": "порог «две отметки хуже подряд» и «план без выполнения» оставлен как демонстрационный (22.10.2026)"
+    },
+    "ui05_doctor_work": {
+      "date": "2026-10-22",
+      "ready_views": [
+        "decisions.html",
+        "first_visit.html",
+        "imports.html"
+      ],
+      "evidence": "evidence/UI05/acceptance.md",
+      "other_doctor_views": "503/interface_removed до UI06 (сообщения, уведомления, критические события)",
+      "open_for_user": "экран подтверждённого плана для пациента не входит ни в один срез; адрес решений отдаёт пациенту техническое 503"
     }
   }
 }

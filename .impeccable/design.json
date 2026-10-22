@@ -402,6 +402,30 @@
       "description": "Строка между двумя линиями: знак-сведение слева, текст и ссылка «к записи» справа.",
       "html": "<div class=\"ds-warn\"><span>22.10: Жалобы — противоречивые сведения</span><a href=\"#\">к записи</a></div>",
       "css": ".ds-warn{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-block:1px solid #e6eaed;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-warn::before{content:\"\";width:22px;margin-top:9px;border-top:2px solid currentColor;flex:none}.ds-warn span{flex:1}.ds-warn a{color:#15191d}"
+    },
+    {
+      "name": "Строка разделов пациента",
+      "kind": "custom",
+      "refersTo": "navigation",
+      "description": "Пять разделов одной строкой под заголовком: Карточка, Сводка к приёму, Приём, План и решения, Документы. Текущий пункт жирный с подчёркиванием 2px чернилами, на телефоне строка прокручивается.",
+      "html": "<nav class=\"ds-pn\"><a>Карточка</a><a>Сводка к приёму</a><a>Приём</a><a class=\"on\">План и решения</a><a>Документы</a></nav>",
+      "css": ".ds-pn{display:flex;gap:16px;padding:0 28px;background:#f7f9fa;border-bottom:1px solid #e6eaed;font-size:14px}.ds-pn a{display:inline-flex;align-items:center;min-height:44px;color:#2b3238;border-bottom:2px solid transparent}.ds-pn a.on{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
+    },
+    {
+      "name": "Раздел сведений приёма",
+      "kind": "custom",
+      "refersTo": "form",
+      "description": "Рамка 1px, подпись-легенда с кодом PT Mono и названием; ряд из трёх полей (состояние, источник, дата), затем текст и основание. «Неизвестно» по умолчанию.",
+      "html": "<fieldset class=\"ds-vf\"><legend><span>V02</span> Жалобы своими словами</legend><div class=\"r\"><i>Неизвестно</i><i>Со слов пациента</i><i>дд.мм.гггг</i></div></fieldset>",
+      "css": ".ds-vf{margin:0;padding:16px 18px;border:1px solid #d3dae0;border-radius:4px;font-size:14px}.ds-vf legend{padding:0 8px;font-weight:700}.ds-vf legend span{font-family:monospace;font-weight:400;color:#56616b}.ds-vf .r{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.ds-vf i{font-style:normal;border:1px solid #7f8a94;border-radius:4px;padding:8px 10px}"
+    },
+    {
+      "name": "Кандидат из документа",
+      "kind": "custom",
+      "refersTo": "marker",
+      "description": "Строка: поле жирным, значение PT Mono, статус линией состояния; под ней точная цитата с вертикальной чертой 1px и строка «Сверено / Не сверено».",
+      "html": "<div class=\"ds-cand\"><b>Диагноз в источнике</b> <code>F41.1</code><blockquote>F41.1</blockquote><small>Не сверено</small></div>",
+      "css": ".ds-cand{font-size:14px}.ds-cand code{margin:0 12px;font-family:monospace}.ds-cand blockquote{margin:8px 0 0;padding:4px 0 4px 12px;border-left:1px solid #15191d;color:#2b3238}.ds-cand small{color:#56616b}"
     }
   ],
   "narrative": {

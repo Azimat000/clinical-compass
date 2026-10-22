@@ -1,0 +1,189 @@
+{#- Документы: загрузка текста, кандидаты из него и сверка врача. Кандидаты не пишутся в карточку сами. -#}
+{% extends 'doctor_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'queue' %}
+{% block title %}Документы{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set card = url_for('demo_patient', patient_id=patient.id) %}
+{% set assertion_kind = {'present': 'known', 'listed': 'known', 'patient_reported': 'known', 'historical': 'known', 'negated': 'denied',
+                         'unknown': 'unknown', 'incomplete': 'unknown', 'invalid': 'unknown', 'not_due': 'unknown',
+                         'conflicting': 'conflict'} %}
+{% set dispositions = {'accept': 'подтверждено', 'correct': 'исправлено', 'reject': 'отклонено', 'add': 'добавлено врачом'} %}
+{% set review_kind = {'accept': 'known', 'correct': 'known', 'reject': 'denied', 'add': 'known'} %}
+
+{% macro value_text(value) -%}
+  {%- if value is mapping -%}{{ value.get('value') }} {{ {'mg': 'мг', 'g': 'г', 'mcg': 'мкг', 'ml': 'мл'}.get(value.get('unit'), value.get('unit', '')) }}
+  {%- elif value is sameas true -%}да
+  {%- elif value is sameas false -%}нет
+  {%- elif value is none -%}не определено
+  {%- else -%}{{ value }}{%- endif -%}
+{%- endmacro %}
+
+{#- Форма сверки одного кандидата. -#}
+{% macro review_form(item, c) %}
+  {% set rv = review_error.form if review_error and review_error.key == item.id ~ ':' ~ c.id else {} %}
+  <form method="post" action="{{ url_for('review_import', patient_id=patient.id, import_id=item.id) }}" class="action-form" data-busy>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <input type="hidden" name="request_key" value="{{ new_key() }}">
+    <input type="hidden" name="candidate_id" value="{{ c.id }}">
+    <input type="hidden" name="field" value="{{ c.field }}">
+    {{ ui.select('assertion', 'Статус', assertion_labels.items()|list, selected=rv.get('assertion', c.assertion), id='as-' ~ item.id ~ '-' ~ c.id) }}
+    {{ ui.field('value', 'Значение', value=rv.get('value', c.review_value), hint='Для подтверждения оставьте как есть.', id='val-' ~ item.id ~ '-' ~ c.id, extra={'maxlength': '500', 'autocomplete': 'off'}) }}
+    {{ ui.textarea('quote', 'Точная цитата из документа', value=rv.get('quote', c.quote), hint='Должна совпадать с текстом документа слово в слово.', id='q-' ~ item.id ~ '-' ~ c.id, rows=2, maxlength=2000) }}
+    {{ ui.textarea('reason', 'Почему так', value=rv.get('reason', ''), hint='Что вы сверили. Обязательно.', id='r-' ~ item.id ~ '-' ~ c.id, required=True, rows=2, maxlength=1000) }}
+    <div class="form-actions">
+      {{ ui.button('Подтвердить', name='disposition', value='accept') }}
+      {{ ui.button('Исправить', name='disposition', value='correct') }}
+      {{ ui.button('Отклонить', name='disposition', value='reject') }}
+    </div>
+    <p class="meta">Подтвердить можно только без правок статуса, цитаты и значения. Любое изменение — «Исправить».</p>
+  </form>
+{% endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="{{ card }}">← Карточка пациента</a></p>
+    <h1>Документы</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Загрузка текста, поиск в нём сведений и сверка врача.</p>
+  </div>
+  <div class="title-actions">{{ ui.button('Загрузить документ', href='#upload') }}</div>
+</div>
+
+{{ ui.patient_nav(patient.id, 'docs') }}
+
+<div class="sheet-pad">
+  {% if error %}{{ ui.notice('Документ не загружен', error ~ ' Введённый текст остался в форме.', kind='error', id='import-error') }}<p class="meta"><a href="#upload">К форме</a></p>{% endif %}
+  {% if review_error %}{{ ui.notice('Сверка не сохранена', review_error.message ~ ' Введённое осталось в форме кандидата.', kind='error', id='review-error') }}<p class="meta"><a href="#cand-{{ review_error.key|replace(':', '-') }}">К кандидату</a></p>{% endif %}
+  {{ ui.notice('Найденное — кандидаты, а не факты', warning, kind='info') }}
+</div>
+
+<div class="card-state">
+  <div><span class="label">Загружено документов</span>{% if items %}<b class="num">{{ items|length }}</b>{% else %}{{ ui.state('unknown', 'ни одного') }}{% endif %}</div>
+  {% set n_reviews = items|map(attribute='reviews')|map('length')|sum %}
+  <div><span class="label">Сверок врача</span>{% if n_reviews %}<b class="num">{{ n_reviews }}</b>{% else %}{{ ui.state('unknown', 'не было') }}{% endif %}</div>
+  <div><span class="label">Что принимается</span>Текст или файл .txt в UTF-8, до 24 000 байт (около 12 000 русских букв)</div>
+</div>
+
+
+<div class="card-body">
+  <section class="block" id="upload" aria-labelledby="h-upload">
+    <h2 id="h-upload">Загрузка</h2>
+    <form method="post" action="{{ url_for('imports_page', patient_id=patient.id) }}" enctype="multipart/form-data" class="action-form" data-busy>
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="request_key" value="{{ new_key() }}">
+      {{ ui.textarea('source_text', 'Текст документа', value=values.get('source_text', ''), hint='Вставьте текст целиком. До 24 000 байт, около 12 000 русских букв.', rows=8) }}
+      <p class="meta or">или</p>
+      <div class="field">
+        <label for="f-file">Файл .txt</label>
+        <span class="hint" id="f-file-hint">Только текст в UTF-8. PDF, DOCX, сканы и архивы не поддерживаются. Выберите либо текст, либо файл. Файл до 24 000 байт.</span>
+        <input class="input" id="f-file" name="file" type="file" accept=".txt,text/plain" aria-describedby="f-file-hint">
+      </div>
+      <div class="form-actions">{{ ui.button('Найти сведения в тексте', kind='primary') }}</div>
+      <p class="meta">Текст сохраняется как есть и не меняется. Ничего не попадает в карточку и план, пока вы не подтвердите.</p>
+    </form>
+  </section>
+
+  <section class="block" id="imports" aria-labelledby="h-imports">
+    <h2 id="h-imports">Загруженное</h2>
+    {% for item in items %}
+    {% set cands = item.result.candidates %}
+    {% set many = cands|length > 25 %}
+    <article class="plan import" id="import-{{ item.id }}">
+      <h3>Документ от <time class="num" datetime="{{ item.created_at }}">{{ item.created_at|msk }}</time></h3>
+      <p class="meta">{{ item.source_text|length }} знаков · найдено кандидатов: <span class="num">{{ cands|length }}</span> · разбор <span class="num">{{ item.result.version }}</span> · контрольная сумма <span class="num id">{{ item.source_sha256[:12] }}</span></p>
+
+      <details class="fold">
+        <summary>Исходный текст целиком</summary>
+        <div class="fold-body"><pre class="source">{{ item.source_text }}</pre></div>
+      </details>
+
+      <h4>Что нашлось в тексте</h4>
+      {% if many %}<p class="meta">Кандидатов много. Форма сверки открывается по ссылке «Сверить» у нужной строки.</p>{% endif %}
+      {% if cands %}
+      <ul class="cands">
+        {% for c in cands %}
+        {% set mine = item.reviews|selectattr('payload.candidate_id', 'equalto', c.id)|list %}
+        {% set last = mine[-1] if mine else none %}
+        <li class="cand" id="cand-{{ item.id }}-{{ c.id }}">
+          <div class="cand-head">
+            <b>{{ fields[c.field] }}</b>
+            <span class="cand-value">{{ value_text(c.value) }}</span>
+            {{ ui.state(assertion_kind.get(c.assertion, 'unknown'), 'в тексте: ' ~ assertion_labels[c.assertion]|lower) }}
+          </div>
+          <blockquote class="quote">{{ c.quote }}</blockquote>
+          <p class="meta">
+            {% if last %}{{ ui.state(review_kind[last.payload.disposition], 'Сверено врачом: ' ~ dispositions[last.payload.disposition]) }} <time class="num" datetime="{{ last.created_at }}">{{ last.created_at|msk }}</time>
+            {% else %}{{ ui.state('unknown', 'Не сверено врачом') }}{% endif %}
+          </p>
+          {% set key = item.id ~ ':' ~ c.id %}
+          {% if not many %}
+          <details class="fold"{% if review_error and review_error.key == key %} open{% endif %}>
+            <summary>Сверить</summary>
+            {{ review_form(item, c) }}
+          </details>
+          {% elif review_key == key %}
+          <div class="fold review-open">
+            {{ review_form(item, c) }}
+            <p class="meta"><a href="{{ url_for('imports_page', patient_id=patient.id) }}#cand-{{ item.id }}-{{ c.id }}">Закрыть форму</a></p>
+          </div>
+          {% else %}
+          <a class="row-link" href="{{ url_for('imports_page', patient_id=patient.id) }}?review={{ key }}#cand-{{ item.id }}-{{ c.id }}">Сверить</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        {{ ui.notice('Ничего не найдено', 'Это значит только, что программа не распознала сведения. Отсутствие кандидата не означает отсутствие риска: прочтите текст сами.', kind='info') }}
+      {% endif %}
+
+      {% if item.result.unextracted_fields %}
+      <details class="fold">
+        <summary>Не найдено в тексте ({{ item.result.unextracted_fields|length }})</summary>
+        <p class="meta">Программа не нашла эти сведения. Они могут быть в документе другими словами.</p>
+        <p class="entry-text">{% for f in item.result.unextracted_fields %}{{ fields.get(f, f) }}{% if not loop.last %}; {% endif %}{% endfor %}</p>
+      </details>
+      {% endif %}
+
+      <details class="fold">
+        <summary>Добавить сведение, которое программа не нашла</summary>
+        <form method="post" action="{{ url_for('review_import', patient_id=patient.id, import_id=item.id) }}" class="action-form" data-busy>
+          <input type="hidden" name="csrf" value="{{ csrf }}">
+          <input type="hidden" name="request_key" value="{{ new_key() }}">
+          <input type="hidden" name="candidate_id" value="">
+          <input type="hidden" name="disposition" value="add">
+          {{ ui.select('field', 'Что добавляете', fields.items()|list, id='af-' ~ item.id) }}
+          {{ ui.select('assertion', 'Статус', assertion_labels.items()|list, selected='present', id='aa-' ~ item.id) }}
+          {{ ui.field('value', 'Значение', id='av-' ~ item.id, extra={'maxlength': '500', 'autocomplete': 'off'}) }}
+          {{ ui.textarea('quote', 'Точная цитата из документа', hint='Слово в слово из текста выше. Обязательно.', id='aq-' ~ item.id, required=True, rows=2, maxlength=2000) }}
+          {{ ui.textarea('reason', 'Почему добавляете', id='ar-' ~ item.id, required=True, rows=2, maxlength=1000) }}
+          <div class="form-actions">{{ ui.button('Добавить сведение') }}</div>
+        </form>
+      </details>
+
+      <h4>Журнал сверки</h4>
+      {% if item.reviews %}
+      <table class="results records">
+        <caption class="visually-hidden">Сверки врача по этому документу</caption>
+        <thead><tr><th scope="col">Когда</th><th scope="col">Что сделано</th><th scope="col">Сведение</th><th scope="col">Основание</th></tr></thead>
+        <tbody>
+          {% for r in item.reviews %}
+          <tr><td><time class="num" datetime="{{ r.created_at }}">{{ r.created_at|msk }}</time></td>
+            <td>{{ dispositions[r.payload.disposition] }}<span class="sub" translate="no">{{ authors.get(r.doctor_id, r.doctor_id) }}</span></td>
+            <td>{{ fields.get(r.payload.field, r.payload.field) }}: {{ r.payload.value }}<span class="sub">{{ assertion_labels[r.payload.assertion] }}</span></td>
+            <td>{{ r.payload.reason }}<span class="sub">«{{ r.payload.quote }}»</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="meta">Сверок не было. Кандидаты остаются непроверенными.</p>
+      {% endif %}
+    </article>
+    {% else %}
+      {{ ui.empty('Документов нет. Загрузите текст выше.', href='#upload', link='Загрузить') }}
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

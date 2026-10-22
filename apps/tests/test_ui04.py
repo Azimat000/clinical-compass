@@ -105,7 +105,7 @@ class DoctorCabinetTests(unittest.TestCase):
             self.assertNotIn('<script>alert', html, path)
             self.assertNotIn('<img src=x', html, path)
             self.assertNotIn('<b>жирно', html, path)
-            self.assertNotRegex(html, r'<(script|style)\b', path)
+            self.assertNotRegex(html, r'<script(?![^>]*\ssrc=)|<style\b', path)
             self.assertNotRegex(html, r' style="', path)
             self.assertNotRegex(html, r' on\w+="', path)
 

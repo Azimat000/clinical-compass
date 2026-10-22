@@ -60,7 +60,11 @@ class DecisionTests(unittest.TestCase):
         self.assertEqual(4,sum(a['supersedes_id'] is not None for a in actions))
         for a in actions:
             self.assertTrue(self.db.execute("SELECT 1 FROM doctor_confirmations WHERE id=? AND decision='approved'",(a['confirmation_id'],)).fetchone())
-        self.assertIn('Подтверждено врачом',self.clients['pat-a'].get('/patients/D01/decisions').get_data(as_text=True))
+        self.assertIn('Подтверждено врачом',self.clients['doc-a'].get('/patients/D01/decisions').get_data(as_text=True))
+        # The patient has no screen for decisions yet: the page address answers with the technical reply, never the doctor's page.
+        asked = self.clients['pat-a'].get('/patients/D01/decisions')
+        self.assertEqual(503, asked.status_code)
+        self.assertNotIn('Решение врача', asked.get_data(as_text=True))
 
     def test_reject_never_applies_and_is_hidden_from_patient(self):
         p=self.draft();self.assertEqual(303,self.confirm(p,'rejected').status_code)

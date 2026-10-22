@@ -219,3 +219,35 @@ def history(db, user, patient_id):
             entry['input_snapshot'] = json.loads(r['input_snapshot_json'])
         result.append(entry)
     return result
+
+
+def stale_ids(db, user, patient_id, items):
+    """Open drafts whose inputs changed after they were written: confirming them would be refused (409)."""
+    open_items = [i for i in items if i['decision'] is None]
+    if not open_items:
+        return set()
+    try:
+        current = snapshot(db, patient_id, doctor_relationship(db, user, patient_id))
+    except DecisionError:
+        return {i['id'] for i in open_items}
+    return {i['id'] for i in open_items if canonical(i['input_snapshot']) != current}
+
+
+def revision_values(entry):
+    """Form values for a new version that starts from an earlier project; parent_id links the two."""
+    payload = entry['payload']
+    values = {'kind': entry['kind'], 'parent_id': entry['id']}
+    values.update({name: payload.get(name, '') for name in ('content', 'basis', 'uncertainties')})
+    route = payload.get('routing_review')
+    if route:
+        values.update({'route_' + key: route.get(key) or '' for key in
+                       ('category', 'urgency', 'severity_status', 'population_status', 'specialty', 'severity',
+                        'population', 'evidence', 'unavailable')})
+        values['route_age_years'] = '' if route.get('age_years') is None else str(route['age_years'])
+    review = payload.get('therapy_review')
+    if review:
+        values.update(aviandr_conclusion=review['conclusion'], aviandr_basis=review['basis'])
+        for check in review['checks']:
+            values['review_' + check['id']] = check['status']
+            values['note_' + check['id']] = check['note']
+    return values

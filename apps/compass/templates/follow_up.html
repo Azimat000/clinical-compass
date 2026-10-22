@@ -25,6 +25,8 @@
   </div>
 </div>
 
+{{ ui.patient_nav(patient.id, 'summary') }}
+
 <form class="period" method="get" action="{{ url_for('follow_up_page', patient_id=patient.id) }}">
   {{ ui.field('start', 'С', type='date', value=values.get('start', data.start if data else ''), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
   {{ ui.field('end', 'По', type='date', value=values.get('end', data.end if data else today), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
@@ -201,3 +203,4 @@
 </div>
 {% endif %}
 {% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

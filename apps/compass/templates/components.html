@@ -38,12 +38,12 @@
 </div>
 {%- endmacro %}
 
-{% macro textarea(name, label, value='', error=None, hint=None, id=None, required=False, disabled=False, rows=4) -%}
+{% macro textarea(name, label, value='', error=None, hint=None, id=None, required=False, disabled=False, rows=4, maxlength=None) -%}
 {%- set fid = id or 'f-' ~ name -%}
 <div class="field">
   <label for="{{ fid }}">{{ label }}</label>
   {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
-  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
+  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if maxlength %} maxlength="{{ maxlength }}"{% endif %}{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
 {{ value }}</textarea>
   {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
 </div>
@@ -63,14 +63,14 @@
 {%- endmacro %}
 
 {#- Группа флажков (checkbox) или переключателей (radio). checked — значение или список значений; locked — недоступные значения. -#}
-{% macro choice(name, legend, options, type='radio', checked=None, error=None, disabled=False, locked=(), id=None) -%}
+{% macro choice(name, legend, options, type='radio', checked=None, error=None, disabled=False, locked=(), id=None, required=False) -%}
 {%- set fid = id or 'c-' ~ name -%}
 {%- set picked = checked if checked is iterable and checked is not string else [checked] -%}
 <fieldset class="choice{% if error %} choice--invalid{% endif %}"{% if error %} aria-describedby="{{ fid }}-error"{% endif %}{% if disabled %} disabled{% endif %}>
   <legend>{{ legend }}</legend>
   <div class="choice-list">
     {% for value, text in options %}
-    <label class="option"><input type="{{ type }}" name="{{ name }}" value="{{ value }}"{% if value in picked %} checked{% endif %}{% if value in locked %} disabled{% endif %}> {{ text }}</label>
+    <label class="option"><input type="{{ type }}" name="{{ name }}" value="{{ value }}"{% if value in picked %} checked{% endif %}{% if value in locked %} disabled{% endif %}{% if required %} required{% endif %}> {{ text }}</label>
     {% endfor %}
   </div>
   {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
@@ -128,4 +128,14 @@
     </div>
   </main>
 </div>
+{%- endmacro %}
+
+{#- Разделы пациента одной строкой: active — card | summary | visit | plan | docs. Остальные пункты — обычные ссылки. -#}
+{% macro patient_nav(patient_id, active) -%}
+{%- set items = [('card', 'Карточка', url_for('demo_patient', patient_id=patient_id)),
+                 ('summary', 'Сводка к приёму', url_for('follow_up_page', patient_id=patient_id)),
+                 ('visit', 'Приём', url_for('first_visit_page', patient_id=patient_id)),
+                 ('plan', 'План и решения', url_for('decisions_page', patient_id=patient_id)),
+                 ('docs', 'Документы', url_for('imports_page', patient_id=patient_id))] -%}
+<nav class="jump patient-nav" aria-label="Разделы пациента">{% for key, label, href in items %}<a href="{{ href }}"{% if key == active %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}</nav>
 {%- endmacro %}

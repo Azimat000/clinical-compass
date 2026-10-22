@@ -1,0 +1,254 @@
+{#- План и решения: подтверждённый план, проекты на подтверждении, история и новый проект. Подтверждение показано только по записи сервера. -#}
+{% extends 'doctor_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'queue' %}
+{% block title %}План и решения{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set card = url_for('demo_patient', patient_id=patient.id) %}
+{% set page = url_for('decisions_page', patient_id=patient.id) %}
+{% set waiting = decisions|selectattr('decision', 'none')|list %}
+{% set closed = decisions|rejectattr('decision', 'none')|list %}
+{% set approved = closed|selectattr('decision', 'equalto', 'approved')|list %}
+{% set head = approved[0] if approved else none %}
+{% set stale_waiting = waiting|selectattr('id', 'in', stale)|list %}
+{% set check_state = {'reviewed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict', 'concern': 'new'} %}
+{% set field_state = {'known': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
+{% set area_titles = reference.review_area_titles %}
+
+{#- Что врач записал в проекте: направление и оценка терапии. -#}
+{% macro review_blocks(item) %}
+  {% set route = item.payload.get('routing_review') %}
+  {% if route %}
+  <p class="subhead">Направление</p>
+  <dl class="facts">
+    <dt>Направление</dt><dd><b>Психиатр — {{ route_categories.get(route.category, 'категория не определена') }}</b></dd>
+    <dt>Срочность</dt><dd>{{ route_urgencies.get(route.urgency, 'не определена')|lower }}</dd>
+    <dt>Кто направляет</dt><dd>{{ route.specialty }}</dd>
+    <dt>Тяжесть</dt><dd>{{ ui.state(field_state[route.severity_status], route_statuses[route.severity_status]) }}<span class="sub">{{ route.severity }}</span></dd>
+    <dt>Для кого справка</dt><dd>{{ ui.state(field_state[route.population_status], route_statuses[route.population_status]) }}<span class="sub">{{ route.population }}{% if route.age_years is not none %}; возраст в проекте {{ route.age_years|years }}{% endif %}</span></dd>
+    <dt>Основание</dt><dd>{{ route.evidence }}</dd>
+    <dt>Если помощь недоступна</dt><dd>{{ route.unavailable }}</dd>
+  </dl>
+  {% if route.get('suggestion') %}<p class="meta">Проект заполнен по источниковой рекомендации «{{ route.suggestion.get('source_section', '') }}». Категорию и срочность выбрал врач.</p>{% endif %}
+  {% elif item.payload.get('route') %}
+  <dl class="facts"><dt>Направление</dt><dd><b>Психиатр — {{ route_categories.get(item.payload.route.category, 'категория не определена') }}</b></dd>
+    <dt>Срочность</dt><dd>{{ route_urgencies.get(item.payload.route.urgency, 'не определена')|lower }}</dd></dl>
+  {% endif %}
+  {% set therapy = item.payload.get('therapy_review') %}
+  {% if therapy %}
+  <p class="subhead">Оценка по листку-вкладышу</p>
+  <table class="results records">
+    <caption class="visually-hidden">Проверка по областям, записанная врачом</caption>
+    <thead><tr><th scope="col">Область</th><th scope="col">Состояние</th><th scope="col">Запись врача</th></tr></thead>
+    <tbody>
+      {% for c in therapy.checks %}
+      <tr><td>{{ area_titles.get(c.id, c.id) }}</td><td>{{ ui.state(check_state[c.status], reference.review_statuses[c.status]) }}</td><td>{{ c.note }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <dl class="facts">
+    <dt>Вывод врача</dt><dd>{{ reference.conclusions.get(therapy.conclusion, therapy.conclusion) }}<span class="sub">{{ therapy.basis }}</span></dd>
+    <dt>Не проверено или противоречит</dt><dd>{% if therapy.unresolved %}{% for id in therapy.unresolved %}{{ area_titles.get(id, id) }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}всё указано как проверенное{% endif %}</dd>
+    <dt>Ограничения и риски</dt><dd>{% if therapy.concerns %}{% for id in therapy.concerns %}{{ area_titles.get(id, id) }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}не отмечены{% endif %}</dd>
+  </dl>
+  <p class="meta">Справка версии <span class="num">{{ therapy.reference_version }}</span>. Пригодность лечения этой записью не установлена, рекомендация автоматически не формируется.</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro body(item) %}
+  <p class="entry-text">{{ item.payload.content }}</p>
+  <dl class="facts">
+    <dt>Основание</dt><dd>{{ item.payload.basis }}</dd>
+    <dt>Что неизвестно</dt><dd>{{ item.payload.uncertainties }}</dd>
+    <dt>Проект составил</dt><dd><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.created_at }}">{{ item.created_at|msk }}</time></dd>
+    {% if item.parent_proposal_id %}{% set parent = decisions|selectattr('id', 'equalto', item.parent_proposal_id)|first %}<dt>На основе</dt><dd>{% if parent %}<a href="#decision-{{ parent.id }}">версии {{ parent.version }}</a>{% else %}прежнего проекта{% endif %}</dd>{% endif %}
+  </dl>
+  {{ review_blocks(item) }}
+{% endmacro %}
+
+{% macro status_line(item) -%}
+  {%- if item.decision == 'approved' -%}{{ ui.state('known', 'Подтверждено врачом') }}
+  {%- elif item.decision == 'rejected' -%}{{ ui.state('denied', 'Отклонено врачом — план не изменён') }}
+  {%- else -%}{{ ui.state('unknown', 'Проект — план не изменён') }}{%- endif -%}
+{%- endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="{{ card }}">← Карточка пациента</a></p>
+    <h1>План и решения</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Сервис сам ничего не назначает.</p>
+  </div>
+  <div class="title-actions">{{ ui.button('Составить проект', href='#new-decision') }}</div>
+</div>
+
+{{ ui.patient_nav(patient.id, 'plan') }}
+
+<div class="sheet-pad">
+  {% if error %}{{ ui.notice('Проект не сохранён', error ~ ' Введённое осталось в форме.', kind='error', id='form-error') }}<p class="meta"><a href="#new-decision">К форме</a></p>{% endif %}
+  {% if confirm_error %}{{ ui.notice('Решение не записано', confirm_error.message, kind='error', id='confirm-error') }}<p class="meta"><a href="#decision-{{ confirm_error.id }}">К проекту</a></p>{% endif %}
+  {{ ui.notice('Неизвестность не означает допуск', 'Если сведений нет или они противоречат друг другу, так и запишите. Отсутствие данных не означает отсутствия риска. Правила оценки пока не включены: рекомендации сервис не формирует.', kind='info') }}
+</div>
+
+<div class="card-state">
+  <div>
+    <span class="label">Подтверждённый план</span>
+    {% if head %}<b>{{ kinds[head.kind] }}</b> <span class="sub">версия <span class="num">{{ head.version }}</span>, <time class="num" datetime="{{ head.confirmed_at }}">{{ head.confirmed_at|msk }}</time></span>
+    {% else %}{{ ui.state('unknown', 'не подтверждён') }}{% endif %}
+  </div>
+  <div>
+    <span class="label">Ждут подтверждения</span>
+    {% if waiting %}<b class="num">{{ waiting|length }}</b>{% if stale_waiting %} <span class="sub">из них устарели: {{ stale_waiting|length }}</span>{% endif %}
+    {% else %}{{ ui.state('unknown', 'проектов нет') }}{% endif %}
+  </div>
+  <div>
+    <span class="label">Всего версий</span>
+    {% if decisions %}<b class="num">{{ decisions|length }}</b>{% else %}{{ ui.state('unknown', 'ни одной') }}{% endif %}
+  </div>
+</div>
+
+<nav class="jump" aria-label="Разделы экрана">
+  {% if waiting %}<a href="#waiting">На подтверждении ({{ waiting|length }})</a><a href="#current">Подтверждённый план</a>{% else %}<a href="#current">Подтверждённый план</a><a href="#waiting">На подтверждении</a>{% endif %}<a href="#history">История</a><a href="#new-decision">Новый проект</a>
+</nav>
+
+<div class="card-body">
+  {% set sec_current %}
+  <section class="block" id="current" aria-labelledby="h-current">
+    <h2 id="h-current">Подтверждённый план</h2>
+    {% if head %}
+    <article class="plan">
+      <h3>{{ kinds[head.kind] }} · версия <span class="num">{{ head.version }}</span></h3>
+      <p class="status-line">{{ status_line(head) }}</p>
+      <p class="meta">Подтвердил <span translate="no">{{ authors.get(head.doctor_id, head.doctor_id) }}</span>, <time class="num" datetime="{{ head.confirmed_at }}">{{ head.confirmed_at|msk }}</time>. Новое подтверждение заменяет это решение, прежние остаются в истории.</p>
+      {{ body(head) }}
+      <p class="entry-text"><b>Обоснование врача:</b> {{ head.rationale }}</p>
+    </article>
+    {% else %}
+      {{ ui.empty('Подтверждённого плана нет. Это не означает, что план не нужен.') }}
+    {% endif %}
+  </section>
+
+  {% endset %}
+  {% set sec_waiting %}
+  <section class="block" id="waiting" aria-labelledby="h-waiting">
+    <h2 id="h-waiting">На подтверждении</h2>
+    {% for item in waiting %}
+    {% set is_stale = item.id in stale %}
+    <article class="plan decision" id="decision-{{ item.id }}">
+      <h3>{{ kinds[item.kind] }} · версия <span class="num">{{ item.version }}</span></h3>
+      <p class="status-line">{{ status_line(item) }}</p>
+      {% if is_stale %}
+        {{ ui.notice('Подтвердить нельзя: проект устарел', 'После его создания изменились данные пациента, источник или день. Изучите сведения и создайте новую версию на основе этого проекта. Отклонить его можно.', kind='info') }}
+        <p class="meta"><a class="button" href="{{ page }}?revise={{ item.id }}#new-decision">Создать новую версию</a></p>
+      {% endif %}
+      {{ body(item) }}
+      <form method="post" action="{{ url_for('confirm_decision', patient_id=patient.id, proposal_id=item.id) }}" class="action-form" data-busy>
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="version" value="{{ item.version }}">
+        <h3>Решение врача</h3>
+        {{ ui.textarea('rationale', 'Обоснование', value=(confirm_error.rationale if confirm_error and confirm_error.id == item.id else ''), hint='Почему вы подтверждаете или отклоняете проект. Запись останется в истории.', id='rationale-' ~ item.id, required=True, rows=3, maxlength=4000) }}
+        {{ ui.choice('reviewed', 'Подтверждение просмотра', [('yes', 'Сведения, на которых основан проект, просмотрены')], type='checkbox', id='reviewed-' ~ item.id, required=True) }}
+        <div class="form-actions">
+          {{ ui.button('Подтвердить решение', kind='primary', name='decision', value='approved', disabled=is_stale) }}
+          {{ ui.button('Отклонить проект', name='decision', value='rejected') }}
+        </div>
+        <p class="meta">Решение запишется, когда ответит сервер. Если страница не обновилась, проверьте историю, прежде чем повторять.</p>
+      </form>
+    </article>
+    {% else %}
+      {{ ui.empty('Проектов, ждущих подтверждения, нет.') }}
+    {% endfor %}
+  </section>
+
+  {% endset %}
+  {% if waiting %}{{ sec_waiting }}{{ sec_current }}{% else %}{{ sec_current }}{{ sec_waiting }}{% endif %}
+
+  <section class="block" id="history" aria-labelledby="h-history">
+    <h2 id="h-history">История решений</h2>
+    {% for item in closed %}
+    <details class="fold decision" id="decision-{{ item.id }}">
+      <summary><span class="sum"><span>{{ kinds[item.kind] }} · версия <span class="num">{{ item.version }}</span></span> {{ status_line(item) }}<span class="sub"><time class="num" datetime="{{ item.confirmed_at }}">{{ item.confirmed_at|msk }}</time>, <span translate="no">{{ authors.get(item.doctor_id, item.doctor_id) }}</span></span></span></summary>
+      <div class="fold-body">
+        {{ body(item) }}
+        <p class="entry-text"><b>Обоснование врача:</b> {{ item.rationale }}</p>
+      </div>
+    </details>
+    {% else %}
+      {{ ui.empty('Решений ещё не было. Первое появится после подтверждения или отклонения проекта.') }}
+    {% endfor %}
+    {% if closed %}<p class="meta">Записи неизменяемы: поправка — это новая версия, а не правка прежней.</p>{% endif %}
+  </section>
+
+  <section class="block" id="new-decision" aria-labelledby="h-new">
+    <h2 id="h-new">Новый проект</h2>
+    {% if values.get('parent_id') %}<p class="meta">Новая версия на основе прежнего проекта.</p>{% endif %}
+    <div class="new-form">
+      <form method="post" action="{{ page }}" class="action-form" data-busy data-decision-form>
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="request_key" value="{{ request_key }}">
+        <input type="hidden" name="parent_id" value="{{ values.get('parent_id', '') }}">
+        <input type="hidden" name="route_rule_context_id" value="{{ values.get('route_rule_context_id', '') }}">
+        <input type="hidden" name="routing_reference" value="{{ route_reference.version }}">
+        <input type="hidden" name="therapy_reference" value="{{ reference.version }}">
+        {% if values.get('parent_id') %}{{ ui.notice('Новая версия', 'Прежний проект остаётся в истории без изменений. Проверьте каждое поле: сведения пациента могли измениться.', kind='info') }}{% endif %}
+        {% if values.get('route_rule_context_id') %}{{ ui.notice('Заполнено по источниковой рекомендации', 'Категорию и срочность подтверждаете вы. Срочность не определена, пока вы её не выберете.', kind='info') }}{% endif %}
+        {{ ui.select('kind', 'Вид решения', kinds.items()|list, selected=values.get('kind', 'plan_change'), required=True) }}
+        {{ ui.textarea('content', 'Решение', value=values.get('content', ''), hint='Что именно решено.', required=True, rows=4, maxlength=4000) }}
+        {{ ui.textarea('basis', 'Основание', value=values.get('basis', ''), hint='Откуда сведения: запись, документ, источник.', required=True, rows=3, maxlength=4000) }}
+        {{ ui.textarea('uncertainties', 'Что неизвестно', value=values.get('uncertainties', ''), hint='Что не проверено или противоречит. Если неизвестного нет, напишите об этом прямо.', required=True, rows=3, maxlength=4000) }}
+
+        <fieldset class="kind-group" data-for-kinds="referral">
+          <legend>Направление к психиатру</legend>
+          <p class="meta">Нужно только для вида «Направление». Категорию и срочность выбираете отдельно, сервис их не вычисляет. Возраст сверяется в <a href="{{ card }}#age-review">карточке</a>.</p>
+          <div class="form-grid">
+            {{ ui.field('route_specialty', 'Специальность направляющего врача', value=values.get('route_specialty', ''), extra={'maxlength': '2000', 'autocomplete': 'off'}) }}
+            {{ ui.select('route_category', 'Категория', route_categories.items()|list, selected=values.get('route_category', 'unknown')) }}
+            {{ ui.select('route_urgency', 'Срочность', route_urgencies.items()|list, selected=values.get('route_urgency', 'unknown')) }}
+            {{ ui.select('route_severity_status', 'Сведения о тяжести', route_statuses.items()|list, selected=values.get('route_severity_status', 'unknown')) }}
+            {{ ui.select('route_population_status', 'Применимость к возрасту', route_statuses.items()|list, selected=values.get('route_population_status', 'unknown')) }}
+            {{ ui.field('route_age_years', 'Возраст, лет', value=values.get('route_age_years', ''), size='sm', extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
+          </div>
+          {{ ui.textarea('route_severity', 'Тяжесть по вашей оценке', value=values.get('route_severity', ''), rows=2, maxlength=2000) }}
+          {{ ui.textarea('route_population', 'Для какой группы применима справка', value=values.get('route_population', ''), rows=2, maxlength=2000) }}
+          {{ ui.textarea('route_evidence', 'Основание направления', value=values.get('route_evidence', ''), rows=3, maxlength=2000) }}
+          {{ ui.textarea('route_unavailable', 'Если помощь недоступна', value=values.get('route_unavailable', ''), hint='Что делать пациенту, если психиатр сразу недоступен.', rows=2, maxlength=2000) }}
+        </fieldset>
+
+        <fieldset class="kind-group" data-for-kinds="therapy_start therapy_change therapy_stop">
+          <legend>Терапия: оценка по листку-вкладышу</legend>
+          <p class="meta">Нужно для назначения, изменения и отмены терапии. Заполните все области: «неизвестно» — допустимый ответ, но его нельзя выдавать за проверку.</p>
+          {{ ui.notice(None, reference.blocker, kind='info') }}
+          <details class="fold">
+            <summary>Справка из источников ({{ reference.sources|length }})</summary>
+            <div class="fold-body">
+              {% for source in reference.sources %}
+              <p class="subhead">{{ source.title }}</p>
+              <ul class="plain">
+                {% for section in source.sections %}
+                <li><b>{{ section.topic }}</b> <span class="num">{{ section.location }}</span><span class="sub">{{ section.source_summary }}</span><span class="sub">{{ section.limitation }}</span></li>
+                {% endfor %}
+              </ul>
+              {% endfor %}
+            </div>
+          </details>
+          {% for area in reference.review_areas %}
+          <fieldset class="area">
+            <legend>{{ area.title }} <span class="meta num">{{ area.source }}</span></legend>
+            <p class="meta">{{ area.prompt }}</p>
+            {{ ui.select('review_' ~ area.id, 'Состояние', reference.review_statuses.items()|list, selected=values.get('review_' ~ area.id, 'unknown')) }}
+            {{ ui.textarea('note_' ~ area.id, 'Что вы проверили и откуда', value=values.get('note_' ~ area.id, ''), rows=2, maxlength=1500) }}
+          </fieldset>
+          {% endfor %}
+          {{ ui.select('aviandr_conclusion', 'Вывод по Авиандру', reference.conclusions.items()|list, selected=values.get('aviandr_conclusion', 'insufficient_data')) }}
+          {{ ui.textarea('aviandr_basis', 'Основание вывода', value=values.get('aviandr_basis', ''), rows=3, maxlength=2000) }}
+        </fieldset>
+
+        <div class="form-actions">{{ ui.button('Сохранить проект', kind='primary') }}</div>
+        <p class="meta">Проект не меняет план и не создаёт назначений. Подтверждение — отдельный шаг в разделе «На подтверждении».</p>
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

@@ -16,9 +16,12 @@ from . import first_visits, follow_up, report_drafts, overview
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
-                         'dashboard.html', 'doctor_patient.html', 'follow_up.html'})
+                         'dashboard.html', 'doctor_patient.html', 'follow_up.html',
+                         'decisions.html', 'first_visit.html', 'imports.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
+# Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
+DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
@@ -142,7 +145,9 @@ def create_app(database=None):
         Keep login/invitation/assessment receipts usable without a browser UI.
         Existing mutation handlers, validation and access checks remain in place.
         """
-        ready = view in READY_VIEWS and (view not in PATIENT_VIEWS or (g.get('user') and g.user['role'] == 'patient'))
+        role_now = g.user['role'] if g.get('user') else None
+        ready = (view in READY_VIEWS and (view not in PATIENT_VIEWS or role_now == 'patient')
+                 and (view not in DOCTOR_VIEWS or role_now == 'doctor'))
         if ready and wants_html():
             return render_template(view, **context)
         if view == 'login.html':
@@ -218,6 +223,15 @@ def create_app(database=None):
     def rule_failure(error):
         return interface_response('result.html', title='Источниковая проверка не выполнена',
                                message=str(error)), error.status
+
+    def author_names(items):
+        """Display names for every doctor mentioned in a list of decisions."""
+        ids = {i.get(key) for i in items for key in ('actor_id', 'doctor_id') if i.get(key)}
+        if not ids:
+            return {}
+        marks = ','.join('?' * len(ids))
+        return {r['id']: r['display_name'] for r in get_db().execute(
+            'SELECT id,display_name FROM users WHERE id IN (%s)' % marks, tuple(ids))}
 
     def patient_or_404(patient_id):
         patient = access.visible_patient(get_db(), g.user, patient_id)
@@ -416,7 +430,8 @@ def create_app(database=None):
             abort(404)
         current = selected[0] if selected else None
         values = dict(request.form) if error else first_visits.form_values(current) if current else {}
-        return interface_response('first_visit.html', patient=patient, visits=items,
+        return interface_response('first_visit.html', patient=patient, visits=items, authors=author_names(items), kinds=decisions.KINDS,
+            patient_name=overview.person(patient['code'])[0],
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
             fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES,
@@ -510,17 +525,25 @@ def create_app(database=None):
                 text = extraction.upload_text(file) if file and file.filename else request.form.get('source_text','')
                 if re.search(r'\d{101}',text):
                     raise extraction.ExtractionError('Числовой фрагмент длиннее 100 цифр не поддерживается; проверьте источник.')
-                extraction.save_import(get_db(),g.user,patient_id,text,request.form.get('request_key',''))
-                return redirect(url_for('imports_page',patient_id=patient_id),code=303)
+                saved = extraction.save_import(get_db(),g.user,patient_id,text,request.form.get('request_key',''))
+                return redirect(url_for('imports_page',patient_id=patient_id)+'#import-'+saved,code=303)
             except (extraction.ExtractionError, decisions.DecisionError) as exc:
                 error, status = str(exc), exc.status
+        return imports_view(patient, patient_id, error, status, values)
+
+    def imports_view(patient, patient_id, error=None, status=200, values=None, review_error=None):
+        """The documents screen; a refused review comes back here with the typed values."""
         items = extraction.history(get_db(),patient_id)
         for item in items:
             for candidate in item['result']['candidates']:
                 candidate['review_value'] = extraction.canonical(candidate['value'])
             for review in item['reviews']:
                 review['payload'] = json.loads(review['payload_json'])
-        return interface_response('imports.html',patient=patient,items=items,error=error,values=values,
+        return interface_response('imports.html',patient=patient,items=items,error=error,values=values or {},
+                               review_error=review_error,
+                               review_key=review_error['key'] if review_error else request.args.get('review','')[:80],
+                               patient_name=overview.person(patient['code'])[0],
+                               authors=author_names([r for item in items for r in item['reviews']]),
                                fields=extraction.FIELDS,assertions=extraction.ASSERTIONS,assertion_labels=extraction.ASSERTION_LABELS,
                                warning=extraction.WARNING,new_key=lambda:secrets.token_hex(16)),status
 
@@ -531,8 +554,11 @@ def create_app(database=None):
         try:
             extraction.review(get_db(),g.user,patient_id,import_id,request.form)
         except (extraction.ExtractionError, decisions.DecisionError) as exc:
-            return interface_response('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
-        return redirect(url_for('imports_page',patient_id=patient_id),code=303)
+            if exc.status in (403, 404):
+                return interface_response('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
+            return imports_view(patient_or_404(patient_id),patient_id,status=exc.status,
+                                review_error={'key':import_id+':'+request.form.get('candidate_id',''),'message':str(exc),'form':request.form})
+        return redirect(url_for('imports_page',patient_id=patient_id)+'#import-'+import_id,code=303)
 
     def patient_today(patient_id, relationship, pending, draft):
         """The one request at the top of the patient's home screen. Read-only; nothing is written."""
@@ -785,8 +811,21 @@ def create_app(database=None):
                 return redirect(url_for('decisions_page', patient_id=patient_id)+'#decision-'+proposal_id, code=303)
             except decisions.DecisionError as failure:
                 error, status = str(failure), failure.status
+        return decisions_view(patient, patient_id, error, status)
+
+    def decisions_view(patient, patient_id, error=None, status=200, confirm_error=None):
+        """The decisions screen; a refused confirmation comes back here with the typed rationale instead of a bare error page."""
         items = decisions.history(get_db(), g.user, patient_id)
-        values = request.form if request.method == 'POST' else {}
+        values = request.form if request.method == 'POST' and confirm_error is None else {}
+        stale = set()
+        if g.user['role'] == 'doctor':
+            stale = decisions.stale_ids(get_db(), g.user, patient_id, items)
+        if request.method == 'GET' and request.args.get('revise'):
+            role('doctor')
+            earlier = next((i for i in items if i['id'] == request.args['revise']), None)
+            if earlier is None:
+                abort(404)
+            values = decisions.revision_values(earlier)
         if request.method == 'GET' and request.args.get('from_context'):
             role('doctor')
             advice = clinical_rules.recommendation(get_db(), g.user, patient_id)
@@ -807,7 +846,9 @@ def create_app(database=None):
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
-                               error=error, values=values,
+                               error=error, values=values, stale=stale, confirm_error=confirm_error,
+                               patient_name=overview.person(patient['code'])[0], authors=author_names(items),
+                               today=records.today().isoformat(),
                                request_key=request.form.get('request_key', secrets.token_hex(16))), status
 
     @app.post('/patients/<patient_id>/decisions/<proposal_id>/confirm')
@@ -817,7 +858,10 @@ def create_app(database=None):
         try:
             decisions.confirm(get_db(), g.user, patient_id, proposal_id, request.form)
         except decisions.DecisionError as error:
-            return interface_response('result.html', title='Решение не подтверждено', message=str(error)), error.status
+            if error.status in (403, 404):
+                return interface_response('result.html', title='Решение не подтверждено', message=str(error)), error.status
+            return decisions_view(patient_or_404(patient_id), patient_id, status=error.status,
+                                  confirm_error={'id': proposal_id, 'message': str(error), 'rationale': request.form.get('rationale', '')})
         return redirect(url_for('decisions_page', patient_id=patient_id)+'#decision-'+proposal_id, code=303)
 
     @app.get('/api/patients/<patient_id>/decisions')

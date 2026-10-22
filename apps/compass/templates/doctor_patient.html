@@ -59,6 +59,8 @@
   </div>
 </div>
 
+{{ ui.patient_nav(patient.id, 'card') }}
+
 <div class="card-state">
   <div>
     <span class="label">Самочувствие, 5 отметок</span>
@@ -275,8 +277,8 @@
     <ul class="plain">
       {% for item in route_items %}
       {% set review = item.payload.get('routing_review') or item.payload.get('route') or {} %}
-      <li>{{ route_categories.get(review.get('category'), 'Категория не определена') }}, {{ route_urgencies.get(review.get('urgency'), 'срочность не определена')|lower }}
-        <span class="sub">{% if item.decision == 'approved' %}подтверждено врачом{% else %}проект, ждёт подтверждения врача{% endif %}</span></li>
+      <li>Психиатр — {{ route_categories.get(review.get('category'), 'категория не определена') }}, срочность: {{ route_urgencies.get(review.get('urgency'), 'не определена')|lower }}
+        <span class="sub">{% if item.decision == 'approved' %}подтверждено врачом{% else %}проект, ждёт подтверждения врача{% endif %} · <a href="{{ url_for('decisions_page', patient_id=patient.id) }}#decision-{{ item.id }}">в плане и решениях</a></span></li>
       {% endfor %}
     </ul>
   </section>
@@ -302,3 +304,4 @@
   </section>
 </div>
 {% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

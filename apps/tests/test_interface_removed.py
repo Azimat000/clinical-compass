@@ -27,11 +27,12 @@ class InterfaceRemovedTests(unittest.TestCase):
                            headers={'Accept': 'application/json'})
 
     def test_only_rebuilt_templates_and_new_assets_are_served(self):
-        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up; the rest of the S29 assets stay removed.
+        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up, UI05 decisions, first visit and imports; the rest of the S29 assets stay removed.
         root = Path(__file__).resolve().parents[1] / 'compass'
         self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html',
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
-                          'doctor_base.html', 'dashboard.html', 'doctor_patient.html', 'follow_up.html'},
+                          'doctor_base.html', 'dashboard.html', 'doctor_patient.html', 'follow_up.html',
+                          'decisions.html', 'first_visit.html', 'imports.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)
@@ -42,9 +43,7 @@ class InterfaceRemovedTests(unittest.TestCase):
                 self.assertEqual(200, response.status_code)
 
     def test_removed_pages_explain_status_without_disclosing_view_context(self):
-        paths = ('/patients/D01/first-visits', '/patients/D01/communication',
-                 '/patients/D01/decisions', '/patients/D01/imports',
-                 '/notifications', '/critical')
+        paths = ('/patients/D01/communication', '/notifications', '/critical')
         for path in paths:
             with self.subTest(path=path):
                 response = self.clients['doc-a'].get(path)
@@ -57,7 +56,8 @@ class InterfaceRemovedTests(unittest.TestCase):
                 self.assertEqual(503, self.clients['doc-a'].head(path).status_code)
 
     def test_doctor_screens_are_pages_for_browsers_and_stay_technical_for_json_clients(self):
-        for path in ('/', '/demo/D01', '/patients/D01/follow-up'):
+        for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/first-visits',
+                     '/patients/D01/decisions', '/patients/D01/imports'):
             with self.subTest(path=path):
                 page = self.clients['doc-a'].get(path)
                 self.assertEqual(200, page.status_code)

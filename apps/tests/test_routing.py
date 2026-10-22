@@ -29,11 +29,14 @@ class RoutingTests(unittest.TestCase):
             item = self.clients['pat-a'].get('/api/patients/D01/decisions').json['decisions'][0]
             self.assertEqual({'target':'psychiatrist','category':category,'urgency':urgency},item['payload']['route'])
             self.assertNotIn('routing_review',item['payload'])
-            for path in ('/', '/demo/D01'):
-                page = self.clients['doc-a'].get(path).text
-                self.assertIn('Психиатр — '+label,page)
-                self.assertIn('Срочность:',page)
-                self.assertIn('Подтверждено врачом',page)
+            page = self.clients['doc-a'].get('/patients/D01/decisions').text
+            self.assertIn('Психиатр — '+label,page)
+            self.assertIn('Срочность',page)
+            self.assertIn('Подтверждено врачом',page)
+            card = self.clients['doc-a'].get('/demo/D01').text
+            self.assertIn('Психиатр — '+label,card)
+            self.assertIn('срочность:',card)
+            self.assertIn('подтверждено врачом',card)
 
     def test_missing_data_not_negative_or_planned_and_confirmation_requires_choice(self):
         p=self.draft(kind='referral',route_category='unknown',route_urgency='unknown',route_population_status='unknown')
