@@ -121,7 +121,7 @@ test_repeat_visit_and_exact_dass_results_remain_separate (test_first_visits.Firs
 test_roles_csrf_other_patient_revocation_and_xss (test_first_visits.FirstVisitTests.test_roles_csrf_other_patient_revocation_and_xss) ... FAIL
 test_sources_dates_unknown_denial_conflict_and_summary_sections (test_first_visits.FirstVisitTests.test_sources_dates_unknown_denial_conflict_and_summary_sections) ... FAIL
 test_upgrade_preserves_previous_rows_and_checksums (test_first_visits.FirstVisitTests.test_upgrade_preserves_previous_rows_and_checksums) ... ok
-test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) ... 
+test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) ...
   test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'observed_on': '2099-01-01'}) ... FAIL
   test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'visit_kind': 'diagnosis'}) ... FAIL
   test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'base_revision': 'bad'}) ... FAIL
@@ -178,7 +178,7 @@ test_authorization_csrf_ended_relationship_and_xss (test_records.RecordsTests.te
 test_migration_preserves_s05_and_prior_migrations_are_unchanged (test_records.RecordsTests.test_migration_preserves_s05_and_prior_migrations_are_unchanged) ... ok
 test_pair_same_report_provenance_and_separate_adverse_event (test_records.RecordsTests.test_pair_same_report_provenance_and_separate_adverse_event) ... FAIL
 test_retry_idempotency_changed_body_and_distinct_observation_dates (test_records.RecordsTests.test_retry_idempotency_changed_body_and_distinct_observation_dates) ... ok
-test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) ... 
+test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) ...
   test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values="{'observed_on': 'tomorrow'}") ... FAIL
   test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values="{'observed_on': '2099-01-01'}") ... FAIL
   test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values="{'observed_on': '1899-01-01'}") ... FAIL
