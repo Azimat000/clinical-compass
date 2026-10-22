@@ -710,6 +710,92 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
   .form-actions .button { flex: 1 1 auto; }
 }
 
+/* ---------- Сообщения, уведомления, критические события (UI06) ---------- */
+/* Переписка: свои сообщения белые, чужие на полосе; кто пишет, названо словом */
+.thread, .items { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-md); }
+.msg { padding: 14px var(--sp-lg); background: var(--band); border: 1px solid var(--border); border-radius: var(--r-sheet); max-width: 680px; scroll-margin-top: var(--sp-lg); }
+.msg--mine { background: var(--sheet); }
+.msg:target, .item:target { border-color: var(--ink); }
+.crit:target { outline: 2px solid var(--ink); outline-offset: 4px; }
+.msg-head, .item-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--sp-md); }
+.msg-head time, .item-head .meta { color: var(--muted); font-size: var(--fs-meta); }
+.msg-body { margin-top: var(--sp-xs); max-width: 60ch; text-wrap: pretty; }
+.msg-ctx { margin-top: var(--sp-sm); }
+/* Три состояния сообщения — три отдельные строки с линией состояния */
+.msg-states { margin: var(--sp-md) 0 0; padding: var(--sp-sm) 0 0; list-style: none; display: grid; gap: var(--sp-xs); border-top: 1px solid var(--rule); font-size: var(--fs-meta); }
+.msg-states .state { align-items: baseline; }
+.msg-states .state::before { align-self: baseline; transform: translateY(-3px); }
+.msg-states .state--unknown { color: var(--muted); }
+.msg-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-md); }
+.msg-actions form { margin: 0; }
+.p-main .button:not(.button--action), .p-main .input, .p-main .select, .p-main .option { min-height: 44px; }
+.compose > h2 { margin-bottom: var(--sp-md); }
+.compose-more { margin-top: var(--sp-lg); }
+.compose-more > summary { justify-content: flex-start; min-height: 44px; }
+.compose-more > summary::after { margin-left: var(--sp-sm); }
+.compose-more-body { padding-bottom: var(--sp-xs); }
+.compose-more-body .field + .field { margin-top: var(--sp-lg); }
+.compose .form-actions { margin-top: var(--sp-lg); }
+.compose > .meta { margin-top: var(--sp-md); }
+.p-block > .compose { margin-top: 0; max-width: none; }
+
+/* Пункты плана и уведомления: список записей с состоянием */
+.item { padding: 14px var(--sp-lg); background: var(--sheet); border: 1px solid var(--border); border-radius: var(--r-sheet); max-width: 760px; scroll-margin-top: var(--sp-lg); }
+.item > p { margin-top: var(--sp-xs); }
+.item > .meta { margin-top: var(--sp-xs); }
+.item .msg-states { margin-top: var(--sp-sm); }
+.item-history { margin-top: var(--sp-sm); }
+.item-history > summary { min-height: 44px; justify-content: flex-start; font-weight: 400; }
+.item-history > summary::after { margin-left: var(--sp-sm); }
+.item-history .plain { padding: 0 0 var(--sp-sm) var(--sp-xs); font-size: var(--fs-cell); }
+.item-history .sub { margin-top: 2px; max-width: 60ch; }
+.item-form { margin-top: var(--sp-sm); }
+.item-form .action-form { max-width: none; margin: 0; border: 0; padding: var(--sp-lg) 14px; }
+.tally { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--sp-md) var(--sp-xl); padding: var(--sp-md) 0 var(--sp-lg); max-width: 760px; }
+.tally > div { min-width: 0; overflow-wrap: anywhere; }
+.tally--wide > div:first-child { grid-column: 1 / -1; }
+.older { margin-top: var(--sp-md); max-width: 760px; }
+.older .fold-body .thread { padding-top: var(--sp-xs); }
+.p-block .tally { padding-top: var(--sp-xs); }
+.p-block > .items, .p-block > .thread { max-width: none; }
+.p-main > .notice { margin-top: var(--sp-lg); }
+.top-error { margin-top: var(--sp-lg); }
+.top-error .meta { margin-top: var(--sp-xs); }
+.p-block h2 { margin-bottom: var(--sp-xs); }
+.p-block > .meta { margin-bottom: var(--sp-md); max-width: 60ch; }
+.block > .thread, .block > .items { max-width: 760px; }
+
+/* Критические события: заметнее обычных толщиной линии и словами. Красный — только у счётчика меню и статуса «Ждёт подтверждения»: это клиническое событие, требующее врача */
+.alert-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-sm) var(--sp-lg);
+  padding: var(--sp-md) var(--sp-sheet); border-bottom: 2px solid var(--ink); background: var(--sheet); }
+.alert-band p { flex: 1 1 28em; max-width: 70ch; text-wrap: pretty; }
+.crit { margin-top: var(--sp-lg); padding: var(--sp-lg); border-top: 1px solid var(--rule); scroll-margin-top: var(--sp-lg); }
+.crit:first-of-type { margin-top: 0; }
+.crit--open { border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--sheet); margin-inline: calc(-1 * var(--sp-sm)); }
+.crit h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--sp-lg); margin: 0 0 var(--sp-xs); font-size: var(--fs-section); }
+.crit .meta { margin-top: var(--sp-xs); }
+.crit .entry-text { margin-top: var(--sp-sm); }
+.chain { list-style: none; margin: var(--sp-lg) 0 0; padding: 0; display: grid; gap: var(--sp-md); max-width: 640px; }
+.chain > li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-sm); font-size: var(--fs-cell); }
+.chain > li + li { padding-top: var(--sp-md); border-top: 1px solid var(--rule); }
+.chain > li > .state { align-items: baseline; }
+.chain > li > .state::before { align-self: baseline; transform: translateY(-3px); }
+.chain form { margin: 0; }
+.chain .action-form { margin-top: 0; max-width: none; }
+.chain-note { color: var(--muted); font-size: var(--fs-meta); max-width: 60ch; }
+.crit .quote { margin-top: 0; }
+.crit .fold { margin-top: var(--sp-lg); }
+.crit .fold-body .results td:first-child, .crit .fold-body .results th:first-child { min-width: 2em; }
+@media (max-width: 760px) {
+  .alert-band { padding-inline: var(--sp-lg); }
+  .alert-band .button { width: 100%; }
+  .msg, .item { padding-inline: 14px; }
+  .msg-actions .button, .chain .button { width: 100%; }
+  .msg-actions form { flex: 1 1 100%; }
+  .crit { padding-inline: 14px; }
+  .crit--open { margin-inline: 0; }
+}
+
 /* ---------- Каталог компонентов (только для проверки, COMPASS_UI_GALLERY=1) ---------- */
 .gallery { max-width: 1120px; margin: 0 auto; padding: var(--sp-xl) var(--sp-lg) 48px; }
 .gallery > .sheet + .sheet { margin-top: var(--sp-xl); }

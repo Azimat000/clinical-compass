@@ -88,10 +88,9 @@ class DoctorWorkspaceTests(unittest.TestCase):
         for link in ['#records', '#assessments', '#age-review', '#clinical-rules', '#link']:
             self.assertIn(link, nav)
             self.assertIn('id="%s"' % link[1:], page)
-        # Решения, приём и документы готовы (UI05) и есть в строке разделов пациента; сообщения появятся в UI06, ссылки на 503 нет.
-        for path in ['decisions', 'first-visits', 'imports']:
+        # Решения, приём, сообщения (UI06) и документы есть в строке разделов пациента.
+        for path in ['decisions', 'first-visits', 'communication', 'imports']:
             self.assertIn('href="/patients/D01/' + path + '"', page)
-        self.assertNotIn('/patients/D01/communication', page)
         self.assertIn('href="/patients/D01/follow-up"', page)
 
     def test_patient_role_keeps_own_card_without_doctor_header(self):

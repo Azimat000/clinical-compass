@@ -68,6 +68,14 @@ def inbox(db, user, prepare=True):
         return items
 
 
+def waiting(db, user):
+    """Ready notifications the doctor has not acknowledged yet. Read-only: unlike inbox() it never marks anything as shown."""
+    return db.execute('''SELECT count(*) FROM routine_notifications n JOIN clinical_entries e ON e.id=n.entry_id
+        JOIN care_relationships r ON r.id=n.relationship_id
+        WHERE n.recipient_id=? AND r.doctor_id=? AND r.patient_id=e.patient_id AND r.ends_at IS NULL AND r.starts_at<=?
+        AND n.ready_at IS NOT NULL AND n.acknowledged_at IS NULL''', (user['id'], user['id'], now())).fetchone()[0]
+
+
 def mark(db, user, notification_id, action):
     if action not in ('seen', 'acknowledged'):
         raise NotificationError('Неизвестное действие.', 400)

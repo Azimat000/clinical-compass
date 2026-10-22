@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-22T23:40:00+03:00",
+  "updated_on": "2026-10-23T00:20:00+03:00",
   "current_slice": null,
-  "last_accepted_slice": "UI05",
-  "next_slice": "UI06",
+  "last_accepted_slice": "UI06",
+  "next_slice": "UI06B",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -338,8 +338,8 @@
       "reason": null
     },
     "UI06": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/UI06",
       "handoff": "memory/sessions/UI06.md",
       "reason": null
     },
@@ -737,6 +737,16 @@
       "evidence": "evidence/UI05/acceptance.md",
       "other_doctor_views": "503/interface_removed до UI06 (сообщения, уведомления, критические события)",
       "open_for_user": "решено 22.10.2026: экран подтверждённого плана для пациента делается срезом UI06B после UI06 (plan/slices/UI06B.md)"
+    },
+    "ui06_messages": {
+      "date": "2026-10-23",
+      "ready_views": [
+        "communication.html",
+        "notifications.html",
+        "critical.html"
+      ],
+      "evidence": "evidence/UI06/acceptance.md",
+      "other_views": "503/interface_removed только у адреса решений для пациента (UI06B)"
     }
   }
 }

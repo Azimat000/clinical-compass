@@ -118,13 +118,11 @@ class PatientWorkspaceTests(unittest.TestCase):
         for path, current in expected.items():
             page = self.page(path)
             nav = re.search(r'<nav class="p-tabs" aria-label="Разделы кабинета">.*?</nav>', page, re.S).group(0)
-            self.assertEqual(3, nav.count('<a '), path)
-            for name in ['Сегодня', 'Дневник', 'Анкеты']:
+            self.assertEqual(4, nav.count('<a '), path)
+            for name in ['Сегодня', 'Дневник', 'Анкеты', 'Сообщения']:
                 self.assertRegex(nav, r'<a href="[^"]+"[^>]*>%s</a>' % name, path)
             self.assertEqual(1, nav.count('aria-current="page"'), path)
             self.assertRegex(nav, r'<a href="[^"]+" aria-current="page">%s</a>' % current, path)
-            # раздел «Сообщения» собирается в UI06: до тех пор его нет в навигации совсем
-            self.assertNotIn('Сообщения', nav)
             self.assertNotIn('aria-disabled', nav)
 
     def test_self_report_form_keeps_server_fields_and_drops_the_two_steps(self):

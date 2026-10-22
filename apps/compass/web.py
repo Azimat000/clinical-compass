@@ -17,11 +17,13 @@ from . import first_visits, follow_up, report_drafts, overview
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
                          'dashboard.html', 'doctor_patient.html', 'follow_up.html',
-                         'decisions.html', 'first_visit.html', 'imports.html'})
+                         'decisions.html', 'first_visit.html', 'imports.html',
+                         'communication.html', 'notifications.html', 'critical.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
-DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html'})
+# communication.html is for both roles.
+DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'notifications.html', 'critical.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
@@ -116,10 +118,31 @@ def create_app(database=None):
                 g.queue_total = sum(1 for r in overview.rows(db, user, patients, pending_signal_counts(db, user['id'])) if r['attention'])
         return g.queue_total
 
+    def inbox_counts():
+        """Doctor's menu counters: ready notifications not yet acknowledged and critical events not yet acknowledged. Read-only."""
+        if 'inbox_counts' not in g:
+            user = g.get('user')
+            if not user or user['role'] != 'doctor':
+                g.inbox_counts = {'notices': None, 'critical': None}
+            else:
+                db = get_db()
+                try:
+                    g.inbox_counts = {'notices': notifications.waiting(db, user),
+                                      'critical': sum(1 for r in critical_delivery.inbox(db, user) if r['acknowledged_at'] is None)}
+                except notifications.NotificationError:
+                    g.inbox_counts = {'notices': None, 'critical': None}
+        return g.inbox_counts
+
     @app.context_processor
     def session_context():
         user = g.get('user')
-        return {'current_user': user, 'csrf': user['csrf_token'] if user else '', 'queue_total': queue_total}
+        return {'current_user': user, 'csrf': user['csrf_token'] if user else '', 'queue_total': queue_total,
+                'inbox_counts': inbox_counts}
+
+    @app.template_filter()
+    def person_name(code):
+        """Display name of a patient from the list code."""
+        return overview.person(code or '')[0]
 
     def get_db():
         if 'db' not in g:
@@ -438,35 +461,60 @@ def create_app(database=None):
             measured=assessments.history(db, g.user, patient_id),
             decisions=decisions.history(db, g.user, patient_id)), status
 
+    def communication_view(patient, patient_id, error=None, error_op=None, values=None, status=200):
+        """The conversation screen for both roles; a refused write comes back here with what was typed."""
+        db = get_db()
+        try:
+            data = communication.view(db, g.user, patient_id)
+        except communication.Error as failure:
+            return interface_response('result.html', title='Раздел недоступен', message=str(failure)), failure.status
+        doctor = db.execute('''SELECT u.display_name FROM care_relationships r JOIN users u ON u.id=r.doctor_id
+            WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=?''', (patient_id, now())).fetchone()
+        return interface_response('communication.html', patient=patient, data=data, error=error, error_op=error_op,
+                               values=values or {}, kinds=decisions.KINDS, patient_name=overview.person(patient['code'])[0],
+                               doctor_name=doctor['display_name'] if doctor else '',
+                               message_key=secrets.token_hex(16), task_key=secrets.token_hex(16),
+                               report_keys={t['id']: secrets.token_hex(16) for t in data['tasks']}), status
+
     @app.get('/patients/<patient_id>/communication')
     def communication_page(patient_id):
-        patient = patient_or_404(patient_id)
+        return communication_view(patient_or_404(patient_id), patient_id)
+
+    def moscow_time(local):
+        """datetime-local value from the browser -> ISO time with the Moscow offset the server rule asks for."""
         try:
-            data = communication.view(get_db(), g.user, patient_id)
-        except communication.Error as error:
-            return interface_response('result.html', title='Раздел недоступен', message=str(error)), error.status
-        return interface_response('communication.html', patient=patient, data=data,
-                               message_key=secrets.token_hex(16), task_key=secrets.token_hex(16),
-                               report_keys={t['id']:secrets.token_hex(16) for t in data['tasks']})
+            return datetime.fromisoformat(local).replace(tzinfo=MOSCOW).isoformat()
+        except ValueError:
+            return local
 
     @app.post('/patients/<patient_id>/communication/<operation>')
     def communication_write(patient_id, operation):
-        patient_or_404(patient_id)
+        patient = patient_or_404(patient_id)
+        anchor = ''
         try:
             if operation == 'send':
                 communication.send(get_db(),g.user,patient_id,request.form)
             elif operation == 'schedule':
                 role('doctor')
-                communication.schedule(get_db(),g.user,patient_id,request.form)
+                form = request.form
+                if form.get('due_local') and not form.get('due_at'):
+                    form = form.copy()
+                    form['due_at'] = moscow_time(form['due_local'])
+                communication.schedule(get_db(),g.user,patient_id,form)
             elif operation == 'report':
                 communication.report(get_db(),g.user,patient_id,request.form.get('task_id',''),request.form)
+                anchor = '#task-' + request.form.get('task_id','')
             elif operation in ('received','read'):
                 communication.receipt(get_db(),g.user,patient_id,request.form.get('message_id',''),operation)
+                anchor = '#message-' + request.form.get('message_id','')
             else:
                 abort(404)
         except communication.Error as error:
-            return interface_response('result.html', title='Не сохранено', message=str(error)), error.status
-        return redirect(url_for('communication_page',patient_id=patient_id),code=303)
+            if error.status in (403, 404):
+                return interface_response('result.html', title='Не сохранено', message=str(error)), error.status
+            where = operation + (':' + request.form.get('task_id','') if operation == 'report' else '')
+            return communication_view(patient, patient_id, error=str(error), error_op=where, values=request.form, status=error.status)
+        return redirect(url_for('communication_page',patient_id=patient_id)+anchor,code=303)
 
     @app.get('/notifications')
     def notification_inbox():
@@ -484,15 +532,19 @@ def create_app(database=None):
             notifications.mark(get_db(), g.user, notification_id, action)
         except notifications.NotificationError as error:
             return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
-        return redirect(url_for('notification_inbox'), code=303)
+        return redirect(url_for('notification_inbox')+'#notification-'+notification_id, code=303)
+
+    def critical_view(error=None, error_event=None, reaction='', status=200):
+        items = critical_delivery.inbox(get_db(), g.user)
+        logs = {r['id']: get_db().execute('SELECT * FROM critical_delivery_log WHERE event_id=? ORDER BY sequence',
+                                        (r['id'],)).fetchall() for r in items}
+        return interface_response('critical.html', items=items, logs=logs, error=error, error_event=error_event,
+                                  reaction=reaction), status
 
     @app.get('/critical')
     def critical_inbox():
         role('doctor')
-        items = critical_delivery.inbox(get_db(), g.user)
-        logs = {r['id']: get_db().execute('SELECT * FROM critical_delivery_log WHERE event_id=? ORDER BY sequence',
-                                        (r['id'],)).fetchall() for r in items}
-        return interface_response('critical.html', items=items, logs=logs)
+        return critical_view()
 
     @app.get('/api/critical')
     def critical_status():
@@ -506,10 +558,13 @@ def create_app(database=None):
         try:
             critical_delivery.mark(get_db(), g.user, event_id, action, request.form.get('reaction',''))
         except notifications.NotificationError as error:
+            if error.status == 400 and action == 'reacted':
+                return critical_view(error=str(error), error_event=event_id, reaction=request.form.get('reaction',''), status=400)
             return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
-        if action == 'received':
+        # The page script confirms receipt without leaving the screen; the form button asks for a page back.
+        if action == 'received' and not request.form.get('back'):
             return '', 204
-        return redirect(url_for('critical_inbox'),code=303)
+        return redirect(url_for('critical_inbox')+'#event-'+event_id,code=303)
 
     @app.route('/patients/<patient_id>/imports', methods=['GET', 'POST'])
     def imports_page(patient_id):

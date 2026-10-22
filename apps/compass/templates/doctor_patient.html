@@ -221,7 +221,7 @@
   <section class="block" id="clinical-rules" aria-labelledby="h-rules">
     <h2 id="h-rules">Врачебные сведения</h2>
     {% set advice = clinical_panel.advice %}
-    {{ ui.notice('Рекомендация не сформирована', advice.reason, kind='info') }}
+    {{ ui.notice('Рекомендация не сформирована' if advice.category == 'unknown' else route_categories[advice.category] ~ ': по клиническим рекомендациям', advice.reason, kind='info') }}
     {% if advice.source_url %}<p class="meta">Источник: <a href="{{ advice.source_url }}" rel="noopener noreferrer">клинические рекомендации</a>, {{ advice.source_section }}. Решения по ним принимает врач.</p>{% endif %}
     {% if signals %}<p>{{ ui.state('new', 'Критических сигналов без реакции врача: ' ~ signals) }}</p>{% endif %}
     {% if clinical_panel.events %}

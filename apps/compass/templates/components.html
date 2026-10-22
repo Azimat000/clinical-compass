@@ -13,14 +13,14 @@
 {%- endmacro %}
 
 {#- kind: primary | secondary | link; size: block | action. Ссылка, если задан href. -#}
-{% macro button(label, kind='secondary', type='submit', href=None, size=None, disabled=False, busy=False, name=None, value=None, id=None) -%}
+{% macro button(label, kind='secondary', type='submit', href=None, size=None, disabled=False, busy=False, name=None, value=None, id=None, aria_label=None) -%}
 {%- set cls = 'button' ~ (' button--' ~ kind if kind != 'secondary' else '') ~ (' button--' ~ size if size else '') -%}
 {% if href and not disabled -%}
-<a class="{{ cls }}" href="{{ href }}"{% if id %} id="{{ id }}"{% endif %}>{{ label }}</a>
+<a class="{{ cls }}" href="{{ href }}"{% if id %} id="{{ id }}"{% endif %}{% if aria_label %} aria-label="{{ aria_label }}"{% endif %}>{{ label }}</a>
 {%- elif href -%}
 <a class="{{ cls }}" role="link" aria-disabled="true"{% if id %} id="{{ id }}"{% endif %}>{{ label }}</a>
 {%- else -%}
-<button class="{{ cls }}" type="{{ type }}"{% if name %} name="{{ name }}"{% endif %}{% if value is not none %} value="{{ value }}"{% endif %}{% if id %} id="{{ id }}"{% endif %}{% if disabled %} disabled{% endif %}{% if busy %} aria-busy="true" aria-disabled="true"{% endif %}>{{ label }}</button>
+<button class="{{ cls }}" type="{{ type }}"{% if aria_label %} aria-label="{{ aria_label }}"{% endif %}{% if name %} name="{{ name }}"{% endif %}{% if value is not none %} value="{{ value }}"{% endif %}{% if id %} id="{{ id }}"{% endif %}{% if disabled %} disabled{% endif %}{% if busy %} aria-busy="true" aria-disabled="true"{% endif %}>{{ label }}</button>
 {%- endif %}
 {%- endmacro %}
 
@@ -38,12 +38,12 @@
 </div>
 {%- endmacro %}
 
-{% macro textarea(name, label, value='', error=None, hint=None, id=None, required=False, disabled=False, rows=4, maxlength=None) -%}
+{% macro textarea(name, label, value='', error=None, hint=None, id=None, required=False, disabled=False, rows=4, maxlength=None, minlength=None) -%}
 {%- set fid = id or 'f-' ~ name -%}
 <div class="field">
   <label for="{{ fid }}">{{ label }}</label>
   {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
-  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if maxlength %} maxlength="{{ maxlength }}"{% endif %}{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
+  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if maxlength %} maxlength="{{ maxlength }}"{% endif %}{% if minlength %} minlength="{{ minlength }}"{% endif %}{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
 {{ value }}</textarea>
   {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
 </div>
@@ -130,12 +130,13 @@
 </div>
 {%- endmacro %}
 
-{#- Разделы пациента одной строкой: active — card | summary | visit | plan | docs. Остальные пункты — обычные ссылки. -#}
+{#- Разделы пациента одной строкой: active — card | summary | visit | plan | talk | docs. Остальные пункты — обычные ссылки. -#}
 {% macro patient_nav(patient_id, active) -%}
 {%- set items = [('card', 'Карточка', url_for('demo_patient', patient_id=patient_id)),
                  ('summary', 'Сводка к приёму', url_for('follow_up_page', patient_id=patient_id)),
                  ('visit', 'Приём', url_for('first_visit_page', patient_id=patient_id)),
                  ('plan', 'План и решения', url_for('decisions_page', patient_id=patient_id)),
+                 ('talk', 'Сообщения', url_for('communication_page', patient_id=patient_id)),
                  ('docs', 'Документы', url_for('imports_page', patient_id=patient_id))] -%}
 <nav class="jump patient-nav" aria-label="Разделы пациента">{% for key, label, href in items %}<a href="{{ href }}"{% if key == active %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}</nav>
 {%- endmacro %}

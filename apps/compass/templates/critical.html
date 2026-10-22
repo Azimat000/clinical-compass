@@ -1,0 +1,148 @@
+{#- Критические события: отдельный путь от обычных уведомлений. Четыре шага — получено, просмотрено, подтверждено, реакция записана — каждый отмечает сервер. -#}
+{% extends 'doctor_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'critical' %}
+{% block title %}Критические события{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set open_items = items|rejectattr('acknowledged_at')|list %}
+{% set acked = items|selectattr('acknowledged_at')|list %}
+{% set no_reaction = acked|rejectattr('reacted_at')|list %}
+{% set done = acked|selectattr('reacted_at')|list %}
+{% set reserve_words = {'pending': 'ждёт запуска', 'leased': 'выполняется сейчас',
+                        'operator_received': 'оператор на этом компьютере отметил получение; это не реакция врача',
+                        'dead': 'не сработал после пяти попыток'} %}
+{% set log_words = {'ready': 'Готово к показу', 'received': 'Получено на экране врача', 'seen': 'Просмотрено врачом',
+                    'acknowledged': 'Подтверждено врачом', 'reacted': 'Реакция врача записана',
+                    'reserve_started': 'Резервный сигнал: запуск', 'reserve_failed': 'Резервный сигнал: сбой',
+                    'reserve_operator_received': 'Резервный сигнал: оператор отметил получение',
+                    'reserve_lease_lost': 'Резервный сигнал: запуск потерян'} %}
+
+{#- Один шаг цепочки: сделан (время) или не сделан. -#}
+{% macro step(label, stamp) %}
+  {% if stamp %}<span class="state state--known"><span>{{ label }}: <time class="num" datetime="{{ stamp }}">{{ stamp|msk }}</time></span></span>
+  {% else %}<span class="state state--unknown">{{ label }}: ещё нет</span>{% endif %}
+{% endmacro %}
+
+{% macro mark_form(e, action, label, kind='primary', back=False) %}
+  {% set who = (e.code|person_name) ~ ', событие от ' ~ (e.created_at|msk) %}
+  <form method="post" action="{{ url_for('critical_mark', event_id=e.id, action=action) }}" data-busy>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    {% if back %}<input type="hidden" name="back" value="1">{% endif %}
+    {{ ui.button(label, kind=kind, aria_label=label ~ ': ' ~ who) }}
+  </form>
+{% endmacro %}
+
+{% macro event(e) %}
+  <article class="crit{% if not e.acknowledged_at %} crit--open{% endif %}" id="event-{{ e.id }}" aria-labelledby="h-event-{{ e.id }}"
+           {% if not e.received_at %} data-receipt-url="{{ url_for('critical_mark', event_id=e.id, action='received') }}"{% endif %}>
+    <h3 id="h-event-{{ e.id }}">{% if not e.acknowledged_at %}{{ ui.state('new', 'Ждёт подтверждения') }}{% elif not e.reacted_at %}{{ ui.state('unknown', 'Реакция не записана') }}{% else %}{{ ui.state('known', 'Закрыто записью реакции') }}{% endif %}
+      <span translate="no">{{ e.code|person_name }}</span></h3>
+    <p class="meta">Создано <time class="num" datetime="{{ e.created_at }}">{{ e.created_at|msk }}</time>; запись пациента сохранена сервером <time class="num" datetime="{{ e.accepted_at }}">{{ e.accepted_at|msk }}</time>.
+      <a href="{{ url_for('demo_patient', patient_id=e.patient_id) }}#clinical-rules">Карточка пациента</a></p>
+    <p class="entry-text">Сработало сопоставление ответа пациента с текстом инструкции (правило <span class="num">{{ e.rule_version }}</span>). Это совпадение, а не оценка причины, угрозы жизни или безопасности. Что делать, решает врач.</p>
+
+    <ol class="chain">
+      <li>
+        {{ step('Получено на экране врача', e.received_at) }}
+        {% if not e.received_at %}
+        <span class="chain-note">Обычно эта отметка ставится сама. Если её нет, нажмите кнопку.</span>
+        {{ mark_form(e, 'received', 'Подтвердить получение', 'secondary', back=True) }}
+        {% endif %}
+      </li>
+      <li>
+        {{ step('Просмотрено врачом', e.seen_at) }}
+        {% if e.received_at and not e.seen_at %}{{ mark_form(e, 'seen', 'Отметить: просмотрено') }}{% endif %}
+      </li>
+      <li>
+        {{ step('Подтверждено врачом', e.acknowledged_at) }}
+        {% if e.seen_at and not e.acknowledged_at %}{{ mark_form(e, 'acknowledged', 'Подтвердить событие') }}{% endif %}
+      </li>
+      <li>
+        {{ step('Реакция врача записана', e.reacted_at) }}
+        {% if e.reacted_at %}
+          <p class="quote">{{ e.reaction }}</p>
+        {% elif e.acknowledged_at %}
+          <form method="post" action="{{ url_for('critical_mark', event_id=e.id, action='reacted') }}" class="action-form" data-busy>
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            {{ ui.textarea('reaction', 'Что вы фактически сделали или решили', value=reaction if error_event == e.id else '', hint='От 10 до 2000 знаков. Запись нельзя изменить. Сервис ничего не назначает и никому не отправляет.', id='reaction-' ~ e.id, required=True, rows=4, maxlength=2000, minlength=10) }}
+            <div class="form-actions">{{ ui.button('Записать реакцию', kind='primary', aria_label='Записать реакцию: ' ~ (e.code|person_name) ~ ', событие от ' ~ (e.created_at|msk)) }}</div>
+          </form>
+        {% endif %}
+      </li>
+    </ol>
+
+    <details class="fold">
+      <summary>Резервный сигнал и журнал доставки</summary>
+      <div class="fold-body">
+        <p class="meta">Резервный сигнал на этом компьютере: {{ reserve_words[e.reserve_state] }}. Он нужен как запас, пока вы не открыли экран, и не заменяет службу 24/7.</p>
+        {% if logs[e.id] %}
+        <table class="results records">
+          <caption class="visually-hidden">Журнал доставки события, по порядку</caption>
+          <thead><tr><th scope="col">№</th><th scope="col">Когда</th><th scope="col">Что произошло</th></tr></thead>
+          <tbody>
+            {% for row in logs[e.id] %}
+            <tr><td class="num">{{ loop.index }}</td><td><time class="num" datetime="{{ row.recorded_at }}">{{ row.recorded_at|msk }}</time></td>
+              <td>{{ log_words.get(row.action, row.action) }}{% if row.detail %} <span class="sub num">{{ row.detail }}</span>{% endif %}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+      </div>
+    </details>
+  </article>
+{% endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <h1>Критические события</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding">Отдельно от обычных уведомлений. Каждый шаг отмечает сервер, и событие не пропадает, пока вы его не подтвердите.</p>
+  </div>
+  <div class="title-actions">{{ ui.button('Обычные уведомления', href=url_for('notification_inbox')) }}</div>
+</div>
+
+<div class="card-body" id="critical-list" data-csrf="{{ csrf }}">
+  <section class="block" data-receipt-status hidden>
+    {{ ui.notice('Получение не записано', 'Нажмите «Подтвердить получение» у события или повторите позже.', kind='error') }}
+  </section>
+  {% if error %}
+  <section class="block" aria-label="Ошибка">
+    {{ ui.notice('Реакция не записана', error ~ ' Введённое осталось в поле.', kind='error', id='form-error') }}
+    <p class="meta"><a href="#reaction-{{ error_event }}">К полю реакции</a></p>
+  </section>
+  {% endif %}
+  <section class="block" id="open" aria-labelledby="h-open">
+    <h2 id="h-open">Ждут подтверждения</h2>
+    {% for e in open_items %}{{ event(e) }}
+    {% else %}{{ ui.empty('Событий, ждущих подтверждения, нет. Это не означает отсутствия риска: сервис видит только то, что внесено.') }}{% endfor %}
+  </section>
+
+  {% if no_reaction %}
+  <section class="block" id="no-reaction" aria-labelledby="h-no-reaction">
+    <h2 id="h-no-reaction">Подтверждены, реакция не записана</h2>
+    {% for e in no_reaction %}{{ event(e) }}{% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="block" aria-label="Справка и числа">
+    {{ ui.notice('Учебная демонстрация, не служба 24/7', 'Экран работает, пока он открыт или пока на этом компьютере срабатывает резервный сигнал. Закрытое окно сигнала не считается реакцией врача.', kind='info') }}
+    <div class="tally">
+      <div><span class="label">Ждут подтверждения</span>{% if open_items %}<b class="num count--alert">{{ open_items|length }}</b>{% else %}{{ ui.state('unknown', 'нет') }}{% endif %}</div>
+      <div><span class="label">Подтверждены, реакция не записана</span>{% if no_reaction %}<b class="num">{{ no_reaction|length }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
+      <div><span class="label">Закрыты записью реакции</span>{% if done %}<b class="num">{{ done|length }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
+    </div>
+  </section>
+
+  {% if done %}
+  <section class="block" id="done" aria-labelledby="h-done">
+    <h2 id="h-done">Закрыты записью реакции</h2>
+    <details class="fold">
+      <summary>Показать закрытые ({{ done|length }})</summary>
+      <div class="fold-body">{% for e in done %}{{ event(e) }}{% endfor %}</div>
+    </details>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script><script src="{{ url_for('static', filename='receipt.js') }}" defer></script>{% endblock %}

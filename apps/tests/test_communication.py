@@ -149,9 +149,9 @@ class CommunicationTests(unittest.TestCase):
             'wellbeing':'worse','adverse_events_status':'known','adverse_events_text':'Вымышленное НЯ'}).status_code)
         entry=self.db.execute('SELECT id FROM clinical_entries').fetchone()[0]
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM adverse_events').fetchone()[0])
-        for uid in ('doc-a','pat-a'):
-            html=self.clients[uid].get('/demo/D01').text
-            self.assertIn('Вымышленное НЯ',html);self.assertIn('Хуже',html);self.assertIn('trend-dot',html)
+        for uid,path in (('doc-a','/demo/D01'),('pat-a','/demo/D01/diary')):
+            html=self.clients[uid].get(path).text
+            self.assertIn('Вымышленное НЯ',html);self.assertIn('Хуже',html);self.assertIn('class="wb',html)
         # F02: therapy reference and separate physician approval create the plan anchor.
         html=self.clients['doc-a'].get('/patients/D01/decisions').text
         self.assertIn('Авиандр',html)

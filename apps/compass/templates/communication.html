@@ -1,0 +1,242 @@
+{#- Сообщения: переписка врача и пациента и выполнение пунктов плана. Один шаблон для обеих ролей; три состояния каждого сообщения — отдельными строками. -#}
+{% extends 'doctor_base.html' if current_user.role == 'doctor' else 'patient_base.html' %}
+{% import 'components.html' as ui %}
+{% set is_doctor = current_user.role == 'doctor' %}
+{% set nav_active = 'queue' if is_doctor else 'talk' %}
+{% block title %}Сообщения{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set sec = 'block' if is_doctor else 'p-block' %}
+{% set messages = data.messages|reverse|list %}
+{% set tasks = data.tasks %}
+{% set counts = data.counts %}
+{% set labels = data.labels %}
+{% set partner = ('Пациент ' ~ patient_name) if is_doctor else ('Врач ' ~ doctor_name) %}
+{% set entry_words = {'self_report': 'отметка самочувствия', 'visit': 'запись приёма'} %}
+{% set outcome_state = {'taken': 'known', 'missed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
+{% set head = data.head %}
+{% set can_schedule = is_doctor and head and head.kind not in ('therapy_stop', 'referral') %}
+
+{#- Одно сообщение: кто, когда, текст, связь с записью или пунктом и три отдельных состояния. -#}
+{% macro message(m) %}
+  {% set mine = m.sender_id == current_user.id %}
+  {% set for_me = m.recipient_id == current_user.id %}
+  <li class="msg{% if mine %} msg--mine{% endif %}" id="message-{{ m.id }}">
+    <div class="msg-head"><b translate="no">{{ 'Вы' if mine else partner }}</b><time class="num" datetime="{{ m.sent_at }}">{{ m.sent_at|msk }}</time></div>
+    <p class="msg-body keep">{{ m.body }}</p>
+    {% if m.entry_id or m.task_id %}
+    <p class="meta msg-ctx">Относится к:
+      {% if m.entry_id %}<a href="{{ (url_for('demo_patient', patient_id=patient.id) if is_doctor else url_for('patient_diary', patient_id=patient.id)) ~ '#entry-' ~ m.entry_id }}">записи в дневнике</a>{% endif %}{% if m.entry_id and m.task_id %}, {% endif %}{% if m.task_id %}<a href="#task-{{ m.task_id }}">пункту плана</a>{% endif %}
+    </p>
+    {% endif %}
+    <ul class="msg-states" aria-label="Состояние сообщения">
+      <li><span class="state state--known">Сохранено на сервере</span></li>
+      <li>{% if m.received_at %}<span class="state state--known"><span>{{ 'Получено вами' if for_me else 'Получено адресатом' }}: <time class="num" datetime="{{ m.received_at }}">{{ m.received_at|msk }}</time></span></span>
+        {% else %}<span class="state state--unknown">{{ 'Получено вами' if for_me else 'Получено адресатом' }}: не отмечено</span>{% endif %}</li>
+      <li>{% if m.read_at %}<span class="state state--known"><span>{{ 'Прочитано вами' if for_me else 'Прочитано адресатом' }}: <time class="num" datetime="{{ m.read_at }}">{{ m.read_at|msk }}</time></span></span>
+        {% else %}<span class="state state--unknown">{{ 'Прочитано вами' if for_me else 'Прочитано адресатом' }}: не отмечено</span>{% endif %}</li>
+    </ul>
+    {% if for_me and not m.read_at %}
+    <div class="msg-actions">
+      {% if not m.received_at %}
+      <form method="post" action="{{ url_for('communication_write', patient_id=patient.id, operation='received') }}" data-busy>
+        <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="message_id" value="{{ m.id }}">
+        {{ ui.button('Отметить: получено', aria_label='Отметить полученным сообщение от ' ~ (m.sent_at|msk)) }}
+      </form>
+      {% endif %}
+      <form method="post" action="{{ url_for('communication_write', patient_id=patient.id, operation='read') }}" data-busy>
+        <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="message_id" value="{{ m.id }}">
+        {{ ui.button('Отметить: прочитано', aria_label='Отметить прочитанным сообщение от ' ~ (m.sent_at|msk)) }}
+      </form>
+    </div>
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{#- Отказ сервера: сверху экрана, со ссылкой к форме, где осталось введённое. -#}
+{% macro top_error() %}
+  {% if error %}
+  {% set kind = (error_op or '').split(':')[0] %}
+  {% set titles = {'send': 'Сообщение не отправлено', 'schedule': 'Пункт не запланирован', 'report': 'Отметка не сохранена'} %}
+  {% set targets = {'send': '#compose', 'schedule': '#schedule', 'report': '#task-' ~ (error_op or '').split(':')[-1]} %}
+  <div class="top-error">
+    {{ ui.notice(titles.get(kind, 'Не сохранено'), error ~ ' Введённое осталось в форме.', kind='error', id='form-error') }}
+    <p class="meta"><a href="{{ targets.get(kind, '#thread') }}">К форме</a></p>
+  </div>
+  {% endif %}
+{% endmacro %}
+
+{#- Форма нового сообщения. -#}
+{% macro composer() %}
+  {% set entry_options = [('', 'Ни к какой записи')] %}
+  {% for e in data.entries[:20] %}{% set _ = entry_options.append((e.id, (e.observed_on|short_date) ~ ' · ' ~ entry_words.get(e.kind, 'запись'))) %}{% endfor %}
+  {% set task_options = [('', 'Ни к какому пункту')] %}
+  {% for t in tasks if not t.superseded %}{% set _ = task_options.append((t.id, (t.due_at|msk) ~ ' · ' ~ (t.label|truncate(40, True, '…')))) %}{% endfor %}
+  <form method="post" action="{{ url_for('communication_write', patient_id=patient.id, operation='send') }}" class="action-form compose" id="compose" data-busy>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <input type="hidden" name="request_key" value="{{ message_key }}">
+    <h2 id="h-compose">Новое сообщение</h2>
+    {{ ui.textarea('body', 'Сообщение', value=values.get('body', '') if error_op == 'send' else '', hint='Только то, что нужно сообщить ' ~ ('пациенту' if is_doctor else 'врачу') ~ '. Отправленное изменить нельзя.', required=True, rows=4, maxlength=4000) }}
+    {% if entry_options|length > 1 or task_options|length > 1 %}
+    <details class="compose-more"{% if values.get('entry_id') or values.get('task_id') %} open{% endif %}>
+      <summary>Связать с записью или пунктом плана</summary>
+      <div class="compose-more-body">
+        {% if entry_options|length > 1 %}{{ ui.select('entry_id', 'Запись в дневнике', entry_options, selected=values.get('entry_id', '') if error_op == 'send' else '', hint='Связь помогает понять, о чём сообщение. Она не заменяет самой записи.') }}{% endif %}
+        {% if task_options|length > 1 %}{{ ui.select('task_id', 'Пункт плана', task_options, selected=values.get('task_id', '') if error_op == 'send' else '') }}{% endif %}
+      </div>
+    </details>
+    {% endif %}
+    <div class="form-actions">{{ ui.button('Отправить', kind='primary', size=None if is_doctor else 'action') }}</div>
+    <p class="meta">Сообщение не заменяет срочную помощь. Отправка повторно безопасна: если страница не ответила, проверьте переписку ниже, прежде чем писать снова.</p>
+  </form>
+{% endmacro %}
+
+{#- Переписка списком, сначала новые. -#}
+{% macro thread() %}
+  <section class="{{ sec }}" id="thread" aria-labelledby="h-thread">
+    <h2 id="h-thread">Переписка</h2>
+    <p class="meta">Сначала новые. Отметки «получено» и «прочитано» ставит тот, кому адресовано сообщение. Получение и прочтение не означает реакцию врача.</p>
+    {% if messages %}
+    <ol class="thread">{% for m in messages[:8] %}{{ message(m) }}{% endfor %}</ol>
+    {% if messages|length > 8 %}
+    <details class="fold older">
+      <summary>Более ранние сообщения ({{ messages|length - 8 }})</summary>
+      <div class="fold-body"><ol class="thread">{% for m in messages[8:] %}{{ message(m) }}{% endfor %}</ol></div>
+    </details>
+    {% endif %}
+    {% else %}
+    {{ ui.empty('Сообщений пока нет. Первое появится после отправки.') }}
+    {% endif %}
+  </section>
+{% endmacro %}
+
+{#- Пункты плана: срок, результат, история отметок. -#}
+{% macro plan_items() %}
+  <section class="{{ sec }}" id="plan-items" aria-labelledby="h-plan-items">
+    <h2 id="h-plan-items">Выполнение пунктов плана</h2>
+    {% if tasks %}
+    <div class="tally tally--wide">
+      <div>
+        <span class="label">Доля выполненных</span>
+        {% if counts.percent is none %}{{ ui.state('unknown', 'не рассчитывается: знаменатель 0' if is_doctor else 'не рассчитывается: нет пунктов с известным результатом') }}
+        {% else %}<b class="num">{{ counts.percent }}% ({{ counts.taken }} / {{ counts.known }})</b>{% endif %}
+      </div>
+      <div><span class="label">Срок наступил</span><b class="num">{{ counts.due }}</b></div>
+      <div><span class="label">Нет сведений</span>{% if counts.unknown %}<b class="num">{{ counts.unknown }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
+      <div><span class="label">{{ 'Противоречия' if is_doctor else 'Отметки противоречат' }}</span>{% if counts.conflicting %}<b class="num">{{ counts.conflicting }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
+    </div>
+    <p class="meta">В долю входят только пункты, срок которых наступил и результат известен. «Нет сведений» не считается пропуском. Впереди: <span class="num">{{ counts.future }}</span>, заменены новым планом: <span class="num">{{ counts.superseded }}</span>.</p>
+    <ol class="items">
+      {% for t in tasks %}
+      <li class="item" id="task-{{ t.id }}">
+        <div class="item-head">
+          <b class="keep">{{ t.label }}</b>
+          <span class="meta">срок <time class="num" datetime="{{ t.due_at }}">{{ t.due_at|msk }}</time></span>
+        </div>
+        <p>
+          {% if t.superseded %}{{ ui.state('denied', 'План заменён: пункт не учитывается') }}
+          {% elif t.future %}{{ ui.state('unknown', 'Срок не наступил') }}
+          {% else %}{{ ui.state(outcome_state[t.outcome], labels[t.outcome]) }}{% endif %}
+        </p>
+        {% if t.history %}
+        <details class="item-history">
+          <summary>История отметок ({{ t.history|length }})</summary>
+          <ul class="plain">
+            {% for h in t.history %}
+            <li><b>{{ labels[h.outcome] }}</b> · {{ 'вы' if h.actor_id == current_user.id else partner }}, <time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at|msk }}</time>{% if h.reason %}<span class="sub keep">{{ h.reason }}</span>{% endif %}</li>
+            {% endfor %}
+          </ul>
+        </details>
+        {% endif %}
+        {% if not t.superseded and not t.future %}
+        {% set mine_error = error and error_op == 'report:' ~ t.id %}
+        <details class="fold item-form"{% if mine_error %} open{% endif %}>
+          <summary>{{ 'Уточнить результат' if is_doctor else 'Отметить выполнение' }}</summary>
+          <form method="post" action="{{ url_for('communication_write', patient_id=patient.id, operation='report') }}" class="action-form" data-busy>
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <input type="hidden" name="task_id" value="{{ t.id }}">
+            <input type="hidden" name="request_key" value="{{ report_keys[t.id] }}">
+            {{ ui.choice('outcome', 'Результат', [('taken', labels.taken), ('missed', labels.missed), ('unknown', labels.unknown), ('conflicting', labels.conflicting)], checked=values.get('outcome') if mine_error else None, id='outcome-' ~ t.id, required=True) }}
+            {{ ui.textarea('reason', 'Причина или уточнение', value=values.get('reason', '') if mine_error else '', hint='Обязательно для «Пропущено» и «Противоречие».', id='reason-' ~ t.id, rows=3, maxlength=1000) }}
+            <div class="form-actions">{{ ui.button('Сохранить отметку', kind='primary', aria_label='Сохранить отметку по пункту «' ~ (t.label|truncate(60, True, '…')) ~ '»') }}</div>
+            <p class="meta">Отметку нельзя стереть: поправка записывается новой строкой истории.</p>
+          </form>
+        </details>
+        {% elif t.future and not t.superseded %}
+        <p class="meta">Отметить результат можно после срока.</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    {{ ui.empty('Пунктов плана пока нет. Это не означает, что выполнять нечего: их задаёт врач после подтверждённого решения.') }}
+    {% endif %}
+  </section>
+{% endmacro %}
+
+{#- Планирование пункта: только врачу и только по действующему подтверждённому лечебному плану. -#}
+{% macro schedule_form() %}
+  <section class="block" id="schedule" aria-labelledby="h-schedule">
+    <h2 id="h-schedule">Запланировать пункт</h2>
+    {% if can_schedule %}
+    <details class="fold"{% if error and error_op == 'schedule' %} open{% endif %}>
+      <summary>Новый пункт по подтверждённому плану</summary>
+      <form method="post" action="{{ url_for('communication_write', patient_id=patient.id, operation='schedule') }}" class="action-form" data-busy>
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="action_id" value="{{ head.id }}">
+        <input type="hidden" name="request_key" value="{{ task_key }}">
+        <p class="meta">Основание: подтверждённое решение «{{ kinds[head.kind] }}». Пункт должен ему соответствовать; сервис сам ничего не назначает.</p>
+        {{ ui.textarea('label', 'Что нужно выполнить', value=values.get('label', '') if error_op == 'schedule' else '', required=True, rows=2, maxlength=500) }}
+        {{ ui.field('due_local', 'Срок', type='datetime-local', value=values.get('due_local', '') if error_op == 'schedule' else '', required=True, hint='Время по Москве (МСК).') }}
+        {{ ui.choice('reviewed', 'Подтверждение', [('yes', 'Пункт соответствует подтверждённому решению врача')], type='checkbox', id='reviewed-schedule', required=True) }}
+        <div class="form-actions">{{ ui.button('Запланировать', kind='primary') }}</div>
+      </form>
+    </details>
+    {% elif head %}
+    {{ ui.notice('Пункт запланировать нельзя', 'Последнее подтверждённое решение — «' ~ kinds[head.kind] ~ '». Пункты задаются только по действующему плану лечения.', kind='info') }}
+    <p class="meta"><a href="{{ url_for('decisions_page', patient_id=patient.id) }}">К плану и решениям</a></p>
+    {% else %}
+    {{ ui.empty('Подтверждённого плана нет, пункты не задать.', href=url_for('decisions_page', patient_id=patient.id), link='К плану и решениям') }}
+    {% endif %}
+  </section>
+{% endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="{{ url_for('demo_patient', patient_id=patient.id) }}">← Карточка пациента</a></p>
+    <h1>Сообщения</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Переписка с пациентом и выполнение пунктов плана.</p>
+  </div>
+  <div class="title-actions">{{ ui.button('Написать', kind='primary', href='#compose') }}</div>
+</div>
+
+{{ ui.patient_nav(patient.id, 'talk') }}
+
+<div class="card-state">
+  <div><span class="label">Сообщений</span>{% if messages %}<b class="num">{{ messages|length }}</b>{% else %}{{ ui.state('unknown', 'нет') }}{% endif %}</div>
+  <div><span class="label">От пациента без отметки «прочитано»</span>{% set unread = messages|selectattr('recipient_id', 'equalto', current_user.id)|rejectattr('read_at')|list %}{% if unread %}<b class="num">{{ unread|length }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
+  <div><span class="label">Доля выполненных пунктов</span>{% if counts.percent is none %}{{ ui.state('unknown', 'не рассчитывается') }}{% else %}<b class="num">{{ counts.percent }}%</b>{% endif %}</div>
+</div>
+
+<div class="card-body">
+  {% if error %}<section class="block" aria-label="Ошибка">{{ top_error() }}</section>{% endif %}
+  {{ thread() }}
+  <section class="block" aria-labelledby="h-compose">{{ composer() }}</section>
+  {{ plan_items() }}
+  {{ schedule_form() }}
+</div>
+{% endblock %}
+
+{% block patient_main %}
+<h1>Сообщения</h1>
+<p class="p-date"><time datetime="{{ iso }}">{{ weekday }}, {{ iso|ru_day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+{{ ui.notice('Врач читает не круглосуточно', 'Если стало хуже, не ждите ответа в кабинете: обратитесь за медицинской помощью обычным способом.', kind='info') }}
+<div class="p-actions">{{ ui.button('Написать сообщение', size='action', href='#compose') }}</div>
+{{ top_error() }}
+{{ thread() }}
+<div class="p-block">{{ composer() }}</div>
+{{ plan_items() }}
+{% endblock %}
+
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

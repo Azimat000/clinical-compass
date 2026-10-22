@@ -105,6 +105,36 @@
         "8051"
       ],
       "port": 8051
+    },
+    {
+      "name": "ui06-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui06-review-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8060"
+      ],
+      "port": 8060
+    },
+    {
+      "name": "ui06-worst",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui06-worst-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8061"
+      ],
+      "port": 8061
     }
   ]
 }

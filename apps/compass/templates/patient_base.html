@@ -1,10 +1,11 @@
-{#- Оболочка кабинета пациента: угольная полоса, вкладки, колонка до 680px. Потомок задаёт nav_active: today | diary | forms. -#}
+{#- Оболочка кабинета пациента: угольная полоса, вкладки, колонка до 680px. Потомок задаёт nav_active: today | diary | forms | talk. -#}
 {% extends 'base.html' %}
 {% import 'components.html' as ui %}
 {% block body %}
 {% set tabs = [('today', 'Сегодня', url_for('demo_patient', patient_id=patient.id)),
                ('diary', 'Дневник', url_for('patient_diary', patient_id=patient.id)),
-               ('forms', 'Анкеты', url_for('patient_forms', patient_id=patient.id))] %}
+               ('forms', 'Анкеты', url_for('patient_forms', patient_id=patient.id)),
+               ('talk', 'Сообщения', url_for('communication_page', patient_id=patient.id))] %}
 <header class="p-top carbon">
   <div class="p-top-in">
     {{ ui.brand(url_for('dashboard'), 'Компас') }}

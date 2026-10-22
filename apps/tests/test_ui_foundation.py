@@ -127,8 +127,8 @@ class UiFoundationTests(unittest.TestCase):
 
     def test_views_without_template_still_answer_interface_removed(self):
         client = self.app.test_client()
-        test_access.login(client, 'doc-a')
-        response = client.get('/notifications')
+        test_access.login(client, 'pat-a')
+        response = client.get('/patients/D01/decisions')  # экран плана для пациента появится в UI06B
         self.assertEqual(503, response.status_code)
         self.assertEqual('interface_removed', response.json['status'])
 

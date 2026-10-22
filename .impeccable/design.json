@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T16:00:00+00:00",
+  "generatedAt": "2026-10-22T20:30:00+00:00",
   "title": "Design System: Клинический компас",
   "extensions": {
     "colorMeta": {
@@ -407,8 +407,8 @@
       "name": "Строка разделов пациента",
       "kind": "custom",
       "refersTo": "navigation",
-      "description": "Пять разделов одной строкой под заголовком: Карточка, Сводка к приёму, Приём, План и решения, Документы. Текущий пункт жирный с подчёркиванием 2px чернилами, на телефоне строка прокручивается.",
-      "html": "<nav class=\"ds-pn\"><a>Карточка</a><a>Сводка к приёму</a><a>Приём</a><a class=\"on\">План и решения</a><a>Документы</a></nav>",
+      "description": "Шесть разделов одной строкой под заголовком: Карточка, Сводка к приёму, Приём, План и решения, Сообщения, Документы. Текущий пункт жирный с подчёркиванием 2px чернилами, на телефоне строка прокручивается.",
+      "html": "<nav class=\"ds-pn\"><a>Карточка</a><a>Сводка к приёму</a><a>Приём</a><a class=\"on\">План и решения</a><a>Сообщения</a><a>Документы</a></nav>",
       "css": ".ds-pn{display:flex;gap:16px;padding:0 28px;background:#f7f9fa;border-bottom:1px solid #e6eaed;font-size:14px}.ds-pn a{display:inline-flex;align-items:center;min-height:44px;color:#2b3238;border-bottom:2px solid transparent}.ds-pn a.on{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
     },
     {
@@ -426,6 +426,30 @@
       "description": "Строка: поле жирным, значение PT Mono, статус линией состояния; под ней точная цитата с вертикальной чертой 1px и строка «Сверено / Не сверено».",
       "html": "<div class=\"ds-cand\"><b>Диагноз в источнике</b> <code>F41.1</code><blockquote>F41.1</blockquote><small>Не сверено</small></div>",
       "css": ".ds-cand{font-size:14px}.ds-cand code{margin:0 12px;font-family:monospace}.ds-cand blockquote{margin:8px 0 0;padding:4px 0 4px 12px;border-left:1px solid #15191d;color:#2b3238}.ds-cand small{color:#56616b}"
+    },
+    {
+      "name": "Сообщение с тремя состояниями",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "Карточка: автор словом и время; текст; ниже три отдельные строки линией состояния — «Сохранено на сервере» сплошной, «Получено адресатом» и «Прочитано адресатом» штриховой «не отмечено» или временем. Своё сообщение белое, чужое на полосе. Отметки ставит адресат кнопками.",
+      "html": "<div class=\"ds-msg\"><p><b>Врач</b> <span>22.10.2026 14:05</span></p><p>Запишите давление утром и вечером.</p><ul><li class=\"k\">Сохранено на сервере</li><li class=\"k\">Получено адресатом: 22.10.2026 14:06</li><li class=\"u\">Прочитано адресатом: не отмечено</li></ul></div>",
+      "css": ".ds-msg{padding:14px 16px;background:#f7f9fa;border:1px solid #d3dae0;border-radius:8px;font-size:15px}.ds-msg p:first-child{display:flex;justify-content:space-between}.ds-msg span{color:#56616b;font-size:13px}.ds-msg ul{margin:12px 0 0;padding:8px 0 0;list-style:none;border-top:1px solid #e6eaed;font-size:13px}.ds-msg li{display:flex;gap:8px;align-items:baseline;margin-top:4px}.ds-msg li:before{content:\"\";width:22px;border-top:2px solid #15191d}.ds-msg li.u{color:#56616b}.ds-msg li.u:before{border-top:2px dashed #56616b}"
+    },
+    {
+      "name": "Цепочка шагов критического события",
+      "kind": "custom",
+      "refersTo": "navigation",
+      "description": "Четыре строки подряд: получено на экране врача, просмотрено, подтверждено, реакция записана. Сделанный шаг — сплошная линия и время, несделанный — штриховая «ещё нет». Кнопка есть только у следующего шага. Открытое событие — лист с линией 3px чернилами сверху.",
+      "html": "<ol class=\"ds-chain\"><li class=\"k\">Получено на экране врача: 22.10.2026 23:31</li><li class=\"u\">Просмотрено врачом: ещё нет <button>Отметить: просмотрено</button></li><li class=\"u\">Подтверждено врачом: ещё нет</li><li class=\"u\">Реакция врача записана: ещё нет</li></ol>",
+      "css": ".ds-chain{margin:0;padding:16px;list-style:none;display:grid;gap:12px;border-top:3px solid #15191d;border-bottom:1px solid #15191d;background:#fff;font-size:14px}.ds-chain li{display:grid;gap:8px;padding-top:12px;border-top:1px solid #e6eaed}.ds-chain li:first-child{border-top:0;padding-top:0}.ds-chain li:before{content:\"\";width:22px;border-top:2px solid #15191d}.ds-chain li.u{color:#56616b}.ds-chain li.u:before{border-top:2px dashed #56616b}.ds-chain button{justify-self:start;min-height:36px;padding:0 14px;border:1px solid #15191d;border-radius:4px;background:#1a1f23;color:#fff;font:700 14px sans-serif}"
+    },
+    {
+      "name": "Полоса критического события",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "Над содержимым каждого экрана врача, пока есть неподтверждённое критическое событие: белая полоса с линией 2px чернилами снизу, слова с числом и кнопка «Открыть критические события». Знака ошибки и красной заливки нет; роль region с подписью.",
+      "html": "<div class=\"ds-band\"><p><b>Есть критические события, которые ждут вашего подтверждения: 1.</b> Это учебная демонстрация, не служба 24/7.</p><button>Открыть критические события</button></div>",
+      "css": ".ds-band{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:12px 28px;border-bottom:2px solid #15191d;background:#fff;font-size:14px}.ds-band p{flex:1 1 28em;max-width:70ch}.ds-band button{min-height:36px;padding:0 14px;border:1px solid #1a1f23;border-radius:4px;background:#1a1f23;color:#fff;font:700 14px sans-serif}"
     }
   ],
   "narrative": {
