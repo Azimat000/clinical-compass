@@ -89,7 +89,7 @@ class AgeTests(unittest.TestCase):
         fresh=create_app(self.path).test_client()
         fresh.set_cookie(access.COOKIE,self.clients['doc-a'].get_cookie(access.COOKIE).value)
         html=fresh.get('/demo/D01').get_data(as_text=True)
-        self.assertIn(row['id'],html);self.assertIn(review['basis'],html)
+        self.assertIn(row['id'],html);self.assertIn(review['basis'],html);self.assertIn('Журнал сверок',html)
         for sql in ("UPDATE age_reviews SET birth_date='2000-01-01'",'DELETE FROM age_reviews'):
             with self.assertRaises(sqlite3.IntegrityError):self.db.execute(sql)
 

@@ -54,7 +54,7 @@ class SearchTests(unittest.TestCase):
             'observed_on':'bad','summary':'Сохранить введённый текст'})
         self.assertEqual(400,page.status_code)
         self.assertIn('Сохранить введённый текст',page.text)
-        self.assertIn('data-default-panel="report"',page.text)
+        self.assertIn('id="record-error"',page.text)
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0])
 
 

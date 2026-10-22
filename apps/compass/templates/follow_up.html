@@ -1,0 +1,203 @@
+{#- Сводка повторного приёма: всё, что записано за период, с переходами к исходным записям. Только чтение, без оценок. -#}
+{% extends 'doctor_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'queue' %}
+{% block title %}Сводка к приёму{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
+{% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
+{% set outcome_kind = {'taken': 'known', 'missed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
+{% set visit_kinds = {'first': 'Первый приём', 'repeat': 'Повторный приём'} %}
+{% set card = url_for('demo_patient', patient_id=patient.id) %}
+
+{% macro age_line(age) -%}
+  {%- set n = age.years if age.years is not none else age.get('calculated_years') -%}
+  {%- if age.status == 'known' and n is not none -%}{{ n|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
+{%- endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="{{ card }}">← Карточка пациента</a></p>
+    <h1>Сводка к приёму</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span>{% if data %} · период <time class="num" datetime="{{ data.start }}">{{ data.start|full_date }}</time> — <time class="num" datetime="{{ data.end }}">{{ data.end|full_date }}</time>{% endif %}</p>
+  </div>
+</div>
+
+<form class="period" method="get" action="{{ url_for('follow_up_page', patient_id=patient.id) }}">
+  {{ ui.field('start', 'С', type='date', value=values.get('start', data.start if data else ''), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
+  {{ ui.field('end', 'По', type='date', value=values.get('end', data.end if data else today), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
+  {{ ui.button('Показать период') }}
+  <a class="reset" href="{{ url_for('follow_up_page', patient_id=patient.id) }}">Последние 30 дней</a>
+</form>
+
+{% if error %}
+  <div class="sheet-pad">{{ ui.notice('Период не показан', error, kind='error', id='period-error') }}</div>
+{% endif %}
+
+{% if data %}
+<div class="card-state">
+  <div>
+    <span class="label">Отметки самочувствия</span>
+    {% if data.missing_diary_days >= period_days %}{{ ui.state('unknown', 'ни одной за ' ~ period_days ~ ' дн.') }}
+    {% else %}<b class="num">{{ period_days - data.missing_diary_days }} из {{ period_days }}</b> <span class="sub">дней с отметкой{% if data.missing_diary_days %}; без отметки: {{ data.missing_diary_days }}{% endif %}</span>{% endif %}
+  </div>
+  <div>
+    <span class="label">Приёмы и анкеты</span>
+    {% set seen = data.visits|length + data.encounters|length %}
+    {% if seen or data.measured %}<b class="num">{{ seen }}</b> приёмов · <b class="num">{{ data.measured|length }}</b> анкет{% else %}{{ ui.state('unknown', 'приёмов и анкет нет') }}{% endif %}
+  </div>
+  <div>
+    <span class="label">План</span>
+    {% set due = data.tasks|rejectattr('superseded')|rejectattr('future')|list %}
+    {% if due %}<b class="num">{{ due|selectattr('outcome', 'equalto', 'taken')|list|length }} из {{ due|length }}</b> <span class="sub">выполнено{% for key, word in [('missed', 'пропущено'), ('unknown', 'нет сведений'), ('conflicting', 'противоречие')] %}{% set n = due|selectattr('outcome', 'equalto', key)|list|length %}{% if n %}; {{ word }}: {{ n }}{% endif %}{% endfor %}</span>
+    {% else %}{{ ui.state('unknown', 'пунктов нет') }}{% endif %}
+  </div>
+</div>
+
+<nav class="jump" aria-label="Разделы сводки">
+  <a href="#fu-records">Записи</a><a href="#fu-visits">Приёмы</a><a href="#fu-assessments">Анкеты</a><a href="#fu-plan">План и отметки</a>
+</nav>
+
+<div class="card-body">
+  {% if data.warnings %}
+  <section class="block" id="fu-warnings" aria-labelledby="h-warn">
+    <h2 id="h-warn">Расхождения в записях</h2>
+    {% for w in data.warnings %}{% set text, entry_id = w|note_parts %}
+    <div class="warn">{{ ui.notice(None, text, kind='info') }}{% if entry_id %}<a class="warn-link" href="{{ card }}#entry-{{ entry_id }}">к записи</a>{% endif %}</div>
+    {% endfor %}
+    <p class="meta">Записи сохранены отдельно, ни одна не выбрана «верной». Сверьте источники на приёме.</p>
+  </section>
+  {% endif %}
+
+  <section class="block" id="fu-records" aria-labelledby="h-rec">
+    <h2 id="h-rec">Записи самочувствия</h2>
+    {% if data.entries %}
+    <table class="results records entry-table">
+      <caption class="visually-hidden">Записи за период, сначала новые</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Кто записал</th><th scope="col">Самочувствие</th><th scope="col">Что записано</th><th scope="col"><span class="visually-hidden">Переход</span></th></tr></thead>
+      <tbody>
+        {% for e in data.entries %}
+        <tr>
+          <td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
+          <td>{{ 'Пациент' if e.kind == 'self_report' else 'Врач' }}<span class="sub" translate="no">{{ data.authors.get(e.actor_id, e.actor_id) }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
+          <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
+          <td>{% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
+            <ul class="fields">
+              {% for code, field in e.payload.fields.items() %}
+              <li>{{ ui.state(state_kind[field.status], fields[code]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% else %}<span class="sub">{{ statuses[field.status] }}</span>{% endif %}</li>
+              {% endfor %}
+            </ul></td>
+          <td class="go"><a href="{{ card }}#entry-{{ e.id }}">к записи</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      {{ ui.notice('Записей за период нет', 'Это отсутствие сведений, а не отсутствие жалоб. Уточните самочувствие на приёме.', kind='info') }}
+    {% endif %}
+    {% if data.encounters %}
+    <h3>Архивные записи приёма</h3>
+    <ul class="plain">
+      {% for enc in data.encounters %}
+      <li><time class="num" datetime="{{ enc.occurred_at }}">{{ enc.occurred_at|msk }}</time> · <span translate="no">{{ enc.display_name or 'автор не указан' }}</span><p class="entry-text">{{ enc.narrative }}</p><a class="row-link" href="{{ card }}#encounter-{{ enc.id }}">к записи</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section class="block" id="fu-visits" aria-labelledby="h-visits">
+    <h2 id="h-visits">Приёмы</h2>
+    {% for v in data.visits %}
+    <details class="fold visit"{% if loop.first %} open{% endif %}>
+      <summary>{{ visit_kinds.get(v.payload.visit_kind, 'Приём') }} · <time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time>
+        <span class="sub">{{ data.authors.get(v.actor_id, v.actor_id) }}, версия {{ v.revision }}{% if v.state != 'completed' %}, черновик{% endif %}</span></summary>
+      <table class="results records">
+        <caption class="visually-hidden">Сведения приёма</caption>
+        <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+        <tbody>
+          {% for code, field in v.payload.fields.items() %}
+          <tr><td>{{ visit_fields[code][1] }}</td>
+            <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
+            <td>{{ visit_sources.get(field.source, 'не указан') }}{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <dl class="facts">
+        {% if v.payload.documented_facts %}<dt>Из документа</dt><dd>{{ v.payload.documented_facts }}{% if v.payload.document_basis %}<span class="sub">{{ v.payload.document_basis }}</span>{% endif %}</dd>{% endif %}
+        <dt>Не собрано</dt><dd>{{ v.payload.not_collected or 'не указано' }}</dd>
+        <dt>Возраст</dt><dd>{{ ui.state(state_kind[v.payload.age.status], age_line(v.payload.age)) }}{% if v.payload.age_basis %}<span class="sub">{{ v.payload.age_basis }}</span>{% endif %}</dd>
+        {% if v.payload.action_draft %}<dt>Черновик действия</dt><dd>{{ v.payload.action_draft }}</dd>{% endif %}
+      </dl>
+    </details>
+    {% else %}
+      {{ ui.empty('Приёмов за период нет.') }}
+    {% endfor %}
+  </section>
+
+  <section class="block" id="fu-assessments" aria-labelledby="h-fa">
+    <h2 id="h-fa">Анкеты DASS-42</h2>
+    {% if data.measured %}
+    <table class="results records">
+      <caption class="visually-hidden">Анкеты за период, сначала новые</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревога</th><th scope="col">Депрессия</th><th scope="col">Стресс</th><th scope="col"><span class="visually-hidden">Переход</span></th></tr></thead>
+      <tbody>
+        {% for a in data.measured %}
+        <tr>
+          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></td>
+          <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub"><span class="nowrap">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}</span>. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
+          {% for key in ['anxiety', 'depression', 'stress'] %}<td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>{% endfor %}
+          <td class="go"><a href="{{ card }}#assessment-{{ a.id }}">к анкете</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="meta">Суммы 0–42 по каждой подшкале, без порогов и общего итога. Пропуск — суммы не считаются, ноль не подставляется. Период в анкете: «{{ data.measured[0].form.period }}». Подсчёт: <span class="num">{{ data.measured[0].scoring_version }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
+    {% else %}
+      {{ ui.empty('Анкет за период нет. Это не означает, что состояние в норме.') }}
+    {% endif %}
+  </section>
+
+  <section class="block" id="fu-plan" aria-labelledby="h-plan">
+    <h2 id="h-plan">План и отметки о выполнении</h2>
+    {% for plan in data.plans %}
+    <article class="plan">
+      <h3>{{ kinds.get(plan.kind, 'План') }} · версия {{ plan.version }}</h3>
+      <p class="meta">Подтверждено врачом <span translate="no">{{ data.authors.get(plan.doctor_id, plan.doctor_id) }}</span>, действует с <time class="num" datetime="{{ plan.effective_at }}">{{ plan.effective_at|msk }}</time>{% if plan.carried %}. Подтверждён до начала периода и продолжает действовать{% endif %}.</p>
+      <p class="entry-text">{{ plan.payload.content }}</p>
+      {% if plan.payload.basis %}<p class="meta">Основание: {{ plan.payload.basis }}</p>{% endif %}
+      {% if plan.payload.uncertainties %}<p class="meta">Что неизвестно: {{ plan.payload.uncertainties }}</p>{% endif %}
+      {% set mine = data.tasks|selectattr('action_id', 'equalto', plan.id)|list %}
+      {% if mine %}
+      <table class="results records">
+        <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
+        <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
+        <tbody>
+          {% for t in mine %}
+          <tr>
+            <td><time class="num" datetime="{{ t.due_at }}">{{ t.due_at[:10]|short_date }}</time></td>
+            <td>{{ t.label }}{% if t.superseded %}<span class="sub">заменён новой версией плана</span>{% endif %}</td>
+            <td>{% if t.future %}{{ ui.state('unknown', 'срок впереди') }}{% else %}{{ ui.state(outcome_kind[t.outcome], labels[t.outcome]) }}{% endif %}</td>
+            <td>{% for h in t.history %}<span class="hist"><time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at[:10]|short_date }}</time> {{ labels.get(h.outcome, h.outcome)|lower }}, <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>{% else %}<span class="sub">Отметок нет. Результат неизвестен.</span>{% endfor %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="meta">Пунктов плана в этом периоде нет.</p>
+      {% endif %}
+    </article>
+    {% else %}
+      {{ ui.empty('Подтверждённого плана за период нет. Это не означает, что план не нужен.') }}
+    {% endfor %}
+    {% set known_plans = data.plans|map(attribute='id')|list %}
+    {% set rest = data.tasks|rejectattr('action_id', 'in', known_plans)|list %}
+    {% if rest %}
+    <h3>Пункты других версий плана</h3>
+    <ul class="plain">{% for t in rest %}<li>{{ t.label }} · срок <time class="num" datetime="{{ t.due_at }}">{{ t.due_at[:10]|short_date }}</time> · {{ labels[t.outcome]|lower }}</li>{% endfor %}</ul>
+    {% endif %}
+  </section>
+</div>
+{% endif %}
+{% endblock %}

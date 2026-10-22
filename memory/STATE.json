@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-22T22:10:00+03:00",
+  "updated_on": "2026-10-22T22:28:54+03:00",
   "current_slice": null,
-  "last_accepted_slice": "UI03",
-  "next_slice": "UI04",
+  "last_accepted_slice": "UI04",
+  "next_slice": "UI05",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -326,8 +326,8 @@
       "reason": null
     },
     "UI04": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/UI04",
       "handoff": "memory/sessions/UI04.md",
       "reason": null
     },
@@ -706,6 +706,19 @@
       ],
       "evidence": "evidence/UI03/acceptance.md",
       "doctor_views": "503/interface_removed до UI04–UI06; сообщения — UI06"
+    },
+    "ui04_doctor_cabinet": {
+      "date": "2026-10-22",
+      "ready_views": [
+        "dashboard.html",
+        "doctor_base.html",
+        "doctor_patient.html",
+        "follow_up.html"
+      ],
+      "evidence": "evidence/UI04/acceptance.md",
+      "module": "apps/compass/overview.py",
+      "other_doctor_views": "503/interface_removed до UI05 (решения, первый приём, документы) и UI06 (сообщения, уведомления, критические события)",
+      "open_user_decision": "порог «две отметки хуже подряд» и «план без выполнения» как причины внимания — демонстрационный, не клинический"
     }
   }
 }

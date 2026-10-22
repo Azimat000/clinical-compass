@@ -386,6 +386,22 @@
       "description": "Три вкладки в белой полосе: Сегодня, Дневник, Анкеты; активная подчёркнута чернилами 2px; недоступных пунктов нет.",
       "html": "<nav class=\"ds-ptabs\"><a aria-current=\"page\" href=\"#\">Сегодня</a><a href=\"#\">Дневник</a><a href=\"#\">Анкеты</a></nav>",
       "css": ".ds-ptabs{display:flex;gap:4px;background:#fff;border-bottom:1px solid #d3dae0;padding:0 12px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-ptabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 10px;color:#56616b;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}.ds-ptabs a[aria-current]{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
+    },
+    {
+      "name": "Строка списка врача",
+      "kind": "custom",
+      "refersTo": "marker",
+      "description": "Строка листа результатов: имя и возраст, причина под маркером (ссылка к источнику), метки самочувствия, явления линией состояния, анкета, план, флаги словом; на телефоне две-три строки.",
+      "html": "<div class=\"ds-row\"><b>Елена</b><span class=\"m\">Нежелательное явление</span><span class=\"f\">НЯ</span></div>",
+      "css": ".ds-row{display:grid;grid-template-columns:120px 1fr 56px;gap:12px;align-items:start;padding:11px 12px;border-bottom:1px solid #e6eaed;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-row .m{background:#e3f08a;padding:0 3px;font-weight:700;justify-self:start}.ds-row .f{border:1.5px solid #b8261b;color:#b8261b;border-radius:2px;padding:2px 6px;font:400 12px \"PT Mono\",Menlo,monospace;justify-self:end}"
+    },
+    {
+      "name": "Расхождение",
+      "kind": "custom",
+      "refersTo": "marker",
+      "description": "Строка между двумя линиями: знак-сведение слева, текст и ссылка «к записи» справа.",
+      "html": "<div class=\"ds-warn\"><span>22.10: Жалобы — противоречивые сведения</span><a href=\"#\">к записи</a></div>",
+      "css": ".ds-warn{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-block:1px solid #e6eaed;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-warn::before{content:\"\";width:22px;margin-top:9px;border-top:2px solid currentColor;flex:none}.ds-warn span{flex:1}.ds-warn a{color:#15191d}"
     }
   ],
   "narrative": {

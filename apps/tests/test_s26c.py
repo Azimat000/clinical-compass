@@ -153,7 +153,8 @@ class PatientWorkspaceTests(unittest.TestCase):
             self.assertEqual(404, self.clients['pat-b'].get(path).status_code, path)
         self.assertEqual(404, self.clients['pat-b'].get('/demo/D01').status_code)
         doctor = self.clients['doc-a'].get('/demo/D01')
-        self.assertEqual(503, doctor.status_code)  # кабинет врача собирается в UI04
+        self.assertEqual(200, doctor.status_code)  # врач получает свою карточку, а не кабинет пациента
+        self.assertIn('Разделы карточки', doctor.get_data(as_text=True))
         self.assertNotIn('Разделы кабинета', doctor.get_data(as_text=True))
 
     def test_failed_submission_keeps_every_entered_value_and_saves_nothing(self):
@@ -273,6 +274,7 @@ class PatientWorkspaceTests(unittest.TestCase):
     def test_patient_cannot_use_doctor_screens_and_doctor_card_is_not_the_patient_one(self):
         self.assertEqual(403, self.clients['pat-a'].get('/patients/D01/follow-up').status_code)
         doctor = self.page('/demo/D01', 'doc-a')
+        self.assertIn('Разделы карточки', doctor)
         self.assertNotIn('Разделы кабинета', doctor)
         self.assertNotIn('h-today', doctor)
 

@@ -1,0 +1,44 @@
+{#- Оболочка кабинета врача: боковое меню на компьютере, угольная полоса и «Меню» на узком экране. Потомок задаёт nav_active: queue | invites | patient. -#}
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block body %}
+{% set weekday, day, iso = sheet_date() %}
+{% set nav = [('queue', 'Кому нужно внимание', url_for('dashboard'), queue_total()),
+              ('invites', 'Приглашения', url_for('dashboard') ~ '#invitations', None)] %}
+{% macro menu() %}
+  {% for key, label, href, count in nav %}
+    <a href="{{ href }}"{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count count--alert num">{{ count }}</span>{% endif %}</a>
+  {% endfor %}
+{% endmacro %}
+<div class="shell">
+  <aside class="side" aria-label="Разделы">
+    {{ ui.brand(url_for('dashboard')) }}
+    <nav class="nav" aria-label="Основные разделы">{{ menu() }}</nav>
+    <div class="side-foot"><span class="side-user" translate="no">{{ current_user.display_name }}</span>учебный врач
+      <form class="d-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти</button></form></div>
+  </aside>
+
+  <div class="main">
+    <div class="bar carbon">
+      {{ ui.brand(url_for('dashboard'), 'Компас') }}
+      {{ ui.synthetic() }}
+      <details class="menu">
+        <summary>Меню</summary>
+        <nav class="nav" aria-label="Основные разделы">{{ menu() }}
+          <form class="d-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти</button></form>
+        </nav>
+      </details>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head carbon">
+        <span>{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</span>
+        {{ ui.synthetic('Учебные данные, даты смоделированы') }}
+      </div>
+      <main id="main">
+        {% block doctor_main %}{% endblock %}
+      </main>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -79,8 +79,9 @@ class AccessTests(unittest.TestCase):
         r = self.post('pat-a', '/patients/D01/connection-check')
         self.assertEqual(302, r.status_code)
         report = self.db.execute('SELECT * FROM relationship_checks').fetchone()
-        for uid in ('doc-a', 'pat-a'):
-            self.assertIn(report['id'], self.clients[uid].get('/demo/D01').get_data(as_text=True))
+        # Врач видит номер проверки связи в карточке, пациент — время получения.
+        self.assertIn(report['id'], self.clients['doc-a'].get('/demo/D01').get_data(as_text=True))
+        self.assertIn('Последняя проверка связи получена', self.clients['pat-a'].get('/demo/D01').get_data(as_text=True))
         # New application instance, same browser cookie and database.
         fresh = create_app(self.path).test_client()
         fresh.set_cookie(access.COOKIE, self.clients['doc-a'].get_cookie(access.COOKIE).value)
@@ -274,7 +275,7 @@ class AccessTests(unittest.TestCase):
         self.db.execute("UPDATE encounters SET narrative='HiddenSensitiveMarker' WHERE patient_id='D02'")
         html = self.clients['doc-a'].get('/?q=HiddenSensitiveMarker').get_data(as_text=True)
         self.assertNotIn('href="/demo/D02"', html)
-        self.assertIn('Пациенты не найдены', html)
+        self.assertIn('По этому запросу пациентов нет', html)
 
     def test_secure_configuration_and_no_secrets_in_audit(self):
         self.app.config['AUTH_COOKIE_SECURE'] = True

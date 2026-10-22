@@ -1,4 +1,4 @@
-"""S26B: журнал «Кому нужно внимание» и постоянная шапка карточки врача. Тексты и серверные правила не менялись."""
+"""UI04: список «Кому нужно внимание» и карточка врача. Серверные правила сигналов не менялись, меняется только разметка."""
 import unittest
 from apps.compass import critical_delivery, events
 from apps.compass.db import now
@@ -32,9 +32,10 @@ class DoctorWorkspaceTests(unittest.TestCase):
     def test_no_signal_state_is_worded_and_not_a_claim_of_safety(self):
         page = self.clients()['doc-a'].get('/').text
         self.assertIn('<h1>Кому нужно внимание</h1>', page)
-        self.assertIn('Сигналов без записанной реакции нет', page)
-        self.assertIn('отсутствие сигнала не означает отсутствие риска', page)
-        self.assertNotIn('has-signal', page)
+        self.assertIn('Записанных причин для внимания нет', page)
+        self.assertIn('не вывод о том, что у пациентов всё хорошо', page)
+        self.assertNotIn('СИГНАЛ', page)
+        self.assertNotIn('class="flagged"', page)
 
     def test_signal_patient_goes_first_and_is_marked_with_words(self):
         self.db.execute("UPDATE patients SET code='Яя Первый' WHERE id='D01'")
@@ -46,68 +47,63 @@ class DoctorWorkspaceTests(unittest.TestCase):
         self.assertEqual(['D01', 'D02'], order)
         self.assertEqual({'D01': 1}, pending_signal_counts(self.db, 'doc-a'))
         page = self.clients()['doc-a'].get('/').text
-        self.assertIn('Сигналы без записанной реакции — пациентов: 1', page)
-        self.assertIn('Критический сигнал без записанной реакции: 1', page)
+        self.assertIn('Критический сигнал без реакции врача', page)
+        self.assertIn('критический сигнал без записанной реакции врача', page)  # полная причина флага для скринридера
         self.assertLess(page.index('Яя Первый'), page.index('Демо 02'))
-        self.assertEqual(1, page.count('class="patient-row has-signal"'))
+        self.assertEqual(1, page.count('class="flagged"'))
+        self.assertIn('С причиной для внимания: 1 из 2', page)
 
     def test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it(self):
         eid = self.raise_signal()
         clients = self.clients()
         self.assertEqual({}, pending_signal_counts(self.db, 'doc-b'))
-        self.assertIn('Сигналов без записанной реакции нет', clients['doc-b'].get('/').text)
+        self.assertNotIn('СИГНАЛ', clients['doc-b'].get('/').text)
         for action in ('received', 'seen', 'acknowledged'):
             critical_delivery.mark(self.db, self.doc, eid, action, '')
-        self.assertIn('Сигналы без записанной реакции', clients['doc-a'].get('/').text)
+        self.assertIn('СИГНАЛ', clients['doc-a'].get('/').text)
         self.assertEqual({'D01': 1}, pending_signal_counts(self.db, 'doc-a'))
         critical_delivery.mark(self.db, self.doc, eid, 'reacted', 'Synthetic actual physician response')
         self.assertEqual({}, pending_signal_counts(self.db, 'doc-a'))
-        self.assertIn('Сигналов без записанной реакции нет', clients['doc-a'].get('/').text)
+        self.assertNotIn('СИГНАЛ', clients['doc-a'].get('/').text)
 
-    def test_card_header_is_on_every_doctor_page_and_shows_signal_and_age(self):
+    def test_card_header_shows_signal_and_age_and_has_one_heading(self):
         self.raise_signal()
         doctor = self.clients()['doc-a']
-        for url in ['/demo/D01', '/patients/D01/decisions', '/patients/D01/communication', '/patients/D01/imports',
-                    '/patients/D01/first-visits', '/patients/D01/follow-up']:
-            page = doctor.get(url).text
-            self.assertIn('class="case-head"', page, url)
-            self.assertIn('Постоянная шапка карточки', page, url)
-            self.assertIn('⚠ Без записанной реакции: 1', page, url)
-            self.assertIn('Исходный возраст', page, url)
-            self.assertIn('Записанное направление', page, url)
-            self.assertIn('aria-label="Задача врача"', page, url)
-            self.assertIn('aria-label="Разделы карточки"', page, url)
         card = doctor.get('/demo/D01').text
-        self.assertEqual(1, card.count('<h1>'))
-        self.assertIn('<h1>Демо 01</h1>', card)
+        self.assertEqual(1, card.count('<h1'))
+        self.assertIn('<h1 translate="no">Демо 01</h1>', card)
+        self.assertIn('19 лет', card)
+        self.assertIn('Критических сигналов без реакции врача: 1', card)
+        self.assertIn('Сводка к приёму', card)
+        fu = doctor.get('/patients/D01/follow-up').text
+        self.assertIn('<h1>Сводка к приёму</h1>', fu)
+        self.assertIn('Карточка пациента', fu)
 
-    def test_card_navigation_is_short_and_keeps_every_doctor_function_reachable(self):
+    def test_card_navigation_is_short_and_offers_only_screens_that_exist(self):
         doctor = self.clients()['doc-a']
         page = doctor.get('/demo/D01').text
         nav = page[page.index('aria-label="Разделы карточки"'):]
         nav = nav[:nav.index('</nav>')]
         self.assertEqual(5, nav.count('<a '))
-        for link in ['#overview', '#dynamics', '#assessments', '#clinical-data', '/patients/D01/decisions']:
+        for link in ['#records', '#assessments', '#age-review', '#clinical-rules', '#link']:
             self.assertIn(link, nav)
-        for path in ['/patients/D01/first-visits', '/patients/D01/follow-up', '/patients/D01/imports', '/patients/D01/communication']:
-            self.assertIn('href="' + path + '"', page)
-        self.assertIn('Первый приём', page)
-        self.assertIn('Сводка повторного приёма', page)
-        decisions = doctor.get('/patients/D01/decisions').text
-        self.assertIn('<a aria-current="page" href="/patients/D01/decisions">План и решения</a>', decisions)
-        self.assertIn('href="/patients/D01/communication"', decisions)
+            self.assertIn('id="%s"' % link[1:], page)
+        # Экраны решений, первого приёма, документов и сообщений появятся в UI05/UI06; ссылок на 503 нет.
+        for path in ['decisions', 'first-visits', 'imports', 'communication']:
+            self.assertNotIn('/patients/D01/' + path, page)
+        self.assertIn('href="/patients/D01/follow-up"', page)
 
     def test_patient_role_keeps_own_card_without_doctor_header(self):
         patient = self.clients()['pat-a']
-        for url in ['/demo/D01', '/patients/D01/decisions', '/patients/D01/communication']:
-            page = patient.get(url).text
-            self.assertNotIn('case-head', page, url)
-            self.assertNotIn('Задача врача', page, url)
+        page = patient.get('/demo/D01').text
+        self.assertNotIn('Разделы карточки', page)
+        self.assertNotIn('Сводка к приёму', page)
         self.assertEqual(403, patient.get('/patients/D01/imports').status_code)
+        self.assertEqual(403, patient.get('/patients/D01/follow-up').status_code)
 
-    def test_status_key_separates_draft_receipt_and_unknown(self):
+    def test_legend_separates_known_unknown_and_conflicting_by_word(self):
         page = self.clients()['doc-a'].get('/').text
-        for phrase in ['Проект не меняет план', 'Сохранено, получено и просмотрено не значит', 'Неизвестно, отрицание, противоречие']:
+        for phrase in ['есть сведения', 'неизвестно', 'противоречие', 'не указано', 'лучше', 'без изменений', 'хуже']:
             self.assertIn(phrase, page)
 
 

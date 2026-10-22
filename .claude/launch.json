@@ -45,6 +45,36 @@
         "8030"
       ],
       "port": 8030
+    },
+    {
+      "name": "ui04-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui04-review-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8040"
+      ],
+      "port": 8040
+    },
+    {
+      "name": "ui04-worst",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui04-worst-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8041"
+      ],
+      "port": 8041
     }
   ]
 }

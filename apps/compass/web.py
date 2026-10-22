@@ -4,19 +4,20 @@ import re
 import json
 import secrets
 import sqlite3
-from datetime import datetime
+from datetime import date, datetime
 from zoneinfo import ZoneInfo
 from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list, pending_signal_counts
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up, report_drafts
+from . import first_visits, follow_up, report_drafts, overview
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
-                         'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
-# Patient cabinet screens: a doctor opening the same address still gets 503 until the doctor cabinet exists (UI04).
+                         'patient.html', 'assessment_form.html', 'assessment_receipt.html',
+                         'dashboard.html', 'doctor_patient.html', 'follow_up.html'})
+# Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
@@ -73,6 +74,26 @@ def create_app(database=None):
         return '%d %s' % (day.day, MONTHS[day.month - 1])
 
     @app.template_filter()
+    def times(value):
+        return overview.times_word(int(value))
+
+    @app.template_filter()
+    def years(value):
+        try:
+            return '%d %s' % (int(value), overview.years_word(int(value)))
+        except (TypeError, ValueError):
+            return 'не указан'
+
+    @app.template_filter()
+    def note_parts(value):
+        return overview.note_parts(value)
+
+    @app.template_filter()
+    def note(value):
+        """Warning text for people: ISO date -> 22.10, internal record ids dropped."""
+        return overview.tidy(value or '')
+
+    @app.template_filter()
     def msk(value):
         """Stored UTC stamp -> 22.10.2026 14:05 МСК."""
         try:
@@ -80,10 +101,22 @@ def create_app(database=None):
         except (TypeError, ValueError):
             return value
 
+    def queue_total():
+        """Patients with a recorded reason for attention among all the doctor's patients, ignoring search and filters."""
+        if 'queue_total' not in g:
+            user = g.get('user')
+            if not user or user['role'] != 'doctor':
+                g.queue_total = None
+            else:
+                db = get_db()
+                patients = patient_list(db, doctor_id=user['id'], signals_first=True)
+                g.queue_total = sum(1 for r in overview.rows(db, user, patients, pending_signal_counts(db, user['id'])) if r['attention'])
+        return g.queue_total
+
     @app.context_processor
     def session_context():
         user = g.get('user')
-        return {'current_user': user, 'csrf': user['csrf_token'] if user else ''}
+        return {'current_user': user, 'csrf': user['csrf_token'] if user else '', 'queue_total': queue_total}
 
     def get_db():
         if 'db' not in g:
@@ -303,6 +336,9 @@ def create_app(database=None):
         record_kind = request.args.get('record_kind', '')
         route_category = request.args.get('route_category', '')
         attention = request.args.get('attention', '')
+        show = request.args.get('show', '')
+        if show not in ('', 'flagged'):
+            abort(400)
         try:
             rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'],
                                 record_kind=record_kind, route_category=route_category, attention=attention,
@@ -311,10 +347,13 @@ def create_app(database=None):
             abort(400)
         offers = get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
             WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
-        route_summaries = {p['id']: routing.summaries(get_db(), g.user, p['id']) for p in rows}
         signal_counts = pending_signal_counts(get_db(), g.user['id'])
-        return interface_response('dashboard.html', route_summaries=route_summaries, patients=rows, query=query, age_status=age_status, offers=offers,
-                               signal_counts=signal_counts,
+        sheet = overview.rows(get_db(), g.user, rows, signal_counts)
+        flagged = sum(1 for r in sheet if r['attention'])
+        if show == 'flagged':
+            sheet = [r for r in sheet if r['attention']]
+        return interface_response('dashboard.html', rows=sheet, flagged=flagged, total=len(rows), show=show,
+                               query=query, age_status=age_status, offers=offers, signal_counts=signal_counts,
                                record_kind=record_kind, route_category=route_category, attention=attention)
 
     @app.get('/demo/<patient_id>')
@@ -349,8 +388,9 @@ def create_app(database=None):
             if failure.status in (403, 404):
                 abort(failure.status)
             error, status = str(failure), failure.status
+        days = (date.fromisoformat(data['end']) - date.fromisoformat(data['start'])).days + 1 if data else 0
         return interface_response('follow_up.html', patient=patient, data=data, error=error,
-            values=request.args, today=records.today().isoformat(), fields=records.FIELDS,
+            patient_name=overview.person(patient['code'])[0], period_days=days, values=request.args, today=records.today().isoformat(), fields=records.FIELDS,
             statuses=records.STATUSES, wellbeing=records.WELLBEING, kinds=decisions.KINDS,
             labels=communication.LABELS, visit_fields=first_visits.FIELDS,
             visit_sources=first_visits.SOURCES), status
@@ -533,7 +573,10 @@ def create_app(database=None):
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
         is_patient = g.user['role'] == 'patient'
-        return interface_response('patient.html', section=section, own_marks=[e for e in entries if e['kind'] == 'self_report'],
+        signals = 0 if is_patient else pending_signal_counts(db, g.user['id']).get(patient_id, 0)
+        return interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
+                               signals=signals, route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
+                               overview=None if is_patient else overview.summary(db, g.user, patient, signals), own_marks=[e for e in entries if e['kind'] == 'self_report'],
                                today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,

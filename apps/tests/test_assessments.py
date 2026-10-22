@@ -106,7 +106,7 @@ class AssessmentsTests(unittest.TestCase):
         receipts=self.clients['pat-a'].get('/api/patients/D01/assessments').json['assessments']
         self.assertEqual({'request_id','requested_at','recorded_at','form_version_id'},set(receipts[0]))
         html=self.clients['doc-a'].get('/demo/D01').get_data(as_text=True)
-        self.assertIn('Депрессивные симптомы: 42 / 42',html)
+        self.assertEqual(3,html.count('<td class="num">42</td>'))  # три суммы подшкал 42, общего итога нет
         self.assertIn('Исходные ответы (42 пункта)',html)
         self.assertIn(self.form['items'][20],html)
         for table in ('care_actions','proposals','risk_evaluations','alerts','doctor_confirmations'):
@@ -120,7 +120,9 @@ class AssessmentsTests(unittest.TestCase):
         self.assertIsNone(row['answers'][20])
         trend=assessments.trends([row])[0]
         self.assertTrue(all(not s['points'] for s in trend['series']))
-        self.assertIn('Ни одна сумма не рассчитана',self.clients['doc-a'].get('/demo/D01').get_data(as_text=True))
+        page=self.clients['doc-a'].get('/demo/D01').get_data(as_text=True)
+        self.assertIn('Есть пропуски. Ни одна сумма не рассчитана',page)
+        self.assertIn('не рассчитано',page);self.assertIn('41 из 42',page)
 
     def test_patient_cannot_choose_a_task_or_other_role_and_csrf_is_enforced(self):
         for uid,pid,status in [('pat-a','D01',403),('doc-b','D01',404),('doc-a','D02',404)]:

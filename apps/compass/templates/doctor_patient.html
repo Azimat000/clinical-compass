@@ -1,0 +1,304 @@
+{#- Карточка пациента для врача. Разделы одной страницей, переходы по якорям; действия — обычные формы. -#}
+{% extends 'doctor_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'queue' %}
+{% block title %}{{ overview.name|truncate(60, True, '…') }}{% endblock %}
+{% set weekday, day, iso = sheet_date() %}
+{% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
+{% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
+{% set levels = {'present': 'есть', 'denied': 'нет', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
+{% set context_fields = [('gad_status', 'ГТР: врачебные сведения'), ('severity', 'Тяжесть'), ('suicide_risk', 'Суицидальный риск, запись врача'),
+                         ('psychiatric_comorbidity', 'Психиатрическая коморбидность'), ('treatment_resistance', 'Резистентность к лечению'),
+                         ('aviandr_prescription', 'Назначение Авиандра')] %}
+{% set severity_levels = {'severe': 'тяжёлая', 'nonsevere': 'нетяжёлая', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
+{% set prescription_levels = {'active': 'действует', 'denied': 'нет', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
+{% set shown = entries[:15] %}
+{% set rest = entries[15:] %}
+
+{% macro age_line(age) -%}
+  {%- set n = age.years if age.years is not none else age.get('calculated_years') -%}
+  {%- if age.status == 'known' and n is not none -%}{{ n|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
+{%- endmacro %}
+
+{% macro records_table(rows) %}
+<table class="results records entry-table">
+  <caption class="visually-hidden">Записи пациента и врача, сначала новые</caption>
+  <thead><tr><th scope="col">Дата</th><th scope="col">Кто записал</th><th scope="col">Самочувствие</th><th scope="col">Что записано</th></tr></thead>
+  <tbody>
+    {% for e in rows %}
+    <tr id="entry-{{ e.id }}">
+      <td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
+      <td>{{ 'Пациент' if e.kind == 'self_report' else 'Врач' }}<span class="sub" translate="no">{{ e.display_name }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
+      <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
+      <td>
+        {% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
+        <ul class="fields">
+          {% for code, field in e.payload.fields.items() %}
+          <li>{{ ui.state(state_kind[field.status], record_fields[code]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% else %}<span class="sub">{{ statuses[field.status] }}</span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+        <span class="sub">Возраст в записи: {{ age_line(e.payload.age) }}</span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% block doctor_main %}
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="{{ url_for('dashboard') }}">← Кому нужно внимание</a></p>
+    <h1 translate="no">{{ overview.name }}</h1>
+    <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+    <p class="finding">{{ overview.age }}{% if overview.ordinal %} · {{ overview.ordinal }}{% endif %} · <span class="num" translate="no">{{ patient.id }}</span>
+      {% if relationship %} · ведущий врач <span translate="no">{{ relationship.display_name }}</span> с <time datetime="{{ relationship.starts_at }}">{{ relationship.starts_at[:10]|full_date }}</time>{% else %} · связи с врачом нет{% endif %}</p>
+  </div>
+  <div class="title-actions">
+    {{ ui.button('Сводка к приёму', kind='primary', href=url_for('follow_up_page', patient_id=patient.id)) }}
+  </div>
+</div>
+
+<div class="card-state">
+  <div>
+    <span class="label">Самочувствие, 5 отметок</span>
+    {% if overview.marks.series %}{{ ui.wellbeing(overview.marks.series) }}
+      <span class="sub">{% if overview.marks.streak >= 2 %}хуже {{ overview.marks.streak|times }} подряд{% else %}последняя <time datetime="{{ overview.marks.last_on }}">{{ overview.marks.last_on|short_date }}</time>{% endif %}</span>
+    {% else %}{{ ui.state('unknown', 'нет отметок') }}{% endif %}
+  </div>
+  <div>
+    <span class="label">Что в записях</span>
+    {% if overview.attention %}{{ ui.marker(overview.reason.text) }}{% else %}<b>{{ overview.reason.text }}</b>{% endif %}
+    {% if overview.reason.sub %}<span class="sub">{{ overview.reason.sub }}</span>{% endif %}
+    {% for m in overview.more %}<span class="sub">Ещё: {{ m.text }}{% if m.sub %} ({{ m.sub }}){% endif %}</span>{% endfor %}
+  </div>
+  <div>
+    <span class="label">Флаги</span>
+    {% for code, text, reason in overview.flags %}{{ ui.flag(text, reason) }}{% else %}<span class="sub">флагов нет</span>{% endfor %}
+  </div>
+</div>
+
+<nav class="jump" aria-label="Разделы карточки">
+  <a href="#records">Записи</a><a href="#assessments">Анкеты</a><a href="#age-review">Возраст</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
+</nav>
+
+<div class="card-body">
+  {#- ---------- Записи ---------- #}
+  <section class="block" id="records" aria-labelledby="h-records">
+    <h2 id="h-records">Записи и самочувствие</h2>
+    {% if record_warnings %}
+      <div id="warnings">
+      {% for w in record_warnings %}{% set text, entry_id = w|note_parts %}
+        <div class="warn">{{ ui.notice(None, text, kind='info') }}{% if entry_id %}<a class="warn-link" href="#entry-{{ entry_id }}">к записи</a>{% endif %}</div>
+      {% endfor %}
+      </div>
+    {% endif %}
+    {% if shown %}
+    {{ records_table(shown) }}
+    {% if rest %}
+    <details class="fold">
+      <summary>Ещё записей: {{ rest|length }}</summary>
+      {{ records_table(rest) }}
+    </details>
+    {% endif %}
+    <p class="meta">Всего записей: {{ entries|length }}. За выбранный период — в <a href="{{ url_for('follow_up_page', patient_id=patient.id) }}">сводке к приёму</a>.</p>
+    {% else %}
+      {{ ui.empty('Записей пока нет. Пустой список — отсутствие сведений, а не отсутствие жалоб.') }}
+    {% endif %}
+    {% if encounters %}
+    <h3>Архивные записи приёма</h3>
+    <ul class="plain">
+      {% for enc in encounters %}
+      <li id="encounter-{{ enc['id'] }}"><time class="num" datetime="{{ enc['occurred_at'] }}">{{ enc['occurred_at']|msk }}</time><p class="entry-text">{{ enc['narrative'] }}</p></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  {#- ---------- Анкеты ---------- #}
+  <section class="block" id="assessments" aria-labelledby="h-assess">
+    <h2 id="h-assess">Анкета DASS-42</h2>
+    {% if assessment_error %}{{ ui.notice('Анкета не предложена', assessment_error, kind='error', id='assessment-error') }}{% endif %}
+    {% for task in pending_assessments %}
+      {{ ui.notice('Предложена, ждёт ответа', 'Пациент может отправить её до ' ~ task.deadline_label ~ '.', kind='info') }}
+    {% endfor %}
+    {% if measured %}
+    <table class="results records">
+      <caption class="visually-hidden">Заполненные анкеты DASS-42, сначала новые</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревога</th><th scope="col">Депрессия</th><th scope="col">Стресс</th><th scope="col">Возраст на дату</th></tr></thead>
+      <tbody>
+        {% for a in measured %}
+        <tr id="assessment-{{ a.id }}">
+          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></td>
+          <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub"><span class="nowrap">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}</span>. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
+          {% for key in ['anxiety', 'depression', 'stress'] %}
+          <td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>
+          {% endfor %}
+          <td>{{ a.age_years }}<span class="sub">{{ a.age_basis }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="meta">Суммы по подшкалам, 0–42 каждая, без порогов, уровней тяжести и общего итога. При любом пропуске суммы не считаются. Период в анкете: «{{ measured[0].form.period }}». Подсчёт: <span class="num">{{ measured[0].scoring_version }}</span>. Источник: <a href="{{ measured[0].source_url }}" rel="noopener noreferrer" translate="no">{{ measured[0].form.code }}</a>, версия <span class="num">{{ measured[0].form.version }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
+    {% for a in measured %}
+    <details class="fold" id="answers-{{ a.id }}">
+      <summary>Исходные ответы ({{ a.answers|length }} пункта) · <time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></summary>
+      <ol class="answers">
+        {% for text in a.form['items'] %}{% set value = a.answers[loop.index0] %}
+        <li><span>{{ text }}</span> <b class="num">{{ value if value is not none else 'без ответа' }}</b></li>
+        {% endfor %}
+      </ol>
+      <p class="meta">{% for option in a.form.options %}{{ loop.index0 }} — {{ option }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+    </details>
+    {% endfor %}
+    {% else %}
+      {{ ui.empty('Заполненных анкет нет.') }}
+    {% endif %}
+
+    <form method="post" action="{{ url_for('request_assessment', patient_id=patient.id) }}" class="action-form" id="assessment-form">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="assignment_key" value="{{ assignment_key }}">
+      <input type="hidden" name="form_version_id" value="{{ assessment_form.id }}">
+      <input type="hidden" name="age_status" value="known">
+      <h3>Предложить анкету</h3>
+      <p class="meta">Нужен сверенный возраст от 18 лет. Предложение действует до конца текущих суток по Москве.</p>
+      <div class="form-row">
+        {{ ui.field('age_years', 'Возраст, лет', type='text', value=assessment_values.get('age_years', patient.age_years if patient.age_status == 'known' else ''), size='sm',
+                    extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
+        {{ ui.field('age_basis', 'Откуда возраст', value=assessment_values.get('age_basis', ''), hint='Например: сверен по документу на приёме.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
+      </div>
+      {{ ui.button('Предложить DASS-42') }}
+    </form>
+  </section>
+
+  {#- ---------- Возраст ---------- #}
+  <section class="block" id="age-review" aria-labelledby="h-age">
+    <h2 id="h-age">Сверка возраста</h2>
+    {% if age_error %}{{ ui.notice('Сверка не сохранена', age_error, kind='error', id='age-error') }}{% endif %}
+    <p>В карточке: {{ ui.state(state_kind[patient.age_status], overview.age) }}</p>
+    <table class="results records">
+      <caption class="visually-hidden">Источники возраста в записях</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Источник</th><th scope="col">Возраст</th></tr></thead>
+      <tbody>
+        {% for s in age_view.sources %}
+        <tr><td><time class="num" datetime="{{ s.observed_on }}">{{ s.observed_on|short_date }}</time></td>
+          <td>{% if s.kind == 'self_report' %}самоотчёт{% elif s.kind == 'visit' %}запись врача{% elif s.kind == 'first_visit' %}первый приём{% else %}исходный профиль{% endif %}</td>
+          <td>{{ ui.state(state_kind[s.age.status], age_line(s.age)) }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if age_view.reviews %}
+    <h3>Журнал сверок</h3>
+    <table class="results records">
+      <caption class="visually-hidden">Сверки возраста, сначала новые</caption>
+      <thead><tr><th scope="col">Когда</th><th scope="col">Дата рождения</th><th scope="col">Основание</th><th scope="col">Номер</th></tr></thead>
+      <tbody>
+        {% for r in age_view.reviews %}
+        <tr id="age-review-{{ r.id }}"><td><time class="num" datetime="{{ r.recorded_at }}">{{ r.recorded_at|msk }}</time></td><td class="num">{{ r.birth_date|full_date }}</td><td>{{ r.basis }}</td><td class="num id">{{ r.id }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    {% if age_view.current %}
+      {{ ui.notice('Сверка актуальна', 'Источники не менялись после последней сверки.', kind='done') }}
+    {% else %}
+    <form method="post" action="{{ url_for('review_age', patient_id=patient.id) }}" class="action-form">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="request_key" value="{{ age_request_key }}">
+      <input type="hidden" name="sources_fingerprint" value="{{ age_view.fingerprint }}">
+      <h3>Сверить возраст</h3>
+      {{ ui.field('birth_date', 'Сверенная дата рождения', type='date', value=age_values.get('birth_date', ''), required=True, autocomplete='off') }}
+      {{ ui.textarea('basis', 'Основание', value=age_values.get('basis', ''), hint='Какие документы или сведения сверены.', required=True, rows=3) }}
+      {{ ui.choice('reviewed_sources', 'Подтверждение', [('yes', 'Я сверил(а) все источники возраста из таблицы выше')], type='checkbox') }}
+      {{ ui.button('Сохранить сверку') }}
+    </form>
+    {% endif %}
+  </section>
+
+  {#- ---------- Врачебные сведения ---------- #}
+  <section class="block" id="clinical-rules" aria-labelledby="h-rules">
+    <h2 id="h-rules">Врачебные сведения</h2>
+    {% set advice = clinical_panel.advice %}
+    {{ ui.notice('Рекомендация не сформирована', advice.reason, kind='info') }}
+    {% if advice.source_url %}<p class="meta">Источник: <a href="{{ advice.source_url }}" rel="noopener noreferrer">клинические рекомендации</a>, {{ advice.source_section }}. Решения по ним принимает врач.</p>{% endif %}
+    {% if signals %}<p>{{ ui.state('new', 'Критических сигналов без реакции врача: ' ~ signals) }}</p>{% endif %}
+    {% if clinical_panel.events %}
+    <h3>Критические события</h3>
+    <table class="results records">
+      <caption class="visually-hidden">Критические события пациента, сначала новые</caption>
+      <thead><tr><th scope="col">Когда</th><th scope="col">Событие</th><th scope="col">Передача врачу</th><th scope="col">Номер</th></tr></thead>
+      <tbody>
+        {% for ev in clinical_panel.events %}
+        <tr id="critical-{{ ev.id }}"><td><time class="num" datetime="{{ ev.created_at }}">{{ ev.created_at|msk }}</time></td><td>критическое событие</td>
+          <td>{{ 'передано ведущему врачу' if ev.delivery_state == 'pending_s10' else 'ведущего врача нет' }}</td><td class="num id">{{ ev.id }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    {% set ctx = clinical_panel.context %}
+    {% if ctx %}
+    <dl class="facts">
+      <dt>Сведения на</dt><dd><time class="num" datetime="{{ ctx.payload.observed_on }}">{{ ctx.payload.observed_on|full_date }}</time></dd>
+      {% for key, label in context_fields %}
+      <dt>{{ label }}</dt><dd>{% if key == 'severity' %}{{ severity_levels[ctx.payload[key]] }}{% elif key == 'aviandr_prescription' %}{{ prescription_levels[ctx.payload[key]] }}{% else %}{{ levels[ctx.payload[key]] }}{% endif %}</dd>
+      {% endfor %}
+      <dt>Основание</dt><dd>{{ ctx.payload.clinical_basis }}</dd>
+      {% if ctx.payload.prescription_basis %}<dt>Основание назначения</dt><dd>{{ ctx.payload.prescription_basis }}</dd>{% endif %}
+    </dl>
+    {% else %}
+      {{ ui.empty('Врачебные сведения не вносились. Отсутствие сведений не означает отсутствия риска.') }}
+    {% endif %}
+    <details class="fold"{% if form_error %} open{% endif %}>
+      <summary>{{ 'Обновить сведения' if ctx else 'Внести сведения' }}</summary>
+      <form method="post" action="{{ url_for('clinical_context', patient_id=patient.id) }}" class="action-form">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="request_key" value="{{ clinical_context_key }}">
+        {{ ui.field('observed_on', 'Дата сведений', type='date', value=today, required=True, autocomplete='off', extra={'max': today}) }}
+        <div class="form-grid">
+          {% for key, label in context_fields %}
+            {% if key == 'severity' %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('nonsevere', 'нетяжёлая'), ('severe', 'тяжёлая'), ('conflicting', 'противоречие')], selected='unknown') }}
+            {% elif key == 'aviandr_prescription' %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('denied', 'нет'), ('active', 'действует'), ('conflicting', 'противоречие')], selected='unknown') }}
+            {% else %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('denied', 'нет'), ('present', 'есть'), ('conflicting', 'противоречие')], selected='unknown') }}{% endif %}
+          {% endfor %}
+        </div>
+        {{ ui.textarea('clinical_basis', 'Источник врачебных фактов', hint='Откуда известны эти сведения. Обязательно.', required=True, rows=3) }}
+        {{ ui.textarea('prescription_basis', 'Основание назначения', hint='Нужно, если назначение действует.', rows=2) }}
+        {{ ui.button('Сохранить сведения') }}
+      </form>
+    </details>
+  </section>
+
+  {#- ---------- Направления ---------- #}
+  {% if route_items %}
+  <section class="block" id="routes" aria-labelledby="h-routes">
+    <h2 id="h-routes">Записанные направления</h2>
+    <ul class="plain">
+      {% for item in route_items %}
+      {% set review = item.payload.get('routing_review') or item.payload.get('route') or {} %}
+      <li>{{ route_categories.get(review.get('category'), 'Категория не определена') }}, {{ route_urgencies.get(review.get('urgency'), 'срочность не определена')|lower }}
+        <span class="sub">{% if item.decision == 'approved' %}подтверждено врачом{% else %}проект, ждёт подтверждения врача{% endif %}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {#- ---------- Связь ---------- #}
+  <section class="block" id="link" aria-labelledby="h-link">
+    <h2 id="h-link">Связь с пациентом</h2>
+    {% if relationship %}
+      <p>Действует с <time datetime="{{ relationship.starts_at }}">{{ relationship.starts_at|msk }}</time>.</p>
+      {% if checks %}
+      <p>Проверки связи от пациента: последняя получена <time datetime="{{ checks[0].received_at }}">{{ checks[0].received_at|msk }}</time>, всего {{ checks|length }}{% if checks|length >= 20 %}+{% endif %}.
+        <span class="sub">Проверка подтверждает доставку отметки, а не то, что врач её просмотрел.</span></p>
+      <ul class="plain">
+        {% for c in checks[:5] %}<li><time class="num" datetime="{{ c.received_at }}">{{ c.received_at|msk }}</time> · номер <span class="num id">{{ c.id }}</span></li>{% endfor %}
+      </ul>
+      {% else %}
+        {{ ui.empty('Проверок связи от пациента не было.') }}
+      {% endif %}
+    {% else %}
+      {{ ui.notice('Связи нет', 'Действующей связи ведущего врача с пациентом нет: отправка и приглашения недоступны.', kind='locked') }}
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

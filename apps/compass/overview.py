@@ -1,0 +1,179 @@
+"""Read-only row summaries for the doctor's list. Only recorded facts; nothing is scored or inferred."""
+import re
+from datetime import date
+from . import assessments, decisions, follow_up, records
+
+SIGNAL_FLAGS = {
+    'signal': ('СИГНАЛ', 'критический сигнал без записанной реакции врача'),
+    'adverse': ('НЯ', 'нежелательное явление в записях'),
+    'conflict': ('ПРОТИВ.', 'противоречивые сведения'),
+    'age': ('ВОЗРАСТ', 'возраст не указан'),
+}
+
+
+def person(code):
+    """'Учебный 03 · Елена — Ухудшение и новое НЯ' -> ('Елена', 'учебный 03'); other codes are shown as they are."""
+    if ' · ' in code:
+        ordinal, rest = code.split(' · ', 1)
+        return rest.split(' — ', 1)[0].strip() or code, ordinal.strip().lower()
+    return code, ''
+
+
+def years_word(years):
+    if 11 <= years % 100 <= 14:
+        return 'лет'
+    return {1: 'год', 2: 'года', 3: 'года', 4: 'года'}.get(years % 10, 'лет')
+
+
+def times_word(count):
+    """2 раза, 5 раз, 21 раз, 22 раза"""
+    if 11 <= count % 100 <= 14:
+        return '%d раз' % count
+    return '%d %s' % (count, 'раза' if count % 10 in (2, 3, 4) else 'раз')
+
+
+def note_parts(text):
+    """'22.10: Поле — противоречивые сведения (id)' -> (человеческий текст, id записи или None)"""
+    found = re.search(r'\(([0-9a-f]{32})\)', text or '')
+    return tidy(text or ''), found.group(1) if found else None
+
+
+def age_text(patient):
+    if patient['age_status'] == 'known' and patient['age_years'] is not None:
+        return '%d %s' % (patient['age_years'], years_word(patient['age_years']))
+    return 'возраст противоречив' if patient['age_status'] == 'conflicting' else 'возраст не указан'
+
+
+def dm(iso):
+    """2026-10-07 -> 07.10"""
+    return '%s.%s' % (iso[8:10], iso[5:7]) if iso and len(iso) >= 10 else iso
+
+
+def tidy(note):
+    """'2026-10-22: Поле — противоречивые сведения (id).' -> '22.10: Поле — противоречивые сведения'"""
+    note = re.sub(r'\s*\([0-9a-f]{32}\)', '', note).rstrip('.')
+    return re.sub(r'^(\d{4})-(\d{2})-(\d{2}):', lambda m: '%s.%s:' % (m.group(3), m.group(2)), note)
+
+
+def cut(text, limit):
+    text = ' '.join((text or '').split())
+    return text if len(text) <= limit else text[:limit - 1].rstrip() + '…'
+
+
+def _marks(entries):
+    """Five latest self-reports, oldest first, with the run of 'worse' ending today."""
+    own = [e for e in entries if e['kind'] == 'self_report'][:5]
+    values = [e['payload']['wellbeing'] for e in reversed(own)]
+    streak = 0
+    for value in reversed(values):
+        if value != 'worse':
+            break
+        streak += 1
+    return {'series': values, 'streak': streak, 'unknown': values.count('unknown'),
+            'last_on': own[0]['observed_on'] if own else None, 'total': len([e for e in entries if e['kind'] == 'self_report'])}
+
+
+def _adverse(entries):
+    """The newest record that says anything about adverse events decides; older ones only give the start date."""
+    for index, entry in enumerate(entries):
+        field = entry['payload']['fields'].get('adverse_events', {'status': 'unknown', 'text': None})
+        if field['status'] == 'unknown':
+            continue
+        result = {'status': field['status'], 'text': field['text'], 'on': entry['observed_on'], 'since': entry['observed_on'],
+                  'entry_id': entry['id'], 'newer_silent': index > 0}
+        if field['status'] in ('known', 'conflicting'):
+            for older in entries[index + 1:]:
+                before = older['payload']['fields'].get('adverse_events', {'status': 'unknown'})
+                if before['status'] != field['status']:
+                    break
+                result['since'] = older['observed_on']
+        return result
+    return {'status': 'unknown', 'text': None, 'on': None, 'since': None, 'entry_id': None, 'newer_silent': False}
+
+
+def _dass(db, user, patient, patient_id):
+    done = assessments.history(db, user, patient_id)
+    waiting = assessments.pending(db, user, patient_id)
+    last = None
+    if done:
+        answered = sum(1 for a in done[0]['answers'] if a is not None)
+        last = {'on': done[0]['observed_on'], 'complete': done[0]['completeness'] == 'complete',
+                'answered': answered, 'total': len(done[0]['answers']), 'id': done[0]['id']}
+    if patient['age_status'] != 'known':
+        return {'kind': 'locked', 'last': last, 'waiting': waiting[:1]}
+    if waiting:
+        return {'kind': 'waiting', 'last': last, 'waiting': waiting[:1]}
+    return {'kind': 'done' if last else 'none', 'last': last, 'waiting': []}
+
+
+def _plan(db, user, patient_id):
+    try:
+        data = follow_up.view(db, user, patient_id, {})
+    except decisions.DecisionError:
+        return {'kind': 'none', 'counts': {}, 'due': 0}
+    tasks = [t for t in data['tasks'] if not t['superseded'] and not t['future']]
+    counts = {}
+    for task in tasks:
+        counts[task['outcome']] = counts.get(task['outcome'], 0) + 1
+    return {'kind': 'tasks' if tasks else ('plan' if data['plans'] else 'none'), 'counts': counts, 'due': len(tasks)}
+
+
+def summary(db, user, patient, signals):
+    patient_id = patient['id']
+    entries = records.history(db, patient_id)
+    marks = _marks(entries)
+    adverse = _adverse(entries)
+    notes = [w for w in records.warnings(patient, entries) if not w.startswith('Исходный возраст')]
+    dass = _dass(db, user, patient, patient_id)
+    plan = _plan(db, user, patient_id)
+    name, ordinal = person(patient['code'])
+
+    flags, reasons = [], []
+
+    def reason(text, sub=None, page='card', anchor=None):
+        reasons.append({'text': text, 'sub': sub, 'page': page, 'anchor': anchor})
+
+    if signals:
+        flags.append('signal')
+        reason('Критический сигнал без реакции врача', 'Сигналов: %d. Получение не означает просмотр.' % signals, anchor='clinical-rules')
+    if adverse['status'] == 'known':
+        flags.append('adverse')
+        sub = 'запись от %s' % dm(adverse['on'])
+        if adverse['since'] != adverse['on']:
+            sub += ', в записях с %s' % dm(adverse['since'])
+        if adverse['newer_silent']:
+            sub += '; в более новых записях сведений нет'
+        reason('Нежелательное явление', sub, anchor='entry-' + adverse['entry_id'])
+    if notes or adverse['status'] == 'conflicting' or patient['age_status'] == 'conflicting' or plan['counts'].get('conflicting'):
+        flags.append('conflict')
+        reason('Противоречивые сведения', cut(tidy(notes[0]), 90) if notes else None, anchor='warnings' if notes else None,
+               page='card' if notes else 'follow')
+    if patient['age_status'] == 'unknown':
+        flags.append('age')
+        reason('Возраст не указан', 'Анкета недоступна, нужна сверка.', anchor='age-review')
+    elif patient['age_status'] == 'conflicting':
+        reason('Возраст противоречив', 'Анкета недоступна, нужна сверка.', anchor='age-review')
+    if marks['streak'] >= 2:
+        reason('Хуже %s подряд' % times_word(marks['streak']), 'по отметкам самочувствия', anchor='records')
+    open_items = plan['counts'].get('missed', 0) + plan['counts'].get('unknown', 0)
+    if open_items:
+        reason('План без выполнения или сведений', '%d из %d пунктов' % (open_items, plan['due']), page='follow', anchor='fu-plan')
+    flags = [f for f in dict.fromkeys(flags)]
+
+    if marks['total'] == 0:
+        quiet = {'text': 'Отметок самочувствия пока нет', 'sub': None, 'page': 'card', 'anchor': 'records'}
+    else:
+        ago = (records.today() - date.fromisoformat(marks['last_on'])).days
+        quiet = {'text': 'Последняя отметка %s' % dm(marks['last_on']),
+                 'sub': ('сегодня' if ago == 0 else '%d дн. назад' % ago) + ', всего отметок: %d' % marks['total'],
+                 'page': 'card', 'anchor': 'records'}
+    return {'id': patient_id, 'name': name, 'ordinal': ordinal, 'age': age_text(patient), 'marks': marks,
+            'adverse': adverse, 'dass': dass, 'plan': plan, 'signals': signals,
+            'flags': [(code,) + SIGNAL_FLAGS[code] for code in flags],
+            'attention': bool(reasons), 'reason': reasons[0] if reasons else quiet, 'more': reasons[1:3]}
+
+
+def rows(db, user, patients, signal_counts):
+    result = [summary(db, user, p, signal_counts.get(p['id'], 0)) for p in patients]
+    # Rows that need a look go first; the order the server chose (signals, then code) is kept inside each group.
+    return sorted(result, key=lambda r: not r['attention'])

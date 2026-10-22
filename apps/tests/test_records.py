@@ -47,9 +47,9 @@ class RecordsTests(unittest.TestCase):
         self.assertEqual(303, self.submit(data=data).status_code)
         entry = self.db.execute('SELECT * FROM clinical_entries').fetchone()
         self.assertEqual('pat-a', entry['actor_id'])
-        for uid in ('doc-a', 'pat-a'):
-            page = self.clients[uid].get('/demo/D01').get_data(as_text=True)
-            self.assertIn(entry['id'], page)
+        for uid, path in (('doc-a', '/demo/D01'), ('pat-a', '/demo/D01/diary')):
+            page = self.clients[uid].get(path).get_data(as_text=True)
+            self.assertIn('id="entry-%s"' % entry['id'], page)
             self.assertIn('Синтетическая тошнота', page)
             api = self.clients[uid].get('/api/patients/D01/history').json
             self.assertEqual('pat-a', api['entries'][0]['actor_id'])
@@ -85,7 +85,7 @@ class RecordsTests(unittest.TestCase):
         page = self.clients['doc-a'].get('/demo/D01').get_data(as_text=True)
         self.assertIn('Возраст не соответствует дате рождения', page)
         self.assertIn('Противоречивые сведения', page)
-        self.assertIn('Явное отрицание в этой записи', page)
+        self.assertIn('Явно отрицает', page)
         self.assertIn('Неизвестно', page)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM adverse_events').fetchone()[0])
         self.assertEqual(35, self.db.execute("SELECT age_years FROM patients WHERE id='D01'").fetchone()[0])

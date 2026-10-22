@@ -102,7 +102,7 @@ class FollowUpTests(unittest.TestCase):
         self.assertEqual('conflicting',data['tasks'][0]['outcome'])
         self.assertTrue(any('последняя отметка — противоречие' in w for w in data['warnings']))
         html=self.clients['doc-a'].get(self.summary).text
-        self.assertIn('Противоречие',html);self.assertIn('Пропущено',html)
+        self.assertIn('Противоречие',html);self.assertIn('пропущено',html)
         self.assertIn('doc-a',html);self.assertIn('pat-a',html)
         self.assertNotIn('UNCONFIRMED-PROJECT',html)
         # Superseded old tasks are retained, explicitly excluded, with their plan link.
@@ -193,5 +193,6 @@ class FollowUpTests(unittest.TestCase):
         html=self.clients['doc-a'].get(self.summary).text
         self.assertIn('Противоречивые сведения',html);self.assertIn('Синтетические источники расходятся',html)
         for e in data['encounters']:self.assertIn('#encounter-'+e['id'],html)
-        self.assertIn('/first-visits/'+vid,html)
+        # Ссылка на экран приёма появится вместе с ним в UI05; пока страница показывает сами сведения приёма.
+        self.assertIn('Не собрано',html)
         self.assertNotIn('Сводка повторного приёма',self.clients['pat-a'].get('/demo/D01').text)

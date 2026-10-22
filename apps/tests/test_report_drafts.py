@@ -64,7 +64,7 @@ class ReportDraftTests(unittest.TestCase):
         self.assertEqual(302,self.app.test_client().get(self.url).status_code)
         for path in ['/demo/D01','/patients/D01/follow-up','/notifications']:
             self.assertNotIn(marker,self.clients['doc-a'].get(path).text)
-        self.assertIn('Пациенты не найдены',self.clients['doc-a'].get('/?q='+marker).text)
+        self.assertIn('По этому запросу пациентов нет',self.clients['doc-a'].get('/?q='+marker).text)
         self.assertNotIn(marker,self.clients['pat-b'].get('/demo/D02').text)
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM self_report_drafts').fetchone()[0])
 
