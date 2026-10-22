@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сегодня · Клинический компас</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="p-band">
+  <div class="p-band-in">
+    <div class="p-bar">
+      <a class="brand" href="patient.html">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h7l4-10h7" fill="none" stroke="#7fa3ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="17" r="3.2" fill="#15233f" stroke="#e9eef7" stroke-width="2"/><circle cx="14" cy="7" r="3.2" fill="#15233f" stroke="#e9eef7" stroke-width="2"/></svg>
+        Компас
+      </a>
+      <span class="synthetic">Учебный пример</span>
+      <details class="p-menu"><summary>Ещё</summary>
+        <nav aria-label="Разделы"><a href="#">Дневник</a><a href="#">Анкеты</a><a href="#">Сообщения</a><a href="#">Выйти</a></nav>
+      </details>
+    </div>
+    <h1>Анна, добрый день</h1>
+    <p>Среда, 21 октября</p>
+    <svg viewBox="0 0 360 40" role="img" aria-label="Ваши отметки: 23.09 хуже, 30.09 без изменений, 07.10 лучше, 14.10 лучше, 20.10 лучше; сегодня отметки ещё нет"><line x1="12" y1="20" x2="346" y2="20" stroke="#7fa3ff" stroke-width="5.4" stroke-linecap="round"/><circle cx="12.0" cy="20" r="9.9" fill="#15233f" stroke="#e9eef7" stroke-width="3.15"/><circle cx="12.0" cy="20" r="4.95" fill="#ff7684" stroke="#15233f" stroke-width="1.35"/><circle cx="95.5" cy="20" r="6.3" fill="#c3ccda" stroke="#15233f" stroke-width="1.35"/><circle cx="179.0" cy="20" r="9.9" fill="#15233f" stroke="#e9eef7" stroke-width="3.15"/><circle cx="179.0" cy="20" r="4.95" fill="#5cc995" stroke="#15233f" stroke-width="1.35"/><circle cx="262.5" cy="20" r="6.3" fill="#5cc995" stroke="#15233f" stroke-width="1.35"/><circle cx="334.07142857142856" cy="20" r="9.9" fill="#15233f" stroke="#e9eef7" stroke-width="3.15"/><circle cx="334.07142857142856" cy="20" r="4.95" fill="#5cc995" stroke="#15233f" stroke-width="1.35"/><circle cx="346.0" cy="20" r="8.1" fill="#15233f" stroke="#7fa3ff" stroke-width="3.6"/></svg>
+    <div class="band-scale"><span>23 сентября</span><span>сегодня</span></div>
+  </div>
+</header>
+
+<main class="p-main">
+  <section class="next" aria-labelledby="h-next">
+    <span class="sign" id="h-next">Сегодня</span>
+    <p>Врач просит отметить самочувствие и записать вопросы к приёму.</p>
+    <a class="button button--go" href="#">Отметить самочувствие</a>
+    <small>Около двух минут. Черновик сохраняется, можно вернуться позже.</small>
+  </section>
+
+  <section class="later" aria-labelledby="h-later">
+    <h2 id="h-later">Дальше</h2>
+    <div class="stop"><p>Анкета DASS-42<small>42 вопроса · предложена сегодня</small></p><a class="button" href="#">Начать</a></div>
+    <div class="stop"><p>Сообщение врача, 20 октября<small>«Запись получена. Обсудим изменения и вопросы на повторном приёме».</small></p><a class="button" href="#">Ответить</a></div>
+  </section>
+</main>
+</body>
+</html>

@@ -6,7 +6,7 @@
 
 ## Текущий шаг
 
-**Следующий срез — UI01: три варианта дизайна и UX, выбор пользователя.** Прямое поручение пользователя 22.10.2026: новый интерфейс с чистого листа, простой, наглядный, удобный, без лишних слов и без «ИИ-вида». Шесть навыков дизайна установлены в проект; план UI01–UI08, навыки и память между срезами — docs/design/README.md, бриф — docs/design/BRIEF.md, отчёт установки — memory/sessions/design-skills-setup-2026-10-22.md. Первый шаг сессии: `python3 tools/session.py start UI01`, затем `python3 tools/design_skills.py check` и карточка plan/slices/UI01.md. UI01 не принимается без выбора пользователя.
+**Следующий срез — UI02: токены, шрифты, базовый шаблон, компоненты и вход.** UI01 принят 22.10.2026: пользователь выбрал направление «A. Лист результатов» (бланк лабораторных результатов). Продукт — PRODUCT.md, визуальная система — DESIGN.md и .impeccable/design.json, контракт направления — .impeccable/surfaces/, прототипы — docs/design/prototypes/UI01/a-results/, отчёт — memory/sessions/UI01.md и evidence/UI01/acceptance.md. Открытое для UI02: шрифты PT Sans 400/700 и PT Mono 400 положить в приложение своими файлами woff2 с проверенной лицензией OFL (в прототипе они из системы через local()); итог проверки impeccable-finish-reviewer по прототипу — fix именно по этому пункту. Первый шаг: `python3 tools/session.py start UI02`, затем `python3 tools/design_skills.py check` и карточка plan/slices/UI02.md. Прототипы B и C — история выбора, не образец.
 
 ## Состояние перед UI01
 

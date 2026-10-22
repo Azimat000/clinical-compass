@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кому нужно внимание · Клинический компас</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="doctor.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="3" fill="#fff" stroke="#9fc0cb"/><path d="M8 1v22M16 1v22M1 8h22M1 16h22" stroke="#cfe1e7"/><path d="M4 15 8 11l4 2 4-6 4 2" fill="none" stroke="#1f3d9e" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="brand-name">Клинический компас</span>
+    </a>
+    <nav class="tabs" aria-label="Разделы">
+      <a href="doctor.html" aria-current="page">Внимание <span class="count">3</span></a>
+      <a href="#">Пациенты</a>
+      <a href="#">Сообщения</a>
+      <a href="#">События</a>
+      <a href="#">Приглашения</a>
+    </nav>
+    <div class="top-right"><span class="synthetic">Учебные данные</span><span class="who-am-i">doc-a · <a href="#">Выйти</a></span></div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="title-row">
+    <div>
+      <h1>Кому нужно внимание</h1>
+      <p class="finding"><b>Елена:</b> новое нежелательное явление и четыре отметки «хуже» подряд.</p>
+    </div>
+    <form class="actions" role="search">
+      <label class="visually-hidden" for="q">Поиск по пациентам и записям</label>
+      <input id="q" type="search" name="q" autocomplete="off" placeholder="Имя, код, слово из записи…">
+      <a class="button button--pen" href="#">Пригласить пациента</a>
+    </form>
+  </div>
+
+  <div class="chips" role="group" aria-label="Фильтры">
+    <a class="chip" href="#" aria-pressed="true">С сигналами · 3</a>
+    <a class="chip" href="#" aria-pressed="false">Все · 5</a>
+    <a class="chip" href="#" aria-pressed="false">Возраст не указан</a>
+    <a class="chip" href="#" aria-pressed="false">Есть приём</a>
+    <a class="chip" href="#" aria-pressed="false">Маршрут: обязательно</a>
+  </div>
+
+  <div class="sheet-wrap">
+    <table class="sheet">
+      <caption class="visually-hidden">Лист наблюдения за 23 сентября — 21 октября 2026: верхняя строка пациента — самочувствие, нижняя — события</caption>
+      <colgroup><col class="c-who"><col span="29"><col class="c-sig"></colgroup>
+      <thead>
+<tr class="months"><th class="who" rowspan="2" scope="col">Пациент</th>
+<th colspan="8" scope="colgroup">сентябрь</th><th colspan="21" scope="colgroup">октябрь</th>
+<th class="sig" rowspan="2" scope="col">Сигнал</th></tr>
+<tr>
+<th scope="col"><time datetime="2026-09-23">23</time></th>
+<th scope="col"><time datetime="2026-09-24">24</time></th>
+<th scope="col"><time datetime="2026-09-25">25</time></th>
+<th class="we" scope="col"><time datetime="2026-09-26">26</time></th>
+<th class="we" scope="col"><time datetime="2026-09-27">27</time></th>
+<th scope="col"><time datetime="2026-09-28">28</time></th>
+<th scope="col"><time datetime="2026-09-29">29</time></th>
+<th scope="col"><time datetime="2026-09-30">30</time></th>
+<th scope="col"><time datetime="2026-10-01">1</time></th>
+<th scope="col"><time datetime="2026-10-02">2</time></th>
+<th class="we" scope="col"><time datetime="2026-10-03">3</time></th>
+<th class="we" scope="col"><time datetime="2026-10-04">4</time></th>
+<th scope="col"><time datetime="2026-10-05">5</time></th>
+<th scope="col"><time datetime="2026-10-06">6</time></th>
+<th scope="col"><time datetime="2026-10-07">7</time></th>
+<th scope="col"><time datetime="2026-10-08">8</time></th>
+<th scope="col"><time datetime="2026-10-09">9</time></th>
+<th class="we" scope="col"><time datetime="2026-10-10">10</time></th>
+<th class="we" scope="col"><time datetime="2026-10-11">11</time></th>
+<th scope="col"><time datetime="2026-10-12">12</time></th>
+<th scope="col"><time datetime="2026-10-13">13</time></th>
+<th scope="col"><time datetime="2026-10-14">14</time></th>
+<th scope="col"><time datetime="2026-10-15">15</time></th>
+<th scope="col"><time datetime="2026-10-16">16</time></th>
+<th class="we" scope="col"><time datetime="2026-10-17">17</time></th>
+<th class="we" scope="col"><time datetime="2026-10-18">18</time></th>
+<th scope="col"><time datetime="2026-10-19">19</time></th>
+<th scope="col"><time datetime="2026-10-20">20</time></th>
+<th class="today" scope="col"><time datetime="2026-10-21">21</time></th>
+</tr>
+      </thead>
+      <tbody>
+<tr class="lane-a"><td class="who" rowspan="2"><b><a href="#">Елена</a></b><span>57 лет · учебный 03</span></td><td><i class="m m--same" title="23.09: без изменений"></i><span class="visually-hidden">23.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--worse" title="30.09: хуже"></i><span class="visually-hidden">30.09 самочувствие: хуже</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--worse" title="07.10: хуже"></i><span class="visually-hidden">07.10 самочувствие: хуже</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--worse" title="14.10: хуже"></i><span class="visually-hidden">14.10 самочувствие: хуже</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--worse" title="20.10: хуже"></i><span class="visually-hidden">20.10 самочувствие: хуже</span></td><td class="today"></td><td class="sig is-red" rowspan="2"><b>Новое НЯ: тошнота</b><span>хуже 4 раза подряд · проект решения ждёт</span><a href="#">Сводка к приёму</a></td></tr>
+<tr class="lane-b"><td><i class="m m--visit" title="23.09: приём; анкета"></i><span class="visually-hidden">23.09: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--ae" title="07.10: приём; анкета; нежелательное явление"></i><span class="visually-hidden">07.10: приём; анкета; нежелательное явление</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--ae" title="14.10: нежелательное явление"></i><span class="visually-hidden">14.10: нежелательное явление</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--ae" title="20.10: приём; анкета; нежелательное явление"></i><span class="visually-hidden">20.10: приём; анкета; нежелательное явление</span></td><td class="today"></td></tr>
+<tr class="lane-a"><td class="who" rowspan="2"><b><a href="#">Сергей</a></b><span>29 лет · учебный 04</span></td><td><i class="m m--same" title="23.09: без изменений"></i><span class="visually-hidden">23.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="30.09: без изменений"></i><span class="visually-hidden">30.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--unknown" title="07.10: не указано"></i><span class="visually-hidden">07.10 самочувствие: не указано</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--better" title="14.10: лучше"></i><span class="visually-hidden">14.10 самочувствие: лучше</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--same" title="20.10: без изменений"></i><span class="visually-hidden">20.10 самочувствие: без изменений</span></td><td class="today"></td><td class="sig is-red" rowspan="2"><b>Противоречие в жалобах</b><span>план: пропуск, нет сведений, противоречие</span><a href="#">Сводка к приёму</a></td></tr>
+<tr class="lane-b"><td><i class="m m--visit" title="23.09: приём; анкета"></i><span class="visually-hidden">23.09: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--miss" title="07.10: приём; анкета неполная; пропуск плана"></i><span class="visually-hidden">07.10: приём; анкета неполная; пропуск плана</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--unknown" title="14.10: план: нет сведений"></i><span class="visually-hidden">14.10: план: нет сведений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--conflict" title="20.10: приём; анкета; план: противоречие"></i><span class="visually-hidden">20.10: приём; анкета; план: противоречие</span></td><td class="today"><i class="m m--visit" title="21.10: приём"></i><span class="visually-hidden">21.10: приём</span></td></tr>
+<tr class="lane-a"><td class="who" rowspan="2"><b><a href="#">Ирина</a></b><span>возраст не указан · учебный 05</span></td><td><i class="m m--unknown" title="23.09: не указано"></i><span class="visually-hidden">23.09 самочувствие: не указано</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="30.09: без изменений"></i><span class="visually-hidden">30.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--unknown" title="07.10: не указано"></i><span class="visually-hidden">07.10 самочувствие: не указано</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="14.10: без изменений"></i><span class="visually-hidden">14.10 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--same" title="20.10: без изменений"></i><span class="visually-hidden">20.10 самочувствие: без изменений</span></td><td class="today"></td><td class="sig is-red" rowspan="2"><b>Возраст не указан</b><span>анкета недоступна · 2 отметки без самочувствия</span><a href="#">Сводка к приёму</a></td></tr>
+<tr class="lane-b"><td><i class="m m--visit" title="23.09: приём"></i><span class="visually-hidden">23.09: приём</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--visit" title="07.10: приём"></i><span class="visually-hidden">07.10: приём</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--visit" title="20.10: приём"></i><span class="visually-hidden">20.10: приём</span></td><td class="today"></td></tr>
+<tr class="lane-a"><td class="who" rowspan="2"><b><a href="#">Михаил</a></b><span>46 лет · учебный 02</span></td><td><i class="m m--same" title="23.09: без изменений"></i><span class="visually-hidden">23.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="30.09: без изменений"></i><span class="visually-hidden">30.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="07.10: без изменений"></i><span class="visually-hidden">07.10 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="14.10: без изменений"></i><span class="visually-hidden">14.10 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--same" title="20.10: без изменений"></i><span class="visually-hidden">20.10 самочувствие: без изменений</span></td><td class="today"></td><td class="sig" rowspan="2"><b>Без изменений</b><span>5 отметок подряд · вопросы к приёму</span><a href="#">Сводка к приёму</a></td></tr>
+<tr class="lane-b"><td><i class="m m--visit" title="23.09: приём; анкета"></i><span class="visually-hidden">23.09: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--visit" title="07.10: приём; анкета"></i><span class="visually-hidden">07.10: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--visit" title="20.10: приём; анкета"></i><span class="visually-hidden">20.10: приём; анкета</span></td><td class="today"></td></tr>
+<tr class="lane-a"><td class="who" rowspan="2"><b><a href="#">Анна</a></b><span>34 года · учебный 01</span></td><td><i class="m m--worse" title="23.09: хуже"></i><span class="visually-hidden">23.09 самочувствие: хуже</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--same" title="30.09: без изменений"></i><span class="visually-hidden">30.09 самочувствие: без изменений</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--better" title="07.10: лучше"></i><span class="visually-hidden">07.10 самочувствие: лучше</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--better" title="14.10: лучше"></i><span class="visually-hidden">14.10 самочувствие: лучше</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--better" title="20.10: лучше"></i><span class="visually-hidden">20.10 самочувствие: лучше</span></td><td class="today"></td><td class="sig" rowspan="2"><b>Лучше 3 раза подряд</b><span>хочет обсудить наблюдение</span><a href="#">Сводка к приёму</a></td></tr>
+<tr class="lane-b"><td><i class="m m--visit" title="23.09: приём; анкета"></i><span class="visually-hidden">23.09: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td><i class="m m--visit" title="07.10: приём; анкета"></i><span class="visually-hidden">07.10: приём; анкета</span></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td></td><td></td><td></td><td></td><td class="we"></td><td class="we"></td><td></td><td><i class="m m--visit" title="20.10: приём; анкета"></i><span class="visually-hidden">20.10: приём; анкета</span></td><td class="today"></td></tr>
+      </tbody>
+    </table>
+    <ul class="phone-list">
+<li><div class="ln"><b><a href="#">Елена</a></b><small>57 лет</small></div><div class="why is-red">Новое НЯ: тошнота</div><small>хуже 4 раза подряд · проект решения ждёт</small><div class="mini" aria-hidden="true"><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--worse"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--worse"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--worse"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--worse"></i></span><span class="today"></span></div></li>
+<li><div class="ln"><b><a href="#">Сергей</a></b><small>29 лет</small></div><div class="why is-red">Противоречие в жалобах</div><small>план: пропуск, нет сведений, противоречие</small><div class="mini" aria-hidden="true"><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--unknown"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--better"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--same"></i></span><span class="today"></span></div></li>
+<li><div class="ln"><b><a href="#">Ирина</a></b><small>возраст не указан</small></div><div class="why is-red">Возраст не указан</div><small>анкета недоступна · 2 отметки без самочувствия</small><div class="mini" aria-hidden="true"><span><i class="m m--unknown"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--unknown"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--same"></i></span><span class="today"></span></div></li>
+<li><div class="ln"><b><a href="#">Михаил</a></b><small>46 лет</small></div><div class="why">Без изменений</div><small>5 отметок подряд · вопросы к приёму</small><div class="mini" aria-hidden="true"><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--same"></i></span><span class="today"></span></div></li>
+<li><div class="ln"><b><a href="#">Анна</a></b><small>34 года</small></div><div class="why">Лучше 3 раза подряд</div><small>хочет обсудить наблюдение</small><div class="mini" aria-hidden="true"><span><i class="m m--worse"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--better"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--better"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--better"></i></span><span class="today"></span></div></li>
+    </ul>
+  </div>
+
+  <div class="key" aria-label="Условные обозначения">
+    <span><i class="m m--better"></i>лучше</span>
+    <span><i class="m m--same"></i>без изменений</span>
+    <span><i class="m m--worse"></i>хуже</span>
+    <span><i class="m m--unknown"></i>не указано</span>
+    <span><i class="m m--visit"></i>приём</span>
+    <span><i class="m m--form"></i>анкета</span>
+    <span><i class="m m--form-part"></i>анкета неполная</span>
+    <span><i class="m m--ae"></i>нежелательное явление</span>
+    <span><i class="m m--miss"></i>пропуск плана</span>
+    <span><i class="m m--conflict"></i>противоречие</span>
+    <span>Даты смоделированы, данные учебные</span>
+  </div>
+
+  <div class="lower">
+    <section aria-labelledby="h-pending">
+      <h2 id="h-pending">Ждут решения врача</h2>
+      <div class="row"><p>Елена: уточнить новое нежелательное явление<small>Проект от 21.10, не подтверждён и не меняет план</small></p><a class="button" href="#">Рассмотреть</a></div>
+    </section>
+    <section aria-labelledby="h-inv">
+      <h2 id="h-inv">Приглашения</h2>
+      <div class="empty">Действующих приглашений нет.<a href="#">Пригласить</a></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

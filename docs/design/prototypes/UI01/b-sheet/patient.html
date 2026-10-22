@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сегодня · Клинический компас</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="p-head">
+  <a class="brand" href="patient.html">
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="3" fill="#fff" stroke="#9fc0cb"/><path d="M8 1v22M16 1v22M1 8h22M1 16h22" stroke="#cfe1e7"/><path d="M4 15 8 11l4 2 4-6 4 2" fill="none" stroke="#1f3d9e" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    Компас
+  </a>
+  <span class="synthetic">Учебный пример</span>
+</header>
+
+<main class="p-main">
+  <h1>Сегодня</h1>
+  <p class="p-date">Среда, 21 октября · Анна</p>
+
+  <form class="ask" action="#" method="post">
+    <fieldset>
+      <legend>Как вы сегодня по сравнению с прошлой записью?</legend>
+      <p>Врач просит отмечать самочувствие и записывать вопросы к приёму.</p>
+      <div class="pick">
+        <button type="submit" name="wellbeing" value="better"><i class="m m--better"></i>Лучше</button>
+        <button type="submit" name="wellbeing" value="same"><i class="m m--same"></i>Так же</button>
+        <button type="submit" name="wellbeing" value="worse"><i class="m m--worse"></i>Хуже</button>
+      </div>
+      <a class="later" href="#">Не могу сказать. Записать без отметки</a>
+    </fieldset>
+  </form>
+
+  <section class="strip" aria-labelledby="h-strip">
+    <h2 id="h-strip">Ваш лист за 4 недели <a href="#">Дневник</a></h2>
+    <div class="strip-grid" role="img" aria-label="Отметки: 23.09 хуже, 30.09 без изменений, 07.10, 14.10 и 20.10 лучше; сегодня отметки ещё нет">
+<span><i class="m m--worse" title="23.09: хуже"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--same" title="30.09: без изменений"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--better" title="07.10: лучше"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span></span><span><i class="m m--better" title="14.10: лучше"></i></span><span></span><span></span><span class="we"></span><span class="we"></span><span></span><span><i class="m m--better" title="20.10: лучше"></i></span><span class="today"></span>
+    </div>
+    <div class="strip-scale"><span>23 сен</span><span>7 окт</span><span>сегодня</span></div>
+  </section>
+
+  <section class="p-section" aria-labelledby="h-todo">
+    <h2 id="h-todo">От врача</h2>
+    <div class="card"><p>Анкета DASS-42<small>42 вопроса · предложена сегодня</small></p><a class="button" href="#">Начать</a></div>
+    <div class="card"><p>Сообщение, 20 октября<small>«Запись получена. Обсудим изменения и вопросы на повторном приёме».</small></p><a class="button" href="#">Ответить</a></div>
+  </section>
+</main>
+
+<nav class="bottom" aria-label="Разделы">
+  <div class="bottom-in">
+    <a href="patient.html" aria-current="page"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5h15M6.5 2v3M13.5 2v3" stroke="currentColor" stroke-width="1.5"/></svg>Сегодня</a>
+    <a href="#"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3.5h14v13H3zM7 3.5v13M3 8h14M3 12.5h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Дневник</a>
+    <a href="#"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="2.5" width="12" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 7h6M7 10.5h6M7 14h3" stroke="currentColor" stroke-width="1.5"/></svg>Анкеты</a>
+    <a href="#"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h14v9H8l-4 3v-3H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Врач</a>
+  </div>
+</nav>
+</body>
+</html>

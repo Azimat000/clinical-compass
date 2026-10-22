@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сегодня · Клинический компас</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="p-top">
+  <div class="p-top-in">
+    <a class="brand" href="patient.html">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="#fff"/><path d="M11 18.5 8 11h6z" fill="none" stroke="#fff" stroke-width="1.3"/></svg>
+      Компас
+    </a>
+    <span class="synthetic">Учебный пример</span>
+  </div>
+</header>
+<nav class="p-tabs" aria-label="Разделы">
+  <div class="p-tabs-in">
+    <a href="patient.html" aria-current="page">Сегодня</a>
+    <a href="#">Дневник</a>
+    <a href="#">Анкеты</a>
+    <a href="#">Сообщения</a>
+  </div>
+</nav>
+
+<main class="p-main">
+  <h1>Анна, добрый день</h1>
+  <p class="p-date">Среда, 21 октября · сведения на 09:00</p>
+
+  <section class="today" aria-labelledby="h-today">
+    <h2 id="h-today" class="visually-hidden">Запись на сегодня</h2>
+    <p>Врач просит отметить самочувствие и записать вопросы к приёму.</p>
+    <a class="button button--primary" href="#">Отметить самочувствие</a>
+    <small>Черновик сохраняется, можно вернуться позже.</small>
+  </section>
+
+  <section class="p-block" aria-labelledby="h-form">
+    <h2 id="h-form">Анкета от врача</h2>
+    <div class="task">
+      <p>DASS-42<small>42 вопроса · предложена сегодня</small></p>
+      <a class="button" href="#">Начать</a>
+    </div>
+  </section>
+
+  <section class="p-block" aria-labelledby="h-log">
+    <h2 id="h-log">Ваши отметки <a href="#">Весь дневник</a></h2>
+    <table class="log">
+      <caption class="visually-hidden">Последние пять отметок самочувствия</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Самочувствие</th></tr></thead>
+      <tbody>
+        <tr><td><time datetime="2026-10-20">20.10</time></td><td><span class="wb"><i class="better"></i></span>Лучше</td></tr>
+        <tr><td><time datetime="2026-10-14">14.10</time></td><td><span class="wb"><i class="better"></i></span>Лучше</td></tr>
+        <tr><td><time datetime="2026-10-07">07.10</time></td><td><span class="wb"><i class="better"></i></span>Лучше</td></tr>
+        <tr><td><time datetime="2026-09-30">30.09</time></td><td><span class="wb"><i class="same"></i></span>Без изменений</td></tr>
+        <tr><td><time datetime="2026-09-23">23.09</time></td><td><span class="wb"><i class="worse"></i></span>Хуже</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="p-block" aria-labelledby="h-msg">
+    <h2 id="h-msg">Сообщение врача <a href="#">Ответить</a></h2>
+    <div class="note">
+      <small><time datetime="2026-10-20">20 октября</time></small>
+      <p>Запись получена. Обсудим изменения и вопросы на повторном приёме.</p>
+    </div>
+  </section>
+</main>
+</body>
+</html>

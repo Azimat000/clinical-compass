@@ -40,8 +40,8 @@
 
 | Срез | Результат | Навыки | Статус |
 |---|---|---|---|
-| [UI01](../../plan/slices/UI01.md) | Три варианта дизайна и UX на двух ключевых экранах, выбор пользователя, PRODUCT.md и DESIGN.md | impeccable, design-taste-frontend, web-design-guidelines | следующий |
-| [UI02](../../plan/slices/UI02.md) | Токены, шрифты, базовый шаблон, компоненты, вход | все проверочные | ждёт UI01 |
+| [UI01](../../plan/slices/UI01.md) | Три варианта дизайна и UX на двух ключевых экранах, выбор пользователя, PRODUCT.md и DESIGN.md | impeccable, design-taste-frontend, web-design-guidelines | принят 22.10.2026: «A. Лист результатов» |
+| [UI02](../../plan/slices/UI02.md) | Токены, шрифты, базовый шаблон, компоненты, вход | все проверочные | следующий |
 | [UI03](../../plan/slices/UI03.md) | Пациент: «Сегодня», самоотчёт, анкета, приглашение | impeccable, break-ui | ждёт UI02 |
 | [UI04](../../plan/slices/UI04.md) | Врач: список, карточка, сводка повторного приёма | impeccable, break-ui | ждёт UI03 |
 | [UI05](../../plan/slices/UI05.md) | Врач: решения, первый приём, документы | impeccable, break-ui | ждёт UI04 |

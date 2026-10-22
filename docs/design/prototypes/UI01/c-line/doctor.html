@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кому нужно внимание · Клинический компас</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="doctor.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h7l4-10h7" fill="none" stroke="#7fa3ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="17" r="3.2" fill="#15233f" stroke="#e9eef7" stroke-width="2"/><circle cx="14" cy="7" r="3.2" fill="#15233f" stroke="#e9eef7" stroke-width="2"/></svg>
+      Клинический компас
+    </a>
+    <nav aria-label="Разделы">
+      <a href="doctor.html" aria-current="page">Очередь<span class="count">3</span></a>
+      <a href="#">Пациенты</a>
+      <a href="#">Сообщения</a>
+      <a href="#">События</a>
+      <a href="#">Приглашения</a>
+    </nav>
+    <form class="find" role="search">
+      <label class="visually-hidden" for="q">Найти пациента или запись</label>
+      <input id="q" type="search" name="q" autocomplete="off" placeholder="Найти пациента или запись…"><kbd>/</kbd>
+    </form>
+    <span class="me">doc-a · <a href="#">Выйти</a></span>
+    <details class="top-menu"><summary>Меню</summary>
+      <nav aria-label="Разделы"><a href="doctor.html">Очередь · 3</a><a href="#">Пациенты</a><a href="#">Сообщения</a><a href="#">События</a><a href="#">Приглашения</a><a href="#">Выйти</a></nav>
+    </details>
+  </div>
+</header>
+
+<div class="split">
+  <section class="queue" aria-labelledby="h-queue">
+    <div class="queue-head">
+      <h1 id="h-queue">Кому нужно внимание</h1>
+      <p>21 октября · 3 из 5 с сигналами · <span class="synthetic-dark">учебные данные</span></p>
+    </div>
+    <div class="seg" role="group" aria-label="Показать">
+      <a href="#" aria-current="true">С сигналами · 3</a>
+      <a href="#">Все · 5</a>
+      <a href="#">Возраст не указан</a>
+    </div>
+    <ul class="q">
+      <li><a href="#" aria-current="true"><div class="ln"><b>Елена</b><small>57 лет</small></div><div class="why is-red">Новое НЯ: тошнота</div><small>хуже 4 раза подряд · проект решения ждёт</small><svg viewBox="0 0 380 22" role="img" aria-label="Отметки: 23.09 без изменений, 30.09 хуже, 07.10 хуже, 14.10 хуже, 20.10 хуже"><line x1="8" y1="11" x2="370" y2="11" stroke="#2457c5" stroke-width="2.7" stroke-linecap="round"/><circle cx="8.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="8.0" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="98.5" cy="11" r="3.15" fill="#cf2a3b" stroke="#ffffff" stroke-width="0.675"/><circle cx="189.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="189.0" cy="11" r="2.475" fill="#cf2a3b" stroke="#ffffff" stroke-width="0.675"/><circle cx="279.5" cy="11" r="3.15" fill="#cf2a3b" stroke="#ffffff" stroke-width="0.675"/><circle cx="357.07142857142856" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="357.07142857142856" cy="11" r="2.475" fill="#cf2a3b" stroke="#ffffff" stroke-width="0.675"/><circle cx="370.0" cy="11" r="4.05" fill="#ffffff" stroke="#2457c5" stroke-width="1.8"/></svg></a></li>
+      <li><a href="#"><div class="ln"><b>Сергей</b><small>29 лет</small></div><div class="why is-red">Противоречие в жалобах</div><small>план: пропуск, нет сведений, противоречие</small><svg viewBox="0 0 380 22" role="img" aria-label="Отметки: 23.09 без изменений, 30.09 без изменений, 07.10 не указано, 14.10 лучше, 20.10 без изменений"><line x1="8" y1="11" x2="370" y2="11" stroke="#2457c5" stroke-width="2.7" stroke-linecap="round"/><circle cx="8.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="8.0" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="98.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="189.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="189.0" cy="11" r="2.475" fill="#ffffff" stroke="#b77d00" stroke-width="0.9900000000000001" stroke-dasharray="3 2"/><circle cx="279.5" cy="11" r="3.15" fill="#1f7a4a" stroke="#ffffff" stroke-width="0.675"/><circle cx="357.07142857142856" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="357.07142857142856" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="370.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="370.0" cy="11" r="4.05" fill="#ffffff" stroke="#2457c5" stroke-width="1.8"/></svg></a></li>
+      <li><a href="#"><div class="ln"><b>Ирина</b><small>возраст не указан</small></div><div class="why is-red">Возраст не указан</div><small>анкета недоступна · 2 отметки без самочувствия</small><svg viewBox="0 0 380 22" role="img" aria-label="Отметки: 23.09 не указано, 30.09 без изменений, 07.10 не указано, 14.10 без изменений, 20.10 без изменений"><line x1="8" y1="11" x2="370" y2="11" stroke="#2457c5" stroke-width="2.7" stroke-linecap="round"/><circle cx="8.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="8.0" cy="11" r="2.475" fill="#ffffff" stroke="#b77d00" stroke-width="0.9900000000000001" stroke-dasharray="3 2"/><circle cx="98.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="189.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="189.0" cy="11" r="2.475" fill="#ffffff" stroke="#b77d00" stroke-width="0.9900000000000001" stroke-dasharray="3 2"/><circle cx="279.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="357.07142857142856" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="357.07142857142856" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="370.0" cy="11" r="4.05" fill="#ffffff" stroke="#2457c5" stroke-width="1.8"/></svg></a></li>
+      <li><a href="#"><div class="ln"><b>Михаил</b><small>46 лет</small></div><div class="why">Без изменений</div><small>5 отметок подряд · вопросы к приёму</small><svg viewBox="0 0 380 22" role="img" aria-label="Отметки: 23.09 без изменений, 30.09 без изменений, 07.10 без изменений, 14.10 без изменений, 20.10 без изменений"><line x1="8" y1="11" x2="370" y2="11" stroke="#2457c5" stroke-width="2.7" stroke-linecap="round"/><circle cx="8.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="8.0" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="98.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="189.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="189.0" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="279.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="357.07142857142856" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="357.07142857142856" cy="11" r="2.475" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="370.0" cy="11" r="4.05" fill="#ffffff" stroke="#2457c5" stroke-width="1.8"/></svg></a></li>
+      <li><a href="#"><div class="ln"><b>Анна</b><small>34 года</small></div><div class="why">Лучше 3 раза подряд</div><small>хочет обсудить наблюдение</small><svg viewBox="0 0 380 22" role="img" aria-label="Отметки: 23.09 хуже, 30.09 без изменений, 07.10 лучше, 14.10 лучше, 20.10 лучше"><line x1="8" y1="11" x2="370" y2="11" stroke="#2457c5" stroke-width="2.7" stroke-linecap="round"/><circle cx="8.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="8.0" cy="11" r="2.475" fill="#cf2a3b" stroke="#ffffff" stroke-width="0.675"/><circle cx="98.5" cy="11" r="3.15" fill="#5d6878" stroke="#ffffff" stroke-width="0.675"/><circle cx="189.0" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="189.0" cy="11" r="2.475" fill="#1f7a4a" stroke="#ffffff" stroke-width="0.675"/><circle cx="279.5" cy="11" r="3.15" fill="#1f7a4a" stroke="#ffffff" stroke-width="0.675"/><circle cx="357.07142857142856" cy="11" r="4.95" fill="#ffffff" stroke="#111a26" stroke-width="1.575"/><circle cx="357.07142857142856" cy="11" r="2.475" fill="#1f7a4a" stroke="#ffffff" stroke-width="0.675"/><circle cx="370.0" cy="11" r="4.05" fill="#ffffff" stroke="#2457c5" stroke-width="1.8"/></svg></a></li>
+    </ul>
+    <div class="q-foot"><span>Действующих приглашений нет</span><a href="#">Пригласить пациента</a></div>
+  </section>
+
+  <section class="detail" aria-labelledby="h-patient">
+    <div class="d-head">
+      <div>
+        <h2 id="h-patient">Елена, 57 лет</h2>
+        <p>Учебный 03 · последний приём <time datetime="2026-10-20">20.10</time></p>
+      </div>
+      <div class="d-actions">
+        <a class="button" href="#">Написать</a>
+        <a class="button" href="#">Рассмотреть проект</a>
+        <a class="button button--go" href="#">Сводка к приёму</a>
+      </div>
+    </div>
+
+    <div class="route">
+      <h3>Путь за 4 недели <span>23.09 — 21.10</span></h3>
+      <svg viewBox="0 0 1000 170" role="img" aria-label="Путь Елены за 4 недели: 23.09 без изменений, 30.09 хуже, 07.10 хуже, 14.10 хуже, 20.10 хуже; нежелательное явление 07.10, 14.10, 20.10; проект решения ждёт подтверждения"><line x1="30" y1="104" x2="930" y2="104" stroke="#2457c5" stroke-width="6.0" stroke-linecap="round"/><path d="M870.0 104 l40 -40 h40" fill="none" stroke="#2457c5" stroke-width="3.0" stroke-dasharray="6 5" stroke-linecap="round"/><circle cx="950.0" cy="64" r="7.0" fill="#ffffff" stroke="#2457c5" stroke-width="3.0" stroke-dasharray="4 3"/><text x="934.0" y="48" font-size="13" fill="#111a26" text-anchor="end" font-family="PT Sans Caption, PT Sans, sans-serif">проект: уточнить НЯ · ждёт решения</text><rect x="25.0" y="120.0" width="10.0" height="10.0" fill="#ffffff" stroke="#2457c5" stroke-width="2.0"/><circle cx="30.0" cy="104" r="11.0" fill="#ffffff" stroke="#111a26" stroke-width="3.5"/><circle cx="30.0" cy="104" r="5.5" fill="#5d6878" stroke="#ffffff" stroke-width="1.5"/><text x="30.0" y="148.0" font-size="12" fill="#4f5b6b" text-anchor="middle" font-family="PT Sans Caption, PT Sans, sans-serif">23.09</text><circle cx="255.0" cy="104" r="7.0" fill="#cf2a3b" stroke="#ffffff" stroke-width="1.5"/><text x="255.0" y="148.0" font-size="12" fill="#4f5b6b" text-anchor="middle" font-family="PT Sans Caption, PT Sans, sans-serif">30.09</text><path d="M474.0 82.0 h12.0 l-6.0 10.0z" fill="#cf2a3b"/><rect x="475.0" y="120.0" width="10.0" height="10.0" fill="#ffffff" stroke="#2457c5" stroke-width="2.0"/><circle cx="480.0" cy="104" r="11.0" fill="#ffffff" stroke="#111a26" stroke-width="3.5"/><circle cx="480.0" cy="104" r="5.5" fill="#cf2a3b" stroke="#ffffff" stroke-width="1.5"/><text x="480.0" y="148.0" font-size="12" fill="#4f5b6b" text-anchor="middle" font-family="PT Sans Caption, PT Sans, sans-serif">07.10</text><path d="M699.0 82.0 h12.0 l-6.0 10.0z" fill="#cf2a3b"/><circle cx="705.0" cy="104" r="7.0" fill="#cf2a3b" stroke="#ffffff" stroke-width="1.5"/><text x="705.0" y="148.0" font-size="12" fill="#4f5b6b" text-anchor="middle" font-family="PT Sans Caption, PT Sans, sans-serif">14.10</text><path d="M891.8571428571429 82.0 h12.0 l-6.0 10.0z" fill="#cf2a3b"/><rect x="892.8571428571429" y="120.0" width="10.0" height="10.0" fill="#ffffff" stroke="#2457c5" stroke-width="2.0"/><circle cx="897.8571428571429" cy="104" r="11.0" fill="#ffffff" stroke="#111a26" stroke-width="3.5"/><circle cx="897.8571428571429" cy="104" r="5.5" fill="#cf2a3b" stroke="#ffffff" stroke-width="1.5"/><text x="905.8571428571429" y="148.0" font-size="12" fill="#4f5b6b" text-anchor="end" font-family="PT Sans Caption, PT Sans, sans-serif">20.10</text><circle cx="930.0" cy="104" r="9.0" fill="#ffffff" stroke="#2457c5" stroke-width="4.0"/><text x="924.0" y="148.0" font-size="12" font-weight="700" fill="#2457c5" text-anchor="start" font-family="PT Sans Caption, PT Sans, sans-serif">сегодня</text></svg>
+      <div class="key" aria-label="Условные обозначения">
+        <span><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="#fff" stroke="#111a26" stroke-width="3"/></svg>приём</span>
+        <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#1f7a4a"/></svg>лучше</span>
+        <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#5d6878"/></svg>без изменений</span>
+        <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#cf2a3b"/></svg>хуже</span>
+        <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="#fff" stroke="#b77d00" stroke-width="2" stroke-dasharray="3 2"/></svg>не указано</span>
+        <span><svg width="14" height="12" viewBox="0 0 14 12" aria-hidden="true"><path d="M1 1h12L7 11z" fill="#cf2a3b"/></svg>нежелательное явление</span>
+        <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="10" height="10" fill="#fff" stroke="#2457c5" stroke-width="2"/></svg>анкета</span>
+        <span><svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 7h24" stroke="#2457c5" stroke-width="3" stroke-dasharray="6 5"/></svg>не подтверждено врачом</span>
+      </div>
+    </div>
+
+    <div class="changes">
+      <div class="box">
+        <h3>Что изменилось</h3>
+        <ul>
+          <li><span><span class="red">Тошнота</span>, 3 записи: 07.10, 14.10, 20.10<small>Со слов пациентки. Связь с препаратом не установлена</small></span><a href="#">Записи</a></li>
+          <li><span>Самочувствие «хуже» 4 раза подряд<small>С 30.09; до этого «без изменений»</small></span><a href="#">Дневник</a></li>
+          <li><span>Анкета DASS-42 заполнена 20.10<small>Результаты — в сводке к приёму</small></span><a href="#">Анкеты</a></li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Ждёт решения</h3>
+        <ul>
+          <li><span>Уточнить новое нежелательное явление<small>Проект от 21.10. Не подтверждён и не меняет план</small></span><a href="#">Открыть</a></li>
+          <li><span>Новая анкета DASS-42<small>Предложена сегодня, не заполнена</small></span><a href="#">Анкеты</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Учебная история WD03. Даты смоделированы, это не клиническое наблюдение.</p>
+  </section>
+</div>
+</body>
+</html>

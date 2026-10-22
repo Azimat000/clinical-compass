@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кому нужно внимание · Клинический компас</title>
+<style>
+/* UI01 · направление A «Лист результатов». Статичный прототип, не подключён к приложению. */
+@font-face { font-family: "PT Sans"; src: local("PT Sans"), local("PTSans-Regular"); font-weight: 400; }
+@font-face { font-family: "PT Sans"; src: local("PT Sans Bold"), local("PTSans-Bold"); font-weight: 700; }
+@font-face { font-family: "PT Mono"; src: local("PT Mono"), local("PTMono-Regular"); font-weight: 400; }
+
+:root {
+  --ground: #e9edf0;
+  --sheet: #ffffff;
+  --carbon: #1a1f23;
+  --ink: #15191d;
+  --muted: #56616b;
+  --rule: #e6eaed;
+  --border: #d3dae0;
+  --control: #b9c2ca;
+  --flag: #b8261b;
+  --flag-pale: #fbe9e6;
+  --better: #1f6b45;
+  --marker: #e3f08a;
+  --focus: #1a1f23;
+  --font: "PT Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "PT Mono", Menlo, monospace;
+  --r: 4px;
+  --gap: 16px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 15px/1.45 var(--font);
+}
+::selection { background: var(--marker); color: var(--ink); }
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.num, .mono, .log time, .sheet-head time { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.92em; }
+time { font-variant-numeric: tabular-nums; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Марка продукта: стрелка компаса в рамке пробирки-штампа */
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; letter-spacing: -0.01em; }
+.brand svg { flex: none; }
+.synthetic { font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: var(--r); padding: 1px 6px; white-space: nowrap; }
+
+/* Состояние сведений — форма линии, а не цвет (M06):
+   сплошная — есть сведения, штрих — неизвестно, двойная — противоречие, зачёркнутая — отрицает */
+.state { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.state::before { content: ""; flex: none; width: 22px; height: 0; border-top: 2px solid currentColor; }
+.state--unknown::before { border-top-style: dashed; }
+.state--conflict::before { height: 6px; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+.state--denied::before { border-top-width: 1px; }
+.state--unknown { color: var(--muted); }
+.state--known.is-new { color: var(--flag); }
+
+/* Отметка самочувствия: лучше / без изменений / хуже / не указано */
+.wb { display: inline-flex; gap: 3px; }
+.wb i { width: 16px; height: 16px; display: block; border: 1.5px solid var(--ink); border-radius: 2px; position: relative; }
+.wb i.better::after, .wb i.worse::after { content: ""; position: absolute; left: 2px; right: 2px; height: 1.5px; background: currentColor; }
+.wb i.better { color: var(--better); border-color: var(--better); }
+.wb i.better::after { top: 2px; }
+.wb i.worse { color: var(--flag); border-color: var(--flag); background: var(--flag-pale); }
+.wb i.worse::after { bottom: 2px; }
+.wb i.same::after { content: ""; position: absolute; left: 2px; right: 2px; top: 6px; height: 1.5px; background: var(--ink); }
+.wb i.unknown { border-style: dashed; border-color: var(--muted); }
+
+.marker { background: var(--marker); padding: 0 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 36px; padding: 0 14px;
+  border-radius: var(--r); border: 1px solid var(--control); background: var(--sheet); color: var(--ink);
+  font: 700 14px/1 var(--font); text-decoration: none; cursor: pointer; white-space: nowrap; }
+.button:hover { border-color: var(--ink); }
+.button--primary { background: var(--carbon); border-color: var(--carbon); color: #fff; }
+.button--primary:hover { background: #000; }
+
+input[type="search"], select { font: 400 14px var(--font); color: var(--ink); height: 36px; border: 1px solid var(--control);
+  border-radius: var(--r); background: var(--sheet); padding: 0 10px; }
+input::placeholder { color: #66717b; }
+
+/* ---------- Врач: оболочка ---------- */
+.shell { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
+.side { padding: 20px 12px; display: flex; flex-direction: column; gap: 24px; }
+.side .brand { padding: 0 10px; }
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav a { display: flex; justify-content: space-between; align-items: center; height: 36px; padding: 0 10px; border-radius: var(--r);
+  text-decoration: none; color: #2b3238; }
+.nav a:hover { background: #dfe4e8; }
+.nav a[aria-current="page"] { background: var(--sheet); color: var(--ink); font-weight: 700; box-shadow: inset 0 0 0 1px var(--border); }
+.nav .count { font-family: var(--mono); font-size: 13px; }
+.nav .count--alert { color: var(--flag); font-weight: 700; }
+.side-foot { margin-top: auto; padding: 0 10px; font-size: 13px; color: var(--muted); }
+.side-foot b { color: var(--ink); font-weight: 400; display: block; }
+
+.main { padding: 8px 8px 8px 0; }
+.sheet { background: var(--sheet); border: 1px solid var(--border); border-radius: 8px; min-height: calc(100vh - 16px); }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 28px;
+  background: var(--carbon); color: #d5dce2; font-size: 13px; border-radius: 7px 7px 0 0; }
+.sheet-head .synthetic { color: #d5dce2; border-color: #4a535b; }
+.title-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 24px 28px 16px; }
+h1 { font-size: 26px; line-height: 1.15; margin: 0; letter-spacing: -0.015em; }
+.finding { margin: 8px 0 0; font-size: 15px; color: #2b3238; max-width: 70ch; }
+.title-actions { display: flex; gap: 8px; align-items: center; }
+.title-actions input { width: 260px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 0 28px 16px; }
+.seg { display: inline-flex; border: 1px solid var(--control); border-radius: var(--r); overflow: hidden; }
+.seg a { padding: 0 12px; height: 34px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 14px; }
+.seg a + a { border-left: 1px solid var(--control); }
+.seg a[aria-current="true"] { background: var(--carbon); color: #fff; }
+.filters label { font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 18px; padding: 10px 28px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  font-size: 13px; color: var(--muted); background: #f7f9fa; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+/* Лист результатов: таблица, где каждая строка — пациент, каждая колонка — показатель */
+.results { width: 100%; border-collapse: collapse; }
+.results th { text-align: left; font-weight: 400; font-size: 13px; color: var(--muted); padding: 12px 12px 8px; border-bottom: 1px solid var(--ink); vertical-align: bottom; }
+.results td { padding: 14px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 14px; }
+.results th:first-child, .results td:first-child { padding-left: 28px; }
+.results th:last-child, .results td:last-child { padding-right: 28px; text-align: right; }
+.results td:nth-last-child(2) { padding-right: 28px; text-align: right; width: 72px; }
+.results .who b { display: block; font-size: 15px; }
+.results .who span { color: var(--muted); font-size: 13px; }
+.results .reason b { font-weight: 700; }
+.results .reason small { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.results .flag { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 22px; padding: 0 6px; font: 700 12px var(--mono);
+  border: 1.5px solid var(--flag); color: var(--flag); border-radius: 2px; }
+.results .flag--quiet { border-color: var(--control); color: var(--muted); font-weight: 400; }
+.results .sub { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.results td.num { text-align: right; }
+
+.below { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+.below section { padding: 20px 28px 28px; }
+.below section + section { border-left: 1px solid var(--rule); }
+h2 { font-size: 16px; margin: 0 0 12px; }
+.pending { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rule); }
+.pending p { margin: 0; }
+.pending small { display: block; color: var(--muted); font-size: 13px; }
+.empty { border: 1px dashed var(--control); border-radius: var(--r); padding: 12px 14px; color: var(--muted); font-size: 14px;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+
+.menu { display: none; }
+
+/* ---------- Пациент ---------- */
+.p-top { background: var(--carbon); color: #fff; }
+.p-top-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 0 16px; }
+.p-top .synthetic { color: #c9d1d8; border-color: #4a535b; }
+.p-tabs { background: var(--sheet); border-bottom: 1px solid var(--border); overflow-x: auto; }
+.p-tabs-in { max-width: 680px; margin: 0 auto; display: flex; gap: 4px; padding: 0 8px; }
+.p-tabs a { display: inline-flex; align-items: center; height: 46px; padding: 0 10px; text-decoration: none; color: var(--muted); white-space: nowrap;
+  border-bottom: 2px solid transparent; font-size: 15px; }
+.p-tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 700; }
+.p-main { max-width: 680px; margin: 0 auto; padding: 20px 16px 40px; }
+.p-main h1 { font-size: 24px; }
+.p-date { color: var(--muted); margin: 4px 0 16px; }
+.today { background: var(--sheet); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.today p { margin: 0 0 14px; font-size: 16px; }
+.today .button--primary { width: 100%; min-height: 52px; font-size: 17px; }
+.today small { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; }
+.p-block { margin-top: 24px; }
+.p-block h2 { display: flex; justify-content: space-between; align-items: baseline; }
+.p-block h2 a { font-weight: 400; font-size: 14px; }
+.task { background: var(--sheet); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.task p { margin: 0; }
+.task small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.log { width: 100%; border-collapse: collapse; background: var(--sheet); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.log th { text-align: left; font-weight: 400; font-size: 13px; color: var(--muted); padding: 10px 14px 6px; border-bottom: 1px solid var(--ink); }
+.log td { padding: 11px 14px; border-top: 1px solid var(--rule); font-size: 15px; vertical-align: middle; }
+.log td:first-child { width: 7.5em; }
+.log td .wb { vertical-align: -2px; margin-right: 8px; }
+.note { background: var(--sheet); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.note p { margin: 4px 0 0; }
+.note small { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 1100px) {
+  .shell { grid-template-columns: 1fr; }
+  .side { display: none; }
+  .main { padding: 0; }
+  .sheet { border-radius: 0; border-width: 0; min-height: 100vh; }
+  .menu { display: block; }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 0 16px; background: var(--carbon); color: #fff; }
+  .bar .synthetic { color: #c9d1d8; border-color: #4a535b; }
+  .menu summary { list-style: none; cursor: pointer; height: 36px; display: inline-flex; align-items: center; padding: 0 10px; border: 1px solid #4a535b; border-radius: var(--r); }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu[open] nav { position: absolute; left: 0; right: 0; top: 52px; background: var(--sheet); color: var(--ink); padding: 8px; border-bottom: 1px solid var(--border); z-index: 2;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+  .sheet-head { display: none; }
+}
+@media (min-width: 1101px) { .bar { display: none; } }
+
+@media (max-width: 760px) {
+  .title-row { flex-direction: column; align-items: stretch; padding: 20px 16px 12px; }
+  h1 { font-size: 22px; }
+  .title-actions { flex-wrap: wrap; }
+  .title-actions input { width: 100%; flex: 1 1 100%; }
+  .title-actions .button { flex: 1; }
+  .filters { padding: 0 16px 12px; }
+  .filters label { display: none; }
+  .legend { padding: 10px 16px; gap: 10px 16px; }
+  .results thead { display: none; }
+  .results, .results tbody, .results tr, .results td { display: block; width: 100%; }
+  .results tr { padding: 14px 16px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .results td { padding: 0; border: 0; }
+  .results td:first-child, .results td:last-child { padding: 0; }
+  .results td.reason, .results td.extra { grid-column: 1 / -1; }
+  .results td.extra { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: 13px; }
+  .results td.extra .sub { display: inline; margin: 0; }
+  .results td.hide-sm { display: none; }
+  .below { grid-template-columns: 1fr; }
+  .below section { padding: 20px 16px; }
+  .below section + section { border-left: 0; border-top: 1px solid var(--rule); }
+}
+@media (min-width: 761px) { .results td.extra { display: none; } }
+@media (max-width: 760px) {
+  .results td.who { grid-row: 1; grid-column: 1; }
+  .results td:nth-last-child(2) { grid-row: 1; grid-column: 2; width: auto; padding: 0; }
+}
+
+html,body{height:900px;overflow:hidden}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" aria-label="Разделы">
+    <a class="brand" href="doctor.html">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="none" stroke="#1a1f23" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="#b8261b"/><path d="M11 18.5 8 11h6z" fill="#1a1f23"/></svg>
+      Клинический компас
+    </a>
+    <nav class="nav">
+      <a href="doctor.html" aria-current="page">Кому нужно внимание <span class="count count--alert">3</span></a>
+      <a href="#">Все пациенты <span class="count">5</span></a>
+      <a href="#">Сообщения</a>
+      <a href="#">Уведомления</a>
+      <a href="#">Критические события</a>
+      <a href="#">Приглашения</a>
+    </nav>
+    <div class="side-foot"><b>doc-a</b>учебный врач · <a href="#">Выйти</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="bar">
+      <a class="brand" href="doctor.html">
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="#ff8a7a"/><path d="M11 18.5 8 11h6z" fill="#fff"/></svg>
+        Компас
+      </a>
+      <details class="menu">
+        <summary>Меню</summary>
+        <nav class="nav" aria-label="Разделы">
+          <a href="doctor.html" aria-current="page">Кому нужно внимание <span class="count count--alert">3</span></a>
+          <a href="#">Все пациенты <span class="count">5</span></a>
+          <a href="#">Сообщения</a>
+          <a href="#">Уведомления</a>
+          <a href="#">Критические события</a>
+          <a href="#">Приглашения</a>
+          <a href="#">Выйти</a>
+        </nav>
+      </details>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head">
+        <span>Среда, <time datetime="2026-10-21">21.10.2026</time> · сведения на 09:00</span>
+        <span class="synthetic">Учебные данные WD01–WD05, даты смоделированы</span>
+      </div>
+
+      <div class="title-row">
+        <div>
+          <h1>Кому нужно внимание</h1>
+          <p class="finding">У Елены новое нежелательное явление (тошнота) и четыре отметки «хуже» подряд.</p>
+        </div>
+        <form class="title-actions" role="search">
+          <label class="visually-hidden" for="q">Поиск по пациентам и записям</label>
+          <input id="q" type="search" name="q" autocomplete="off" placeholder="Имя, код, слово из записи…">
+          <a class="button button--primary" href="#">Пригласить пациента</a>
+        </form>
+      </div>
+
+      <div class="filters">
+        <div class="seg" role="group" aria-label="Показать">
+          <a href="#" aria-current="true">С сигналами <span class="num">3</span></a>
+          <a href="#">Все <span class="num">5</span></a>
+        </div>
+        <label>Возраст <select><option>любой</option><option>известен</option><option>не указан</option><option>противоречие</option></select></label>
+        <label>Записи <select><option>любые</option><option>самоотчёт</option><option>приём</option></select></label>
+        <label>Маршрут <select><option>любой</option><option>обязательно</option><option>желательно</option></select></label>
+      </div>
+
+      <div class="legend" aria-label="Условные обозначения">
+        <span><span class="wb"><i class="better"></i></span>лучше</span>
+        <span><span class="wb"><i class="same"></i></span>без изменений</span>
+        <span><span class="wb"><i class="worse"></i></span>хуже</span>
+        <span><span class="wb"><i class="unknown"></i></span>не указано</span>
+        <span class="state state--known">есть сведения</span>
+        <span class="state state--unknown">неизвестно</span>
+        <span class="state state--conflict">противоречие</span>
+      </div>
+
+      <table class="results">
+        <caption class="visually-hidden">Пациенты с сигналами, сначала самые срочные</caption>
+        <thead>
+          <tr>
+            <th scope="col">Пациент</th>
+            <th scope="col">Что изменилось</th>
+            <th scope="col">Самочувствие, 5 отметок</th>
+            <th scope="col">Нежелательные явления</th>
+            <th scope="col">Анкета DASS-42</th>
+            <th scope="col">План</th>
+            <th scope="col"><span class="visually-hidden">Флаг</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="flagged">
+            <td class="who"><b><a href="#">Елена</a></b><span>57 лет · учебный 03</span></td>
+            <td class="reason"><b class="marker">Новое НЯ: тошнота, с <time datetime="2026-10-07">07.10</time></b>
+              <small>Проект решения «уточнить новое НЯ» ждёт подтверждения</small></td>
+            <td class="hide-sm"><span class="wb" aria-label="Без изменений, хуже, хуже, хуже, хуже"><i class="same"></i><i class="worse"></i><i class="worse"></i><i class="worse"></i><i class="worse"></i></span>
+              <span class="sub">хуже 4 раза подряд</span></td>
+            <td class="hide-sm"><span class="state state--known is-new">тошнота</span><span class="sub">3 записи, связь не установлена</span></td>
+            <td class="hide-sm">предложена сегодня<span class="sub">прошлая <time datetime="2026-10-20">20.10</time></span></td>
+            <td class="hide-sm">выполнено<span class="sub">4 из 4 отметок</span></td>
+            <td><span class="flag">НЯ</span></td>
+            <td class="extra"><span class="wb"><i class="same"></i><i class="worse"></i><i class="worse"></i><i class="worse"></i><i class="worse"></i></span><span class="sub">хуже 4 раза · анкета предложена · <a href="#">сводка</a></span></td>
+          </tr>
+          <tr class="flagged">
+            <td class="who"><b><a href="#">Сергей</a></b><span>29 лет · учебный 04</span></td>
+            <td class="reason"><b class="marker">Жалобы противоречат друг другу</b>
+              <small>Сообщение: «лучше», беседа <time datetime="2026-10-21">21.10</time>: «без изменений»</small></td>
+            <td class="hide-sm"><span class="wb" aria-label="Без изменений, без изменений, не указано, лучше, без изменений"><i class="same"></i><i class="same"></i><i class="unknown"></i><i class="better"></i><i class="same"></i></span>
+              <span class="sub">1 без отметки</span></td>
+            <td class="hide-sm"><span class="state state--unknown">нет сведений</span></td>
+            <td class="hide-sm">предложена сегодня<span class="sub"><time datetime="2026-10-07">07.10</time> неполная: 41 из 42</span></td>
+            <td class="hide-sm"><span class="state state--conflict">противоречие</span><span class="sub">пропуск, нет сведений</span></td>
+            <td><span class="flag">?</span></td>
+            <td class="extra"><span class="wb"><i class="same"></i><i class="same"></i><i class="unknown"></i><i class="better"></i><i class="same"></i></span><span class="sub">план: пропуск, нет сведений, противоречие · <a href="#">сводка</a></span></td>
+          </tr>
+          <tr class="flagged">
+            <td class="who"><b><a href="#">Ирина</a></b><span>возраст не указан · учебный 05</span></td>
+            <td class="reason"><b class="marker">Возраст не указан, анкета недоступна</b>
+              <small>Уточнить возраст и пропущенные сведения на приёме</small></td>
+            <td class="hide-sm"><span class="wb" aria-label="Не указано, без изменений, не указано, без изменений, без изменений"><i class="unknown"></i><i class="same"></i><i class="unknown"></i><i class="same"></i><i class="same"></i></span>
+              <span class="sub">2 без отметки</span></td>
+            <td class="hide-sm"><span class="state state--unknown">нет сведений</span></td>
+            <td class="hide-sm">недоступна<span class="sub">нужен возраст</span></td>
+            <td class="hide-sm">выполнено<span class="sub">4 из 4 отметок</span></td>
+            <td><span class="flag">возр.</span></td>
+            <td class="extra"><span class="wb"><i class="unknown"></i><i class="same"></i><i class="unknown"></i><i class="same"></i><i class="same"></i></span><span class="sub">анкета недоступна · <a href="#">сводка</a></span></td>
+          </tr>
+          <tr>
+            <td class="who"><b><a href="#">Михаил</a></b><span>46 лет · учебный 02</span></td>
+            <td class="reason"><b>Без изменений 5 недель</b>
+              <small>Хочет задать вопросы на приёме</small></td>
+            <td class="hide-sm"><span class="wb" aria-label="Без изменений пять раз"><i class="same"></i><i class="same"></i><i class="same"></i><i class="same"></i><i class="same"></i></span></td>
+            <td class="hide-sm"><span class="state state--unknown">нет сведений</span></td>
+            <td class="hide-sm">предложена сегодня<span class="sub">прошлая <time datetime="2026-10-20">20.10</time></span></td>
+            <td class="hide-sm">выполнено<span class="sub">4 из 4 отметок</span></td>
+            <td><span class="flag flag--quiet">—</span></td>
+            <td class="extra"><span class="wb"><i class="same"></i><i class="same"></i><i class="same"></i><i class="same"></i><i class="same"></i></span><span class="sub">анкета предложена · <a href="#">сводка</a></span></td>
+          </tr>
+          <tr>
+            <td class="who"><b><a href="#">Анна</a></b><span>34 года · учебный 01</span></td>
+            <td class="reason"><b>Лучше 3 недели подряд</b>
+              <small>Хочет обсудить дальнейшее наблюдение</small></td>
+            <td class="hide-sm"><span class="wb" aria-label="Хуже, без изменений, лучше, лучше, лучше"><i class="worse"></i><i class="same"></i><i class="better"></i><i class="better"></i><i class="better"></i></span></td>
+            <td class="hide-sm"><span class="state state--unknown">нет сведений</span></td>
+            <td class="hide-sm">предложена сегодня<span class="sub">прошлая <time datetime="2026-10-20">20.10</time></span></td>
+            <td class="hide-sm">выполнено<span class="sub">4 из 4 отметок</span></td>
+            <td><span class="flag flag--quiet">—</span></td>
+            <td class="extra"><span class="wb"><i class="worse"></i><i class="same"></i><i class="better"></i><i class="better"></i><i class="better"></i></span><span class="sub">анкета предложена · <a href="#">сводка</a></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="below">
+        <section aria-labelledby="h-pending">
+          <h2 id="h-pending">Ждут решения врача</h2>
+          <div class="pending">
+            <p>Елена: уточнить новое нежелательное явление<small>Проект от <time datetime="2026-10-21">21.10</time>, не подтверждён и не меняет план</small></p>
+            <a class="button" href="#">Рассмотреть</a>
+          </div>
+        </section>
+        <section aria-labelledby="h-inv">
+          <h2 id="h-inv">Приглашения</h2>
+          <div class="empty">Действующих приглашений нет.<a href="#">Пригласить</a></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
