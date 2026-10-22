@@ -1,0 +1,541 @@
+{
+  "tests_run": 348,
+  "successful_test_methods": 274,
+  "nonpassing_test_methods": 74,
+  "failure_records_including_subtests": 102,
+  "error_records": 4,
+  "all_nonpassing_records_reviewed_as_removed_presentation_contracts": true,
+  "limitations": "Some historical tests mix backend and HTML assertions and stop at the removed presentation check; later assertions in those methods were not executed. New tests and actual WSGI restart verify core backend invariants separately. This is not a passing make check.",
+  "reviewed_records": [
+    {
+      "test": "test_ended_relationship_immediately_revokes_doctor_access (test_access.AccessTests.test_ended_relationship_immediately_revokes_doctor_access)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_forged_cookie_and_hidden_patient_search (test_access.AccessTests.test_forged_cookie_and_hidden_patient_search)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_patient_document_reports_and_actions_access_matrix (test_access.AccessTests.test_patient_document_reports_and_actions_access_matrix)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_roles_invitation_pair_and_shared_technical_report_after_restart (test_access.AccessTests.test_roles_invitation_pair_and_shared_technical_report_after_restart)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_explicit_doctor_resolution_preserves_original_conflict_and_history (test_ages.AgeTests.test_explicit_doctor_resolution_preserves_original_conflict_and_history)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_retries_atomic_failure_escaping_and_decision_snapshot (test_ages.AgeTests.test_retries_atomic_failure_escaping_and_decision_snapshot)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_full_patient_submission_doctor_results_and_patient_receipt_only (test_assessments.AssessmentsTests.test_full_patient_submission_doctor_results_and_patient_receipt_only)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero (test_assessments.AssessmentsTests.test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_own_receipt_survives_relationship_end_without_reopening_submission (test_assessments.AssessmentsTests.test_own_receipt_survives_relationship_end_without_reopening_submission)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_patient_sees_actual_deadline_in_moscow_including_error_page (test_assessments.AssessmentsTests.test_patient_sees_actual_deadline_in_moscow_including_error_page)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_source_provenance_xss_doctor_capture_and_restart (test_assessments.AssessmentsTests.test_source_provenance_xss_doctor_capture_and_restart)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_versions_are_separate_and_patient_diary_is_not_a_score (test_assessments.AssessmentsTests.test_versions_are_separate_and_patient_diary_is_not_a_score)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_withdrawn_source_disables_measurement_without_destroying_diary (test_assessments.AssessmentsTests.test_withdrawn_source_disables_measurement_without_destroying_diary)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_advice_prefill_two_categories_confirmation_and_stale_context (test_clinical_workflow.ClinicalWorkflowTests.test_advice_prefill_two_categories_confirmation_and_stale_context)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_real_safety_event_survives_unavailable_recipient_and_routine_worker (test_clinical_workflow.ClinicalWorkflowTests.test_real_safety_event_survives_unavailable_recipient_and_routine_worker)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_all_eight_functions_connected_two_cabinets (test_communication.CommunicationTests.test_all_eight_functions_connected_two_cabinets)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_bidirectional_receipts_retry_restart_and_escaping (test_communication.CommunicationTests.test_bidirectional_receipts_retry_restart_and_escaping)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_context_links_never_suppress_adverse_event (test_communication.CommunicationTests.test_context_links_never_suppress_adverse_event)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_denominator_unknown_conflicts_corrections_and_future (test_communication.CommunicationTests.test_denominator_unknown_conflicts_corrections_and_future)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_missing_report_never_becomes_missed_or_zero_percent (test_communication.CommunicationTests.test_missing_report_never_becomes_missed_or_zero_percent)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data (test_critical_delivery.CriticalDeliveryTests.test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal (test_decisions.DecisionTests.test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_five_actions_draft_separate_review_and_patient_projection (test_decisions.DecisionTests.test_five_actions_draft_separate_review_and_patient_projection)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_rollbacks_immutability_restart_and_html_escaping (test_decisions.DecisionTests.test_rollbacks_immutability_restart_and_html_escaping)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_import_retries_review_correction_add_reject_persistence_and_no_actions (test_extraction.ExtractionTests.test_import_retries_review_correction_add_reject_persistence_and_no_actions)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_concurrent_stale_save_and_transaction_rollback (test_first_visits.FirstVisitTests.test_concurrent_stale_save_and_transaction_rollback)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_no_diagnosis_draft_retry_restart_revision_complete_without_action (test_first_visits.FirstVisitTests.test_no_diagnosis_draft_retry_restart_revision_complete_without_action)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_repeat_visit_and_exact_dass_results_remain_separate (test_first_visits.FirstVisitTests.test_repeat_visit_and_exact_dass_results_remain_separate)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_roles_csrf_other_patient_revocation_and_xss (test_first_visits.FirstVisitTests.test_roles_csrf_other_patient_revocation_and_xss)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_sources_dates_unknown_denial_conflict_and_summary_sections (test_first_visits.FirstVisitTests.test_sources_dates_unknown_denial_conflict_and_summary_sections)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'observed_on': '2099-01-01'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'visit_kind': 'diagnosis'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'base_revision': 'bad'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'request_key': 'bad'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'not_collected': ''})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'age_status': 'known', 'age_years': '18'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'age_status': 'unknown', 'age_years': '18'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'safety_status': 'known'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'safety_status': 'denied', 'safety_text': 'text'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'acute_source': 'invalid'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'course_on': '2099-01-01'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'impact_status': 'known', 'impact_text': 'X'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'documented_facts': 'X'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'action_draft': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'state': 'approved'})",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_access_roles_revocation_methods_and_read_only_restart (test_follow_up.FollowUpTests.test_access_roles_revocation_methods_and_read_only_restart)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_dass_exact_period_complete_and_missing_without_zero_fill (test_follow_up.FollowUpTests.test_dass_exact_period_complete_and_missing_without_zero_fill)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_invalid_periods_and_moscow_day_boundaries (test_follow_up.FollowUpTests.test_invalid_periods_and_moscow_day_boundaries)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_legacy_sources_and_first_visit_versions_are_not_duplicated (test_follow_up.FollowUpTests.test_legacy_sources_and_first_visit_versions_are_not_duplicated)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_no_outcome_not_missed_no_plan_not_draft (test_follow_up.FollowUpTests.test_no_outcome_not_missed_no_plan_not_draft)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_periods_incomplete_and_conflicting_records_with_attribution (test_follow_up.FollowUpTests.test_periods_incomplete_and_conflicting_records_with_attribution)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_plan_anchor_changes_tasks_all_authors_and_late_corrections (test_follow_up.FollowUpTests.test_plan_anchor_changes_tasks_all_authors_and_late_corrections)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_authenticated_shell_escapes_input_and_rejects_other_hosts (test_foundation.FoundationTests.test_authenticated_shell_escapes_input_and_rejects_other_hosts)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_delivery_seen_ack_order_idempotency_and_no_clinical_actions (test_notifications.NotificationTests.test_delivery_seen_ack_order_idempotency_and_no_clinical_actions)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen (test_notifications.NotificationTests.test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_transient_failure_recovers_without_duplicate_and_summary_is_escaped (test_notifications.NotificationTests.test_transient_failure_recovers_without_duplicate_and_summary_is_escaped)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_authorization_csrf_ended_relationship_and_xss (test_records.RecordsTests.test_authorization_csrf_ended_relationship_and_xss)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_pair_same_report_provenance_and_separate_adverse_event (test_records.RecordsTests.test_pair_same_report_provenance_and_separate_adverse_event)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': 'tomorrow'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': '2099-01-01'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': '1899-01-01'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'unknown', 'age_years': '18'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'age_years': '-1'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'birth_date': '2026-10-19'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'age_years': '121'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'denied'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'conflicting'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'complaints_status': 'known'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'risk_factors_status': 'unsafe'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'adverse_events_status': 'unknown', 'adverse_events_text': 'данные'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'adverse_events_status': 'denied', 'adverse_events_text': 'данные'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'summary': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'summary': 'bad\\\\x00text'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'wellbeing': 'score_10'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'request_key': 'bad'}\")",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_unknown_denied_conflicting_and_age_mismatch (test_records.RecordsTests.test_unknown_denied_conflicting_and_age_mismatch)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_unknown_initial_age_is_never_adult (test_records.RecordsTests.test_unknown_initial_age_is_never_adult)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_csrf_limits_xss_and_native_form (test_report_drafts.ReportDraftTests.test_csrf_limits_xss_and_native_form)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_only_owner_can_read_or_write_and_doctor_cannot_find_private_text (test_report_drafts.ReportDraftTests.test_only_owner_can_read_or_write_and_doctor_cannot_find_private_text)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_unfinished_values_restore_after_restart_and_no_clinical_side_effects (test_report_drafts.ReportDraftTests.test_unfinished_values_restore_after_restart_and_no_clinical_side_effects)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_categories_separate_from_urgency_and_approval_only_patient (test_routing.RoutingTests.test_categories_separate_from_urgency_and_approval_only_patient)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_retry_conflicting_change_data_and_restart (test_routing.RoutingTests.test_retry_conflicting_change_data_and_restart)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_error_retains_inputs_and_opens_report_panel (test_s13.SearchTests.test_error_retains_inputs_and_opens_report_panel)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_route_history_filter_without_claiming_current_decision (test_s13.SearchTests.test_route_history_filter_without_claiming_current_decision)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_card_header_is_on_every_doctor_page_and_shows_signal_and_age (test_s26b.DoctorWorkspaceTests.test_card_header_is_on_every_doctor_page_and_shows_signal_and_age)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_no_signal_state_is_worded_and_not_a_claim_of_safety (test_s26b.DoctorWorkspaceTests.test_no_signal_state_is_worded_and_not_a_claim_of_safety)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it (test_s26b.DoctorWorkspaceTests.test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_signal_patient_goes_first_and_is_marked_with_words (test_s26b.DoctorWorkspaceTests.test_signal_patient_goes_first_and_is_marked_with_words)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_status_key_separates_draft_receipt_and_unknown (test_s26b.DoctorWorkspaceTests.test_status_key_separates_draft_receipt_and_unknown)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_failed_submission_keeps_every_entered_value_and_saves_nothing (test_s26c.PatientWorkspaceTests.test_failed_submission_keeps_every_entered_value_and_saves_nothing)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_message_states_are_separate_words_and_not_a_doctor_reaction (test_s26c.PatientWorkspaceTests.test_message_states_are_separate_words_and_not_a_doctor_reaction)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_patient_without_a_doctor_link_is_told_to_enter_the_invitation_code (test_s26c.PatientWorkspaceTests.test_patient_without_a_doctor_link_is_told_to_enter_the_invitation_code)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_questionnaire_keeps_text_order_and_shows_receipt_states (test_s26c.PatientWorkspaceTests.test_questionnaire_keeps_text_order_and_shows_receipt_states)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_self_report_is_in_two_steps_with_server_fields_unchanged (test_s26c.PatientWorkspaceTests.test_self_report_is_in_two_steps_with_server_fields_unchanged)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_today_has_one_main_action_and_it_follows_the_priority (test_s26c.PatientWorkspaceTests.test_today_has_one_main_action_and_it_follows_the_priority)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_today_never_claims_doctor_saw_or_reacted (test_s26c.PatientWorkspaceTests.test_today_never_claims_doctor_saw_or_reacted)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_lost_receipt_retry_has_same_location_and_no_side_effects (test_s26d.PatientSendTests.test_lost_receipt_retry_has_same_location_and_no_side_effects)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_native_form_post_keeps_redirect_and_error_values (test_s26d.PatientSendTests.test_native_form_post_keeps_redirect_and_error_values)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed)",
+      "category": "failures",
+      "reason": "Expects active page HTTP200; removed interface intentionally returns HTTP503"
+    },
+    {
+      "test": "test_review_html_escapes_notes_and_preserves_error_values (test_therapy.TherapyTests.test_review_html_escapes_notes_and_preserves_error_values)",
+      "category": "failures",
+      "reason": "Expects text/markup of removed HTML or old text encoding"
+    },
+    {
+      "test": "test_card_navigation_is_short_and_keeps_every_doctor_function_reachable (test_s26b.DoctorWorkspaceTests.test_card_navigation_is_short_and_keeps_every_doctor_function_reachable)",
+      "category": "errors",
+      "reason": "Parses removed HTML navigation or login fields"
+    },
+    {
+      "test": "test_patient_navigation_is_short_and_present_on_all_patient_pages (test_s26c.PatientWorkspaceTests.test_patient_navigation_is_short_and_present_on_all_patient_pages)",
+      "category": "errors",
+      "reason": "Parses removed HTML navigation or login fields"
+    },
+    {
+      "test": "test_template_fault_has_safe_fallback_without_rethrow_or_secret (test_security.SecurityTests.test_template_fault_has_safe_fallback_without_rethrow_or_secret)",
+      "category": "errors",
+      "reason": "Fault injection targets removed HTML renderer"
+    },
+    {
+      "test": "test_histories_visibility_boundaries_and_preservation (test_walkthrough_demo.WalkthroughTests.test_histories_visibility_boundaries_and_preservation)",
+      "category": "errors",
+      "reason": "Parses removed HTML navigation or login fields"
+    }
+  ]
+}

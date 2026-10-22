@@ -4,9 +4,8 @@ import re
 import json
 import secrets
 import sqlite3
-from html import escape
 from werkzeug.exceptions import HTTPException
-from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
+from flask import Flask, abort, g, jsonify, redirect, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list, pending_signal_counts
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
@@ -14,7 +13,8 @@ from . import first_visits, follow_up, report_drafts
 
 
 def create_app(database=None):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder=None, template_folder=None)
+    app.json.ensure_ascii = False
     app.config.update(DATABASE=str(database or os.environ.get('COMPASS_DB', 'var/compass.sqlite3')),
                       MAX_CONTENT_LENGTH=65536, TRUSTED_HOSTS=['localhost', '127.0.0.1', '[::1]'],
                       AUTH_COOKIE_SECURE=os.environ.get('COMPASS_COOKIE_SECURE') == '1')
@@ -34,15 +34,35 @@ def create_app(database=None):
         if g.user['role'] != required:
             abort(403)
 
+    def interface_response(view, **context):
+        """Retired HTML boundary; never serialize former template context.
+
+        Keep login/invitation/assessment receipts usable without a browser UI.
+        Existing mutation handlers, validation and access checks remain in place.
+        """
+        if view == 'login.html':
+            return jsonify(csrf=context['challenge'], error=context['error'])
+        if view == 'invitation.html':
+            return jsonify(invitation=context['token'])
+        if view == 'assessment_receipt.html':
+            return jsonify(status='submitted', request_id=context['task']['id'],
+                           received_at=context['received_at'])
+        if view == 'result.html':
+            return app.response_class(error_page(context['title'], context['message']),
+                                      mimetype='text/plain')
+        g.interface_removed = True
+        payload = {'status': 'interface_removed',
+                   'message': 'Интерфейс удалён. Новый интерфейс пока не создан.'}
+        failure = (context.get('error') or context.get('form_error')
+                   or context.get('assessment_error') or context.get('age_error'))
+        if failure:
+            payload['error'] = str(failure)
+        if g.get('user'):
+            payload['csrf'] = g.user['csrf_token']
+        return jsonify(payload)
+
     def error_page(title, message):
-        try:
-            return render_template('error.html', title=title, message=message)
-        except Exception:
-            # Even a failed template must not trigger Flask's traceback logger.
-            return ('<!doctype html><html lang="ru"><meta charset="utf-8">'
-                    '<title>Клинический компас</title><main><h1>' + escape(title) +
-                    '</h1><p role="alert">' + escape(message) +
-                    '</p><a href="/">Вернуться в кабинет</a></main></html>')
+        return title + '\n' + message + '\n'
 
     @app.errorhandler(Exception)
     def request_failure(error):
@@ -57,7 +77,7 @@ def create_app(database=None):
             }.get(code, ('Запрос не выполнен', 'Откройте кабинет и проверьте состояние операции.'))
             response = error.get_response()
             response.set_data(error_page(title, message))
-            response.content_type = 'text/html; charset=utf-8'
+            response.content_type = 'text/plain; charset=utf-8'
             return response
         # Never log exception text, URLs, headers, form bodies or traceback: they
         # can contain clinical text, credentials, SQL parameters or private paths.
@@ -75,12 +95,12 @@ def create_app(database=None):
 
     @app.errorhandler(413)
     def request_too_large(error):
-        return render_template('result.html',title='Ввод слишком большой',
+        return interface_response('result.html',title='Ввод слишком большой',
                                message='Запрос больше 65 536 байт. Для импорта нужен текст или .txt UTF-8 до 24 000 байт; уменьшите файл или текст.'),413
 
     @app.errorhandler(clinical_rules.RuleError)
     def rule_failure(error):
-        return render_template('result.html', title='Источниковая проверка не выполнена',
+        return interface_response('result.html', title='Источниковая проверка не выполнена',
                                message=str(error)), error.status
 
     def patient_or_404(patient_id):
@@ -112,21 +132,6 @@ def create_app(database=None):
             if not access.matches_token(g.user['csrf_token'], supplied):
                 abort(403)
 
-    @app.context_processor
-    def card_context():
-        def card_header(patient):
-            db = get_db()
-            counts = pending_signal_counts(db, g.user['id']) if g.user['role'] == 'doctor' else {}
-            entries = records.history(db, patient['id'])
-            return {'signals': counts.get(patient['id'], 0), 'warnings': len(records.warnings(patient, entries)),
-                    'routes': routing.summaries(db, g.user, patient['id']), 'statuses': records.STATUSES}
-        return {'card_header': card_header}
-
-    @app.context_processor
-    def auth_context():
-        return {'current_user': g.get('user'), 'csrf': g.user['csrf_token'] if g.get('user') else '',
-                'route_categories': routing.CATEGORIES, 'route_urgencies': routing.URGENCIES}
-
     @app.teardown_appcontext
     def close_db(error):
         db = g.pop('db', None)
@@ -135,6 +140,9 @@ def create_app(database=None):
 
     @app.after_request
     def headers(response):
+        if (g.get('interface_removed') and request.method in ('GET', 'HEAD')
+                and 200 <= response.status_code < 300):
+            response.status_code = 503
         response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['Referrer-Policy'] = 'no-referrer'
@@ -165,7 +173,7 @@ def create_app(database=None):
             error = 'Слишком много попыток. Повторите через 15 минут.' if failure == 'limited' else 'Не удалось войти. Проверьте логин и пароль.'
             status = 429 if failure == 'limited' else 401
         challenge = access.login_challenge(get_db())
-        response = app.make_response((render_template('login.html', challenge=challenge, error=error), status))
+        response = app.make_response((interface_response('login.html', challenge=challenge, error=error), status))
         cookie(response, access.CHALLENGE_COOKIE, challenge, 600)
         return response
 
@@ -200,7 +208,7 @@ def create_app(database=None):
             WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
         route_summaries = {p['id']: routing.summaries(get_db(), g.user, p['id']) for p in rows}
         signal_counts = pending_signal_counts(get_db(), g.user['id'])
-        return render_template('dashboard.html', route_summaries=route_summaries, patients=rows, query=query, age_status=age_status, offers=offers,
+        return interface_response('dashboard.html', route_summaries=route_summaries, patients=rows, query=query, age_status=age_status, offers=offers,
                                signal_counts=signal_counts,
                                record_kind=record_kind, route_category=route_category, attention=attention)
 
@@ -221,7 +229,7 @@ def create_app(database=None):
             if failure.status in (403, 404):
                 abort(failure.status)
             error, status = str(failure), failure.status
-        return render_template('follow_up.html', patient=patient, data=data, error=error,
+        return interface_response('follow_up.html', patient=patient, data=data, error=error,
             values=request.args, today=records.today().isoformat(), fields=records.FIELDS,
             statuses=records.STATUSES, wellbeing=records.WELLBEING, kinds=decisions.KINDS,
             labels=communication.LABELS, visit_fields=first_visits.FIELDS,
@@ -248,7 +256,7 @@ def create_app(database=None):
             abort(404)
         current = selected[0] if selected else None
         values = dict(request.form) if error else first_visits.form_values(current) if current else {}
-        return render_template('first_visit.html', patient=patient, visits=items,
+        return interface_response('first_visit.html', patient=patient, visits=items,
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
             fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES,
@@ -261,8 +269,8 @@ def create_app(database=None):
         try:
             data = communication.view(get_db(), g.user, patient_id)
         except communication.Error as error:
-            return render_template('result.html', title='Раздел недоступен', message=str(error)), error.status
-        return render_template('communication.html', patient=patient, data=data,
+            return interface_response('result.html', title='Раздел недоступен', message=str(error)), error.status
+        return interface_response('communication.html', patient=patient, data=data,
                                message_key=secrets.token_hex(16), task_key=secrets.token_hex(16),
                                report_keys={t['id']:secrets.token_hex(16) for t in data['tasks']})
 
@@ -282,7 +290,7 @@ def create_app(database=None):
             else:
                 abort(404)
         except communication.Error as error:
-            return render_template('result.html', title='Не сохранено', message=str(error)), error.status
+            return interface_response('result.html', title='Не сохранено', message=str(error)), error.status
         return redirect(url_for('communication_page',patient_id=patient_id),code=303)
 
     @app.get('/notifications')
@@ -292,7 +300,7 @@ def create_app(database=None):
             items = notifications.inbox(get_db(), g.user, prepare=request.method != 'HEAD')
         except notifications.NotificationError as error:
             abort(error.status)
-        return render_template('notifications.html', items=items)
+        return interface_response('notifications.html', items=items)
 
     @app.post('/notifications/<notification_id>/<action>')
     def notification_mark(notification_id, action):
@@ -300,7 +308,7 @@ def create_app(database=None):
         try:
             notifications.mark(get_db(), g.user, notification_id, action)
         except notifications.NotificationError as error:
-            return render_template('result.html', title='Отметка не сохранена', message=str(error)), error.status
+            return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
         return redirect(url_for('notification_inbox'), code=303)
 
     @app.get('/critical')
@@ -309,7 +317,7 @@ def create_app(database=None):
         items = critical_delivery.inbox(get_db(), g.user)
         logs = {r['id']: get_db().execute('SELECT * FROM critical_delivery_log WHERE event_id=? ORDER BY sequence',
                                         (r['id'],)).fetchall() for r in items}
-        return render_template('critical.html', items=items, logs=logs)
+        return interface_response('critical.html', items=items, logs=logs)
 
     @app.get('/api/critical')
     def critical_status():
@@ -323,7 +331,7 @@ def create_app(database=None):
         try:
             critical_delivery.mark(get_db(), g.user, event_id, action, request.form.get('reaction',''))
         except notifications.NotificationError as error:
-            return render_template('result.html', title='Отметка не сохранена', message=str(error)), error.status
+            return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
         if action == 'received':
             return '', 204
         return redirect(url_for('critical_inbox'),code=303)
@@ -352,7 +360,7 @@ def create_app(database=None):
                 candidate['review_value'] = extraction.canonical(candidate['value'])
             for review in item['reviews']:
                 review['payload'] = json.loads(review['payload_json'])
-        return render_template('imports.html',patient=patient,items=items,error=error,values=values,
+        return interface_response('imports.html',patient=patient,items=items,error=error,values=values,
                                fields=extraction.FIELDS,assertions=extraction.ASSERTIONS,assertion_labels=extraction.ASSERTION_LABELS,
                                warning=extraction.WARNING,new_key=lambda:secrets.token_hex(16)),status
 
@@ -363,37 +371,8 @@ def create_app(database=None):
         try:
             extraction.review(get_db(),g.user,patient_id,import_id,request.form)
         except (extraction.ExtractionError, decisions.DecisionError) as exc:
-            return render_template('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
+            return interface_response('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
         return redirect(url_for('imports_page',patient_id=patient_id),code=303)
-
-    def patient_today(patient_id, relationship, pending):
-        # Read-only summary for the patient's home screen: what waits, and the one main action.
-        # Counts come from existing server records; nothing is written and no new access is granted.
-        summary = {'unmarked': 0, 'unread': 0, 'action': None}
-        if relationship is not None:
-            try:
-                data = communication.view(get_db(), g.user, patient_id)
-            except communication.Error:
-                data = None
-            if data:
-                summary['unmarked'] = sum(1 for t in data['tasks'] if not t['future'] and not t['superseded'] and not t['history'])
-                summary['unread'] = sum(1 for m in data['messages'] if m['recipient_id'] == g.user['id'] and not m['read_at'])
-        if relationship is None:
-            summary['action'] = {'label': 'Ввести код приглашения врача', 'href': '#connection',
-                                 'why': 'Пока врач не связан с кабинетом, отправлять сведения некому.'}
-        elif pending:
-            summary['action'] = {'label': 'Заполнить анкету DASS-42', 'href': url_for('assessment_form', request_id=pending[0]['id']),
-                                 'why': 'Анкету предложил врач; отправить нужно до ' + pending[0]['deadline_label'] + '.'}
-        elif summary['unmarked']:
-            summary['action'] = {'label': 'Отметить выполнение плана', 'href': url_for('communication_page', patient_id=patient_id) + '#plan-progress',
-                                 'why': 'Пунктов плана без вашей отметки: %d.' % summary['unmarked']}
-        elif summary['unread']:
-            summary['action'] = {'label': 'Прочитать сообщение', 'href': url_for('communication_page', patient_id=patient_id) + '#correspondence',
-                                 'why': 'Сообщений, которые вы ещё не отметили прочитанными: %d.' % summary['unread']}
-        else:
-            summary['action'] = {'label': 'Записать самочувствие', 'href': '#new-record',
-                                 'why': 'Срочных дел нет. Самоотчёт можно отправить в любой день.'}
-        return summary
 
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None, age_error=None, age_values=None):
         patient = patient_or_404(patient_id)
@@ -410,8 +389,7 @@ def create_app(database=None):
         entries = records.history(db, patient_id)
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
-        today_view = patient_today(patient_id, relationship, pending) if g.user['role'] == 'patient' else None
-        return render_template('patient.html', today_view=today_view, personal_draft=personal_draft, draft_restored=draft_restored,
+        return interface_response('patient.html', personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
@@ -436,7 +414,7 @@ def create_app(database=None):
         try:
             clinical_rules.save_context(get_db(), g.user, patient_id, request.form)
         except clinical_rules.RuleError as error:
-            return render_template('result.html', title='Сведения не сохранены', message=str(error)), error.status
+            return interface_response('result.html', title='Сведения не сохранены', message=str(error)), error.status
         return redirect(url_for('demo_patient', patient_id=patient_id) + '#clinical-rules', code=303)
 
     @app.post('/invitations')
@@ -444,8 +422,8 @@ def create_app(database=None):
         role('doctor')
         token = access.invite(get_db(), g.user['id'], request.form.get('patient_id', '')[:100])
         if token is None:
-            return render_template('result.html', title='Приглашение не создано', message='Проверьте код пациента. Для него должно быть доступно приглашение.'), 409
-        return render_template('invitation.html', token=token)
+            return interface_response('result.html', title='Приглашение не создано', message='Проверьте код пациента. Для него должно быть доступно приглашение.'), 409
+        return interface_response('invitation.html', token=token)
 
     @app.post('/invitations/<token_hash>/revoke')
     def revoke_invitation(token_hash):
@@ -462,7 +440,7 @@ def create_app(database=None):
     def accept_invitation():
         role('patient')
         if not access.accept_invite(get_db(), g.user['id'], request.form.get('invitation', '')):
-            return render_template('result.html', title='Приглашение недоступно', message='Код не подходит этому кабинету, истёк или уже использован.'), 409
+            return interface_response('result.html', title='Приглашение недоступно', message='Код не подходит этому кабинету, истёк или уже использован.'), 409
         return redirect(url_for('dashboard'))
 
     @app.post('/patients/<patient_id>/connection-check')
@@ -493,7 +471,7 @@ def create_app(database=None):
             # Keep entered values on error without creating a partial record.
             if error.status == 400:
                 return render_patient(patient_id, request.form, str(error)), 400
-            return render_template('result.html', title='Запись не сохранена', message=str(error)), error.status
+            return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
         location = url_for('demo_patient', patient_id=patient_id) + '#entry-' + entry_id
         if json_reply:
             return jsonify(location=location)
@@ -566,15 +544,15 @@ def create_app(database=None):
             if completed:
                 if g.user['role']=='doctor':
                     return redirect(url_for('demo_patient', patient_id=task['patient_id'])+'#assessment-'+completed['assessment_id'])
-                return render_template('assessment_receipt.html', task=task, received_at=completed['recorded_at'])
+                return interface_response('assessment_receipt.html', task=task, received_at=completed['recorded_at'])
             if task['expires_at']<=now() or task['age_on']!=records.today().isoformat():
                 raise assessments.AssessmentError('Срок предложения истёк. Врач может предложить новую анкету.',409)
             form = assessments.available_form(db, task['form_version_id'])
         except assessments.AssessmentError as error:
             if request.method == 'POST' and error.status == 400:
-                return render_template('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form, error=str(error)),400
-            return render_template('result.html', title='Анкета недоступна', message=str(error)),error.status
-        return render_template('assessment_form.html', task=task, instrument=form, values={}, error=None)
+                return interface_response('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form, error=str(error)),400
+            return interface_response('result.html', title='Анкета недоступна', message=str(error)),error.status
+        return interface_response('assessment_form.html', task=task, instrument=form, values={}, error=None)
 
     @app.get('/api/patients/<patient_id>/assessments')
     def assessments_api(patient_id):
@@ -621,7 +599,7 @@ def create_app(database=None):
             role('doctor')
             advice = clinical_rules.recommendation(get_db(), g.user, patient_id)
             if advice['context_id'] != request.args['from_context'] or advice['category'] == 'unknown':
-                return render_template('result.html', title='Рекомендация изменилась', message='Обновите карточку и проверьте исходные сведения.'), 409
+                return interface_response('result.html', title='Рекомендация изменилась', message='Обновите карточку и проверьте исходные сведения.'), 409
             alternative = 'Допустимая альтернатива по КР — врач-психотерапевт.' if advice.get('alternative') == 'psychotherapist' else ''
             values = {'kind': 'referral', 'content': advice['reason'] + ' ' + alternative,
                       'basis': advice['source_url'] + ' · ' + advice['source_section'],
@@ -633,7 +611,7 @@ def create_app(database=None):
                       'route_severity': advice['basis'], 'route_severity_status': 'unknown',
                       'route_evidence': advice['source_url'] + ' · ' + advice['source_section'] + ' · ' + advice['reason'],
                       'route_unavailable': 'Не ожидать помощи через демо: использовать доступный обычный канал связи с врачом или обратиться в медицинскую организацию.'}
-        return render_template('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
+        return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
@@ -647,7 +625,7 @@ def create_app(database=None):
         try:
             decisions.confirm(get_db(), g.user, patient_id, proposal_id, request.form)
         except decisions.DecisionError as error:
-            return render_template('result.html', title='Решение не подтверждено', message=str(error)), error.status
+            return interface_response('result.html', title='Решение не подтверждено', message=str(error)), error.status
         return redirect(url_for('decisions_page', patient_id=patient_id)+'#decision-'+proposal_id, code=303)
 
     @app.get('/api/patients/<patient_id>/decisions')

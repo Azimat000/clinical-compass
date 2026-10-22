@@ -13,8 +13,8 @@ PASSWORD_HASH = generate_password_hash(PASSWORD, method='scrypt:32768:8:1')
 
 
 def csrf(client, path='/'):
-    page = client.get(path, follow_redirects=True).get_data(as_text=True)
-    return re.search(r'name="csrf" value="([^"]+)"', page).group(1)
+    response = client.get(path, follow_redirects=True)
+    return response.get_json()['csrf']
 
 
 def login(client, uid, password=PASSWORD):
@@ -53,7 +53,7 @@ class AccessTests(unittest.TestCase):
     def offer(self, uid='doc-a', pid='D01'):
         r = self.post(uid, '/invitations', {'patient_id': pid})
         self.assertEqual(200, r.status_code)
-        return re.search(r'readonly value="([^"]+)"', r.get_data(as_text=True)).group(1)
+        return r.get_json()['invitation']
 
     def link(self, doc='doc-a', pat='pat-a', pid='D01'):
         token = self.offer(doc, pid)

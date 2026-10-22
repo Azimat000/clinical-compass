@@ -1,8 +1,0 @@
-{% macro visit_fact(code, definition) %}<fieldset><legend>{{ definition[1] }}</legend>
-<div class="form-grid"><label>Состояние: {{ definition[1]|lower }}<select name="{{ code }}_status">{% for key,label in statuses.items() %}<option value="{{ key }}" {% if values.get(code+'_status','unknown')==key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
-<label>Источник: {{ definition[1]|lower }}<select name="{{ code }}_source">{% for key,label in sources.items() %}<option value="{{ key }}" {% if values.get(code+'_source','patient')==key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
-<label>Дата сведений: {{ definition[1]|lower }}<input type="date" min="1900-01-01" max="{{ today }}" name="{{ code }}_on" value="{{ values.get(code+'_on','') }}"></label></div>
-<label>Описание: {{ definition[1]|lower }}<textarea name="{{ code }}_text" maxlength="2000" rows="2">{{ values.get(code+'_text','') }}</textarea></label>
-<label>Основание, источник расхождения: {{ definition[1]|lower }}<textarea name="{{ code }}_basis" maxlength="1000" rows="2">{{ values.get(code+'_basis','') }}</textarea></label>
-{% if code in ['safety','acute'] %}<p class="notice warning">Сведения требуют отдельной оценки врача. Это свободная запись врача, не утверждённая процедура вопросов и не автоматическая оценка срочности. Нет ответа ≠ нет риска.</p>{% endif %}
-</fieldset>{% endmacro %}

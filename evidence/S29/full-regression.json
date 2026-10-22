@@ -1,0 +1,708 @@
+{
+  "tests_run": 348,
+  "successful_tests": [
+    "test_access.AccessTests.test_account_changed_during_password_check_never_creates_session",
+    "test_access.AccessTests.test_expired_revoked_disabled_doctor_and_wrong_owner_invites",
+    "test_access.AccessTests.test_failed_audit_rolls_back_session_rotation_and_refund",
+    "test_access.AccessTests.test_invitation_bound_to_recipient_single_use_competing_offer_invalidated",
+    "test_access.AccessTests.test_login_csrf_replay_and_authenticated_csrf",
+    "test_access.AccessTests.test_login_throttle_persistent_and_generic_errors",
+    "test_access.AccessTests.test_no_anonymous_cards_or_api",
+    "test_access.AccessTests.test_recipient_reassignment_and_future_relationship_do_not_grant_access",
+    "test_access.AccessTests.test_secure_configuration_and_no_secrets_in_audit",
+    "test_access.AccessTests.test_seed_accounts_random_idempotent_and_no_implicit_relationship",
+    "test_access.AccessTests.test_sessions_hash_cookie_rotation_logout_expiry_idle_and_disabled",
+    "test_access.AccessTests.test_successful_auth_never_refunds_a_replaced_limit_window",
+    "test_access.AccessTests.test_successful_shared_ip_logins_refund_only_their_own_attempt",
+    "test_ages.AgeTests.test_age_review_blocks_previously_prepared_decision",
+    "test_ages.AgeTests.test_eighteenth_birthday_and_one_day_before",
+    "test_ages.AgeTests.test_even_compatible_new_age_information_requires_new_offer",
+    "test_ages.AgeTests.test_integer_age_observation_date_range",
+    "test_ages.AgeTests.test_invalid_review_and_stale_source_snapshot",
+    "test_ages.AgeTests.test_new_patient_information_cannot_reuse_resolution_or_old_offer",
+    "test_ages.AgeTests.test_original_birthdate_probe_and_all_historical_sources",
+    "test_ages.AgeTests.test_patient_cannot_clear_conflict_and_access_csrf",
+    "test_ages.AgeTests.test_underage_review_never_grants_adulthood_and_source_changes_rechecked",
+    "test_ages.AgeTests.test_upgrade_preserves_every_s08a_table_and_row",
+    "test_assessments.AssessmentsTests.test_age_unknown_conflicting_underage_and_fresh_explicit_source",
+    "test_assessments.AssessmentsTests.test_historical_latest_age_conflict_is_not_silently_ignored",
+    "test_assessments.AssessmentsTests.test_invalid_answers_duplicate_fields_versions_expiry_and_retirement",
+    "test_assessments.AssessmentsTests.test_manual_reference_vectors_and_every_missing_position",
+    "test_assessments.AssessmentsTests.test_migration_from_s06_preserves_every_prior_row",
+    "test_assessments.AssessmentsTests.test_new_age_conflict_after_assignment_is_rechecked_on_submission",
+    "test_assessments.AssessmentsTests.test_patient_cannot_choose_a_task_or_other_role_and_csrf_is_enforced",
+    "test_assessments.AssessmentsTests.test_retry_atomicity_immutable_results_and_no_fake_expert",
+    "test_backup.BackupTests.test_concurrent_writer_backup_is_a_consistent_snapshot",
+    "test_backup.BackupTests.test_foreign_key_violation_refused_before_destination_creation",
+    "test_backup.BackupTests.test_manifest_counts_describe_snapshot_not_later_source",
+    "test_backup.BackupTests.test_missing_corrupt_tampered_and_symlink_refused",
+    "test_backup.BackupTests.test_snapshot_restore_and_no_overwrite",
+    "test_clinical_rules.ClinicalRuleTests.test_age_18_19_unknown_conflicting_and_all_source_intersection",
+    "test_clinical_rules.ClinicalRuleTests.test_age_range_crossing_boundary_does_not_choose_adult",
+    "test_clinical_rules.ClinicalRuleTests.test_append_only_and_transaction_requirement",
+    "test_clinical_rules.ClinicalRuleTests.test_context_idempotency_conflict_and_role_current_authorization",
+    "test_clinical_rules.ClinicalRuleTests.test_context_rx_denied_unknown_conflicting_missing_and_stale_historical_report",
+    "test_clinical_rules.ClinicalRuleTests.test_context_transaction_rolls_back_and_event_failure_rolls_back_entire_report",
+    "test_clinical_rules.ClinicalRuleTests.test_disabled_doctor_and_ended_relationship_preserve_events_and_context",
+    "test_clinical_rules.ClinicalRuleTests.test_each_of_four_source_reactions_creates_event_with_complete_evidence",
+    "test_clinical_rules.ClinicalRuleTests.test_legacy_reports_and_non_synthetic_case_never_activate_rule",
+    "test_clinical_rules.ClinicalRuleTests.test_reaction_unknown_conflict_negative_and_positive_with_uncertainty",
+    "test_clinical_rules.ClinicalRuleTests.test_record_retry_atomic_rollback_and_critical_consumer",
+    "test_clinical_rules.ClinicalRuleTests.test_referral_mandatory_desirable_alternative_unknown_and_age",
+    "test_clinical_rules.ClinicalRuleTests.test_source_hash_and_release_fail_closed_and_fingerprint",
+    "test_clinical_rules.ClinicalRuleTests.test_three_required_facts_missing_denied_conflicting",
+    "test_clinical_rules.ClinicalRuleTests.test_validation_duplicates_and_required_prescription_basis",
+    "test_clinical_workflow.ClinicalWorkflowTests.test_context_auth_csrf_and_changed_source_fail_closed",
+    "test_communication.CommunicationTests.test_atomic_rollback_concurrency_immutability",
+    "test_communication.CommunicationTests.test_intermediate_plan_stop_stays_excluded_after_another_change",
+    "test_communication.CommunicationTests.test_isolation_csrf_link_expiry_and_context",
+    "test_communication.CommunicationTests.test_new_accompaniment_information_invalidates_pending_decision",
+    "test_communication.CommunicationTests.test_plan_confirmation_change_and_schedule_idempotency",
+    "test_critical_delivery.CriticalDeliveryTests.test_console_refuses_redirected_output",
+    "test_critical_delivery.CriticalDeliveryTests.test_disabled_unassigned_and_ended_relationship_no_reserve_retargeting",
+    "test_critical_delivery.CriticalDeliveryTests.test_handler_failure_rollback_and_retry",
+    "test_critical_delivery.CriticalDeliveryTests.test_native_dialog_receipt_requires_exact_button_and_no_timeout",
+    "test_critical_delivery.CriticalDeliveryTests.test_receipt_read_accept_reaction_are_ordered_idempotent_no_medical_mutation",
+    "test_critical_delivery.CriticalDeliveryTests.test_reserve_five_failures_retained_and_log_immutable",
+    "test_critical_delivery.CriticalDeliveryTests.test_reserve_timeout_retry_lease_recovery_and_no_duplicate_effect",
+    "test_decisions.DecisionTests.test_concurrent_approvals_cannot_overwrite_new_plan",
+    "test_decisions.DecisionTests.test_decision_auth_csrf_other_patient_and_expired_link",
+    "test_decisions.DecisionTests.test_disabled_doctor_rechecked_inside_transaction",
+    "test_decisions.DecisionTests.test_new_report_including_backdated_unknown_blocks_old_then_new_revision_works",
+    "test_decisions.DecisionTests.test_other_plan_changes_invalidate_parallel_project",
+    "test_decisions.DecisionTests.test_reject_never_applies_and_is_hidden_from_patient",
+    "test_decisions.DecisionTests.test_retry_validation_wrong_version_and_required_review",
+    "test_decisions.DecisionTests.test_source_age_date_and_catalog_change_block_confirmation",
+    "test_extraction.ExtractionTests.test_access_csrf_ended_pair_and_other_import_review",
+    "test_extraction.ExtractionTests.test_literal_spans_negation_conflicts_dates_and_high_risk_uncertainty",
+    "test_extraction.ExtractionTests.test_new_import_and_review_require_rereview_of_pending_decision",
+    "test_extraction.ExtractionTests.test_unsupported_input_limits_and_atomic_rollback",
+    "test_extraction_v2.LiteralV2Tests.test_adversarial_unknown_subject_and_negated_cancellation",
+    "test_extraction_v2.LiteralV2Tests.test_cancellations_and_non_due_tasks_are_source_facts_only",
+    "test_extraction_v2.LiteralV2Tests.test_common_scope_rules_apply_to_every_boolean_and_risk_branch",
+    "test_extraction_v2.LiteralV2Tests.test_corrections_unknown_forms_and_ledger_do_not_create_known_conflicts",
+    "test_extraction_v2.LiteralV2Tests.test_different_drugs_or_historical_doses_are_not_current_conflicts",
+    "test_extraction_v2.LiteralV2Tests.test_disclosed_jury_temporal_and_inflection_regressions",
+    "test_extraction_v2.LiteralV2Tests.test_explicit_nonconfirmation_family_morphology_and_absence",
+    "test_extraction_v2.LiteralV2Tests.test_long_input_is_bounded_and_has_exact_quotes",
+    "test_extraction_v2.LiteralV2Tests.test_negation_scope_is_not_shared_across_objects_or_sentences",
+    "test_extraction_v2.LiteralV2Tests.test_question_unknown_and_own_historical_speech_are_not_current_alarms",
+    "test_extraction_v2.LiteralV2Tests.test_third_party_age_dose_and_medication_are_not_patient_values",
+    "test_extraction_v2.LiteralV2Tests.test_unicode_offsets_date_roles_and_invalid_date",
+    "test_extraction_v2.LiteralV2Tests.test_units_do_not_match_years_or_word_prefixes",
+    "test_first_visits.FirstVisitTests.test_new_age_sources_block_dass_and_invalidate_prior_review",
+    "test_first_visits.FirstVisitTests.test_new_visit_invalidates_age_reconciliation_and_outstanding_dass",
+    "test_first_visits.FirstVisitTests.test_new_visit_invalidates_existing_plan_confirmation",
+    "test_first_visits.FirstVisitTests.test_upgrade_preserves_previous_rows_and_checksums",
+    "test_follow_up.FollowUpTests.test_assessments_on_distinct_days_keep_their_own_period",
+    "test_foundation.FoundationTests.test_atomic_data_and_event_rollback",
+    "test_foundation.FoundationTests.test_catalog_extension_keeps_versions_and_blocks_incomplete_scores",
+    "test_foundation.FoundationTests.test_confirmation_requires_doctor_relationship_version_and_approval",
+    "test_foundation.FoundationTests.test_event_retry_rolls_back_partial_handler_and_recovers",
+    "test_foundation.FoundationTests.test_immutable_migrations_and_atomic_failure",
+    "test_foundation.FoundationTests.test_model_guards_unknowns_foreign_keys_and_audit",
+    "test_foundation.FoundationTests.test_schema_extension_preserves_existing_data",
+    "test_foundation.FoundationTests.test_search_filter_and_index_update",
+    "test_foundation.FoundationTests.test_seed_is_idempotent_and_survives_connection_restart",
+    "test_foundation.FoundationTests.test_unknown_topic_goes_to_dead_queue",
+    "test_interface_removed.InterfaceRemovedTests.test_all_five_actions_still_require_fresh_physician_confirmation",
+    "test_interface_removed.InterfaceRemovedTests.test_assessments_keep_scoring_private_and_unknown_age_blocks_assignment",
+    "test_interface_removed.InterfaceRemovedTests.test_assets_and_templates_are_absent_and_not_served",
+    "test_interface_removed.InterfaceRemovedTests.test_existing_apis_and_foreign_access_remain_protected",
+    "test_interface_removed.InterfaceRemovedTests.test_login_logout_and_csrf_work_without_html",
+    "test_interface_removed.InterfaceRemovedTests.test_private_draft_send_retry_and_restart_preserve_records",
+    "test_interface_removed.InterfaceRemovedTests.test_removed_pages_explain_status_without_disclosing_view_context",
+    "test_interface_removed.InterfaceRemovedTests.test_server_failure_keeps_safe_errors_and_atomic_rollback",
+    "test_notifications.NotificationTests.test_atomic_enqueue_failure_and_request_and_processing_duplicates",
+    "test_notifications.NotificationTests.test_concurrent_same_request_serializes_to_one_report_event_notification",
+    "test_notifications.NotificationTests.test_pending_old_or_future_link_and_disabled_doctor_cannot_deliver",
+    "test_notifications.NotificationTests.test_role_csrf_foreign_and_ended_or_replaced_relationship",
+    "test_notifications.NotificationTests.test_upgrade_s09_database_preserves_every_existing_table_row",
+    "test_records.RecordsTests.test_atomic_failure_rolls_back_report_observations_event_audit",
+    "test_records.RecordsTests.test_migration_preserves_s05_and_prior_migrations_are_unchanged",
+    "test_records.RecordsTests.test_retry_idempotency_changed_body_and_distinct_observation_dates",
+    "test_records.RecordsTests.test_visit_and_report_disagreements_same_day_preserved_not_merged",
+    "test_report_drafts.ReportDraftTests.test_changed_draft_in_other_tab_blocks_stale_final_send",
+    "test_report_drafts.ReportDraftTests.test_concurrent_tabs_cannot_silently_replace_one_another",
+    "test_report_drafts.ReportDraftTests.test_delete_clear_retry_and_tombstone_reject_old_request",
+    "test_report_drafts.ReportDraftTests.test_lost_save_response_identical_retry_and_stale_edit",
+    "test_report_drafts.ReportDraftTests.test_mid_send_failure_rolls_back_record_and_keeps_draft",
+    "test_report_drafts.ReportDraftTests.test_save_does_not_require_doctor_relationship",
+    "test_report_drafts.ReportDraftTests.test_send_clears_content_and_late_autosave_never_resurrects_it",
+    "test_retrieval_corpus.CitationCorpusTests.test_all_sources_removed",
+    "test_retrieval_corpus.CitationCorpusTests.test_archive_cannot_copy_unknown_rights",
+    "test_retrieval_corpus.CitationCorpusTests.test_archive_never_current",
+    "test_retrieval_corpus.CitationCorpusTests.test_attribution_purpose_source_context_required",
+    "test_retrieval_corpus.CitationCorpusTests.test_changed_fact_with_updated_hash_but_old_record_rejected",
+    "test_retrieval_corpus.CitationCorpusTests.test_changed_or_missing_review_blocks_snapshot",
+    "test_retrieval_corpus.CitationCorpusTests.test_corrupt_manifest",
+    "test_retrieval_corpus.CitationCorpusTests.test_corrupt_stored_blob",
+    "test_retrieval_corpus.CitationCorpusTests.test_duplicate_bytes_different_id",
+    "test_retrieval_corpus.CitationCorpusTests.test_duplicate_id_with_changed_content",
+    "test_retrieval_corpus.CitationCorpusTests.test_expansion_with_updated_sha_but_old_selection_rejected",
+    "test_retrieval_corpus.CitationCorpusTests.test_extra_blob_and_no_silent_overwrite",
+    "test_retrieval_corpus.CitationCorpusTests.test_facts_only_mode_never_claims_verbatim_permission",
+    "test_retrieval_corpus.CitationCorpusTests.test_full_pdf_not_authorized_by_citation_review",
+    "test_retrieval_corpus.CitationCorpusTests.test_future_review",
+    "test_retrieval_corpus.CitationCorpusTests.test_index_projection_contains_only_authored_paraphrase",
+    "test_retrieval_corpus.CitationCorpusTests.test_invalid_manifest_json_types_fail_closed",
+    "test_retrieval_corpus.CitationCorpusTests.test_later_repeat_before_expiry_same_version",
+    "test_retrieval_corpus.CitationCorpusTests.test_lifecycle_all_metadata_rechecked",
+    "test_retrieval_corpus.CitationCorpusTests.test_malformed_document_type_quarantined",
+    "test_retrieval_corpus.CitationCorpusTests.test_malformed_rights_fail_closed",
+    "test_retrieval_corpus.CitationCorpusTests.test_manufacturer_cannot_replace_official_grls",
+    "test_retrieval_corpus.CitationCorpusTests.test_missing_or_changed_rights_report_blocks_current_snapshot",
+    "test_retrieval_corpus.CitationCorpusTests.test_missing_original",
+    "test_retrieval_corpus.CitationCorpusTests.test_modified_bytes",
+    "test_retrieval_corpus.CitationCorpusTests.test_more_than_one_quote_per_source_requires_policy_revision",
+    "test_retrieval_corpus.CitationCorpusTests.test_no_network_even_for_official_source_url",
+    "test_retrieval_corpus.CitationCorpusTests.test_only_json_copied_no_full_original",
+    "test_retrieval_corpus.CitationCorpusTests.test_path_traversal_and_url",
+    "test_retrieval_corpus.CitationCorpusTests.test_pdf_header",
+    "test_retrieval_corpus.CitationCorpusTests.test_proof_bound_to_bytes_type_and_version",
+    "test_retrieval_corpus.CitationCorpusTests.test_publish_rejects_invalid_blob_before_write",
+    "test_retrieval_corpus.CitationCorpusTests.test_publish_rejects_version_traversal_before_write",
+    "test_retrieval_corpus.CitationCorpusTests.test_quotation_expansion_without_new_review_rejected",
+    "test_retrieval_corpus.CitationCorpusTests.test_removed_source",
+    "test_retrieval_corpus.CitationCorpusTests.test_review_evidence_paths_fail_closed",
+    "test_retrieval_corpus.CitationCorpusTests.test_review_expiry_at_exact_boundary",
+    "test_retrieval_corpus.CitationCorpusTests.test_revocation_and_official_status",
+    "test_retrieval_corpus.CitationCorpusTests.test_rights_lost_after_import",
+    "test_retrieval_corpus.CitationCorpusTests.test_rights_require_each_scope",
+    "test_retrieval_corpus.CitationCorpusTests.test_symlink_destination",
+    "test_retrieval_corpus.CitationCorpusTests.test_symlink_snapshot",
+    "test_retrieval_corpus.CitationCorpusTests.test_symlink_source",
+    "test_retrieval_corpus.CitationCorpusTests.test_timezone_required",
+    "test_retrieval_corpus.CitationCorpusTests.test_unknown_blob_format_rejected",
+    "test_retrieval_corpus.CitationCorpusTests.test_unknown_disposition_rejected_even_with_consistent_hash",
+    "test_retrieval_corpus.CitationCorpusTests.test_unknown_metadata",
+    "test_retrieval_corpus.CitationCorpusTests.test_valid_import_and_repeat",
+    "test_retrieval_corpus.CitationCorpusTests.test_version_changes_with_policy_or_time",
+    "test_retrieval_corpus.CitationCorpusTests.test_wrong_type",
+    "test_retrieval_corpus.CorpusTests.test_all_sources_removed",
+    "test_retrieval_corpus.CorpusTests.test_archive_cannot_copy_unknown_rights",
+    "test_retrieval_corpus.CorpusTests.test_archive_never_current",
+    "test_retrieval_corpus.CorpusTests.test_changed_or_missing_review_blocks_snapshot",
+    "test_retrieval_corpus.CorpusTests.test_corrupt_manifest",
+    "test_retrieval_corpus.CorpusTests.test_corrupt_stored_blob",
+    "test_retrieval_corpus.CorpusTests.test_duplicate_bytes_different_id",
+    "test_retrieval_corpus.CorpusTests.test_duplicate_id_with_changed_content",
+    "test_retrieval_corpus.CorpusTests.test_extra_blob_and_no_silent_overwrite",
+    "test_retrieval_corpus.CorpusTests.test_future_review",
+    "test_retrieval_corpus.CorpusTests.test_invalid_manifest_json_types_fail_closed",
+    "test_retrieval_corpus.CorpusTests.test_later_repeat_before_expiry_same_version",
+    "test_retrieval_corpus.CorpusTests.test_lifecycle_all_metadata_rechecked",
+    "test_retrieval_corpus.CorpusTests.test_malformed_document_type_quarantined",
+    "test_retrieval_corpus.CorpusTests.test_malformed_rights_fail_closed",
+    "test_retrieval_corpus.CorpusTests.test_manufacturer_cannot_replace_official_grls",
+    "test_retrieval_corpus.CorpusTests.test_missing_original",
+    "test_retrieval_corpus.CorpusTests.test_modified_bytes",
+    "test_retrieval_corpus.CorpusTests.test_no_network_even_for_official_source_url",
+    "test_retrieval_corpus.CorpusTests.test_path_traversal_and_url",
+    "test_retrieval_corpus.CorpusTests.test_pdf_header",
+    "test_retrieval_corpus.CorpusTests.test_proof_bound_to_bytes_type_and_version",
+    "test_retrieval_corpus.CorpusTests.test_publish_rejects_invalid_blob_before_write",
+    "test_retrieval_corpus.CorpusTests.test_publish_rejects_version_traversal_before_write",
+    "test_retrieval_corpus.CorpusTests.test_removed_source",
+    "test_retrieval_corpus.CorpusTests.test_review_evidence_paths_fail_closed",
+    "test_retrieval_corpus.CorpusTests.test_review_expiry_at_exact_boundary",
+    "test_retrieval_corpus.CorpusTests.test_revocation_and_official_status",
+    "test_retrieval_corpus.CorpusTests.test_rights_lost_after_import",
+    "test_retrieval_corpus.CorpusTests.test_rights_require_each_scope",
+    "test_retrieval_corpus.CorpusTests.test_symlink_destination",
+    "test_retrieval_corpus.CorpusTests.test_symlink_snapshot",
+    "test_retrieval_corpus.CorpusTests.test_symlink_source",
+    "test_retrieval_corpus.CorpusTests.test_timezone_required",
+    "test_retrieval_corpus.CorpusTests.test_unknown_disposition_rejected_even_with_consistent_hash",
+    "test_retrieval_corpus.CorpusTests.test_unknown_metadata",
+    "test_retrieval_corpus.CorpusTests.test_valid_import_and_repeat",
+    "test_retrieval_corpus.CorpusTests.test_version_changes_with_policy_or_time",
+    "test_retrieval_corpus.CorpusTests.test_wrong_type",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_guideline_cannot_inherit_DASS_resource_binding_or_quote",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_identity_type_url_and_storage_are_not_general_permissions",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_only_two_explicit_official_facts_admitted_without_originals",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_rehashed_unverified_TLS_report_still_rejected",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_revoked_removed_and_cross_domain_pins_refused",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_source_expiry_is_not_renewed_by_receipt",
+    "test_retrieval_guideline_receipts.GuidelineReceiptTests.test_tampered_receipt_report_and_artifact_withdraw_admission",
+    "test_retrieval_packages.PackageTests.test_bad_replacement_quarantines_without_old_source_fallback",
+    "test_retrieval_packages.PackageTests.test_explicit_replacement_reuses_original_and_preserves_other_sources",
+    "test_retrieval_packages.PackageTests.test_fact_collection_larger_than_initial_five_with_new_review",
+    "test_retrieval_packages.PackageTests.test_failure_in_staging_never_exposes_partial_version",
+    "test_retrieval_packages.PackageTests.test_four_new_sources_repeat_and_no_network",
+    "test_retrieval_packages.PackageTests.test_implicit_or_stale_replacement_is_rejected",
+    "test_retrieval_packages.PackageTests.test_official_GRLS_gov_host_keeps_full_admission_checks",
+    "test_retrieval_packages.PackageTests.test_package_root_and_path_escape_rejected",
+    "test_retrieval_packages.PackageTests.test_review_and_expiry_not_bypassed_by_registration",
+    "test_retrieval_packages.PackageTests.test_symlink_registry_rejected",
+    "test_retrieval_packages.PackageTests.test_tampered_missing_and_symlink_package_files",
+    "test_retrieval_packages.PackageTests.test_two_registered_packages_and_unregistered_rejection",
+    "test_retrieval_packages.PackageTests.test_unknown_rights_quarantine_without_damage_to_old_snapshot",
+    "test_retrieval_primary.PrimaryTests.test_exact_six_receipts_export_only_authored_facts_without_network",
+    "test_retrieval_primary.PrimaryTests.test_html_sections_have_no_invented_pdf_page_and_new_sources_no_quotes",
+    "test_retrieval_primary.PrimaryTests.test_receipt_cannot_escape_registered_root_or_be_symlink",
+    "test_retrieval_primary.PrimaryTests.test_receipt_report_local_form_and_policy_tamper_revoke_after_snapshot",
+    "test_retrieval_primary.PrimaryTests.test_rights_expiry_and_removed_pin_fail_closed",
+    "test_retrieval_primary.PrimaryTests.test_tls_or_resource_match_not_verified_is_not_official_admission",
+    "test_retrieval_primary.PrimaryTests.test_type_identity_url_storage_version_sha_and_artifact_are_pinned",
+    "test_routing.RoutingTests.test_adult_reference_never_silently_applies_to_child_unknown_or_conflict",
+    "test_routing.RoutingTests.test_inactive_critical_rules_never_create_alerts_or_outbox",
+    "test_routing.RoutingTests.test_missing_data_not_negative_or_planned_and_confirmation_requires_choice",
+    "test_routing.RoutingTests.test_source_update_obsolete_legacy_draft_and_missing_access",
+    "test_routing.RoutingTests.test_validation_no_made_up_categories_sources_or_empty_rationale",
+    "test_s13.CriticalFilterTests.test_pending_before_delivery_then_reaction_and_ended_relationship",
+    "test_s13.SearchTests.test_all_search_sources_literals_filters_and_pair_isolation",
+    "test_s26b.DoctorWorkspaceTests.test_patient_role_keeps_own_card_without_doctor_header",
+    "test_s26c.PatientWorkspaceTests.test_patient_cannot_use_doctor_screens_and_doctor_card_is_not_the_patient_one",
+    "test_s26d.PatientSendTests.test_changed_retry_returns_conflict_and_preserves_original",
+    "test_s26d.PatientSendTests.test_concurrent_repeat_commits_exactly_one_entry_and_notification",
+    "test_s26d.PatientSendTests.test_csrf_and_roles_still_reject_json_sends",
+    "test_s26d.PatientSendTests.test_validation_failure_is_json_and_nothing_is_written",
+    "test_security.SecurityTests.test_all_five_actions_require_doctor_and_fresh_review",
+    "test_security.SecurityTests.test_all_patient_routes_deny_foreign_patient_even_with_valid_csrf",
+    "test_security.SecurityTests.test_duplicate_security_and_clinical_fields_are_rejected",
+    "test_security.SecurityTests.test_every_mutation_requires_session_and_csrf",
+    "test_security.SecurityTests.test_mid_write_fault_rolls_back_and_original_retry_succeeds",
+    "test_security.SecurityTests.test_non_ascii_and_oversized_security_tokens_are_rejected",
+    "test_security.SecurityTests.test_private_files_and_headers_hosts_forwarding_and_oversized_input",
+    "test_security.SecurityTests.test_unexpected_exception_hides_text_from_response_and_log",
+    "test_therapy.TherapyTests.test_each_synthetic_case_can_document_consideration_without_automatic_treatment",
+    "test_therapy.TherapyTests.test_every_unknown_conflicting_or_concern_blocks_completed_review",
+    "test_therapy.TherapyTests.test_full_physician_review_still_does_not_establish_suitability",
+    "test_therapy.TherapyTests.test_missing_version_notes_and_invalid_states_are_rejected",
+    "test_therapy.TherapyTests.test_negative_consideration_retains_specific_risk",
+    "test_therapy.TherapyTests.test_retry_cannot_replace_review_and_source_change_invalidates_project",
+    "test_therapy.TherapyTests.test_unknowns_saved_as_unknown_not_drug_clearance",
+    "test_walkthrough_demo.WalkthroughTests.test_refuse_existing_output_and_same_source",
+    "test_walkthrough_demo.WalkthroughTests.test_refuse_non_synthetic_missing_doctor_and_repeated_seed"
+  ],
+  "failures": [
+    {
+      "test": "test_ended_relationship_immediately_revokes_doctor_access (test_access.AccessTests.test_ended_relationship_immediately_revokes_doctor_access)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_access.py\", line 148, in test_ended_relationship_immediately_revokes_doctor_access\n    self.assertEqual(200, self.clients['pat-a'].get('/demo/D01').status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_forged_cookie_and_hidden_patient_search (test_access.AccessTests.test_forged_cookie_and_hidden_patient_search)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_access.py\", line 273, in test_forged_cookie_and_hidden_patient_search\n    self.assertIn('Пациенты не найдены', html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Пациенты не найдены' not found in '{\"csrf\":\"V9KGa7zVS9xb97D-2q27oUTvW9b1UsRrmLrddhtrV6E\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_patient_document_reports_and_actions_access_matrix (test_access.AccessTests.test_patient_document_reports_and_actions_access_matrix)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_access.py\", line 139, in test_patient_document_reports_and_actions_access_matrix\n    self.assertIn('Демо 01' if uid.endswith('a') else 'Демо 02', html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Демо 01' not found in '{\"csrf\":\"Igx35luvcL4UgZxDUuKeR8nXIT0Qbi7Qc-R0cmCpc24\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_roles_invitation_pair_and_shared_technical_report_after_restart (test_access.AccessTests.test_roles_invitation_pair_and_shared_technical_report_after_restart)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_access.py\", line 79, in test_roles_invitation_pair_and_shared_technical_report_after_restart\n    self.assertIn(report['id'], self.clients[uid].get('/demo/D01').get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'cdc03da7aeb5dc1db32c2b1e577e20fb' not found in '{\"csrf\":\"1QveyEqxSkNS1GotgrpKygX6G7xcrkLxYnZymvx0epE\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_explicit_doctor_resolution_preserves_original_conflict_and_history (test_ages.AgeTests.test_explicit_doctor_resolution_preserves_original_conflict_and_history)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_ages.py\", line 92, in test_explicit_doctor_resolution_preserves_original_conflict_and_history\n    self.assertIn(row['id'],html);self.assertIn(review['basis'],html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\nAssertionError: '926f0d4c2a5a850b4cd37a27a1778bff' not found in '{\"csrf\":\"uIqYAGy7TI4IvV0F-PsppahGYvssToKEjXCPfFomQrk\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_retries_atomic_failure_escaping_and_decision_snapshot (test_ages.AgeTests.test_retries_atomic_failure_escaping_and_decision_snapshot)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_ages.py\", line 150, in test_retries_atomic_failure_escaping_and_decision_snapshot\n    self.assertIn('&lt;script&gt;test',html);self.assertNotIn('<script>test',html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;test' not found in '{\"csrf\":\"MOV9EKnBXA-xfpHOKKf79XcsA8M3IGTG9vVfqiRDREw\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_full_patient_submission_doctor_results_and_patient_receipt_only (test_assessments.AssessmentsTests.test_full_patient_submission_doctor_results_and_patient_receipt_only)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 90, in test_full_patient_submission_doctor_results_and_patient_receipt_only\n    self.assertIn(self.form['items'][20],page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Я чувствовал, что не стоит жить дальше.' not found in '{\"csrf\":\"pxyP8he0MxUugB87hCrAQoBtH9CDwtrvVF7fpQwOTWU\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero (test_assessments.AssessmentsTests.test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 123, in test_incomplete_is_saved_without_any_subscale_and_gaps_are_not_zero\n    self.assertIn('Ни одна сумма не рассчитана',self.clients['doc-a'].get('/demo/D01').get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Ни одна сумма не рассчитана' not found in '{\"csrf\":\"p8xEo2YzWERH1Ag2j93JZc7jIqtt4Ip0PvAza0Xe5iE\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_own_receipt_survives_relationship_end_without_reopening_submission (test_assessments.AssessmentsTests.test_own_receipt_survives_relationship_end_without_reopening_submission)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 183, in test_own_receipt_survives_relationship_end_without_reopening_submission\n    self.assertIn('Анкета отправлена врачу',response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Анкета отправлена врачу' not found in '{\"received_at\":\"2026-10-22T12:31:33.451759+00:00\",\"request_id\":\"caf99ec60b2c635a16276e2a50b718d8\",\"status\":\"submitted\"}\\n'\n"
+    },
+    {
+      "test": "test_patient_sees_actual_deadline_in_moscow_including_error_page (test_assessments.AssessmentsTests.test_patient_sees_actual_deadline_in_moscow_including_error_page)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 61, in test_patient_sees_actual_deadline_in_moscow_including_error_page\n    self.assertIn(expected['deadline_label'], html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '23.10.2026 00:00 МСК' not found in '{\"csrf\":\"u-6FG2ILR0hBjQcTL36s0GEKnS_Fu4LzY7LTyCb7qqA\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_source_provenance_xss_doctor_capture_and_restart (test_assessments.AssessmentsTests.test_source_provenance_xss_doctor_capture_and_restart)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 232, in test_source_provenance_xss_doctor_capture_and_restart\n    self.assertIn('&lt;script&gt;bad',page); self.assertNotIn('<script>bad',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;bad' not found in '{\"csrf\":\"i5pyl0x8l-5ZHx6ti2YvJqVv70dgMAMoAbIUjdM9gts\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_versions_are_separate_and_patient_diary_is_not_a_score (test_assessments.AssessmentsTests.test_versions_are_separate_and_patient_diary_is_not_a_score)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 260, in test_versions_are_separate_and_patient_diary_is_not_a_score\n    self.assertIn('История субъективного самочувствия',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'История субъективного самочувствия' not found in '{\"csrf\":\"E0YE7u4Kws0DkR4vutoQ1tfOAPa93jUdh7b2Cm0EKY8\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_withdrawn_source_disables_measurement_without_destroying_diary (test_assessments.AssessmentsTests.test_withdrawn_source_disables_measurement_without_destroying_diary)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_assessments.py\", line 245, in test_withdrawn_source_disables_measurement_without_destroying_diary\n    self.assertEqual(200,fresh.get('/demo/D01').status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_advice_prefill_two_categories_confirmation_and_stale_context (test_clinical_workflow.ClinicalWorkflowTests.test_advice_prefill_two_categories_confirmation_and_stale_context)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_clinical_workflow.py\", line 40, in test_advice_prefill_two_categories_confirmation_and_stale_context\n    self.assertEqual(200, response.status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_real_safety_event_survives_unavailable_recipient_and_routine_worker (test_clinical_workflow.ClinicalWorkflowTests.test_real_safety_event_survives_unavailable_recipient_and_routine_worker)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_clinical_workflow.py\", line 83, in test_real_safety_event_survives_unavailable_recipient_and_routine_worker\n    self.assertEqual(200, page.status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_all_eight_functions_connected_two_cabinets (test_communication.CommunicationTests.test_all_eight_functions_connected_two_cabinets)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_communication.py\", line 154, in test_all_eight_functions_connected_two_cabinets\n    self.assertIn('Вымышленное НЯ',html);self.assertIn('Хуже',html);self.assertIn('trend-dot',html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Вымышленное НЯ' not found in '{\"csrf\":\"h0W53Smlj7sdA_nZQGkc6_GLuRqm0IKMKp0diNhUbQY\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_bidirectional_receipts_retry_restart_and_escaping (test_communication.CommunicationTests.test_bidirectional_receipts_retry_restart_and_escaping)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_communication.py\", line 48, in test_bidirectional_receipts_retry_restart_and_escaping\n    self.assertEqual(200,getattr(self.clients['doc-a'],method)(self.url).status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_context_links_never_suppress_adverse_event (test_communication.CommunicationTests.test_context_links_never_suppress_adverse_event)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_communication.py\", line 131, in test_context_links_never_suppress_adverse_event\n    self.assertIn('#entry-'+entry,page);self.assertIn('#task-'+task['id'],page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '#entry-cbe2299aed51e9ffeea267749f567ada' not found in '{\"csrf\":\"X57hf_KoarQxdLv9nu8olEcsKf3CQVfGTJLY1LPFX1g\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_denominator_unknown_conflicts_corrections_and_future (test_communication.CommunicationTests.test_denominator_unknown_conflicts_corrections_and_future)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_communication.py\", line 90, in test_denominator_unknown_conflicts_corrections_and_future\n    self.assertIn('Уточнено',self.clients['pat-a'].get(self.url).get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Уточнено' not found in '{\"csrf\":\"3iqyKZPpLCM3WPbv0mBUg7WyIWjcXAplebIDIMXus2s\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_missing_report_never_becomes_missed_or_zero_percent (test_communication.CommunicationTests.test_missing_report_never_becomes_missed_or_zero_percent)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_communication.py\", line 198, in test_missing_report_never_becomes_missed_or_zero_percent\n    self.assertIn('не рассчитывается: знаменатель 0',self.clients['doc-a'].get(self.url).text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'не рассчитывается: знаменатель 0' not found in '{\"csrf\":\"JNJcZSqGplnQRCD1lrHxQY13oLyq4UbCnV-TNIuRSPA\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data (test_critical_delivery.CriticalDeliveryTests.test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_critical_delivery.py\", line 47, in test_http_auth_csrf_receipt_not_get_and_no_cross_patient_data\n    self.assertIn(eid,c.get('/critical').text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '7b7c829fff00d5366ba826737cf5aace' not found in '{\"csrf\":\"JACpwG0YeInjPZc_yuSWzEgIPD13L-S7sXratzHtui0\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal (test_decisions.DecisionTests.test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_decisions.py\", line 113, in test_age_boundaries_unknown_and_negative_indication_never_generate_medical_proposal\n    self.assertEqual(200,page.status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_five_actions_draft_separate_review_and_patient_projection (test_decisions.DecisionTests.test_five_actions_draft_separate_review_and_patient_projection)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_decisions.py\", line 63, in test_five_actions_draft_separate_review_and_patient_projection\n    self.assertIn('Подтверждено врачом',self.clients['pat-a'].get('/patients/D01/decisions').get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Подтверждено врачом' not found in '{\"csrf\":\"ogyM9NM8jMHRJeYP7jhQwmZ_9lnCdVrgUECN4_N7mOQ\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_rollbacks_immutability_restart_and_html_escaping (test_decisions.DecisionTests.test_rollbacks_immutability_restart_and_html_escaping)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_decisions.py\", line 171, in test_rollbacks_immutability_restart_and_html_escaping\n    self.assertIn('&lt;script&gt;',page);self.assertNotIn('<script>test()',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;' not found in '{\"csrf\":\"uRmx5Q_8IuH7vdRIietnln61pX4J5LwKsD6HTnsVgDg\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_import_retries_review_correction_add_reject_persistence_and_no_actions (test_extraction.ExtractionTests.test_import_retries_review_correction_add_reject_persistence_and_no_actions)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_extraction.py\", line 63, in test_import_retries_review_correction_add_reject_persistence_and_no_actions\n    self.assertEqual(200,page.status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_concurrent_stale_save_and_transaction_rollback (test_first_visits.FirstVisitTests.test_concurrent_stale_save_and_transaction_rollback)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 110, in test_concurrent_stale_save_and_transaction_rollback\n    self.assertIn('Два',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Два' not found in '{\"csrf\":\"uLdk5kVaD16sKIh81z_GjEpJHSu4ev5yYa29Lr7NGMw\",\"error\":\"Приём изменился или завершён. Откройте сохранённую версию; ваш ввод показан ниже.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_no_diagnosis_draft_retry_restart_revision_complete_without_action (test_first_visits.FirstVisitTests.test_no_diagnosis_draft_retry_restart_revision_complete_without_action)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 67, in test_no_diagnosis_draft_retry_restart_revision_complete_without_action\n    self.assertIn('Не хватает сил',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Не хватает сил' not found in '{\"csrf\":\"IhUFw5Ggf9mp3O5s7MYbNzsdFLEd3cJGb4CmvJ1zSC8\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_repeat_visit_and_exact_dass_results_remain_separate (test_first_visits.FirstVisitTests.test_repeat_visit_and_exact_dass_results_remain_separate)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 219, in test_repeat_visit_and_exact_dass_results_remain_separate\n    self.assertIn('Повторный приём',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Повторный приём' not found in '{\"csrf\":\"0KLwtp8_Lv4U1toH_8JoH8KCGZfw_BeFG440KkuiNpk\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_roles_csrf_other_patient_revocation_and_xss (test_first_visits.FirstVisitTests.test_roles_csrf_other_patient_revocation_and_xss)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 127, in test_roles_csrf_other_patient_revocation_and_xss\n    self.assertIn('&lt;script&gt;',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;' not found in '{\"csrf\":\"qerW34lgKezy_M6CdjnD4eHCRHHF7yDp1OMDNkeCbRs\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_sources_dates_unknown_denial_conflict_and_summary_sections (test_first_visits.FirstVisitTests.test_sources_dates_unknown_denial_conflict_and_summary_sections)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 95, in test_sources_dates_unknown_denial_conflict_and_summary_sections\n    self.assertIn(label,page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: 'Жалобы и сведения с источниками' not found in '{\"csrf\":\"8-aopM2a5djhhVIxsOVWQWUIouH9n_hQPkufoW-Vns8\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'observed_on': '2099-01-01'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Дата наблюдения должна быть с 1900 года и не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'visit_kind': 'diagnosis'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Выберите первый или повторный приём.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'base_revision': 'bad'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Обновите версию приёма.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'request_key': 'bad'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Обновите форму перед сохранением.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'not_collected': ''})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Запишите жалобы либо отметьте, что сведения пока не собраны.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'age_status': 'known', 'age_years': '18'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Для возраста выберите источник; известные или противоречивые сведения требуют основания.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'age_status': 'unknown', 'age_years': '18'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Неизвестный возраст не должен содержать значения.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'safety_status': 'known'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Сведения о безопасности: запись врача: при наличии или противоречии нужен текст; для неизвестного или отрицания оставьте описание пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'safety_status': 'denied', 'safety_text': 'text'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Сведения о безопасности: запись врача: при наличии или противоречии нужен текст; для неизвестного или отрицания оставьте описание пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'acute_source': 'invalid'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Проверьте состояние и источник: Внезапные или острые телесные жалобы\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'course_on': '2099-01-01'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Дата наблюдения должна быть с 1900 года и не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'impact_status': 'known', 'impact_text': 'X'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Укажите основание сведений: Влияние на повседневную жизнь\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'documented_facts': 'X'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Укажите документ и дату для документированных врачебных фактов.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'action_draft': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Недопустимое значение или слишком длинный текст.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_validation_and_post_error_retains_values (test_first_visits.FirstVisitTests.test_validation_and_post_error_retains_values) (override={'state': 'approved'})",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_first_visits.py\", line 145, in test_validation_and_post_error_retains_values\n    self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Новая версия не сохранена' not found in '{\"csrf\":\"-hKbfL094W6qOei8UbqSLBoDI6hGOPSbCeqA0f0w0ks\",\"error\":\"Выберите сохранение черновика или завершение записи.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_access_roles_revocation_methods_and_read_only_restart (test_follow_up.FollowUpTests.test_access_roles_revocation_methods_and_read_only_restart)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 161, in test_access_roles_revocation_methods_and_read_only_restart\n    self.assertEqual(200,self.clients['doc-a'].get(self.summary).status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_dass_exact_period_complete_and_missing_without_zero_fill (test_follow_up.FollowUpTests.test_dass_exact_period_complete_and_missing_without_zero_fill)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 77, in test_dass_exact_period_complete_and_missing_without_zero_fill\n    self.assertIn(a['form']['period'],html);self.assertIn('#assessment-'+a['id'],html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'На прошлой неделе' not found in '{\"csrf\":\"6EN1_6L0ZO0elZw-PQBfJH_j_w0aFIpuIkMqvHI_9tc\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_invalid_periods_and_moscow_day_boundaries (test_follow_up.FollowUpTests.test_invalid_periods_and_moscow_day_boundaries)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 146, in test_invalid_periods_and_moscow_day_boundaries\n    self.assertIn('role=\"alert\"',response.text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'role=\"alert\"' not found in '{\"csrf\":\"JDHxw9kwq0uFbGBh8vdS7dBmcNSZEkUhFgzx_eOXDd0\",\"error\":\"Укажите обе даты с 1900 года до сегодня; начало не должно быть позже конца.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_legacy_sources_and_first_visit_versions_are_not_duplicated (test_follow_up.FollowUpTests.test_legacy_sources_and_first_visit_versions_are_not_duplicated)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 194, in test_legacy_sources_and_first_visit_versions_are_not_duplicated\n    self.assertIn('Противоречивые сведения',html);self.assertIn('Синтетические источники расходятся',html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Противоречивые сведения' not found in '{\"csrf\":\"1nWLT0_i8lEqWNkvfj3LarHtl21OsmQ-2uA9L2kEw9Y\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_no_outcome_not_missed_no_plan_not_draft (test_follow_up.FollowUpTests.test_no_outcome_not_missed_no_plan_not_draft)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 120, in test_no_outcome_not_missed_no_plan_not_draft\n    self.assertIn('Отметок нет. Результат неизвестен.',html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Отметок нет. Результат неизвестен.' not found in '{\"csrf\":\"tL5XAw-z-T16LsoqP-5dquICiSoo5IDi4XAWnZ7sdv4\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_periods_incomplete_and_conflicting_records_with_attribution (test_follow_up.FollowUpTests.test_periods_incomplete_and_conflicting_records_with_attribution)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 61, in test_periods_incomplete_and_conflicting_records_with_attribution\n    self.assertIn(value,html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: 'doc-a' not found in '{\"csrf\":\"53smLjSJ1RncUm6CrMqIgZ55UrM3FWqeBWTpk_bLBoc\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_plan_anchor_changes_tasks_all_authors_and_late_corrections (test_follow_up.FollowUpTests.test_plan_anchor_changes_tasks_all_authors_and_late_corrections)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_follow_up.py\", line 105, in test_plan_anchor_changes_tasks_all_authors_and_late_corrections\n    self.assertIn('Противоречие',html);self.assertIn('Пропущено',html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Противоречие' not found in '{\"csrf\":\"dZrTtO969EXdtLLK0Wzm9mSH8HuqZu-mZ8hYc556WWM\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_authenticated_shell_escapes_input_and_rejects_other_hosts (test_foundation.FoundationTests.test_authenticated_shell_escapes_input_and_rejects_other_hosts)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_foundation.py\", line 141, in test_authenticated_shell_escapes_input_and_rejects_other_hosts\n    self.assertIn('Демо 01', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: 'Демо 01' not found in '{\"csrf\":\"ZT1NEy8m9-_ov5N6zJMz2qsMoUNQks-HDwhqNi1Ln_k\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_delivery_seen_ack_order_idempotency_and_no_clinical_actions (test_notifications.NotificationTests.test_delivery_seen_ack_order_idempotency_and_no_clinical_actions)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_notifications.py\", line 155, in test_delivery_seen_ack_order_idempotency_and_no_clinical_actions\n    self.assertEqual(200, self.clients['doc-a'].head('/notifications').status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen (test_notifications.NotificationTests.test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_notifications.py\", line 145, in test_failed_handler_rolls_back_then_retry_dead_journal_survives_reopen\n    self.assertIn(entry, self.clients['doc-a'].get('/notifications').get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '03f931abbea12c2e391237d2b35bac92' not found in '{\"csrf\":\"UuYQXv8G925TOE_XuPWT56IipoeE3CVktMSMuBXpSL4\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_transient_failure_recovers_without_duplicate_and_summary_is_escaped (test_notifications.NotificationTests.test_transient_failure_recovers_without_duplicate_and_summary_is_escaped)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_notifications.py\", line 100, in test_transient_failure_recovers_without_duplicate_and_summary_is_escaped\n    self.assertIn('&lt;script&gt;syntheticMarker()&lt;/script&gt;', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;syntheticMarker()&lt;/script&gt;' not found in '{\"csrf\":\"guTAErCAc1OphJ3E3N6IQFv5ma_XFZXMg-fi0VfZPm8\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_authorization_csrf_ended_relationship_and_xss (test_records.RecordsTests.test_authorization_csrf_ended_relationship_and_xss)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 173, in test_authorization_csrf_ended_relationship_and_xss\n    self.assertIn('&lt;script&gt;', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;' not found in '{\"csrf\":\"vaxkDQR9bL3HVvGsd8E525VcjIg3kKbEALyA0I2oU3g\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_pair_same_report_provenance_and_separate_adverse_event (test_records.RecordsTests.test_pair_same_report_provenance_and_separate_adverse_event)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 52, in test_pair_same_report_provenance_and_separate_adverse_event\n    self.assertIn(entry['id'], page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\nAssertionError: 'af847e57c39c1523f8cf31d934688999' not found in '{\"csrf\":\"fDj6DLjCH3ODvs18poUUzYUEmaW7owlJy4M0Eu7PmeU\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': 'tomorrow'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Укажите дату наблюдения с 1900 года, не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': '2099-01-01'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Укажите дату наблюдения с 1900 года, не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'observed_on': '1899-01-01'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Укажите дату наблюдения с 1900 года, не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'unknown', 'age_years': '18'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Неизвестный возраст не должен содержать значения.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'age_years': '-1'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Проверьте возраст (0–120) и дату рождения относительно даты наблюдения.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'birth_date': '2026-10-19'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Проверьте возраст (0–120) и дату рождения относительно даты наблюдения.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known', 'age_years': '121'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Проверьте возраст (0–120) и дату рождения относительно даты наблюдения.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'known'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Укажите возраст на дату наблюдения или дату рождения; пояснение противоречий допустимо только при соответствующем статусе.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'denied'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Проверьте статус возраста.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'age_status': 'conflicting'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Опишите противоречие возраста.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'complaints_status': 'known'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'risk_factors_status': 'unsafe'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'adverse_events_status': 'unknown', 'adverse_events_text': 'данные'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'adverse_events_status': 'denied', 'adverse_events_text': 'данные'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'summary': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Недопустимое значение или слишком длинный текст.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'summary': 'bad\\\\x00text'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Недопустимое значение или слишком длинный текст.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'wellbeing': 'score_10'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Проверьте значение самочувствия.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows) (values=\"{'request_key': 'bad'}\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 142, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Запись не сохранена', response.get_data(as_text=True))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Запись не сохранена' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Обновите форму перед отправкой.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_server_validation_and_failed_form_keeps_input_without_partial_rows (test_records.RecordsTests.test_server_validation_and_failed_form_keeps_input_without_partial_rows)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 146, in test_server_validation_and_failed_form_keeps_input_without_partial_rows\n    self.assertIn('Сохранённый ввод', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сохранённый ввод' not found in '{\"csrf\":\"VfODarDPLihnIl4Sjd9Su7kBKBKGPTO2iMygD16KNHU\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_unknown_denied_conflicting_and_age_mismatch (test_records.RecordsTests.test_unknown_denied_conflicting_and_age_mismatch)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 86, in test_unknown_denied_conflicting_and_age_mismatch\n    self.assertIn('Возраст не соответствует дате рождения', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Возраст не соответствует дате рождения' not found in '{\"csrf\":\"joT3gMLIT1wDTvXg2uEGjMidbgznRsSvIjsWoLhrQTU\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_unknown_initial_age_is_never_adult (test_records.RecordsTests.test_unknown_initial_age_is_never_adult)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_records.py\", line 97, in test_unknown_initial_age_is_never_adult\n    self.assertIn('Взрослая применимость не установлена', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Взрослая применимость не установлена' not found in '{\"csrf\":\"OtE_QatbNdbS77O34s0JC7VOdgR8OeGfEO4Op1HjeSo\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_csrf_limits_xss_and_native_form (test_report_drafts.ReportDraftTests.test_csrf_limits_xss_and_native_form)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_report_drafts.py\", line 153, in test_csrf_limits_xss_and_native_form\n    self.assertIn('&lt;script&gt;window.BAD=true&lt;/script&gt;',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;window.BAD=true&lt;/script&gt;' not found in '{\"csrf\":\"yPbUuelCKh5nQIYtBNjG2zANwwte_zHWUTke4ShSooU\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_only_owner_can_read_or_write_and_doctor_cannot_find_private_text (test_report_drafts.ReportDraftTests.test_only_owner_can_read_or_write_and_doctor_cannot_find_private_text)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_report_drafts.py\", line 67, in test_only_owner_can_read_or_write_and_doctor_cannot_find_private_text\n    self.assertIn('Пациенты не найдены',self.clients['doc-a'].get('/?q='+marker).text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Пациенты не найдены' not found in '{\"csrf\":\"FjxfpgWzflG-g-b-L1Lih-5tEPuirhBKE15plO2DeUg\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_unfinished_values_restore_after_restart_and_no_clinical_side_effects (test_report_drafts.ReportDraftTests.test_unfinished_values_restore_after_restart_and_no_clinical_side_effects)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_report_drafts.py\", line 52, in test_unfinished_values_restore_after_restart_and_no_clinical_side_effects\n    self.assertIn('Черновик восстановлен',page);self.assertIn('Противоречие ещё не исправлено',page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Черновик восстановлен' not found in '{\"csrf\":\"ssFZZ4qYnfxd43LXN-d_BcDmLQbqQlGps7DEh8ES1UQ\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_categories_separate_from_urgency_and_approval_only_patient (test_routing.RoutingTests.test_categories_separate_from_urgency_and_approval_only_patient)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_routing.py\", line 24, in test_categories_separate_from_urgency_and_approval_only_patient\n    self.assertIn(label, page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^\nAssertionError: 'Обязательно' not found in '{\"csrf\":\"p3Nn8BUtZat1Fn2fI2KHQIeTEbGgGrMe6eYtHg4WPFc\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_retry_conflicting_change_data_and_restart (test_routing.RoutingTests.test_retry_conflicting_change_data_and_restart)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_routing.py\", line 113, in test_retry_conflicting_change_data_and_restart\n    self.assertIn('&lt;script&gt;x&lt;/script&gt;',client.get(url).text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;x&lt;/script&gt;' not found in '{\"csrf\":\"8Pk3loT3XzEFKyks5QherErsCXFaz0N-Y7pG5bdPbJU\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_error_retains_inputs_and_opens_report_panel (test_s13.SearchTests.test_error_retains_inputs_and_opens_report_panel)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s13.py\", line 56, in test_error_retains_inputs_and_opens_report_panel\n    self.assertIn('Сохранить введённый текст',page.text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сохранить введённый текст' not found in '{\"csrf\":\"CTzsSANKTtIDpx48qwxSbX294qbqrEFw4pWh6E_PjnQ\",\"error\":\"Укажите дату наблюдения с 1900 года, не позднее сегодняшней.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_route_history_filter_without_claiming_current_decision (test_s13.SearchTests.test_route_history_filter_without_claiming_current_decision)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s13.py\", line 49, in test_route_history_filter_without_claiming_current_decision\n    self.assertIn('включая проекты',self.clients['doc-a'].get('/').text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'включая проекты' not found in '{\"csrf\":\"fNp0Y4YOzLl06nvxLAP7GZ7ajSEhZP4r7K8HeZu0m7M\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_card_header_is_on_every_doctor_page_and_shows_signal_and_age (test_s26b.DoctorWorkspaceTests.test_card_header_is_on_every_doctor_page_and_shows_signal_and_age)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 73, in test_card_header_is_on_every_doctor_page_and_shows_signal_and_age\n    self.assertIn('class=\"case-head\"', page, url)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'class=\"case-head\"' not found in '{\"csrf\":\"FQrfgp8uPLV_fw-rcITHJs0ZY-EL2G0e3HVP8ZBbl5s\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n' : /demo/D01\n"
+    },
+    {
+      "test": "test_no_signal_state_is_worded_and_not_a_claim_of_safety (test_s26b.DoctorWorkspaceTests.test_no_signal_state_is_worded_and_not_a_claim_of_safety)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 34, in test_no_signal_state_is_worded_and_not_a_claim_of_safety\n    self.assertIn('<h1>Кому нужно внимание</h1>', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '<h1>Кому нужно внимание</h1>' not found in '{\"csrf\":\"kcQhRz3CZIQTiu1JK0RLnwgD-1d2R9LYvJ5nhzC3rrA\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it (test_s26b.DoctorWorkspaceTests.test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 58, in test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it\n    self.assertIn('Сигналов без записанной реакции нет', clients['doc-b'].get('/').text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сигналов без записанной реакции нет' not found in '{\"csrf\":\"9X00sey6mjbyxYtQRSYgCBjW_CSBiHwA-0DRmJsPaKs\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_signal_patient_goes_first_and_is_marked_with_words (test_s26b.DoctorWorkspaceTests.test_signal_patient_goes_first_and_is_marked_with_words)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 49, in test_signal_patient_goes_first_and_is_marked_with_words\n    self.assertIn('Сигналы без записанной реакции — пациентов: 1', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сигналы без записанной реакции — пациентов: 1' not found in '{\"csrf\":\"_T2g_wlZlg4Hw5jFb-feMIWJNQwpguKqyJUmTf9h-Fs\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_status_key_separates_draft_receipt_and_unknown (test_s26b.DoctorWorkspaceTests.test_status_key_separates_draft_receipt_and_unknown)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 111, in test_status_key_separates_draft_receipt_and_unknown\n    self.assertIn(phrase, page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 'Проект не меняет план' not found in '{\"csrf\":\"PUN2ECgLNPFci7ph5qLsOEUrVehtunAGYmJsaGExQp0\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_failed_submission_keeps_every_entered_value_and_saves_nothing (test_s26c.PatientWorkspaceTests.test_failed_submission_keeps_every_entered_value_and_saves_nothing)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 107, in test_failed_submission_keeps_every_entered_value_and_saves_nothing\n    self.assertIn('Текст при отрицании: должен остаться в форме', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Текст при отрицании: должен остаться в форме' not found in '{\"csrf\":\"wbxD9D79DOFDDnAZzt-plIP0SADsc3BnVinP54kgFH8\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_message_states_are_separate_words_and_not_a_doctor_reaction (test_s26c.PatientWorkspaceTests.test_message_states_are_separate_words_and_not_a_doctor_reaction)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 117, in test_message_states_are_separate_words_and_not_a_doctor_reaction\n    self.assertIn('Сохранено на сервере', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сохранено на сервере' not found in '{\"csrf\":\"-k0X15UW4qXV7J38C35g1TERW-Uz39ZsO4Zp_ZoshPY\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_patient_without_a_doctor_link_is_told_to_enter_the_invitation_code (test_s26c.PatientWorkspaceTests.test_patient_without_a_doctor_link_is_told_to_enter_the_invitation_code)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 59, in test_patient_without_a_doctor_link_is_told_to_enter_the_invitation_code\n    self.assertIn('Ввести код приглашения врача', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Ввести код приглашения врача' not found in '{\"csrf\":\"qORlnFh60zEntvHQwdqrJJdpX44EOtS_MI0IUQOe8fI\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_questionnaire_keeps_text_order_and_shows_receipt_states (test_s26c.PatientWorkspaceTests.test_questionnaire_keeps_text_order_and_shows_receipt_states)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 132, in test_questionnaire_keeps_text_order_and_shows_receipt_states\n    self.assertIn('data-answer-progress', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'data-answer-progress' not found in '{\"csrf\":\"KgRsUlV_RIDvKy0mQ4-bTiElZuQjX306EBJJzsKRQcY\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_self_report_is_in_two_steps_with_server_fields_unchanged (test_s26c.PatientWorkspaceTests.test_self_report_is_in_two_steps_with_server_fields_unchanged)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 84, in test_self_report_is_in_two_steps_with_server_fields_unchanged\n    self.assertIn('data-report-form', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'data-report-form' not found in '{\"csrf\":\"06gR_oDPirXLHu2B4rFakLo0sg-zmoBMj3qgJUOK6sQ\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_today_has_one_main_action_and_it_follows_the_priority (test_s26c.PatientWorkspaceTests.test_today_has_one_main_action_and_it_follows_the_priority)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 38, in test_today_has_one_main_action_and_it_follows_the_priority\n    self.assertIn('<h2 id=\"today-title\">Сегодня</h2>', page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '<h2 id=\"today-title\">Сегодня</h2>' not found in '{\"csrf\":\"mMI4GlWxG2PZUa9eDpd9voHYNpR4cB4H9V3_7DjmHTY\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_today_never_claims_doctor_saw_or_reacted (test_s26c.PatientWorkspaceTests.test_today_never_claims_doctor_saw_or_reacted)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 68, in test_today_never_claims_doctor_saw_or_reacted\n    self.assertIn(text, page)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: 'Сохранено на сервере' not found in '{\"csrf\":\"vptdiV3juynedVTP5v6BDgpBVr-YR1D1LkOwRXpZkTg\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_lost_receipt_retry_has_same_location_and_no_side_effects (test_s26d.PatientSendTests.test_lost_receipt_retry_has_same_location_and_no_side_effects)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26d.py\", line 45, in test_lost_receipt_retry_has_same_location_and_no_side_effects\n    self.assertIn('Сохранено на сервере', receipt)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Сохранено на сервере' not found in '{\"csrf\":\"k6Twb1BU9BiNnQbQ926AbBqo6QAm0s03fcl3J1U5n6Y\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_native_form_post_keeps_redirect_and_error_values (test_s26d.PatientSendTests.test_native_form_post_keeps_redirect_and_error_values)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26d.py\", line 91, in test_native_form_post_keeps_redirect_and_error_values\n    self.assertIn('Синтетика S26D', error.text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Синтетика S26D' not found in '{\"csrf\":\"n_hVG7JXEfYbCrXvHwjphGDf0RBogfrx1HeXgeBGSZ8\",\"error\":\"Для имеющихся или противоречивых сведений нужен текст; для «неизвестно» и отрицания оставьте текст пустым.\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    },
+    {
+      "test": "test_database_fault_is_unavailable_not_safe_and_retry_can_succeed (test_security.SecurityTests.test_database_fault_is_unavailable_not_safe_and_retry_can_succeed)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py\", line 132, in test_database_fault_is_unavailable_not_safe_and_retry_can_succeed\n    self.assertEqual(200,self.clients['doc-a'].get('/').status_code)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 503\n"
+    },
+    {
+      "test": "test_review_html_escapes_notes_and_preserves_error_values (test_therapy.TherapyTests.test_review_html_escapes_notes_and_preserves_error_values)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_therapy.py\", line 91, in test_review_html_escapes_notes_and_preserves_error_values\n    self.assertIn('&lt;script&gt;synthetic()&lt;/script&gt;', html)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '&lt;script&gt;synthetic()&lt;/script&gt;' not found in '{\"csrf\":\"WdQmZF-YwovQoAn__hoC7WdXAumvqZG7lL3eg4PpCzc\",\"message\":\"Интерфейс удалён. Новый интерфейс пока не создан.\",\"status\":\"interface_removed\"}\\n'\n"
+    }
+  ],
+  "errors": [
+    {
+      "test": "test_card_navigation_is_short_and_keeps_every_doctor_function_reachable (test_s26b.DoctorWorkspaceTests.test_card_navigation_is_short_and_keeps_every_doctor_function_reachable)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py\", line 87, in test_card_navigation_is_short_and_keeps_every_doctor_function_reachable\n    nav = page[page.index('aria-label=\"Разделы карточки\"'):]\n               ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: substring not found\n"
+    },
+    {
+      "test": "test_patient_navigation_is_short_and_present_on_all_patient_pages (test_s26c.PatientWorkspaceTests.test_patient_navigation_is_short_and_present_on_all_patient_pages)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26c.py\", line 76, in test_patient_navigation_is_short_and_present_on_all_patient_pages\n    nav = re.search(r'<nav aria-label=\"Разделы кабинета\".*?</nav>', page, re.S).group(0)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'group'\n"
+    },
+    {
+      "test": "test_template_fault_has_safe_fallback_without_rethrow_or_secret (test_security.SecurityTests.test_template_fault_has_safe_fallback_without_rethrow_or_secret)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_security.py\", line 113, in test_template_fault_has_safe_fallback_without_rethrow_or_secret\n    with patch('apps.compass.web.render_template',side_effect=RuntimeError(sentinel)):\n         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py\", line 1497, in __enter__\n    original, local = self.get_original()\n                      ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py\", line 1467, in get_original\n    raise AttributeError(\n        \"%s does not have the attribute %r\" % (target, name)\n    )\nAttributeError: <module 'apps.compass.web' from '/Users/azamatsibgatullin/Documents/HAC/apps/compass/web.py'> does not have the attribute 'render_template'\n"
+    },
+    {
+      "test": "test_histories_visibility_boundaries_and_preservation (test_walkthrough_demo.WalkthroughTests.test_histories_visibility_boundaries_and_preservation)",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_walkthrough_demo.py\", line 73, in test_histories_visibility_boundaries_and_preservation\n    token = re.search(r'name=\"csrf\" value=\"([^\"]+)\"', page).group(1)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'group'\n"
+    }
+  ],
+  "skipped": []
+}

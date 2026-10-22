@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-21T15:17:34+03:00",
+  "updated_on": "2026-10-22T15:36:39+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S28",
+  "last_accepted_slice": "S29",
   "next_slice": null,
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -299,6 +299,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S28",
       "handoff": "memory/sessions/S28.md",
+      "reason": null
+    },
+    "S29": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S29",
+      "handoff": "memory/sessions/S29.md",
       "reason": null
     }
   },
@@ -597,5 +603,15 @@
       ],
       "implementation_started": false
     }
-  ]
+  ],
+  "interface_state": {
+    "status": "removed_by_direct_user_request",
+    "date": "2026-10-22",
+    "slice": "S29",
+    "report": "memory/sessions/S29.md",
+    "backend_preserved": true,
+    "new_interface_authorized": false,
+    "old_design_is_reference": false,
+    "legacy_html_tests": "not_passing_due_to_removed_interface; evidence/S29/regression-review.json"
+  }
 }

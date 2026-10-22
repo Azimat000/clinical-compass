@@ -1,0 +1,36 @@
+{
+  "previous_server_pid": 26110,
+  "server_pid": 50005,
+  "worker_pid_unchanged": 26111,
+  "database": "var/walkthrough-20261021.sqlite3",
+  "checks": {
+    "/healthz": {
+      "status": 200,
+      "content_type": "application/json",
+      "has_html": false
+    },
+    "/static/app.css": {
+      "status": 404,
+      "content_type": "text/plain",
+      "has_html": false
+    },
+    "/static/interface.js": {
+      "status": 404,
+      "content_type": "text/plain",
+      "has_html": false
+    },
+    "/missing": {
+      "status": 404,
+      "content_type": "text/plain",
+      "has_html": false
+    }
+  },
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "014_report_drafts",
+    "status": "ok"
+  },
+  "login_attempts_on_production_db": 0,
+  "restart_retry": "Initial launch used resolved interpreter outside venv and failed before DB open; relaunched with .venv/bin/python."
+}

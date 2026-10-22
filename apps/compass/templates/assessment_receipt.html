@@ -1,8 +1,0 @@
-{% extends "base.html" %}
-{% block title %}Анкета отправлена — Клинический компас{% endblock %}
-{% block content %}{% set pid=task.patient_id %}{% set patient_section='assessments' %}{% include 'patient_nav.html' %}
-<h1>Анкета отправлена врачу</h1><p>Дата заполнения (Москва): {{ task.age_on }}.</p>
-<p>Ответы доступны вашему врачу. Для собственной динамики используйте дневник самочувствия.</p>
-<dl class="states-key"><dt>Сохранено на сервере</dt><dd>Да, получено сервером (UTC): {{ received_at }}.</dd><dt>Прочитано врачом</dt><dd>Здесь не показывается.</dd><dt>Реакция врача</dt><dd>Здесь не показывается: ответ придёт отдельным сообщением или на приёме.</dd></dl>
-<details><summary>Подробности квитанции</summary><p>Получена сервером (UTC): {{ received_at }}.</p><p>Версия формы: {{ task.form_version_id }}. Квитанция: {{ task.id }}.</p></details>
-<a class="back" href="{{ url_for('demo_patient',patient_id=task.patient_id) }}#dynamics">Открыть дневник самочувствия →</a>{% endblock %}
