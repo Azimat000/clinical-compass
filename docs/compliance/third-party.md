@@ -21,7 +21,7 @@ Codex используется для разработки; продукт к в
 
 ## Навыки интерфейса — 19.10.2026
 
-Инструменты разработки в `.agents/`, не runtime приложения: Anthropic frontend-design (Apache-2.0) и Addy Osmani frontend-ui-engineering с памяткой доступности (MIT). Полные лицензии/уведомления сохранены в `.agents/skills/frontend-design/LICENSE.txt` и `.agents/THIRD_PARTY_LICENSES/addyosmani-agent-skills-LICENSE`. Точные исходники/версии/хеши: `docs/design/skills.lock.json`, сравнение и ограничения: `evidence/interface-skills/research.md`. Собственный адаптер: `.agents/skills/hac-interface/SKILL.md`. Права на upstream не выдаются за исключительное авторство команды; при включении в передаваемый комплект сохранить лицензии и учитывать отдельно в S17/S22. Уточнения конкурса об ИИ/заимствованиях остаются открытыми. Новых пакетов приложения и расходов нет.
+Прежние инструменты разработки интерфейса (Anthropic frontend-design, Apache-2.0; Addy Osmani frontend-ui-engineering, MIT; собственный адаптер hac-interface) и сопутствующие материалы удалены по прямому поручению пользователя 22.10.2026. В runtime приложения они не входили. Исторические версии/лицензии/хеши сохранены в Git и прежнем отчёте memory/sessions/interface-skills.md; текущий комплект этих материалов не содержит. Происхождение прежних заимствований не объявляется исключительным авторством команды.
 
 ## S14 — снимок фактического контура
 

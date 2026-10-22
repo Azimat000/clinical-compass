@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-22T15:36:39+03:00",
+  "updated_on": "2026-10-22T16:19:39+03:00",
   "current_slice": null,
   "last_accepted_slice": "S29",
   "next_slice": null,
@@ -320,11 +320,17 @@
   },
   "tooling": {
     "interface_skills": {
-      "status": "configured",
-      "report": "memory/sessions/interface-skills.md",
-      "lock": "docs/design/skills.lock.json",
-      "commit_ref": "refs/tags/setup/interface-skills",
-      "scope": "Инструменты для S13, интерфейсных S14–S15/S17C/S17E/S18/S20; установка не принимает срезы. S16 исключён."
+      "status": "removed_by_direct_user_request",
+      "date": "2026-10-22",
+      "removed_skills": [
+        "frontend-design",
+        "frontend-ui-engineering",
+        "hac-interface"
+      ],
+      "report": "memory/sessions/interface-skills-removal-2026-10-22.md",
+      "commit_ref": "refs/tags/setup/interface-skills-removal-2026-10-22",
+      "scope": "project-local; former installation is historical and must not be restored automatically",
+      "historical_setup_ref": "refs/tags/setup/interface-skills"
     }
   },
   "latest_synthetic_audit": {
