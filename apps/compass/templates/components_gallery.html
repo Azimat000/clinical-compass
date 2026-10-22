@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block title %}Компоненты{% endblock %}
+{% block body %}
+{#- Каталог для проверки дизайна (COMPASS_UI_GALLERY=1). Только вымышленные подписи, без данных сервиса. -#}
+<main class="gallery" id="main">
+  <div class="sheet">
+    <div class="sheet-head carbon">{{ ui.brand() }}{{ ui.synthetic('Каталог компонентов') }}</div>
+    <div class="sheet-body stack">
+      <h1>Компоненты</h1>
+      <p class="lede">Каждый компонент в покое, с ошибкой и недоступный. Фокус — клавишей Tab.</p>
+    </div>
+  </div>
+
+  <section class="sheet" aria-labelledby="g-buttons">
+    <div class="sheet-body">
+      <h2 id="g-buttons">Кнопки</h2>
+      <div class="gallery-grid">
+        <div><h3>Главная, одна на экран</h3>
+          <div class="row">{{ ui.button(d.primary, kind='primary', type='button') }}{{ ui.button(d.primary, kind='primary', type='button', disabled=True) }}{{ ui.button('Сохраняется…', kind='primary', type='button', busy=True) }}</div>
+        </div>
+        <div><h3>Второстепенная и ссылка</h3>
+          <div class="row">{{ ui.button(d.secondary, type='button') }}{{ ui.button(d.secondary, type='button', disabled=True) }}{{ ui.button('Подробнее', kind='link', type='button') }}</div>
+        </div>
+        <div><h3>Пациент: на всю ширину</h3>
+          {{ ui.button(d.action, kind='primary', size='action', type='button') }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="g-fields">
+    <div class="sheet-body">
+      <h2 id="g-fields">Поля</h2>
+      <div class="gallery-grid">
+        <div><h3>Обычное</h3>{{ ui.field('g-name', d.field_label, value=d.field_value, hint=d.field_hint, extra={'placeholder': 'WD…'}) }}</div>
+        <div><h3>Ошибка</h3>{{ ui.field('g-date', d.date_label, value=d.date_value, error=d.date_error) }}</div>
+        <div><h3>Недоступно</h3>{{ ui.field('g-locked', 'Возраст', value='не указан', disabled=True, hint='Меняет только врач') }}</div>
+        <div><h3>Текст</h3>{{ ui.textarea('g-note', d.note_label, value=d.note_value, hint=d.note_hint) }}</div>
+        <div><h3>Текст с ошибкой</h3>{{ ui.textarea('g-note-error', 'Сообщение врачу', error='Напишите хотя бы одно слово.') }}</div>
+        <div><h3>Список</h3>{{ ui.select('g-period', 'Период', d.select, selected=d.select[-1][0]) }}</div>
+        <div><h3>Список с ошибкой</h3>{{ ui.select('g-kind', 'Тип записи', [('', 'Выберите…'), ('note', 'Заметка')], error='Выберите тип записи.') }}</div>
+        <div><h3>Список недоступен</h3>{{ ui.select('g-role', 'Роль', [('doctor', 'Врач')], disabled=True) }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="g-choice">
+    <div class="sheet-body">
+      <h2 id="g-choice">Выбор</h2>
+      <div class="gallery-grid">
+        <div><h3>Переключатели</h3>{{ ui.choice('g-wb', 'Самочувствие с прошлой отметки', d.options, checked='unknown') }}</div>
+        <div><h3>С ошибкой</h3>{{ ui.choice('g-ae', 'Новые нежелательные явления', [('yes', 'Есть'), ('no', 'Нет'), ('unknown', 'Не знаю')], error='Выберите один ответ.') }}</div>
+        <div><h3>Флажки, один недоступен</h3>{{ ui.choice('g-sig', 'Показывать', [('signal', 'С сигналами'), ('silent', 'Без отметок'), ('archived', 'Завершённые')], type='checkbox', checked=['signal'], locked=['archived']) }}</div>
+        <div><h3>Сегменты</h3><div class="seg" role="group" aria-label="Режим списка"><button type="button" aria-pressed="true">С сигналами</button><button type="button" aria-pressed="false">Все</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="g-status">
+    <div class="sheet-body">
+      <h2 id="g-status">Статусы</h2>
+      <div class="gallery-grid">
+        <div><h3>Флаг строки</h3><div class="row">{% for code, reason in d.flags %}{{ ui.flag(code, reason) }}{% endfor %}</div></div>
+        <div><h3>Самочувствие у врача и у пациента</h3>
+          <div class="row">{{ ui.wellbeing(d.wellbeing) }}<span class="meta">врач</span></div>
+          <div class="row">{{ ui.wellbeing(d.wellbeing, calm=True) }}<span class="meta">пациент</span></div>
+        </div>
+        <div><h3>Состояние сведений</h3>
+          <div class="stack">{{ ui.state('known', 'Есть сведения') }}<br>{{ ui.state('unknown', 'Неизвестно') }}<br>{{ ui.state('conflict', 'Противоречие') }}<br>{{ ui.state('denied', 'Явно отрицает') }}<br>{{ ui.state('new', 'Новое явление') }}</div>
+        </div>
+        <div><h3>Причина внимания</h3><p>{{ ui.marker(d.marker) }}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="g-states">
+    <div class="sheet-body">
+      <h2 id="g-states">Уведомления, пусто, загрузка</h2>
+      <div class="gallery-grid">
+        <div class="stack"><h3>Уведомления</h3>
+          {{ ui.notice('Сохранено', 'Сервер принял запись в 09:14.', kind='done') }}
+          {{ ui.notice(d.notice_title, d.notice_text) }}
+        </div>
+        <div class="stack"><h3>Ошибка и блокировка</h3>
+          {{ ui.notice(d.error_title, d.error_text, kind='error') }}
+          {{ ui.notice('Вход временно закрыт', 'Повторите через 15 минут.', kind='locked') }}
+        </div>
+        <div class="stack"><h3>Пусто и загрузка</h3>
+          {{ ui.empty(d.empty, href='#g-states', link='Пригласить') }}
+          {{ ui.loading() }}
+          <div aria-hidden="true"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>
+        </div>
+        <div class="stack"><h3>Карточка</h3>
+          <div class="card"><h2>Просьба врача</h2><p class="meta">Карточка — белая, рамка 1px, без тени.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

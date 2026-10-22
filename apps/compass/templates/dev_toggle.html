@@ -1,0 +1,10 @@
+{#- Только каталог (COMPASS_UI_GALLERY=1): какие данные и какая страница показаны. -#}
+<nav class="dev-toggle" aria-label="Данные для проверки">
+  {% for key, label in (('demo', 'Обычные данные'), ('worst', 'Худший случай')) %}
+  <a href="{{ url_for('ui_gallery', page=toggle.page, data=key) }}"{% if toggle.case == key %} aria-current="true"{% endif %}>{{ label }}</a>
+  {% endfor %}
+  <span aria-hidden="true">·</span>
+  {% for key, label in (('catalog', 'Каталог'), ('login', 'Вход'), ('login-error', 'Ошибка'), ('login-locked', 'Блок'), ('result', 'Итог')) %}
+  <a href="{{ url_for('ui_gallery', page=key, data=toggle.case) }}"{% if toggle.page == key %} aria-current="true"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>

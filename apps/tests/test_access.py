@@ -13,8 +13,11 @@ PASSWORD_HASH = generate_password_hash(PASSWORD, method='scrypt:32768:8:1')
 
 
 def csrf(client, path='/'):
+    """CSRF token from a rendered form (login) or from a technical JSON answer."""
     response = client.get(path, follow_redirects=True)
-    return response.get_json()['csrf']
+    if response.is_json:
+        return response.get_json()['csrf']
+    return re.search(r'name="csrf" value="([^"]+)"', response.text).group(1)
 
 
 def login(client, uid, password=PASSWORD):

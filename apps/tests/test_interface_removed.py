@@ -26,17 +26,18 @@ class InterfaceRemovedTests(unittest.TestCase):
         return client.post(path, data={'csrf': test_access.csrf(client), **values},
                            headers={'Accept': 'application/json'})
 
-    def test_assets_and_templates_are_absent_and_not_served(self):
+    def test_only_rebuilt_templates_and_new_assets_are_served(self):
+        # UI02 rebuilt login/result from scratch; S29 assets stay removed.
         root = Path(__file__).resolve().parents[1] / 'compass'
-        self.assertFalse((root / 'templates').exists())
-        self.assertFalse((root / 'static').exists())
-        self.assertIsNone(self.app.static_folder)
-        self.assertIsNone(self.app.template_folder)
-        for name in ('app.css', 'interface.js', 'self_report.js', 'report_draft.js',
-                     'fonts/PTSans-Regular.ttf'):
+        self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html'},
+                         {p.name for p in (root / 'templates').iterdir()})
+        for name in ('interface.js', 'self_report.js', 'report_draft.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)
             self.assertEqual(404, response.status_code)
-            self.assertNotIn('<html', response.text)
+            self.assertEqual('text/html', response.mimetype)  # result page, not the removed file
+        for name in ('app.css', 'fonts/PTSans-Regular.ttf', 'fonts/PTMono-Regular.ttf'):
+            with self.app.test_client().get('/static/' + name) as response:
+                self.assertEqual(200, response.status_code)
 
     def test_removed_pages_explain_status_without_disclosing_view_context(self):
         paths = ('/', '/demo/D01', '/patients/D01/first-visits',
@@ -54,15 +55,16 @@ class InterfaceRemovedTests(unittest.TestCase):
                 self.assertEqual('no-store', response.headers['Cache-Control'])
                 self.assertEqual(503, self.clients['doc-a'].head(path).status_code)
 
-    def test_login_logout_and_csrf_work_without_html(self):
+    def test_login_logout_and_csrf_work_for_json_clients(self):
         client = self.app.test_client()
-        challenge = client.get('/login')
+        json_only = {'Accept': 'application/json'}
+        challenge = client.get('/login', headers=json_only)
         self.assertEqual(200, challenge.status_code)
         self.assertEqual({'csrf', 'error'}, set(challenge.json))
         self.assertEqual(403, client.post('/login', data={
             'login': 'doc-a', 'password': test_access.PASSWORD}).status_code)
         response = client.post('/login', data={'csrf': challenge.json['csrf'],
-            'login': 'doc-a', 'password': test_access.PASSWORD})
+            'login': 'doc-a', 'password': test_access.PASSWORD}, headers=json_only)
         self.assertEqual(302, response.status_code)
         self.assertEqual(200, client.get('/api/patients/D01').status_code)
         self.assertEqual(403, client.post('/logout').status_code)

@@ -1,0 +1,129 @@
+{#- Общие компоненты «Листа результатов» (DESIGN.md). Только разметка: стили в static/app.css, без inline-стилей и скриптов. -#}
+
+{% macro mark() -%}
+<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+{%- endmacro %}
+
+{% macro brand(href=None, label='Клинический компас') -%}
+{% if href %}<a class="brand" href="{{ href }}" translate="no">{{ mark() }}{{ label }}</a>{% else %}<span class="brand" translate="no">{{ mark() }}{{ label }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro synthetic(text='Учебные данные') -%}
+<span class="synthetic">{{ text }}</span>
+{%- endmacro %}
+
+{#- kind: primary | secondary | link; size: block | action. Ссылка, если задан href. -#}
+{% macro button(label, kind='secondary', type='submit', href=None, size=None, disabled=False, busy=False, name=None, value=None, id=None) -%}
+{%- set cls = 'button' ~ (' button--' ~ kind if kind != 'secondary' else '') ~ (' button--' ~ size if size else '') -%}
+{% if href and not disabled -%}
+<a class="{{ cls }}" href="{{ href }}"{% if id %} id="{{ id }}"{% endif %}>{{ label }}</a>
+{%- elif href -%}
+<a class="{{ cls }}" role="link" aria-disabled="true"{% if id %} id="{{ id }}"{% endif %}>{{ label }}</a>
+{%- else -%}
+<button class="{{ cls }}" type="{{ type }}"{% if name %} name="{{ name }}"{% endif %}{% if value is not none %} value="{{ value }}"{% endif %}{% if id %} id="{{ id }}"{% endif %}{% if disabled %} disabled{% endif %}{% if busy %} aria-busy="true" aria-disabled="true"{% endif %}>{{ label }}</button>
+{%- endif %}
+{%- endmacro %}
+
+{#- Текстовое поле. error — текст причины, hint — короткая подсказка. extra — словарь дополнительных атрибутов. -#}
+{% macro field(name, label, type='text', value='', error=None, hint=None, id=None, required=False, disabled=False, autocomplete=None, size=None, extra={}) -%}
+{%- set fid = id or 'f-' ~ name -%}
+{%- set described = [] -%}
+{%- if hint %}{% set _ = described.append(fid ~ '-hint') %}{% endif -%}
+{%- if error %}{% set _ = described.append(fid ~ '-error') %}{% endif -%}
+<div class="field">
+  <label for="{{ fid }}">{{ label }}</label>
+  {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
+  <input class="input{% if size %} input--{{ size }}{% endif %}" id="{{ fid }}" name="{{ name }}" type="{{ type }}"{% if value %} value="{{ value }}"{% endif %}{% if autocomplete %} autocomplete="{{ autocomplete }}"{% endif %}{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if described %} aria-describedby="{{ described|join(' ') }}"{% endif %}{% for key, val in extra.items() if val is not sameas false %} {{ key }}{% if val is not sameas true %}="{{ val }}"{% endif %}{% endfor %}>
+  {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro textarea(name, label, value='', error=None, hint=None, id=None, required=False, disabled=False, rows=4) -%}
+{%- set fid = id or 'f-' ~ name -%}
+<div class="field">
+  <label for="{{ fid }}">{{ label }}</label>
+  {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
+  <textarea class="textarea" id="{{ fid }}" name="{{ name }}" rows="{{ rows }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>{{ value }}</textarea>
+  {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
+</div>
+{%- endmacro %}
+
+{#- options — список пар (значение, подпись). -#}
+{% macro select(name, label, options, selected=None, error=None, hint=None, id=None, required=False, disabled=False) -%}
+{%- set fid = id or 'f-' ~ name -%}
+<div class="field">
+  <label for="{{ fid }}">{{ label }}</label>
+  {% if hint %}<span class="hint" id="{{ fid }}-hint">{{ hint }}</span>{% endif %}
+  <select class="select" id="{{ fid }}" name="{{ name }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %}{% if error %} aria-invalid="true"{% endif %}{% if hint or error %} aria-describedby="{% if hint %}{{ fid }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ fid }}-error{% endif %}"{% endif %}>
+    {% for value, text in options %}<option value="{{ value }}"{% if value == selected %} selected{% endif %}>{{ text }}</option>{% endfor %}
+  </select>
+  {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
+</div>
+{%- endmacro %}
+
+{#- Группа флажков (checkbox) или переключателей (radio). checked — значение или список значений; locked — недоступные значения. -#}
+{% macro choice(name, legend, options, type='radio', checked=None, error=None, disabled=False, locked=(), id=None) -%}
+{%- set fid = id or 'c-' ~ name -%}
+{%- set picked = checked if checked is iterable and checked is not string else [checked] -%}
+<fieldset class="choice{% if error %} choice--invalid{% endif %}"{% if error %} aria-describedby="{{ fid }}-error"{% endif %}{% if disabled %} disabled{% endif %}>
+  <legend>{{ legend }}</legend>
+  <div class="choice-list">
+    {% for value, text in options %}
+    <label class="option"><input type="{{ type }}" name="{{ name }}" value="{{ value }}"{% if value in picked %} checked{% endif %}{% if value in locked %} disabled{% endif %}> {{ text }}</label>
+    {% endfor %}
+  </div>
+  {% if error %}<span class="field-error" id="{{ fid }}-error">{{ error }}</span>{% endif %}
+</fieldset>
+{%- endmacro %}
+
+{#- kind: info | error | locked | done. Сообщение об ошибке объявляется сразу (role=alert). -#}
+{% macro notice(title, text=None, kind='info', id=None) -%}
+<div class="notice notice--{{ kind }}"{% if id %} id="{{ id }}"{% endif %} role="{{ 'alert' if kind in ('error', 'locked') else 'status' }}">
+  {% if title %}<p class="notice-title">{{ title }}</p>{% endif %}
+  {% if text %}<p>{{ text }}</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro empty(text, href=None, link=None) -%}
+<div class="empty"><span>{{ text }}</span>{% if href %}<a href="{{ href }}">{{ link }}</a>{% endif %}</div>
+{%- endmacro %}
+
+{% macro loading(text='Сведения загружаются…') -%}
+<p class="loading" role="status">{{ text }}</p>
+{%- endmacro %}
+
+{#- Флаг строки: код словом и полная причина для скринридера. -#}
+{% macro flag(code, reason) -%}
+<span class="flag" title="{{ reason }}"><span aria-hidden="true">{{ code }}</span><span class="visually-hidden">{{ reason }}</span></span>
+{%- endmacro %}
+
+{#- Метки самочувствия: values — список better | same | worse | unknown, слева направо. calm — у пациента «хуже» без красного. -#}
+{% macro wellbeing(values, calm=False) -%}
+{%- set words = {'better': 'лучше', 'same': 'без изменений', 'worse': 'хуже', 'unknown': 'не указано'} -%}
+<span class="wb{% if calm %} wb--calm{% endif %}" role="img" aria-label="Самочувствие по отметкам: {% for v in values %}{{ words[v] }}{% if not loop.last %}, {% endif %}{% endfor %}">{% for v in values %}<i class="{{ v }}"></i>{% endfor %}</span>
+{%- endmacro %}
+
+{#- Линия состояния сведений: known | unknown | conflict | denied | new. -#}
+{% macro state(kind, text) -%}
+<span class="state state--{{ kind }}">{{ text }}</span>
+{%- endmacro %}
+
+{% macro marker(text) -%}
+<span class="marker">{{ text }}</span>
+{%- endmacro %}
+
+{#- Отдельная страница (вход, итог действия): лист с угольной шапкой по центру поля. -#}
+{% macro solo_sheet() -%}
+{%- set weekday, day, iso = sheet_date() -%}
+<div class="solo">
+  <main class="solo-main" id="main">
+    <div class="sheet">
+      <div class="sheet-head carbon">{{ brand() }}<span class="sheet-head-end"><time class="sheet-date num" datetime="{{ iso }}" title="{{ weekday }}">{{ day }}</time>{{ synthetic() }}</span></div>
+      <div class="sheet-body">
+        {{ caller() }}
+        <p class="solo-note">Демонстрация на вымышленных пациентах. Реальные данные не вводите.</p>
+      </div>
+    </div>
+  </main>
+</div>
+{%- endmacro %}

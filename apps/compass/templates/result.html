@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+{#- Сервер дописывает код инцидента в конец сообщения; показываем его отдельно моноширинным. -#}
+{% set text, _, incident = message.partition('. Код ошибки: ') %}
+{% call ui.solo_sheet() %}
+  <div class="solo-title"><h1>{{ title }}</h1></div>
+  <div class="solo-form">
+    {{ ui.notice(None, text ~ ('.' if incident else ''), kind='error') }}
+    {% if incident %}<p class="result-code">Код ошибки <span class="num">{{ incident }}</span></p>{% endif %}
+  </div>
+  <div class="result-actions">
+    {% if g.get('user') %}
+      {{ ui.button('Открыть кабинет', kind='primary', href=url_for('dashboard')) }}
+    {% else %}
+      {{ ui.button('Перейти ко входу', kind='primary', href=url_for('login')) }}
+    {% endif %}
+  </div>
+{% endcall %}
+{% endblock %}

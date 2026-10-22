@@ -1,41 +1,48 @@
 {
-  "schema_version": 1,
-  "downloaded_on": "2026-10-21",
-  "scope": "project-local, static assets only",
-  "permission": "Прямое согласие пользователя в чате 21.10.2026: скачать PT Sans и PT Serif (OFL) из официального открытого репозитория",
-  "origin": "https://github.com/google/fonts (каталог ofl); правообладатель ParaType Ltd; файлы получены с main без закрепления коммита, поэтому проверять по sha256",
-  "license": "SIL Open Font License 1.1; зарезервированные имена PT Sans, PT Serif, ParaType; файлы используются без изменений; тексты лицензий лежат рядом",
+  "schema_version": 2,
+  "updated_on": "2026-10-22",
+  "slice": "UI02",
+  "scope": "project-local static assets of the rebuilt interface (UI02); PT Serif больше не используется",
+  "permission": "PT Sans — согласие пользователя в чате 21.10.2026 (S26A); PT Mono — прямое согласие пользователя в чате 22.10.2026 (UI02): «Да, скачать»",
+  "origin": "https://github.com/google/fonts (каталог ofl); правообладатель ParaType Ltd; файлы с main без закрепления коммита, поэтому проверять по sha256",
+  "license": "SIL Open Font License 1.1; зарезервированные имена PT Sans, PT Serif, PT Mono, ParaType. Файлы раздаются без изменений (OFL-FAQ 1.8, 2.1): не конвертируются в WOFF2 и не урезаются, потому что по OFL-FAQ 2.2.2 и 2.6 это может считаться Modified Version и потребовать переименования. Тексты лицензий лежат рядом.",
+  "weights": "PT Sans 400 и 700; PT Mono только 400 (жирного начертания в google/fonts нет, синтез жирного выключен font-synthesis: none)",
   "files": [
     {
       "path": "apps/compass/static/fonts/PTSans-Regular.ttf",
       "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/PT_Sans-Web-Regular.ttf",
       "bytes": 442960,
-      "sha256": "9cc831490532009bae2b3ce0d39c62adfc889060beb421593bfd9d2396d0f10a"
+      "sha256": "9cc831490532009bae2b3ce0d39c62adfc889060beb421593bfd9d2396d0f10a",
+      "note": "восстановлен из Git a81d278 (S26A, скачан 21.10.2026); sha256 совпадает с прежним замком"
     },
     {
       "path": "apps/compass/static/fonts/PTSans-Bold.ttf",
       "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/PT_Sans-Web-Bold.ttf",
       "bytes": 470240,
-      "sha256": "3128bd5ecf01816e59a23d54c57a7a6b14615b07db53ff277c77376010265b05"
-    },
-    {
-      "path": "apps/compass/static/fonts/PTSerif-Bold.ttf",
-      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptserif/PT_Serif-Web-Bold.ttf",
-      "bytes": 339996,
-      "sha256": "038ba7336bd7ea14f12ad155bed51a4345cac5153275d521dec3ba04021c526e"
+      "sha256": "3128bd5ecf01816e59a23d54c57a7a6b14615b07db53ff277c77376010265b05",
+      "note": "восстановлен из Git a81d278 (S26A, скачан 21.10.2026); sha256 совпадает с прежним замком"
     },
     {
       "path": "apps/compass/static/fonts/OFL-PTSans.txt",
       "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptsans/OFL.txt",
       "bytes": 4425,
-      "sha256": "2758cf7a872827f39661cf8cc24188113c030447aefb5ca7145993650076ca8c"
+      "sha256": "2758cf7a872827f39661cf8cc24188113c030447aefb5ca7145993650076ca8c",
+      "note": "восстановлен из Git a81d278 (S26A)"
     },
     {
-      "path": "apps/compass/static/fonts/OFL-PTSerif.txt",
-      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptserif/OFL.txt",
-      "bytes": 4434,
-      "sha256": "ddf311c28ddf5a5ad9747649837346b67bed9d356789c3072bb27dbce49e514d"
+      "path": "apps/compass/static/fonts/PTMono-Regular.ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptmono/PTM55FT.ttf",
+      "bytes": 185912,
+      "sha256": "cbe732b3b8fd211fd986ebdfc9b870ddeca4faab0bb5425fc509b37f9b4ac804",
+      "note": "скачан 22.10.2026; последний коммит файла в google/fonts 90abd17b4f97671435798b6147b698aa9087612f (по отчёту web-researcher)"
+    },
+    {
+      "path": "apps/compass/static/fonts/OFL-PTMono.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ptmono/OFL.txt",
+      "bytes": 4448,
+      "sha256": "511125dc85198375795fdbc109d088654d3b7f9dbd3ccb7bf93d844aef0b153c",
+      "note": "скачан 22.10.2026"
     }
   ],
-  "coverage_check": "evidence/S26A/fonts-check.json: русские А–Я, а–я, Ё, ё, цифры, латиница, «», —, №, …, ₽, ≥ присутствуют; нет ⚠ и ◇ (подставляются системным шрифтом)"
+  "coverage_check": "tools/check_fonts.py: русские А–Я, а–я, Ё, ё, цифры, латиница, «», —, №, …, ₽, ≥ есть во всех трёх файлах; ⚠ и ◇ нет (не использовать)"
 }

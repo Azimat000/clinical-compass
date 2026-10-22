@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T14:27:58+00:00",
+  "generatedAt": "2026-10-22T15:30:00+00:00",
   "title": "Design System: Клинический компас",
   "extensions": {
     "colorMeta": {
@@ -413,7 +413,7 @@
       },
       {
         "name": "The Self-Hosted Rule",
-        "body": "Шрифты — локальные файлы woff2 с лицензией OFL рядом с приложением (CSP `default-src 'self'`). Прототип UI01 брал их из системы через `local()`; UI02 не принимается, пока PT Sans 400/700 и PT Mono 400 не лежат файлами с проверенной лицензией.",
+        "body": "Шрифты — локальные файлы ParaType рядом с приложением, без изменений: apps/compass/static/fonts/ (PT Sans 400 и 700, PT Mono 400, SIL OFL 1.1, тексты лицензий рядом, происхождение и sha256 — docs/design/fonts.lock.json, проверка — `python3 tools/check_fonts.py`). Формат TTF как в источнике: конвертация в WOFF2 или урезание набора знаков по OFL-FAQ 2.2.2 и 2.6 может считаться изменённой версией и потребовать другого имени. Жирного PT Mono нет, синтез жирного выключен (`font-synthesis: none`), поэтому коды флагов набраны PT Mono 400.",
         "section": "typography"
       },
       {

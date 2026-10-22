@@ -1,0 +1,284 @@
+/* Клинический компас · направление A «Лист результатов» (DESIGN.md, UI01).
+   Только локальные ресурсы: CSP default-src 'self', без inline-стилей. */
+
+/* ---------- Шрифты: файлы ParaType без изменений, SIL OFL 1.1 (fonts/OFL-*.txt) ---------- */
+@font-face { font-family: "PT Sans"; src: url("fonts/PTSans-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PT Sans"; src: url("fonts/PTSans-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "PT Mono"; src: url("fonts/PTMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* ---------- Токены ---------- */
+:root {
+  /* цвет */
+  --carbon: #1a1f23;
+  --on-carbon: #d5dce2;
+  --carbon-line: #4a535b;
+  --ink: #15191d;
+  --ink-soft: #2b3238;
+  --muted: #56616b;
+  --sheet: #ffffff;
+  --ground: #e9edf0;
+  --band: #f7f9fa;
+  --hover: #dfe4e8;
+  --rule: #e6eaed;
+  --border: #d3dae0;
+  --control: #7f8a94;   /* рамки полей, ≥3:1 к белому */
+  --flag: #b8261b;      /* только отклонение, требующее врача */
+  --better: #1f6b45;    /* только метка «лучше» */
+  --marker: #e3f08a;    /* только причина внимания */
+  --focus: var(--ink);
+
+  /* шрифт */
+  --font: "PT Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "PT Mono", Menlo, Consolas, monospace;
+  --fs-title: 26px;
+  --fs-title-compact: 22px;
+  --fs-title-patient: 24px;
+  --fs-section: 16px;
+  --fs-body: 15px;
+  --fs-cell: 14px;
+  --fs-action: 17px;
+  --fs-meta: 13px;
+  --fs-label: 12px;
+
+  /* ритм 4px */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 12px;
+  --sp-lg: 16px;
+  --sp-xl: 24px;
+  --sp-sheet: 28px;
+
+  /* форма */
+  --r-mark: 2px;
+  --r-control: 4px;
+  --r-sheet: 8px;
+  --h-control: 36px;
+  --h-action: 52px;
+
+  /* глубина: тень только у того, что лежит поверх страницы */
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, .12);
+
+  /* движение */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --t-fast: 120ms;
+  --t-base: 180ms;
+}
+
+/* ---------- Основа ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-color: var(--control) var(--ground); -webkit-tap-highlight-color: rgba(26, 31, 35, .12); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 var(--fs-body)/1.45 var(--font);
+  font-synthesis: none;
+  caret-color: var(--ink);
+  overflow-wrap: break-word;
+}
+::selection { background: var(--marker); color: var(--ink); }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: var(--fs-title); line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+h2 { font-size: var(--fs-section); line-height: 1.3; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+time, .num { font-variant-numeric: tabular-nums; }
+.num, .mono { font-family: var(--mono); font-size: 0.92em; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: var(--sp-sm); top: var(--sp-sm); z-index: 10; padding: var(--sp-sm) var(--sp-md);
+  background: var(--sheet); color: var(--ink); border: 1px solid var(--ink); border-radius: var(--r-control); transform: translateY(-200%); }
+.skip:focus-visible { transform: none; }
+
+/* ---------- Марка и пометка учебных данных ---------- */
+.brand { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
+.brand svg { flex: none; }
+.synthetic { font-size: var(--fs-label); line-height: 1.3; color: var(--muted); border: 1px solid var(--border);
+  border-radius: var(--r-control); padding: 1px 6px; white-space: nowrap; }
+
+/* Угольная полоса: шапка листа, верх пациента, мобильная полоса врача */
+.carbon { background: var(--carbon); color: var(--sheet); --focus: var(--sheet); }
+.carbon .synthetic { color: var(--on-carbon); border-color: var(--carbon-line); }
+
+/* ---------- Лист ---------- */
+.sheet { background: var(--sheet); border: 1px solid var(--border); border-radius: var(--r-sheet); overflow: hidden; }
+.sheet-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-sm) var(--sp-lg);
+  min-height: 44px; padding: 10px var(--sp-sheet); font-size: var(--fs-meta); }
+.sheet-body { padding: var(--sp-xl) var(--sp-sheet) var(--sp-sheet); }
+.card { background: var(--sheet); border: 1px solid var(--border); border-radius: var(--r-sheet); padding: var(--sp-lg) 18px; }
+.meta { font-size: var(--fs-meta); color: var(--muted); }
+.lede { color: var(--ink-soft); max-width: 70ch; }
+
+/* ---------- Кнопки ---------- */
+.button { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-sm);
+  min-height: var(--h-control); padding: 0 14px; border: 1px solid var(--control); border-radius: var(--r-control);
+  background: var(--sheet); color: var(--ink); font: 700 var(--fs-cell)/1.2 var(--font); text-decoration: none; text-align: center;
+  cursor: pointer; touch-action: manipulation; padding-block: 8px; text-wrap: balance; max-width: 100%;
+  transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
+.button:hover { border-color: var(--ink); }
+.button:active { background: var(--hover); }
+.button--primary { background: var(--carbon); border-color: var(--carbon); color: var(--sheet); }
+.button--primary:hover { background: var(--ink); border-color: var(--ink); }
+.button--primary:active { background: var(--ink-soft); }
+.button--block { width: 100%; }
+.button--action { width: 100%; min-height: var(--h-action); font-size: var(--fs-action); }
+.button--link { border-color: transparent; background: none; padding: 0 var(--sp-xs); font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
+.button--link:hover { border-color: transparent; text-decoration-thickness: 2px; }
+.button:disabled, .button[aria-disabled="true"] { cursor: not-allowed; background: var(--band); border-color: var(--border); color: var(--muted); }
+.button--primary:disabled, .button--primary[aria-disabled="true"] { background: var(--hover); border-color: var(--hover); color: var(--muted); }
+/* Ожидание ответа сервера: подпись с «…» в разметке и штриховая черта, как у «сведений ещё нет». Без анимации (движение — UI07). */
+.button[aria-busy="true"] { cursor: progress; position: relative; }
+.button[aria-busy="true"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px; border-top: 2px dashed currentColor; }
+
+/* ---------- Поля ---------- */
+.field { display: grid; gap: 6px; }
+.field + .field, .field + .choice, .choice + .field { margin-top: var(--sp-lg); }
+.field label, .field legend, .choice legend { font-size: var(--fs-cell); font-weight: 700; padding: 0; }
+.hint { font-size: var(--fs-meta); color: var(--muted); }
+.input, .select, .textarea {
+  width: 100%; min-height: var(--h-control); padding: 0 10px; border: 1px solid var(--control); border-radius: var(--r-control);
+  background: var(--sheet); color: var(--ink); font: 400 var(--fs-cell)/1.3 var(--font);
+  transition: border-color var(--t-fast) var(--ease-out); }
+.input--lg { min-height: 44px; font-size: 16px; }
+.textarea { min-height: 96px; padding: 8px 10px; line-height: 1.45; resize: vertical; }
+.select { appearance: none; padding-right: 32px; background-image: url("icons/chevron.svg"); background-repeat: no-repeat; background-position: right 10px center; background-size: 12px 8px; }
+.input:hover, .select:hover, .textarea:hover { border-color: var(--ink-soft); }
+.input:focus-visible, .select:focus-visible, .textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.input::placeholder, .textarea::placeholder { color: var(--muted); }
+.input:disabled, .select:disabled, .textarea:disabled { background: var(--band); border-color: var(--border); color: var(--muted); cursor: not-allowed; }
+/* Ошибка поля: двойная рамка чернилами и текст причины. Красный остаётся за клиническим отклонением. */
+.input[aria-invalid="true"], .select[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.field-error { display: flex; gap: var(--sp-sm); align-items: baseline; font-size: var(--fs-meta); font-weight: 700; }
+.field-error::before { content: ""; flex: none; width: 16px; height: 16px; background: url("icons/alert.svg") center / 16px 16px no-repeat; transform: translateY(3px); }
+
+/* Выбор: флажки и переключатели крупной областью касания */
+.choice { border: 0; margin: 0; padding: 0; min-width: 0; }
+.choice legend { margin-bottom: 6px; }
+.choice-list { display: grid; gap: 2px; }
+.option { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 var(--sp-sm); margin: 0 calc(-1 * var(--sp-sm));
+  border-radius: var(--r-control); cursor: pointer; font-size: var(--fs-cell); }
+.option:hover { background: var(--band); }
+.option input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--carbon); cursor: inherit; }
+.option input:focus-visible { outline-offset: 3px; }
+.option:has(input:disabled) { color: var(--muted); cursor: not-allowed; background: none; }
+.choice--invalid .choice-list { padding: var(--sp-xs) var(--sp-sm); margin: 0 calc(-1 * var(--sp-sm)); border: 1.5px solid var(--ink); border-radius: var(--r-control); }
+
+/* Сегменты: «С сигналами / Все» */
+.seg { display: inline-flex; border: 1px solid var(--control); border-radius: var(--r-control); overflow: hidden; }
+.seg a, .seg button { appearance: none; border: 0; background: var(--sheet); color: var(--ink); font: 400 var(--fs-cell)/1 var(--font);
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 var(--sp-md); text-decoration: none; cursor: pointer; }
+.seg a + a, .seg button + button { border-left: 1px solid var(--control); }
+.seg a:hover, .seg button:hover { background: var(--band); }
+.seg [aria-current="true"], .seg [aria-pressed="true"] { background: var(--carbon); color: var(--sheet); }
+.seg a:focus-visible, .seg button:focus-visible { outline-offset: -3px; }
+.seg [aria-current="true"]:focus-visible, .seg [aria-pressed="true"]:focus-visible { outline-color: var(--sheet); }
+
+/* ---------- Статусы ---------- */
+/* Флаг строки: словом, рамкой, без заливки */
+.flag { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 22px; padding: 0 6px;
+  border: 1.5px solid var(--flag); border-radius: var(--r-mark); color: var(--flag); font: 400 var(--fs-label)/1 var(--mono);
+  letter-spacing: .02em; white-space: nowrap; }
+/* Метка самочувствия: лучше — верхняя половина, хуже — нижняя, без изменений — черта, не указано — пунктир */
+.wb { display: inline-flex; gap: 3px; vertical-align: middle; }
+.wb i { position: relative; display: block; width: 16px; height: 16px; overflow: hidden; border: 1.5px solid var(--ink); border-radius: var(--r-mark); }
+.wb i::after { content: ""; position: absolute; left: 0; right: 0; background: currentColor; }
+.wb .better { color: var(--better); border-color: var(--better); }
+.wb .better::after { top: 0; height: 50%; }
+.wb .worse { color: var(--flag); border-color: var(--flag); }
+.wb .worse::after { bottom: 0; height: 50%; }
+.wb .same::after { top: 5.5px; left: 2px; right: 2px; height: 2px; background: var(--ink); }
+.wb .unknown { border-style: dashed; border-color: var(--muted); }
+.wb .unknown::after { display: none; }
+.wb--calm .worse { color: var(--ink); border-color: var(--ink); } /* пациент: своё «хуже» не красное */
+/* Линия состояния сведений */
+.state { display: inline-flex; align-items: center; gap: var(--sp-sm); white-space: nowrap; }
+.state::before { content: ""; flex: none; width: 22px; height: 0; border-top: 2px solid currentColor; }
+.state--unknown { color: var(--muted); }
+.state--unknown::before { border-top-style: dashed; }
+.state--conflict::before { height: 6px; border-bottom: 2px solid currentColor; }
+.state--denied::before { border-top-width: 1px; }
+.state--new { color: var(--flag); }
+.marker { background: var(--marker); padding: 0 3px; font-weight: 700; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+/* ---------- Сообщения на экране ---------- */
+/* Строка бланка между линиями, а не карточка в листе. Вид знака перед текстом — смысл:
+   черта — сведение, «!» — ошибка, «пауза» — вход временно закрыт, толстая черта — принято сервером. */
+.notice { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 2px var(--sp-md); align-items: start; padding: var(--sp-md) 0;
+  border-block: 1px solid var(--rule); font-size: var(--fs-cell); }
+.notice > * { grid-column: 2; }
+.notice::before { grid-column: 1; grid-row: 1 / span 2; content: ""; width: 22px; height: 0; margin-top: 9px; border-top: 2px solid currentColor; }
+.notice-title { font-weight: 700; font-size: var(--fs-body); }
+.notice p { text-wrap: pretty; }
+.notice p + p { margin-top: 2px; }
+.notice--error, .notice--locked { border-top: 2px solid var(--ink); border-bottom-color: var(--ink); }
+.notice--error::before { width: 18px; height: 18px; margin-top: 2px; border: 0; background: url("icons/alert.svg") center / 18px 18px no-repeat; }
+.notice--locked::before { width: 18px; height: 18px; margin-top: 2px; border: 0; background: url("icons/pause.svg") center / 18px 18px no-repeat; }
+.notice--done::before { border-top-width: 4px; margin-top: 8px; }
+
+/* Пусто, загрузка, ошибка раздела */
+.empty { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-sm) var(--sp-md);
+  padding: var(--sp-md) 14px; border: 1px dashed var(--control); border-radius: var(--r-control); color: var(--muted); font-size: var(--fs-cell); }
+.empty a { color: var(--ink); font-weight: 700; }
+.loading { display: flex; align-items: center; gap: var(--sp-md); color: var(--muted); font-size: var(--fs-cell); }
+/* Загрузка: сведений ещё нет — та же штриховая линия, что у «неизвестно», без мигания */
+.loading::before { content: ""; flex: none; width: 22px; border-top: 2px dashed currentColor; }
+.skeleton-line { height: 12px; border-radius: var(--r-mark); background: var(--rule); }
+.skeleton-line + .skeleton-line { margin-top: var(--sp-sm); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
+
+/* ---------- Отдельная страница: вход и итог действия ---------- */
+.solo { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--sp-xl) var(--sp-lg); }
+.solo-main { width: 100%; max-width: 440px; }
+.solo .sheet-head { padding: 10px var(--sp-xl); }
+.sheet-head-end { display: inline-flex; align-items: center; gap: var(--sp-md); }
+.sheet-date { color: var(--on-carbon); white-space: nowrap; }
+.solo .sheet-body { padding: var(--sp-xl) var(--sp-xl) 0; }
+/* Отчерк под заголовком чернилами 1px, как под шапкой таблицы бланка */
+.solo-title { padding-bottom: var(--sp-md); border-bottom: 1px solid var(--ink); }
+.solo h1 { font-size: var(--fs-title-patient); }
+.solo-sub { margin-top: 6px; color: var(--muted); font-size: var(--fs-cell); }
+.solo-form { margin-top: var(--sp-xl); }
+.solo-form .notice { margin-bottom: var(--sp-lg); }
+/* Отчерк заголовка уже лежит сверху: вторая линия рядом читалась бы как «противоречие» */
+.solo-title + .solo-form > .notice:first-child { border-top: 0; padding-top: 0; }
+.solo-form .button--action { margin-top: var(--sp-xl); }
+/* Поля входа 44px/16px: 16px не даёт iOS увеличивать страницу при фокусе, 44px — область касания с телефона */
+.solo-note { margin: var(--sp-xl) calc(-1 * var(--sp-xl)) 0; padding: var(--sp-md) var(--sp-xl); border-top: 1px solid var(--rule); background: var(--band);
+  font-size: var(--fs-meta); color: var(--ink); text-wrap: pretty; }
+.result-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-xl); }
+.result-code { margin-top: var(--sp-md); font-size: var(--fs-meta); color: var(--muted); }
+
+/* Телефон: лист на весь экран, без поля вокруг */
+@media (max-width: 480px) {
+  body:has(.solo) { background: var(--sheet); }
+  .solo { justify-content: flex-start; padding: 0; }
+  .solo-main { max-width: none; }
+  .solo .sheet { border: 0; border-radius: 0; }
+  .solo .sheet-head { padding: 10px var(--sp-lg); min-height: 52px; }
+  .solo .sheet-body { padding: var(--sp-xl) var(--sp-lg) 0; }
+  .solo-note { margin-inline: calc(-1 * var(--sp-lg)); padding-inline: var(--sp-lg); }
+  .sheet-date { display: none; }
+  .result-actions .button { flex: 1 1 100%; }
+}
+
+/* ---------- Каталог компонентов (только для проверки, COMPASS_UI_GALLERY=1) ---------- */
+.gallery { max-width: 1120px; margin: 0 auto; padding: var(--sp-xl) var(--sp-lg) 48px; }
+.gallery > .sheet + .sheet { margin-top: var(--sp-xl); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--sp-xl) var(--sp-sheet); }
+.gallery-grid > div > h3 { font-size: var(--fs-meta); font-weight: 400; color: var(--muted); margin-bottom: var(--sp-sm); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-sm); }
+.row + .row { margin-top: var(--sp-sm); }
+.stack > * + * { margin-top: var(--sp-md); }
+.gallery .sheet-body > h2 { margin-bottom: var(--sp-lg); }
+@media (max-width: 480px) { .gallery { padding: var(--sp-sm) var(--sp-sm) 120px; } .gallery .sheet-body { padding: var(--sp-lg); } .gallery .sheet-head { padding: 10px var(--sp-lg); } }
+
+/* Переключатель данных каталога: служебный, не часть дизайна */
+.dev-toggle { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 20; display: flex; flex-wrap: wrap; justify-content: center; gap: 2px;
+  max-width: calc(100vw - 16px); padding: 3px; border-radius: 8px; background: #d9dde1; font: 400 12px/1 system-ui, sans-serif; box-shadow: var(--shadow-float); }
+.dev-toggle a { padding: 6px 8px; border-radius: 6px; color: #333; text-decoration: none; white-space: nowrap; }
+.dev-toggle a[aria-current="true"] { background: #fff; color: #000; }
+.dev-toggle span { align-self: center; color: #666; padding: 0 2px; }

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% import 'components.html' as ui %}
+{% block title %}Вход{% endblock %}
+{% block body %}
+{#- После неверного пароля логин остаётся, фокус сразу в пароле. -#}
+{% set retry = true if error and failure != 'limited' else false %}
+{% set problem = {'aria-describedby': 'login-problem'} if error else {} %}
+{% call ui.solo_sheet() %}
+  <div class="solo-title">
+    <h1>Вход</h1>
+    <p class="solo-sub">Кабинет врача или пациента</p>
+  </div>
+  <form class="solo-form" method="post" action="{{ url_for('login') }}">
+    {% if failure == 'limited' %}
+      {{ ui.notice('Вход временно закрыт', 'Слишком много неудачных попыток. Повторите через 15 минут.', kind='locked', id='login-problem') }}
+    {% elif error %}
+      {{ ui.notice('Не удалось войти', 'Проверьте логин и пароль.', kind='error', id='login-problem') }}
+    {% endif %}
+    <input type="hidden" name="csrf" value="{{ challenge }}">
+    {{ ui.field('login', 'Логин', value=login_value, required=True, autocomplete='username', size='lg',
+                extra=dict(problem, autocapitalize='none', spellcheck='false', maxlength='100', autofocus=not retry)) }}
+    {{ ui.field('password', 'Пароль', type='password', required=True, autocomplete='current-password', size='lg',
+                extra=dict(problem, maxlength='256', autofocus=retry)) }}
+    {{ ui.button('Войти', kind='primary', size='action') }}
+  </form>
+{% endcall %}
+{% endblock %}

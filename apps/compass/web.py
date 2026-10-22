@@ -5,25 +5,36 @@ import json
 import secrets
 import sqlite3
 from werkzeug.exceptions import HTTPException
-from flask import Flask, abort, g, jsonify, redirect, request, url_for
+from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list, pending_signal_counts
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
 from . import first_visits, follow_up, report_drafts
 
+# Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
+READY_VIEWS = frozenset({'login.html', 'result.html'})
+
 
 def create_app(database=None):
-    app = Flask(__name__, static_folder=None, template_folder=None)
+    app = Flask(__name__, static_folder='static', template_folder='templates')
     app.json.ensure_ascii = False
     app.config.update(DATABASE=str(database or os.environ.get('COMPASS_DB', 'var/compass.sqlite3')),
                       MAX_CONTENT_LENGTH=65536, TRUSTED_HOSTS=['localhost', '127.0.0.1', '[::1]'],
-                      AUTH_COOKIE_SECURE=os.environ.get('COMPASS_COOKIE_SECURE') == '1')
+                      AUTH_COOKIE_SECURE=os.environ.get('COMPASS_COOKIE_SECURE') == '1',
+                      UI_GALLERY=os.environ.get('COMPASS_UI_GALLERY') == '1')
     db = connect(app.config['DATABASE'])
     try:
         migrate(db)
         assessments.install_form(db)
     finally:
         db.close()
+
+    @app.template_global()
+    def sheet_date():
+        """Server date for the sheet header, as on a printed results form."""
+        day = records.today()
+        weekday = ('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье')[day.weekday()]
+        return weekday, day.strftime('%d.%m.%Y'), day.isoformat()
 
     def get_db():
         if 'db' not in g:
@@ -34,12 +45,23 @@ def create_app(database=None):
         if g.user['role'] != required:
             abort(403)
 
+    def wants_html():
+        """Browsers get pages; clients that ask for JSON keep the technical answers."""
+        if request.path.startswith('/api/'):
+            return False
+        accepted = request.accept_mimetypes
+        if not accepted:  # no Accept header means any type is acceptable
+            return True
+        return accepted.best_match(['text/html', 'application/json', 'text/plain']) == 'text/html'
+
     def interface_response(view, **context):
-        """Retired HTML boundary; never serialize former template context.
+        """Render rebuilt screens; never serialize template context of missing ones.
 
         Keep login/invitation/assessment receipts usable without a browser UI.
         Existing mutation handlers, validation and access checks remain in place.
         """
+        if view in READY_VIEWS and wants_html():
+            return render_template(view, **context)
         if view == 'login.html':
             return jsonify(csrf=context['challenge'], error=context['error'])
         if view == 'invitation.html':
@@ -64,6 +86,15 @@ def create_app(database=None):
     def error_page(title, message):
         return title + '\n' + message + '\n'
 
+    def failure_body(title, message):
+        """Error pages for browsers; plain text for API and JSON clients or if rendering fails."""
+        if wants_html():
+            try:
+                return render_template('result.html', title=title, message=message), 'text/html; charset=utf-8'
+            except Exception:  # never let the error page hide the original failure
+                app.logger.error('result_page_failure')
+        return error_page(title, message), 'text/plain; charset=utf-8'
+
     @app.errorhandler(Exception)
     def request_failure(error):
         if isinstance(error, HTTPException):
@@ -76,8 +107,9 @@ def create_app(database=None):
                 405: ('Действие недоступно', 'Используйте соответствующую форму в кабинете.'),
             }.get(code, ('Запрос не выполнен', 'Откройте кабинет и проверьте состояние операции.'))
             response = error.get_response()
-            response.set_data(error_page(title, message))
-            response.content_type = 'text/plain; charset=utf-8'
+            body, content_type = failure_body(title, message)
+            response.set_data(body)
+            response.content_type = content_type
             return response
         # Never log exception text, URLs, headers, form bodies or traceback: they
         # can contain clinical text, credentials, SQL parameters or private paths.
@@ -88,7 +120,8 @@ def create_app(database=None):
         message = ('Не удалось завершить запрос; результат операции неизвестен. Отсутствие сигнала не означает отсутствие риска. '
                    'После восстановления откройте кабинет и проверьте сохранённые записи перед повтором. '
                    'Не ожидайте помощи через демо. Код ошибки: ' + incident)
-        response = app.make_response((error_page('Сервис временно недоступен', message), 503 if unavailable else 500))
+        body, content_type = failure_body('Сервис временно недоступен', message)
+        response = app.make_response((body, 503 if unavailable else 500, {'Content-Type': content_type}))
         if unavailable:
             response.headers['Retry-After'] = '5'
         return response
@@ -120,7 +153,7 @@ def create_app(database=None):
                     or any(len(request.files.getlist(key)) != 1 for key in request.files)
                     or set(request.form).intersection(request.files)):
                 abort(400)
-        if request.endpoint in ('static', 'healthz', 'login') or request.endpoint is None:
+        if request.endpoint in ('static', 'healthz', 'login', 'ui_gallery') or request.endpoint is None:
             return
         g.user = access.resolve_session(get_db(), request.cookies.get(access.COOKIE, ''))
         if not g.user:
@@ -146,7 +179,8 @@ def create_app(database=None):
         response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['Referrer-Policy'] = 'no-referrer'
-        response.headers['Cache-Control'] = 'no-store'
+        # Fonts, styles and icons hold no personal data: revalidate instead of refetching.
+        response.headers['Cache-Control'] = 'no-cache' if request.endpoint == 'static' else 'no-store'
         if app.config['AUTH_COOKIE_SECURE']:
             response.headers['Strict-Transport-Security'] = 'max-age=31536000'
         return response
@@ -155,9 +189,29 @@ def create_app(database=None):
     def healthz():
         return health(get_db())
 
+    if app.config['UI_GALLERY']:
+        from .ui_fixtures import CASES
+
+        @app.get('/ui/components', defaults={'page': 'catalog'})
+        @app.get('/ui/components/<page>')
+        def ui_gallery(page):
+            """Component catalogue and page previews for design checks; no service data, off unless COMPASS_UI_GALLERY=1."""
+            case = request.args.get('data', 'demo')
+            if case not in CASES or page not in ('catalog', 'login', 'login-error', 'login-locked', 'result'):
+                abort(404)
+            d = CASES[case]
+            toggle = {'page': page, 'case': case}
+            if page == 'catalog':
+                return render_template('components_gallery.html', d=d, toggle=toggle)
+            if page == 'result':
+                return render_template('result.html', title=d['result_title'], message=d['result_message'], toggle=toggle)
+            failure = {'login': None, 'login-error': 'invalid', 'login-locked': 'limited'}[page]
+            return render_template('login.html', challenge='preview-only', error=failure, failure=failure,
+                                   login_value=d['login_value'] if failure else '', toggle=toggle)
+
     @app.route('/login', methods=['GET', 'POST'])
     def login():
-        error, status = None, 200
+        error, status, failure, uid = None, 200, None, ''
         if request.method == 'POST':
             if not access.consume_challenge(get_db(), request.cookies.get(access.CHALLENGE_COOKIE, ''), request.form.get('csrf', '')):
                 abort(403)
@@ -173,7 +227,8 @@ def create_app(database=None):
             error = 'Слишком много попыток. Повторите через 15 минут.' if failure == 'limited' else 'Не удалось войти. Проверьте логин и пароль.'
             status = 429 if failure == 'limited' else 401
         challenge = access.login_challenge(get_db())
-        response = app.make_response((interface_response('login.html', challenge=challenge, error=error), status))
+        response = app.make_response((interface_response('login.html', challenge=challenge, error=error,
+                                                         failure=failure, login_value=uid), status))
         cookie(response, access.CHALLENGE_COOKIE, challenge, 600)
         return response
 

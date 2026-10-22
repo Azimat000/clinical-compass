@@ -110,8 +110,9 @@ class SecurityTests(unittest.TestCase):
         self.app.logger.addHandler(handler)
         sentinel='SYNTHETIC_TEMPLATE_PRIVATE_VALUE'
         try:
+            # '/login' is a rebuilt page (UI02); '/' has no template yet and answers 503 without rendering.
             with patch('apps.compass.web.render_template',side_effect=RuntimeError(sentinel)):
-                r=self.clients['doc-a'].get('/')
+                r=self.app.test_client().get('/login')
                 missing=self.clients['doc-a'].get('/missing')
             self.assertEqual(500,r.status_code)
             self.assertEqual(404,missing.status_code)

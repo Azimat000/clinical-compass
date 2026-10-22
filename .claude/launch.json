@@ -4,8 +4,32 @@
     {
       "name": "ui01-prototypes",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8765", "--bind", "127.0.0.1", "--directory", "docs/design/prototypes/UI01"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8765",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "docs/design/prototypes/UI01"
+      ],
       "port": 8765
+    },
+    {
+      "name": "ui02-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        "COMPASS_UI_GALLERY=1",
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui02-review-20261022.sqlite3",
+        "serve",
+        "--port",
+        "8020"
+      ],
+      "port": 8020
     }
   ]
 }
