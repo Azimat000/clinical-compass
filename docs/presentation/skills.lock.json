@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "installed_on": "2026-10-23",
+  "installed_by": "Claude Code по прямому поручению пользователя 23.10.2026 (презентация к предзащите и демо-дню)",
+  "note": "Навыки — инструкции без исполняемых скриптов. Сторонние права сохраняются за авторами. Обновлять только копированием из указанного коммита с пересчётом хешей.",
+  "skills": [
+    {
+      "name": "pitch-craft",
+      "repo": "https://github.com/ooiyeefei/ccc",
+      "commit": "4e6e08abf6f26c452d9c87351f36b0dd83683fa8",
+      "upstream_path": "skills/pitch-craft",
+      "license": "MIT",
+      "use": "речь к слайдам, тайминг, финал",
+      "local_changes": [
+        "добавлен LICENSE из корня репозитория",
+        "не скопированы evals и README"
+      ],
+      "path": ".claude/skills/pitch-craft",
+      "files": {
+        "LICENSE": "2a65b4f259ab9143b4712425fb90b9f62c95b2db6c721600129da1348c923c0d",
+        "SKILL.md": "8bb3e528705842724e77a70c792c532ba9f325befdfb9622cf171ad2e6159094",
+        "references/human-voice.md": "51822b47005bc79d0de315764d98db0ad16c9bbfa86ee0715f357908f89966ef",
+        "references/storytelling.md": "a09d6e8c980c08fc8c8197d895b5788701502629b9f32389a4d1948e600c7c4f",
+        "references/timing.md": "84473a5055aace30f2e5a2382ca7e05881a4c2a401cd7595c27f8510cb629b7d"
+      }
+    },
+    {
+      "name": "theme-factory",
+      "repo": "https://github.com/anthropics/skills",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "upstream_path": "skills/theme-factory",
+      "license": "Apache-2.0",
+      "use": "палитры и шрифтовые пары",
+      "local_changes": [],
+      "path": ".claude/skills/theme-factory",
+      "files": {
+        "LICENSE.txt": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+        "SKILL.md": "c35893e221e28895c52143cc11bf30e41a44817796b39d4b15727dadc9796552",
+        "theme-showcase.pdf": "3e126eca9fe99088051f7cb984c97cedb31c7d9e09ce0ba5d61bd01e70a0d253",
+        "themes/arctic-frost.md": "868a75a8fb5b2a61d0f0ab87c437fe632d3cbab6371c418f06aa2816ac109ae0",
+        "themes/botanical-garden.md": "222cb8e7496abc9b75b29453c809fb9839e7e4b01fa45deecdd896b38d087765",
+        "themes/desert-rose.md": "bd065b8629be3b64655183927e248e3d892a27b8d184b009cfba89c96102744f",
+        "themes/forest-canopy.md": "ecb722efa24688e808b5bf323c334ca2349e989cfddd72ce8400ce5d4c4bd3e7",
+        "themes/golden-hour.md": "3444a00df971d3c2f06b665e21a2e9eb5d7d7d6f6281f2758773b8345776a139",
+        "themes/midnight-galaxy.md": "0e134c4c0324df41e34ac314269aa6829cd378cf3c304b31858d0cd158d2f944",
+        "themes/modern-minimalist.md": "b8bc572b75948d4df69c401af703b9262ed6820a3ceb270da30a529e92763614",
+        "themes/ocean-depths.md": "a7ad8eec85341dbfcb2665da827a4b6a4baee08ab3335ac02421f18e6b46b2e2",
+        "themes/sunset-boulevard.md": "658af11ab04be4923692571081ffb42a428141ae537703117b9236d9f8ee22a3",
+        "themes/tech-innovation.md": "183648163026dd5eeba3df5effa335b55ba333c3ee1fe215278605e55f40a52a"
+      }
+    },
+    {
+      "name": "demo-day-deck",
+      "repo": "local",
+      "license": "проект HAC",
+      "use": "сводный навык: пять разделов организатора, оформление, проверка",
+      "path": ".claude/skills/demo-day-deck",
+      "files": {
+        "SKILL.md": "a2387b999540d52e7541d50d8ecaba854c493252d8034863413886b2d0e4518b",
+        "references/checklists.md": "6c7e7871c18c236fbd64e111f0e6e39bd27df55b24bc58ed210c0ef1cb43c40b"
+      }
+    }
+  ],
+  "also_used_existing": [
+    "anthropic-skills:pptx (сборка .pptx, проверка)",
+    "dataviz (графики)",
+    "humanizer (тексты для людей)"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "measured_on": "23.10.2026",
+  "demo_url": "",
+  "slices_accepted": 53,
+  "tests_app": 518,
+  "tests_tools": 70,
+  "tests_total": 588,
+  "coverage_tool": "7.17",
+  "coverage_service_pct": 95,
+  "coverage_package_pct": 89,
+  "coverage_note": "покрытие — по коду, который выполняет веб-сервис, без консольного запуска, отключённой песочницы расширений и отложенного модуля поиска по корпусу (по всему пакету 89 %)",
+  "latency_worst_median_ms": 16,
+  "security_tests": 27,
+  "screenshots_reviewed": 261,
+  "latency": [
+    {"label": "Список пациентов", "path": "/", "median": 8.7, "p95": 47.4},
+    {"label": "Сводка к приёму", "path": "/patients/P101/follow-up", "median": 4.7, "p95": 5.2},
+    {"label": "План и препараты", "path": "/patients/P103/decisions", "median": 8.9, "p95": 9.8},
+    {"label": "Карточка пациента", "path": "/demo/P101", "median": 15.5, "p95": 16.9},
+    {"label": "Сообщения", "path": "/patients/P101/communication", "median": 3.6, "p95": 4.9}
+  ],
+  "coverage_modules": [
+    {"label": "Препараты", "module": "medications.py", "pct": 99},
+    {"label": "Права и доступ", "module": "access.py", "pct": 98},
+    {"label": "Повторное наблюдение", "module": "follow_up.py", "pct": 98},
+    {"label": "Записи пациента", "module": "records.py", "pct": 97},
+    {"label": "Анкеты", "module": "assessments.py", "pct": 96},
+    {"label": "Сообщения", "module": "communication.py", "pct": 96},
+    {"label": "Веб-слой", "module": "web.py", "pct": 95},
+    {"label": "Решения врача", "module": "decisions.py", "pct": 93}
+  ],
+  "dataset": {"patients": 8, "doctors": 3, "weeks": 6, "self_reports": 56, "questionnaires": 72, "medication_marks": 250},
+  "method_rows": [
+    ["Автотесты приложения", "518, все OK", "python -m unittest discover -s apps/tests, 23.10.2026, 181 с"],
+    ["Автотесты инструментов", "70, все OK", "python -m unittest discover -s tools -p 'test_*.py'"],
+    ["Покрытие кода", "95 % / 89 %", "coverage 7.17 при прогоне 518 тестов; 95 % — код веб-сервиса (3 282 оператора), 89 % — весь пакет apps/compass"],
+    ["Время ответа", "медиана 3,6–15,5 мс", "40 последовательных GET-запросов врача на страницу к локальному серверу Flask на копии рабочей базы, MacBook на Apple Silicon"],
+    ["Принятые этапы", "53", "теги slice/* в Git с отчётом приёмки, 18–23.10.2026"],
+    ["Проверки защиты", "27", "тесты test_access.py (17) и test_security.py (10): роли, связи, CSRF, сессии, приглашения"],
+    ["Просмотр экранов", "261 снимок", "снимки экранов в evidence/ за все этапы, ширина 320–1440 px"],
+    ["Демо-данные", "8 пациентов, 3 врача", "рабочая база: 56 самоотчётов, 72 анкеты, 250 отметок о препаратах; все люди вымышленные"]
+  ],
+  "sources": [
+    "ВОЗ / ПАОЗ. Over a billion people living with mental health conditions, 02.09.2025. paho.org/en/news/2-9-2025-over-billion-people-living-mental-health-conditions-services-require-urgent-scale-up",
+    "Consortium Psychiatricum, 2024: распространённость тревоги и депрессии в Москве по скринингу. consortium-psy.com/jour/article/view/15487",
+    "Guo T. et al. Measurement-based care versus standard care for major depression. Am J Psychiatry, 2015; 172(10): 1004–1013. doi:10.1176/appi.ajp.2015.14050652",
+    "Fortney J.C. et al. A Tipping Point for Measurement-Based Care. Psychiatric Services, 2017; 68(2): 179–188",
+    "Федеральный закон № 152-ФЗ «О персональных данных», ст. 10",
+    "Федеральный закон № 323-ФЗ «Об основах охраны здоровья граждан в РФ», ст. 13 и ст. 38",
+    "Постановление Правительства РФ от 30.11.2024 № 1684 «Об утверждении Правил государственной регистрации медицинских изделий» (действует с 01.03.2025)",
+    "Золотарева А.А., 2023: русские версии PHQ-9 и GAD-7; Фаттахов, Горобец: русская версия DASS-42 (источники и права — evidence/S34/research.md, docs/clinical/scales-rights.md)"
+  ]
+}
