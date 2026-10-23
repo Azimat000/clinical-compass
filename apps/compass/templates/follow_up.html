@@ -139,26 +139,10 @@
   </section>
 
   <section class="block" id="fu-assessments" aria-labelledby="h-fa">
-    <h2 id="h-fa">Анкеты DASS-42</h2>
-    {% if data.measured %}
-    <table class="results records">
-      <caption class="visually-hidden">Анкеты за период, сначала новые</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревога</th><th scope="col">Депрессия</th><th scope="col">Стресс</th><th scope="col"><span class="visually-hidden">Переход</span></th></tr></thead>
-      <tbody>
-        {% for a in data.measured %}
-        <tr>
-          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></td>
-          <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub"><span class="nowrap">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}</span>. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
-          {% for key in ['anxiety', 'depression', 'stress'] %}<td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>{% endfor %}
-          <td class="go"><a href="{{ card }}#assessment-{{ a.id }}">к анкете</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <p class="meta">Суммы 0–42 по каждой подшкале, без порогов и общего итога. Пропуск — суммы не считаются, ноль не подставляется. Период в анкете: «{{ data.measured[0].form.period }}». Подсчёт: <span class="num">{{ data.measured[0].scoring_version }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
-    {% else %}
-      {{ ui.empty('Анкет за период нет. Это не означает, что состояние в норме.') }}
-    {% endif %}
+    <h2 id="h-fa">Анкеты за период</h2>
+    {% set chart_groups = data.assessment_trends %}
+    {% set assessment_summary = true %}
+    {% include 'assessment_charts.html' %}
   </section>
 
   <section class="block" id="fu-plan" aria-labelledby="h-plan">

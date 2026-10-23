@@ -220,6 +220,7 @@ class FirstVisitTests(unittest.TestCase):
         self.assertIn('Повторный приём',page)
         self.assertIn(definition['title'],page)
         self.assertIn(definition['id'],page)
-        self.assertIn('<td class="num">14</td>',page)
+        for subscale in definition['subscales'].values():
+            self.assertIn(subscale['label'] + ': <b class="num">14</b>',page)
         self.assertEqual(1,len(self.rows()))
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])

@@ -116,7 +116,7 @@ def _view(db, user, patient_id, values):
         if task['outcome'] == 'conflicting':
             warnings.append(f'Пункт «{task["label"]}»: последняя отметка — противоречие. '
                             'Все авторы и отметки сохранены в разделе выполнения.')
-    return dict(start=start, end=end, generated_at=now(), entries=entries, measured=measured,
+    return dict(start=start, end=end, generated_at=now(), entries=entries, measured=measured, assessment_trends=assessments.trends(measured),
                 encounters=encounters, visits=visits, plans=plans, tasks=tasks, authors=authors,
                 warnings=warnings,
                 missing_diary_days=(date.fromisoformat(end)-date.fromisoformat(start)).days+1-len(days))

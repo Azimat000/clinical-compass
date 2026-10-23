@@ -1,0 +1,568 @@
+{
+  "checks": [
+    {
+      "table": "schema_migrations",
+      "old_rows": 15,
+      "new_rows": 15,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "users",
+      "old_rows": 11,
+      "new_rows": 11,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "sessions",
+      "old_rows": 4,
+      "new_rows": 4,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patients",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "care_relationships",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounters",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search_data",
+      "old_rows": 11,
+      "new_rows": 11,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search_idx",
+      "old_rows": 9,
+      "new_rows": 9,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search_content",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search_docsize",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "encounter_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "observations",
+      "old_rows": 400,
+      "new_rows": 400,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "source_versions",
+      "old_rows": 1,
+      "new_rows": 3,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "catalog_versions",
+      "old_rows": 1,
+      "new_rows": 3,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "assessments",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "self_reports",
+      "old_rows": 56,
+      "new_rows": 56,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "proposals",
+      "old_rows": 16,
+      "new_rows": 16,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "doctor_confirmations",
+      "old_rows": 16,
+      "new_rows": 16,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "care_actions",
+      "old_rows": 16,
+      "new_rows": 16,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "therapy_courses",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "referrals",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "risk_evaluations",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "adverse_events",
+      "old_rows": 6,
+      "new_rows": 6,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "alerts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "conversations",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "messages",
+      "old_rows": 112,
+      "new_rows": 112,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "adherence_reports",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "documents",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "extraction_runs",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "extracted_facts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "consents",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "audit_entries",
+      "old_rows": 432,
+      "new_rows": 432,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "outbox_events",
+      "old_rows": 56,
+      "new_rows": 56,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "event_receipts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "deliveries",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "login_challenges",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "login_limits",
+      "old_rows": 4,
+      "new_rows": 4,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "care_invitations",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "relationship_checks",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entries",
+      "old_rows": 80,
+      "new_rows": 80,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "assessment_form_releases",
+      "old_rows": 1,
+      "new_rows": 3,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "assessment_requests",
+      "old_rows": 32,
+      "new_rows": 32,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "assessment_results",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "decision_drafts",
+      "old_rows": 16,
+      "new_rows": 16,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "age_reviews",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "routine_notifications",
+      "old_rows": 56,
+      "new_rows": 56,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "outbox_attempts",
+      "old_rows": 56,
+      "new_rows": 56,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_contexts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_rule_evaluations",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "critical_events",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "critical_delivery",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "critical_delivery_log",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "message_context",
+      "old_rows": 112,
+      "new_rows": 112,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "message_receipts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "adherence_tasks",
+      "old_rows": 56,
+      "new_rows": 56,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "adherence_entries",
+      "old_rows": 59,
+      "new_rows": 59,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "text_imports",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "extraction_reviews",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search",
+      "old_rows": 80,
+      "new_rows": 80,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search_data",
+      "old_rows": 10,
+      "new_rows": 10,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search_idx",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search_content",
+      "old_rows": 80,
+      "new_rows": 80,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search_docsize",
+      "old_rows": 80,
+      "new_rows": 80,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "clinical_entry_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search_data",
+      "old_rows": 2,
+      "new_rows": 2,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search_idx",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search_content",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search_docsize",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "import_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search_data",
+      "old_rows": 10,
+      "new_rows": 10,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search_idx",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search_content",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search_docsize",
+      "old_rows": 8,
+      "new_rows": 8,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "patient_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "first_visit_versions",
+      "old_rows": 24,
+      "new_rows": 24,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "self_report_drafts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    },
+    {
+      "table": "medication_marks",
+      "old_rows": 0,
+      "new_rows": 0,
+      "prior_rows_unchanged": true,
+      "expected_change_only": true
+    }
+  ],
+  "all_prior_rows_preserved": true,
+  "only_two_new_form_releases": true,
+  "integrity": "ok",
+  "foreign_keys": []
+}

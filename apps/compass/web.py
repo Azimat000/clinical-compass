@@ -610,7 +610,7 @@ def create_app(database=None):
             view.update(kind='link', label='Привязать врача',
                         why='Пока врач не связан с кабинетом, отправлять сведения некому. Код приглашения даёт врач.')
         elif pending:
-            view.update(kind='assessment', label='Заполнить анкету DASS\u201142', task=pending[0],
+            view.update(kind='assessment', label='Заполнить анкету ' + pending[0]['code'].replace('DASS-42', 'DASS\u201142'), task=pending[0],
                         href=url_for('assessment_form', request_id=pending[0]['id']),
                         why='Врач предложил анкету.',
                         note=('Есть ещё анкеты от врача: %d. Они в разделе «Анкеты».' % (len(pending) - 1)) if len(pending) > 1 else None)
@@ -660,6 +660,8 @@ def create_app(database=None):
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
                                pending_assessments=pending, assessment_form=assessments.definition(),
+                               assessment_catalogue=assessments.catalogue(db, g.user, patient_id) if not is_patient else [],
+                               form_names={f['id']: f['code'] for f in assessments.definitions()},
                                assignment_key=(assessment_values.get('assignment_key','') if assessment_values is not None else secrets.token_hex(16)),
                                assessment_values=assessment_values or {}, assessment_error=assessment_error,
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
@@ -838,7 +840,7 @@ def create_app(database=None):
             form = assessments.available_form(db, task['form_version_id'])
         except assessments.AssessmentError as error:
             if request.method == 'POST' and error.status == 400:
-                return interface_response('assessment_form.html', task=task, instrument=assessments.definition(), values=request.form,
+                return interface_response('assessment_form.html', task=task, instrument=assessments.definition(task['form_version_id']), values=request.form,
                                           error=str(error), patient=patient_or_404(task['patient_id'])),400
             return interface_response('result.html', title='Анкета недоступна', message=str(error)),error.status
         return interface_response('assessment_form.html', task=task, instrument=form, values={}, error=None,

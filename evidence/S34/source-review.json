@@ -1,0 +1,48 @@
+{
+  "checked_on": "2026-10-23",
+  "researcher": "/root/questionnaire_research",
+  "forms": [
+    {
+      "form_id": "DASS42-RU-FG-2024-demo-v1",
+      "resource": "apps/compass/resources/dass42-ru-v1.json",
+      "resource_sha256": "e4d758dc1ccffc99fba21f238180baead2d354179e3b3d34a1a4842e418325a2",
+      "source": {
+        "url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+        "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+        "checked_on": "2026-10-19",
+        "verification": "read-only researcher /root/scale_best_option; exact text and fetched PDF hash"
+      },
+      "items": 42,
+      "mandatory_min_interval_days": null,
+      "source_validation_is_not_independent_clinical_review": true
+    },
+    {
+      "form_id": "GAD7-RU-Z-2023-demo-v1",
+      "resource": "apps/compass/resources/gad7-ru-v1.json",
+      "resource_sha256": "f7ed73e5a802a730d9e68139848f1ffa366d17b279067fb07458d40cbf1c854b",
+      "source": {
+        "url": "https://publications.hse.ru/pubs/share/direct/889173128.pdf",
+        "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+        "checked_on": "2026-10-23",
+        "verification": "read-only web-researcher /root/questionnaire_research; exact appendix of validation paper"
+      },
+      "items": 7,
+      "mandatory_min_interval_days": null,
+      "source_validation_is_not_independent_clinical_review": true
+    },
+    {
+      "form_id": "PHQ9-RU-Z-2023-demo-v1",
+      "resource": "apps/compass/resources/phq9-ru-v1.json",
+      "resource_sha256": "63d28ca78bcc7e055f0ea779f237c2d4f87ce22531ee4e231b37e3d9b23d9e50",
+      "source": {
+        "url": "https://publications.hse.ru/pubs/share/direct/896524950.pdf",
+        "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+        "checked_on": "2026-10-23",
+        "verification": "read-only web-researcher /root/questionnaire_research; exact appendix of validation paper"
+      },
+      "items": 9,
+      "mandatory_min_interval_days": null,
+      "source_validation_is_not_independent_clinical_review": true
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{# Same source data on the patient card and follow-up summary; doctor-only. #}
+{% import 'components.html' as ui %}
+{% for group in chart_groups %}
+<section class="assessment-series" aria-labelledby="chart-{{ group.version }}">
+  <div class="assessment-heading">
+    <h3 id="chart-{{ group.version }}">{{ group.form.code }} <span>{{ group.form.get('purpose', 'Депрессия, тревога и стресс') }}</span></h3>
+    <span class="meta">Анкет: {{ group.total }} · {{ group.first_date|full_date }} — {{ group.last_date|full_date }}</span>
+  </div>
+  <p class="meta">{{ group.form.period }}. {{ group.form.get('direction_note', 'Больше баллов — больше выраженность указанных симптомов.') }} Баллы не являются диагнозом.</p>
+  <div class="assessment-plots">
+  {% for series in group.series %}
+    <figure class="assessment-plot">
+      <figcaption>{{ series.name }}</figcaption>
+      <div class="assessment-value">
+        {% if series.latest %}<b class="num">{{ series.latest.value }}</b><span>из {{ series.maximum }}<br><time datetime="{{ series.latest.date }}">{{ series.latest.date|full_date }}</time></span>
+        {% else %}<span>Нет полных ответов</span>{% endif %}
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-{{ group.version }}-{{ series.code }}">
+        <title id="plot-{{ group.version }}-{{ series.code }}">{{ group.form.code }} — {{ series.name }}. Диапазон 0–{{ series.maximum }}. Точные значения приведены в таблице ниже.</title>
+        {% for y, label in [(30, series.maximum), (93, series.middle|string|replace('.', ',')), (156, 0)] %}
+        <line x1="42" x2="530" y1="{{ y }}" y2="{{ y }}" class="assessment-grid"/>
+        <text x="29" y="{{ y + 5 }}" text-anchor="end">{{ label }}</text>
+        {% endfor %}
+        {% for segment in series.segments %}{% if segment|length > 1 %}
+        <polyline class="assessment-line" points="{% for p in segment %}{{ p.x }},{{ p.y }} {% endfor %}"/>
+        {% endif %}{% endfor %}
+        {% for point in series.points %}
+        <a href="{% if assessment_summary|default(false) %}{{ card }}{% endif %}#assessment-{{ point.id }}" aria-label="{{ point.date|full_date }}: {{ point.value }} из {{ series.maximum }}, к исходным ответам">
+          <circle cx="{{ point.x }}" cy="{{ point.y }}" r="24" class="assessment-hit"/>
+          <circle cx="{{ point.x }}" cy="{{ point.y }}" r="5" class="assessment-point"><title>{{ point.date|full_date }} · {{ point.value }} из {{ series.maximum }}</title></circle>
+        </a>
+        {% endfor %}
+        <text x="42" y="185">{{ group.first_date|short_date }}</text>
+        {% if group.last_date != group.first_date %}<text x="530" y="185" text-anchor="end">{{ group.last_date|short_date }}</text>{% endif %}
+      </svg>
+      {% if series.previous %}
+      <p class="assessment-delta">Изменение балла: <b class="num">{{ '+' if series.delta > 0 else '' }}{{ series.delta }}</b> с {{ series.previous.date|full_date }} по {{ series.latest.date|full_date }}.</p>
+      {% else %}<p class="assessment-delta">{% if series.latest %}Для сравнения нужно ещё одно полное заполнение.{% else %}Пропуски не заменяются нулём.{% endif %}</p>{% endif %}
+    </figure>
+  {% endfor %}
+  </div>
+  <p class="meta">Точки расположены по датам. Линия соединяет измерения и не показывает состояние между ними. {% if group.missing %}С пропусками: {{ group.missing }} — без точки и без расчёта, линия прерывается. {% endif %}{% if group.total > group.shown %}На графике последние {{ group.shown }} анкет; вся история сохранена ниже. {% endif %}Редакции и способы подсчёта не смешиваются.</p>
+  <details class="fold assessment-table"{% if group.total <= 3 %} open{% endif %}>
+    <summary>Точные значения и исходные ответы · {{ group.form.code }}</summary>
+    <div class="assessment-table-scroll" role="region" aria-label="Результаты {{ group.form.code }}" tabindex="0">
+    <table class="results">
+      <caption class="visually-hidden">{{ group.form.code }}: все заполнения одной версии, от ранних к поздним</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th>{% for code, subscale in group.form.subscales.items() %}<th scope="col">{{ subscale.label }}</th>{% endfor %}<th scope="col">Ответы</th></tr></thead>
+      <tbody>
+      {% for a in group.rows %}
+      <tr{% if not assessment_summary|default(false) %} id="assessment-{{ a.id }}"{% endif %}>
+        <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|full_date }}</time></td>
+        <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
+        {% for code in group.form.subscales %}<td class="num">{% if a.scores is not none %}{{ a.scores[code] }}{% else %}не рассчитано{% endif %}</td>{% endfor %}
+        <td><a href="{% if assessment_summary|default(false) %}{{ card }}{% endif %}#{% if assessment_summary|default(false) %}assessment{% else %}answers{% endif %}-{{ a.id }}">Открыть</a></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </details>
+  {% if not assessment_summary|default(false) %}
+  {% for a in group.rows|reverse %}
+    <details class="fold" id="answers-{{ a.id }}">
+      <summary>Исходные ответы ({{ a.answers|length }} пункта) · {{ group.form.code }} · {{ a.observed_on|full_date }}</summary>
+      <p class="meta">Заполнил: {{ a.display_name }}. Принято сервером: {{ a.recorded_at|msk }}. Возраст: {{ a.age_years }}. Основание: {{ a.age_basis }}.</p>
+      <ol class="answers">
+        {% for text in a.form['items'] %}{% set value = a.answers[loop.index0] %}
+        <li><span>{{ text }}</span> <b class="num">{{ value if value is not none else 'без ответа' }}</b></li>
+        {% endfor %}
+      </ol>
+      <p class="meta">{% for option in a.form.options %}{{ loop.index0 }} — {{ option }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+    </details>
+  {% endfor %}
+  {% endif %}
+  <details class="fold"><summary>Версия, источник и ограничения · {{ group.form.code }}</summary>
+    <p class="meta">{{ group.form.attribution }} {{ group.form.population.study }}{% if group.form.code == 'DASS-42' %} Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.{% endif %}</p>
+    <p class="meta">{{ group.form.get('scoring_note', 'Суммы по подшкалам: три отдельные суммы 0–42, без общего итога, порогов и уровней тяжести.') }} При любом пропуске суммы не рассчитываются.</p>
+    <p class="meta">Редакция: <span data-form-version="{{ group.form.version }}">{{ group.form.version.split(' / ')[0] }}</span>. Подсчёт: {{ group.rows[0].scoring_version }}.</p>
+    <p class="meta"><a href="{{ group.form.source.url }}">Бланк и источник</a> · <a href="{{ group.form.validation_url }}">Русская валидация</a> · <a href="{{ group.form.rights_url }}">Условия применения</a></p>
+  </details>
+</section>
+{% else %}
+  {% if assessment_summary|default(false) %}{{ ui.empty('Анкет за период нет. Это не означает, что состояние в норме.') }}{% else %}{{ ui.empty('Заполненных анкет нет. Предложите анкету — после ответов здесь появится график. Отсутствие ответов не означает, что состояние в норме.') }}{% endif %}
+{% endfor %}

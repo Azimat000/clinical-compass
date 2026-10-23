@@ -65,7 +65,7 @@
     <h2 id="h-form">Анкета от врача</h2>
     {% for task in pending_assessments %}
     <div class="task">
-      <p>DASS&#8209;42<small>{{ assessment_form['items']|length }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
+      <p>{{ task.code }}<small>{{ task.item_count }}&nbsp;{{ 'вопроса' if task.item_count == 42 else 'вопросов' }} · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
       {{ ui.button('Начать', href=url_for('assessment_form', request_id=task.id)) }}
     </div>
     {% endfor %}
@@ -249,7 +249,7 @@
     <h2 id="h-pending">От врача</h2>
     {% for task in pending_assessments %}
     <div class="task">
-      <p>DASS&#8209;42<small>{{ assessment_form['items']|length }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
+      <p>{{ task.code }}<small>{{ task.item_count }}&nbsp;{{ 'вопроса' if task.item_count == 42 else 'вопросов' }} · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></small></p>
       {{ ui.button('Начать', kind='primary', href=url_for('assessment_form', request_id=task.id)) }}
     </div>
     {% else %}
@@ -261,7 +261,7 @@
     {% if measured %}
     <ul class="receipts">
       {% for r in measured %}
-      <li><span>DASS&#8209;42<small>отправлена <time datetime="{{ r.recorded_at }}">{{ r.recorded_at|msk }}</time></small></span>
+      <li><span>{{ form_names[r.form_version_id] }}<small>отправлена <time datetime="{{ r.recorded_at }}">{{ r.recorded_at|msk }}</time></small></span>
         <a href="{{ url_for('assessment_form', request_id=r.request_id) }}">Квитанция</a></li>
       {% endfor %}
     </ul>

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T14:50:58+03:00",
+  "updated_on": "2026-10-23T15:17:33+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S33",
+  "last_accepted_slice": "S34",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -383,6 +383,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S33",
       "handoff": "memory/sessions/S33.md",
+      "reason": null
+    },
+    "S34": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S34",
+      "handoff": "memory/sessions/S34.md",
       "reason": null
     }
   },
@@ -788,6 +794,20 @@
       "active_database": "var/compass.sqlite3",
       "test_database": "var/S33-ui-check.sqlite3",
       "clinical_validation": false
+    },
+    "s34_assessments": {
+      "date": "2026-10-23",
+      "evidence": "evidence/S34/acceptance.md",
+      "report": "memory/sessions/S34.md",
+      "forms": [
+        "DASS-42",
+        "GAD-7 RU-Zolotareva-2023",
+        "PHQ-9 RU-Zolotareva-2023"
+      ],
+      "mandatory_intervals": null,
+      "early_repeat_allowed": true,
+      "clinical_validation": false,
+      "active_database": "var/compass.sqlite3"
     }
   },
   "latest_roster": {

@@ -5,7 +5,7 @@
 {% block title %}Анкета отправлена{% endblock %}
 {% block patient_main %}
 <h1>Анкета отправлена врачу</h1>
-<p class="p-date">DASS&#8209;42 · заполнена <time datetime="{{ task.age_on }}">{{ task.age_on|full_date }}</time> (Москва)</p>
+<p class="p-date">{{ task.code }} · заполнена <time datetime="{{ task.age_on }}">{{ task.age_on|full_date }}</time> (Москва)</p>
 <p class="lede">Ответы доступны вашему врачу. Свою динамику смотрите в дневнике самочувствия.</p>
 
 <dl class="states">
@@ -20,7 +20,7 @@
 <details class="receipt-more">
   <summary>Подробности квитанции</summary>
   <p class="meta">Получена сервером (UTC): <span class="num">{{ received_at }}</span>.</p>
-  <p class="meta" data-form-version="{{ task.form_version_id }}">Анкета DASS-42. Квитанция: <span class="num">{{ task.id }}</span>.</p>
+  <p class="meta" data-form-version="{{ task.form_version_id }}">Анкета {{ task.code }}. Квитанция: <span class="num">{{ task.id }}</span>.</p>
 </details>
 
 <div class="p-actions">{{ ui.button('Открыть дневник', kind='primary', href=url_for('patient_diary', patient_id=task.patient_id)) }}</div>

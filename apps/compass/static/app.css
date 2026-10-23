@@ -918,3 +918,56 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 @media (max-width: 760px) {
   .card-body > .med-calendar { padding-inline: var(--sp-lg); }
 }
+
+/* ---------- Анкеты: выбор инструмента и сопоставимые серии (S34) ---------- */
+.assessment-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; }
+.assessment-heading > a { min-height: 36px; display: inline-flex; align-items: center; }
+.assessment-heading h3 { font-size: 18px; line-height: 1.35; }
+.assessment-heading h3 span { font-size: var(--fs-cell); font-weight: 400; margin-left: 8px; }
+.assessment-series { padding-block: 24px; border-bottom: 1px solid var(--border); min-width: 0; }
+.assessment-series > .meta { margin-top: 8px; max-width: 80ch; }
+.assessment-plots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 24px; margin-block: 20px 12px; }
+.assessment-plot { min-width: 0; margin: 0; padding: 16px; background: var(--band); }
+.assessment-plot figcaption { font-weight: 700; }
+.assessment-value { display: flex; gap: 10px; align-items: center; min-height: 64px; margin-top: 8px; }
+.assessment-value > b { font-size: 32px; line-height: 1; }
+.assessment-value > span { font-size: var(--fs-meta); color: var(--muted); }
+.assessment-plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.assessment-plot svg text { fill: var(--muted); font: 30px var(--font); }
+.assessment-grid { stroke: var(--border); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.assessment-line { stroke: var(--ink-soft); stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; }
+.assessment-point { fill: var(--ink); stroke: var(--sheet); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.assessment-plot svg a:focus-visible { outline: none; }
+.assessment-plot svg a:focus-visible .assessment-point, .assessment-plot svg a:hover .assessment-point { stroke: var(--ink); stroke-width: 3; fill: var(--sheet); }
+.assessment-delta { margin-top: 12px; font-size: var(--fs-meta); color: var(--ink-soft); }
+.assessment-table-scroll { overflow-x: auto; scrollbar-width: thin; }
+.assessment-table-scroll table { min-width: 540px; }
+.assessment-series .fold { margin-top: 8px; }
+.assessment-catalogue { margin-block: 16px; display: grid; }
+.assessment-choice { display: flex; gap: 12px; align-items: start; padding: 14px 10px; border-bottom: 1px solid var(--border); cursor: pointer; }
+.assessment-choice:first-child { border-top: 1px solid var(--border); }
+.assessment-choice:hover, .assessment-choice:has(input:checked) { background: var(--band); }
+.assessment-choice input { flex: none; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--ink); }
+.assessment-choice small { display: block; color: var(--muted); font-size: var(--fs-meta); margin-top: 4px; }
+.assessment-wait { display: block; font-size: var(--fs-meta); margin-top: 6px; }
+.assessment-choice:has(input:disabled) { cursor: default; }
+@media (max-width: 760px) {
+  .assessment-heading { align-items: start; }
+  .assessment-heading h3 span { display: block; margin: 4px 0 0; }
+  .assessment-plots { grid-template-columns: 1fr; gap: 12px; }
+  .assessment-plot { padding: 12px; }
+  .assessment-table-scroll table { font-size: var(--fs-meta); }
+}
+.assessment-hit { fill: transparent; stroke: none; }
+.assessment-plot:only-child { display: grid; grid-template-columns: 160px minmax(0, 1fr); column-gap: 24px; }
+.assessment-plot:only-child svg { grid-column: 2; grid-row: 1 / span 3; height: 190px; }
+.assessment-plot:only-child svg text { font-size: 18px; }
+.assessment-plot:only-child .assessment-delta { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .assessment-plot:only-child { display: block; }
+  .assessment-plot:only-child svg { height: auto; }
+  .assessment-plot:only-child svg text { font-size: 30px; }
+}
+.assessment-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.assessment-actions form { margin: 0; }
+.assessment-actions a { display: inline-flex; align-items: center; min-height: 36px; }

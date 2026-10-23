@@ -123,7 +123,7 @@
 
     <section class="block" id="v-age" aria-labelledby="h-age">
       <h2 id="h-age">Возраст</h2>
-      <p class="meta">Запись возраста не допускает пациента к инструменту: анкета DASS-42 предлагается после сверки возраста в <a href="{{ card }}#age-review">карточке</a>. Неизвестный возраст оставьте без чисел.</p>
+      <p class="meta">Запись возраста не допускает пациента к инструменту: анкеты предлагаются после сверки возраста в <a href="{{ card }}#age-review">карточке</a>. Неизвестный возраст оставьте без чисел.</p>
       <div class="form-grid">
         {{ ui.select('age_status', 'Состояние возраста', [('unknown', 'Неизвестно'), ('known', 'Известен'), ('conflicting', 'Противоречие')], selected=values.get('age_status', 'unknown')) }}
         {{ ui.field('age_years', 'Полных лет', value=values.get('age_years', ''), size='sm', extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
@@ -164,7 +164,7 @@
 </form>
 {% else %}
 <nav class="jump" aria-label="Разделы записи">
-  <a href="#v-record">Запись</a><a href="#v-tool">Анкета DASS-42</a><a href="#v-plan">Подтверждённый план</a><a href="#v-list">Приёмы</a>
+  <a href="#v-record">Запись</a><a href="#v-tool">Анкеты</a><a href="#v-plan">Подтверждённый план</a><a href="#v-list">Приёмы</a>
 </nav>
 <div class="card-body">
   <section class="block" id="v-record" aria-labelledby="h-record">
@@ -177,23 +177,23 @@
 <div class="card-body">
   <section class="block" id="v-tool" aria-labelledby="h-tool">
     <h2 id="h-tool">Результат инструмента отдельно</h2>
-    <p class="meta">Анкеты не входят в запись приёма и её не меняют. Суммы 0–42 по каждой подшкале, без порогов и общего итога.{% if measured %} Форма: «{{ measured[0].form.title }}», период в анкете: «{{ measured[0].form.period }}».{% endif %}</p>
+    <p class="meta">Анкеты не входят в запись приёма и её не меняют. Каждая анкета имеет свой диапазон и способ подсчёта. Диагнозы и назначения из баллов не формируются.{% if measured %} Форма: «{{ measured[0].form.title }}», период в анкете: «{{ measured[0].form.period }}».{% endif %}</p>
     {% if measured %}
     <table class="results records">
-      <caption class="visually-hidden">Заполненные анкеты DASS-42, сначала новые</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревога</th><th scope="col">Депрессия</th><th scope="col">Стресс</th></tr></thead>
+      <caption class="visually-hidden">Заполненные анкеты, сначала новые</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Результаты</th></tr></thead>
       <tbody>
         {% for a in measured %}
         <tr>
           <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time><span class="sub num" data-form-version="{{ a.scale_version_id }}">{{ a.form.code }} · {{ a.form.version.split(' / ')[0] }}</span></td>
           <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub">Есть пропуски, суммы не рассчитаны.</span>{% endif %}</td>
-          {% for key in ['anxiety', 'depression', 'stress'] %}<td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>{% endfor %}
+          <td>{% for key, subscale in a.form.subscales.items() %}<span class="sub">{{ subscale.label }}: <b class="num">{% if a.scores is not none %}{{ a.scores[key] }}{% else %}не рассчитано{% endif %}</b></span>{% endfor %}<a href="{{ card }}#answers-{{ a.id }}">Ответы и график</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
     {% else %}
-      {{ ui.empty('Анкет DASS-42 нет. Предложить её можно в карточке после сверки возраста.', href=card ~ '#assessments', link='Открыть анкеты') }}
+      {{ ui.empty('Заполненных анкет нет. Предложить анкету можно в карточке после сверки возраста.', href=card ~ '#assessments', link='Открыть анкеты') }}
     {% endif %}
   </section>
 

@@ -118,57 +118,40 @@
 
   {#- ---------- Анкеты ---------- #}
   <section class="block" id="assessments" aria-labelledby="h-assess">
-    <h2 id="h-assess">Анкета DASS-42</h2>
+    <div class="assessment-heading"><h2 id="h-assess">Анкеты и динамика</h2><div class="assessment-actions"><form method="get" action="{{ url_for('demo_patient', patient_id=patient.id) }}#assessments"><button class="button" type="submit">Обновить результаты</button></form><a href="#assessment-form">Предложить анкету</a></div></div>
     {% if assessment_error %}{{ ui.notice('Анкета не предложена', assessment_error, kind='error', id='assessment-error') }}{% endif %}
     {% for task in pending_assessments %}
-      {{ ui.notice('Предложена, ждёт ответа', 'Пациент может отправить её до ' ~ task.deadline_label ~ '.', kind='info') }}
+      {{ ui.notice(task.code ~ ' · Предложена, ждёт ответа', 'Пациент может отправить её до ' ~ task.deadline_label ~ '.', kind='info') }}
     {% endfor %}
-    {% if measured %}
-    <table class="results records">
-      <caption class="visually-hidden">Заполненные анкеты DASS-42, сначала новые</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревога</th><th scope="col">Депрессия</th><th scope="col">Стресс</th><th scope="col">Возраст на дату</th></tr></thead>
-      <tbody>
-        {% for a in measured %}
-        <tr id="assessment-{{ a.id }}">
-          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></td>
-          <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub"><span class="nowrap">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}</span>. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
-          {% for key in ['anxiety', 'depression', 'stress'] %}
-          <td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>
-          {% endfor %}
-          <td>{{ a.age_years }}<span class="sub">{{ a.age_basis }}</span></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <p class="meta">Суммы по подшкалам, 0–42 каждая, без порогов, уровней тяжести и общего итога. При любом пропуске суммы не считаются. Период в анкете: «{{ measured[0].form.period }}». Подсчёт: <span class="num">{{ measured[0].scoring_version }}</span>. Источник: <a href="{{ measured[0].source_url }}" rel="noopener noreferrer" translate="no">{{ measured[0].form.code }}</a>, редакция текста <span class="num" data-form-version="{{ measured[0].form.version }}">{{ measured[0].form.version.split(' / ')[0] }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
-    {% for a in measured %}
-    <details class="fold" id="answers-{{ a.id }}">
-      <summary>Исходные ответы ({{ a.answers|length }} пункта) · <time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></summary>
-      <ol class="answers">
-        {% for text in a.form['items'] %}{% set value = a.answers[loop.index0] %}
-        <li><span>{{ text }}</span> <b class="num">{{ value if value is not none else 'без ответа' }}</b></li>
-        {% endfor %}
-      </ol>
-      <p class="meta">{% for option in a.form.options %}{{ loop.index0 }} — {{ option }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
-    </details>
-    {% endfor %}
-    {% else %}
-      {{ ui.empty('Заполненных анкет нет.') }}
-    {% endif %}
+    {% set chart_groups = assessment_trends %}
+    {% include 'assessment_charts.html' %}
 
-    <form method="post" action="{{ url_for('request_assessment', patient_id=patient.id) }}" class="action-form" id="assessment-form">
+    <form method="post" action="{{ url_for('request_assessment', patient_id=patient.id) }}" class="action-form" id="assessment-form" data-busy>
       <input type="hidden" name="csrf" value="{{ csrf }}">
       <input type="hidden" name="assignment_key" value="{{ assignment_key }}">
-      <input type="hidden" name="form_version_id" value="{{ assessment_form.id }}">
       <input type="hidden" name="age_status" value="known">
       <h3>Предложить анкету</h3>
-      <p class="meta">Нужен сверенный возраст от 18 лет. Предложение действует до конца текущих суток по Москве.</p>
+      <p class="meta">Предложение появится в кабинете пациента и действует до конца текущих суток по Москве. Нужен сверенный возраст от 18 лет.</p>
+      <div class="assessment-catalogue">
+        {% for choice in assessment_catalogue %}
+        <label class="assessment-choice">
+          <input type="radio" name="form_version_id" value="{{ choice.form.id }}" required{% if assessment_values.get('form_version_id', assessment_form.id) == choice.form.id %} checked{% endif %}{% if not choice.allowed %} disabled{% endif %}>
+          <span><b>{{ choice.form.code }}</b> · {{ choice.form.get('purpose', 'Депрессия, тревога и стресс') }}
+          <small>Вопросов: {{ choice.form['items']|length }} · {{ choice.form.get('min_age', 18) }}–{{ choice.form.get('max_age', 120) }} лет · {{ choice.form.period }} · {% if choice.policy.mandatory_min_interval_days is none %}обязательного интервала нет{% else %}не чаще раза в {{ choice.policy.mandatory_min_interval_days }} суток{% endif %}</small>
+          {% if choice.last_at %}<small>Последняя отправка: <time datetime="{{ choice.last_at }}">{{ choice.last_at|msk }}</time></small>{% endif %}
+          {% if not choice.allowed %}<span class="assessment-wait">{{ choice.message }}</span>{% endif %}</span>
+        </label>
+        {% endfor %}
+      </div>
+      <details class="fold"><summary>Как устроены интервалы</summary>
+        <p class="meta">Период «за последнюю неделю» или «за последние две недели» указывает, о каком времени спрашивают, и сам по себе не запрещает повторение раньше. Если источник не устанавливает обязательный интервал, ранняя отправка разрешена. Уже открытое предложение одной и той же анкеты не дублируется: нужно дождаться ответа или окончания его срока.</p>
+      </details>
       <div class="form-row">
         {{ ui.field('age_years', 'Возраст, лет', type='text', value=assessment_values.get('age_years', patient.age_years if patient.age_status == 'known' else ''), size='sm',
                     extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
         {{ ui.field('age_basis', 'Откуда возраст', value=assessment_values.get('age_basis', ''), hint='Например: сверен по документу на приёме.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
       </div>
-      {{ ui.button('Предложить DASS-42') }}
+      {{ ui.button('Предложить выбранную анкету') }}
     </form>
   </section>
 

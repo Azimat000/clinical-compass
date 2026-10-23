@@ -1,16 +1,17 @@
-{#- Анкета DASS-42 для пациента. Тексты и порядок утверждений берутся из определения шкалы без изменений. -#}
+{#- Анкета выбранной версии для пациента. Тексты и порядок утверждений берутся из определения шкалы без изменений. -#}
 {% extends 'patient_base.html' %}
 {% import 'components.html' as ui %}
 {% set nav_active = 'forms' %}
-{% block title %}DASS‑42{% endblock %}
+{% block title %}{{ instrument.code }}{% endblock %}
 {% block patient_main %}
 {% set total = instrument['items']|length %}
 <h1>{{ instrument.title }}</h1>
-<p class="p-date">DASS&#8209;42 · {{ total }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></p>
+<p class="p-date">{{ instrument.code }} · Вопросов: {{ total }} · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></p>
 
 {% if error %}{{ ui.notice('Анкета не отправлена', error ~ ' Ответы остались в форме, проверьте её.', kind='error', id='q-error') }}{% endif %}
 {{ ui.notice('Заполнение анкеты', 'Врач получит анкету. Анкета не ставит диагноз и не создаёт назначений. После отправки вы увидите квитанцию. Баллы пациенту не показываются. Новое предложение понадобится, если срок пройдёт.') }}
 
+<p class="meta">Врач читает ответы не круглосуточно. Если нужна срочная помощь, не ждите ответа на анкету — обратитесь за помощью обычным способом.</p>
 <p class="q-instruction">{{ instrument.instruction }}</p>
 <p class="meta">Выберите один вариант для каждого утверждения. Можно оставить пропуск: ответы передадутся врачу без расчёта результата.</p>
 
