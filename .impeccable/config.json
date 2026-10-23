@@ -29,6 +29,15 @@
         ],
         "createdAt": "2026-10-22T14:32:24.699Z",
         "reason": "agent decided: rejected UI01 direction C kept as decision history; not part of the chosen DESIGN.md world"
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "apps/compass/static/app.css"
+        ],
+        "createdAt": "2026-10-23T00:16:23.103Z",
+        "reason": "agent: .plan-entry--now sets border-radius:0 (app.css L820), detector misses the override; 3px top line is the UI06B design (DESIGN.md), not user-confirmed"
       }
     ]
   }
