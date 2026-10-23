@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T15:17:33+03:00",
+  "updated_on": "2026-10-23T15:34:45+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S34",
+  "last_accepted_slice": "S35",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -389,6 +389,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S34",
       "handoff": "memory/sessions/S34.md",
+      "reason": null
+    },
+    "S35": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S35-accepted",
+      "handoff": "memory/sessions/S35.md",
       "reason": null
     }
   },
@@ -825,6 +831,24 @@
     "clinical_review": false,
     "real_user_trial": false,
     "previous_roster": "archived_offline_not_served",
-    "visible_training_labels": false
+    "visible_training_labels": false,
+    "questionnaire_history": {
+      "slice": "S35",
+      "dataset": "data/fictional/questionnaires-20261023.json",
+      "added_results": 48,
+      "forms": [
+        "PHQ-9",
+        "GAD-7"
+      ],
+      "dates": [
+        "2026-09-11",
+        "2026-10-02",
+        "2026-10-22"
+      ],
+      "synthetic": true,
+      "simulated_dates": true,
+      "clinical_review": false,
+      "report": "memory/sessions/S35.md"
+    }
   }
 }

@@ -1,0 +1,797 @@
+{
+  "all_prior_rows_unchanged": true,
+  "only_expected_additions": true,
+  "checks": [
+    {
+      "table": "schema_migrations",
+      "old_rows": 15,
+      "new_rows": 15,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "users",
+      "old_rows": 11,
+      "new_rows": 11,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "sessions",
+      "old_rows": 4,
+      "new_rows": 4,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patients",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "care_relationships",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounters",
+      "old_rows": 24,
+      "new_rows": 24,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search",
+      "old_rows": 24,
+      "new_rows": 24,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search_data",
+      "old_rows": 11,
+      "new_rows": 11,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search_idx",
+      "old_rows": 9,
+      "new_rows": 9,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search_content",
+      "old_rows": 24,
+      "new_rows": 24,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search_docsize",
+      "old_rows": 24,
+      "new_rows": 24,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "encounter_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "observations",
+      "old_rows": 400,
+      "new_rows": 400,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "source_versions",
+      "old_rows": 3,
+      "new_rows": 3,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "catalog_versions",
+      "old_rows": 3,
+      "new_rows": 3,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "assessments",
+      "old_rows": 24,
+      "new_rows": 72,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "self_reports",
+      "old_rows": 56,
+      "new_rows": 56,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "proposals",
+      "old_rows": 16,
+      "new_rows": 16,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "doctor_confirmations",
+      "old_rows": 16,
+      "new_rows": 16,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "care_actions",
+      "old_rows": 16,
+      "new_rows": 16,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "therapy_courses",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "referrals",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "risk_evaluations",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "adverse_events",
+      "old_rows": 6,
+      "new_rows": 6,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "alerts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "conversations",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "messages",
+      "old_rows": 112,
+      "new_rows": 112,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "adherence_reports",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "documents",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "extraction_runs",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "extracted_facts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "consents",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "audit_entries",
+      "old_rows": 432,
+      "new_rows": 433,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "outbox_events",
+      "old_rows": 56,
+      "new_rows": 56,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "event_receipts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "deliveries",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "login_challenges",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "login_limits",
+      "old_rows": 4,
+      "new_rows": 4,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "care_invitations",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "relationship_checks",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entries",
+      "old_rows": 80,
+      "new_rows": 80,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "assessment_form_releases",
+      "old_rows": 3,
+      "new_rows": 3,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "assessment_requests",
+      "old_rows": 32,
+      "new_rows": 80,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "assessment_results",
+      "old_rows": 24,
+      "new_rows": 72,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "decision_drafts",
+      "old_rows": 16,
+      "new_rows": 16,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "age_reviews",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "routine_notifications",
+      "old_rows": 56,
+      "new_rows": 56,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "outbox_attempts",
+      "old_rows": 56,
+      "new_rows": 56,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_contexts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_rule_evaluations",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "critical_events",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "critical_delivery",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "critical_delivery_log",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "message_context",
+      "old_rows": 112,
+      "new_rows": 112,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "message_receipts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "adherence_tasks",
+      "old_rows": 56,
+      "new_rows": 56,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "adherence_entries",
+      "old_rows": 59,
+      "new_rows": 59,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "text_imports",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "extraction_reviews",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search",
+      "old_rows": 80,
+      "new_rows": 80,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search_data",
+      "old_rows": 10,
+      "new_rows": 10,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search_idx",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search_content",
+      "old_rows": 80,
+      "new_rows": 80,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search_docsize",
+      "old_rows": 80,
+      "new_rows": 80,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "clinical_entry_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search_data",
+      "old_rows": 2,
+      "new_rows": 2,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search_idx",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search_content",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search_docsize",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "import_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search_data",
+      "old_rows": 10,
+      "new_rows": 10,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search_idx",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search_content",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search_docsize",
+      "old_rows": 8,
+      "new_rows": 8,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "patient_search_config",
+      "old_rows": 1,
+      "new_rows": 1,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "first_visit_versions",
+      "old_rows": 24,
+      "new_rows": 24,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "self_report_drafts",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    },
+    {
+      "table": "medication_marks",
+      "old_rows": 0,
+      "new_rows": 0,
+      "old_rows_unchanged": true,
+      "expected_additions_only": true
+    }
+  ],
+  "series": [
+    {
+      "patient_id": "P101",
+      "code": "PHQ-9",
+      "values": [
+        11,
+        6,
+        3
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P101",
+      "code": "GAD-7",
+      "values": [
+        13,
+        6,
+        3
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P102",
+      "code": "PHQ-9",
+      "values": [
+        9,
+        12,
+        9
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P102",
+      "code": "GAD-7",
+      "values": [
+        13,
+        11,
+        8
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P103",
+      "code": "PHQ-9",
+      "values": [
+        17,
+        16,
+        17
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P103",
+      "code": "GAD-7",
+      "values": [
+        14,
+        13,
+        14
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P104",
+      "code": "PHQ-9",
+      "values": [
+        9,
+        15,
+        16
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P104",
+      "code": "GAD-7",
+      "values": [
+        7,
+        9,
+        12
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P105",
+      "code": "PHQ-9",
+      "values": [
+        21,
+        19,
+        9
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P105",
+      "code": "GAD-7",
+      "values": [
+        12,
+        10,
+        6
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P106",
+      "code": "PHQ-9",
+      "values": [
+        18,
+        15,
+        12
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P106",
+      "code": "GAD-7",
+      "values": [
+        9,
+        7,
+        6
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P107",
+      "code": "PHQ-9",
+      "values": [
+        8,
+        7,
+        5
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P107",
+      "code": "GAD-7",
+      "values": [
+        13,
+        11,
+        6
+      ],
+      "points": 3,
+      "segments": [
+        3
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P108",
+      "code": "PHQ-9",
+      "values": [
+        12,
+        null,
+        12
+      ],
+      "points": 2,
+      "segments": [
+        1,
+        1
+      ],
+      "matches_authored_answers": true
+    },
+    {
+      "patient_id": "P108",
+      "code": "GAD-7",
+      "values": [
+        9,
+        null,
+        9
+      ],
+      "points": 2,
+      "segments": [
+        1,
+        1
+      ],
+      "matches_authored_answers": true
+    }
+  ],
+  "backup_mode": "0o600",
+  "integrity": "ok",
+  "foreign_keys": []
+}
