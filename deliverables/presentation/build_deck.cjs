@@ -30,7 +30,15 @@ const THEME = {
 };
 const HEAD = 'Cambria', BODY = 'Calibri';
 const W = 13.333, H = 7.5, MX = 0.6;
-const FOOT = 'Клинический компас · кейс-чемпионат Авинейро · 2026';
+const FOOT = 'Команда «Шаг вперёд» · Клинический компас · кейс-чемпионат Авинейро · 2026';
+const UNIVERSITY = 'ФГБОУ ВО «Казанский государственный медицинский университет» Минздрава России';
+const TEAM = [
+  { ini: 'ИИ', last: 'Идиятуллин', first: 'Ильназ Алмазович', role: 'КАПИТАН · МЕДИК', captain: true },
+  { ini: 'АС', last: 'Сибгатуллин', first: 'Азамат Ильдарович', role: 'ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ', note: 'Сервер, база данных, кабинеты врача и пациента, автотесты' },
+  { ini: 'МГ', last: 'Галицкий', first: 'Марк Игоревич', role: 'МЕДИК' },
+  { ini: 'ММ', last: 'Мурадисинов', first: 'Мурадисин Идрисович', role: 'МЕДИК' },
+  { ini: 'ИГ', last: 'Гайнатуллин', first: 'Ильназ Рамилевич', role: 'МЕДИК' },
+];
 
 // ---------- image helpers ----------
 async function svgPng(svg, px = 256) {
@@ -146,16 +154,16 @@ async function ic(name, color) {
     T(s, 'Веб-сервис для психиатра и пациента с тревогой и депрессией: дневник самочувствия, анкеты DASS-42, PHQ-9 и GAD-7, календарь препаратов и план лечения, который подтверждает врач', { x: MX, y: 3.3, w: 6.6, h: 1.0, fontSize: 15, color: K.ink });
     box(s, MX, 4.55, 6.75, 0.78, K.mist);
     T(s, [{ text: 'Кейс  ', options: { bold: true, color: K.teal, fontSize: 10, charSpacing: 1 } }, { text: '«Клинический компас: инновационные решения для диагностики и ведения пациентов с тревогой и депрессией»', options: { color: K.ink, fontSize: 12 } }], { x: MX + 0.2, y: 4.6, w: 6.4, h: 0.68, valign: 'middle' });
-    s.addShape(pres.shapes.OVAL, { x: MX, y: 5.65, w: 0.62, h: 0.62, fill: { color: K.petrol }, line: { color: K.petrol, width: 0 } });
-    T(s, 'АС', { x: MX, y: 5.65, w: 0.62, h: 0.62, fontFace: HEAD, fontSize: 15, bold: true, color: K.white, align: 'center', valign: 'middle' });
-    T(s, 'Азамат Сибгатуллин', { x: 1.38, y: 5.66, w: 3.2, h: 0.32, fontFace: HEAD, fontSize: 14, bold: true, color: K.ink });
-    T(s, 'капитан команды, разработчик', { x: 1.38, y: 5.97, w: 3.2, h: 0.3, fontSize: 11, color: K.slate });
-    s.addShape(pres.shapes.OVAL, { x: 4.45, y: 5.65, w: 0.62, h: 0.62, fill: { color: K.tealL }, line: { color: K.tealL, width: 0 } });
-    T(s, '+4', { x: 4.45, y: 5.65, w: 0.62, h: 0.62, fontFace: HEAD, fontSize: 15, bold: true, color: K.teal, align: 'center', valign: 'middle' });
-    T(s, 'участника команды', { x: 5.23, y: 5.66, w: 2.3, h: 0.32, fontFace: HEAD, fontSize: 14, bold: true, color: K.ink });
-    T(s, 'состав на слайде «Команда»', { x: 5.23, y: 5.97, w: 2.3, h: 0.3, fontSize: 11, color: K.slate });
-    T(s, 'Октябрь 2026', { x: MX, y: 6.85, w: 3, h: 0.3, fontSize: 11, color: K.slate });
-    s.addNotes('Добрый день. Психиатр видит пациента раз в несколько недель, а всё важное происходит между приёмами. «Клинический компас» показывает врачу эту часть жизни пациента: самочувствие, анкеты, приём препаратов. При этом решение всегда остаётся за врачом. Я Азамат Сибгатуллин, капитан и разработчик команды.');
+    TEAM.forEach((m, k) => {
+      const x = MX + k * 0.5;
+      s.addShape(pres.shapes.OVAL, { x, y: 5.5, w: 0.58, h: 0.58, fill: { color: m.captain ? K.amber : K.petrol }, line: { color: K.white, width: 1.5 } });
+      T(s, m.ini, { x, y: 5.5, w: 0.58, h: 0.58, fontFace: HEAD, fontSize: 12, bold: true, color: K.white, align: 'center', valign: 'middle' });
+    });
+    T(s, 'Команда «Шаг вперёд»', { x: 3.35, y: 5.47, w: 4.2, h: 0.34, fontFace: HEAD, fontSize: 16, bold: true, color: K.ink });
+    T(s, 'капитан — Ильназ Идиятуллин', { x: 3.35, y: 5.8, w: 4.2, h: 0.3, fontSize: 12, color: K.slate });
+    T(s, UNIVERSITY, { x: MX, y: 6.38, w: 7.0, h: 0.3, fontSize: 11, color: K.slate });
+    T(s, 'Педиатрический факультет · Казань, октябрь 2026', { x: MX, y: 6.7, w: 7.0, h: 0.3, fontSize: 11, color: K.slate });
+    s.addNotes('Добрый день. Психиатр видит пациента раз в несколько недель, а всё важное происходит между приёмами. «Клинический компас» показывает врачу эту часть жизни пациента: самочувствие, анкеты, приём препаратов. При этом решение всегда остаётся за врачом. Мы команда «Шаг вперёд» из Казанского медицинского университета: четыре медика и разработчик.');
   }
 
   // =====================================================================
@@ -252,30 +260,45 @@ async function ic(name, color) {
   }
 
   // =====================================================================
-  // 5. Prototype — doctor
+  // 5. Prototype — doctor: patient list
   {
     const s = slide('2. Прототип', 'ПРОТОТИП · ВРАЧ', 'Врач сразу видит, кому нужно внимание');
-    const shots = [
-      ['doctor-patients.jpg', 'Пациенты', 'Список с причинами для проверки и последними отметками самочувствия'],
-      ['doctor-followup.jpg', 'Сводка к приёму', 'Записи за выбранный период; у каждой автор, время и неизвестные поля'],
-      ['doctor-plan.jpg', 'План и решения', 'Текущий план с подтверждением врача и недельный календарь препаратов'],
+    const bw = 6.3, bh = bw * 1490 / 2000;
+    screen(s, 'doctor-patients-crop.jpg', MX, 1.72, bw, bh);
+    const pts = [
+      ['Причина рядом с именем', 'Пропуск в плане или нежелательное явление, с датой и ссылкой на исходную запись'],
+      ['Последние отметки', 'Пять последних дней самочувствия: лучше, без изменений, хуже или не указано'],
+      ['Два режима списка', '«Все пациенты» и «Нужно проверить», поиск по имени, коду и словам из записей'],
     ];
-    // Lead screenshot large on the left, the other two stacked on the right with captions beside them.
-    const bw = 7.0, bh = bw * 1125 / 1800;
-    screen(s, shots[0][0], MX, 1.72, bw, bh);
-    T(s, [{ text: shots[0][1] + '  ', options: { fontFace: HEAD, bold: true, color: K.petrol, fontSize: 15 } }, { text: shots[0][2], options: { fontSize: 12, color: K.ink } }], { x: MX, y: 1.72 + bh + 0.15, w: bw, h: 0.4, valign: 'middle' });
-    shots.slice(1).forEach(([img, h, t], i) => {
-      const x = 7.95, y = 1.72 + i * 2.32, w = 2.85, hh = w * 1125 / 1800;
-      screen(s, img, x, y, w, hh);
-      T(s, h, { x: x + 3.05, y, w: 1.75, h: 0.6, fontFace: HEAD, fontSize: 14, bold: true, color: K.petrol });
-      T(s, t, { x: x + 3.05, y: y + 0.62, w: 1.75, h: 1.2, fontSize: 11, color: K.ink });
+    pts.forEach(([h, t], i) => {
+      const y = 1.85 + i * 1.5;
+      num(s, i + 1, 7.55, y, 0.48, K.teal, K.white);
+      T(s, h, { x: 8.25, y: y - 0.02, w: 4.45, h: 0.36, fontFace: HEAD, fontSize: 16, bold: true, color: K.petrol });
+      T(s, t, { x: 8.25, y: y + 0.36, w: 4.45, h: 0.9, fontSize: 13, color: K.ink });
     });
     foot(s, 'Снимки работающего сервиса от 23.10.2026. Все пациенты, врачи и препараты в демонстрации вымышленные.');
-    s.addNotes('Это работающий кабинет врача, не макет. Слева список пациентов: сверху те, у кого есть что проверить, и рядом конкретная причина, например пропуск в плане или записанное нежелательное явление. В центре сводка к приёму за выбранный период. Справа план и календарь приёма препаратов, где видно, в какой день пациент пропустил таблетку.');
+    s.addNotes('Это работающий кабинет врача, не макет. Сверху списка те, у кого есть что проверить, и рядом конкретная причина: пропуск в плане или записанное нежелательное явление. Справа последние отметки самочувствия. Один щелчок, и врач в нужной записи.');
   }
 
   // =====================================================================
-  // 6. Prototype — patient phone
+  // 6. Prototype — doctor: follow-up and plan
+  {
+    const s = slide('2. Прототип', 'ПРОТОТИП · ВРАЧ', 'Перед приёмом всё за период собрано на одном экране');
+    const shots = [
+      ['doctor-followup-crop.jpg', 'Сводка к приёму', 'записи за период: автор, время, неизвестное'],
+      ['doctor-plan-crop.jpg', 'План и решения', 'план с подтверждением врача и календарь препаратов'],
+    ];
+    shots.forEach(([img, h, t], i) => {
+      const w = 5.75, hh = w * 1490 / 2000, x = i ? W - MX - w : MX;
+      screen(s, img, x, 1.72, w, hh);
+      T(s, [{ text: h + '  ', options: { fontFace: HEAD, bold: true, color: K.petrol, fontSize: 15 } }, { text: t, options: { fontSize: 12, color: K.ink } }], { x, y: 1.72 + hh + 0.12, w, h: 0.42, valign: 'middle' });
+    });
+    foot(s, 'Снимки работающего сервиса от 23.10.2026. Все пациенты, врачи и препараты в демонстрации вымышленные.');
+    s.addNotes('Перед приёмом врач открывает сводку за выбранный период: все записи пациента, кто и когда их сделал, и что осталось неизвестным. Рядом план лечения и календарь препаратов, где видно, в какой день пациент пропустил таблетку.');
+  }
+
+  // =====================================================================
+  // 7. Prototype — patient phone
   {
     const s = slide('2. Прототип', 'ПРОТОТИП · ПАЦИЕНТ', 'Пациенту достаточно телефона');
     const pts = [
@@ -299,7 +322,7 @@ async function ic(name, color) {
   }
 
   // =====================================================================
-  // 7. Prototype — questionnaires
+  // 8. Prototype — questionnaires
   {
     const s = slide('2. Прототип', 'ПРОТОТИП · АНКЕТЫ', 'Динамика анкет видна сразу, ответы под рукой');
     screen(s, 'doctor-charts.jpg', MX, 1.7, 12.13, 12.13 * 629 / 2000);
@@ -315,29 +338,6 @@ async function ic(name, color) {
       T(s, t, { x: x + 0.65, y: y + 0.3, w: 3.3, h: 0.7, fontSize: 11, color: K.ink });
     }
     s.addNotes('Анкеты врач предлагает сам. В карточке три шкалы DASS-42 и отдельно PHQ-9 и GAD-7: последнее значение, график и изменение. Мы используем точные русские версии и ничего в них не меняем. Если анкета заполнена не полностью, точка на графике не появляется: пропуск не превращается в ноль.');
-  }
-
-  // =====================================================================
-  // 8. Safety
-  {
-    const s = slide('2. Прототип', 'БЕЗОПАСНОСТЬ', 'Врач в центре каждого клинического решения');
-    const cards = [
-      ['LuUserCheck', 'Подтверждение врача', 'Назначение, изменение и отмена терапии, направление и новый план вступают в силу только после подтверждения на сервере'],
-      ['LuKeyRound', 'Права и связи', 'Врач видит только своих пациентов. Сервер проверяет роль и связь при каждом запросе, даже прямом'],
-      ['LuHistory', 'Журнал происхождения', 'У каждой записи автор, время и исходный текст. Исправление дополняет историю и ничего не стирает'],
-      ['LuLock', 'Защита входа', 'Токены против подделки запросов, истечение сессий, одноразовые приглашения и отзыв доступа'],
-      ['LuServer', 'Без внешних сервисов', 'Шрифты и скрипты свои, строгая политика безопасности страниц. Данные не уходят третьим лицам'],
-      ['LuUsers', 'Только вымышленные данные', 'В демонстрации 8 придуманных пациентов и 3 врача. Реальные данные людей не вводятся'],
-    ];
-    for (const [i, [icn, h, t]] of cards.entries()) {
-      const x = MX + (i % 3) * 4.1, y = 1.78 + Math.floor(i / 3) * 2.3;
-      box(s, x, y, 3.93, 2.08, i === 0 ? K.amberL : K.mist);
-      await iconDot(s, icn, x + 0.28, y + 0.28, 0.56, i === 0 ? K.amber : K.petrol, K.white);
-      T(s, h, { x: x + 1.0, y: y + 0.28, w: 2.8, h: 0.56, fontFace: HEAD, fontSize: 14, bold: true, color: K.petrol, valign: 'middle' });
-      T(s, t, { x: x + 0.28, y: y + 1.0, w: 3.45, h: 1.0, fontSize: 12, color: K.ink });
-    }
-    foot(s, 'Технологии прототипа: Python и Flask, SQLite, HTML, CSS и JavaScript без сторонних библиотек в браузере.');
-    s.addNotes('Безопасность заложена в устройство сервиса. Пять видов клинических действий без подтверждения врача не срабатывают, причём проверка идёт на сервере, а не только в интерфейсе. Врач видит только своих пациентов. У каждой записи есть автор и время, исправления ничего не стирают. В демонстрации только вымышленные люди.');
   }
 
   // =====================================================================
@@ -473,24 +473,22 @@ async function ic(name, color) {
   // =====================================================================
   // 14. Team
   {
-    const s = slide('5. Команда', 'КОМАНДА', 'Команда проекта');
-    box(s, MX, 1.78, 4.6, 4.75, K.petrol);
-    s.addShape(pres.shapes.OVAL, { x: MX + 0.35, y: 2.1, w: 1.15, h: 1.15, fill: { color: K.amber }, line: { color: K.amber, width: 0 } });
-    T(s, 'АС', { x: MX + 0.35, y: 2.1, w: 1.15, h: 1.15, fontFace: HEAD, fontSize: 26, bold: true, color: K.white, align: 'center', valign: 'middle' });
-    T(s, 'Сибгатуллин\nАзамат Ильдарович', { x: MX + 0.35, y: 3.45, w: 4.0, h: 0.85, fontFace: HEAD, fontSize: 18, bold: true, color: K.white });
-    T(s, 'КАПИТАН · РАЗРАБОТЧИК', { x: MX + 0.35, y: 4.33, w: 4.0, h: 0.3, fontSize: 10, bold: true, charSpacing: 1.5, color: K.amberL });
-    const me = ['Спроектировал и написал сервис: сервер, база данных, кабинеты врача и пациента', `${M.tests_total} автотестов и ${M.slices_accepted} принятых этапа разработки`];
-    T(s, me.map((t, j) => ({ text: t, options: { bullet: { indent: 14 }, breakLine: j < me.length - 1, paraSpaceAfter: 6 } })), { x: MX + 0.35, y: 4.75, w: 3.95, h: 1.6, fontSize: 12, color: 'E4EFED' });
-    for (let i = 0; i < 4; i++) {
-      const x = 5.45 + (i % 2) * 3.67, y = 1.78 + Math.floor(i / 2) * 2.43;
-      box(s, x, y, 3.5, 2.3, K.mist);
-      s.addShape(pres.shapes.OVAL, { x: x + 0.28, y: y + 0.3, w: 0.85, h: 0.85, fill: { color: K.tealL }, line: { color: K.tealL, width: 0 } });
-      s.addImage({ data: await ic('LuUser', K.teal), x: x + 0.48, y: y + 0.5, w: 0.45, h: 0.45 });
-      T(s, 'Фамилия\nИмя Отчество', { x: x + 1.3, y: y + 0.3, w: 2.1, h: 0.85, fontFace: HEAD, fontSize: 14, bold: true, color: K.petrol, valign: 'middle' });
-      T(s, 'РОЛЬ В ПРОЕКТЕ', { x: x + 0.28, y: y + 1.35, w: 3.0, h: 0.28, fontSize: 10, bold: true, charSpacing: 1.5, color: K.teal });
-      T(s, 'Чем занимается в команде', { x: x + 0.28, y: y + 1.65, w: 3.0, h: 0.5, fontSize: 12, color: K.slate });
-    }
-    s.addNotes('Наша команда — пять человек. Я отвечаю за разработку: спроектировал и написал сервер, базу и оба кабинета. (Представить остальных участников и их роли.)');
+    const s = slide('5. Команда', 'КОМАНДА', 'Команда «Шаг вперёд»');
+    const cw = 2.27, gap = (W - 2 * MX - 5 * cw) / 4;
+    TEAM.forEach((m, k) => {
+      const x = MX + k * (cw + gap), y = 1.78, dark = !!m.captain;
+      box(s, x, y, cw, 3.85, dark ? K.petrol : K.mist);
+      s.addShape(pres.shapes.OVAL, { x: x + 0.25, y: y + 0.3, w: 1.0, h: 1.0, fill: { color: dark ? K.amber : K.tealL }, line: { color: dark ? K.amber : K.tealL, width: 0 } });
+      T(s, m.ini, { x: x + 0.25, y: y + 0.3, w: 1.0, h: 1.0, fontFace: HEAD, fontSize: 22, bold: true, color: dark ? K.white : K.teal, align: 'center', valign: 'middle' });
+      T(s, m.last, { x: x + 0.25, y: y + 1.55, w: cw - 0.4, h: 0.38, fontFace: HEAD, fontSize: 16, bold: true, color: dark ? K.white : K.petrol });
+      T(s, m.first, { x: x + 0.25, y: y + 1.93, w: cw - 0.4, h: 0.6, fontSize: 13, color: dark ? 'E4EFED' : K.ink });
+      T(s, m.role, { x: x + 0.25, y: y + 2.62, w: cw - 0.35, h: 0.45, fontSize: 9.5, bold: true, charSpacing: 1.2, color: dark ? K.amberL : K.teal });
+      if (m.note) T(s, m.note, { x: x + 0.25, y: y + 3.0, w: cw - 0.4, h: 0.8, fontSize: 11, color: K.slate });
+    });
+    box(s, MX, 5.88, W - 2 * MX, 0.66, K.mist);
+    await iconDot(s, 'LuGraduationCap', MX + 0.18, 5.96, 0.5, K.white, K.teal);
+    T(s, [{ text: UNIVERSITY, options: { bold: true, color: K.petrol } }, { text: ' · педиатрический факультет', options: { color: K.ink } }], { x: MX + 0.85, y: 5.88, w: W - 2 * MX - 1.0, h: 0.66, fontSize: 13, valign: 'middle' });
+    s.addNotes('Нас пятеро, все из Казанского медицинского университета, педиатрический факультет. Капитан — Ильназ Идиятуллин. Марк Галицкий, Мурадисин Мурадисинов и Ильназ Гайнатуллин вместе с капитаном представляют медицинский профиль команды. Азамат Сибгатуллин написал сервис: сервер, базу данных, оба кабинета и автотесты.');
   }
 
   // =====================================================================
@@ -526,7 +524,27 @@ async function ic(name, color) {
   }
 
   // =====================================================================
-  // 16. Close
+  // 16. Appendix — methods
+  {
+    const s = slide('Приложение', 'ПРИЛОЖЕНИЕ · МЕТОДИКА', 'Как мы получили цифры');
+    const rows = [['Показатель', 'Значение', 'Как измерено']].concat(M.method_rows);
+    s.addTable(rows.map((r, i) => r.map((c) => ({ text: c, options: { bold: i === 0, color: i === 0 ? K.white : K.ink, fill: { color: i === 0 ? K.petrol : i % 2 ? K.white : K.mist } } }))), { x: MX, y: 1.75, w: W - 2 * MX, colW: [2.6, 1.6, 7.93], fontFace: BODY, fontSize: 11, border: { type: 'solid', color: K.line, pt: 0.5 }, margin: 0.06, valign: 'middle' });
+    s.addNotes('Слайд для вопросов жюри о методике измерений.');
+  }
+
+  // =====================================================================
+  // 17. Appendix — sources
+  {
+    const s = slide('Приложение', 'ПРИЛОЖЕНИЕ · ИСТОЧНИКИ', 'Источники цифр и норм');
+    M.sources.forEach((t, j) => {
+      T(s, String(j + 1), { x: MX, y: 1.75 + j * 0.56, w: 0.35, h: 0.5, fontFace: HEAD, fontSize: 13, bold: true, color: K.teal });
+      T(s, t, { x: MX + 0.45, y: 1.75 + j * 0.56, w: W - 2 * MX - 0.45, h: 0.5, fontSize: 11, color: K.ink });
+    });
+    s.addNotes('Слайд для вопросов жюри об источниках.');
+  }
+
+  // =====================================================================
+  // 18. Close
   {
     const s = pres.addSlide({ masterName: 'DARK', sectionTitle: 'Финал' });
     s.addImage({ data: markLight, x: MX, y: 0.7, w: 0.9, h: 0.9 });
@@ -539,28 +557,8 @@ async function ic(name, color) {
       T(s, t, { x, y: 5.05, w: 2.5, h: 0.3, fontSize: 12, color: K.sea });
     });
     T(s, 'Спасибо! Готовы ответить на вопросы', { x: MX, y: 5.95, w: 9, h: 0.5, fontFace: HEAD, fontSize: 20, bold: true, color: K.amberL });
-    T(s, 'Азамат Сибгатуллин и команда · кейс-чемпионат Авинейро · 2026', { x: MX, y: 6.85, w: 9, h: 0.3, fontSize: 10, color: K.sea });
+    T(s, 'Команда «Шаг вперёд» · Казанский ГМУ · кейс-чемпионат Авинейро · 2026', { x: MX, y: 6.85, w: 9, h: 0.3, fontSize: 10, color: K.sea });
     s.addNotes('Клинический компас: врач за минуту видит, что изменилось у пациента между приёмами, а решение всегда остаётся за врачом. Спасибо, готовы ответить на вопросы.');
-  }
-
-  // =====================================================================
-  // 17. Appendix — methods
-  {
-    const s = slide('Приложение', 'ПРИЛОЖЕНИЕ · МЕТОДИКА', 'Как мы получили цифры');
-    const rows = [['Показатель', 'Значение', 'Как измерено']].concat(M.method_rows);
-    s.addTable(rows.map((r, i) => r.map((c) => ({ text: c, options: { bold: i === 0, color: i === 0 ? K.white : K.ink, fill: { color: i === 0 ? K.petrol : i % 2 ? K.white : K.mist } } }))), { x: MX, y: 1.75, w: W - 2 * MX, colW: [2.6, 1.6, 7.93], fontFace: BODY, fontSize: 11, border: { type: 'solid', color: K.line, pt: 0.5 }, margin: 0.06, valign: 'middle' });
-    s.addNotes('Слайд для вопросов жюри о методике измерений.');
-  }
-
-  // =====================================================================
-  // 18. Appendix — sources
-  {
-    const s = slide('Приложение', 'ПРИЛОЖЕНИЕ · ИСТОЧНИКИ', 'Источники цифр и норм');
-    M.sources.forEach((t, j) => {
-      T(s, String(j + 1), { x: MX, y: 1.75 + j * 0.56, w: 0.35, h: 0.5, fontFace: HEAD, fontSize: 13, bold: true, color: K.teal });
-      T(s, t, { x: MX + 0.45, y: 1.75 + j * 0.56, w: W - 2 * MX - 0.45, h: 0.5, fontSize: 11, color: K.ink });
-    });
-    s.addNotes('Слайд для вопросов жюри об источниках.');
   }
 
   await pres.writeFile({ fileName: OUT });
