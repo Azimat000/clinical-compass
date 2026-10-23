@@ -383,7 +383,7 @@
       "name": "Вкладки пациента",
       "kind": "nav",
       "refersTo": "button-secondary",
-      "description": "Три вкладки в белой полосе: Сегодня, Дневник, Анкеты; активная подчёркнута чернилами 2px; недоступных пунктов нет.",
+      "description": "Пять вкладок в белой полосе: Сегодня, Дневник, Анкеты, План, Сообщения; активная подчёркнута чернилами 2px; недоступных пунктов нет; на узком экране полоса прокручивается.",
       "html": "<nav class=\"ds-ptabs\"><a aria-current=\"page\" href=\"#\">Сегодня</a><a href=\"#\">Дневник</a><a href=\"#\">Анкеты</a></nav>",
       "css": ".ds-ptabs{display:flex;gap:4px;background:#fff;border-bottom:1px solid #d3dae0;padding:0 12px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-ptabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 10px;color:#56616b;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}.ds-ptabs a[aria-current]{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
     },
@@ -450,6 +450,14 @@
       "description": "Над содержимым каждого экрана врача, пока есть неподтверждённое критическое событие: белая полоса с линией 2px чернилами снизу, слова с числом и кнопка «Открыть критические события». Знака ошибки и красной заливки нет; роль region с подписью.",
       "html": "<div class=\"ds-band\"><p><b>Есть критические события, которые ждут вашего подтверждения: 1.</b> Это учебная демонстрация, не служба 24/7.</p><button>Открыть критические события</button></div>",
       "css": ".ds-band{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:12px 28px;border-bottom:2px solid #15191d;background:#fff;font-size:14px}.ds-band p{flex:1 1 28em;max-width:70ch}.ds-band button{min-height:36px;padding:0 14px;border:1px solid #1a1f23;border-radius:4px;background:#1a1f23;color:#fff;font:700 14px sans-serif}"
+    },
+    {
+      "name": "Подтверждённое решение врача",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Экран «План» пациента: вид решения, текст врача, линия состояния «Подтверждено врачом», имя врача и время МСК. Последнее решение — линия 3px чернилами сверху, остальные с тонкой рамкой. Только подтверждённое; красного и значка нет.",
+      "html": "<article class=\"ds-plan\"><h3>Изменение плана</h3><p>Ежедневные отметки самочувствия и анкета через две недели.</p><p class=\"ds-plan-meta\"><span class=\"ds-line\"></span>Подтверждено врачом · <b>Имя врача</b> · 23.10.2026 02:55 МСК</p></article>",
+      "css": ".ds-plan{background:#fff;border:1px solid #d3dae0;border-top:3px solid #15191d;border-radius:2px;padding:18px 16px;max-width:560px;font:400 15px/1.45 \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-plan h3{margin:0;font-size:18px;line-height:1.3}.ds-plan p{margin:8px 0 0;max-width:60ch}.ds-plan-meta{display:flex;flex-wrap:wrap;gap:4px 8px;padding-top:8px;border-top:1px solid #e6eaed;font-size:13px;color:#56616b}.ds-line{align-self:center;width:22px;border-top:2px solid #15191d}"
     }
   ],
   "narrative": {

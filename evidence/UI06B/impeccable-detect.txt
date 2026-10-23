@@ -1,0 +1,28 @@
+
+1 file scanned with regex matching only (.css).
+Rules that need a parsed page (tiny-text, low-contrast and other element rules) did not run on them; findings are an undercount, not a clean bill of health.
+For the full check, scan the running dev server (npx impeccable detect http://localhost:PORT) or a static site's built .html.
+
+/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css
+  line 804: [border-accent-on-rounded] border-top: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+1 anti-pattern found.
+
+── Advisory (not counted as failures) ──
+
+/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/plan.html
+  [design-system-color] text color rgb(0, 0, 0) on h3 "{{ kinds.get(d.kind, 'Решение врача') }}" is outside DESIGN.md colors
+    → A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.
+
+/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css
+  line 829: [design-system-color] Undocumented color #333 is outside DESIGN.md colors
+    → A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.
+  line 829: [design-system-radius] border-radius: 6px is outside the DESIGN.md rounded scale
+    → A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.
+  line 830: [design-system-color] Undocumented color #000 is outside DESIGN.md colors
+    → A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.
+  line 831: [design-system-color] Undocumented color #666 is outside DESIGN.md colors
+    → A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.
+
+5 advisory notes. Suppress with --no-advisory.

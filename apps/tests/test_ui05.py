@@ -37,9 +37,10 @@ class DoctorWorkTests(unittest.TestCase):
             self.assertNotIn(' style=', page, path)
         for path in ('/patients/D01/first-visits', '/patients/D01/imports'):
             self.assertEqual(403, self.clients['pat-a'].get(path).status_code)
-        # Страница решений открыта и пациенту по прежним правилам доступа, но врачебный экран ему не отдаётся.
+        # Страница решений открыта и пациенту по прежним правилам доступа, но вместо врачебного экрана он получает свой экран плана (UI06B).
         asked = self.clients['pat-a'].get('/patients/D01/decisions')
-        self.assertEqual(503, asked.status_code)
+        self.assertEqual(200, asked.status_code)
+        self.assertIn('<h1>План</h1>', asked.get_data(as_text=True))
         self.assertNotIn('Решение врача', asked.get_data(as_text=True))
         self.assertEqual(404, self.clients['doc-b'].get('/patients/D01/decisions').status_code)
 

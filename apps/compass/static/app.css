@@ -280,6 +280,8 @@ time, .num { font-variant-numeric: tabular-nums; }
 .p-tabs a { display: inline-flex; align-items: center; min-height: 46px; padding: 0 10px; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; }
 .p-tabs a { color: var(--muted); text-decoration: none; }
 .p-tabs a { outline-offset: -3px; }
+/* Пять вкладок на телефоне помещаются без прокрутки: уже поля, без зазора между ссылками (цель касания остаётся 46px по высоте) */
+@media (max-width: 480px) { .p-tabs-in { gap: 0; padding: 0 var(--sp-xs); } .p-tabs a { padding: 0 8px; } }
 .p-tabs a:hover { color: var(--ink); background: var(--band); }
 .p-tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 700; }
 .p-main { max-width: 680px; margin: 0 auto; padding: var(--sp-xl) var(--sp-lg) 48px; }
@@ -795,6 +797,22 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
   .crit { padding-inline: 14px; }
   .crit--open { margin-inline: 0; }
 }
+
+/* ---------- Пациент: подтверждённый врачом план (UI06B) ---------- */
+/* Решение — запись между линиями, как строка бланка: вид, текст врача, кто и когда подтвердил. Последнее решение отличается линией 3px сверху, а не цветом */
+.plan-lead { max-width: 60ch; text-wrap: pretty; }
+.plan-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-md); }
+.plan-entry { padding: 14px var(--sp-lg); background: var(--sheet); border: 1px solid var(--border); border-radius: var(--r-sheet); scroll-margin-top: var(--sp-lg); }
+.plan-entry--now { border-top: 3px solid var(--ink); border-radius: 0; padding-block: 18px; }
+.plan-kind { margin: 0; color: var(--ink); font-size: var(--fs-section); line-height: 1.3; }
+.plan-entry--now .plan-kind { font-size: var(--fs-action); }
+.plan-text { margin-top: var(--sp-sm); max-width: 60ch; text-wrap: pretty; }
+.plan-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-xs) var(--sp-md); margin-top: var(--sp-md); padding-top: var(--sp-sm); border-top: 1px solid var(--rule); font-size: var(--fs-meta); }
+.plan-meta .state { align-items: baseline; }
+.plan-meta .state::before { align-self: baseline; transform: translateY(-3px); }
+.plan-next { margin-top: var(--sp-lg); font-size: var(--fs-cell); }
+.plan-next a { display: inline-flex; align-items: center; min-height: 44px; }
+.p-block > .plan-list { max-width: none; }
 
 /* ---------- Каталог компонентов (только для проверки, COMPASS_UI_GALLERY=1) ---------- */
 .gallery { max-width: 1120px; margin: 0 auto; padding: var(--sp-xl) var(--sp-lg) 48px; }

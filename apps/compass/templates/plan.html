@@ -1,0 +1,52 @@
+{#- План: решения, которые подтвердил врач. Только пациент; врач на этом адресе получает decisions.html. Сюда не попадают проекты, отклонённые, разбор терапии и направления. -#}
+{% extends 'patient_base.html' %}
+{% import 'components.html' as ui %}
+{% set nav_active = 'plan' %}
+{% block title %}План{% endblock %}
+
+{#- Одно подтверждённое решение: вид, текст, кто и когда подтвердил. -#}
+{% macro entry(d, current=False) %}
+<li class="plan-entry{% if current %} plan-entry--now{% endif %}" id="plan-{{ d.id }}">
+  <h3 class="plan-kind">{{ kinds.get(d.kind, 'Решение врача') }}</h3>
+  <p class="plan-text keep">{{ d.content }}</p>
+  <p class="plan-meta">
+    {{ ui.state('known', 'Подтверждено врачом') }}
+    <span class="meta"><b translate="no">{{ d.doctor }}</b> · <time class="num" datetime="{{ d.confirmed_at }}">{{ d.confirmed_at|msk }}</time></span>
+  </p>
+</li>
+{% endmacro %}
+
+{% block patient_main %}
+{%- set weekday, day, iso = sheet_date() -%}
+<h1>План</h1>
+<p class="p-date"><time datetime="{{ iso }}">{{ weekday }}, {{ iso|ru_day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
+<p class="plan-lead">Здесь только решения, которые подтвердил врач. Демо не оказывает экстренную помощь.</p>
+
+{% if not plan %}
+<section class="p-block" aria-labelledby="h-plan-now">
+  <h2 id="h-plan-now">Подтверждённый план</h2>
+  {{ ui.empty('Врач пока не подтвердил план. Это не означает, что плана не будет.') }}
+</section>
+{% else %}
+<section class="p-block" aria-labelledby="h-plan-now">
+  <h2 id="h-plan-now">Последнее подтверждённое решение</h2>
+  <ol class="plan-list">{{ entry(plan[0], current=True) }}</ol>
+</section>
+
+{% if plan|length > 1 %}
+<section class="p-block" aria-labelledby="h-plan-before">
+  <h2 id="h-plan-before">Ранее подтверждённые решения</h2>
+  <p class="meta">Сначала новые. Новое решение может менять прежние.</p>
+  <ol class="plan-list">{% for d in plan[1:6] %}{{ entry(d) }}{% endfor %}</ol>
+  {% if plan|length > 6 %}
+  <details class="fold older">
+    <summary>Ещё более ранние ({{ plan|length - 6 }})</summary>
+    <div class="fold-body"><ol class="plan-list">{% for d in plan[6:] %}{{ entry(d) }}{% endfor %}</ol></div>
+  </details>
+  {% endif %}
+</section>
+{% endif %}
+
+<p class="plan-next"><a href="{{ url_for('communication_page', patient_id=patient.id) }}#plan-items">Пункты плана со сроками и отметками (раздел «Сообщения»)</a></p>
+{% endif %}
+{% endblock %}

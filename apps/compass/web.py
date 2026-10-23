@@ -18,9 +18,9 @@ READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
                          'dashboard.html', 'doctor_patient.html', 'follow_up.html',
                          'decisions.html', 'first_visit.html', 'imports.html',
-                         'communication.html', 'notifications.html', 'critical.html'})
+                         'communication.html', 'notifications.html', 'critical.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
-PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html'})
+PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'plan.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
 # communication.html is for both roles.
 DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'notifications.html', 'critical.html'})
@@ -868,6 +868,15 @@ def create_app(database=None):
                 error, status = str(failure), failure.status
         return decisions_view(patient, patient_id, error, status)
 
+    def plan_response(patient, items):
+        """The patient's plan screen. It gets a narrow copy of the already patient-safe projection: kind, text, date and the doctor's name; no ids, rationale, basis or uncertainties."""
+        confirmed = sorted((i for i in items if i['decision'] == 'approved'),
+                           key=lambda i: (i['confirmed_at'], i['version']), reverse=True)
+        names = author_names(confirmed)
+        plan = [{'id': i['id'], 'kind': i['kind'], 'content': i['payload'].get('content', ''), 'confirmed_at': i['confirmed_at'],
+                 'doctor': names.get(i['doctor_id']) or 'врач (имя не указано)'} for i in confirmed]
+        return interface_response('plan.html', patient=patient, plan=plan, kinds=decisions.KINDS)
+
     def decisions_view(patient, patient_id, error=None, status=200, confirm_error=None):
         """The decisions screen; a refused confirmation comes back here with the typed rationale instead of a bare error page."""
         items = decisions.history(get_db(), g.user, patient_id)
@@ -897,6 +906,8 @@ def create_app(database=None):
                       'route_severity': advice['basis'], 'route_severity_status': 'unknown',
                       'route_evidence': advice['source_url'] + ' · ' + advice['source_section'] + ' · ' + advice['reason'],
                       'route_unavailable': 'Не ожидать помощи через демо: использовать доступный обычный канал связи с врачом или обратиться в медицинскую организацию.'}
+        if g.user['role'] == 'patient':
+            return plan_response(patient, items), status
         return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,

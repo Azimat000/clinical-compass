@@ -118,8 +118,8 @@ class PatientWorkspaceTests(unittest.TestCase):
         for path, current in expected.items():
             page = self.page(path)
             nav = re.search(r'<nav class="p-tabs" aria-label="Разделы кабинета">.*?</nav>', page, re.S).group(0)
-            self.assertEqual(4, nav.count('<a '), path)
-            for name in ['Сегодня', 'Дневник', 'Анкеты', 'Сообщения']:
+            self.assertEqual(5, nav.count('<a '), path)
+            for name in ['Сегодня', 'Дневник', 'Анкеты', 'План', 'Сообщения']:
                 self.assertRegex(nav, r'<a href="[^"]+"[^>]*>%s</a>' % name, path)
             self.assertEqual(1, nav.count('aria-current="page"'), path)
             self.assertRegex(nav, r'<a href="[^"]+" aria-current="page">%s</a>' % current, path)

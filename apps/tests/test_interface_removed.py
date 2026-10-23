@@ -27,13 +27,13 @@ class InterfaceRemovedTests(unittest.TestCase):
                            headers={'Accept': 'application/json'})
 
     def test_only_rebuilt_templates_and_new_assets_are_served(self):
-        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up, UI05 decisions, first visit and imports, UI06 messages, notifications and critical events; the rest of the S29 assets stay removed.
+        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up, UI05 decisions, first visit and imports, UI06 messages, notifications and critical events, UI06B the patient's plan; the rest of the S29 assets stay removed.
         root = Path(__file__).resolve().parents[1] / 'compass'
         self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html',
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
                           'doctor_base.html', 'dashboard.html', 'doctor_patient.html', 'follow_up.html',
                           'decisions.html', 'first_visit.html', 'imports.html',
-                          'communication.html', 'notifications.html', 'critical.html'},
+                          'communication.html', 'notifications.html', 'critical.html', 'plan.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)
@@ -43,18 +43,23 @@ class InterfaceRemovedTests(unittest.TestCase):
             with self.app.test_client().get('/static/' + name) as response:
                 self.assertEqual(200, response.status_code)
 
-    def test_only_the_patient_plan_page_still_answers_interface_removed(self):
-        # UI06B строит экран плана для пациента; до него адрес решений отдаёт пациенту только техническое 503.
+    def test_patient_plan_page_is_a_page_and_stays_technical_for_json_clients(self):
+        # UI06B: пациент получает экран плана; клиенты, просящие JSON, по-прежнему получают техническое 503.
+        path = '/patients/D01/decisions'
+        page = self.clients['pat-a'].get(path)
+        self.assertEqual(200, page.status_code)
+        self.assertIn('<html', page.text)
+        self.assertEqual(200, self.clients['pat-a'].head(path).status_code)
         for path in ('/patients/D01/decisions',):
             with self.subTest(path=path):
-                response = self.clients['pat-a'].get(path)
+                response = self.clients['pat-a'].get(path, headers={'Accept': 'application/json'})
                 self.assertEqual(503, response.status_code)
                 self.assertEqual('interface_removed', response.json['status'])
                 self.assertEqual({'status', 'message', 'csrf'}, set(response.json))
                 self.assertNotIn('Демо 01', response.text)
                 self.assertNotIn('<html', response.text)
                 self.assertEqual('no-store', response.headers['Cache-Control'])
-                self.assertEqual(503, self.clients['pat-a'].head(path).status_code)
+                self.assertEqual(503, self.clients['pat-a'].head(path, headers={'Accept': 'application/json'}).status_code)
 
     def test_doctor_screens_are_pages_for_browsers_and_stay_technical_for_json_clients(self):
         for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/first-visits',

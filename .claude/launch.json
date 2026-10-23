@@ -135,6 +135,21 @@
         "8061"
       ],
       "port": 8061
+    },
+    {
+      "name": "ui06b-app",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        ".venv/bin/python",
+        "-m",
+        "apps.compass",
+        "--db",
+        "var/ui06b-review-20261023.sqlite3",
+        "serve",
+        "--port",
+        "8062"
+      ],
+      "port": 8062
     }
   ]
 }
