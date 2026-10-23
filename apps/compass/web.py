@@ -927,12 +927,15 @@ def create_app(database=None):
         med_base = values.get('med_base', medications.base_id(get_db(), patient_id))
         if not values:
             values = medications.form_values(med_plans[-1]['medications']) if med_plans else {}
+        if request.method == 'GET' and request.args.get('med_edit') == '1':
+            values = {**values, 'med_change': 'replace'}
         return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
                                med_base=med_base, med_calendar=medication_calendar(patient_id),
                                error=error, values=values, stale=stale, confirm_error=confirm_error,
+                               compose_open=bool(error or values.get('parent_id') or values.get('route_rule_context_id') or request.args.get('compose') == '1' or request.args.get('med_edit') == '1'),
                                patient_name=overview.person(patient['code'])[0], authors=author_names(items),
                                today=records.today().isoformat(),
                                request_key=request.form.get('request_key', secrets.token_hex(16))), status

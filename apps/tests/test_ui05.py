@@ -98,7 +98,7 @@ class DoctorWorkTests(unittest.TestCase):
         self.assertEqual(303, self.confirm(proposal).status_code)
         done = self.page('/patients/D01/decisions')
         self.assertIn('Подтверждено врачом', done)
-        self.assertIn('Подтверждённый план', done)
+        self.assertIn('Текущий план', done)
         self.assertNotIn('name="decision" value="approved"', done)
 
     def test_server_failure_on_confirm_is_a_page_with_a_code_and_changes_nothing(self):

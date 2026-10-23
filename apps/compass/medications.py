@@ -35,7 +35,8 @@ def approved(db, patient_id):
         JOIN doctor_confirmations c ON c.proposal_id=p.id
         JOIN care_actions a ON a.confirmation_id=c.id
         WHERE p.patient_id=? AND c.decision='approved' ORDER BY c.confirmed_at,p.version''', (patient_id,))
-    return [{**dict(r), 'medications': json.loads(r['payload_json'])['medications']} for r in rows
+    return [{**dict(r), 'medications': json.loads(r['payload_json'])['medications'],
+            'context': json.loads(r['payload_json']).get('medication_context', '')} for r in rows
             if 'medications' in json.loads(r['payload_json'])]
 
 
@@ -150,7 +151,22 @@ def calendar(db, patient_id, day_text=None):
                      'partial': sum(d['state'] == 'partial' for d in items),
                      'unmarked': sum(d['overdue'] for d in items)})
     plans = approved(db, patient_id)
-    return {'current_medications': plans[-1]['medications'] if plans else [], 'days': days, 'doses': [d for d in doses if d['day'] == selected.isoformat()],
+    # Six calendar weeks, with facts only: future doses never count as missing.
+    recent_start = records.today() - timedelta(days=records.today().weekday()+35)
+    recent_doses = occurrences(db, patient_id, recent_start, records.today())
+    periods = []
+    for offset in range(6):
+        first = recent_start + timedelta(days=offset*7)
+        last = min(first+timedelta(days=6), records.today())
+        items = [d for d in recent_doses if first.isoformat() <= d['day'] <= last.isoformat() and not d['future']]
+        gaps = [d for d in items if d['state'] in ('missed', 'partial') or d['overdue']]
+        periods.append({'start': first.isoformat(), 'end': last.isoformat(), 'total': len(items),
+                        'taken': sum(d['state']=='taken' for d in items),
+                        'missed': sum(d['state']=='missed' for d in items),
+                        'partial': sum(d['state']=='partial' for d in items),
+                        'unknown': sum(d['state']=='unknown' for d in items),
+                        'open_day': gaps[0]['day'] if gaps else first.isoformat()})
+    return {'periods': periods, 'context': plans[-1]['context'] if plans else '', 'current_medications': plans[-1]['medications'] if plans else [], 'days': days, 'doses': [d for d in doses if d['day'] == selected.isoformat()],
             'selected': selected.isoformat(), 'start': monday.isoformat(), 'end': (monday+timedelta(days=6)).isoformat(),
             'prev': (selected-timedelta(days=7)).isoformat(), 'next': (selected+timedelta(days=7)).isoformat(),
             'today': records.today().isoformat(), 'counts': {k: sum(d['state'] == k for d in doses) for k in LABELS},

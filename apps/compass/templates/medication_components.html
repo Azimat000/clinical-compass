@@ -15,12 +15,13 @@
 {% macro calendar(cal, patient, csrf, endpoint, is_patient) %}
 <section class="med-calendar" id="medications" aria-labelledby="h-medications">
   <div class="med-title"><h2 id="h-medications">Приём препаратов</h2>
-    {% if not is_patient %}<a href="{{ url_for('decisions_page', patient_id=patient.id) }}#new-decision">Изменить назначения</a>{% endif %}
+    {% if not is_patient %}<a href="{{ url_for('decisions_page', patient_id=patient.id, compose=1, med_edit=1) }}#new-decision">Изменить расписание</a>{% endif %}
   </div>
   {% if not cal.has_plan %}
     <p class="meta">Врач пока не добавил расписание препаратов.</p>
   {% else %}
-  <details class="med-course"><summary>Назначения и курсы</summary>{{ schedule(cal.current_medications) }}</details>
+  {% if not is_patient %}<p class="meta med-context">{{ cal.context }} <a href="{{ url_for('demo_patient', patient_id=patient.id) }}#records">Сопоставить с дневником</a></p>{% endif %}
+  <details class="med-course"><summary>Расписание и курсы · {{ cal.current_medications|length }}</summary>{{ schedule(cal.current_medications) }}</details>
   <nav class="med-weeks" aria-label="Недели календаря приёма">
     <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.prev) }}#medications" aria-label="Предыдущая неделя">← Неделя</a>
     <span class="num">{{ cal.start|short_date }}–{{ cal.end|short_date }}<small>{{ cal.start[:4] }}</small></span>
@@ -30,20 +31,27 @@
     {% for day in cal.days %}
     <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date) }}#medications"{% if day.selected %} aria-current="date"{% endif %} aria-label="{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}">
       <span>{{ day.weekday }}</span><b class="num">{{ day.number }}</b>
-      {% if day.total %}<span class="med-day-count"><img src="{{ url_for('static', filename='icons/pill.svg') }}" alt="">{{ day.taken }}/{{ day.total }}</span>
+      {% if day.total %}<span class="med-day-count"><img src="{{ url_for('static', filename='icons/pill.svg') }}" alt="" width="14" height="14">{{ day.taken }}/{{ day.total }}</span>
       {% else %}<span class="med-day-count">—</span>{% endif %}
-      {% if day.missed or day.partial or day.unmarked %}<span class="med-day-gap" aria-hidden="true">!</span>{% endif %}
+      {% if day.missed %}<span class="med-day-note">Пропуск</span>
+      {% elif day.partial %}<span class="med-day-note">Часть</span>
+      {% elif day.unmarked %}<span class="med-day-note">Нет отм.</span>{% endif %}
       {% if day.today %}<span class="med-today-dot" aria-label="Сегодня"></span>{% endif %}
     </a>
     {% endfor %}
   </div>
-  <p class="med-week-summary">За неделю: принято {{ cal.counts.taken }}, частично {{ cal.counts.partial }}, пропущено {{ cal.counts.missed }}. Без отметки за прошедшие дни: {{ cal.past_unmarked }}.</p>
+  <dl class="med-week-summary" aria-label="Итоги выбранной недели">
+    <div><dt>Принято</dt><dd class="num">{{ cal.counts.taken }}</dd></div>
+    <div><dt>Пропущено</dt><dd class="num">{{ cal.counts.missed }}</dd></div>
+    <div><dt>Частично</dt><dd class="num">{{ cal.counts.partial }}</dd></div>
+    <div><dt>Без отметки за прошлые дни</dt><dd class="num">{{ cal.past_unmarked }}</dd></div>
+  </dl>
   <div class="med-selected-heading"><h3>{{ cal.selected|ru_day }}{% if cal.selected == cal.today %} · сегодня{% endif %}</h3>
     {% if cal.selected != cal.today %}<a href="{{ url_for(endpoint, patient_id=patient.id) }}#medications">К сегодня</a>{% endif %}
   </div>
   {% for dose in cal.doses %}
   <article class="med-dose" id="dose-{{ dose.proposal_id }}-{{ dose.med_index }}-{{ dose.slot_index }}">
-    <div class="med-dose-heading"><img class="med-pill" src="{{ url_for('static', filename='icons/pill.svg') }}" alt=""><time class="num">{{ dose.time }}</time><b class="keep">{{ dose.name }}</b></div>
+    <div class="med-dose-heading"><img class="med-pill" src="{{ url_for('static', filename='icons/pill.svg') }}" alt="" width="14" height="14"><time class="num">{{ dose.time }}</time><b class="keep">{{ dose.name }}</b></div>
     <p class="med-dose-amount">{{ dose.amount }} табл. <span class="med-status med-status--{{ dose.state }}">{% if dose.state == 'partial' %}Принято {{ dose.actual_label }} из {{ dose.amount }} табл.{% elif dose.future %}Предстоит{% else %}{{ dose.label }}{% endif %}</span></p>
     {% if is_patient and not dose.future %}
     <form method="post" action="{{ url_for('medication_report', patient_id=patient.id) }}" class="med-mark-form" data-busy>
@@ -79,6 +87,23 @@
     {% endif %}
   </article>
   {% else %}<p class="med-no-doses">На этот день приёмов по подтверждённому расписанию нет.</p>{% endfor %}
+  {% if not is_patient %}
+  <details class="fold med-trend">
+    <summary>Динамика приёма за 6 недель</summary>
+    <div class="fold-body">
+      <p class="meta">Фактические отметки к текущему времени. Будущие приёмы не учитываются; отсутствие расписания — не пропуск.</p>
+      <table class="results med-trend-table">
+        <caption class="visually-hidden">История приёма по неделям</caption>
+        <thead><tr><th scope="col">Неделя</th><th scope="col">Принято / приёмов</th><th scope="col">Пропущено</th><th scope="col">Частично</th><th scope="col">Нет отметки</th></tr></thead>
+        <tbody>{% for period in cal.periods %}<tr>
+          <th scope="row"><a href="{{ url_for(endpoint, patient_id=patient.id, med_day=period.open_day) }}#medications">{{ period.start|short_date }}–{{ period.end|short_date }}</a></th>
+          <td class="num">{% if period.total %}{{ period.taken }} / {{ period.total }}{% else %}—{% endif %}</td>
+          <td class="num">{{ period.missed }}</td><td class="num">{{ period.partial }}</td><td class="num">{{ period.unknown }}</td>
+        </tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </details>
+  {% endif %}
   <p class="meta">Время по Москве. Счёт под таблеткой — полностью принятые дозы из запланированных. «Нет отметки» не означает пропуск.</p>
   {% endif %}
 </section>

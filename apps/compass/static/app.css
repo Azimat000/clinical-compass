@@ -971,3 +971,37 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .assessment-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
 .assessment-actions form { margin: 0; }
 .assessment-actions a { display: inline-flex; align-items: center; min-height: 36px; }
+
+/* S36: current plan first; details and composition are progressive disclosure. */
+.plan-jump { background: var(--band); }
+.current-plan-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; color: var(--muted); font-size: var(--fs-meta); }
+.current-plan-meta .state { color: var(--ink); }
+.plan-main-text { max-width: 72ch; font-size: 17px; margin-block: 14px 12px; }
+.plan-basis { margin-top: 16px; }
+.plan-fold { border-top: 1px solid var(--border); }
+.plan-fold > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; cursor: pointer; min-height: 48px; padding-block: 12px; font-weight: 700; }
+.plan-fold > summary::before { content: '+'; font-size: 20px; }
+.plan-fold[open] > summary::before { content: '−'; }
+.plan-fold > summary .meta { font-weight: 400; }
+.plan-fold-body { padding-block: 8px 20px; }
+.med-context { max-width: 72ch; margin-block: 12px; }
+.med-course > summary { cursor: pointer; min-height: 44px; padding-block: 12px; }
+.med-week-summary { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--ink); }
+.med-week-summary > div { display: flex; align-items: baseline; gap: 8px; }
+.med-week-summary dt { font-size: var(--fs-meta); color: var(--muted); }
+.med-week-summary dd { margin: 0; }
+.med-trend { margin-block: 16px; }
+.med-trend .fold-body { overflow-x: auto; }
+.med-trend-table { min-width: 520px; }
+.med-trend-table th a { display: inline-flex; align-items: center; min-height: 44px; }
+.med-title a, .med-selected-heading a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 760px) {
+  .plan-fold > summary { gap: 4px 12px; }
+  .plan-fold > summary .meta { flex-basis: 100%; padding-left: 22px; }
+  .med-week-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .med-week-summary > div { display: block; }
+  .med-week-summary dd { margin-top: 4px; }
+}
+
+.med-day-note { font-size: 12px; font-weight: 700; line-height: 1.3; overflow-wrap: normal; }
+.med-trend-table td { text-align: right; }

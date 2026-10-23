@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T15:34:45+03:00",
+  "updated_on": "2026-10-23T16:04:33+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S35",
+  "last_accepted_slice": "S36",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -395,6 +395,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S35-accepted",
       "handoff": "memory/sessions/S35.md",
+      "reason": null
+    },
+    "S36": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S36",
+      "handoff": "memory/sessions/S36.md",
       "reason": null
     }
   },
@@ -814,6 +820,12 @@
       "early_repeat_allowed": true,
       "clinical_validation": false,
       "active_database": "var/compass.sqlite3"
+    },
+    "s36_plan_workflow": {
+      "date": "2026-10-23",
+      "evidence": "evidence/S36/acceptance.md",
+      "report": "memory/sessions/S36.md",
+      "clinical_validation": false
     }
   },
   "latest_roster": {
@@ -849,6 +861,19 @@
       "simulated_dates": true,
       "clinical_review": false,
       "report": "memory/sessions/S35.md"
+    },
+    "medication_history": {
+      "slice": "S36",
+      "dataset": "data/fictional/medications-20261023.json",
+      "marks": 250,
+      "schedule_snapshots": 14,
+      "explicit_missed": {
+        "patient": "P103",
+        "day": "2026-10-22",
+        "time": "20:00"
+      },
+      "fictional_medication_names": true,
+      "report": "memory/sessions/S36.md"
     }
   }
 }

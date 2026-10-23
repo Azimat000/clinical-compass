@@ -56,15 +56,15 @@
   {% endif %}
 {% endmacro %}
 
-{% macro body(item) %}
-  <p class="entry-text">{{ item.payload.content }}</p>
+{% macro body(item, include_content=True, include_med=True) %}
+  {% if include_content %}<p class="entry-text">{{ item.payload.content }}</p>{% endif %}
   <dl class="facts">
     <dt>Основание</dt><dd>{{ item.payload.basis }}</dd>
     <dt>Что неизвестно</dt><dd>{{ item.payload.uncertainties }}</dd>
     <dt>Проект составил</dt><dd><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.created_at }}">{{ item.created_at|msk }}</time></dd>
     {% if item.parent_proposal_id %}{% set parent = decisions|selectattr('id', 'equalto', item.parent_proposal_id)|first %}<dt>На основе</dt><dd>{% if parent %}<a href="#decision-{{ parent.id }}">версии {{ parent.version }}</a>{% else %}прежнего проекта{% endif %}</dd>{% endif %}
   </dl>
-  {% if 'medications' in item.payload %}<p class="subhead">Состав препаратов</p>{{ med.schedule(item.payload.medications) }}{% endif %}
+  {% if include_med and 'medications' in item.payload %}<p class="subhead">Состав препаратов</p>{{ med.schedule(item.payload.medications) }}{% endif %}
   {{ review_blocks(item) }}
 {% endmacro %}
 
@@ -80,51 +80,39 @@
     <p class="crumb"><a href="{{ card }}">← Карточка пациента</a></p>
     <h1>План и решения</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Сервис сам ничего не назначает.</p>
+    <p class="finding"><span translate="no">{{ patient_name }}</span> · <span class="num" translate="no">{{ patient.id }}</span></p>
   </div>
-  <div class="title-actions">{{ ui.button('Составить проект', href='#new-decision') }}</div>
+  <div class="title-actions">{{ ui.button('Новый проект', href=page ~ '?compose=1#new-decision', kind='primary') }}</div>
 </div>
 
 {{ ui.patient_nav(patient.id, 'plan') }}
 
-<div class="sheet-pad">
+{% if error or confirm_error %}<div class="sheet-pad">
   {% if error %}{{ ui.notice('Проект не сохранён', error ~ ' Введённое осталось в форме.', kind='error', id='form-error') }}<p class="meta"><a href="#new-decision">К форме</a></p>{% endif %}
   {% if confirm_error %}{{ ui.notice('Решение не записано', confirm_error.message, kind='error', id='confirm-error') }}<p class="meta"><a href="#decision-{{ confirm_error.id }}">К проекту</a></p>{% endif %}
-  {{ ui.notice('Неизвестность не означает допуск', 'Если сведений нет или они противоречат друг другу, так и запишите. Отсутствие данных не означает отсутствия риска. Правила оценки пока не включены: рекомендации сервис не формирует.', kind='info') }}
-</div>
+</div>{% endif %}
 
-<div class="card-state">
-  <div>
-    <span class="label">Подтверждённый план</span>
-    {% if head %}<b>{{ kinds[head.kind] }}</b> <span class="sub">версия <span class="num">{{ head.version }}</span>, <time class="num" datetime="{{ head.confirmed_at }}">{{ head.confirmed_at|msk }}</time></span>
-    {% else %}{{ ui.state('unknown', 'не подтверждён') }}{% endif %}
-  </div>
-  <div>
-    <span class="label">Ждут подтверждения</span>
-    {% if waiting %}<b class="num">{{ waiting|length }}</b>{% if stale_waiting %} <span class="sub">из них устарели: {{ stale_waiting|length }}</span>{% endif %}
-    {% else %}{{ ui.state('unknown', 'проектов нет') }}{% endif %}
-  </div>
-  <div>
-    <span class="label">Всего версий</span>
-    {% if decisions %}<b class="num">{{ decisions|length }}</b>{% else %}{{ ui.state('unknown', 'ни одной') }}{% endif %}
-  </div>
-</div>
-
-<nav class="jump" aria-label="Разделы экрана">
-  {% if waiting %}<a href="#waiting">На подтверждении ({{ waiting|length }})</a><a href="#current">Подтверждённый план</a>{% else %}<a href="#current">Подтверждённый план</a><a href="#waiting">На подтверждении</a>{% endif %}<a href="#history">История</a><a href="#new-decision">Новый проект</a>
+<nav class="jump plan-jump" aria-label="Разделы экрана">
+  <a href="#current">Текущий план</a><a href="#medications">Препараты</a>
+  {% if waiting %}<a href="#waiting">На подтверждении · {{ waiting|length }}</a>{% endif %}
+  <a href="#history">История решений</a>
 </nav>
 
 <div class="card-body">
   {% set sec_current %}
   <section class="block" id="current" aria-labelledby="h-current">
-    <h2 id="h-current">Подтверждённый план</h2>
+    <h2 id="h-current">Текущий план</h2>
     {% if head %}
-    <article class="plan">
-      <h3>{{ kinds[head.kind] }} · версия <span class="num">{{ head.version }}</span></h3>
-      <p class="status-line">{{ status_line(head) }}</p>
-      <p class="meta">Подтвердил <span translate="no">{{ authors.get(head.doctor_id, head.doctor_id) }}</span>, <time class="num" datetime="{{ head.confirmed_at }}">{{ head.confirmed_at|msk }}</time>. Новое подтверждение заменяет это решение, прежние остаются в истории.</p>
-      {{ body(head) }}
-      <p class="entry-text"><b>Обоснование врача:</b> {{ head.rationale }}</p>
+    <article class="plan current-plan" id="decision-{{ head.id }}">
+      <div class="current-plan-meta"><span>{{ kinds[head.kind] }} · версия <span class="num">{{ head.version }}</span></span>{{ status_line(head) }}</div>
+      <p class="entry-text plan-main-text">{{ head.payload.content }}</p>
+      <p class="meta"><span translate="no">{{ authors.get(head.doctor_id, head.doctor_id) }}</span> · <time class="num" datetime="{{ head.confirmed_at }}">{{ head.confirmed_at|msk }}</time></p>
+      <details class="fold plan-basis">
+        <summary>Основание и подробности решения</summary>
+        <div class="fold-body">{{ body(head, False, False) }}
+          <p class="entry-text"><b>Обоснование врача:</b> {{ head.rationale }}</p>
+        </div>
+      </details>
     </article>
     {% else %}
       {{ ui.empty('Подтверждённого плана нет. Это не означает, что план не нужен.') }}
@@ -164,14 +152,15 @@
   </section>
 
   {% endset %}
-  {% if waiting %}{{ sec_waiting }}{{ sec_current }}{% else %}{{ sec_current }}{{ sec_waiting }}{% endif %}
+  {% if waiting %}{{ sec_waiting }}{% endif %}{{ sec_current }}
 
   {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', False) }}
 
-  <section class="block" id="history" aria-labelledby="h-history">
-    <h2 id="h-history">История решений</h2>
+  <details class="block plan-fold" id="history">
+    <summary><span>История решений</span><span class="meta">{{ closed|length }} · включая текущую версию</span></summary>
+    <div class="plan-fold-body">
     {% for item in closed %}
-    <details class="fold decision" id="decision-{{ item.id }}">
+    <details class="fold decision" id="{{ 'history-' if head and item.id == head.id else 'decision-' }}{{ item.id }}">
       <summary><span class="sum"><span>{{ kinds[item.kind] }} · версия <span class="num">{{ item.version }}</span></span> {{ status_line(item) }}<span class="sub"><time class="num" datetime="{{ item.confirmed_at }}">{{ item.confirmed_at|msk }}</time>, <span translate="no">{{ authors.get(item.doctor_id, item.doctor_id) }}</span></span></span></summary>
       <div class="fold-body">
         {{ body(item) }}
@@ -182,10 +171,14 @@
       {{ ui.empty('Решений ещё не было. Первое появится после подтверждения или отклонения проекта.') }}
     {% endfor %}
     {% if closed %}<p class="meta">Записи неизменяемы: поправка — это новая версия, а не правка прежней.</p>{% endif %}
-  </section>
+    </div>
+  </details>
 
-  <section class="block" id="new-decision" aria-labelledby="h-new">
-    <h2 id="h-new">Новый проект</h2>
+  <details class="block plan-fold" id="new-decision"{% if compose_open %} open{% endif %}>
+    <summary><span>Новый проект</span><span class="meta">Сохранить → проверить → подтвердить</span></summary>
+    <div class="plan-fold-body">
+    <p class="meta">Сервис сам ничего не назначает. Новый проект изменит план только после отдельного подтверждения врача.</p>
+    {{ ui.notice('Неизвестность не означает допуск', 'Отсутствие данных не означает отсутствия риска. Непроверенные правила оценки не включены; рекомендации сервис не формирует.', kind='info') }}
     {% if values.get('parent_id') %}<p class="meta">Новая версия на основе прежнего проекта.</p>{% endif %}
     <div class="new-form">
       <form method="post" action="{{ page }}" class="action-form" data-busy data-decision-form>
@@ -200,7 +193,7 @@
         {{ ui.select('kind', 'Вид решения', kinds.items()|list, selected=values.get('kind', 'plan_change'), required=True) }}
         {{ ui.textarea('content', 'Решение', value=values.get('content', ''), hint='Что именно решено.', required=True, rows=4, maxlength=4000) }}
         {{ ui.textarea('basis', 'Основание', value=values.get('basis', ''), hint='Откуда сведения: запись, документ, источник.', required=True, rows=3, maxlength=4000) }}
-        {{ ui.textarea('uncertainties', 'Что неизвестно', value=values.get('uncertainties', ''), hint='Что не проверено или противоречит. Если неизвестного нет, напишите об этом прямо.', required=True, rows=3, maxlength=4000) }}
+        {{ ui.textarea('uncertainties', 'Что неизвестно', value=values.get('uncertainties', ''), hint='Запишите недостающие и противоречивые сведения. Отсутствие данных не означает отсутствия риска.', required=True, rows=3, maxlength=4000) }}
 
         {% include 'medication_editor.html' %}
 
@@ -254,7 +247,8 @@
         <p class="meta">Проект не меняет план и не создаёт назначений. Подтверждение — отдельный шаг в разделе «На подтверждении».</p>
       </form>
     </div>
-  </section>
+    </div>
+  </details>
 </div>
 {% endblock %}
 {% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script><script src="{{ url_for('static', filename='medications.js') }}" defer></script>{% endblock %}
