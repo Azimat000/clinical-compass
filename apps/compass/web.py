@@ -645,7 +645,9 @@ def create_app(database=None):
         draft_restored = bool(personal_draft and personal_draft['active'] and form_values is None)
         if draft_restored:
             form_values = personal_draft['values']
-        encounters = db.execute('SELECT * FROM encounters WHERE patient_id=? ORDER BY occurred_at DESC', (patient_id,)).fetchall()
+        encounters = db.execute('''SELECT e.* FROM encounters e WHERE e.patient_id=?
+            AND NOT EXISTS(SELECT 1 FROM clinical_entries c WHERE c.encounter_id=e.id)
+            ORDER BY e.occurred_at DESC''', (patient_id,)).fetchall()
         relationship = db.execute('''SELECT r.*,u.display_name FROM care_relationships r JOIN users u ON u.id=r.doctor_id
             WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=?''', (patient_id, now())).fetchone()
         checks = db.execute('''SELECT c.* FROM relationship_checks c JOIN care_relationships r ON r.id=c.relationship_id
@@ -742,7 +744,8 @@ def create_app(database=None):
             if error.status == 400:
                 return render_patient(patient_id, request.form, str(error), section='report'), 400
             return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
-        location = url_for('patient_diary', patient_id=patient_id) + '#entry-' + entry_id
+        destination = 'demo_patient' if kind == 'visit' else 'patient_diary'
+        location = url_for(destination, patient_id=patient_id) + '#entry-' + entry_id
         if json_reply:
             return jsonify(location=location)
         return redirect(location, code=303)

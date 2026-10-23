@@ -45,7 +45,7 @@ class PlanScreenTests(unittest.TestCase):
     def test_empty_plan_says_so_in_words_and_without_a_promise(self):
         page = self.page()
         self.assertIn(EMPTY, page)
-        self.assertIn('Демо не оказывает экстренную помощь', page)
+        self.assertIn('Кабинет не оказывает экстренную помощь', page)
         self.assertNotIn('Последнее подтверждённое', page)
         self.assertNotIn('Ранее подтверждённые', page)
         self.assertNotRegex(page, r'врач (увидит|ответит|свяжется|посмотрит)')
@@ -145,7 +145,7 @@ class PlanScreenTests(unittest.TestCase):
         self.assertNotIn('<script', page)
         ids = re.findall(r'\sid="([^"]+)"', page)
         self.assertEqual(len(ids), len(set(ids)))
-        self.assertIn('Демо не оказывает экстренную помощь', page)
+        self.assertIn('Кабинет не оказывает экстренную помощь', page)
         self.assertIn('не обеспечивает экстренную помощь', page)  # общая подпись кабинета
         self.assertNotRegex(page, r'врач (увидит|ответит|свяжется|посмотрит)')
         self.assertIn('communication#plan-items', page)

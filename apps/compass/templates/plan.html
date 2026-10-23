@@ -20,7 +20,7 @@
 {%- set weekday, day, iso = sheet_date() -%}
 <h1>План</h1>
 <p class="p-date"><time datetime="{{ iso }}">{{ weekday }}, {{ iso|ru_day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-<p class="plan-lead">Здесь только решения, которые подтвердил врач. Демо не оказывает экстренную помощь.</p>
+<p class="plan-lead">Здесь только решения, которые подтвердил врач. Кабинет не оказывает экстренную помощь.</p>
 
 {% if not plan %}
 <section class="p-block" aria-labelledby="h-plan-now">

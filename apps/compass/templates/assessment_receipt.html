@@ -20,7 +20,7 @@
 <details class="receipt-more">
   <summary>Подробности квитанции</summary>
   <p class="meta">Получена сервером (UTC): <span class="num">{{ received_at }}</span>.</p>
-  <p class="meta">Версия формы: <span class="num">{{ task.form_version_id }}</span>. Квитанция: <span class="num">{{ task.id }}</span>.</p>
+  <p class="meta" data-form-version="{{ task.form_version_id }}">Анкета DASS-42. Квитанция: <span class="num">{{ task.id }}</span>.</p>
 </details>
 
 <div class="p-actions">{{ ui.button('Открыть дневник', kind='primary', href=url_for('patient_diary', patient_id=task.patient_id)) }}</div>

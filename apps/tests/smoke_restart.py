@@ -4,6 +4,7 @@ import http.cookiejar
 import json
 from pathlib import Path
 import re
+import secrets
 import socket
 import sqlite3
 import subprocess
@@ -68,16 +69,19 @@ def main():
                             time.sleep(.1)
                     else:
                         raise RuntimeError('Server did not become ready')
-                    assert 'Вход в компас' in urlopen(url, timeout=3).read().decode()
+                    assert '<h1>Вход</h1>' in urlopen(url, timeout=3).read().decode()
                     if round_number == 1:
                         for browser, uid in ((doctor, 'doctor-demo'), (patient, 'patient-D01')):
                             post(browser, '/login', {'login': uid, 'password': creds[uid]})
                         offer = post(doctor, '/invitations', {'patient_id': 'D01'})
-                        token = re.search(r'readonly value="([^"]+)"', offer).group(1)
+                        token = re.search(r'id="invitation-code" value="([^"]+)"', offer).group(1)
                         post(patient, '/link', {'invitation': token})
                         html = post(patient, '/patients/D01/connection-check', {})
-                        report_id = re.search(r'Технический отчёт ([0-9a-f]+)', html).group(1)
-                        key = re.search(r'name="request_key" value="([^"]+)"', html).group(1)
+                        assert 'Последняя проверка связи получена' in html
+                        with closing(sqlite3.connect(path)) as checked:
+                            report_id = checked.execute('SELECT id FROM relationship_checks').fetchone()[0]
+                        report_form = get(patient, '/demo/D01/report')
+                        key = re.search(r'name="request_key" value="([^"]+)"', report_form).group(1)
                         values = {'request_key': key, 'observed_on': '2026-10-18', 'wellbeing': 'worse',
                                   'complaints_status': 'known', 'complaints_text': 'Синтетическая жалоба после перезапуска',
                                   'risk_factors_status': 'unknown', 'adverse_events_status': 'known',
@@ -86,7 +90,7 @@ def main():
                         clinical_id = json.loads(get(doctor, '/api/patients/D01/history'))['entries'][0]['id']
                         post(patient, '/patients/D01/self-reports', values)  # Same retry does not duplicate.
                         html = get(doctor, '/demo/D01')
-                        visit_key = re.search(r'name="request_key" value="([^"]+)"', html).group(1)
+                        visit_key = secrets.token_hex(16)
                         post(doctor, '/patients/D01/visits', {'request_key': visit_key, 'observed_on': '2026-10-18',
                             'risk_factors_status': 'denied', 'summary': 'Синтетический визит врача', 'wellbeing': 'same'})
                         for incomplete in (False, True):
@@ -96,7 +100,8 @@ def main():
                             html = post(doctor, '/patients/D01/assessment-requests', {
                                 'assignment_key': assignment_key, 'form_version_id': version, 'age_years': '35',
                                 'age_status': 'known', 'age_basis': 'Синтетический профиль D01, сверено для теста'})
-                            task = re.search(r'href="/assessments/([0-9a-f]+)"', html).group(1)
+                            pending_page = get(patient, '/demo/D01/forms')
+                            task = re.search(r'href="/assessments/([0-9a-f]+)"', pending_page).group(1)
                             assert 'Шкала депрессии, тревоги и стресса' in get(patient, '/assessments/' + task)
                             answers = {'form_version_id': version, **{f'answer_{i}': str(i % 4) for i in range(1, 43)}}
                             if incomplete:
@@ -118,12 +123,14 @@ def main():
                         assert json.loads(get(patient, '/api/patients/D01/decisions'))['decisions'] == []
                         post(doctor, '/patients/D01/decisions/'+proposal['id']+'/confirm',
                             {'version':str(proposal['version']),'decision':'approved','rationale':'Просмотрено на синтетике','reviewed':'yes'})
-                    assert report_id in get(patient) and report_id in get(doctor, '/demo/D01')
+                    assert 'Последняя проверка связи получена' in get(patient)
+                    assert report_id in get(doctor, '/demo/D01')
                     for browser in (doctor, patient):
                         clinical = json.loads(get(browser, '/api/patients/D01/history'))['entries']
                         assert len(clinical) == 2 and clinical_id in [e['id'] for e in clinical]
                         assert {e['kind'] for e in clinical} == {'visit', 'self_report'}
-                        assert 'Синтетическое нежелательное явление' in get(browser, '/demo/D01')
+                        route = '/demo/D01' if browser is doctor else '/demo/D01/diary'
+                        assert 'Синтетическое нежелательное явление' in get(browser, route)
                     assert 'Демо 01' in get(doctor) and 'Демо 02' not in get(doctor)
                     measured = json.loads(get(doctor, '/api/patients/D01/assessments'))['assessments']
                     assert len(measured) == 2

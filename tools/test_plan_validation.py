@@ -11,8 +11,13 @@ from validate_plan import ROOT, ready_id, validate
 class PlanTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / 'HAC'
-        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns('.git', 'tmp', '__pycache__'))
+        # Plan validation needs tracked evidence, not live databases, credentials,
+        # installed runtimes or skill caches (which can also be cloud placeholders).
+        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns(
+            '.git', 'tmp', '__pycache__', 'var', '.venv', 'node_modules',
+            'secrets', 'private-data', '.agents', '.claude', '.impeccable', '.taste-skill'))
 
     def tearDown(self):
         self.temp.cleanup()

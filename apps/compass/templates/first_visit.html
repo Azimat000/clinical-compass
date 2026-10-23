@@ -85,7 +85,7 @@
 
 <div class="sheet-pad">
   {% if error %}{{ ui.notice('Новая версия не сохранена', error ~ ' Введённое осталось в форме.', kind='error', id='visit-error') }}<p class="meta"><a href="#v-visit">К форме</a></p>{% endif %}
-  {{ ui.notice('Это запись, а не оценка', 'Диагноз и назначение для начала не нужны. Правила безопасности пока не активны: отсутствие сигнала не означает отсутствие риска. Демо не оказывает экстренную помощь.', kind='info') }}
+  {{ ui.notice('Это запись, а не оценка', 'Диагноз и назначение для начала не нужны. Правила безопасности пока не активны: отсутствие сигнала не означает отсутствие риска. Кабинет не оказывает экстренную помощь.', kind='info') }}
 </div>
 
 {% if current %}
@@ -185,7 +185,7 @@
       <tbody>
         {% for a in measured %}
         <tr>
-          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time><span class="sub num">{{ a.scale_version_id }}</span></td>
+          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time><span class="sub num" data-form-version="{{ a.scale_version_id }}">{{ a.form.code }} · {{ a.form.version.split(' / ')[0] }}</span></td>
           <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub">Есть пропуски, суммы не рассчитаны.</span>{% endif %}</td>
           {% for key in ['anxiety', 'depression', 'stress'] %}<td class="num">{% if a.scores %}{{ a.scores[key] }}{% else %}{{ ui.state('unknown', 'не рассчитано') }}{% endif %}</td>{% endfor %}
         </tr>

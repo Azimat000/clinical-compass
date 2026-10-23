@@ -1,0 +1,79 @@
+{
+  "source_sha256": "c64bad7340c851fe2f219e0454d63573760e55e49ffe866cde5f49ecb9793b87",
+  "old_user_ids": [
+    "demo-anna",
+    "demo-elena",
+    "demo-irina",
+    "demo-mikhail",
+    "demo-new",
+    "demo-sergey",
+    "doc-a",
+    "doc-b",
+    "pat-a",
+    "pat-b"
+  ],
+  "old_patient_ids": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "WD01",
+    "WD02",
+    "WD03",
+    "WD04",
+    "WD05",
+    "WD06"
+  ],
+  "source_tables": {
+    "source_versions": {
+      "rows": 1,
+      "sha256": "20772b3b46f6820c5cfc9fc0f1f10ea64144899073f4b4127bbe61da2c6d2070",
+      "unchanged": true
+    },
+    "catalog_versions": {
+      "rows": 1,
+      "sha256": "ce1956a6f0428eb696a9d4b47bba24efc055f2162a583075ac456e4102fca9fb",
+      "unchanged": true
+    },
+    "assessment_form_releases": {
+      "rows": 1,
+      "sha256": "0f3256d0e6eace5f22063371c6865a2e152fcebcaec678e0e24e2708cfc339aa",
+      "unchanged": true
+    }
+  },
+  "active_database": "/Users/azamatsibgatullin/Documents/HAC/var/compass.sqlite3",
+  "archived_default_database": "/Users/azamatsibgatullin/Documents/HAC/var/archives/S30-default-before-20261023.sqlite3",
+  "processes": {
+    "server": 9641,
+    "worker": 9236
+  },
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "014_report_drafts",
+    "status": "ok"
+  },
+  "new_users": 11,
+  "new_patients": 8,
+  "sessions_before_browser": 0,
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "counts": {
+    "users": 11,
+    "patients": 8,
+    "clinical_entries": 80,
+    "first_visit_versions": 24,
+    "assessments": 24,
+    "proposals": 16,
+    "care_actions": 16,
+    "messages": 112,
+    "adherence_tasks": 56,
+    "adherence_entries": 48,
+    "critical_events": 0
+  },
+  "outbox": {
+    "processed": 56
+  }
+}

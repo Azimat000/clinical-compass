@@ -8,7 +8,7 @@
 {% if href %}<a class="brand" href="{{ href }}" translate="no">{{ mark() }}{{ label }}</a>{% else %}<span class="brand" translate="no">{{ mark() }}{{ label }}</span>{% endif %}
 {%- endmacro %}
 
-{% macro synthetic(text='Учебные данные') -%}
+{% macro synthetic(text='Сведения') -%}
 <span class="synthetic">{{ text }}</span>
 {%- endmacro %}
 
@@ -120,10 +120,10 @@
 <div class="solo">
   <main class="solo-main" id="main">
     <div class="sheet">
-      <div class="sheet-head carbon">{{ brand() }}<span class="sheet-head-end"><time class="sheet-date num" datetime="{{ iso }}" title="{{ weekday }}">{{ day }}</time>{{ synthetic() }}</span></div>
+      <div class="sheet-head carbon">{{ brand() }}<span class="sheet-head-end"><time class="sheet-date num" datetime="{{ iso }}" title="{{ weekday }}">{{ day }}</time></span></div>
       <div class="sheet-body">
         {{ caller() }}
-        <p class="solo-note">Демонстрация на вымышленных пациентах. Реальные данные не вводите.</p>
+        <p class="solo-note">Доступ к кабинету по личному логину и паролю.</p>
       </div>
     </div>
   </main>

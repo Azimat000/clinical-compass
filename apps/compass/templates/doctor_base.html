@@ -17,14 +17,13 @@
   <aside class="side" aria-label="Разделы">
     {{ ui.brand(url_for('dashboard')) }}
     <nav class="nav" aria-label="Основные разделы">{{ menu() }}</nav>
-    <div class="side-foot"><span class="side-user" translate="no">{{ current_user.display_name }}</span>учебный врач
+    <div class="side-foot"><span class="side-user" translate="no">{{ current_user.display_name }}</span>Врач
       <form class="d-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти</button></form></div>
   </aside>
 
   <div class="main">
     <div class="bar carbon">
       {{ ui.brand(url_for('dashboard'), 'Компас') }}
-      {{ ui.synthetic() }}
       <details class="menu">
         <summary>Меню</summary>
         <nav class="nav" aria-label="Основные разделы">{{ menu() }}
@@ -36,11 +35,10 @@
     <div class="sheet">
       <div class="sheet-head carbon">
         <span>{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</span>
-        {{ ui.synthetic('Учебные данные, даты смоделированы') }}
       </div>
       {% if unread.critical and nav_active != 'critical' %}
       <div class="alert-band" role="region" aria-label="Критические события">
-        <p><b>Есть критические события, которые ждут вашего подтверждения: <span class="num">{{ unread.critical }}</span>.</b> Они не входят в обычные уведомления. Это учебная демонстрация, не служба 24/7.</p>
+        <p><b>Есть критические события, которые ждут вашего подтверждения: <span class="num">{{ unread.critical }}</span>.</b> Они не входят в обычные уведомления. Кабинет не обеспечивает круглосуточное наблюдение.</p>
         <a class="button" href="{{ url_for('critical_inbox') }}">Открыть критические события</a>
       </div>
       {% endif %}

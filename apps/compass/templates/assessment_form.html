@@ -9,7 +9,7 @@
 <p class="p-date">DASS&#8209;42 · {{ total }}&nbsp;вопроса · отправить до <time datetime="{{ task.deadline_iso }}">{{ task.deadline_label }}</time></p>
 
 {% if error %}{{ ui.notice('Анкета не отправлена', error ~ ' Ответы остались в форме, проверьте её.', kind='error', id='q-error') }}{% endif %}
-{{ ui.notice('Только вымышленные ответы', 'Врач получит анкету. Анкета не ставит диагноз и не создаёт назначений. После отправки вы увидите квитанцию. Баллы пациенту не показываются. Новое предложение понадобится, если срок пройдёт.') }}
+{{ ui.notice('Заполнение анкеты', 'Врач получит анкету. Анкета не ставит диагноз и не создаёт назначений. После отправки вы увидите квитанцию. Баллы пациенту не показываются. Новое предложение понадобится, если срок пройдёт.') }}
 
 <p class="q-instruction">{{ instrument.instruction }}</p>
 <p class="meta">Выберите один вариант для каждого утверждения. Можно оставить пропуск: ответы передадутся врачу без расчёта результата.</p>
@@ -44,6 +44,6 @@
   </div>
 </form>
 
-<p class="meta q-source">{{ instrument.attribution }} Версия: {{ instrument.version }}. <a href="{{ instrument.source.url }}">Официальный бланк</a> · <a href="{{ instrument.validation_url }}">Исследование русской версии</a> · <a href="{{ instrument.rights_url }}">Условия применения</a></p>
+<p class="meta q-source">{{ instrument.attribution }} Редакция текста: <span data-form-version="{{ instrument.version }}">{{ instrument.version.split(' / ')[0] }}</span>. <a href="{{ instrument.source.url }}">Официальный бланк</a> · <a href="{{ instrument.validation_url }}">Исследование русской версии</a> · <a href="{{ instrument.rights_url }}">Условия применения</a></p>
 {% endblock %}
 {% block page_scripts %}<script src="{{ url_for('static', filename='questionnaire.js') }}" defer></script>{% endblock %}

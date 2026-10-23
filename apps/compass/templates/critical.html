@@ -126,7 +126,7 @@
   {% endif %}
 
   <section class="block" aria-label="Справка и числа">
-    {{ ui.notice('Учебная демонстрация, не служба 24/7', 'Экран работает, пока он открыт или пока на этом компьютере срабатывает резервный сигнал. Закрытое окно сигнала не считается реакцией врача.', kind='info') }}
+    {{ ui.notice('Кабинет не обеспечивает круглосуточное наблюдение', 'Экран работает, пока он открыт или пока на этом компьютере срабатывает резервный сигнал. Закрытое окно сигнала не считается реакцией врача.', kind='info') }}
     <div class="tally">
       <div><span class="label">Ждут подтверждения</span>{% if open_items %}<b class="num count--alert">{{ open_items|length }}</b>{% else %}{{ ui.state('unknown', 'нет') }}{% endif %}</div>
       <div><span class="label">Подтверждены, реакция не записана</span>{% if no_reaction %}<b class="num">{{ no_reaction|length }}</b>{% else %}<span class="num">0</span>{% endif %}</div>

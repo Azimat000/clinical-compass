@@ -46,7 +46,8 @@ class PatientWorkspaceTests(unittest.TestCase):
         self.assertIn('href="/demo/D01/report"', page)
         self.assertIn('<h1>', page)
         self.assertIn('сведения на', page)
-        self.assertIn('Учебные данные', page)
+        self.assertIn('compass-data-origin', page)
+        self.assertNotIn('Учебные данные', page)
         # начатый и сохранённый черновик выше обычной отметки
         self.assertEqual(200, self.clients['pat-a'].post('/patients/D01/self-report-draft', data={
             'csrf': test_access.csrf(self.clients['pat-a']), 'request_key': secrets.token_hex(16),
@@ -135,7 +136,7 @@ class PatientWorkspaceTests(unittest.TestCase):
                      'csrf', 'request_key', 'draft_revision']:
             self.assertTrue(re.search(r'name="%s"' % name, page), name)
         self.assertEqual(4, len(re.findall(r'name="wellbeing"', page)))
-        self.assertIn('Не ждите ответа через демонстрационный кабинет', page)
+        self.assertIn('Не ждите ответа через кабинет', page)
         self.assertIn('/static/report_draft.js', page)
         self.assertIn('/static/self_report.js', page)
         self.assertIn('action="/patients/D01/self-report-draft"', page)

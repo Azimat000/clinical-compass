@@ -113,6 +113,16 @@ class RecordsTests(unittest.TestCase):
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute('DELETE FROM clinical_entries')
 
+    def test_doctor_record_redirects_to_own_card_and_is_not_duplicated_as_archive(self):
+        response = self.submit('doc-a', kind='visits', data=self.values(summary='Новая запись врача'))
+        self.assertEqual(303, response.status_code)
+        self.assertTrue(response.location.startswith('/demo/D01#entry-'))
+        page = self.clients['doc-a'].get(response.location)
+        self.assertEqual(200, page.status_code)
+        entry = self.db.execute('SELECT id FROM clinical_entries').fetchone()[0]
+        self.assertIn('id="entry-%s"' % entry, page.text)
+        self.assertNotIn('id="encounter-%s"' % entry, page.text)
+
     def test_retry_idempotency_changed_body_and_distinct_observation_dates(self):
         data = self.values(wellbeing='better')
         self.assertEqual(303, self.submit(data=data).status_code)

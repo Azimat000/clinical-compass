@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T06:41:20+03:00",
+  "updated_on": "2026-10-23T13:13:05+03:00",
   "current_slice": null,
-  "last_accepted_slice": "UI07",
+  "last_accepted_slice": "S30",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -359,6 +359,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/UI06B",
       "handoff": "memory/sessions/UI06B.md",
+      "reason": null
+    },
+    "S30": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S30",
+      "handoff": "memory/sessions/S30.md",
       "reason": null
     }
   },
@@ -756,5 +762,22 @@
       "evidence": "evidence/UI06B/acceptance.md",
       "other_views": "503/interface_removed только для клиентов, просящих JSON (Accept: application/json) на адресах экранов; у браузеров экранов без шаблона нет"
     }
+  },
+  "latest_roster": {
+    "slice": "S30",
+    "commit_ref": "refs/tags/slice/S30",
+    "active_database": "var/compass.sqlite3",
+    "accounts_file": "var/clinic-20261023-access.md",
+    "report": "memory/sessions/S30.md",
+    "evidence": "evidence/S30/acceptance.md",
+    "dataset": "data/fictional/clinic-20261023.json",
+    "doctors": 3,
+    "patients": 8,
+    "synthetic": true,
+    "simulated_dates": true,
+    "clinical_review": false,
+    "real_user_trial": false,
+    "previous_roster": "archived_offline_not_served",
+    "visible_training_labels": false
   }
 }

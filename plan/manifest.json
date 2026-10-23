@@ -2357,6 +2357,43 @@
       "acceptance_tag": "slice/UI07"
     },
     {
+      "id": "S30",
+      "title": "Новый состав врачей и пациентов с индивидуальными историями",
+      "target_date": "23.10.2026 — прямое поручение",
+      "depends_on": [
+        "UI07"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Заменить весь состав рабочей базы, сохранив источники и клинические границы.",
+        "Создать восемь разных историй и трёх новых врачей через штатные серверные операции.",
+        "Убрать учебные формулировки из интерфейса, сохранив техническое происхождение и ограничения помощи."
+      ],
+      "outputs": [
+        "tools/replace_roster.py",
+        "data/fictional/clinic-20261023.json",
+        "evidence/S30/acceptance.md"
+      ],
+      "acceptance": [
+        "В рабочем сервисе нет прежних пациентов, врачей и связанных с ними записей/сеансов.",
+        "Восемь новых пациентов, три врача; истории, повторные приёмы, анкеты, планы, отметки и переписка индивидуальны и согласованы по датам.",
+        "Видимые тексты без учебных/демо пометок; происхождение synthetic, simulated_dates, clinical_review=false сохранено технически.",
+        "Источники и их статусы неизменны; доступ разграничен, клинические правила не активированы.",
+        "База проходит integrity/foreign_key; вход и экраны проверены, make check проходит."
+      ],
+      "handoff_path": "memory/sessions/S30.md",
+      "evidence_dir": "evidence/S30",
+      "requirement_ids": [],
+      "verification_commands": [
+        ".venv/bin/python -m unittest apps.tests.test_replace_roster",
+        "make check",
+        "python3 tools/validate_plan.py"
+      ],
+      "planned_commit": "slice(S30): replace active roster with individual fictional histories",
+      "acceptance_tag": "slice/S30"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

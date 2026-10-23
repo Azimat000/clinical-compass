@@ -141,7 +141,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <p class="meta">Суммы по подшкалам, 0–42 каждая, без порогов, уровней тяжести и общего итога. При любом пропуске суммы не считаются. Период в анкете: «{{ measured[0].form.period }}». Подсчёт: <span class="num">{{ measured[0].scoring_version }}</span>. Источник: <a href="{{ measured[0].source_url }}" rel="noopener noreferrer" translate="no">{{ measured[0].form.code }}</a>, версия <span class="num">{{ measured[0].form.version }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
+    <p class="meta">Суммы по подшкалам, 0–42 каждая, без порогов, уровней тяжести и общего итога. При любом пропуске суммы не считаются. Период в анкете: «{{ measured[0].form.period }}». Подсчёт: <span class="num">{{ measured[0].scoring_version }}</span>. Источник: <a href="{{ measured[0].source_url }}" rel="noopener noreferrer" translate="no">{{ measured[0].form.code }}</a>, редакция текста <span class="num" data-form-version="{{ measured[0].form.version }}">{{ measured[0].form.version.split(' / ')[0] }}</span>. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
     {% for a in measured %}
     <details class="fold" id="answers-{{ a.id }}">
       <summary>Исходные ответы ({{ a.answers|length }} пункта) · <time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time></summary>

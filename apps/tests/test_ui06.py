@@ -344,7 +344,7 @@ class InboxTests(unittest.TestCase):
     def test_empty_critical_screen_does_not_say_all_is_well(self):
         page = self.clients_ready()['doc-a'].get('/critical').get_data(as_text=True)
         self.assertIn('Это не означает отсутствия риска', page)
-        self.assertIn('Учебная демонстрация, не служба 24/7', page)
+        self.assertIn('Кабинет не обеспечивает круглосуточное наблюдение', page)
 
     def test_journal_and_reserve_state_are_readable_words(self):
         self.critical()
