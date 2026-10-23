@@ -47,8 +47,8 @@
 | [UI05](../../plan/slices/UI05.md) | Врач: решения, первый приём, документы | impeccable, break-ui | принят 22.10.2026 |
 | [UI06](../../plan/slices/UI06.md) | Сообщения, уведомления, критические события | impeccable, break-ui | принят 22.10.2026 |
 | [UI06B](../../plan/slices/UI06B.md) | Пациент: подтверждённый врачом план | impeccable, break-ui | принят 23.10.2026 |
-| [UI07](../../plan/slices/UI07.md) | Движение и тонкая доводка | emil-design-eng, review-animations | следующий |
-| [UI08](../../plan/slices/UI08.md) | Общая проверка, три браузера, зелёный make check | break-ui, web-design-guidelines, impeccable audit | ждёт UI07 |
+| [UI07](../../plan/slices/UI07.md) | Движение и тонкая доводка | emil-design-eng, review-animations | принят 23.10.2026 (review-animations не запускался по решению пользователя) |
+| [UI08](../../plan/slices/UI08.md) | Общая проверка, три браузера, зелёный make check | break-ui, web-design-guidelines, impeccable audit | следующий |
 
 ## Память между срезами
 
