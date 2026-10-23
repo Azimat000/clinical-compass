@@ -1,4 +1,4 @@
-"""UI06: сообщения (обе роли), уведомления и критические события врача. Разметка, три состояния, безопасный повтор, ошибки без потери введённого."""
+"""UI06/S31: сообщения двух ролей, уведомления и отсутствие критического интерфейса."""
 import re
 import secrets
 import unittest
@@ -251,108 +251,48 @@ class InboxTests(unittest.TestCase):
             pass
         return self.db.execute('SELECT id FROM critical_events ORDER BY created_at DESC LIMIT 1').fetchone()[0]
 
-    def test_critical_steps_are_ordered_each_with_its_own_server_button(self):
-        eid = self.critical()
+    def test_removed_critical_page_redirects_without_recording_any_receipt(self):
+        self.critical()
         doctor = self.clients_ready()['doc-a']
-        page = doctor.get('/critical').get_data(as_text=True)
-        self.assertIn('Ждёт подтверждения', page)
-        self.assertIn('Получено на экране врача: ещё нет', page)
-        self.assertIn('data-receipt-url="/critical/%s/received"' % eid, page)
-        self.assertIn('name="back"', page)  # форма без скрипта возвращает на страницу
-        self.assertNotIn('/critical/%s/seen' % eid, page)  # следующий шаг не раньше предыдущего
-        self.assertIn('receipt.js', page)
-        csrf = test_access.csrf(doctor)
-        self.assertEqual(204, doctor.post('/critical/%s/received' % eid, data={'csrf': csrf}).status_code)
-        back = doctor.post('/critical/%s/received' % eid, data={'csrf': csrf, 'back': '1'})
-        self.assertEqual(303, back.status_code)
-        self.assertTrue(back.headers['Location'].endswith('/critical#event-' + eid))
-        page = doctor.get('/critical').get_data(as_text=True)
-        self.assertNotIn('data-receipt-url', page)
-        self.assertIn('/critical/%s/seen' % eid, page)
-        self.assertNotIn('/critical/%s/acknowledged' % eid, page)
-        for action, hint in (('seen', 'acknowledged'), ('acknowledged', 'reacted')):
-            self.assertEqual(303, doctor.post('/critical/%s/%s' % (eid, action), data={'csrf': csrf}).status_code)
-            page = doctor.get('/critical').get_data(as_text=True)
-            self.assertIn('/critical/%s/%s' % (eid, hint), page)
-        self.assertIn('Реакция не записана', page)
-        self.assertIn('name="reaction"', page)
+        for method in ('get', 'head'):
+            response = getattr(doctor, method)('/critical')
+            self.assertEqual(302, response.status_code)
+            self.assertEqual('/', response.headers['Location'])
+        row = self.db.execute('SELECT received_at,seen_at,acknowledged_at,reacted_at FROM critical_delivery').fetchone()
+        self.assertTrue(all(v is None for v in row))
 
-    def test_reaction_too_short_comes_back_on_the_screen_with_the_text(self):
+    def test_no_critical_ui_on_any_doctor_screen_even_with_a_stored_event(self):
+        eid = self.critical()
+        doctor = self.clients_ready()['doc-a']
+        for path in ('/', '/notifications', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/decisions',
+                     '/patients/D01/first-visits', '/patients/D01/imports', URL):
+            page = doctor.get(path).text
+            for removed in ('Критические события', 'Критический сигнал', 'href="/critical',
+                            'alert-band', 'receipt.js', 'name="reaction"', 'data-receipt-url', eid):
+                self.assertNotIn(removed, page, path)
+        self.assertEqual(1, self.db.execute('SELECT count(*) FROM critical_events').fetchone()[0])
+
+    def test_removed_page_preserves_role_boundaries_and_has_no_script(self):
+        clients = self.clients_ready()
+        self.assertEqual(403, clients['pat-a'].get('/critical').status_code)
+        self.assertEqual(302, clients['doc-b'].get('/critical').status_code)
+        self.assertEqual(404, clients['doc-a'].get('/static/receipt.js').status_code)
+
+    def test_legacy_server_operations_still_validate_order_length_and_do_not_change_treatment(self):
         eid = self.critical()
         doctor = self.clients_ready()['doc-a']
         csrf = test_access.csrf(doctor)
-        for action in ('received', 'seen', 'acknowledged'):
-            doctor.post('/critical/%s/%s' % (eid, action), data={'csrf': csrf})
+        self.assertEqual(409, doctor.post('/critical/%s/seen' % eid, data={'csrf': csrf}).status_code)
+        for action, status in (('received', 204), ('seen', 303), ('acknowledged', 303)):
+            self.assertEqual(status, doctor.post('/critical/%s/%s' % (eid, action), data={'csrf': csrf}).status_code)
         refused = doctor.post('/critical/%s/reacted' % eid, data={'csrf': csrf, 'reaction': 'коротко'})
         self.assertEqual(400, refused.status_code)
-        page = refused.get_data(as_text=True)
-        self.assertIn('Реакция не записана', page)
-        self.assertIn('коротко', page)
         self.assertIsNone(self.db.execute('SELECT reacted_at FROM critical_delivery').fetchone()[0])
-        self.assertEqual(303, doctor.post('/critical/%s/reacted' % eid, data={'csrf': csrf, 'reaction': 'Синтетическая фактическая реакция'}).status_code)
-        page = doctor.get('/critical').get_data(as_text=True)
-        self.assertIn('Закрыто записью реакции', page)
-        self.assertIn('Синтетическая фактическая реакция', page)
-
-    def test_banner_and_menu_counter_follow_unacknowledged_events_on_every_doctor_screen(self):
-        eid = self.critical()
-        doctor = self.clients_ready()['doc-a']
-        for path in ('/', '/notifications', '/demo/D01', '/patients/D01/decisions', URL):
-            page = doctor.get(path).get_data(as_text=True)
-            self.assertIn('class="alert-band" role="region" aria-label="Критические события"', page, path)
-            self.assertRegex(page, r'<a href="/critical">Критические события <span class="count count--alert num">1</span>', path)
-        self.assertNotIn('alert-band', doctor.get('/critical').get_data(as_text=True))  # на своём экране полосы нет
-        csrf = test_access.csrf(doctor)
-        for action in ('received', 'seen', 'acknowledged'):
-            doctor.post('/critical/%s/%s' % (eid, action), data={'csrf': csrf})
-        self.assertNotIn('alert-band', doctor.get('/').get_data(as_text=True))
-        self.assertNotRegex(doctor.get('/').get_data(as_text=True), r'Критические события <span class="count')
-
-    def test_other_doctor_and_patient_see_no_critical_event_or_banner(self):
-        eid = self.critical()
-        clients = self.clients_ready()
-        other = clients['doc-b'].get('/critical').get_data(as_text=True)
-        self.assertNotIn(eid, other)
-        self.assertNotIn('alert-band', clients['doc-b'].get('/').get_data(as_text=True))
-        self.assertEqual(403, clients['pat-a'].get('/critical').status_code)
-        self.assertNotIn('alert-band', clients['pat-a'].get('/demo/D01').get_data(as_text=True))
-
-    def test_open_events_come_before_the_reference_text_and_buttons_name_their_event(self):
-        eid = self.critical()
-        doctor = self.clients_ready()['doc-a']
-        csrf = test_access.csrf(doctor)
-        doctor.post('/critical/%s/received' % eid, data={'csrf': csrf})
-        page = doctor.get('/critical').get_data(as_text=True)
-        self.assertLess(page.index('id="event-%s"' % eid), page.index('Справка и числа'))
-        self.assertRegex(page, r'aria-label="Отметить: просмотрено: [^"]+, событие от ')
-        self.assertNotIn('Страница сама отправит', page)
-        self.assertIn('data-receipt-status hidden', page)
-        self.assertRegex(page, r'<section class="block" data-receipt-status hidden>\s*<div class="notice notice--error" role="alert">')
-        doctor.post('/critical/%s/seen' % eid, data={'csrf': csrf})
-        page = doctor.get('/critical').get_data(as_text=True)
-        self.assertIn('Подтвердить событие', page)
-        self.assertNotIn('событие принято', page)
-
-    def test_reaction_field_asks_the_browser_for_the_length_the_server_requires(self):
-        eid = self.critical()
-        doctor = self.clients_ready()['doc-a']
-        csrf = test_access.csrf(doctor)
-        for action in ('received', 'seen', 'acknowledged'):
-            doctor.post('/critical/%s/%s' % (eid, action), data={'csrf': csrf})
-        self.assertRegex(doctor.get('/critical').get_data(as_text=True), r'<textarea[^>]*maxlength="2000"[^>]*minlength="10"')
-
-    def test_empty_critical_screen_does_not_say_all_is_well(self):
-        page = self.clients_ready()['doc-a'].get('/critical').get_data(as_text=True)
-        self.assertIn('Это не означает отсутствия риска', page)
-        self.assertIn('Кабинет не обеспечивает круглосуточное наблюдение', page)
-
-    def test_journal_and_reserve_state_are_readable_words(self):
-        self.critical()
-        delivery.reserve_one(self.db, 'doc-a', sender=lambda: None)
-        page = self.clients_ready()['doc-a'].get('/critical').get_data(as_text=True)
-        self.assertIn('Готово к показу', page)
-        self.assertIn('Резервный сигнал: оператор отметил получение', page)
-        self.assertIn('оператор на этом компьютере отметил получение; это не реакция врача', page)
+        accepted = doctor.post('/critical/%s/reacted' % eid, data={'csrf': csrf, 'reaction': 'Синтетическая фактическая реакция'})
+        self.assertEqual(303, accepted.status_code)
+        self.assertEqual('/', accepted.headers['Location'])
+        self.assertEqual('Синтетическая фактическая реакция', self.db.execute('SELECT reaction FROM critical_delivery').fetchone()[0])
+        self.assertEqual(0, self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
 
     def test_notifications_list_chain_buttons_and_counters(self):
         from apps.compass import access

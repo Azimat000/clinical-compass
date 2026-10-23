@@ -2394,6 +2394,43 @@
       "acceptance_tag": "slice/S30"
     },
     {
+      "id": "S31",
+      "title": "Понятный список пациентов без критических сигналов",
+      "target_date": "23.10.2026 — прямое поручение",
+      "depends_on": [
+        "S30"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Удалить врачебные экраны, ссылки, счётчики и флаги критических сигналов.",
+        "Упростить список пациентов и причины проверки с прямыми ссылками к фактам.",
+        "Проверить доступ, данные, мобильную версию и регрессию; записать память."
+      ],
+      "outputs": [
+        "apps/compass/templates/dashboard.html",
+        "apps/compass/templates/doctor_base.html",
+        "apps/compass/overview.py",
+        "evidence/S31/acceptance.md"
+      ],
+      "acceptance": [
+        "Критических сигналов, ссылок и цепочки подтверждения нет во врачебном интерфейсе; исторические данные и серверные операции сохранены.",
+        "Список имеет понятные причины без дублирующих флагов, разделяет пропуск и отсутствие отметки; ссылки открывают нужный источник.",
+        "Все пациенты доступны; поиск, фильтры, мобильный экран, отсутствие данных и права проверены.",
+        "make check проходит, память обновлена; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S31.md",
+      "evidence_dir": "evidence/S31",
+      "requirement_ids": [],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S31): simplify doctor review list and remove critical UI",
+      "acceptance_tag": "slice/S31"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

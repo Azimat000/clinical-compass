@@ -1,4 +1,4 @@
-{#- Уведомления врача: обычные сообщения о новых отметках пациентов. Критические события — отдельный экран. Показ, просмотр и приём — отдельные отметки сервера. -#}
+{#- Уведомления врача о новых отметках пациентов. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
 {% set nav_active = 'notices' %}
@@ -8,7 +8,6 @@
 {% set waiting = ready|rejectattr('acknowledged_at')|list %}
 {% set closed = ready|selectattr('acknowledged_at')|list %}
 {% set preparing = items|rejectattr('ready_at')|list %}
-{% set critical_open = inbox_counts().critical %}
 
 {#- Что сервер записал про одно уведомление, по порядку. Отметки ставит врач, показ — сервер. -#}
 {% macro stages(n) %}
@@ -59,9 +58,8 @@
   <div>
     <h1>Уведомления</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-    <p class="finding">Новые отметки самочувствия от ваших пациентов. Критические события сюда не попадают: они идут отдельным путём.</p>
+    <p class="finding">Новые отметки самочувствия от ваших пациентов.</p>
   </div>
-  <div class="title-actions">{{ ui.button('Критические события' ~ (' (' ~ critical_open ~ ')' if critical_open else ''), href=url_for('critical_inbox')) }}</div>
 </div>
 
 <div class="sheet-pad">
@@ -78,7 +76,7 @@
   <section class="block" id="waiting" aria-labelledby="h-waiting">
     <h2 id="h-waiting">Ждут отметки</h2>
     {% if waiting %}<ol class="items">{% for n in waiting %}{{ entry(n) }}{% endfor %}</ol>
-    {% else %}{{ ui.empty('Новых уведомлений нет. Это не означает, что пациенты ничего не отправляли: проверьте очередь внимания.', href=url_for('dashboard'), link='Кому нужно внимание') }}{% endif %}
+    {% else %}{{ ui.empty('Новых уведомлений нет. Это не означает, что пациенты ничего не отправляли: посмотрите записи пациентов.', href=url_for('dashboard'), link='Пациенты') }}{% endif %}
   </section>
 
   {% if preparing %}

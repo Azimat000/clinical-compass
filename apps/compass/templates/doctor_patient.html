@@ -48,7 +48,7 @@
 {% block doctor_main %}
 <div class="title-row">
   <div>
-    <p class="crumb"><a href="{{ url_for('dashboard') }}">← Кому нужно внимание</a></p>
+    <p class="crumb"><a href="{{ url_for('dashboard') }}">← Пациенты</a></p>
     <h1 translate="no">{{ overview.name }}</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
     <p class="finding">{{ overview.age }}{% if overview.ordinal %} · {{ overview.ordinal }}{% endif %} · <span class="num" translate="no">{{ patient.id }}</span>
@@ -69,15 +69,12 @@
     {% else %}{{ ui.state('unknown', 'нет отметок') }}{% endif %}
   </div>
   <div>
-    <span class="label">Что в записях</span>
+    <span class="label">Что проверить</span>
     {% if overview.attention %}{{ ui.marker(overview.reason.text) }}{% else %}<b>{{ overview.reason.text }}</b>{% endif %}
     {% if overview.reason.sub %}<span class="sub">{{ overview.reason.sub }}</span>{% endif %}
     {% for m in overview.more %}<span class="sub">Ещё: {{ m.text }}{% if m.sub %} ({{ m.sub }}){% endif %}</span>{% endfor %}
   </div>
-  <div>
-    <span class="label">Флаги</span>
-    {% for code, text, reason in overview.flags %}{{ ui.flag(text, reason) }}{% else %}<span class="sub">флагов нет</span>{% endfor %}
-  </div>
+
 </div>
 
 <nav class="jump" aria-label="Разделы карточки">
@@ -223,20 +220,6 @@
     {% set advice = clinical_panel.advice %}
     {{ ui.notice('Рекомендация не сформирована' if advice.category == 'unknown' else route_categories[advice.category] ~ ': по клиническим рекомендациям', advice.reason, kind='info') }}
     {% if advice.source_url %}<p class="meta">Источник: <a href="{{ advice.source_url }}" rel="noopener noreferrer">клинические рекомендации</a>, {{ advice.source_section }}. Решения по ним принимает врач.</p>{% endif %}
-    {% if signals %}<p>{{ ui.state('new', 'Критических сигналов без реакции врача: ' ~ signals) }}</p>{% endif %}
-    {% if clinical_panel.events %}
-    <h3>Критические события</h3>
-    <table class="results records">
-      <caption class="visually-hidden">Критические события пациента, сначала новые</caption>
-      <thead><tr><th scope="col">Когда</th><th scope="col">Событие</th><th scope="col">Передача врачу</th><th scope="col">Номер</th></tr></thead>
-      <tbody>
-        {% for ev in clinical_panel.events %}
-        <tr id="critical-{{ ev.id }}"><td><time class="num" datetime="{{ ev.created_at }}">{{ ev.created_at|msk }}</time></td><td>критическое событие</td>
-          <td>{{ 'передано ведущему врачу' if ev.delivery_state == 'pending_s10' else 'ведущего врача нет' }}</td><td class="num id">{{ ev.id }}</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% endif %}
     {% set ctx = clinical_panel.context %}
     {% if ctx %}
     <dl class="facts">

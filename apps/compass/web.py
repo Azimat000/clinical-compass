@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
-from .repository import patient_list, pending_signal_counts
+from .repository import patient_list
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
 from . import first_visits, follow_up, report_drafts, overview
 
@@ -18,7 +18,7 @@ READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
                          'dashboard.html', 'doctor_patient.html', 'follow_up.html',
                          'decisions.html', 'first_visit.html', 'imports.html',
-                         'communication.html', 'notifications.html', 'critical.html', 'plan.html'})
+                         'communication.html', 'notifications.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'plan.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
@@ -106,37 +106,24 @@ def create_app(database=None):
         except (TypeError, ValueError):
             return value
 
-    def queue_total():
-        """Patients with a recorded reason for attention among all the doctor's patients, ignoring search and filters."""
-        if 'queue_total' not in g:
-            user = g.get('user')
-            if not user or user['role'] != 'doctor':
-                g.queue_total = None
-            else:
-                db = get_db()
-                patients = patient_list(db, doctor_id=user['id'], signals_first=True)
-                g.queue_total = sum(1 for r in overview.rows(db, user, patients, pending_signal_counts(db, user['id'])) if r['attention'])
-        return g.queue_total
-
     def inbox_counts():
-        """Doctor's menu counters: ready notifications not yet acknowledged and critical events not yet acknowledged. Read-only."""
+        """Ordinary notification counter. Read-only; no critical-event UI."""
         if 'inbox_counts' not in g:
             user = g.get('user')
             if not user or user['role'] != 'doctor':
-                g.inbox_counts = {'notices': None, 'critical': None}
+                g.inbox_counts = {'notices': None}
             else:
                 db = get_db()
                 try:
-                    g.inbox_counts = {'notices': notifications.waiting(db, user),
-                                      'critical': sum(1 for r in critical_delivery.inbox(db, user) if r['acknowledged_at'] is None)}
+                    g.inbox_counts = {'notices': notifications.waiting(db, user)}
                 except notifications.NotificationError:
-                    g.inbox_counts = {'notices': None, 'critical': None}
+                    g.inbox_counts = {'notices': None}
         return g.inbox_counts
 
     @app.context_processor
     def session_context():
         user = g.get('user')
-        return {'current_user': user, 'csrf': user['csrf_token'] if user else '', 'queue_total': queue_total,
+        return {'current_user': user, 'csrf': user['csrf_token'] if user else '',
                 'inbox_counts': inbox_counts}
 
     @app.template_filter()
@@ -373,24 +360,29 @@ def create_app(database=None):
         record_kind = request.args.get('record_kind', '')
         route_category = request.args.get('route_category', '')
         attention = request.args.get('attention', '')
+        if attention not in ('', 'pending'):
+            abort(400)
+        # Retire bookmarked signal filters; never silently hide patients through an obsolete URL.
+        if attention:
+            filters = {key: request.args[key] for key in ('q', 'age_status', 'record_kind', 'route_category', 'show')
+                       if key in request.args}
+            return redirect(url_for('dashboard', **filters))
         show = request.args.get('show', '')
         if show not in ('', 'flagged'):
             abort(400)
         try:
             rows = patient_list(get_db(), query, age_status, doctor_id=g.user['id'],
-                                record_kind=record_kind, route_category=route_category, attention=attention,
-                                signals_first=True)
+                                record_kind=record_kind, route_category=route_category)
         except ValueError:
             abort(400)
         offers = get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
             WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
-        signal_counts = pending_signal_counts(get_db(), g.user['id'])
-        sheet = overview.rows(get_db(), g.user, rows, signal_counts)
+        sheet = overview.rows(get_db(), g.user, rows)
         flagged = sum(1 for r in sheet if r['attention'])
         if show == 'flagged':
             sheet = [r for r in sheet if r['attention']]
         return interface_response('dashboard.html', rows=sheet, flagged=flagged, total=len(rows), show=show,
-                               query=query, age_status=age_status, offers=offers, signal_counts=signal_counts,
+                               query=query, age_status=age_status, offers=offers,
                                record_kind=record_kind, route_category=route_category, attention=attention)
 
     @app.get('/demo/<patient_id>')
@@ -534,17 +526,12 @@ def create_app(database=None):
             return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
         return redirect(url_for('notification_inbox')+'#notification-'+notification_id, code=303)
 
-    def critical_view(error=None, error_event=None, reaction='', status=200):
-        items = critical_delivery.inbox(get_db(), g.user)
-        logs = {r['id']: get_db().execute('SELECT * FROM critical_delivery_log WHERE event_id=? ORDER BY sequence',
-                                        (r['id'],)).fetchall() for r in items}
-        return interface_response('critical.html', items=items, logs=logs, error=error, error_event=error_event,
-                                  reaction=reaction), status
-
     @app.get('/critical')
     def critical_inbox():
         role('doctor')
-        return critical_view()
+        if wants_html():
+            return redirect(url_for('dashboard'))
+        return interface_response('critical.html')
 
     @app.get('/api/critical')
     def critical_status():
@@ -558,13 +545,11 @@ def create_app(database=None):
         try:
             critical_delivery.mark(get_db(), g.user, event_id, action, request.form.get('reaction',''))
         except notifications.NotificationError as error:
-            if error.status == 400 and action == 'reacted':
-                return critical_view(error=str(error), error_event=event_id, reaction=request.form.get('reaction',''), status=400)
             return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
-        # The page script confirms receipt without leaving the screen; the form button asks for a page back.
+        # Legacy server receipts are retained for existing technical callers; no doctor screen exposes them.
         if action == 'received' and not request.form.get('back'):
             return '', 204
-        return redirect(url_for('critical_inbox')+'#event-'+event_id,code=303)
+        return redirect(url_for('dashboard'),code=303)
 
     @app.route('/patients/<patient_id>/imports', methods=['GET', 'POST'])
     def imports_page(patient_id):
@@ -656,10 +641,9 @@ def create_app(database=None):
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
         is_patient = g.user['role'] == 'patient'
-        signals = 0 if is_patient else pending_signal_counts(db, g.user['id']).get(patient_id, 0)
         return interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
-                               signals=signals, route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
-                               overview=None if is_patient else overview.summary(db, g.user, patient, signals), own_marks=[e for e in entries if e['kind'] == 'self_report'],
+                               route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
+                               overview=None if is_patient else overview.summary(db, g.user, patient), own_marks=[e for e in entries if e['kind'] == 'self_report'],
                                today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,

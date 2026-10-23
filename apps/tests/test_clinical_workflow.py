@@ -81,8 +81,9 @@ class ClinicalWorkflowTests(unittest.TestCase):
         self.db.execute("UPDATE users SET disabled=0 WHERE id='doc-a'")
         page = self.clients['doc-a'].get('/demo/D01')
         self.assertEqual(200, page.status_code)
-        self.assertIn(event['id'], page.text)
-        self.assertIn('критическое событие', page.text)
+        self.assertNotIn(event['id'], page.text)
+        self.assertNotIn('критическое событие', page.text)
+        self.assertEqual([{'id': event['id'], 'received': False}], self.clients['doc-a'].get('/api/critical').json)
         patient_page = self.clients['pat-a'].get('/demo/D01').text
         self.assertNotIn('Источник назначения:', patient_page)
         self.assertNotIn('Суицидальный риск в оценке врача', patient_page)

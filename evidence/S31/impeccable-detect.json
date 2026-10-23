@@ -1,0 +1,110 @@
+[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/dashboard.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on li \"{% if primary %}{{ ui.marker(reason.text\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/doctor_base.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on a \"{{ label }}{% if count %} {{ count }} жд\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/doctor_patient.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on caption \"Записи пациента и врача, сначала новые\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/notifications.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on span \"Создано: {{ n.created_at|msk }}\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/first_visit.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on legend \"{{ fields[code][0] }} {{ fields[code][1]\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 819,
+    "snippet": "Undocumented color #333 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#333"
+  },
+  {
+    "antipattern": "design-system-radius",
+    "name": "Radius outside DESIGN.md",
+    "description": "A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 819,
+    "snippet": "border-radius: 6px is outside the DESIGN.md rounded scale",
+    "advisory": true,
+    "ignoreValue": "6px"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 820,
+    "snippet": "Undocumented color #000 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#000"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 821,
+    "snippet": "Undocumented color #666 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#666"
+  }
+]

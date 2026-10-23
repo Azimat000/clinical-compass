@@ -167,7 +167,7 @@ time, .num { font-variant-numeric: tabular-nums; }
 .option:has(input:disabled) { color: var(--muted); cursor: not-allowed; background: none; }
 .choice--invalid .choice-list { padding: var(--sp-xs) var(--sp-sm); margin: 0 calc(-1 * var(--sp-sm)); border: 1.5px solid var(--ink); border-radius: var(--r-control); }
 
-/* Сегменты: «С сигналами / Все» */
+/* Переключатель списка */
 .seg { display: inline-flex; border: 1px solid var(--control); border-radius: var(--r-control); overflow: hidden; }
 .seg a, .seg button { appearance: none; border: 0; background: var(--sheet); color: var(--ink); font: 400 var(--fs-cell)/1 var(--font);
   display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px var(--sp-md); text-decoration: none; cursor: pointer; }
@@ -726,13 +726,12 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
   .form-actions .button { flex: 1 1 auto; }
 }
 
-/* ---------- Сообщения, уведомления, критические события (UI06) ---------- */
+/* ---------- Сообщения и уведомления (UI06) ---------- */
 /* Переписка: свои сообщения белые, чужие на полосе; кто пишет, названо словом */
 .thread, .items { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-md); }
 .msg { padding: 14px var(--sp-lg); background: var(--band); border: 1px solid var(--border); border-radius: var(--r-sheet); max-width: 680px; scroll-margin-top: var(--sp-lg); }
 .msg--mine { background: var(--sheet); }
 .msg:target, .item:target { border-color: var(--ink); }
-.crit:target { outline: 2px solid var(--ink); outline-offset: 4px; }
 .msg-head, .item-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--sp-md); }
 .msg-head time, .item-head .meta { color: var(--muted); font-size: var(--fs-meta); }
 .msg-body { margin-top: var(--sp-xs); max-width: 60ch; text-wrap: pretty; }
@@ -781,35 +780,10 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .p-block > .meta { margin-bottom: var(--sp-md); max-width: 60ch; }
 .block > .thread, .block > .items { max-width: 760px; }
 
-/* Критические события: заметнее обычных толщиной линии и словами. Красный — только у счётчика меню и статуса «Ждёт подтверждения»: это клиническое событие, требующее врача */
-.alert-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-sm) var(--sp-lg);
-  padding: var(--sp-md) var(--sp-sheet); border-bottom: 2px solid var(--ink); background: var(--sheet); }
-.alert-band p { flex: 1 1 28em; max-width: 70ch; text-wrap: pretty; }
-.crit { margin-top: var(--sp-lg); padding: var(--sp-lg); border-top: 1px solid var(--rule); scroll-margin-top: var(--sp-lg); }
-.crit:first-of-type { margin-top: 0; }
-.crit--open { border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--sheet); margin-inline: calc(-1 * var(--sp-sm)); }
-.crit h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--sp-lg); margin: 0 0 var(--sp-xs); font-size: var(--fs-section); }
-.crit .meta { margin-top: var(--sp-xs); }
-.crit .entry-text { margin-top: var(--sp-sm); }
-.chain { list-style: none; margin: var(--sp-lg) 0 0; padding: 0; display: grid; gap: var(--sp-md); max-width: 640px; }
-.chain > li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-sm); font-size: var(--fs-cell); }
-.chain > li + li { padding-top: var(--sp-md); border-top: 1px solid var(--rule); }
-.chain > li > .state { align-items: baseline; }
-.chain > li > .state::before { align-self: baseline; transform: translateY(-3px); }
-.chain form { margin: 0; }
-.chain .action-form { margin-top: 0; max-width: none; }
-.chain-note { color: var(--muted); font-size: var(--fs-meta); max-width: 60ch; }
-.crit .quote { margin-top: 0; }
-.crit .fold { margin-top: var(--sp-lg); }
-.crit .fold-body .results td:first-child, .crit .fold-body .results th:first-child { min-width: 2em; }
 @media (max-width: 760px) {
-  .alert-band { padding-inline: var(--sp-lg); }
-  .alert-band .button { width: 100%; }
   .msg, .item { padding-inline: 14px; }
-  .msg-actions .button, .chain .button { width: 100%; }
+  .msg-actions .button { width: 100%; }
   .msg-actions form { flex: 1 1 100%; }
-  .crit { padding-inline: 14px; }
-  .crit--open { margin-inline: 0; }
 }
 
 /* ---------- Пациент: подтверждённый врачом план (UI06B) ---------- */
@@ -845,3 +819,31 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .dev-toggle a { padding: 6px 8px; border-radius: 6px; color: #333; text-decoration: none; white-space: nowrap; }
 .dev-toggle a[aria-current="true"] { background: #fff; color: #000; }
 .dev-toggle span { align-self: center; color: #666; padding: 0 2px; }
+
+/* Пациенты: три столбца, конкретная причина вместо дублирующих флагов. */
+.review-list { table-layout: fixed; }
+.review-list th:first-child { width: 28%; }
+.review-list th:nth-child(2) { width: 46%; }
+.review-list th:last-child { width: 26%; }
+.review-list .who { width: 28%; min-width: 0; max-width: none; }
+.review-list td.reason { width: 46%; min-width: 0; }
+.review-reasons { list-style: none; margin: 0; padding: 0; }
+.review-reasons li + li { margin-top: var(--sp-md); }
+.review-reasons .reason-link { display: inline-block; min-height: 24px; font-weight: 700; }
+.review-list .review-marks { width: 26%; }
+.review-list .sub { display: block; }
+.review-filters { min-width: 0; }
+.review-filters summary { cursor: pointer; min-height: 36px; display: list-item; align-content: center; }
+.review-filters .filter-form { margin-top: var(--sp-sm); }
+.review-filters > .meta { margin-top: var(--sp-sm); max-width: 60ch; }
+@media (max-width: 760px) {
+  .review-list:not(.records) tr { grid-template-columns: minmax(0, 1fr); }
+  .review-list td.reason, .review-list .who, .review-list .review-marks { grid-column: 1; min-width: 0; width: auto; }
+  .review-list .review-marks { margin-top: var(--sp-sm); }
+  .review-list .review-marks .row-link { display: inline-flex; min-height: 44px; }
+  .review-list .reason-link { min-height: 44px; align-content: center; }
+  .review-list .reason small { margin-top: 0; }
+  .review-reasons li + li { margin-top: var(--sp-xs); }
+  .review-filters { width: 100%; }
+  .review-filters .filter-form { grid-template-columns: minmax(0, 1fr); }
+}

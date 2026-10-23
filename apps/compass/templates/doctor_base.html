@@ -1,16 +1,15 @@
-{#- Оболочка кабинета врача: боковое меню на компьютере, угольная полоса и «Меню» на узком экране. Потомок задаёт nav_active: queue | critical | notices | invites | patient. -#}
+{#- Оболочка кабинета врача: постоянные разделы без отдельного пути сигналов. -#}
 {% extends 'base.html' %}
 {% import 'components.html' as ui %}
 {% block body %}
 {% set weekday, day, iso = sheet_date() %}
 {% set unread = inbox_counts() %}
-{% set nav = [('queue', 'Кому нужно внимание', url_for('dashboard'), queue_total(), True),
-              ('critical', 'Критические события', url_for('critical_inbox'), unread.critical, True),
+{% set nav = [('queue', 'Пациенты', url_for('dashboard'), None, False),
               ('notices', 'Уведомления', url_for('notification_inbox'), unread.notices, False),
               ('invites', 'Приглашения', url_for('dashboard') ~ '#invitations', None, False)] %}
 {% macro menu() %}
   {% for key, label, href, count, alert in nav %}
-    <a href="{{ href }}"{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count{% if alert %} count--alert{% endif %} num">{{ count }}</span><span class="visually-hidden">{{ {'queue': ' с причиной внимания', 'critical': ' ждут подтверждения', 'notices': ' ждут отметки'}[key] }}</span>{% endif %}</a>
+    <a href="{{ href }}"{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count num">{{ count }}</span><span class="visually-hidden"> ждут отметки</span>{% endif %}</a>
   {% endfor %}
 {% endmacro %}
 <div class="shell">
@@ -36,12 +35,6 @@
       <div class="sheet-head carbon">
         <span>{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</span>
       </div>
-      {% if unread.critical and nav_active != 'critical' %}
-      <div class="alert-band" role="region" aria-label="Критические события">
-        <p><b>Есть критические события, которые ждут вашего подтверждения: <span class="num">{{ unread.critical }}</span>.</b> Они не входят в обычные уведомления. Кабинет не обеспечивает круглосуточное наблюдение.</p>
-        <a class="button" href="{{ url_for('critical_inbox') }}">Открыть критические события</a>
-      </div>
-      {% endif %}
       <main id="main">
         {% block doctor_main %}{% endblock %}
       </main>

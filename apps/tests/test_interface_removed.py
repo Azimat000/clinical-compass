@@ -33,7 +33,7 @@ class InterfaceRemovedTests(unittest.TestCase):
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
                           'doctor_base.html', 'dashboard.html', 'doctor_patient.html', 'follow_up.html',
                           'decisions.html', 'first_visit.html', 'imports.html',
-                          'communication.html', 'notifications.html', 'critical.html', 'plan.html'},
+                          'communication.html', 'notifications.html', 'plan.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)
@@ -64,12 +64,12 @@ class InterfaceRemovedTests(unittest.TestCase):
     def test_doctor_screens_are_pages_for_browsers_and_stay_technical_for_json_clients(self):
         for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/first-visits',
                      '/patients/D01/decisions', '/patients/D01/imports', '/patients/D01/communication',
-                     '/notifications', '/critical'):
+                     '/notifications',):
             with self.subTest(path=path):
                 page = self.clients['doc-a'].get(path)
                 self.assertEqual(200, page.status_code)
                 self.assertIn('<html', page.text)
-                if path not in ('/notifications', '/critical'):  # эти ящики без данных не называют пациента
+                if path not in ('/notifications',):  # эти ящики без данных не называют пациента
                     self.assertIn('Демо 01', page.text)
                 technical = self.clients['doc-a'].get(path, headers={'Accept': 'application/json'})
                 self.assertEqual(503, technical.status_code)

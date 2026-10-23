@@ -1,160 +1,112 @@
-{#- «Кому нужно внимание»: лист результатов по пациентам врача. Показатели берутся из записей (overview.py), выводов нет. -#}
+{#- Пациенты: причина проверки ведёт прямо к исходной записи. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
 {% set nav_active = 'queue' %}
-{% block title %}Кому нужно внимание{% endblock %}
+{% block title %}Пациенты{% endblock %}
 {% set weekday, day, iso = sheet_date() %}
-{% set args = {'q': query, 'age_status': age_status, 'record_kind': record_kind, 'route_category': route_category, 'attention': attention} %}
-{% set open_filters = age_status or record_kind or route_category or attention %}
+{% set args = {'q': query, 'age_status': age_status, 'record_kind': record_kind, 'route_category': route_category} %}
+{% set open_filters = age_status or record_kind or route_category %}
 
 {% macro href(r, reason) -%}
   {%- set base = url_for('follow_up_page', patient_id=r.id) if reason.page == 'follow' else url_for('demo_patient', patient_id=r.id) -%}
   {{ base }}{% if reason.anchor %}#{{ reason.anchor }}{% endif %}
 {%- endmacro %}
 
-{% macro marks_cell(r) %}
-  {% if r.marks.series %}
-    {{ ui.wellbeing(r.marks.series) }}
-    <span class="sub">{% if r.marks.streak >= 2 %}хуже {{ r.marks.streak|times }} подряд{% elif r.marks.unknown %}без отметки: {{ r.marks.unknown }}{% else %}последняя <time datetime="{{ r.marks.last_on }}">{{ r.marks.last_on|short_date }}</time>{% endif %}</span>
-  {% else %}
-    {{ ui.state('unknown', 'нет отметок') }}
-  {% endif %}
-{% endmacro %}
-
-{% macro adverse_cell(r) %}
-  {% set a = r.adverse %}
-  {% if a.status == 'known' %}{% set link %}<a href="{{ url_for('demo_patient', patient_id=r.id) }}#entry-{{ a.entry_id }}"{% if a.text|length > 28 %} title="{{ a.text }}"{% endif %}>{{ a.text|truncate(28, True, '…') }}</a>{% endset %}{{ ui.state('new', link) }}<span class="sub">запись от <time datetime="{{ a.on }}">{{ a.on|short_date }}</time>{% if a.newer_silent %}; новее — без сведений{% endif %}</span>
-  {% elif a.status == 'conflicting' %}{{ ui.state('conflict', 'противоречие') }}<span class="sub">запись от <time datetime="{{ a.on }}">{{ a.on|short_date }}</time></span>
-  {% elif a.status == 'denied' %}{{ ui.state('denied', 'отрицает') }}<span class="sub">запись от <time datetime="{{ a.on }}">{{ a.on|short_date }}</time></span>
-  {% else %}{{ ui.state('unknown', 'нет сведений') }}{% endif %}
-{% endmacro %}
-
-{% macro dass_cell(r) %}
-  {% set d = r.dass %}
-  {% if d.kind == 'locked' %}недоступна<span class="sub">нужен возраст</span>
-  {% elif d.kind == 'waiting' %}предложена<span class="sub">ждёт ответа</span>
-  {% elif d.kind == 'done' %}<a href="{{ url_for('demo_patient', patient_id=r.id) }}#assessment-{{ d.last.id }}">заполнена <time datetime="{{ d.last.on }}">{{ d.last.on|short_date }}</time></a>
-    <span class="sub">{% if d.last.complete %}полная{% else %}неполная: <span class="nowrap">{{ d.last.answered }} из {{ d.last.total }}</span>{% endif %}</span>
-  {% else %}{{ ui.state('unknown', 'не заполнялась') }}{% endif %}
-{% endmacro %}
-
-{% macro plan_text(p) -%}
-  {%- set bits = [] -%}
-  {%- if p.counts.get('missed') %}{% set _ = bits.append('пропущено ' ~ p.counts.missed) %}{% endif -%}
-  {%- if p.counts.get('unknown') %}{% set _ = bits.append('нет сведений ' ~ p.counts.unknown) %}{% endif -%}
-  {%- if p.counts.get('conflicting') %}{% set _ = bits.append('противоречие ' ~ p.counts.conflicting) %}{% endif -%}
-  {{- bits|join(', ') -}}
-{%- endmacro %}
-
-{% macro plan_cell(r) %}
-  {% set p = r.plan %}
-  {% if p.kind == 'tasks' %}
-    {% if p.counts.get('conflicting') %}{{ ui.state('conflict', 'противоречие') }}
-    {% else %}выполнено <span class="nowrap">{{ p.counts.get('taken', 0) }}&nbsp;из&nbsp;{{ p.due }}</span>{% endif %}
-    <span class="sub">{{ plan_text(p) or 'за 30 дней' }}</span>
-  {% elif p.kind == 'plan' %}план подтверждён<span class="sub">пунктов за 30 дней нет</span>
-  {% else %}{{ ui.state('unknown', 'плана нет') }}{% endif %}
-{% endmacro %}
-
-{% macro flags_cell(r) %}
-  {% for code, text, reason in r.flags %}{{ ui.flag(text, reason) }}{% endfor %}
+{% macro reason_line(r, reason, primary=False) %}
+  <li>
+    <a class="reason-link" href="{{ href(r, reason)|trim }}">{% if primary %}{{ ui.marker(reason.text) }}{% else %}{{ reason.text }}{% endif %}</a>
+    {% if reason.sub %}<small>{{ reason.sub }}</small>{% endif %}
+  </li>
 {% endmacro %}
 
 {% block doctor_main %}
 <div class="title-row">
   <div>
-    <h1>Кому нужно внимание</h1>
+    <h1>Пациенты</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-    <p class="finding">{% if not total %}Пациентов по этому запросу нет.{% elif flagged %}С причиной для внимания: {{ flagged }} из {{ total }}.{% else %}Записанных причин для внимания нет. Это состояние записей, а не вывод о том, что у пациентов всё хорошо.{% endif %}</p>
+    <p class="finding">Сначала — пациенты с записями для проверки. Нажмите причину, чтобы открыть подробности.</p>
   </div>
   <div class="title-actions">
     <form id="find" class="search" method="get" action="{{ url_for('dashboard') }}" role="search">
       <label class="visually-hidden" for="q">Поиск по пациентам и записям</label>
       <input class="input" id="q" type="search" name="q" value="{{ query }}" maxlength="100" autocomplete="off" placeholder="Имя, код, слово из записи…">
       <input type="hidden" name="show" value="{{ show }}">
-      {% for key, value in [('age_status', age_status), ('record_kind', record_kind), ('route_category', route_category), ('attention', attention)] if value %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endfor %}
+      {% for key, value in [('age_status', age_status), ('record_kind', record_kind), ('route_category', route_category)] if value %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endfor %}
       {{ ui.button('Найти') }}
     </form>
-    {{ ui.button('Пригласить пациента', kind='primary', href='#invitations') }}
   </div>
 </div>
 
 <div class="filters">
-  <div class="seg" role="group" aria-label="Показать">
-    <a href="{{ url_for('dashboard', show='flagged', **args) }}"{% if show == 'flagged' %} aria-current="true"{% endif %}>Есть причина <span class="num">{{ flagged }}</span></a>
-    <a href="{{ url_for('dashboard', **args) }}"{% if show != 'flagged' %} aria-current="true"{% endif %}>Все <span class="num">{{ total }}</span></a>
+  <div class="seg" role="group" aria-label="Список пациентов">
+    <a href="{{ url_for('dashboard', **args) }}"{% if show != 'flagged' %} aria-current="true"{% endif %}>Все пациенты <span class="num">{{ total }}</span></a>
+    <a href="{{ url_for('dashboard', show='flagged', **args) }}"{% if show == 'flagged' %} aria-current="true"{% endif %}>Нужно проверить <span class="num">{{ flagged }}</span></a>
   </div>
-  <form class="filter-form" method="get" action="{{ url_for('dashboard') }}">
-    <input type="hidden" name="show" value="{{ show }}">
-    {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
-    <label>Возраст <select class="select" name="age_status">
-      {% for v, t in [('', 'любой'), ('known', 'известен'), ('unknown', 'не указан'), ('conflicting', 'противоречие')] %}<option value="{{ v }}"{% if v == age_status %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
-    <label>Записи <select class="select" name="record_kind">
-      {% for v, t in [('', 'любые'), ('self_report', 'самоотчёт'), ('visit', 'приём')] %}<option value="{{ v }}"{% if v == record_kind %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
-    <label>Маршрут <select class="select" name="route_category">
-      {% for v, t in [('', 'любой'), ('mandatory', 'обязательно'), ('desirable', 'желательно')] %}<option value="{{ v }}"{% if v == route_category %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
-    <label>Сигнал <select class="select" name="attention">
-      {% for v, t in [('', 'любой'), ('pending', 'без реакции врача')] %}<option value="{{ v }}"{% if v == attention %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
-    {{ ui.button('Показать') }}
-    {% if open_filters or query %}<a class="reset" href="{{ url_for('dashboard', show=show) }}">Сбросить</a>{% endif %}
-  </form>
-</div>
-
-<details class="filter-note">
-  <summary>Что считается причиной для внимания</summary>
-  <p>Только записанные факты, без оценки состояния: критическое событие без реакции врача; нежелательное явление в записях; противоречивые сведения; возраст не указан или противоречив; две отметки «хуже» подряд и больше; пункты плана без выполнения или сведений. Порог «две подряд» используется для сортировки. Его клиническая применимость не подтверждена.</p>
-  <p>Фильтр «Маршрут» учитывает все записанные направления, включая проекты, не только подтверждённые врачом. «Сигнал» — критическое событие, на которое врач ещё не записал реакцию.</p>
-</details>
-
-<div class="legend" role="group" aria-label="Условные обозначения">
-  <span>{{ ui.wellbeing(['better'], decorative=True) }}лучше</span>
-  <span>{{ ui.wellbeing(['same'], decorative=True) }}без изменений</span>
-  <span>{{ ui.wellbeing(['worse'], decorative=True) }}хуже</span>
-  <span>{{ ui.wellbeing(['unknown'], decorative=True) }}не указано</span>
-  {{ ui.state('known', 'есть сведения') }}
-  {{ ui.state('unknown', 'неизвестно') }}
-  {{ ui.state('conflict', 'противоречие') }}
-  {{ ui.state('denied', 'отрицает') }}
-  {{ ui.state('new', 'нежелательное явление') }}
+  <details class="review-filters"{% if open_filters %} open{% endif %}>
+    <summary>Фильтры{% if open_filters %} применены{% endif %}</summary>
+    <form class="filter-form" method="get" action="{{ url_for('dashboard') }}">
+      <input type="hidden" name="show" value="{{ show }}">
+      {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
+      <label>Возраст <select class="select" name="age_status">
+        {% for v, t in [('', 'любой'), ('known', 'известен'), ('unknown', 'не указан'), ('conflicting', 'противоречие')] %}<option value="{{ v }}"{% if v == age_status %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
+      <label>Записи <select class="select" name="record_kind">
+        {% for v, t in [('', 'любые'), ('self_report', 'самоотчёт'), ('visit', 'приём')] %}<option value="{{ v }}"{% if v == record_kind %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
+      <label>Направление <select class="select" name="route_category">
+        {% for v, t in [('', 'любое'), ('mandatory', 'обязательно'), ('desirable', 'желательно')] %}<option value="{{ v }}"{% if v == route_category %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></label>
+      {{ ui.button('Применить') }}
+      {% if open_filters %}<a class="reset" href="{{ url_for('dashboard', q=query, show=show) }}">Сбросить фильтры</a>{% endif %}
+    </form>
+    <p class="meta">Фильтр учитывает направления, включая проекты, которые врач ещё не подтвердил.</p>
+  </details>
+  {% if query %}<a class="reset" href="{{ url_for('dashboard', show=show) }}">Сбросить поиск</a>{% endif %}
 </div>
 
 {% if rows %}
-<table class="results">
-  <caption class="visually-hidden">Пациенты врача: сначала те, у кого есть причина для внимания</caption>
-  <thead>
-    <tr>
-      <th scope="col">Пациент</th>
-      <th scope="col">Что в записях</th>
-      <th scope="col">Самочувствие, 5 отметок</th>
-      <th scope="col">Нежелательные явления</th>
-      <th scope="col">Анкета DASS-42</th>
-      <th scope="col">План</th>
-      <th scope="col"><span class="visually-hidden">Флаги</span></th>
-    </tr>
-  </thead>
+<table class="results review-list">
+  <caption class="visually-hidden">Пациенты врача: сначала записи для проверки</caption>
+  <thead><tr><th scope="col">Пациент</th><th scope="col">Что проверить</th><th scope="col">Последние отметки</th></tr></thead>
   <tbody>
     {% for r in rows %}
     <tr{% if r.attention %} class="flagged"{% endif %}>
-      <td class="who"><b><a href="{{ url_for('demo_patient', patient_id=r.id) }}" translate="no"{% if r.name|length > 40 %} title="{{ r.name }}"{% endif %}>{{ r.name|truncate(40, True, '…') }}</a></b><span>{{ r.age }}{% if r.ordinal %} · {{ r.ordinal }}{% endif %}</span></td>
-      <td class="reason">{% if r.attention %}<a class="reason-link" href="{{ href(r, r.reason)|trim }}">{{ ui.marker(r.reason.text) }}</a>{% else %}<b>{{ r.reason.text }}</b>{% endif %}
-        {% if r.reason.sub or r.more %}<small>{{ r.reason.sub }}{% if r.reason.sub and r.more %} · {% endif %}{% if r.more %}ещё причин: {{ r.more|length }}{% endif %}</small>{% endif %}
-        <a class="row-link" href="{{ url_for('follow_up_page', patient_id=r.id) }}">Сводка к приёму</a></td>
-      <td class="hide-sm">{{ marks_cell(r) }}</td>
-      <td class="hide-sm">{{ adverse_cell(r) }}</td>
-      <td class="hide-sm">{{ dass_cell(r) }}</td>
-      <td class="hide-sm">{{ plan_cell(r) }}</td>
-      <td class="flags">{{ flags_cell(r) }}</td>
-      <td class="extra">{% if r.marks.series %}{{ ui.wellbeing(r.marks.series) }}{% endif %}<span class="sub">{% if r.marks.streak >= 2 %}хуже {{ r.marks.streak|times }} подряд · {% endif %}{% if r.adverse.status == 'known' %}НЯ: {{ r.adverse.text|truncate(24, True, '…') }}{% elif r.adverse.status == 'conflicting' %}НЯ: противоречие{% else %}НЯ: нет сведений{% endif %} · {% if r.dass.kind == 'waiting' %}анкета предложена{% elif r.dass.kind == 'locked' %}анкета недоступна{% elif r.dass.kind == 'none' %}анкета не заполнялась{% else %}анкета заполнена{% endif %} · {% if r.plan.kind == 'tasks' %}план {{ r.plan.counts.get('taken', 0) }} из {{ r.plan.due }}{% else %}плана нет{% endif %}</span><a class="extra-link" href="{{ url_for('follow_up_page', patient_id=r.id) }}">Сводка к приёму</a></td>
+      <td class="who"><b><a href="{{ url_for('demo_patient', patient_id=r.id) }}" translate="no">{{ r.name }}</a></b><span>{{ r.age }} · <span translate="no">{{ r.id }}</span></span></td>
+      <td class="reason">
+        {% if r.attention %}
+        <ul class="review-reasons">{{ reason_line(r, r.reason, primary=True) }}{% for reason in r.more %}{{ reason_line(r, reason) }}{% endfor %}</ul>
+        {% else %}<span class="sub">Записей с причинами для проверки нет.</span>{% endif %}
+      </td>
+      <td class="review-marks">
+        {% if r.marks.series %}{{ ui.wellbeing(r.marks.series) }}<span class="sub">Последняя <time datetime="{{ r.marks.last_on }}">{{ r.marks.last_on|short_date }}</time></span>
+        {% else %}{{ ui.state('unknown', 'нет отметок') }}{% endif %}
+        <a class="row-link" href="{{ url_for('follow_up_page', patient_id=r.id) }}">Сводка к приёму</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% else %}
 <div class="sheet-pad">
-  {{ ui.empty('По этому запросу пациентов нет. Отсутствие результата не означает отсутствия записей: проверьте слова поиска и фильтры.', href=url_for('dashboard'), link='Показать всех') }}
+  {% if show == 'flagged' and not query and not open_filters %}
+    {{ ui.empty('Записей с причинами для проверки нет.', href=url_for('dashboard'), link='Все пациенты') }}
+  {% elif not query and not open_filters and not total %}
+    {{ ui.empty('У вас пока нет пациентов.', href='#invitations', link='Пригласить пациента') }}
+  {% else %}
+    {{ ui.empty('По этому запросу пациентов нет. Проверьте поиск и фильтры.', href=url_for('dashboard'), link='Показать всех') }}
+  {% endif %}
 </div>
 {% endif %}
-{% if total >= 100 %}<p class="sheet-pad meta">Показаны первые 100 пациентов по коду. Причины внимания посчитаны только для них: сузьте поиск, чтобы увидеть остальных.</p>{% endif %}
+{% if total >= 100 %}<p class="sheet-pad meta">Показаны первые 100 пациентов по имени. Чтобы найти остальных, воспользуйтесь поиском.</p>{% endif %}
+
+<details class="filter-note">
+  <summary>Как составлен список</summary>
+  <p>Причины для проверки: нежелательное явление в записях; противоречивые сведения; неизвестный или противоречивый возраст; две последние отметки «хуже» подряд и больше; пропуск пункта плана или отсутствие отметки после срока выполнения.</p>
+  <p>Это список записей для проверки, а не оценка опасности. Отсутствие причины не означает, что у пациента всё хорошо. Порог «две отметки подряд» помогает организовать список; его клиническая применимость не подтверждена.</p>
+</details>
+<div class="legend" role="group" aria-label="Отметки самочувствия, от более ранних к последним">
+  <span>{{ ui.wellbeing(['better'], decorative=True) }}лучше</span>
+  <span>{{ ui.wellbeing(['same'], decorative=True) }}без изменений</span>
+  <span>{{ ui.wellbeing(['worse'], decorative=True) }}хуже</span>
+  <span>{{ ui.wellbeing(['unknown'], decorative=True) }}не указано</span>
+</div>
 
 <div class="below" id="invitations">
   <section aria-labelledby="h-invite">

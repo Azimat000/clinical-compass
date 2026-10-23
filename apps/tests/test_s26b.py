@@ -1,4 +1,4 @@
-"""UI04: список «Кому нужно внимание» и карточка врача. Серверные правила сигналов не менялись, меняется только разметка."""
+"""S31: серверная история сигналов сохранена, но не управляет врачебным списком."""
 import unittest
 from apps.compass import critical_delivery, events
 from apps.compass.db import now
@@ -31,13 +31,13 @@ class DoctorWorkspaceTests(unittest.TestCase):
 
     def test_no_signal_state_is_worded_and_not_a_claim_of_safety(self):
         page = self.clients()['doc-a'].get('/').text
-        self.assertIn('<h1>Кому нужно внимание</h1>', page)
-        self.assertIn('Записанных причин для внимания нет', page)
-        self.assertIn('не вывод о том, что у пациентов всё хорошо', page)
+        self.assertIn('<h1>Пациенты</h1>', page)
+        self.assertIn('Записей с причинами для проверки нет', page)
+        self.assertIn('Отсутствие причины не означает, что у пациента всё хорошо', page)
         self.assertNotIn('СИГНАЛ', page)
         self.assertNotIn('class="flagged"', page)
 
-    def test_signal_patient_goes_first_and_is_marked_with_words(self):
+    def test_legacy_signal_ordering_does_not_change_visible_patient_order(self):
         self.db.execute("UPDATE patients SET code='Яя Первый' WHERE id='D01'")
         self.db.execute("INSERT INTO care_relationships VALUES('rel2','D02','doc-a',?,NULL)", (now(),))
         before = [p['id'] for p in patient_list(self.db, doctor_id='doc-a', signals_first=True)]
@@ -47,11 +47,11 @@ class DoctorWorkspaceTests(unittest.TestCase):
         self.assertEqual(['D01', 'D02'], order)
         self.assertEqual({'D01': 1}, pending_signal_counts(self.db, 'doc-a'))
         page = self.clients()['doc-a'].get('/').text
-        self.assertIn('Критический сигнал без реакции врача', page)
-        self.assertIn('критический сигнал без записанной реакции врача', page)  # полная причина флага для скринридера
-        self.assertLess(page.index('Яя Первый'), page.index('Демо 02'))
-        self.assertEqual(1, page.count('class="flagged"'))
-        self.assertIn('С причиной для внимания: 1 из 2', page)
+        self.assertNotIn('Критический сигнал', page)
+        self.assertNotIn('критический сигнал без записанной реакции врача', page)  # технический сигнал не выводится в интерфейс
+        self.assertLess(page.index('Демо 02'), page.index('Яя Первый'))
+        self.assertEqual(0, page.count('class="flagged"'))
+        self.assertNotIn('>СИГНАЛ<', page)
 
     def test_other_doctor_does_not_see_signal_and_reaction_clears_it_only_after_server_records_it(self):
         eid = self.raise_signal()
@@ -60,20 +60,20 @@ class DoctorWorkspaceTests(unittest.TestCase):
         self.assertNotIn('СИГНАЛ', clients['doc-b'].get('/').text)
         for action in ('received', 'seen', 'acknowledged'):
             critical_delivery.mark(self.db, self.doc, eid, action, '')
-        self.assertIn('СИГНАЛ', clients['doc-a'].get('/').text)
+        self.assertNotIn('СИГНАЛ', clients['doc-a'].get('/').text)
         self.assertEqual({'D01': 1}, pending_signal_counts(self.db, 'doc-a'))
         critical_delivery.mark(self.db, self.doc, eid, 'reacted', 'Synthetic actual physician response')
         self.assertEqual({}, pending_signal_counts(self.db, 'doc-a'))
         self.assertNotIn('СИГНАЛ', clients['doc-a'].get('/').text)
 
-    def test_card_header_shows_signal_and_age_and_has_one_heading(self):
+    def test_card_header_keeps_age_and_one_heading_without_signals(self):
         self.raise_signal()
         doctor = self.clients()['doc-a']
         card = doctor.get('/demo/D01').text
         self.assertEqual(1, card.count('<h1'))
         self.assertIn('<h1 translate="no">Демо 01</h1>', card)
         self.assertIn('19 лет', card)
-        self.assertIn('Критических сигналов без реакции врача: 1', card)
+        self.assertNotIn('Критических сигналов', card)
         self.assertIn('Сводка к приёму', card)
         fu = doctor.get('/patients/D01/follow-up').text
         self.assertIn('<h1>Сводка к приёму</h1>', fu)
@@ -103,7 +103,7 @@ class DoctorWorkspaceTests(unittest.TestCase):
 
     def test_legend_separates_known_unknown_and_conflicting_by_word(self):
         page = self.clients()['doc-a'].get('/').text
-        for phrase in ['есть сведения', 'неизвестно', 'противоречие', 'не указано', 'лучше', 'без изменений', 'хуже']:
+        for phrase in ['не указано', 'лучше', 'без изменений', 'хуже']:
             self.assertIn(phrase, page)
 
 

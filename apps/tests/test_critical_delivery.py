@@ -44,8 +44,8 @@ class CriticalDeliveryTests(unittest.TestCase):
         clients={u:app.test_client() for u in ('doc-a','doc-b','pat-a')}
         for uid,c in clients.items(): login(c,uid)
         c=clients['doc-a']
-        self.assertIn(eid,c.get('/critical').text)
-        self.assertEqual(200,c.head('/critical').status_code)
+        self.assertEqual('/',c.get('/critical').headers['Location'])
+        self.assertEqual(302,c.head('/critical').status_code)
         self.assertIsNone(self.db.execute('SELECT received_at FROM critical_delivery').fetchone()[0])
         self.assertEqual([{'id':eid,'received':False}],c.get('/api/critical').json)
         self.assertEqual([],clients['doc-b'].get('/api/critical').json)

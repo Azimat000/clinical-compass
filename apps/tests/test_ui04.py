@@ -36,30 +36,31 @@ class DoctorCabinetTests(unittest.TestCase):
 
     def test_list_marks_absence_of_data_and_never_calls_it_good(self):
         page = self.page('/')
-        self.assertIn('Отметок самочувствия пока нет', page)
+        self.assertIn('Записей с причинами для проверки нет', page)
         self.assertIn('нет отметок', page)
-        self.assertIn('не вывод о том, что у пациентов всё хорошо', page)
-        self.assertNotRegex(page.replace('не вывод о том, что у пациентов всё хорошо', ''), r'(?i)всё хорошо|в норме|без проблем')
+        self.assertIn('Отсутствие причины не означает, что у пациента всё хорошо', page)
+        self.assertNotRegex(page.replace('Отсутствие причины не означает, что у пациента всё хорошо', ''), r'(?i)всё хорошо|в норме|без проблем')
 
-    def test_list_shows_record_facts_and_flags_with_words(self):
+    def test_list_shows_reasons_without_duplicate_flags(self):
         self.self_report('Тошнота после завтрака', 'worse', adverse_events_status='known', adverse_events_text='Тошнота')
         self.self_report('Хуже снова', 'worse')
         page = self.page('/')
         self.assertIn('class="flagged"', page)
-        self.assertIn('Нежелательное явление', page)
-        self.assertIn('хуже 2 раза подряд', page)
-        self.assertIn('нежелательное явление', page.lower())
-        self.assertRegex(page, r'<span class="flag" title="[^"]*"><span aria-hidden="true">НЯ</span><span class="visually-hidden">')
-        self.assertIn('Тошнота', page)  # текст явления виден в столбце, а не только флаг
+        self.assertIn('Записано нежелательное явление', page)
+        self.assertIn('Самочувствие хуже 2 раза подряд', page)
+        self.assertNotIn('class="flag"', page)
+        self.assertNotIn('>НЯ<', page)
+        self.assertIn('Тошнота', page)
+        self.assertEqual(3, len(re.findall(r'<th scope="col">', page)))
 
     def test_unknown_age_is_flagged_and_dass_is_unavailable(self):
         self.add_patient('D09', 'Учебный 09 · Ирина — Возраст не указан', 'unknown')
         page = self.page('/')
-        self.assertIn('Возраст не указан', page)
-        self.assertIn('>ВОЗРАСТ<', page)
-        self.assertIn('недоступна', page)
-        self.assertIn('нужен возраст', page)
-        self.assertIn('Ирина', page)  # имя из кода, без названия сюжета
+        self.assertIn('Уточнить возраст', page)
+        self.assertIn('Возраст не указан; анкета недоступна', page)
+        self.assertIn('href="/demo/D09#age-review"', page)
+        self.assertNotIn('>ВОЗРАСТ<', page)
+        self.assertIn('Ирина', page)
         self.assertNotIn('Возраст не указан</a>', page)
 
     def test_filters_search_and_show_work_without_scripts(self):
@@ -77,8 +78,11 @@ class DoctorCabinetTests(unittest.TestCase):
             self.assertEqual(400, self.clients['doc-a'].get(bad).status_code, bad)
         self.assertIn('name="show" value="flagged"', self.page('/?show=flagged'))
 
-    def test_signal_filter_keeps_only_unanswered_signal_patients(self):
-        self.assertIn('По этому запросу пациентов нет', self.page('/?attention=pending'))
+    def test_retired_signal_filter_redirects_without_hiding_patients(self):
+        response = self.clients['doc-a'].get('/?attention=pending&q=D01')
+        self.assertEqual(302, response.status_code)
+        self.assertEqual('/?q=D01', response.headers['Location'])
+        self.assertIn('Демо 01', self.clients['doc-a'].get(response.headers['Location']).text)
 
     def test_invitations_are_created_listed_and_revoked_from_the_list(self):
         self.assertIn('Действующих приглашений нет', self.page('/'))
@@ -226,10 +230,12 @@ class DoctorCabinetTests(unittest.TestCase):
             self.assertEqual(1, card.count('id="entry-%s"' % entry_id))
             self.assertIn('href="/demo/D01#entry-%s"' % entry_id, follow)
 
-    def test_queue_counter_in_menu_ignores_search_and_filters_and_is_on_every_page(self):
+    def test_patient_menu_has_no_duplicate_attention_counter(self):
         self.self_report('Хуже', 'worse', adverse_events_status='known', adverse_events_text='Тошнота')
         for path in ('/', '/?q=нет-такого', '/?age_status=unknown', '/demo/D01', '/patients/D01/follow-up'):
-            self.assertRegex(self.page(path), r'<span class="count count--alert num">1</span>', path)
+            page = self.page(path)
+            self.assertNotIn('count--alert', page, path)
+            self.assertRegex(page, r'<a href="/"[^>]*>Пациенты</a>', path)
 
     def test_adverse_flag_names_the_record_and_admits_that_newer_records_are_silent(self):
         old = (records.today().replace(day=1)).isoformat()

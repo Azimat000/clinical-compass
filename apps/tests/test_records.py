@@ -84,7 +84,7 @@ class RecordsTests(unittest.TestCase):
         self.assertEqual('conflicting', entries[0]['payload']['age']['status'])
         page = self.clients['doc-a'].get('/demo/D01').get_data(as_text=True)
         self.assertIn('Возраст не соответствует дате рождения', page)
-        self.assertIn('Противоречивые сведения', page)
+        self.assertIn('Сверить противоречивые сведения', page)
         self.assertIn('Явно отрицает', page)
         self.assertIn('Неизвестно', page)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM adverse_events').fetchone()[0])

@@ -1,15 +1,7 @@
 """Read-only row summaries for the doctor's list. Only recorded facts; nothing is scored or inferred."""
 import re
 from datetime import date
-from . import assessments, decisions, follow_up, records
-
-SIGNAL_FLAGS = {
-    'signal': ('СИГНАЛ', 'критический сигнал без записанной реакции врача'),
-    'adverse': ('НЯ', 'нежелательное явление в записях'),
-    'conflict': ('ПРОТИВ.', 'противоречивые сведения'),
-    'age': ('ВОЗРАСТ', 'возраст не указан'),
-}
-
+from . import decisions, follow_up, records
 
 def person(code):
     """'Учебный 03 · Елена — Ухудшение и новое НЯ' -> ('Елена', 'учебный 03'); other codes are shown as they are."""
@@ -91,21 +83,6 @@ def _adverse(entries):
     return {'status': 'unknown', 'text': None, 'on': None, 'since': None, 'entry_id': None, 'newer_silent': False}
 
 
-def _dass(db, user, patient, patient_id):
-    done = assessments.history(db, user, patient_id)
-    waiting = assessments.pending(db, user, patient_id)
-    last = None
-    if done:
-        answered = sum(1 for a in done[0]['answers'] if a is not None)
-        last = {'on': done[0]['observed_on'], 'complete': done[0]['completeness'] == 'complete',
-                'answered': answered, 'total': len(done[0]['answers']), 'id': done[0]['id']}
-    if patient['age_status'] != 'known':
-        return {'kind': 'locked', 'last': last, 'waiting': waiting[:1]}
-    if waiting:
-        return {'kind': 'waiting', 'last': last, 'waiting': waiting[:1]}
-    return {'kind': 'done' if last else 'none', 'last': last, 'waiting': []}
-
-
 def _plan(db, user, patient_id):
     try:
         data = follow_up.view(db, user, patient_id, {})
@@ -118,47 +95,50 @@ def _plan(db, user, patient_id):
     return {'kind': 'tasks' if tasks else ('plan' if data['plans'] else 'none'), 'counts': counts, 'due': len(tasks)}
 
 
-def summary(db, user, patient, signals):
+def summary(db, user, patient):
     patient_id = patient['id']
     entries = records.history(db, patient_id)
     marks = _marks(entries)
     adverse = _adverse(entries)
     notes = [w for w in records.warnings(patient, entries) if not w.startswith('Исходный возраст')]
-    dass = _dass(db, user, patient, patient_id)
     plan = _plan(db, user, patient_id)
     name, ordinal = person(patient['code'])
 
-    flags, reasons = [], []
+    reasons = []
 
     def reason(text, sub=None, page='card', anchor=None):
         reasons.append({'text': text, 'sub': sub, 'page': page, 'anchor': anchor})
 
-    if signals:
-        flags.append('signal')
-        reason('Критический сигнал без реакции врача', 'Сигналов: %d. Получение не означает просмотр.' % signals, anchor='clinical-rules')
     if adverse['status'] == 'known':
-        flags.append('adverse')
         sub = 'запись от %s' % dm(adverse['on'])
         if adverse['since'] != adverse['on']:
             sub += ', в записях с %s' % dm(adverse['since'])
         if adverse['newer_silent']:
             sub += '; в более новых записях сведений нет'
-        reason('Нежелательное явление', sub, anchor='entry-' + adverse['entry_id'])
-    if notes or adverse['status'] == 'conflicting' or patient['age_status'] == 'conflicting' or plan['counts'].get('conflicting'):
-        flags.append('conflict')
-        reason('Противоречивые сведения', cut(tidy(notes[0]), 90) if notes else None, anchor='warnings' if notes else None,
-               page='card' if notes else 'follow')
+        reason('Записано нежелательное явление', cut(adverse['text'] or '', 120).rstrip('.') + '. ' + sub.capitalize(), anchor='entry-' + adverse['entry_id'])
+    if notes:
+        reason('Сверить противоречивые сведения', cut(tidy(notes[0]), 120), anchor='warnings')
+    elif adverse['status'] == 'conflicting':
+        reason('Сверить сведения о нежелательном явлении', 'В записях есть противоречие.', anchor='entry-' + adverse['entry_id'])
+    if plan['counts'].get('conflicting'):
+        reason('Сверить выполнение плана', 'Отметки о выполнении расходятся.', page='follow', anchor='fu-plan')
     if patient['age_status'] == 'unknown':
-        flags.append('age')
-        reason('Возраст не указан', 'Анкета недоступна, нужна сверка.', anchor='age-review')
+        reason('Уточнить возраст', 'Возраст не указан; анкета недоступна.', anchor='age-review')
     elif patient['age_status'] == 'conflicting':
-        reason('Возраст противоречив', 'Анкета недоступна, нужна сверка.', anchor='age-review')
+        reason('Уточнить возраст', 'Сведения о возрасте расходятся; анкета недоступна.', anchor='age-review')
     if marks['streak'] >= 2:
-        reason('Хуже %s подряд' % times_word(marks['streak']), 'по отметкам самочувствия', anchor='records')
+        reason('Самочувствие хуже %s подряд' % times_word(marks['streak']), 'По последним отметкам пациента.', anchor='records')
     open_items = plan['counts'].get('missed', 0) + plan['counts'].get('unknown', 0)
     if open_items:
-        reason('План без выполнения или сведений', '%d из %d пунктов' % (open_items, plan['due']), page='follow', anchor='fu-plan')
-    flags = [f for f in dict.fromkeys(flags)]
+        missed = plan['counts'].get('missed', 0)
+        unknown = plan['counts'].get('unknown', 0)
+        parts = []
+        if missed:
+            parts.append('Отмечено пропусков: %d' % missed)
+        if unknown:
+            parts.append('Без отметки: %d' % unknown)
+        reason('Есть пропуски в плане' if missed else 'Не отмечено выполнение плана',
+               '; '.join(parts) + '.', page='follow', anchor='fu-plan')
 
     if marks['total'] == 0:
         quiet = {'text': 'Отметок самочувствия пока нет', 'sub': None, 'page': 'card', 'anchor': 'records'}
@@ -168,12 +148,11 @@ def summary(db, user, patient, signals):
                  'sub': ('сегодня' if ago == 0 else '%d дн. назад' % ago) + ', всего отметок: %d' % marks['total'],
                  'page': 'card', 'anchor': 'records'}
     return {'id': patient_id, 'name': name, 'ordinal': ordinal, 'age': age_text(patient), 'marks': marks,
-            'adverse': adverse, 'dass': dass, 'plan': plan, 'signals': signals,
-            'flags': [(code,) + SIGNAL_FLAGS[code] for code in flags],
-            'attention': bool(reasons), 'reason': reasons[0] if reasons else quiet, 'more': reasons[1:3]}
+            'adverse': adverse, 'plan': plan,
+            'attention': bool(reasons), 'reason': reasons[0] if reasons else quiet, 'more': reasons[1:]}
 
 
-def rows(db, user, patients, signal_counts):
-    result = [summary(db, user, p, signal_counts.get(p['id'], 0)) for p in patients]
-    # Rows that need a look go first; the order the server chose (signals, then code) is kept inside each group.
+def rows(db, user, patients):
+    result = [summary(db, user, p) for p in patients]
+    # Reasons for checking first; preserve alphabetical order within each group.
     return sorted(result, key=lambda r: not r['attention'])
