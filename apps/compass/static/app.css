@@ -850,3 +850,71 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
   .review-filters { width: 100%; }
   .review-filters .filter-form { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---------- S33: план на главной и отдельные приёмы ---------- */
+.home-plan .plan-text { margin: 12px 0; font-size: 17px; }
+.med-calendar { margin: 24px 0; padding-block: 20px; border-block: 1px solid var(--border); }
+.card-body > .med-calendar { margin-inline: 0; padding-inline: var(--sp-sheet); }
+.med-title, .med-selected-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.med-title h2, .med-selected-heading h3 { margin: 0; }
+.med-title a, .med-selected-heading a { font-size: 14px; }
+.med-weeks { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 18px 0 12px; }
+.med-weeks > span { text-align: center; font-size: 14px; }
+.med-weeks small { display: block; color: var(--muted); }
+.med-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border: 1px solid var(--control); border-radius: var(--r-control); overflow: hidden; }
+.med-day { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 96px; padding: 8px 2px 10px; color: var(--ink); text-decoration: none; border-right: 1px solid var(--border); }
+.med-day:last-child { border-right: 0; }
+.med-day--selected { background: var(--carbon); color: var(--sheet); }
+.med-day:focus-visible { outline-offset: -3px; }
+.med-day > b { font-size: 19px; }
+.med-day > span:first-child { font-size: 13px; }
+.med-day-count { display: flex; align-items: center; gap: 2px; font-size: 12px; }
+.med-day-count img { width: 14px; height: 14px; }
+.med-day--selected img { filter: invert(1); }
+.med-day-gap { position: absolute; right: 3px; top: 3px; font-weight: 700; font-size: 12px; }
+.med-today-dot { position: absolute; bottom: 4px; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.med-week-summary { margin: 10px 0 22px; font-size: 14px; color: var(--muted); }
+.med-dose { padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.med-dose:last-of-type { border-bottom: 0; }
+.med-dose-heading { display: grid; grid-template-columns: 24px auto 1fr; align-items: baseline; gap: 10px; }
+.med-dose-heading b { min-width: 0; font-size: 17px; }
+.med-pill { align-self: center; width: 24px; height: 24px; }
+.med-dose-amount { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 8px 0 12px 34px; }
+.med-status { font-weight: 700; }
+.med-status--unknown { font-weight: 400; color: var(--muted); border-bottom: 1px dashed currentColor; }
+.med-status--taken::before { content: ''; display: inline-block; width: 6px; height: 10px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-right: 9px; }
+.med-status--partial, .med-status--missed { text-decoration: underline; text-underline-offset: 4px; }
+.med-mark-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.med-mark-form .button { min-height: 44px; }
+.med-correction { margin-top: 12px; }
+.med-correction summary, .med-history summary { cursor: pointer; padding-block: 7px; }
+.med-correction label { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.med-correction select { max-width: 240px; min-height: 44px; }
+.med-correction > button { margin: 0 6px 8px 0; }
+.med-history { font-size: 14px; }
+.med-history ul { margin-block: 8px; padding-left: 20px; }
+.med-no-doses { padding: 16px 0; color: var(--muted); }
+.med-schedule { padding-left: 20px; }
+.med-schedule li { margin: 12px 0; overflow-wrap: anywhere; }
+.med-editor { min-width: 0; margin: 24px 0; padding: 16px; border: 1px solid var(--control); }
+.med-editor legend { font-weight: 700; font-size: 17px; }
+.med-edit-item { border-bottom: 1px solid var(--border); margin: 12px 0; }
+.med-edit-item > summary { padding: 12px 0; cursor: pointer; overflow-wrap: anywhere; }
+.med-edit-body { padding-bottom: 16px; }
+.med-slot-edit { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-block: 10px; }
+.med-slot-edit .field { min-width: 0; }
+.med-slot-edit input, .med-slot-edit select { width: 100%; min-width: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .med-day:not(.med-day--selected):hover { background: var(--hover); }
+}
+@media (max-width: 480px) {
+  .med-days { margin-inline: -4px; }
+  .med-day-count img { width: 12px; height: 12px; }
+  .med-weeks .button { padding-inline: 8px; min-height: 44px; }
+  .med-dose-heading { gap: 8px; }
+  .med-dose-amount { margin-left: 32px; }
+  .med-editor { padding: 12px; }
+}
+@media (max-width: 760px) {
+  .card-body > .med-calendar { padding-inline: var(--sp-lg); }
+}

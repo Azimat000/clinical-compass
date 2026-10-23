@@ -1,0 +1,34 @@
+<fieldset class="med-editor">
+  <legend>Препараты в плане</legend>
+  <input type="hidden" name="med_base" value="{{ med_base }}">
+  {{ ui.select('med_change', 'Что сделать с расписанием', [('preserve', 'Сохранить прежние назначения'), ('replace', 'Задать новый состав препаратов')], selected=values.get('med_change', 'preserve')) }}
+  <p class="meta">Новый состав полностью заменит прежний после подтверждения. Включите в него все препараты, которые нужно продолжить. Пустой состав означает отмену расписания.</p>
+  <div data-med-editor-body>
+    {% for i in range(8) %}
+    {% set prefix = 'med_' ~ i ~ '_' %}
+    {% set name = values.get(prefix ~ 'name', '') %}
+    <details class="med-edit-item"{% if name or (i == 0 and values.get('med_change') == 'replace') %} open{% endif %} data-med-item>
+      <summary>{{ name if name else 'Добавить препарат ' ~ (i + 1) }}</summary>
+      <div class="med-edit-body">
+        {{ ui.field(prefix ~ 'name', 'Название, дозировка и форма препарата', value=name, extra={'maxlength': '200', 'autocomplete': 'off'}, hint='Напишите так, чтобы пациент различал препараты и дозировки.') }}
+        <div class="form-grid">
+          {{ ui.field(prefix ~ 'start', 'Начало курса', type='date', value=values.get(prefix ~ 'start', '')) }}
+          {{ ui.field(prefix ~ 'days', 'Курс, дней', type='number', value=values.get(prefix ~ 'days', ''), extra={'min': '1', 'max': '366', 'inputmode': 'numeric'}) }}
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+        {% for j in range(4) %}
+        <div class="med-slot-edit">
+          {{ ui.field(prefix ~ j ~ '_time', 'Время приёма ' ~ (j+1), type='time', value=values.get(prefix ~ j ~ '_time', '')) }}
+          {{ ui.select(prefix ~ j ~ '_qty', 'Таблеток на приём', [('', 'Не задано')] + med_choices(), selected=values.get(prefix ~ j ~ '_qty', '')|string) }}
+        </div>
+        {% endfor %}
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+    {% endfor %}
+    <button class="button" type="button" data-med-add hidden>Добавить препарат</button>
+    {{ ui.choice('med_reviewed', 'Проверка расписания', [('yes', 'Название, дозировка, допустимость дробления таблетки, время и курс проверены мной по источникам и сведениям пациента')], type='checkbox', id='med-reviewed') }}
+    <p class="meta">Сервис не проверяет пригодность препарата и дробления таблетки. Приёмы до времени подтверждения не добавляются задним числом.</p>
+  </div>
+</fieldset>

@@ -1,6 +1,7 @@
 {#- План и решения: подтверждённый план, проекты на подтверждении, история и новый проект. Подтверждение показано только по записи сервера. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'medication_components.html' as med with context %}
 {% set nav_active = 'queue' %}
 {% block title %}План и решения{% endblock %}
 {% set weekday, day, iso = sheet_date() %}
@@ -63,6 +64,7 @@
     <dt>Проект составил</dt><dd><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.created_at }}">{{ item.created_at|msk }}</time></dd>
     {% if item.parent_proposal_id %}{% set parent = decisions|selectattr('id', 'equalto', item.parent_proposal_id)|first %}<dt>На основе</dt><dd>{% if parent %}<a href="#decision-{{ parent.id }}">версии {{ parent.version }}</a>{% else %}прежнего проекта{% endif %}</dd>{% endif %}
   </dl>
+  {% if 'medications' in item.payload %}<p class="subhead">Состав препаратов</p>{{ med.schedule(item.payload.medications) }}{% endif %}
   {{ review_blocks(item) }}
 {% endmacro %}
 
@@ -164,6 +166,8 @@
   {% endset %}
   {% if waiting %}{{ sec_waiting }}{{ sec_current }}{% else %}{{ sec_current }}{{ sec_waiting }}{% endif %}
 
+  {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', False) }}
+
   <section class="block" id="history" aria-labelledby="h-history">
     <h2 id="h-history">История решений</h2>
     {% for item in closed %}
@@ -197,6 +201,8 @@
         {{ ui.textarea('content', 'Решение', value=values.get('content', ''), hint='Что именно решено.', required=True, rows=4, maxlength=4000) }}
         {{ ui.textarea('basis', 'Основание', value=values.get('basis', ''), hint='Откуда сведения: запись, документ, источник.', required=True, rows=3, maxlength=4000) }}
         {{ ui.textarea('uncertainties', 'Что неизвестно', value=values.get('uncertainties', ''), hint='Что не проверено или противоречит. Если неизвестного нет, напишите об этом прямо.', required=True, rows=3, maxlength=4000) }}
+
+        {% include 'medication_editor.html' %}
 
         <fieldset class="kind-group" data-for-kinds="referral">
           <legend>Направление к психиатру</legend>
@@ -251,4 +257,4 @@
   </section>
 </div>
 {% endblock %}
-{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script><script src="{{ url_for('static', filename='medications.js') }}" defer></script>{% endblock %}

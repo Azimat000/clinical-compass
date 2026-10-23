@@ -1,7 +1,7 @@
 """Read-only row summaries for the doctor's list. Only recorded facts; nothing is scored or inferred."""
 import re
-from datetime import date
-from . import decisions, follow_up, records
+from datetime import date, timedelta
+from . import decisions, follow_up, records, medications
 
 def person(code):
     """'Учебный 03 · Елена — Ухудшение и новое НЯ' -> ('Елена', 'учебный 03'); other codes are shown as they are."""
@@ -139,6 +139,16 @@ def summary(db, user, patient):
             parts.append('Без отметки: %d' % unknown)
         reason('Есть пропуски в плане' if missed else 'Не отмечено выполнение плана',
                '; '.join(parts) + '.', page='follow', anchor='fu-plan')
+
+    med_doses = medications.occurrences(db, patient_id, records.today()-timedelta(days=6), records.today())
+    med_gaps = [d for d in med_doses if d['state'] in ('missed', 'partial') or d['overdue']]
+    if med_gaps:
+        missed = sum(d['state'] == 'missed' for d in med_gaps)
+        partial = sum(d['state'] == 'partial' for d in med_gaps)
+        unknown = sum(d['overdue'] for d in med_gaps)
+        reason('Проверить приём препаратов', f'За 7 дней: пропущено {missed}, частично {partial}, без отметки {unknown}.',
+               anchor='medications', page='card')
+        reasons[-1]['med_day'] = med_gaps[0]['day']
 
     if marks['total'] == 0:
         quiet = {'text': 'Отметок самочувствия пока нет', 'sub': None, 'page': 'card', 'anchor': 'records'}

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T14:17:37+03:00",
+  "updated_on": "2026-10-23T14:50:58+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S32",
+  "last_accepted_slice": "S33",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -377,6 +377,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S32",
       "handoff": "memory/sessions/S32.md",
+      "reason": null
+    },
+    "S33": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S33",
+      "handoff": "memory/sessions/S33.md",
       "reason": null
     }
   },
@@ -773,6 +779,15 @@
       ],
       "evidence": "evidence/UI06B/acceptance.md",
       "other_views": "503/interface_removed только для клиентов, просящих JSON (Accept: application/json) на адресах экранов; у браузеров экранов без шаблона нет"
+    },
+    "s33_medications": {
+      "date": "2026-10-23",
+      "evidence": "evidence/S33/acceptance.md",
+      "report": "memory/sessions/S33.md",
+      "scope": "approved home plan, physician-authored fractional medication schedules and per-dose patient calendar; no automatic clinical advice",
+      "active_database": "var/compass.sqlite3",
+      "test_database": "var/S33-ui-check.sqlite3",
+      "clinical_validation": false
     }
   },
   "latest_roster": {

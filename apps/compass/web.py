@@ -11,7 +11,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up, report_drafts, overview
+from . import first_visits, follow_up, report_drafts, overview, medications
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
@@ -30,6 +30,7 @@ MONTHS = ('января', 'февраля', 'марта', 'апреля', 'ма�
 
 def create_app(database=None):
     app = Flask(__name__, static_folder='static', template_folder='templates')
+    app.jinja_env.globals.update(med_quantity=medications.quantity, med_choices=medications.choices, new_key=lambda: secrets.token_hex(16))
     app.json.ensure_ascii = False
     app.config.update(DATABASE=str(database or os.environ.get('COMPASS_DB', 'var/compass.sqlite3')),
                       MAX_CONTENT_LENGTH=65536, TRUSTED_HOSTS=['localhost', '127.0.0.1', '[::1]'],
@@ -618,7 +619,7 @@ def create_app(database=None):
                         why='Вы начали отметку самочувствия. Черновик виден только вам и врачу не отправлен.')
         else:
             view.update(kind='report', label='Отметить самочувствие', href=url_for('patient_report', patient_id=patient_id),
-                        why='Срочных дел нет. Отметить самочувствие можно в любой день.',
+                        why='Отметить самочувствие можно в любой день.',
                         note='Черновик сохраняется, можно вернуться позже.')
         return view
 
@@ -644,6 +645,8 @@ def create_app(database=None):
         return interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
                                overview=None if is_patient else overview.summary(db, g.user, patient), own_marks=[e for e in entries if e['kind'] == 'self_report'],
+                               plan=patient_plan(patient_id) if is_patient else [],
+                               med_calendar=medication_calendar(patient_id),
                                today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
@@ -662,6 +665,33 @@ def create_app(database=None):
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
                                request_key=(form_values.get('request_key', '') if form_values is not None else secrets.token_hex(16)),
                                today=records.today().isoformat(), form_values=form_values or {}, form_error=form_error)
+
+    @app.post('/patients/<patient_id>/medication-marks')
+    def medication_report(patient_id):
+        role('patient')
+        patient_or_404(patient_id)
+        endpoint = request.form.get('return_to')
+        if endpoint not in ('demo_patient', 'decisions_page'):
+            endpoint = 'demo_patient'
+        try:
+            medications.report(get_db(), g.user, patient_id, request.form)
+        except decisions.DecisionError as failure:
+            return interface_response('result.html', title='Отметка не сохранена', message=str(failure)), failure.status
+        return redirect(url_for(endpoint, patient_id=patient_id, med_day=request.form['dose_on'])+'#medications', code=303)
+
+    def medication_calendar(patient_id):
+        try:
+            return medications.calendar(get_db(), patient_id, request.args.get('med_day'))
+        except decisions.DecisionError as failure:
+            abort(400, description=str(failure))
+
+    def patient_plan(patient_id):
+        items = decisions.history(get_db(), g.user, patient_id)
+        confirmed = sorted((i for i in items if i['decision'] == 'approved'),
+                           key=lambda i: (i['confirmed_at'], i['version']), reverse=True)
+        names = author_names(confirmed)
+        return [{'id': i['id'], 'kind': i['kind'], 'content': i['payload'].get('content', ''), 'confirmed_at': i['confirmed_at'],
+                 'doctor': names.get(i['doctor_id']) or 'врач (имя не указано)'} for i in confirmed]
 
     @app.post('/patients/<patient_id>/clinical-context')
     def clinical_context(patient_id):
@@ -857,12 +887,8 @@ def create_app(database=None):
 
     def plan_response(patient, items):
         """The patient's plan screen. It gets a narrow copy of the already patient-safe projection: kind, text, date and the doctor's name; no ids, rationale, basis or uncertainties."""
-        confirmed = sorted((i for i in items if i['decision'] == 'approved'),
-                           key=lambda i: (i['confirmed_at'], i['version']), reverse=True)
-        names = author_names(confirmed)
-        plan = [{'id': i['id'], 'kind': i['kind'], 'content': i['payload'].get('content', ''), 'confirmed_at': i['confirmed_at'],
-                 'doctor': names.get(i['doctor_id']) or 'врач (имя не указано)'} for i in confirmed]
-        return interface_response('plan.html', patient=patient, plan=plan, kinds=decisions.KINDS)
+        return interface_response('plan.html', patient=patient, plan=patient_plan(patient['id']), kinds=decisions.KINDS,
+                                  med_calendar=medication_calendar(patient['id']))
 
     def decisions_view(patient, patient_id, error=None, status=200, confirm_error=None):
         """The decisions screen; a refused confirmation comes back here with the typed rationale instead of a bare error page."""
@@ -895,10 +921,15 @@ def create_app(database=None):
                       'route_unavailable': 'Не ожидать помощи через демо: использовать доступный обычный канал связи с врачом или обратиться в медицинскую организацию.'}
         if g.user['role'] == 'patient':
             return plan_response(patient, items), status
+        med_plans = medications.approved(get_db(), patient_id)
+        med_base = values.get('med_base', medications.base_id(get_db(), patient_id))
+        if not values:
+            values = medications.form_values(med_plans[-1]['medications']) if med_plans else {}
         return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,
+                               med_base=med_base, med_calendar=medication_calendar(patient_id),
                                error=error, values=values, stale=stale, confirm_error=confirm_error,
                                patient_name=overview.person(patient['code'])[0], authors=author_names(items),
                                today=records.today().isoformat(),

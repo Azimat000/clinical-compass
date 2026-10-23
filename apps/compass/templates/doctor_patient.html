@@ -1,6 +1,7 @@
 {#- Карточка пациента для врача. Разделы одной страницей, переходы по якорям; действия — обычные формы. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'medication_components.html' as med with context %}
 {% set nav_active = 'queue' %}
 {% block title %}{{ overview.name|truncate(60, True, '…') }}{% endblock %}
 {% set weekday, day, iso = sheet_date() %}
@@ -82,6 +83,7 @@
 </nav>
 
 <div class="card-body">
+  {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', False) }}
   {#- ---------- Записи ---------- #}
   <section class="block" id="records" aria-labelledby="h-records">
     <h2 id="h-records">Записи и самочувствие</h2>

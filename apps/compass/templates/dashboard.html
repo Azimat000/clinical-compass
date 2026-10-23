@@ -8,7 +8,7 @@
 {% set open_filters = age_status or record_kind or route_category %}
 
 {% macro href(r, reason) -%}
-  {%- set base = url_for('follow_up_page', patient_id=r.id) if reason.page == 'follow' else url_for('demo_patient', patient_id=r.id) -%}
+  {%- set base = url_for('follow_up_page', patient_id=r.id) if reason.page == 'follow' else url_for('demo_patient', patient_id=r.id, med_day=reason.med_day) if reason.med_day else url_for('demo_patient', patient_id=r.id) -%}
   {{ base }}{% if reason.anchor %}#{{ reason.anchor }}{% endif %}
 {%- endmacro %}
 

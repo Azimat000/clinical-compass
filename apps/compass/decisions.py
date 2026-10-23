@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import re
 import secrets
-from . import access, records, routing, clinical_rules
+from . import access, records, routing, clinical_rules, medications
 from .db import now, transaction
 
 KINDS = {'therapy_start': 'Назначение терапии', 'therapy_change': 'Изменение терапии',
@@ -74,6 +74,7 @@ def snapshot(db, patient_id, relationship_id):
         ('first_visit_versions', 'SELECT * FROM first_visit_versions WHERE patient_id=? ORDER BY id'),
         ('text_imports', 'SELECT * FROM text_imports WHERE patient_id=? ORDER BY id'),
         ('extraction_reviews', 'SELECT e.* FROM extraction_reviews e JOIN text_imports t ON t.id=e.import_id WHERE t.patient_id=? ORDER BY e.id'),
+        ('medication_marks', 'SELECT * FROM medication_marks WHERE patient_id=? ORDER BY sequence'),
         ('adherence_tasks', 'SELECT * FROM adherence_tasks WHERE patient_id=? ORDER BY id'),
         ('adherence_entries', 'SELECT e.* FROM adherence_entries e JOIN adherence_tasks t ON t.id=e.task_id WHERE t.patient_id=? ORDER BY e.id'),
         ('messages', 'SELECT m.* FROM messages m JOIN conversations c ON c.id=m.conversation_id JOIN care_relationships r ON r.id=c.relationship_id WHERE r.patient_id=? ORDER BY m.id'),
@@ -119,6 +120,9 @@ def draft(db, user, patient_id, form):
         raise DecisionError('Выберите вид решения.')
     payload = {name: checked_text(form, name) for name in ('content', 'basis', 'uncertainties')}
     payload.update(kind=kind, mode='manual_synthetic', automatic=False)
+    meds = medications.parse(form, kind)
+    if meds is not None:
+        payload['medications'] = meds
     if kind == 'referral':
         payload['routing_review'] = routing.review(form)
     review = therapy_review(form, kind)
@@ -143,6 +147,12 @@ def draft(db, user, patient_id, form):
             if old['payload_json'] != text or (old['parent_proposal_id'] or '') != parent:
                 raise DecisionError('Повторная отправка содержит другие сведения.', 409)
             return old['id']
+        if kind == 'therapy_stop' and meds is None:
+            med_plans = medications.approved(db, patient_id)
+            if med_plans and med_plans[-1]['medications']:
+                raise DecisionError('При отмене терапии явно задайте новый состав препаратов: укажите продолжаемые либо уберите все.', 409)
+        if meds is not None and form.get('med_base', '') != medications.base_id(db, patient_id):
+            raise DecisionError('Состав препаратов уже изменён другим подтверждением. Обновите страницу и проверьте назначения.', 409)
         if parent and not db.execute('''SELECT 1 FROM proposals p JOIN decision_drafts d ON d.proposal_id=p.id
             WHERE p.id=? AND p.patient_id=?''', (parent, patient_id)).fetchone():
             raise DecisionError('Предыдущий проект недоступен.', 404)
@@ -238,6 +248,8 @@ def revision_values(entry):
     payload = entry['payload']
     values = {'kind': entry['kind'], 'parent_id': entry['id']}
     values.update({name: payload.get(name, '') for name in ('content', 'basis', 'uncertainties')})
+    if 'medications' in payload:
+        values.update(med_change='replace', **medications.form_values(payload['medications']))
     route = payload.get('routing_review')
     if route:
         values.update({'route_' + key: route.get(key) or '' for key in

@@ -1,0 +1,85 @@
+{% import 'components.html' as ui %}
+{% macro schedule(meds) %}
+{% if meds %}
+<ul class="med-schedule">
+  {% for med in meds %}
+  <li><b class="keep">{{ med.name }}</b>
+    <span class="sub">{% for slot in med.slots %}<span class="num">{{ slot.time }}</span> — {{ med_quantity(slot.quarters) }} табл.{% if not loop.last %} · {% endif %}{% endfor %}</span>
+    <span class="sub">Всего {{ med_quantity(med.slots|sum(attribute='quarters')) }} табл. в день · {{ med.start|full_date }}–{{ med.end|full_date }} · {{ med.days }} дн.</span>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}<p class="meta">В этом составе препаратов нет.</p>{% endif %}
+{% endmacro %}
+
+{% macro calendar(cal, patient, csrf, endpoint, is_patient) %}
+<section class="med-calendar" id="medications" aria-labelledby="h-medications">
+  <div class="med-title"><h2 id="h-medications">Приём препаратов</h2>
+    {% if not is_patient %}<a href="{{ url_for('decisions_page', patient_id=patient.id) }}#new-decision">Изменить назначения</a>{% endif %}
+  </div>
+  {% if not cal.has_plan %}
+    <p class="meta">Врач пока не добавил расписание препаратов.</p>
+  {% else %}
+  <details class="med-course"><summary>Назначения и курсы</summary>{{ schedule(cal.current_medications) }}</details>
+  <nav class="med-weeks" aria-label="Недели календаря приёма">
+    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.prev) }}#medications" aria-label="Предыдущая неделя">← Неделя</a>
+    <span class="num">{{ cal.start|short_date }}–{{ cal.end|short_date }}<small>{{ cal.start[:4] }}</small></span>
+    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.next) }}#medications" aria-label="Следующая неделя">Неделя →</a>
+  </nav>
+  <div class="med-days" aria-label="Дни недели">
+    {% for day in cal.days %}
+    <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date) }}#medications"{% if day.selected %} aria-current="date"{% endif %} aria-label="{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}">
+      <span>{{ day.weekday }}</span><b class="num">{{ day.number }}</b>
+      {% if day.total %}<span class="med-day-count"><img src="{{ url_for('static', filename='icons/pill.svg') }}" alt="">{{ day.taken }}/{{ day.total }}</span>
+      {% else %}<span class="med-day-count">—</span>{% endif %}
+      {% if day.missed or day.partial or day.unmarked %}<span class="med-day-gap" aria-hidden="true">!</span>{% endif %}
+      {% if day.today %}<span class="med-today-dot" aria-label="Сегодня"></span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  <p class="med-week-summary">За неделю: принято {{ cal.counts.taken }}, частично {{ cal.counts.partial }}, пропущено {{ cal.counts.missed }}. Без отметки за прошедшие дни: {{ cal.past_unmarked }}.</p>
+  <div class="med-selected-heading"><h3>{{ cal.selected|ru_day }}{% if cal.selected == cal.today %} · сегодня{% endif %}</h3>
+    {% if cal.selected != cal.today %}<a href="{{ url_for(endpoint, patient_id=patient.id) }}#medications">К сегодня</a>{% endif %}
+  </div>
+  {% for dose in cal.doses %}
+  <article class="med-dose" id="dose-{{ dose.proposal_id }}-{{ dose.med_index }}-{{ dose.slot_index }}">
+    <div class="med-dose-heading"><img class="med-pill" src="{{ url_for('static', filename='icons/pill.svg') }}" alt=""><time class="num">{{ dose.time }}</time><b class="keep">{{ dose.name }}</b></div>
+    <p class="med-dose-amount">{{ dose.amount }} табл. <span class="med-status med-status--{{ dose.state }}">{% if dose.state == 'partial' %}Принято {{ dose.actual_label }} из {{ dose.amount }} табл.{% elif dose.future %}Предстоит{% else %}{{ dose.label }}{% endif %}</span></p>
+    {% if is_patient and not dose.future %}
+    <form method="post" action="{{ url_for('medication_report', patient_id=patient.id) }}" class="med-mark-form" data-busy>
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="request_key" value="{{ new_key() }}">
+      <input type="hidden" name="proposal_id" value="{{ dose.proposal_id }}">
+      <input type="hidden" name="med_index" value="{{ dose.med_index }}">
+      <input type="hidden" name="slot_index" value="{{ dose.slot_index }}">
+      <input type="hidden" name="dose_on" value="{{ dose.day }}">
+      <input type="hidden" name="revision" value="{{ dose.revision }}">
+      <input type="hidden" name="return_to" value="{{ endpoint }}">
+      {% if dose.state == 'unknown' %}
+      <div class="med-mark-actions">
+        <button class="button button--primary" name="outcome" value="taken">Принял{% if dose.quarters > 4 %} все {{ dose.amount }} табл.{% else %} {{ dose.amount }} табл.{% endif %}</button>
+        <button class="button" name="outcome" value="missed">Пропустил</button>
+      </div>
+      {% endif %}
+      <details class="med-correction"><summary>{{ 'Принял часть дозы' if dose.state == 'unknown' else 'Исправить отметку' }}</summary>
+        <label>Фактически принято, табл.
+          <select name="actual_quarters" aria-label="Фактически принято: {{ dose.name }}, {{ dose.time }}">
+            <option value="0"{% if dose.actual == 0 %} selected{% endif %}>0 — пропущено</option>
+            {% for n,label in med_choices(dose.quarters) %}<option value="{{ n }}"{% if dose.actual == n|int or (dose.actual is none and n|int == dose.quarters) %} selected{% endif %}>{{ label }}</option>{% endfor %}
+          </select>
+        </label>
+        <button class="button" name="outcome" value="quantity">Сохранить количество</button>
+        {% if dose.state != 'unknown' %}<button class="button" name="outcome" value="unknown">Убрать отметку</button>{% endif %}
+      </details>
+    </form>
+    {% elif dose.future %}<p class="meta">Отметка доступна после {{ dose.time }} по Москве.</p>{% endif %}
+    {% if dose.history %}
+      <p class="meta">{{ 'Вы отметили' if is_patient else 'Пациент отметил' }} {{ dose.history[-1].recorded_at|msk }}.</p>
+      {% if dose.history|length > 1 %}<details class="med-history"><summary>История отметок ({{ dose.history|length }})</summary><ul>{% for mark in dose.history|reverse %}<li>{{ mark.recorded_at|msk }} — {{ 'отметка убрана' if mark.actual_quarters is none else med_quantity(mark.actual_quarters) ~ ' табл.' }}</li>{% endfor %}</ul></details>{% endif %}
+    {% endif %}
+  </article>
+  {% else %}<p class="med-no-doses">На этот день приёмов по подтверждённому расписанию нет.</p>{% endfor %}
+  <p class="meta">Время по Москве. Счёт под таблеткой — полностью принятые дозы из запланированных. «Нет отметки» не означает пропуск.</p>
+  {% endif %}
+</section>
+{% endmacro %}
