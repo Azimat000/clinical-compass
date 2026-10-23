@@ -1,0 +1,74 @@
+[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/follow_up.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on a \"← Карточка пациента\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/communication.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on li \"{{ 'Вы' if mine else partner }}{{ m.sent\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 821,
+    "snippet": "Undocumented color #333 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#333"
+  },
+  {
+    "antipattern": "design-system-radius",
+    "name": "Radius outside DESIGN.md",
+    "description": "A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 821,
+    "snippet": "border-radius: 6px is outside the DESIGN.md rounded scale",
+    "advisory": true,
+    "ignoreValue": "6px"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 822,
+    "snippet": "Undocumented color #000 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#000"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/static/app.css",
+    "line": 823,
+    "snippet": "Undocumented color #666 is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "#666"
+  }
+]

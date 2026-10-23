@@ -1,0 +1,325 @@
+{
+  "base_commit": "3c94f05f507a698ef5dd06f8fb17aa442765ff8d",
+  "git_status": "?? evidence/audits/2026-10-20-cycles/\n?? tools/run_synthetic_cycles.py\n",
+  "git_diff": "",
+  "database_tables": {
+    "schema_migrations": {
+      "rows": 14,
+      "sha256": "f7befeaacab234852eced91f1c9090edaa5e3754ec74d73581cb17e3aa03b1f2"
+    },
+    "users": {
+      "rows": 11,
+      "sha256": "2f48f5b50b09e470c5de7e038fd08a8c1bc65a5c87f55cf4957b0ca56ef634be"
+    },
+    "sessions": {
+      "rows": 4,
+      "sha256": "ab3231d4a5723d25afb09308222b6193a560040e5916e84bb4b0fa63dbaffdbb"
+    },
+    "patients": {
+      "rows": 8,
+      "sha256": "094754a7b73c4729201e90a5778014392e05157dc09c7af3e9913e355ec509af"
+    },
+    "care_relationships": {
+      "rows": 8,
+      "sha256": "7995a25ceb1f631d506e488b01a4d74f968369c24f8659da13241a67739aeaf2"
+    },
+    "encounters": {
+      "rows": 24,
+      "sha256": "fa69a14df7777b89264a6096d5ae98eebe164d67ce5e95ae7c086279c8db3fe7"
+    },
+    "encounter_search": {
+      "rows": 24,
+      "sha256": "4f6f69e500d2e4f5557894c016a2503799cfb09a654a8d6b6f266cd3037c7187"
+    },
+    "encounter_search_data": {
+      "rows": 11,
+      "sha256": "f92b7b7a327d53d00fc481324365fafc01fb37f8f1545b5fe84be4347d28bf0a"
+    },
+    "encounter_search_idx": {
+      "rows": 9,
+      "sha256": "38360c01681fdb77291d9bbca1cc46a13d1502cbc00cce18571824445f2f267c"
+    },
+    "encounter_search_content": {
+      "rows": 24,
+      "sha256": "252a3eeffd9bcb621476a64f5504c00cd1e84edaf6e6c4d326a25569d367ad9e"
+    },
+    "encounter_search_docsize": {
+      "rows": 24,
+      "sha256": "05c61b21eb0c739c44bfa25c119e8ceb451a73fc3ddbcbcc3b0d2d125ad55617"
+    },
+    "encounter_search_config": {
+      "rows": 1,
+      "sha256": "da5c87e45bd591584bf2b7ac080aa9182a9714bdf2f9ae913c2e7d7530515dcb"
+    },
+    "observations": {
+      "rows": 400,
+      "sha256": "629493e52469dd04ca60d385b9cdebfabc29f3a075be24076b6991cfa4b08564"
+    },
+    "source_versions": {
+      "rows": 1,
+      "sha256": "a4ead4d6dead46db18e1c7ea2754a5f8cae399501e55152447b7fb11aa93d886"
+    },
+    "catalog_versions": {
+      "rows": 1,
+      "sha256": "a951cd52f5fa8a97dcc00ed7516856bcc01177498da1cee2a65bebe1c2e360ff"
+    },
+    "assessments": {
+      "rows": 24,
+      "sha256": "195a17e35391091bbfa65ab8c493fa4922ae9f8aad7ef2488a314f76f9d365be"
+    },
+    "self_reports": {
+      "rows": 56,
+      "sha256": "055acfe20189be762407aed7d1219931b191209741ac3a4f1dc895bf2d94c412"
+    },
+    "proposals": {
+      "rows": 16,
+      "sha256": "c25fab947ad417dd0f70fabb1c0ebb4a1fe39a48ec117230d02bdbea4168ac7a"
+    },
+    "doctor_confirmations": {
+      "rows": 16,
+      "sha256": "b9804f34f7e208386d259dc1b18ecc06e9067122679b6b40cf3b13318111d828"
+    },
+    "care_actions": {
+      "rows": 16,
+      "sha256": "d09a6972ccaaf2a21c1680bebcb904a7faea07c994ae6a19b76149a63fd5813e"
+    },
+    "therapy_courses": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "referrals": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "risk_evaluations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "adverse_events": {
+      "rows": 6,
+      "sha256": "25f82c46448989d7b56d4b28cc6068f0e77d69f2565016f4bb30b9c214620ff6"
+    },
+    "alerts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "conversations": {
+      "rows": 8,
+      "sha256": "384b701b21cbc6be68d23b3d97f399fac8ca202ec0c22215bea9f8268b5f3782"
+    },
+    "messages": {
+      "rows": 112,
+      "sha256": "0ba328e797d176a930d44e83f7883cf4d8beab4b7a494046560bfa70dd6fca53"
+    },
+    "adherence_reports": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "documents": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extraction_runs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extracted_facts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "consents": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "audit_entries": {
+      "rows": 431,
+      "sha256": "dc09c600962e90bfd04329765e79dfbdabae10bafb17d34812dc49e904c81a10"
+    },
+    "outbox_events": {
+      "rows": 56,
+      "sha256": "65cfe1c681ae70971761122fa70dbad77c3800cb3b76e2856300193794b918fd"
+    },
+    "event_receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "deliveries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "login_challenges": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "login_limits": {
+      "rows": 4,
+      "sha256": "f1975a0cc359cb3c875cfefd0f145046b029274a99b673e3d712af2771c7deca"
+    },
+    "care_invitations": {
+      "rows": 8,
+      "sha256": "35c3c2ee2377b5ca904ab20d0b768658cd6599401df8ca15899d0d35b6c608d1"
+    },
+    "relationship_checks": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "clinical_entries": {
+      "rows": 80,
+      "sha256": "c9d2aa28df7bd971c6f9f6cde30f393fad9c1efb09e8b00d594337bd0fb337d6"
+    },
+    "assessment_form_releases": {
+      "rows": 1,
+      "sha256": "9ed520f200c69949a74c4c66bf6d2a70710ebb0117061433cd44ebc91277faa1"
+    },
+    "assessment_requests": {
+      "rows": 32,
+      "sha256": "a0c42a6c2c4f8b2ece15294b0d4cb668e92b83295c41539105fcb3d0023ce485"
+    },
+    "assessment_results": {
+      "rows": 24,
+      "sha256": "aa4e60bce88dd37836348b823a834b0836dda7ce3769f0eee04106ae997c62af"
+    },
+    "decision_drafts": {
+      "rows": 16,
+      "sha256": "9742067466285396d3e8627b8eb571bb3e16a5a7a59747cd3080f9ba88baaecb"
+    },
+    "age_reviews": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "routine_notifications": {
+      "rows": 56,
+      "sha256": "acb388cc21dcc3f7a5c7e6dfd5ed62dc9a4c4303cd9ffd88bc7fcc06c4f82665"
+    },
+    "outbox_attempts": {
+      "rows": 56,
+      "sha256": "432c6107b713ef8b7c4a432a74425840ef776673602bb1cfddbed3b273ab8f5e"
+    },
+    "clinical_contexts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "clinical_rule_evaluations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "critical_events": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "critical_delivery": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "critical_delivery_log": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "message_context": {
+      "rows": 112,
+      "sha256": "25343d178ff118bf1f744cc4dffdd5607544e8f2431070e74ff8be784779152c"
+    },
+    "message_receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "adherence_tasks": {
+      "rows": 56,
+      "sha256": "d59fd33059730a5a6fa5330e862098f8058e9585081aa634f735083337819b38"
+    },
+    "adherence_entries": {
+      "rows": 48,
+      "sha256": "c238d4e2ed208f39978392df682c0f3c7ad51804e0dfa99144aa4a46b80aa575"
+    },
+    "text_imports": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "extraction_reviews": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "clinical_entry_search": {
+      "rows": 80,
+      "sha256": "257288de21ca85e973085fbfd00d9dfd4501c1dea4bff8c5adc1f9ad2bb28dda"
+    },
+    "clinical_entry_search_data": {
+      "rows": 10,
+      "sha256": "81727c2f9a5637f16bd276e9f970cbb2ec587c8ee825a782317d8ff2506bf56a"
+    },
+    "clinical_entry_search_idx": {
+      "rows": 8,
+      "sha256": "279fc1c01d7ac2070b1fbb170c137cda19477f2245b85fcc5b55c2618281c271"
+    },
+    "clinical_entry_search_content": {
+      "rows": 80,
+      "sha256": "741c2920f1a0953b2847699a53889dca455d515c5bef93dc5bdf9c7d159c8bdb"
+    },
+    "clinical_entry_search_docsize": {
+      "rows": 80,
+      "sha256": "37285819390594bc97b57d98d8d395b086326607b2580fd03b1419ba8307aad1"
+    },
+    "clinical_entry_search_config": {
+      "rows": 1,
+      "sha256": "da5c87e45bd591584bf2b7ac080aa9182a9714bdf2f9ae913c2e7d7530515dcb"
+    },
+    "import_search": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "import_search_data": {
+      "rows": 2,
+      "sha256": "c6ca025ea9b6e25a3585ab0f86061046fb90040a9ae96ab5dca2102e2814bc7e"
+    },
+    "import_search_idx": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "import_search_content": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "import_search_docsize": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "import_search_config": {
+      "rows": 1,
+      "sha256": "da5c87e45bd591584bf2b7ac080aa9182a9714bdf2f9ae913c2e7d7530515dcb"
+    },
+    "patient_search": {
+      "rows": 8,
+      "sha256": "f62f70573e754e364cde52b5588ac522c2f5f426d2163ffa0cb4f64dd9514f71"
+    },
+    "patient_search_data": {
+      "rows": 10,
+      "sha256": "d9cf598566f1ea86c777952661cc094a3862e3fc999792a8b36bf17e6e01a2a1"
+    },
+    "patient_search_idx": {
+      "rows": 8,
+      "sha256": "07d813b5fe9a0a3a6fd26975144835d67a2d9da7393e071d51c2d0c8e56364aa"
+    },
+    "patient_search_content": {
+      "rows": 8,
+      "sha256": "2204fa77429b8cdeb2ec7505adf308995dd3a09a4d85093f9c66f71dbd186254"
+    },
+    "patient_search_docsize": {
+      "rows": 8,
+      "sha256": "95237dcdf6e021cce6a8ae410c1b9697da7f12ddcc58926fc6a31cb78b1168db"
+    },
+    "patient_search_config": {
+      "rows": 1,
+      "sha256": "da5c87e45bd591584bf2b7ac080aa9182a9714bdf2f9ae913c2e7d7530515dcb"
+    },
+    "first_visit_versions": {
+      "rows": 24,
+      "sha256": "d8fda6f1bb351b669ec64efab81c2cf0c5d82dcc4bfa17a49fbff4b9d4d475b7"
+    },
+    "self_report_drafts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "dataset_sha256": "0672755710be534f138666eda271ef3498465e56e177a59787721ccdc0d7a872",
+  "authorization": "Исправить ложный пропуск P103 25.09 и аналогичные случаи в вымышленных исходных данных. Не подтверждать весь план автоматически по наличию любого самоотчёта."
+}

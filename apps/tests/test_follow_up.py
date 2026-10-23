@@ -47,6 +47,23 @@ class FollowUpTests(unittest.TestCase):
         return {r[0]:[tuple(x) for x in self.db.execute('SELECT * FROM "'+r[0]+'" ORDER BY rowid')]
             for r in self.db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '%search%' AND name NOT IN ('sessions','login_challenges','login_limits')")}
 
+    def test_latest_mark_is_separate_from_previous_marks_and_links_to_the_diary(self):
+        from apps.compass import communication
+        import re
+        action = self.action()
+        task, _ = self.task(action)
+        report = self.entry(summary='Самоотчёт есть; это не автоматическое выполнение плана')
+        for outcome, reason in [('missed', 'ПРЕЖНЯЯ-ОТМЕТКА'), ('taken', 'ДЕЙСТВУЮЩАЯ-ОТМЕТКА')]:
+            communication.report(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', task['id'],
+                                 {'request_key': secrets.token_hex(16), 'outcome': outcome, 'reason': reason})
+        page = self.clients['doc-a'].get(self.summary).text
+        self.assertIn('href="/demo/D01#entry-%s"' % report, page)
+        self.assertIn('Предыдущие отметки (1)', page)
+        visible = re.sub(r'<details\b.*?</details>', '', page, flags=re.S)
+        self.assertIn('ДЕЙСТВУЮЩАЯ-ОТМЕТКА', visible)
+        self.assertNotIn('ПРЕЖНЯЯ-ОТМЕТКА', visible)
+        self.assertIn('ПРЕЖНЯЯ-ОТМЕТКА', page)
+
     def test_periods_incomplete_and_conflicting_records_with_attribution(self):
         day=records.today().isoformat();old=(records.today()-timedelta(days=2)).isoformat()
         a=self.entry(day,adverse_events_status='known',adverse_events_text='Вымышленное НЯ <script>bad()</script>')
@@ -102,7 +119,7 @@ class FollowUpTests(unittest.TestCase):
         self.assertEqual('conflicting',data['tasks'][0]['outcome'])
         self.assertTrue(any('последняя отметка — противоречие' in w for w in data['warnings']))
         html=self.clients['doc-a'].get(self.summary).text
-        self.assertIn('Противоречие',html);self.assertIn('пропущено',html)
+        self.assertIn('Противоречие',html);self.assertIn('Пропущено',html)
         self.assertIn('doc-a',html);self.assertIn('pat-a',html)
         self.assertNotIn('UNCONFIRMED-PROJECT',html)
         # Superseded old tasks are retained, explicitly excluded, with their plan link.

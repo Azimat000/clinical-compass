@@ -58,7 +58,21 @@ def load_dataset():
         assert all(len(p[f]) == 7 for f in ('diary', 'wellbeing', 'replies'))
         assert len(p['visits']) == len(p['levels']) == 3
         assert len(p['plans']) == 2 and len(p['outcomes']) == 6
+        for index, outcome in enumerate(p['outcomes']):
+            assert outcome in communication.LABELS
+            note = p.get('outcome_notes', {}).get(str(index))
+            assert note is None or isinstance(note, str) and 1 <= len(note.strip()) <= 1000
+            assert outcome == 'taken' or note, 'Non-completion needs an explicit, coherent explanation'
     return dataset
+
+
+def adherence_reason(profile, index):
+    note = profile.get('outcome_notes', {}).get(str(index))
+    if note:
+        return note
+    if profile['outcomes'][index] != 'taken':
+        raise ValueError('An incomplete fictional task needs an authored explanation')
+    return 'Самоотчёт за этот день отправлен.'
 
 
 def copy_sources(source, target):
@@ -128,9 +142,7 @@ def seed_patient(db, profile, days, today):
             })
             if task:
                 outcome = p['outcomes'][index - 1]
-                reason = {'taken': 'Запись за этот день сделана.', 'missed': 'В этот день запись не сделана.',
-                          'unknown': 'Не помню, сделана ли запись в тот день.',
-                          'conflicting': 'Отметил выполнение за весь период, но записи есть не за каждый день.'}[outcome]
+                reason = adherence_reason(p, index - 1)
                 communication.report(db, patient, pid, task, {'request_key': key(), 'outcome': outcome, 'reason': reason})
         if index in (0, 3, 6):
             visit = index // 3

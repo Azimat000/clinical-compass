@@ -138,6 +138,8 @@
           {% else %}{{ ui.state(outcome_state[t.outcome], labels[t.outcome]) }}{% endif %}
         </p>
         {% if t.history %}
+        {% set latest = t.history[-1] %}
+        {% if latest.reason %}<p class="meta keep">{{ latest.reason }}</p>{% endif %}
         <details class="item-history">
           <summary>История отметок ({{ t.history|length }})</summary>
           <ul class="plain">

@@ -97,6 +97,8 @@ def _view(db, user, patient_id, values):
             task['history'] = [dict(h) for h in db.execute(
                 'SELECT * FROM adherence_entries WHERE task_id=? ORDER BY recorded_at,id', (task['id'],))]
             task['outcome'] = task['history'][-1]['outcome'] if task['history'] else 'unknown'
+            task['diary_entries'] = [e for e in entries if e['kind'] == 'self_report'
+                                     and e['observed_on'] == local_day(task['due_at'])]
             task['superseded'] = communication.superseded(db, task)
             task['future'] = task['due_at'] > now()
             tasks.append(task)

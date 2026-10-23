@@ -163,6 +163,7 @@
 
   <section class="block" id="fu-plan" aria-labelledby="h-plan">
     <h2 id="h-plan">План и отметки о выполнении</h2>
+    <p class="meta">Показана последняя отметка выполнения. Самоотчёт за ту же дату — рядом для сверки.</p>
     {% for plan in data.plans %}
     <article class="plan">
       <h3>{{ kinds.get(plan.kind, 'План') }} · версия {{ plan.version }}</h3>
@@ -172,7 +173,7 @@
       {% if plan.payload.uncertainties %}<p class="meta">Что неизвестно: {{ plan.payload.uncertainties }}</p>{% endif %}
       {% set mine = data.tasks|selectattr('action_id', 'equalto', plan.id)|list %}
       {% if mine %}
-      <table class="results records">
+      <table class="results records plan-tasks">
         <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
         <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
         <tbody>
@@ -181,7 +182,19 @@
             <td><time class="num" datetime="{{ t.due_at }}">{{ t.due_at[:10]|short_date }}</time></td>
             <td>{{ t.label }}{% if t.superseded %}<span class="sub">заменён новой версией плана</span>{% endif %}</td>
             <td>{% if t.future %}{{ ui.state('unknown', 'срок впереди') }}{% else %}{{ ui.state(outcome_kind[t.outcome], labels[t.outcome]) }}{% endif %}</td>
-            <td>{% for h in t.history %}<span class="hist"><time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at[:10]|short_date }}</time> {{ labels.get(h.outcome, h.outcome)|lower }}, <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>{% else %}<span class="sub">Отметок нет. Результат неизвестен.</span>{% endfor %}</td>
+            <td>
+              {% if t.history %}
+              {% set h = t.history[-1] %}
+              <span class="hist"><time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at|msk }}</time> · <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>
+              {% if t.history|length > 1 %}
+              <details class="item-history">
+                <summary>Предыдущие отметки ({{ t.history|length - 1 }})</summary>
+                {% for h in t.history[:-1]|reverse %}<span class="hist">{{ labels.get(h.outcome, h.outcome) }} · <time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at|msk }}</time>, <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>{% endfor %}
+              </details>
+              {% endif %}
+              {% else %}<span class="sub">Отметок нет. Результат неизвестен.</span>{% endif %}
+              {% for entry in t.diary_entries %}<a class="row-link" href="{{ card }}#entry-{{ entry.id }}">Самоотчёт за {{ entry.observed_on|short_date }}</a>{% endfor %}
+            </td>
           </tr>
           {% endfor %}
         </tbody>

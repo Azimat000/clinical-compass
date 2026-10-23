@@ -656,6 +656,9 @@ h4 { margin: var(--sp-lg) 0 var(--sp-sm); font-size: var(--fs-cell); }
 .patient-nav a:hover { color: var(--ink); border-bottom-color: var(--control); }
 .patient-nav a[aria-current="page"] { color: var(--ink); font-weight: 700; border-bottom-color: var(--ink); }
 .results.records td { overflow-wrap: anywhere; }
+.plan-tasks td:nth-child(3) { min-width: 8.5em; }
+.plan-tasks td:nth-child(3) .state { white-space: nowrap; }
+.plan-tasks .row-link { display: inline-flex; }
 .results.sources td:first-child { width: 14em; }
 @media (max-width: 760px) { .results.sources td:first-child { width: auto; } }
 .results td > .state + .field-text { display: block; margin-top: 2px; }

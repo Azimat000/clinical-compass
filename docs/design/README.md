@@ -49,6 +49,7 @@
 | [UI06B](../../plan/slices/UI06B.md) | Пациент: подтверждённый врачом план | impeccable, break-ui | принят 23.10.2026 |
 | [UI07](../../plan/slices/UI07.md) | Движение и тонкая доводка | emil-design-eng, review-animations | принят 23.10.2026 (review-animations не запускался по решению пользователя) |
 | [S31](../../plan/slices/S31.md) | Упрощённый список пациентов; критические сигналы убраны из интерфейса | impeccable, web-design-guidelines | принят 23.10.2026; UI08 отдельно |
+| [S32](../../plan/slices/S32.md) | Согласованные вымышленные отметки плана, действующая отметка и ссылка на самоотчёт | impeccable, web-design-guidelines | принят 23.10.2026; UI08 отдельно |
 | [UI08](../../plan/slices/UI08.md) | Общая проверка, три браузера, зелёный make check | break-ui, web-design-guidelines, impeccable audit | следующий |
 
 ## Память между срезами

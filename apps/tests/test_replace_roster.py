@@ -126,6 +126,19 @@ class ReplaceRosterTests(unittest.TestCase):
             self.assertEqual(1, db.execute("SELECT count(*) FROM assessments WHERE completeness='incomplete'").fetchone()[0])
             self.assertEqual(0, db.execute("SELECT count(*) FROM assessments WHERE completeness<>'complete' AND score IS NOT NULL").fetchone()[0])
 
+    def test_diary_tasks_do_not_claim_absence_of_existing_reports(self):
+        with closing(connect(self.target)) as db:
+            for p in self.dataset['patients']:
+                history = db.execute('''SELECT e.outcome,e.reason FROM adherence_entries e
+                    JOIN adherence_tasks t ON t.id=e.task_id WHERE t.patient_id=? ORDER BY t.due_at''', (p['id'],)).fetchall()
+                self.assertEqual(6, len(history))
+                if p['id'] != 'P108':
+                    self.assertTrue(all(h['outcome'] == 'taken' for h in history), p['id'])
+                else:
+                    self.assertEqual(['conflicting','missed','unknown','taken','unknown','conflicting'], [h['outcome'] for h in history])
+                    self.assertTrue(all('Самоотчёт отправлен' in h['reason'] for h in history if h['outcome'] != 'taken'))
+                self.assertTrue(all('В этот день запись не сделана.' != h['reason'] for h in history))
+
     def test_visible_pages_plain_language_access_and_old_login_rejected(self):
         for d in self.dataset['doctors']:
             client = self.login(d['id'])
