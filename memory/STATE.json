@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-23T16:04:33+03:00",
+  "updated_on": "2026-10-24T17:51:46+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S36",
+  "last_accepted_slice": "S37",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -401,6 +401,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S36",
       "handoff": "memory/sessions/S36.md",
+      "reason": null
+    },
+    "S37": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S37",
+      "handoff": "memory/sessions/S37.md",
       "reason": null
     }
   },
@@ -825,6 +831,13 @@
       "date": "2026-10-23",
       "evidence": "evidence/S36/acceptance.md",
       "report": "memory/sessions/S36.md",
+      "clinical_validation": false
+    },
+    "s37_invitation_modal": {
+      "date": "2026-10-24",
+      "evidence": "evidence/S37/acceptance.md",
+      "report": "memory/sessions/S37.md",
+      "fallback": "/invitations/new",
       "clinical_validation": false
     }
   },

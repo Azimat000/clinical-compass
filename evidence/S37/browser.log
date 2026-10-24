@@ -1,0 +1,66 @@
+chromium: start
+login: navigate
+login: fields
+login: submit
+login: submitted
+chromium: navigate 1440
+chromium: width 1440 PASS
+chromium: navigate 768
+chromium: width 768 PASS
+chromium: navigate 375
+chromium: width 375 PASS
+chromium: navigate 320
+chromium: width 320 PASS
+chromium: patient card
+chromium: bookmark
+chromium: noJS
+login: navigate
+login: fields
+login: submit
+login: submitted
+chromium: mutation copy
+login: navigate
+login: fields
+login: submit
+login: submitted
+firefox: start
+login: navigate
+login: fields
+login: submit
+login: submitted
+firefox: navigate 1440
+firefox: width 1440 PASS
+firefox: navigate 768
+firefox: width 768 PASS
+firefox: navigate 375
+firefox: width 375 PASS
+firefox: navigate 320
+firefox: width 320 PASS
+firefox: patient card
+firefox: bookmark
+firefox: noJS
+login: navigate
+login: fields
+login: submit
+login: submitted
+webkit: start
+login: navigate
+login: fields
+login: submit
+login: submitted
+webkit: navigate 1440
+webkit: width 1440 PASS
+webkit: navigate 768
+webkit: width 768 PASS
+webkit: navigate 375
+webkit: width 375 PASS
+webkit: navigate 320
+webkit: width 320 PASS
+webkit: patient card
+webkit: bookmark
+webkit: noJS
+login: navigate
+login: fields
+login: submit
+login: submitted
+PASS: Chromium/Firefox/WebKit;1440/768/375/320;focus,Tab,Escape,backdrop,close;other screen,bookmark,noJS;creation/revocation/error on copy

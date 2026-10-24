@@ -567,18 +567,33 @@ html:has(.q-bar) { scroll-padding-bottom: 150px; }
 .extra-link { margin-left: auto; }
 .answers { margin: 0; padding: var(--sp-sm) 14px var(--sp-sm) 40px; display: grid; gap: var(--sp-xs); font-size: var(--fs-cell); }
 .answers li > span { overflow-wrap: anywhere; }
-.below { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); margin-top: var(--sp-lg); }
-.below section { padding: 20px var(--sp-sheet) var(--sp-sheet); min-width: 0; }
-.below section + section { border-left: 1px solid var(--rule); }
-.below h2 { margin-bottom: var(--sp-md); }
-.below .meta { margin-top: var(--sp-sm); }
+/* Приглашение открывается поверх кабинета; список пациентов остаётся на месте. */
+.invite-dialog {
+  width: min(520px, calc(100% - 32px)); max-height: calc(100dvh - 32px);
+  margin: auto; padding: var(--sp-xl); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--sheet); color: var(--ink); border: 1px solid var(--border);
+  border-radius: var(--r-sheet); box-shadow: var(--shadow-float);
+  font: inherit; overflow-wrap: anywhere;
+}
+.invite-dialog::backdrop { background: rgb(26 31 35 / .48); }
+body:has(.invite-dialog[open]) { overflow: hidden; }
+.invite-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-lg); margin-bottom: var(--sp-xl); }
+.invite-heading h2 { font-size: var(--fs-title-compact); }
+.invite-heading .button { flex: none; }
+.invite-dialog .button, .invite-dialog .input { min-height: 44px; }
+.invite-dialog .input { font-size: var(--fs-section); }
+.invite-note { margin-top: var(--sp-md); }
+.invite-waiting { margin-top: var(--sp-xl); padding-top: var(--sp-xl); border-top: 1px solid var(--rule); }
+.invite-waiting h2 { margin-bottom: var(--sp-md); }
+.invitation-page { max-width: 600px; padding-block: var(--sp-xl); }
+.invitation-page h1 { margin-bottom: var(--sp-xl); }
 .pending { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-lg); padding: var(--sp-md) 0; border-top: 1px solid var(--rule); }
 .revoke { flex: none; border: 1px solid var(--border); border-radius: var(--r-control); padding: 0 var(--sp-md); }
 .revoke[open] { padding-bottom: var(--sp-md); max-width: 16em; }
 .revoke > summary { display: flex; align-items: center; min-height: 44px; font-weight: 700; cursor: pointer; }
 .revoke .meta { margin: 0 0 var(--sp-sm); }
 .pending small { display: block; color: var(--muted); font-size: var(--fs-meta); }
-.invite-form { max-width: 360px; }
+.invite-form { width: 100%; }
 .invite-form .button { margin-top: var(--sp-md); }
 
 /* Планшет и телефон: боковое меню уходит в угольную полосу */
@@ -615,11 +630,10 @@ html:has(.q-bar) { scroll-padding-bottom: 150px; }
   .filter-form { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
   .filter-form .select { width: 100%; }
   .legend { padding: 10px var(--sp-lg); gap: 6px var(--sp-lg); }
-  /* На телефоне сначала пациенты, расшифровка знаков и приглашения — под списком */
+  /* На телефоне сначала пациенты, расшифровка знаков — под списком */
   main { display: flex; flex-direction: column; }
   main > * { min-width: 0; }
   main > .legend { order: 10; border-top: 1px solid var(--rule); }
-  main > .below { order: 11; }
   .results thead { display: none; }
   .results:not(.records), .results:not(.records) tbody, .results:not(.records) tr, .results:not(.records) td { display: block; width: 100%; }
   .results:not(.records) tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px var(--sp-md); padding: 14px var(--sp-lg); border-bottom: 1px solid var(--rule); }
@@ -640,9 +654,6 @@ html:has(.q-bar) { scroll-padding-bottom: 150px; }
   .facts { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .facts dd { margin-bottom: var(--sp-sm); }
   .form-row { grid-template-columns: minmax(0, 1fr); }
-  .below { grid-template-columns: minmax(0, 1fr); }
-  .below section { padding: 20px var(--sp-lg); }
-  .below section + section { border-left: 0; border-top: 1px solid var(--rule); }
   .pending { flex-wrap: wrap; }
   .action-form { padding: var(--sp-lg) 14px; }
 }
@@ -1005,3 +1016,9 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 
 .med-day-note { font-size: 12px; font-weight: 700; line-height: 1.3; overflow-wrap: normal; }
 .med-trend-table td { text-align: right; }
+
+@media (max-width: 480px) {
+  .invite-dialog { padding: var(--sp-lg); }
+  .invite-dialog .pending { flex-wrap: wrap; }
+  .invite-dialog .revoke[open] { max-width: 100%; }
+}

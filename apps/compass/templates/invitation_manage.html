@@ -1,0 +1,9 @@
+{% extends 'doctor_base.html' %}
+{% set nav_active = 'invites' %}
+{% block title %}Пригласить пациента{% endblock %}
+{% block doctor_main %}
+<div class="invitation-page sheet-pad">
+  <h1>Пригласить пациента</h1>
+  {% include 'invitation_content.html' %}
+</div>
+{% endblock %}

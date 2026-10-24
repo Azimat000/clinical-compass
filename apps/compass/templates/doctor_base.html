@@ -6,10 +6,10 @@
 {% set unread = inbox_counts() %}
 {% set nav = [('queue', 'Пациенты', url_for('dashboard'), None, False),
               ('notices', 'Уведомления', url_for('notification_inbox'), unread.notices, False),
-              ('invites', 'Приглашения', url_for('dashboard') ~ '#invitations', None, False)] %}
+              ('invites', 'Пригласить пациента', url_for('invitation_page'), None, False)] %}
 {% macro menu() %}
   {% for key, label, href, count, alert in nav %}
-    <a href="{{ href }}"{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count num">{{ count }}</span><span class="visually-hidden"> ждут отметки</span>{% endif %}</a>
+    <a href="{{ href }}"{% if key == 'invites' and request.endpoint != 'invitation_page' %} data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog"{% endif %}{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count num">{{ count }}</span><span class="visually-hidden"> ждут отметки</span>{% endif %}</a>
   {% endfor %}
 {% endmacro %}
 <div class="shell">
@@ -41,5 +41,16 @@
     </div>
   </div>
 </div>
+{% if request.endpoint != 'invitation_page' %}
+<dialog class="invite-dialog" id="invite-dialog" aria-labelledby="invite-title">
+  <div class="invite-heading">
+    <h2 id="invite-title">Пригласить пациента</h2>
+    <button class="button" type="button" data-invite-close>Закрыть</button>
+  </div>
+  {% set offers = pending_invitations() %}
+  {% include 'invitation_content.html' %}
+</dialog>
+<script src="{{ url_for('static', filename='invitations.js') }}" defer></script>
+{% endif %}
 {% block page_scripts %}{% endblock %}
 {% endblock %}

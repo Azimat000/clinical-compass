@@ -88,7 +88,7 @@
   {% if show == 'flagged' and not query and not open_filters %}
     {{ ui.empty('Записей с причинами для проверки нет.', href=url_for('dashboard'), link='Все пациенты') }}
   {% elif not query and not open_filters and not total %}
-    {{ ui.empty('У вас пока нет пациентов.', href='#invitations', link='Пригласить пациента') }}
+    <div class="empty"><span>У вас пока нет пациентов.</span><a href="{{ url_for('invitation_page') }}" data-invite-open>Пригласить пациента</a></div>
   {% else %}
     {{ ui.empty('По этому запросу пациентов нет. Проверьте поиск и фильтры.', href=url_for('dashboard'), link='Показать всех') }}
   {% endif %}
@@ -108,36 +108,4 @@
   <span>{{ ui.wellbeing(['unknown'], decorative=True) }}не указано</span>
 </div>
 
-<div class="below" id="invitations">
-  <section aria-labelledby="h-invite">
-    <h2 id="h-invite">Пригласить пациента</h2>
-    <form method="post" action="{{ url_for('create_invitation') }}" class="invite-form">
-      <input type="hidden" name="csrf" value="{{ csrf }}">
-      {{ ui.field('patient_id', 'Код пациента', hint='Код пациента из карточки, например P101.', required=True,
-                  extra={'maxlength': '100', 'autocomplete': 'off', 'spellcheck': 'false'}) }}
-      {{ ui.button('Создать приглашение') }}
-    </form>
-    <p class="meta">Код приглашения показывается один раз. Передайте его пациенту сами.</p>
-  </section>
-  <section aria-labelledby="h-waiting">
-    <h2 id="h-waiting">Ждут принятия</h2>
-    {% if offers %}
-      {% for offer in offers %}
-      <div class="pending">
-        <p>Пациент <span class="num" translate="no">{{ offer.patient_id }}</span><small>действует до <time datetime="{{ offer.expires_at }}">{{ offer.expires_at|msk }}</time></small></p>
-        <details class="revoke">
-          <summary>Отозвать</summary>
-          <form method="post" action="{{ url_for('revoke_invitation', token_hash=offer.token_hash) }}">
-            <input type="hidden" name="csrf" value="{{ csrf }}">
-            <p class="meta">Код перестанет работать. Новый можно создать выше.</p>
-            {{ ui.button('Да, отозвать') }}
-          </form>
-        </details>
-      </div>
-      {% endfor %}
-    {% else %}
-      {{ ui.empty('Действующих приглашений нет.') }}
-    {% endif %}
-  </section>
-</div>
 {% endblock %}

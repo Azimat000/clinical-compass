@@ -91,7 +91,7 @@ class ReviewListTests(unittest.TestCase):
         self.db.execute('UPDATE care_relationships SET ends_at=?', (now(),))
         page = self.page()
         self.assertIn('У вас пока нет пациентов', page)
-        self.assertIn('href="#invitations">Пригласить пациента</a>', page)
+        self.assertIn('href="/invitations/new" data-invite-open>Пригласить пациента</a>', page)
         self.assertNotIn('По этому запросу пациентов нет', page)
 
     def test_retired_filter_redirect_only_preserves_supported_filters(self):

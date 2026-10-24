@@ -16,14 +16,14 @@ from . import first_visits, follow_up, report_drafts, overview, medications
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
-                         'dashboard.html', 'doctor_patient.html', 'follow_up.html',
+                         'dashboard.html', 'invitation_manage.html', 'doctor_patient.html', 'follow_up.html',
                          'decisions.html', 'first_visit.html', 'imports.html',
                          'communication.html', 'notifications.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'plan.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
 # communication.html is for both roles.
-DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'notifications.html', 'critical.html'})
+DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'notifications.html', 'critical.html', 'invitation_manage.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
@@ -121,11 +121,19 @@ def create_app(database=None):
                     g.inbox_counts = {'notices': None}
         return g.inbox_counts
 
+    def pending_invitations():
+        user = g.get('user')
+        if not user or user['role'] != 'doctor':
+            return []
+        return get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
+            WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?
+            ORDER BY expires_at DESC''', (user['id'], now())).fetchall()
+
     @app.context_processor
     def session_context():
         user = g.get('user')
         return {'current_user': user, 'csrf': user['csrf_token'] if user else '',
-                'inbox_counts': inbox_counts}
+                'inbox_counts': inbox_counts, 'pending_invitations': pending_invitations}
 
     @app.template_filter()
     def person_name(code):
@@ -376,14 +384,12 @@ def create_app(database=None):
                                 record_kind=record_kind, route_category=route_category)
         except ValueError:
             abort(400)
-        offers = get_db().execute('''SELECT token_hash,patient_id,expires_at FROM care_invitations
-            WHERE doctor_id=? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>?''', (g.user['id'], now())).fetchall()
         sheet = overview.rows(get_db(), g.user, rows)
         flagged = sum(1 for r in sheet if r['attention'])
         if show == 'flagged':
             sheet = [r for r in sheet if r['attention']]
         return interface_response('dashboard.html', rows=sheet, flagged=flagged, total=len(rows), show=show,
-                               query=query, age_status=age_status, offers=offers,
+                               query=query, age_status=age_status,
                                record_kind=record_kind, route_category=route_category, attention=attention)
 
     @app.get('/demo/<patient_id>')
@@ -704,6 +710,11 @@ def create_app(database=None):
         except clinical_rules.RuleError as error:
             return interface_response('result.html', title='Сведения не сохранены', message=str(error)), error.status
         return redirect(url_for('demo_patient', patient_id=patient_id) + '#clinical-rules', code=303)
+
+    @app.get('/invitations/new')
+    def invitation_page():
+        role('doctor')
+        return interface_response('invitation_manage.html', offers=pending_invitations())
 
     @app.post('/invitations')
     def create_invitation():
