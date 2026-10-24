@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-24T17:51:46+03:00",
+  "updated_on": "2026-10-24T17:57:42+03:00",
   "current_slice": null,
   "last_accepted_slice": "S37",
   "next_slice": "UI08",
@@ -838,7 +838,10 @@
       "evidence": "evidence/S37/acceptance.md",
       "report": "memory/sessions/S37.md",
       "fallback": "/invitations/new",
-      "clinical_validation": false
+      "clinical_validation": false,
+      "opening": "explicit_click_only",
+      "corrective_ref": "refs/tags/fix/S37-invitation-click-only",
+      "corrective_evidence": "evidence/S37/click-only/acceptance.md"
     }
   },
   "latest_roster": {

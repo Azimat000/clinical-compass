@@ -45,8 +45,9 @@
   dialog.addEventListener('close', function () {
     if (opener && opener.isConnected) { opener.focus({ preventScroll: true }); }
   });
-  // Previously shared invitation anchors still open the new window.
-  function openBookmark() { if (location.hash === '#invitations') { open(); } }
-  window.addEventListener('hashchange', openBookmark);
-  openBookmark();
+  // A restored page must also wait for a fresh click, even when the browser
+  // brings it back from its navigation cache with the dialog still open.
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted && dialog.open) { dialog.close(); }
+  });
 }());

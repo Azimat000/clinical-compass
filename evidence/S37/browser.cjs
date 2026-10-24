@@ -73,7 +73,7 @@ async function trigger(page, width) {
     check(await page.getByRole('dialog').isVisible(), 'Missing modal on patient card');
     await page.keyboard.press('Escape');
     console.log(name + ': bookmark'); await go(page, '/#invitations');
-    check(await page.getByRole('dialog').isVisible(), 'Old bookmark broken');
+    check(!await page.getByRole('dialog').isVisible(), 'Old bookmark opened modal without a click');
     await context.close();
     const nojs = await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:900}});
     const plain = await nojs.newPage();
@@ -105,9 +105,9 @@ async function trigger(page, width) {
       await c.close();
     }
     await browser.close();
-    checks.push({browser:name,version:browser.version(),noJS:true,otherScreen:true,oldBookmark:true});
+    checks.push({browser:name,version:browser.version(),noJS:true,otherScreen:true,oldBookmarkStaysClosed:true});
   }
   check(errors.length === 0, JSON.stringify(errors));
   fs.writeFileSync(__dirname + '/browser.json',JSON.stringify({checks,errors,creation:true,revocation:true,invalidID:true,workingDatabaseMutated:false},null,2)+'\n');
-  console.log('PASS: Chromium/Firefox/WebKit;1440/768/375/320;focus,Tab,Escape,backdrop,close;other screen,bookmark,noJS;creation/revocation/error on copy');
+  console.log('PASS: Chromium/Firefox/WebKit;1440/768/375/320;focus,Tab,Escape,backdrop,close;other screen,bookmark stays closed,noJS;creation/revocation/error on copy');
 })().catch(e=>{console.error(e);process.exit(1)});
