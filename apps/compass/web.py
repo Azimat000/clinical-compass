@@ -570,7 +570,7 @@ def create_app(database=None):
                 error, status = str(exc), exc.status
         return imports_view(patient, patient_id, error, status, values)
 
-    def imports_view(patient, patient_id, error=None, status=200, values=None, review_error=None):
+    def imports_view(patient, patient_id, error=None, status=200, values=None, review_error=None, document_error=None):
         """The documents screen; a refused review comes back here with the typed values."""
         items = extraction.history(get_db(),patient_id)
         for item in items:
@@ -578,13 +578,35 @@ def create_app(database=None):
                 candidate['review_value'] = extraction.canonical(candidate['value'])
             for review in item['reviews']:
                 review['payload'] = json.loads(review['payload_json'])
+        visits = first_visits.history(get_db(), g.user, patient_id)
+        latest = {}
+        for visit in visits:
+            latest.setdefault(visit['visit_id'], visit)
+        document_drafts = [v for v in latest.values() if v['state'] == 'draft']
+        editable_ids = {v['id'] for v in document_drafts}
+        document_history = [v for v in visits if v['id'] not in editable_ids and
+                            (v['payload'].get('documented_facts') or v['payload'].get('document_basis'))]
         return interface_response('imports.html',patient=patient,items=items,error=error,values=values or {},
+                               document_drafts=document_drafts, document_history=document_history, document_error=document_error,
                                review_error=review_error,
                                review_key=review_error['key'] if review_error else request.args.get('review','')[:80],
                                patient_name=overview.person(patient['code'])[0],
-                               authors=author_names([r for item in items for r in item['reviews']]),
+                               authors=author_names([r for item in items for r in item['reviews']] + visits),
                                fields=extraction.FIELDS,assertions=extraction.ASSERTIONS,assertion_labels=extraction.ASSERTION_LABELS,
                                warning=extraction.WARNING,new_key=lambda:secrets.token_hex(16)),status
+
+    @app.post('/patients/<patient_id>/first-visits/<visit_id>/documents')
+    def save_visit_documents(patient_id, visit_id):
+        role('doctor')
+        patient = patient_or_404(patient_id)
+        try:
+            saved = first_visits.save_documents(get_db(), g.user, patient_id, visit_id, request.form)
+        except first_visits.Error as failure:
+            if failure.status in (403, 404):
+                abort(failure.status)
+            return imports_view(patient, patient_id, status=failure.status,
+                                document_error={'visit_id': visit_id, 'message': str(failure), 'form': dict(request.form)})
+        return redirect(url_for('imports_page', patient_id=patient_id) + '#visit-document-' + saved, code=303)
 
     @app.post('/patients/<patient_id>/imports/<import_id>/review')
     def review_import(patient_id,import_id):

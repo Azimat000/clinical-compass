@@ -91,9 +91,12 @@ class FirstVisitTests(unittest.TestCase):
         self.assertEqual('denied',p['fields']['safety']['status'])
         self.assertEqual('2026-10-18',p['fields']['complaints']['observed_on'])
         page=self.clients['doc-a'].get(r.location).get_data(as_text=True)
-        for label in ('Жалобы и сведения с источниками','Документированные врачебные факты','Что уточнить',
+        for label in ('Жалобы и сведения с источниками','Что уточнить',
                       'Проект действия'):
             self.assertIn(label,page)
+        documents=self.clients['doc-a'].get('/patients/FV01/imports').text
+        self.assertIn('Диагноз только из синтетического документа',documents)
+        self.assertIn('Врач N, 18.10.2026',documents)
         editor=self.clients['doc-a'].get('/patients/FV01/first-visits').text
         for label in ('Анкеты в карточке','План и решения','Короткая оценка пока недоступна'):
             self.assertIn(label,editor)

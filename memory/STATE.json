@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T00:39:19+03:00",
+  "updated_on": "2026-10-26T00:57:10+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S48",
+  "last_accepted_slice": "S49",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -473,6 +473,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S48",
       "handoff": "memory/sessions/S48.md",
+      "reason": null
+    },
+    "S49": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S49",
+      "handoff": "memory/sessions/S49.md",
       "reason": null
     }
   },
@@ -1007,6 +1013,17 @@
       "plan": "decisions page only; no duplicate metadata or empty state in visit editor",
       "legacy_v_plan": "patient navigation anchor",
       "unique_visit_notes_and_assessment_notice_preserved": true,
+      "stored_medical_data_unchanged": true,
+      "clinical_validation": false
+    },
+    "documents_single_home": {
+      "date": "2026-10-26",
+      "slice": "S49",
+      "report": "memory/sessions/S49.md",
+      "evidence": "evidence/S49/acceptance.md",
+      "home": "documents screen: imports/reviews and all versioned visit document notes",
+      "visit": "only links; document fields inherited from exact base when absent",
+      "editing": "draft notes only, via version/retry/conflict guards; completed records immutable",
       "stored_medical_data_unchanged": true,
       "clinical_validation": false
     }

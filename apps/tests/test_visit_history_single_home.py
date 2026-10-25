@@ -50,8 +50,13 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
             for item in self.rows():
                 self.assertEqual(1,page.count('id="visit-version-'+visit+'-'+str(item['revision'])+'"'))
                 self.assertIn(item['recorded_at'],page)
-                for key in ('documented_facts','document_basis','action_draft','age_basis'):
+                for key in ('action_draft','age_basis'):
                     self.assertIn(escape(item['payload'][key]),page)
+                documents=self.clients['doc-a'].get('/patients/FV01/imports').text
+                for key in ('documented_facts','document_basis'):
+                    self.assertIn(escape(item['payload'][key]),documents)
+                    self.assertNotIn(escape(item['payload'][key]),page)
+                self.assertIn('#visit-document-'+item['id'],page)
                 self.assertIn(item['payload']['age']['detail'],page)
                 for field in item['payload']['fields'].values():
                     self.assertIn(escape(field['text']),page)
@@ -80,7 +85,8 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
         self.assertEqual(before,[tuple(r) for r in self.db.execute('SELECT * FROM first_visit_versions')])
         draft=self.post(self.values(observed_on=records.today().isoformat(), documented_facts='CURRENT-DRAFT',document_basis='SOURCE'))
         draft_page=self.clients['doc-a'].get(draft.location).text
-        self.assertIn('CURRENT-DRAFT',draft_page)
+        self.assertNotIn('CURRENT-DRAFT',draft_page)
+        self.assertIn('CURRENT-DRAFT',self.clients['doc-a'].get('/patients/FV01/imports').text)
         self.assertNotIn('OLD-DOCUMENT',draft_page)
         self.assertNotIn('NEW-DOCUMENT',draft_page)
 
@@ -89,8 +95,11 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
         today=records.today().isoformat()
         page=self.clients['doc-a'].get('/demo/FV01',query_string={'start':today,'end':today}).text
         self.assertEqual(1,page.count('id="visit-'+visit+'"'))
-        self.assertIn('OLD-DOCUMENT',page)
-        self.assertIn('NEW-DOCUMENT',page)
+        documents=self.clients['doc-a'].get('/patients/FV01/imports').text
+        self.assertIn('OLD-DOCUMENT',documents)
+        self.assertIn('NEW-DOCUMENT',documents)
+        self.assertNotIn('OLD-DOCUMENT',page)
+        self.assertNotIn('NEW-DOCUMENT',page)
         data=follow_up.view(self.db,self.doctor,'FV01',{'start':today,'end':today},include_plan=False)
         self.assertEqual(1,len(data['visits']))
         self.assertEqual(2,len(data['visit_versions'][visit]))

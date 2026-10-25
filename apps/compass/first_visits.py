@@ -104,7 +104,13 @@ def history(db, user, patient_id):
 
 def save(db, user, patient_id, visit_id, values):
     require_doctor(db, user, patient_id)
-    payload = validate(values)
+    # Document fields live on the documents screen. An ordinary visit submission
+    # inherits them from its exact base version, including an idempotent retry.
+    base_row = db.execute('SELECT payload_json FROM first_visit_versions WHERE visit_id=? AND patient_id=? AND revision=?',
+                          (visit_id, patient_id, values.get('base_revision', ''))).fetchone()
+    inherited = {key: json.loads(base_row['payload_json']).get(key, '') if base_row else ''
+                 for key in ('documented_facts', 'document_basis')}
+    payload = validate({**inherited, **values})
     retry = text(values, 'request_key', 32)
     if not re.fullmatch('[0-9a-f]{32}', retry):
         raise Error('Обновите форму перед сохранением.')
@@ -154,3 +160,24 @@ def form_values(item):
         for suffix, key in [('status', 'status'), ('text', 'text'), ('source', 'source'), ('basis', 'basis'), ('on', 'observed_on')]:
             values[code + '_' + suffix] = fact[key]
     return values
+
+
+def save_documents(db, user, patient_id, visit_id, values):
+    """Change only document notes of a draft; the same version/retry guards apply."""
+    require_doctor(db, user, patient_id)
+    try:
+        revision = int(text(values, 'base_revision', 10))
+    except ValueError:
+        raise Error('Обновите версию приёма.') from None
+    base = next((row for row in history(db, user, patient_id)
+                 if row['visit_id'] == visit_id and row['revision'] == revision), None)
+    if base is None:
+        raise Error('Версия приёма недоступна.', 404)
+    if base['state'] != 'draft':
+        raise Error('Завершённая запись закрыта для правок.', 409)
+    form = form_values(base)
+    form.update({key: values.get(key, '') for key in ('documented_facts', 'document_basis', 'request_key')})
+    form['state'] = 'draft'
+    save(db, user, patient_id, visit_id, form)
+    return db.execute('SELECT id FROM first_visit_versions WHERE visit_id=? AND patient_id=? AND revision=?',
+                      (visit_id, patient_id, revision + 1)).fetchone()['id']

@@ -61,8 +61,7 @@
       {% endfor %}
     </tbody>
   </table>
-  <h3>Документированные врачебные факты</h3>
-  {% if p.documented_facts %}<p class="entry-text">{{ p.documented_facts }}</p><p class="meta">{{ p.document_basis }}</p>{% else %}<p class="meta">Фактов из документов не внесено.</p>{% endif %}
+  {% if p.documented_facts or p.document_basis %}<p class="meta"><a href="{{ url_for('imports_page', patient_id=item.patient_id) }}#visit-document-{{ item.id }}">Сведения из документов к этой версии приёма</a></p>{% endif %}
   <h3>Что уточнить</h3>
   <ul class="plain">
     {% if p.not_collected %}<li>{{ ui.state('unknown', 'Сведения о жалобах отмечены как ещё не собранные') }}</li>{% endif %}

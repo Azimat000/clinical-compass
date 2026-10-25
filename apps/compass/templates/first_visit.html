@@ -41,7 +41,7 @@
   {% if current and not editing %}<div class="title-actions">{{ ui.button('Начать новый приём', kind='primary', href=url_for('first_visit_page', patient_id=patient.id, visit_id='new')) }}</div>{% endif %}
 </div>
 
-<span id="v-plan"></span>
+<span id="v-plan"></span><span id="v-docs"></span>
 {{ ui.patient_nav(patient.id, 'visit') }}
 
 <div class="sheet-pad">
@@ -61,7 +61,7 @@
 
 {% if editing %}
 <nav class="jump" aria-label="Разделы формы">
-  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-docs">Документы и действие</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a><a id="v-tool" href="{{ card }}#assessments">Анкеты в карточке</a>
+  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-action">Проект действия</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a><a id="v-tool" href="{{ card }}#assessments">Анкеты в карточке</a>
 </nav>
 <form method="post" action="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=visit_id) }}" data-busy data-visit-form>
   <input type="hidden" name="csrf" value="{{ csrf }}">
@@ -101,10 +101,8 @@
       {% for code in ['other_states', 'medications', 'somatic', 'safety', 'acute'] %}{{ fact(code) }}{% endfor %}
     </section>
 
-    <section class="block" id="v-docs" aria-labelledby="h-docs">
-      <h2 id="h-docs">Документы и действие</h2>
-      {{ ui.textarea('documented_facts', 'Документированные врачебные факты', value=values.get('documented_facts', ''), hint='Например, диагноз из конкретного документа. Слова пациента записывайте в разделах выше.', rows=3, maxlength=4000) }}
-      {{ ui.textarea('document_basis', 'Документ, автор и дата', value=values.get('document_basis', ''), hint='Нужно, если внесены факты из документа.', rows=2, maxlength=1000) }}
+    <section class="block" id="v-action" aria-labelledby="h-action">
+      <h2 id="h-action">Проект действия</h2>
       {{ ui.textarea('action_draft', 'Проект действия (не назначение и не направление)', value=values.get('action_draft', ''), hint='План не изменится. Подтверждение — в разделе «План и решения».', rows=3, maxlength=4000) }}
       <p class="meta">Завершение фиксирует запись вместе с пробелами и закрывает её для правок. Новые уточнения — в новом приёме.</p>
     </section>

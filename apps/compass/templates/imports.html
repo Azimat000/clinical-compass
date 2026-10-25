@@ -56,6 +56,12 @@
 <div class="sheet-pad">
   {% if error %}{{ ui.notice('Документ не загружен', error ~ ' Введённый текст остался в форме.', kind='error', id='import-error') }}<p class="meta"><a href="#upload">К форме</a></p>{% endif %}
   {% if review_error %}{{ ui.notice('Сверка не сохранена', review_error.message ~ ' Введённое осталось в форме кандидата.', kind='error', id='review-error') }}<p class="meta"><a href="#cand-{{ review_error.key|replace(':', '-') }}">К кандидату</a></p>{% endif %}
+  {% if document_error %}
+    {{ ui.notice('Сведения из документа не сохранены', document_error.message ~ ' Введённое осталось ниже.', kind='error', id='document-error') }}
+    <p class="entry-text">{{ document_error.form.get('documented_facts', '') }}</p>
+    <p class="meta">{{ document_error.form.get('document_basis', '') }}</p>
+    <p class="meta"><a href="#visit-documents">К сведениям приёма</a></p>
+  {% endif %}
   {{ ui.notice('Найденное — кандидаты, а не факты', warning, kind='info') }}
 </div>
 
@@ -65,6 +71,8 @@
   <div><span class="label">Сверок врача</span>{% if n_reviews %}<b class="num">{{ n_reviews }}</b>{% else %}{{ ui.state('unknown', 'не было') }}{% endif %}</div>
   <div><span class="label">Что принимается</span>Текст или файл .txt в UTF-8, до 24 000 байт (около 12 000 русских букв)</div>
 </div>
+
+<nav class="jump" aria-label="Разделы документов"><a href="#upload">Загрузить</a><a href="#imports">Загруженное</a><a href="#visit-documents">Сведения к приёмам</a></nav>
 
 
 <div class="card-body">
@@ -183,6 +191,35 @@
     {% else %}
       {{ ui.empty('Документов нет. Загрузите текст выше.', href='#upload', link='Загрузить') }}
     {% endfor %}
+  </section>
+  <section class="block" id="visit-documents" aria-labelledby="h-visit-documents">
+    <h2 id="h-visit-documents">Сведения из документов к приёмам</h2>
+    <p class="meta">Записи врача с указанным основанием и все их версии. Исходные тексты и сверка — в разделе «Загруженное».</p>
+    {% for v in document_drafts %}
+    {% set dv = document_error.form if document_error and document_error.visit_id == v.visit_id else v.payload %}
+    <article id="visit-document-{{ v.id }}">
+      <h3>Приём {{ v.payload.observed_on|full_date }} · черновик · версия <span class="num">{{ v.revision }}</span></h3>
+      <p class="meta"><span translate="no">{{ authors.get(v.actor_id, v.actor_id) }}</span> · <time datetime="{{ v.recorded_at }}">{{ v.recorded_at|msk }}</time>. <a href="{{ card }}#visit-version-{{ v.visit_id }}-{{ v.revision }}">К записи приёма</a></p>
+      <form method="post" action="{{ url_for('save_visit_documents', patient_id=patient.id, visit_id=v.visit_id) }}" class="action-form" data-busy>
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <input type="hidden" name="request_key" value="{{ dv.get('request_key') or new_key() }}">
+        <input type="hidden" name="base_revision" value="{{ dv.get('base_revision', v.revision) }}">
+        {{ ui.textarea('documented_facts', 'Документированные врачебные факты', value=dv.get('documented_facts', ''), id='visit-facts-' ~ v.visit_id, hint='Например, диагноз из конкретного документа.', rows=3, maxlength=4000) }}
+        {{ ui.textarea('document_basis', 'Документ, автор и дата', value=dv.get('document_basis', ''), id='visit-basis-' ~ v.visit_id, hint='Нужно, если внесены факты из документа.', rows=2, maxlength=1000) }}
+        {{ ui.button('Сохранить сведения к приёму') }}
+        <p class="meta">Сохранится новая версия черновика. Завершение приёма — в разделе «Приём».</p>
+      </form>
+    </article>
+    {% endfor %}
+    {% for v in document_history %}
+    <details class="fold" id="visit-document-{{ v.id }}">
+      <summary>Приём {{ v.payload.observed_on|full_date }} · версия {{ v.revision }} · {{ 'черновик' if v.state == 'draft' else 'запись завершена' }}</summary>
+      <p class="entry-text">{{ v.payload.documented_facts }}</p>
+      <p class="meta">{{ v.payload.document_basis }}</p>
+      <p class="meta"><span translate="no">{{ authors.get(v.actor_id, v.actor_id) }}</span> · <time datetime="{{ v.recorded_at }}">{{ v.recorded_at|msk }}</time>. <a href="{{ card }}#visit-version-{{ v.visit_id }}-{{ v.revision }}">К записи приёма</a></p>
+    </details>
+    {% endfor %}
+    {% if not document_drafts and not document_history %}{{ ui.empty('Сведений из документов к приёмам пока нет. Новые документы можно загрузить выше.') }}{% endif %}
   </section>
 </div>
 {% endblock %}
