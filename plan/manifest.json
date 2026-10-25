@@ -3075,6 +3075,52 @@
       "acceptance_tag": "slice/S46"
     },
     {
+      "id": "S47",
+      "title": "Анкеты только в карточке пациента",
+      "target_date": "26.10.2026 — прямое поручение",
+      "depends_on": [
+        "S46"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Убрать дублирующую таблицу анкет из редактора приёма; оставить переход к карточке.",
+        "Сохранить все заполнения, пропуски, ответы, результаты, графики, версии и источники в карточке.",
+        "Проверить данные, формы и доступ, обновить сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/first_visit.html",
+        "apps/compass/templates/assessment_charts.html",
+        "apps/compass/web.py",
+        "apps/tests/test_assessment_single_home.py",
+        "evidence/S47/acceptance.md"
+      ],
+      "acceptance": [
+        "Анкеты и результаты находятся только в карточке; редактор содержит ссылку без повторной таблицы.",
+        "Все заполнения, исходные ответы, пропуски, результаты, графики, версии и сведения об источниках сохранены.",
+        "Предложение и заполнение анкеты, форма приёма, ошибки и границы ролей работают по-прежнему.",
+        "Рабочие медицинские данные неизменны, проверки пройдены, сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S47.md",
+      "evidence_dir": "evidence/S47",
+      "requirement_ids": [
+        "F01",
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S47): keep questionnaires in patient card",
+      "acceptance_tag": "slice/S47"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

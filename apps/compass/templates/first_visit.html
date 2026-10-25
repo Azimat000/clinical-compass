@@ -61,7 +61,7 @@
 
 {% if editing %}
 <nav class="jump" aria-label="Разделы формы">
-  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-docs">Документы и действие</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a>
+  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-docs">Документы и действие</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a><a id="v-tool" href="{{ card }}#assessments">Анкеты в карточке</a>
 </nav>
 <form method="post" action="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=visit_id) }}" data-busy data-visit-form>
   <input type="hidden" name="csrf" value="{{ csrf }}">
@@ -126,28 +126,6 @@
 {% endif %}
 
 <div class="card-body">
-  <section class="block" id="v-tool" aria-labelledby="h-tool">
-    <h2 id="h-tool">Результат инструмента отдельно</h2>
-    <p class="meta">Анкеты не входят в запись приёма и её не меняют. Каждая анкета имеет свой диапазон и способ подсчёта. Диагнозы и назначения из баллов не формируются.{% if measured %} Форма: «{{ measured[0].form.title }}», период в анкете: «{{ measured[0].form.period }}».{% endif %}</p>
-    {% if measured %}
-    <table class="results records">
-      <caption class="visually-hidden">Заполненные анкеты, сначала новые</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Результаты</th></tr></thead>
-      <tbody>
-        {% for a in measured %}
-        <tr>
-          <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|short_date }}</time><span class="sub num" data-form-version="{{ a.scale_version_id }}">{{ a.form.code }} · {{ a.form.version.split(' / ')[0] }}</span></td>
-          <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub">Есть пропуски, суммы не рассчитаны.</span>{% endif %}</td>
-          <td>{% for key, subscale in a.form.subscales.items() %}<span class="sub">{{ subscale.label }}: <b class="num">{% if a.scores is not none %}{{ a.scores[key] }}{% else %}не рассчитано{% endif %}</b></span>{% endfor %}<a href="{{ card }}#answers-{{ a.id }}">Ответы и график</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-      {{ ui.empty('Заполненных анкет нет. Предложить анкету можно в карточке пациента.', href=card ~ '#assessments', link='Открыть анкеты') }}
-    {% endif %}
-  </section>
-
   <section class="block" id="v-plan" aria-labelledby="h-vplan">
     <h2 id="h-vplan">Подтверждённый план</h2>
     {% if approved %}

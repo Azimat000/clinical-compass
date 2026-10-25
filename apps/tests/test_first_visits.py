@@ -95,7 +95,7 @@ class FirstVisitTests(unittest.TestCase):
                       'Проект действия'):
             self.assertIn(label,page)
         editor=self.clients['doc-a'].get('/patients/FV01/first-visits').text
-        for label in ('Результат инструмента отдельно','Подтверждённый план','Короткая оценка пока недоступна'):
+        for label in ('Анкеты в карточке','Подтверждённый план','Короткая оценка пока недоступна'):
             self.assertIn(label,editor)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE first_visit_versions SET state='completed'")
@@ -215,9 +215,13 @@ class FirstVisitTests(unittest.TestCase):
             {'form_version_id':definition['id'],**{f'answer_{n}':'1' for n in range(1,43)}})
         page=self.clients['doc-a'].get(r.location).get_data(as_text=True)
         self.assertIn('Повторный приём',page)
-        self.assertIn(definition['title'],page)
-        self.assertIn(definition['id'],page)
+        self.assertNotIn(definition['title'],page)
+        self.assertIn('/demo/FV01#assessments',page)
+        card=self.clients['doc-a'].get('/demo/FV01').text
+        self.assertIn(definition['title'],card)
+        self.assertIn(definition['id'],card)
         for subscale in definition['subscales'].values():
-            self.assertIn(subscale['label'] + ': <b class="num">14</b>',page)
+            self.assertIn(subscale['label'],card)
+        self.assertEqual(3,card.count('<td class="num">14</td>'))
         self.assertEqual(1,len(self.rows()))
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])

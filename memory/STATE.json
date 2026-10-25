@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T00:19:29+03:00",
+  "updated_on": "2026-10-26T00:29:44+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S46",
+  "last_accepted_slice": "S47",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -461,6 +461,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S46",
       "handoff": "memory/sessions/S46.md",
+      "reason": null
+    },
+    "S47": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S47",
+      "handoff": "memory/sessions/S47.md",
       "reason": null
     }
   },
@@ -974,6 +980,16 @@
       "evidence": "evidence/S46/acceptance.md",
       "history": "doctor card only; short records, standalone archives, detailed visits and all revisions",
       "editor": "new/current draft only; completion and completed bookmarks open the card",
+      "stored_medical_data_unchanged": true,
+      "clinical_validation": false
+    },
+    "assessment_single_home": {
+      "date": "2026-10-26",
+      "slice": "S47",
+      "report": "memory/sessions/S47.md",
+      "evidence": "evidence/S47/acceptance.md",
+      "home": "doctor card only; full answers, missing data, exact results, graphs, versions and sources",
+      "editor": "ordinary link to card; legacy v-tool anchor preserved",
       "stored_medical_data_unchanged": true,
       "clinical_validation": false
     }

@@ -451,7 +451,6 @@ def create_app(database=None):
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
             fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES,
-            measured=assessments.history(db, g.user, patient_id),
             decisions=decisions.history(db, g.user, patient_id)), status
 
     def communication_view(patient, patient_id, error=None, error_op=None, values=None, status=200):

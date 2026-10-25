@@ -72,7 +72,7 @@
     </details>
   {% endfor %}
   <details class="fold"><summary>Версия, источник и ограничения · {{ group.form.code }}</summary>
-    <p class="meta">{{ group.form.attribution }} {{ group.form.population.study }}{% if group.form.code == 'DASS-42' %} Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.{% endif %}</p>
+    <p class="meta">{{ group.form.title }}. {{ group.form.attribution }} {{ group.form.population.study }}{% if group.form.code == 'DASS-42' %} Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.{% endif %}</p>
     <p class="meta">{{ group.form.get('scoring_note', 'Суммы по подшкалам: три отдельные суммы 0–42, без общего итога, порогов и уровней тяжести.') }} При любом пропуске суммы не рассчитываются.</p>
     <p class="meta">Редакция: <span data-form-version="{{ group.form.version }}">{{ group.form.version.split(' / ')[0] }}</span>. Подсчёт: {{ group.rows[0].scoring_version }}.</p>
     <p class="meta"><a href="{{ group.form.source.url }}">Бланк и источник</a> · <a href="{{ group.form.validation_url }}">Русская валидация</a> · <a href="{{ group.form.rights_url }}">Условия применения</a></p>
