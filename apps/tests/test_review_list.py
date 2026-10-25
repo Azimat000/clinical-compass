@@ -37,7 +37,7 @@ class ReviewListTests(unittest.TestCase):
             page = self.page()
         self.assertIn('Есть пропуски в плане', page)
         self.assertIn('Отмечено пропусков: 1; Без отметки: 2', page)
-        self.assertIn('href="/patients/D01/follow-up#fu-plan"', page)
+        self.assertIn('href="/demo/D01#fu-plan"', page)
 
     def test_every_reason_is_visible_and_each_link_has_an_existing_target(self):
         self.db.execute("UPDATE patients SET age_status='unknown',age_years=NULL WHERE id='D01'")

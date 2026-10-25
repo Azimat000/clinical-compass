@@ -1,0 +1,62 @@
+{
+  "initial_suite": "541 tests; 11 failures, 3 errors",
+  "findings": [
+    {
+      "test": "ERROR: test_existing_and_new_entries_are_shown_in_their_own_sections (test_record_routing.RecordRoutingTests.test_existing_and_new_entries_are_shown_in_their_own_sections)",
+      "failure": "TypeError: 'NoneType' object is not subscriptable"
+    },
+    {
+      "test": "ERROR: test_future_detailed_visit_retains_versions_without_becoming_a_diary_entry (test_record_routing.RecordRoutingTests.test_future_detailed_visit_retains_versions_without_becoming_a_diary_entry)",
+      "failure": "TypeError: 'NoneType' object is not subscriptable"
+    },
+    {
+      "test": "ERROR: test_standalone_archives_and_linked_visit_are_never_duplicated (test_record_routing.RecordRoutingTests.test_standalone_archives_and_linked_visit_are_never_duplicated)",
+      "failure": "TypeError: 'NoneType' object is not subscriptable"
+    },
+    {
+      "test": "FAIL: test_full_patient_submission_doctor_results_and_patient_receipt_only (test_assessments.AssessmentsTests.test_full_patient_submission_doctor_results_and_patient_receipt_only)",
+      "failure": "AssertionError: 'Исходные ответы (42 пункта)' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-scheme\" content"
+    },
+    {
+      "test": "FAIL: test_source_provenance_xss_doctor_capture_and_restart (test_assessments.AssessmentsTests.test_source_provenance_xss_doctor_capture_and_restart)",
+      "failure": "AssertionError: '&lt;script&gt;bad' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-scheme\" content=\"light\">\\"
+    },
+    {
+      "test": "FAIL: test_dass_exact_period_complete_and_missing_without_zero_fill (test_follow_up.FollowUpTests.test_dass_exact_period_complete_and_missing_without_zero_fill)",
+      "failure": "AssertionError: '#assessment-49f6a9802d921820fee719e643fb5383' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"colo"
+    },
+    {
+      "test": "FAIL: test_only_rebuilt_templates_and_new_assets_are_served (test_interface_removed.InterfaceRemovedTests.test_only_rebuilt_templates_and_new_assets_are_served)",
+      "failure": "AssertionError: Items in the first set but not the second:"
+    },
+    {
+      "test": "FAIL: test_missed_and_unknown_completion_are_shown_separately (test_review_list.ReviewListTests.test_missed_and_unknown_completion_are_shown_separately)",
+      "failure": "AssertionError: 'href=\"/patients/D01/follow-up#fu-plan\"' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-sche"
+    },
+    {
+      "test": "FAIL: test_card_header_keeps_age_and_one_heading_without_signals (test_s26b.DoctorWorkspaceTests.test_card_header_keeps_age_and_one_heading_without_signals)",
+      "failure": "AssertionError: 'Сводка к приёму' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-scheme\" content=\"light\">\\n<"
+    },
+    {
+      "test": "FAIL: test_card_navigation_is_short_and_offers_only_screens_that_exist (test_s26b.DoctorWorkspaceTests.test_card_navigation_is_short_and_offers_only_screens_that_exist)",
+      "failure": "AssertionError: 4 != 6"
+    },
+    {
+      "test": "FAIL: test_card_shows_every_entry_so_every_follow_up_link_lands (test_ui04.DoctorCabinetTests.test_card_shows_every_entry_so_every_follow_up_link_lands)",
+      "failure": "AssertionError: 'href=\"/demo/D01#entry-121bd983c47107a8c2fd3623e4eadbd1\"' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta"
+    },
+    {
+      "test": "FAIL: test_card_without_records_says_absence_not_safety (test_ui04.DoctorCabinetTests.test_card_without_records_says_absence_not_safety)",
+      "failure": "AssertionError: 'Записей пока нет' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-scheme\" content=\"light\">\\n"
+    },
+    {
+      "test": "FAIL: test_follow_up_empty_period_is_not_good_news (test_ui04.DoctorCabinetTests.test_follow_up_empty_period_is_not_good_news)",
+      "failure": "AssertionError: 'ни одной за 30 дн.' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta name=\"color-scheme\" content=\"light\">"
+    },
+    {
+      "test": "FAIL: test_follow_up_links_back_to_source_records (test_ui04.DoctorCabinetTests.test_follow_up_links_back_to_source_records)",
+      "failure": "AssertionError: 'href=\"/demo/D01#entry-02128445a9c21da89bdb3062eda9f6e5\"' not found in '<!doctype html>\\n<html lang=\"ru\">\\n<head>\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<meta"
+    }
+  ],
+  "resolution": "Fixed the original-answer display in the unified chart. Updated obsolete expectations for a separate summary/template, its section IDs, links and default 30-day interval. New source/filter/access/read-only checks pass; final logs supersede initial run."
+}

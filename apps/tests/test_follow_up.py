@@ -92,7 +92,7 @@ class FollowUpTests(unittest.TestCase):
         self.assertEqual({'depression':28,'anxiety':28,'stress':28},full['scores'])
         html=self.clients['doc-a'].get(self.summary).text
         for a in data['measured']:
-            self.assertIn(a['form']['period'],html);self.assertIn('#assessment-'+a['id'],html)
+            self.assertIn(a['form']['period'],html);self.assertIn('id="assessment-'+a['id']+'"',html)
             self.assertIn(a['scoring_version'],html)
         self.assertIn('Есть пропуски. Ни одна сумма не рассчитана',html)
         self.assertIn('Возраст участников русского исследования не указан',html)

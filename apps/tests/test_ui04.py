@@ -1,5 +1,6 @@
 """UI04: кабинет врача — список, карточка, сводка повторного приёма. Проверяется разметка, фильтры, худшие данные и границы."""
 import re
+from datetime import timedelta
 import secrets
 import unittest
 
@@ -117,7 +118,7 @@ class DoctorCabinetTests(unittest.TestCase):
 
     def test_card_without_records_says_absence_not_safety(self):
         card = self.page('/demo/D01')
-        self.assertIn('Записей пока нет', card)
+        self.assertIn('Записей за период нет', card)
         self.assertIn('отсутствие сведений, а не отсутствие жалоб', card)
         self.assertNotIn('Врачебные сведения', card)
         self.assertNotIn('Рекомендация не сформирована', card)
@@ -177,7 +178,7 @@ class DoctorCabinetTests(unittest.TestCase):
     # ---- сводка повторного приёма ----
 
     def test_follow_up_empty_period_is_not_good_news(self):
-        page = self.page('/patients/D01/follow-up')
+        page = self.page('/patients/D01/follow-up?start=' + (records.today()-timedelta(days=29)).isoformat() + '&end=' + records.today().isoformat())
         self.assertIn('Записей за период нет', page)
         self.assertIn('отсутствие сведений, а не отсутствие жалоб', page)
         self.assertIn('ни одной за 30 дн.', page)
@@ -190,8 +191,8 @@ class DoctorCabinetTests(unittest.TestCase):
     def test_follow_up_links_back_to_source_records(self):
         self.self_report('Исходная запись', 'worse', adverse_events_status='known', adverse_events_text='Тошнота')
         entry_id = self.db.execute('SELECT id FROM clinical_entries').fetchone()[0]
-        page = self.page('/patients/D01/follow-up')
-        self.assertIn('href="/demo/D01#entry-%s"' % entry_id, page)
+        page = self.page('/patients/D01/follow-up?start=' + (records.today()-timedelta(days=29)).isoformat() + '&end=' + records.today().isoformat())
+        self.assertIn('id="entry-%s"' % entry_id, page)
         self.assertIn('Исходная запись', page)
         self.assertIn('Тошнота', page)
         self.assertIn('1 из 30', page)
@@ -217,7 +218,7 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertIn('Ещё записей: 2', card)
         for entry_id in ids:
             self.assertEqual(1, card.count('id="entry-%s"' % entry_id))
-            self.assertIn('href="/demo/D01#entry-%s"' % entry_id, follow)
+            self.assertIn('id="entry-%s"' % entry_id, follow)
 
     def test_patient_menu_has_no_duplicate_attention_counter(self):
         self.self_report('Хуже', 'worse', adverse_events_status='known', adverse_events_text='Тошнота')

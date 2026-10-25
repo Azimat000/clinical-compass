@@ -12,7 +12,7 @@
 {% else %}<p class="meta">В этом составе препаратов нет.</p>{% endif %}
 {% endmacro %}
 
-{% macro calendar(cal, patient, csrf, endpoint, is_patient) %}
+{% macro calendar(cal, patient, csrf, endpoint, is_patient, period={}) %}
 <section class="med-calendar" id="medications" aria-labelledby="h-medications">
   <div class="med-title"><h2 id="h-medications">Приём препаратов</h2>
     {% if not is_patient %}<a href="{{ url_for('decisions_page', patient_id=patient.id, compose=1, med_edit=1) }}#new-decision">Изменить расписание</a>{% endif %}
@@ -23,13 +23,13 @@
   {% if not is_patient %}<p class="meta med-context">{{ cal.context }} <a href="{{ url_for('demo_patient', patient_id=patient.id) }}#records">Сопоставить с дневником</a></p>{% endif %}
   <details class="med-course"><summary>Расписание и курсы · {{ cal.current_medications|length }}</summary>{{ schedule(cal.current_medications) }}</details>
   <nav class="med-weeks" aria-label="Недели календаря приёма">
-    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.prev) }}#medications" aria-label="Предыдущая неделя">← Неделя</a>
+    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.prev, **period) }}#medications" aria-label="Предыдущая неделя">← Неделя</a>
     <span class="num">{{ cal.start|short_date }}–{{ cal.end|short_date }}<small>{{ cal.start[:4] }}</small></span>
-    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.next) }}#medications" aria-label="Следующая неделя">Неделя →</a>
+    <a class="button" href="{{ url_for(endpoint, patient_id=patient.id, med_day=cal.next, **period) }}#medications" aria-label="Следующая неделя">Неделя →</a>
   </nav>
   <div class="med-days" aria-label="Дни недели">
     {% for day in cal.days %}
-    <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date) }}#medications"{% if day.selected %} aria-current="date"{% endif %} aria-label="{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}">
+    <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date, **period) }}#medications"{% if day.selected %} aria-current="date"{% endif %} aria-label="{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}">
       <span>{{ day.weekday }}</span><b class="num">{{ day.number }}</b>
       {% if day.total %}<span class="med-day-count"><img src="{{ url_for('static', filename='icons/pill.svg') }}" alt="" width="14" height="14">{{ day.taken }}/{{ day.total }}</span>
       {% else %}<span class="med-day-count">—</span>{% endif %}
@@ -47,7 +47,7 @@
     <div><dt>Без отметки за прошлые дни</dt><dd class="num">{{ cal.past_unmarked }}</dd></div>
   </dl>
   <div class="med-selected-heading"><h3>{{ cal.selected|ru_day }}{% if cal.selected == cal.today %} · сегодня{% endif %}</h3>
-    {% if cal.selected != cal.today %}<a href="{{ url_for(endpoint, patient_id=patient.id) }}#medications">К сегодня</a>{% endif %}
+    {% if cal.selected != cal.today %}<a href="{{ url_for(endpoint, patient_id=patient.id, **period) }}#medications">К сегодня</a>{% endif %}
   </div>
   {% for dose in cal.doses %}
   <article class="med-dose" id="dose-{{ dose.proposal_id }}-{{ dose.med_index }}-{{ dose.slot_index }}">
@@ -95,10 +95,10 @@
       <table class="results med-trend-table">
         <caption class="visually-hidden">История приёма по неделям</caption>
         <thead><tr><th scope="col">Неделя</th><th scope="col">Принято / приёмов</th><th scope="col">Пропущено</th><th scope="col">Частично</th><th scope="col">Нет отметки</th></tr></thead>
-        <tbody>{% for period in cal.periods %}<tr>
-          <th scope="row"><a href="{{ url_for(endpoint, patient_id=patient.id, med_day=period.open_day) }}#medications">{{ period.start|short_date }}–{{ period.end|short_date }}</a></th>
-          <td class="num">{% if period.total %}{{ period.taken }} / {{ period.total }}{% else %}—{% endif %}</td>
-          <td class="num">{{ period.missed }}</td><td class="num">{{ period.partial }}</td><td class="num">{{ period.unknown }}</td>
+        <tbody>{% for week in cal.periods %}<tr>
+          <th scope="row"><a href="{{ url_for(endpoint, patient_id=patient.id, med_day=week.open_day, **period) }}#medications">{{ week.start|short_date }}–{{ week.end|short_date }}</a></th>
+          <td class="num">{% if week.total %}{{ week.taken }} / {{ week.total }}{% else %}—{% endif %}</td>
+          <td class="num">{{ week.missed }}</td><td class="num">{{ week.partial }}</td><td class="num">{{ week.unknown }}</td>
         </tr>{% endfor %}</tbody>
       </table>
     </div>

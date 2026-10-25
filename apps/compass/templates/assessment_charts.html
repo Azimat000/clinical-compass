@@ -1,4 +1,4 @@
-{# Same source data on the patient card and follow-up summary; doctor-only. #}
+{# Results and original answers on the unified patient card; doctor-only. #}
 {% import 'components.html' as ui %}
 {% for group in chart_groups %}
 <section class="assessment-series" aria-labelledby="chart-{{ group.version }}">
@@ -25,7 +25,7 @@
         <polyline class="assessment-line" points="{% for p in segment %}{{ p.x }},{{ p.y }} {% endfor %}"/>
         {% endif %}{% endfor %}
         {% for point in series.points %}
-        <a href="{% if assessment_summary|default(false) %}{{ card }}{% endif %}#assessment-{{ point.id }}" aria-label="{{ point.date|full_date }}: {{ point.value }} из {{ series.maximum }}, к исходным ответам">
+        <a href="#assessment-{{ point.id }}" aria-label="{{ point.date|full_date }}: {{ point.value }} из {{ series.maximum }}, к исходным ответам">
           <circle cx="{{ point.x }}" cy="{{ point.y }}" r="24" class="assessment-hit"/>
           <circle cx="{{ point.x }}" cy="{{ point.y }}" r="5" class="assessment-point"><title>{{ point.date|full_date }} · {{ point.value }} из {{ series.maximum }}</title></circle>
         </a>
@@ -48,18 +48,17 @@
       <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th>{% for code, subscale in group.form.subscales.items() %}<th scope="col">{{ subscale.label }}</th>{% endfor %}<th scope="col">Ответы</th></tr></thead>
       <tbody>
       {% for a in group.rows %}
-      <tr{% if not assessment_summary|default(false) %} id="assessment-{{ a.id }}"{% endif %}>
+      <tr id="assessment-{{ a.id }}">
         <td><time class="num" datetime="{{ a.observed_on }}">{{ a.observed_on|full_date }}</time></td>
         <td>{% if a.completeness == 'complete' %}{{ ui.state('known', 'полное') }}{% else %}{{ ui.state('unknown', 'неполное') }}<span class="sub">{{ a.answers|select('ne', none)|list|length }} из {{ a.answers|length }}. Есть пропуски. Ни одна сумма не рассчитана.</span>{% endif %}</td>
         {% for code in group.form.subscales %}<td class="num">{% if a.scores is not none %}{{ a.scores[code] }}{% else %}не рассчитано{% endif %}</td>{% endfor %}
-        <td><a href="{% if assessment_summary|default(false) %}{{ card }}{% endif %}#{% if assessment_summary|default(false) %}assessment{% else %}answers{% endif %}-{{ a.id }}">Открыть</a></td>
+        <td><a href="#answers-{{ a.id }}">Открыть</a></td>
       </tr>
       {% endfor %}
       </tbody>
     </table>
     </div>
   </details>
-  {% if not assessment_summary|default(false) %}
   {% for a in group.rows|reverse %}
     <details class="fold" id="answers-{{ a.id }}">
       <summary>Исходные ответы ({{ a.answers|length }} пункта) · {{ group.form.code }} · {{ a.observed_on|full_date }}</summary>
@@ -72,7 +71,6 @@
       <p class="meta">{% for option in a.form.options %}{{ loop.index0 }} — {{ option }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
     </details>
   {% endfor %}
-  {% endif %}
   <details class="fold"><summary>Версия, источник и ограничения · {{ group.form.code }}</summary>
     <p class="meta">{{ group.form.attribution }} {{ group.form.population.study }}{% if group.form.code == 'DASS-42' %} Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.{% endif %}</p>
     <p class="meta">{{ group.form.get('scoring_note', 'Суммы по подшкалам: три отдельные суммы 0–42, без общего итога, порогов и уровней тяжести.') }} При любом пропуске суммы не рассчитываются.</p>
@@ -81,5 +79,5 @@
   </details>
 </section>
 {% else %}
-  {% if assessment_summary|default(false) %}{{ ui.empty('Анкет за период нет. Это не означает, что состояние в норме.') }}{% else %}{{ ui.empty('Заполненных анкет нет. Предложите анкету — после ответов здесь появится график. Отсутствие ответов не означает, что состояние в норме.') }}{% endif %}
+  {% if assessment_period|default(false) %}{{ ui.empty('Анкет за период нет. Это не означает, что состояние в норме.') }}{% else %}{{ ui.empty('Заполненных анкет нет. Предложите анкету — после ответов здесь появится график. Отсутствие ответов не означает, что состояние в норме.') }}{% endif %}
 {% endfor %}

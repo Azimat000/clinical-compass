@@ -2938,6 +2938,50 @@
       "acceptance_tag": "slice/S43"
     },
     {
+      "id": "S44",
+      "title": "Единая карточка пациента со сводкой за период",
+      "target_date": "25.10.2026 — прямое поручение",
+      "depends_on": [
+        "S43"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Объединить карточку и сводку без повторения разделов, сохранить период и исходные факты.",
+        "Сохранить действия, доступ и данные; проверить и обновить работающий сервис."
+      ],
+      "outputs": [
+        "apps/compass/templates/doctor_patient.html",
+        "apps/compass/web.py",
+        "apps/compass/follow_up.py",
+        "apps/tests/test_patient_card_merge.py",
+        "evidence/S44/acceptance.md"
+      ],
+      "acceptance": [
+        "Один экран и один пункт навигации: разделы не дублируются.",
+        "Вся история и выбранный период, планы/отметки/источники и действия доступны.",
+        "Старые ссылки работают, доступ изолирован, данные сохранены.",
+        "Проверки пройдены; сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S44.md",
+      "evidence_dir": "evidence/S44",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S44): merge patient card and visit summary",
+      "acceptance_tag": "slice/S44"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

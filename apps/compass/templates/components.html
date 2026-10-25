@@ -130,10 +130,9 @@
 </div>
 {%- endmacro %}
 
-{#- Разделы пациента одной строкой: active — card | summary | visit | plan | talk | docs. Остальные пункты — обычные ссылки. -#}
+{#- Разделы пациента одной строкой: active — card | visit | plan | talk | docs. Остальные пункты — обычные ссылки. -#}
 {% macro patient_nav(patient_id, active) -%}
 {%- set items = [('card', 'Карточка', url_for('demo_patient', patient_id=patient_id)),
-                 ('summary', 'Сводка к приёму', url_for('follow_up_page', patient_id=patient_id)),
                  ('visit', 'Приём', url_for('first_visit_page', patient_id=patient_id)),
                  ('plan', 'План и решения', url_for('decisions_page', patient_id=patient_id)),
                  ('talk', 'Сообщения', url_for('communication_page', patient_id=patient_id)),

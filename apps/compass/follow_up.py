@@ -37,17 +37,17 @@ def local_day(stamp):
     return value.astimezone(MOSCOW).date().isoformat()
 
 
-def view(db, user, patient_id, values):
+def view(db, user, patient_id, values, *, all_history=False):
     # A single read snapshot keeps the plan and its linked outcomes consistent.
     db.execute('SAVEPOINT follow_up_read')
     try:
-        return _view(db, user, patient_id, values)
+        return _view(db, user, patient_id, values, all_history=all_history)
     finally:
         db.execute('ROLLBACK TO follow_up_read')
         db.execute('RELEASE follow_up_read')
 
 
-def _view(db, user, patient_id, values):
+def _view(db, user, patient_id, values, *, all_history=False):
     if user['role'] != 'doctor' or not db.execute(
             "SELECT 1 FROM users WHERE id=? AND role='doctor' AND disabled=0", (user['id'],)).fetchone():
         raise decisions.DecisionError('Сводка повторного приёма доступна врачу.', 403)
@@ -55,9 +55,15 @@ def _view(db, user, patient_id, values):
     if patient is None:
         raise decisions.DecisionError('Карточка недоступна.', 404)
     start, end = period(values)
+    if all_history:
+        start = '1900-01-01'
+    included_days = []
     def includes(stamp):
         day = local_day(stamp)
-        return day is not None and start <= day <= end
+        included = day is not None and start <= day <= end
+        if included and all_history:
+            included_days.append(day)
+        return included
 
     authors = {r['id']: r['display_name'] for r in db.execute('SELECT id,display_name FROM users')}
     all_entries = [e for e in records.history(db, patient_id) if includes(e['observed_on'])]
@@ -101,6 +107,9 @@ def _view(db, user, patient_id, values):
             task['superseded'] = communication.superseded(db, task)
             task['future'] = task['due_at'] > now()
             tasks.append(task)
+
+    if all_history:
+        start = min(included_days, default=end)
 
     days = {e['observed_on'] for e in entries if e['kind'] == 'self_report'}
     warnings = records.warnings(patient, all_entries)

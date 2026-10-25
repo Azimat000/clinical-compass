@@ -28,7 +28,7 @@ class RecordRoutingTests(unittest.TestCase):
                            complaints_text='DOCTOR-DETAIL', age_status='known', age_years='35')
         before = [tuple(r) for r in self.db.execute('SELECT * FROM clinical_entries')]
         for path, diary, visits in [('/demo/D01', 'records', 'visit-history'),
-                                    ('/patients/D01/follow-up', 'fu-records', 'fu-visits')]:
+                                    ('/patients/D01/follow-up', 'records', 'visit-history')]:
             html = self.clients['doc-a'].get(path).text
             diary_html, visit_html = self.section(html, diary), self.section(html, visits)
             self.assertIn('PATIENT-ONLY', diary_html)
@@ -93,7 +93,7 @@ class RecordRoutingTests(unittest.TestCase):
         self.assertEqual([], data['doctor_entries'])
         self.assertEqual(1, len(data['visits']))
         self.assertEqual(2, data['visits'][0]['revision'])
-        self.assertIn('MODERN-VISIT', self.section(self.clients['doc-a'].get('/patients/D01/follow-up').text, 'fu-visits'))
+        self.assertIn('MODERN-VISIT', self.section(self.clients['doc-a'].get('/patients/D01/follow-up').text, 'visit-history'))
         self.assertNotIn('MODERN-VISIT', self.clients['pat-a'].get('/demo/D01/diary').text)
         self.assertNotIn('MODERN-VISIT', self.clients['pat-a'].get('/demo/D01/visits').text)
         self.assertEqual(403, self.clients['pat-a'].get('/patients/D01/first-visits/' + visit).status_code)
@@ -148,7 +148,7 @@ class RecordRoutingTests(unittest.TestCase):
         self.db.execute("INSERT INTO encounters(id,patient_id,occurred_at,author_id,narrative,origin) VALUES('old-visit','D01',?,'doc-a','ARCHIVE-ONLY','archive')",
                          (records.today().isoformat(),))
         for path, section in [('/demo/D01', 'visit-history'), ('/patients/D01/first-visits', 'v-list'),
-                              ('/patients/D01/follow-up', 'fu-visits')]:
+                              ('/patients/D01/follow-up', 'visit-history')]:
             response = self.clients['doc-a'].get(path)
             self.assertEqual(200, response.status_code)
             html = self.section(response.text, section)

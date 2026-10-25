@@ -74,24 +74,24 @@ class DoctorWorkspaceTests(unittest.TestCase):
         self.assertIn('<h1 translate="no">Демо 01</h1>', card)
         self.assertIn('19 лет', card)
         self.assertNotIn('Критических сигналов', card)
-        self.assertIn('Сводка к приёму', card)
+        self.assertNotIn('Сводка к приёму', card)
         fu = doctor.get('/patients/D01/follow-up').text
-        self.assertIn('<h1>Сводка к приёму</h1>', fu)
-        self.assertIn('Карточка пациента', fu)
+        self.assertIn('<h1 translate="no">Демо 01</h1>', fu)
+        self.assertIn('Показать период', fu)
 
     def test_card_navigation_is_short_and_offers_only_screens_that_exist(self):
         doctor = self.clients()['doc-a']
         page = doctor.get('/demo/D01').text
         nav = page[page.index('aria-label="Разделы карточки"'):]
         nav = nav[:nav.index('</nav>')]
-        self.assertEqual(4, nav.count('<a '))
-        for link in ['#records', '#visit-history', '#assessments', '#link']:
+        self.assertEqual(6, nav.count('<a '))
+        for link in ['#medications', '#records', '#visit-history', '#assessments', '#fu-plan', '#link']:
             self.assertIn(link, nav)
             self.assertIn('id="%s"' % link[1:], page)
         # Решения, приём, сообщения (UI06) и документы есть в строке разделов пациента.
         for path in ['decisions', 'first-visits', 'communication', 'imports']:
             self.assertIn('href="/patients/D01/' + path + '"', page)
-        self.assertIn('href="/patients/D01/follow-up"', page)
+        self.assertNotIn('href="/patients/D01/follow-up"', page)
 
     def test_patient_role_keeps_own_card_without_doctor_header(self):
         patient = self.clients()['pat-a']

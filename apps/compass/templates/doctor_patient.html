@@ -10,6 +10,9 @@
 {% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
 {% set shown = entries[:15] %}
 {% set rest = entries[15:] %}
+{% set outcome_kind = {'taken': 'known', 'missed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
+{% set visit_kinds = {'first': 'Первый приём', 'repeat': 'Повторный приём'} %}
+{% set card = url_for('demo_patient', patient_id=patient.id) %}
 
 {% macro age_line(age) -%}
   {%- set n = age.years if age.years is not none else age.get('calculated_years') -%}
@@ -51,37 +54,53 @@
     <p class="finding">{{ overview.age }}{% if overview.ordinal %} · {{ overview.ordinal }}{% endif %} · <span class="num" translate="no">{{ patient.id }}</span>
       {% if relationship %} · ведущий врач <span translate="no">{{ relationship.display_name }}</span> с <time datetime="{{ relationship.starts_at }}">{{ relationship.starts_at[:10]|full_date }}</time>{% else %} · связи с врачом нет{% endif %}</p>
   </div>
-  <div class="title-actions">
-    {{ ui.button('Сводка к приёму', kind='primary', href=url_for('follow_up_page', patient_id=patient.id)) }}
-  </div>
 </div>
 
 {{ ui.patient_nav(patient.id, 'card') }}
 
+<div class="sheet-pad">
+  {% if overview.attention %}<p class="finding">Сейчас: {{ ui.marker(overview.reason.text) }}{% if overview.reason.sub %}<span class="sub">{{ overview.reason.sub }}</span>{% endif %}{% for m in overview.more %}<span class="sub">{{ m.text }}{% if m.sub %} ({{ m.sub }}){% endif %}</span>{% endfor %}</p>{% endif %}
+  <p class="meta">{% if all_history %}Вся история{% else %}Выбранный период{% endif %}. Период относится к записям, анкетам и планам. У календаря препаратов свой выбор дня.</p>
+</div>
+<form class="period" method="get" action="{{ card }}">
+  {{ ui.field('start', 'С', type='date', value=period_values.get('start', data.start if data else ''), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
+  {{ ui.field('end', 'По', type='date', value=period_values.get('end', data.end if data else today), required=True, extra={'max': today, 'autocomplete': 'off'}) }}
+  {{ ui.button('Показать период') }}
+  <a class="reset" href="{{ card }}?start={{ recent_start }}&amp;end={{ today }}">Последние 30 дней</a>
+  <a class="reset" href="{{ card }}">Вся история</a>
+</form>
+{% if period_error %}<div class="sheet-pad">{{ ui.notice('Период не показан', period_error, kind='error', id='period-error') }}</div>{% endif %}
+{% if data %}
 <div class="card-state">
   <div>
-    <span class="label">Самочувствие, 5 отметок</span>
-    {% if overview.marks.series %}{{ ui.wellbeing(overview.marks.series) }}
-      <span class="sub">{% if overview.marks.streak >= 2 %}хуже {{ overview.marks.streak|times }} подряд{% else %}последняя <time datetime="{{ overview.marks.last_on }}">{{ overview.marks.last_on|short_date }}</time>{% endif %}</span>
-    {% else %}{{ ui.state('unknown', 'нет отметок') }}{% endif %}
+    <span class="label">Отметки самочувствия</span>
+    {% if data.missing_diary_days >= period_days %}{{ ui.state('unknown', 'ни одной за ' ~ period_days ~ ' дн.') }}
+    {% else %}<b class="num">{{ period_days - data.missing_diary_days }} из {{ period_days }}</b> <span class="sub">дней с отметкой{% if data.missing_diary_days %}; без отметки: {{ data.missing_diary_days }}{% endif %}</span>{% endif %}
   </div>
   <div>
-    <span class="label">Что проверить</span>
-    {% if overview.attention %}{{ ui.marker(overview.reason.text) }}{% else %}<b>{{ overview.reason.text }}</b>{% endif %}
-    {% if overview.reason.sub %}<span class="sub">{{ overview.reason.sub }}</span>{% endif %}
-    {% for m in overview.more %}<span class="sub">Ещё: {{ m.text }}{% if m.sub %} ({{ m.sub }}){% endif %}</span>{% endfor %}
+    <span class="label">Приёмы и анкеты</span>
+    {% set seen = data.visits|length + data.encounters|length + data.doctor_entries|length %}
+    {% if seen or data.measured %}<b class="num">{{ seen }}</b> приёмов · <b class="num">{{ data.measured|length }}</b> анкет{% else %}{{ ui.state('unknown', 'приёмов и анкет нет') }}{% endif %}
   </div>
-
+  <div>
+    <span class="label">План</span>
+    {% set due = data.tasks|rejectattr('superseded')|rejectattr('future')|list %}
+    {% if due %}<b class="num">{{ due|selectattr('outcome', 'equalto', 'taken')|list|length }} из {{ due|length }}</b> <span class="sub">выполнено{% for key, word in [('missed', 'пропущено'), ('unknown', 'нет сведений'), ('conflicting', 'противоречие')] %}{% set n = due|selectattr('outcome', 'equalto', key)|list|length %}{% if n %}; {{ word }}: {{ n }}{% endif %}{% endfor %}</span>
+    {% else %}{{ ui.state('unknown', 'пунктов нет') }}{% endif %}
+  </div>
 </div>
 
+{% endif %}
+
 <nav class="jump" aria-label="Разделы карточки">
-  <a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a><a href="#link">Связь</a>
+  <a href="#medications">Препараты</a><a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a>{% if data %}<a href="#fu-plan">План и отметки</a>{% endif %}<a href="#link">Связь</a>
 </nav>
 
 <div class="card-body">
-  {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', False) }}
+  {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', False, selected_period) }}
   {#- ---------- Записи ---------- #}
   <section class="block" id="records" aria-labelledby="h-records">
+    <span id="fu-records"></span><span id="fu-warnings"></span>
     <h2 id="h-records">Самочувствие пациента</h2>
     {% if record_warnings %}
       <div id="warnings">
@@ -98,30 +117,58 @@
       {{ records_table(rest) }}
     </details>
     {% endif %}
-    <p class="meta">Всего записей: {{ entries|length }}. За выбранный период — в <a href="{{ url_for('follow_up_page', patient_id=patient.id) }}">сводке к приёму</a>.</p>
+    <p class="meta">Записей за период: {{ entries|length }}.</p>
     {% else %}
-      {{ ui.empty('Записей пока нет. Пустой список — отсутствие сведений, а не отсутствие жалоб.') }}
+      {% if data %}{{ ui.empty('Записей за период нет. Это отсутствие сведений, а не отсутствие жалоб.') }}{% endif %}
     {% endif %}
   </section>
 
   <section class="block" id="visit-history" aria-labelledby="h-visit-history">
     <h2 id="h-visit-history">История приёмов</h2>
     <p><a href="{{ url_for('first_visit_page', patient_id=patient.id) }}#v-list">Все приёмы и новая запись</a></p>
+    <span id="fu-visits"></span>
     {% if doctor_entries %}
       {{ visit_records.doctor_records(doctor_entries, record_fields, statuses) }}
     {% endif %}
     {{ visit_records.archives(encounters, patient.id) }}
+    {% for v in data.visits %}
+    <details class="fold visit"{% if loop.first %} open{% endif %}>
+      <summary>{{ visit_kinds.get(v.payload.visit_kind, 'Приём') }} · <time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time>
+        <span class="sub">{{ data.authors.get(v.actor_id, v.actor_id) }}, версия {{ v.revision }}{% if v.state != 'completed' %}, черновик{% endif %}</span></summary>
+      <table class="results records">
+        <caption class="visually-hidden">Сведения приёма</caption>
+        <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+        <tbody>
+          {% for code, field in v.payload.fields.items() %}
+          <tr><td>{{ visit_fields[code][1] }}</td>
+            <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
+            <td>{{ visit_sources.get(field.source, 'не указан') }}{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <dl class="facts">
+        {% if v.payload.documented_facts %}<dt>Из документа</dt><dd>{{ v.payload.documented_facts }}{% if v.payload.document_basis %}<span class="sub">{{ v.payload.document_basis }}</span>{% endif %}</dd>{% endif %}
+        <dt>Не собрано</dt><dd>{{ v.payload.not_collected or 'не указано' }}</dd>
+        <dt>Возраст</dt><dd>{{ ui.state(state_kind[v.payload.age.status], age_line(v.payload.age)) }}{% if v.payload.age_basis %}<span class="sub">{{ v.payload.age_basis }}</span>{% endif %}</dd>
+        {% if v.payload.action_draft %}<dt>Черновик действия</dt><dd>{{ v.payload.action_draft }}</dd>{% endif %}
+      </dl>
+    </details>
+    {% else %}
+      {% if not doctor_entries and not encounters %}{{ ui.empty('Приёмов за период нет.') }}{% endif %}
+    {% endfor %}
   </section>
 
   {#- ---------- Анкеты ---------- #}
   <section class="block" id="assessments" aria-labelledby="h-assess">
+    <span id="fu-assessments"></span>
     <div class="assessment-heading"><h2 id="h-assess">Анкеты и динамика</h2><div class="assessment-actions"><form method="get" action="{{ url_for('demo_patient', patient_id=patient.id) }}#assessments"><button class="button" type="submit">Обновить результаты</button></form><a href="#assessment-form">Предложить анкету</a></div></div>
     {% if assessment_error %}{{ ui.notice('Анкета не предложена', assessment_error, kind='error', id='assessment-error') }}{% endif %}
     {% for task in pending_assessments %}
       {{ ui.notice(task.code ~ ' · Предложена, ждёт ответа', 'Пациент может отправить её до ' ~ task.deadline_label ~ '.', kind='info') }}
     {% endfor %}
     {% set chart_groups = assessment_trends %}
-    {% include 'assessment_charts.html' %}
+    {% set assessment_period = true %}
+    {% if data %}{% include 'assessment_charts.html' %}{% endif %}
 
     <form method="post" action="{{ url_for('request_assessment', patient_id=patient.id) }}" class="action-form" id="assessment-form" data-busy>
       <input type="hidden" name="csrf" value="{{ csrf }}">
@@ -145,6 +192,61 @@
       {{ ui.button('Предложить выбранную анкету') }}
     </form>
   </section>
+
+  {% if data %}
+  <section class="block" id="fu-plan" aria-labelledby="h-plan">
+    <h2 id="h-plan">План и отметки о выполнении</h2>
+    <p class="meta">Показана последняя отметка выполнения. Самоотчёт за ту же дату — рядом для сверки.</p>
+    {% for plan in data.plans %}
+    <article class="plan">
+      <h3>{{ kinds.get(plan.kind, 'План') }} · версия {{ plan.version }}</h3>
+      <p class="meta">Подтверждено врачом <span translate="no">{{ data.authors.get(plan.doctor_id, plan.doctor_id) }}</span>, действует с <time class="num" datetime="{{ plan.effective_at }}">{{ plan.effective_at|msk }}</time>{% if plan.carried %}. Подтверждён до начала периода и продолжает действовать{% endif %}.</p>
+      <p class="entry-text">{{ plan.payload.content }}</p>
+      {% if plan.payload.basis %}<p class="meta">Основание: {{ plan.payload.basis }}</p>{% endif %}
+      {% if plan.payload.uncertainties %}<p class="meta">Что неизвестно: {{ plan.payload.uncertainties }}</p>{% endif %}
+      {% set mine = data.tasks|selectattr('action_id', 'equalto', plan.id)|list %}
+      {% if mine %}
+      <table class="results records plan-tasks">
+        <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
+        <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
+        <tbody>
+          {% for t in mine %}
+          <tr>
+            <td><time class="num" datetime="{{ t.due_at }}">{{ t.due_at[:10]|short_date }}</time></td>
+            <td>{{ t.label }}{% if t.superseded %}<span class="sub">заменён новой версией плана</span>{% endif %}</td>
+            <td>{% if t.future %}{{ ui.state('unknown', 'срок впереди') }}{% else %}{{ ui.state(outcome_kind[t.outcome], labels[t.outcome]) }}{% endif %}</td>
+            <td>
+              {% if t.history %}
+              {% set h = t.history[-1] %}
+              <span class="hist"><time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at|msk }}</time> · <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>
+              {% if t.history|length > 1 %}
+              <details class="item-history">
+                <summary>Предыдущие отметки ({{ t.history|length - 1 }})</summary>
+                {% for h in t.history[:-1]|reverse %}<span class="hist">{{ labels.get(h.outcome, h.outcome) }} · <time class="num" datetime="{{ h.recorded_at }}">{{ h.recorded_at|msk }}</time>, <span translate="no">{{ data.authors.get(h.actor_id, h.actor_id) }}</span>{% if h.reason %}: {{ h.reason }}{% endif %}</span>{% endfor %}
+              </details>
+              {% endif %}
+              {% else %}<span class="sub">Отметок нет. Результат неизвестен.</span>{% endif %}
+              {% for entry in t.diary_entries %}<a class="row-link" href="{{ card }}#entry-{{ entry.id }}">Самоотчёт за {{ entry.observed_on|short_date }}</a>{% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="meta">Пунктов плана в этом периоде нет.</p>
+      {% endif %}
+    </article>
+    {% else %}
+      {{ ui.empty('Подтверждённого плана за период нет. Это не означает, что план не нужен.') }}
+    {% endfor %}
+    {% set known_plans = data.plans|map(attribute='id')|list %}
+    {% set rest = data.tasks|rejectattr('action_id', 'in', known_plans)|list %}
+    {% if rest %}
+    <h3>Пункты других версий плана</h3>
+    <ul class="plain">{% for t in rest %}<li>{{ t.label }} · срок <time class="num" datetime="{{ t.due_at }}">{{ t.due_at[:10]|short_date }}</time> · {{ labels[t.outcome]|lower }}</li>{% endfor %}</ul>
+    {% endif %}
+  </section>
+  {% endif %}
 
   {#- ---------- Направления ---------- #}
   {% if route_items %}

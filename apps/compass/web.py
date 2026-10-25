@@ -4,7 +4,7 @@ import re
 import json
 import secrets
 import sqlite3
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
@@ -16,7 +16,7 @@ from . import first_visits, follow_up, report_drafts, overview, medications, med
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
-                         'dashboard.html', 'invitation_manage.html', 'doctor_patient.html', 'follow_up.html',
+                         'dashboard.html', 'invitation_manage.html', 'doctor_patient.html',
                          'decisions.html', 'first_visit.html', 'imports.html',
                          'communication.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
@@ -418,22 +418,8 @@ def create_app(database=None):
     @app.get('/patients/<patient_id>/follow-up')
     def follow_up_page(patient_id):
         role('doctor')
-        patient = patient_or_404(patient_id)
-        error, data, status = None, None, 200
-        try:
-            if any(len(request.args.getlist(k)) != 1 for k in ('start', 'end') if k in request.args):
-                raise decisions.DecisionError('Укажите один период: по одной начальной и конечной дате.')
-            data = follow_up.view(get_db(), g.user, patient_id, request.args)
-        except decisions.DecisionError as failure:
-            if failure.status in (403, 404):
-                abort(failure.status)
-            error, status = str(failure), failure.status
-        days = (date.fromisoformat(data['end']) - date.fromisoformat(data['start'])).days + 1 if data else 0
-        return interface_response('follow_up.html', patient=patient, data=data, error=error,
-            patient_name=overview.person(patient['code'])[0], period_days=days, values=request.args, today=records.today().isoformat(), fields=records.FIELDS,
-            statuses=records.STATUSES, wellbeing=records.WELLBEING, kinds=decisions.KINDS,
-            labels=communication.LABELS, visit_fields=first_visits.FIELDS,
-            visit_sources=first_visits.SOURCES), status
+        # Compatibility address: one implementation and one visible patient card.
+        return render_patient(patient_id)
 
     @app.route('/patients/<patient_id>/first-visits', methods=['GET'])
     @app.route('/patients/<patient_id>/first-visits/<visit_id>', methods=['GET', 'POST'])
@@ -654,7 +640,27 @@ def create_app(database=None):
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
         is_patient = g.user['role'] == 'patient'
-        return interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
+        data, period_error, period_status = None, None, 200
+        all_history = not any(k in request.args for k in ('start', 'end'))
+        if not is_patient:
+            try:
+                if any(len(request.args.getlist(k)) != 1 for k in ('start', 'end') if k in request.args):
+                    raise decisions.DecisionError('Укажите один период: по одной начальной и конечной дате.')
+                data = follow_up.view(db, g.user, patient_id, request.args, all_history=all_history)
+            except decisions.DecisionError as failure:
+                if failure.status in (403, 404):
+                    abort(failure.status)
+                period_error, period_status = str(failure), failure.status
+            entries = data['entries'] if data else []
+            doctor_entries = data['doctor_entries'] if data else []
+            encounters = data['encounters'] if data else []
+            measured = data['measured'] if data else []
+        response = interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
+                               data=data, selected_period={'start': data['start'], 'end': data['end']} if data and not all_history else {}, period_error=period_error, period_values=request.args, all_history=all_history,
+                               period_days=(date.fromisoformat(data['end']) - date.fromisoformat(data['start'])).days + 1 if data else 0,
+                               recent_start=(records.today() - timedelta(days=29)).isoformat(),
+                               kinds=decisions.KINDS, labels=communication.LABELS,
+                               visit_fields=first_visits.FIELDS, visit_sources=first_visits.SOURCES,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
                                overview=None if is_patient else overview.summary(db, g.user, patient), own_marks=[e for e in entries if e['kind'] == 'self_report'],
                                plan=patient_plan(patient_id) if is_patient else [],
@@ -666,7 +672,7 @@ def create_app(database=None):
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                doctor_entries=doctor_entries,
                                route_items=routing.summaries(db, g.user, patient_id),
-                               entries=entries, record_warnings=records.warnings(patient, all_entries),
+                               entries=entries, record_warnings=data['warnings'] if data else records.warnings(patient, all_entries) if is_patient else [],
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
                                pending_assessments=pending, assessment_form=assessments.definition(),
@@ -677,6 +683,7 @@ def create_app(database=None):
                                record_fields=records.FIELDS, statuses=records.STATUSES, wellbeing=records.WELLBEING,
                                request_key=(form_values.get('request_key', '') if form_values is not None else secrets.token_hex(16)),
                                today=records.today().isoformat(), form_values=form_values or {}, form_error=form_error)
+        return (response, period_status) if period_status != 200 else response
 
     @app.post('/patients/<patient_id>/medication-marks')
     def medication_report(patient_id):

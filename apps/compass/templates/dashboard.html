@@ -8,7 +8,7 @@
 {% set open_filters = age_status or record_kind or route_category %}
 
 {% macro href(r, reason) -%}
-  {%- set base = url_for('follow_up_page', patient_id=r.id) if reason.page == 'follow' else url_for('demo_patient', patient_id=r.id, med_day=reason.med_day) if reason.med_day else url_for('demo_patient', patient_id=r.id) -%}
+  {%- set base = url_for('demo_patient', patient_id=r.id, med_day=reason.med_day) if reason.med_day else url_for('demo_patient', patient_id=r.id) -%}
   {{ base }}{% if reason.anchor %}#{{ reason.anchor }}{% endif %}
 {%- endmacro %}
 
@@ -77,7 +77,6 @@
       <td class="review-marks">
         {% if r.marks.series %}{{ ui.wellbeing(r.marks.series) }}<span class="sub">Последняя <time datetime="{{ r.marks.last_on }}">{{ r.marks.last_on|short_date }}</time></span>
         {% else %}{{ ui.state('unknown', 'нет отметок') }}{% endif %}
-        <a class="row-link" href="{{ url_for('follow_up_page', patient_id=r.id) }}">Сводка к приёму</a>
       </td>
     </tr>
     {% endfor %}
