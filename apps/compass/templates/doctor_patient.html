@@ -130,7 +130,6 @@
     <form method="post" action="{{ url_for('request_assessment', patient_id=patient.id) }}" class="action-form" id="assessment-form" data-busy>
       <input type="hidden" name="csrf" value="{{ csrf }}">
       <input type="hidden" name="assignment_key" value="{{ assignment_key }}">
-      <input type="hidden" name="age_status" value="known">
       <h3>Предложить анкету</h3>
       <p class="meta">Предложение появится в кабинете пациента и действует до конца текущих суток по Москве. Анкеты доступны от 18 лет с учётом ограничений выбранной формы.</p>
       <div class="assessment-catalogue">
@@ -147,11 +146,6 @@
       <details class="fold"><summary>Как устроены интервалы</summary>
         <p class="meta">Период «за последнюю неделю» или «за последние две недели» указывает, о каком времени спрашивают, и сам по себе не запрещает повторение раньше. Если источник не устанавливает обязательный интервал, ранняя отправка разрешена. Уже открытое предложение одной и той же анкеты не дублируется: нужно дождаться ответа или окончания его срока.</p>
       </details>
-      <div class="form-row">
-        {{ ui.field('age_years', 'Возраст, лет', type='text', value=assessment_values.get('age_years', patient.age_years if patient.age_status == 'known' else ''), size='sm',
-                    extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
-        {{ ui.field('age_basis', 'Откуда возраст', value=assessment_values.get('age_basis', ''), hint='Например: документ или запись приёма.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
-      </div>
       {{ ui.button('Предложить выбранную анкету') }}
     </form>
   </section>

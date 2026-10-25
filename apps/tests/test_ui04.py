@@ -141,7 +141,8 @@ class DoctorCabinetTests(unittest.TestCase):
         page = response.get_data(as_text=True)
         self.assertIn('id="assessment-error"', page)
         self.assertIn('Анкета не предложена', page)
-        self.assertIn('value="35"', page)
+        self.assertNotIn('name="age_years"', page)
+        self.assertNotIn('name="age_basis"', page)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM assessment_requests').fetchone()[0])
 
     def test_assessment_request_then_pending_and_results_are_visible_to_doctor_only(self):

@@ -206,6 +206,32 @@ def checked_age(db, patient, values, form=None):
     return years, basis, age
 
 
+def saved_age(db, patient, form):
+    """Use stored evidence without requiring the physician to enter age again."""
+    state = ages.view(db, patient)
+    allowed, source_ids = None, []
+    try:
+        for source in state['sources']:
+            candidates = ages.possible_years(source, records.today())
+            if candidates is not None:
+                allowed = candidates if allowed is None else allowed & candidates
+                source_ids.append(source['id'])
+    except ages.AgeError as error:
+        raise AssessmentError(str(error), error.status) from None
+    if not source_ids or not allowed:
+        raise AssessmentError('Анкета недоступна: в сохранённых сведениях возраст неизвестен или противоречив.', 409)
+    minimum, maximum = form.get('min_age', 18), form.get('max_age', 120)
+    if min(allowed) < minimum or max(allowed) > maximum:
+        raise AssessmentError(f"{form['code']}: сохранённые сведения не подтверждают возраст от {minimum} до {maximum} лет.", 409)
+    # The integer column stores a conservative lower bound, not a guessed birthday.
+    # Keep the full range and origin in the immutable request snapshot.
+    years, basis, age = checked_age(db, patient, {'age_status': 'known', 'age_years': str(min(allowed)),
+        'age_basis': 'Сохранённые сведения в карточке пациента.'}, form)
+    age['possible_years'] = sorted(allowed)
+    age['saved_source_ids'] = source_ids
+    return years, basis, age
+
+
 def assign(db, user, patient_id, values):
     if user['role'] != 'doctor':
         raise AssessmentError('Предложить анкету может только ведущий врач.', 403)
@@ -219,7 +245,11 @@ def assign(db, user, patient_id, values):
         if patient['synthetic'] != 1:
             raise AssessmentError('Доступен только синтетический демонстрационный режим.', 409)
         form = available_form(db, values.get('form_version_id', ''))
-        years, basis, age = checked_age(db, patient, values, form)
+        # Older clients may still send their explicit, validated age evidence.
+        # The current UI sends only the form and retry key.
+        age_fields = ('age_status', 'age_years', 'age_basis', 'birth_date', 'age_detail')
+        years, basis, age = (checked_age(db, patient, values, form) if any(k in values for k in age_fields)
+                             else saved_age(db, patient, form))
         payload = canonical({'form_version_id': form['id'], 'age': age, 'age_basis': basis})
         key = hashlib.sha256(f'{user["id"]}:{patient_id}:{retry}'.encode()).hexdigest()
         old = db.execute('SELECT id,payload_json FROM assessment_requests WHERE request_key=?', (key,)).fetchone()

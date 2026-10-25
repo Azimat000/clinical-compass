@@ -2,7 +2,7 @@
   "schema_version": 1,
   "updated_on": "2026-10-25",
   "current_slice": null,
-  "last_accepted_slice": "S40",
+  "last_accepted_slice": "S41",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -425,6 +425,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S40",
       "handoff": "memory/sessions/S40.md",
+      "reason": null
+    },
+    "S41": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S41",
+      "handoff": "memory/sessions/S41.md",
       "reason": null
     }
   },
@@ -883,6 +889,15 @@
       "workflow_removed": true,
       "historical_data_preserved": true,
       "instrument_age_limits_preserved": true
+    },
+    "assessment_saved_age": {
+      "date": "2026-10-25",
+      "slice": "S41",
+      "report": "memory/sessions/S41.md",
+      "evidence": "evidence/S41/acceptance.md",
+      "age_inputs_removed": true,
+      "stored_sources_used": true,
+      "age_limits_preserved": true
     }
   },
   "latest_roster": {

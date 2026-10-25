@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "table_count": 81,
+  "unchanged_tables": 78,
+  "changed_auth_tables": {
+    "sessions": {
+      "before": {
+        "rows": 25,
+        "sha256": "f91aaef2dd95f5ef8c3a74c1f53ad1a5f91ffdb8f93eeda97c5543770aae2781"
+      },
+      "after": {
+        "rows": 26,
+        "sha256": "10614e5fb54d115dffa327a9d811ab461b07e227e2b9fa5312407ec09c597f35"
+      }
+    },
+    "login_limits": {
+      "before": {
+        "rows": 11,
+        "sha256": "62abd9d0a98b0afd145ad2211dbd1889f12f7c89b9889290a83b7769831cebfd"
+      },
+      "after": {
+        "rows": 11,
+        "sha256": "c7f12979f2f58eb4d2021fb9f8269fae6cdf020cca895e89e6cf7382b83ed452"
+      }
+    },
+    "audit_entries": {
+      "before": {
+        "rows": 466,
+        "sha256": "feef85360f0382066e176b6567958044fbdee18f95143aa2e1c0db711aa5371d"
+      },
+      "after": {
+        "rows": 467,
+        "sha256": "ebee288d7bcf8e5b14ad1042bab6561e392119c66ce3839d62f6cc02ecf89a7f"
+      }
+    }
+  },
+  "age_reviews_unchanged": true,
+  "old_audit_preserved": true,
+  "new_audit_rows": 1,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_untracked_files_unchanged": 4,
+  "backup_permissions": "0o600"
+}
