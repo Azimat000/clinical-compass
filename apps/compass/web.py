@@ -400,7 +400,7 @@ def create_app(database=None):
         if entry is None:
             abort(404)
         if entry['kind'] == 'visit':
-            destination = 'first_visit_page' if g.user['role'] == 'doctor' else 'patient_visits'
+            destination = 'demo_patient' if g.user['role'] == 'doctor' else 'patient_visits'
         else:
             destination = 'demo_patient' if g.user['role'] == 'doctor' else 'patient_diary'
         return redirect(url_for(destination, patient_id=patient_id) + '#entry-' + entry_id)
@@ -431,6 +431,8 @@ def create_app(database=None):
         if request.method == 'POST':
             try:
                 saved = first_visits.save(db, g.user, patient_id, visit_id, request.form)
+                if request.form.get('state') == 'completed':
+                    return redirect(url_for('demo_patient', patient_id=patient_id) + '#visit-' + saved, code=303)
                 return redirect(url_for('first_visit_page', patient_id=patient_id, visit_id=saved), code=303)
             except first_visits.Error as failure:
                 if failure.status in (403, 404):
@@ -441,10 +443,10 @@ def create_app(database=None):
         if visit_id != 'new' and not selected:
             abort(404)
         current = selected[0] if selected else None
+        if request.method in ('GET', 'HEAD') and current and current['state'] == 'completed':
+            return redirect(url_for('demo_patient', patient_id=patient_id) + '#visit-' + visit_id)
         values = dict(request.form) if error else first_visits.form_values(current) if current else {}
-        return interface_response('first_visit.html', patient=patient, visits=items, authors=author_names(items), kinds=decisions.KINDS,
-            doctor_entries=[e for e in records.history(db, patient_id) if e['kind'] == 'visit'],
-            encounters=records.legacy_encounters(db, patient_id), record_fields=records.FIELDS, wellbeing=records.WELLBEING,
+        return interface_response('first_visit.html', patient=patient, kinds=decisions.KINDS,
             patient_name=overview.person(patient['code'])[0],
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
@@ -774,7 +776,7 @@ def create_app(database=None):
             if kind == 'self_report' and (error.status == 400 or (error.status == 409 and 'medication_feedback_version' in request.form)):
                 return render_patient(patient_id, request.form, str(error), section='report'), error.status
             return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
-        destination = 'first_visit_page' if kind == 'visit' else 'patient_diary'
+        destination = 'demo_patient' if kind == 'visit' else 'patient_diary'
         location = url_for(destination, patient_id=patient_id) + '#entry-' + entry_id
         if json_reply:
             return jsonify(location=location)

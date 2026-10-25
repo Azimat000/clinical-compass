@@ -121,36 +121,40 @@
 
   <section class="block" id="visit-history" aria-labelledby="h-visit-history">
     <h2 id="h-visit-history">История приёмов</h2>
-    <p><a href="{{ url_for('first_visit_page', patient_id=patient.id) }}#v-list">Все приёмы и новая запись</a></p>
+    <p><a href="{{ url_for('first_visit_page', patient_id=patient.id) }}">Начать новый приём</a></p>
     <span id="fu-visits"></span>
     {% if doctor_entries %}
       {{ visit_records.doctor_records(doctor_entries, record_fields, statuses) }}
     {% endif %}
     {{ visit_records.archives(encounters, patient.id) }}
+    <span id="v-list"></span>
     {% for v in data.visits %}
-    <details class="fold visit"{% if loop.first %} open{% endif %}>
+    <details class="fold visit" id="visit-{{ v.visit_id }}"{% if loop.first %} open{% endif %}>
       <summary>{{ visit_kinds.get(v.payload.visit_kind, 'Приём') }} · <time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time>
-        <span class="sub">{{ data.authors.get(v.actor_id, v.actor_id) }}, версия {{ v.revision }}{% if v.state != 'completed' %}, черновик{% endif %}</span></summary>
-      <table class="results records">
-        <caption class="visually-hidden">Сведения приёма</caption>
-        <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
-        <tbody>
-          {% for code, field in v.payload.fields.items() %}
-          <tr><td>{{ visit_fields[code][1] }}</td>
-            <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
-            <td>{{ visit_sources.get(field.source, 'не указан') }}{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}</td></tr>
+        <span class="sub">{{ data.authors.get(v.actor_id, v.actor_id) }}, версия {{ v.revision }} · {{ 'Завершена' if v.state == 'completed' else 'Черновик' }}</span></summary>
+      <div class="fold-body">
+        <h3>Запись приёма</h3>
+        <div id="visit-version-{{ v.visit_id }}-{{ v.revision }}">
+          {{ visit_records.detailed(v, visit_fields, statuses, visit_sources, data.authors) }}
+        </div>
+        {% if v.state == 'draft' %}<p><a class="button" href="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=v.visit_id) }}">Продолжить черновик</a></p>{% endif %}
+        {% set previous = data.visit_versions[v.visit_id][1:] %}
+        {% if previous %}
+        <details class="fold">
+          <summary>Предыдущие версии ({{ previous|length }})</summary>
+          {% for old in previous %}
+          <details class="fold" id="visit-version-{{ old.visit_id }}-{{ old.revision }}">
+            <summary>Версия {{ old.revision }} · {{ 'запись завершена' if old.state == 'completed' else 'черновик' }} · <time class="num" datetime="{{ old.recorded_at }}">{{ old.recorded_at|msk }}</time></summary>
+            <div class="fold-body">{{ visit_records.detailed(old, visit_fields, statuses, visit_sources, data.authors) }}</div>
+          </details>
           {% endfor %}
-        </tbody>
-      </table>
-      <dl class="facts">
-        {% if v.payload.documented_facts %}<dt>Из документа</dt><dd>{{ v.payload.documented_facts }}{% if v.payload.document_basis %}<span class="sub">{{ v.payload.document_basis }}</span>{% endif %}</dd>{% endif %}
-        <dt>Не собрано</dt><dd>{{ v.payload.not_collected or 'не указано' }}</dd>
-        <dt>Возраст</dt><dd>{{ ui.state(state_kind[v.payload.age.status], age_line(v.payload.age)) }}{% if v.payload.age_basis %}<span class="sub">{{ v.payload.age_basis }}</span>{% endif %}</dd>
-        {% if v.payload.action_draft %}<dt>Черновик действия</dt><dd>{{ v.payload.action_draft }}</dd>{% endif %}
-      </dl>
+        </details>
+        <p class="meta">Прежние версии сохранены без изменений.</p>
+        {% endif %}
+      </div>
     </details>
     {% else %}
-      {% if not doctor_entries and not encounters %}{{ ui.empty('Приёмов за период нет.') }}{% endif %}
+      {% if data and not doctor_entries and not encounters %}{{ ui.empty('Приёмов за период нет.') }}{% endif %}
     {% endfor %}
   </section>
 

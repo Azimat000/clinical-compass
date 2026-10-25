@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "database": "var/compass.sqlite3",
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "processes": {
+    "server": 4996,
+    "worker": 5011
+  }
+}

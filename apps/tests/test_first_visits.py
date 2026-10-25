@@ -92,8 +92,11 @@ class FirstVisitTests(unittest.TestCase):
         self.assertEqual('2026-10-18',p['fields']['complaints']['observed_on'])
         page=self.clients['doc-a'].get(r.location).get_data(as_text=True)
         for label in ('Жалобы и сведения с источниками','Документированные врачебные факты','Что уточнить',
-                      'Результат инструмента отдельно','Проект действия','Подтверждённый план','Короткая оценка пока недоступна'):
+                      'Проект действия'):
             self.assertIn(label,page)
+        editor=self.clients['doc-a'].get('/patients/FV01/first-visits').text
+        for label in ('Результат инструмента отдельно','Подтверждённый план','Короткая оценка пока недоступна'):
+            self.assertIn(label,editor)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE first_visit_versions SET state='completed'")
         with self.assertRaises(sqlite3.IntegrityError):

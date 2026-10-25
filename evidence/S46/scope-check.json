@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "baseline_commit": "cadb0e7a963486507b9642c336ca5c22313629ca",
+  "pre_existing_tracked_changes": false,
+  "pre_existing_files_preserved": 4,
+  "implementation": "main agent only; no delegated mutations",
+  "tracked_paths": [
+    "DESIGN.md",
+    "PRODUCT.md",
+    "START_HERE.md",
+    "apps/compass/follow_up.py",
+    "apps/compass/templates/doctor_patient.html",
+    "apps/compass/templates/first_visit.html",
+    "apps/compass/templates/visit_records.html",
+    "apps/compass/web.py",
+    "apps/tests/test_first_visits.py",
+    "apps/tests/test_follow_up.py",
+    "apps/tests/test_plan_deduplication.py",
+    "apps/tests/test_record_routing.py",
+    "apps/tests/test_records.py",
+    "docs/design/README.md",
+    "memory/BLOCKERS.md",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/EXTERNAL.md",
+    "memory/STATE.json",
+    "plan/COVERAGE.md",
+    "plan/coverage.json",
+    "plan/manifest.json"
+  ],
+  "final_review": "PASS: actual source/test/doc diff, payload/revision preservation, source links, rendered output and acceptance matrix inspected"
+}

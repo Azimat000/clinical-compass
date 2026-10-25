@@ -52,7 +52,7 @@ class FollowUpTests(unittest.TestCase):
         import re
         action = self.action()
         task, _ = self.task(action)
-        report = self.entry(summary='Самоотчёт есть; это не автоматическое выполнение плана')
+        report = self.entry(follow_up.local_day(task['due_at']), summary='Самоотчёт есть; это не автоматическое выполнение плана')
         for outcome, reason in [('missed', 'ПРЕЖНЯЯ-ОТМЕТКА'), ('taken', 'ДЕЙСТВУЮЩАЯ-ОТМЕТКА')]:
             communication.report(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', task['id'],
                                  {'request_key': secrets.token_hex(16), 'outcome': outcome, 'reason': reason})
@@ -212,5 +212,5 @@ class FollowUpTests(unittest.TestCase):
         self.assertIn('Противоречивые сведения',html);self.assertIn('Синтетические источники расходятся',html)
         for e in data['encounters']:self.assertIn('#encounter-'+e['id'],html)
         # Ссылка на экран приёма появится вместе с ним в UI05; пока страница показывает сами сведения приёма.
-        self.assertIn('Не собрано',html)
+        self.assertIn('Что уточнить',html)
         self.assertNotIn('Сводка повторного приёма',self.clients['pat-a'].get('/demo/D01').text)

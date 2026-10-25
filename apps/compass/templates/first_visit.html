@@ -1,7 +1,6 @@
 {#- Приём: запись сведений врача с источниками до диагноза. Версии неизменяемы; завершённая запись закрыта для правок. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
-{% import 'visit_records.html' as visit_records %}
 {% set nav_active = 'queue' %}
 {% set weekday, day, iso = sheet_date() %}
 {% set card = url_for('demo_patient', patient_id=patient.id) %}
@@ -11,9 +10,6 @@
 {% set page_title = kind_words.get(values.get('visit_kind') if editing else current.payload.visit_kind, 'Приём') if (current or values) else 'Новый приём' %}
 {% block title %}{{ page_title }}{% endblock %}
 {% set approved = decisions|selectattr('decision', 'equalto', 'approved')|list %}
-{% set seen = namespace(ids=[], latest=[]) %}
-{% for v in visits %}{% if v.visit_id not in seen.ids %}{% set seen.ids = seen.ids + [v.visit_id] %}{% set seen.latest = seen.latest + [v] %}{% endif %}{% endfor %}
-
 {% macro age_line(age) -%}
   {%- if age.status == 'known' and age.years is not none -%}{{ age.years|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
 {%- endmacro %}
@@ -33,42 +29,6 @@
   <div class="vf-text">{{ ui.textarea(code ~ '_text', 'Что записано', value=values.get(code ~ '_text', ''), hint='Нужно при «Есть сведения» и «Противоречие».', rows=2, maxlength=2000) }}</div>
   <div class="vf-basis">{{ ui.field(code ~ '_basis', 'Основание', value=values.get(code ~ '_basis', ''), hint='Откуда сведения: беседа, осмотр, документ. Нужно, если состояние не «Неизвестно».', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}</div>
 </fieldset>
-{% endmacro %}
-
-{#- Сохранённая версия только для чтения. -#}
-{% macro record(item) %}
-  {% set p = item.payload %}
-  <dl class="facts">
-    <dt>Дата приёма</dt><dd><time class="num" datetime="{{ p.observed_on }}">{{ p.observed_on|full_date }}</time> · {{ kind_words.get(p.visit_kind, 'Приём') }}</dd>
-    <dt>Версия</dt><dd>версия <span class="num">{{ item.revision }}</span> · {{ 'черновик' if item.state == 'draft' else 'запись завершена' }}<span class="sub"><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.recorded_at }}">{{ item.recorded_at|msk }}</time></span></dd>
-    <dt>Возраст</dt><dd>{{ ui.state(state_kind[p.age.status], age_line(p.age)) }}<span class="sub">{{ sources.get(p.age_source, '') }}{% if p.age_basis %}: {{ p.age_basis }}{% endif %}</span></dd>
-  </dl>
-  <h3>Жалобы и сведения с источниками</h3>
-  <table class="results records sources">
-    <caption class="visually-hidden">Сведения приёма с источниками</caption>
-    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
-    <tbody>
-      {% for code, field in p.fields.items() %}
-      <tr><td>{{ fields[code][1] }}</td>
-        <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
-        <td>{% if field.status == 'unknown' %}<span class="sub">источник не указан</span>{% else %}{{ sources.get(field.source, 'не указан') }}, <time class="num" datetime="{{ field.observed_on }}">{{ field.observed_on|short_date }}</time>{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}{% endif %}</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <h3>Документированные врачебные факты</h3>
-  {% if p.documented_facts %}<p class="entry-text">{{ p.documented_facts }}</p><p class="meta">{{ p.document_basis }}</p>{% else %}<p class="meta">Фактов из документов не внесено.</p>{% endif %}
-  <h3>Что уточнить</h3>
-  <ul class="plain">
-    {% if p.not_collected %}<li>{{ ui.state('unknown', 'Сведения о жалобах отмечены как ещё не собранные') }}</li>{% endif %}
-    {% if p.age.status != 'known' %}<li>{{ ui.state('unknown' if p.age.status == 'unknown' else 'conflict', 'Возраст: ' ~ ('неизвестен' if p.age.status == 'unknown' else 'противоречие')) }}</li>{% endif %}
-    {% for code, field in p.fields.items() if field.status in ('unknown', 'conflicting') %}
-    <li>{{ ui.state('unknown' if field.status == 'unknown' else 'conflict', fields[code][1] ~ ': ' ~ ('неизвестно' if field.status == 'unknown' else 'противоречие')) }}</li>
-    {% endfor %}
-  </ul>
-  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
-  <h3>Проект действия</h3>
-  {% if p.action_draft %}<p class="entry-text">{{ p.action_draft }}</p><p class="meta">Запись врача. План не изменён: назначение, направление и изменение плана — только в разделе «План и решения».</p>
-  {% else %}<p class="meta">Не составлен.</p>{% endif %}
 {% endmacro %}
 
 {% block doctor_main %}
@@ -101,7 +61,7 @@
 
 {% if editing %}
 <nav class="jump" aria-label="Разделы формы">
-  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-docs">Документы и действие</a><a href="#v-list">Приёмы</a>
+  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a href="#v-docs">Документы и действие</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a>
 </nav>
 <form method="post" action="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=visit_id) }}" data-busy data-visit-form>
   <input type="hidden" name="csrf" value="{{ csrf }}">
@@ -163,16 +123,6 @@
     </div>
   </div>
 </form>
-{% else %}
-<nav class="jump" aria-label="Разделы записи">
-  <a href="#v-record">Запись</a><a href="#v-tool">Анкеты</a><a href="#v-plan">Подтверждённый план</a><a href="#v-list">Приёмы</a>
-</nav>
-<div class="card-body">
-  <section class="block" id="v-record" aria-labelledby="h-record">
-    <h2 id="h-record">Запись приёма</h2>
-    {{ record(current) }}
-  </section>
-</div>
 {% endif %}
 
 <div class="card-body">
@@ -208,48 +158,7 @@
     {{ ui.notice('Короткая оценка пока недоступна', 'Правила оценки не подтверждены источниками. Сервис не оценивает ответы и не определяет срочность: решение остаётся за врачом.', kind='info') }}
   </section>
 
-  <section class="block" id="v-list" aria-labelledby="h-list">
-    <h2 id="h-list">История приёмов</h2>
-    {% if seen.latest %}
-    <table class="results records">
-      <caption class="visually-hidden">Сохранённые приёмы, сначала новые</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Вид</th><th scope="col">Состояние</th><th scope="col">Версий</th><th scope="col">Врач</th><th scope="col"><span class="visually-hidden">Открыть</span></th></tr></thead>
-      <tbody>
-        {% for v in seen.latest %}
-        <tr id="visit-{{ v.visit_id }}">
-          <td><time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time></td>
-          <td>{{ kind_words.get(v.payload.visit_kind, 'Приём') }}</td>
-          <td>{{ ui.state('known' if v.state == 'completed' else 'unknown', 'запись завершена' if v.state == 'completed' else 'черновик') }}</td>
-          <td class="num">{{ visits|selectattr('visit_id', 'equalto', v.visit_id)|list|length }}</td>
-          <td><span translate="no">{{ authors.get(v.actor_id, v.actor_id) }}</span></td>
-          <td class="go"><a href="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=v.visit_id) }}">{{ 'продолжить' if v.state == 'draft' else 'открыть' }}</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% if current %}
-      {% set mine = visits|selectattr('visit_id', 'equalto', visit_id)|list %}
-      {% if mine|length > 1 %}
-      <h3>Версии этого приёма</h3>
-      {% for v in mine %}
-      <details class="fold">
-        <summary><span class="sum"><span>версия <span class="num">{{ v.revision }}</span></span> {{ ui.state('known' if v.state == 'completed' else 'unknown', 'запись завершена' if v.state == 'completed' else 'черновик') }}<span class="sub"><time class="num" datetime="{{ v.recorded_at }}">{{ v.recorded_at|msk }}</time></span></span></summary>
-        <div class="fold-body">{{ record(v) }}</div>
-      </details>
-      {% endfor %}
-      <p class="meta">Прежние версии не меняются: уточнение сохраняется как новая версия.</p>
-      {% endif %}
-    {% endif %}
-    {% else %}
-      {% if not doctor_entries and not encounters %}{{ ui.empty('Приёмов ещё нет. Запишите жалобы или отметьте, что сведения пока не собраны.') }}{% endif %}
-    {% endif %}
-    {% if doctor_entries %}
-      <h3>Записи врача</h3>
-      {{ visit_records.doctor_records(doctor_entries, record_fields, statuses) }}
-    {% endif %}
-    {{ visit_records.archives(encounters, patient.id) }}
-    {% if current %}<p class="meta"><a href="{{ url_for('first_visit_page', patient_id=patient.id, visit_id='new') }}">Начать новый приём</a></p>{% endif %}
-  </section>
+
 </div>
 {% endblock %}
 {% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

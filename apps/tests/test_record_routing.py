@@ -39,7 +39,8 @@ class RecordRoutingTests(unittest.TestCase):
             self.assertNotIn('PATIENT-ONLY', visit_html)
             self.assertEqual(1, html.count('id="entry-' + doctor + '"'))
         history = self.clients['doc-a'].get('/patients/D01/first-visits').text
-        self.assertIn('DOCTOR-ONLY', self.section(history, 'v-list'))
+        self.assertNotIn('DOCTOR-ONLY', history)
+        self.assertIn('href="/demo/D01#visit-history"', history)
         self.assertNotIn('PATIENT-ONLY', history)
         diary = self.clients['pat-a'].get('/demo/D01/diary').text
         self.assertIn('id="entry-' + patient + '"', diary)
@@ -54,7 +55,7 @@ class RecordRoutingTests(unittest.TestCase):
         form = self.values(summary='FUTURE-VISIT', complaints_status='known', complaints_text='Visit facts')
         response = self.submit('doc-a', kind='visits', data=form)
         self.assertEqual(303, response.status_code)
-        self.assertTrue(response.location.startswith('/patients/D01/first-visits#entry-'))
+        self.assertTrue(response.location.startswith('/demo/D01#entry-'))
         self.assertIn('FUTURE-VISIT', self.clients['doc-a'].get(response.location).text)
         self.assertEqual(response.location, self.submit('doc-a', kind='visits', data=form).location)
         self.assertEqual(409, self.submit('doc-a', kind='visits', data={**form, 'summary': 'changed'}).status_code)
@@ -118,7 +119,7 @@ class RecordRoutingTests(unittest.TestCase):
         report = self.save('pat-a', 'REPORT')
         visit = self.save('doc-a', 'VISIT')
         for who, eid, target in [('pat-a', report, '/demo/D01/diary'), ('pat-a', visit, '/demo/D01/visits'),
-                                 ('doc-a', report, '/demo/D01'), ('doc-a', visit, '/patients/D01/first-visits')]:
+                                 ('doc-a', report, '/demo/D01'), ('doc-a', visit, '/demo/D01')]:
             path = '/patients/D01/records/' + eid
             response = self.clients[who].get(path)
             self.assertEqual(302, response.status_code)
@@ -147,7 +148,7 @@ class RecordRoutingTests(unittest.TestCase):
         visit = self.save('doc-a', 'LINKED-VISIT')
         self.db.execute("INSERT INTO encounters(id,patient_id,occurred_at,author_id,narrative,origin) VALUES('old-visit','D01',?,'doc-a','ARCHIVE-ONLY','archive')",
                          (records.today().isoformat(),))
-        for path, section in [('/demo/D01', 'visit-history'), ('/patients/D01/first-visits', 'v-list'),
+        for path, section in [('/demo/D01', 'visit-history'),
                               ('/patients/D01/follow-up', 'visit-history')]:
             response = self.clients['doc-a'].get(path)
             self.assertEqual(200, response.status_code)

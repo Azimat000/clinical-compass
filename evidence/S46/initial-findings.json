@@ -1,0 +1,28 @@
+{
+  "runs": {
+    "targeted-initial.log": [
+      "ERROR: test_existing_and_new_entries_are_shown_in_their_own_sections (test_record_routing.RecordRoutingTests.test_existing_and_new_entries_are_shown_in_their_own_sections)",
+      "ERROR: test_standalone_archives_and_linked_visit_are_never_duplicated (test_record_routing.RecordRoutingTests.test_standalone_archives_and_linked_visit_are_never_duplicated)",
+      "FAIL: test_sources_dates_unknown_denial_conflict_and_summary_sections (test_first_visits.FirstVisitTests.test_sources_dates_unknown_denial_conflict_and_summary_sections)",
+      "FAIL: test_future_short_visit_saves_once_and_redirects_to_history (test_record_routing.RecordRoutingTests.test_future_short_visit_saves_once_and_redirects_to_history)",
+      "FAIL: test_typed_links_and_access_for_each_role_and_patient (test_record_routing.RecordRoutingTests.test_typed_links_and_access_for_each_role_and_patient)",
+      "FAIL: test_latest_mark_is_separate_from_previous_marks_and_links_to_the_diary (test_follow_up.FollowUpTests.test_latest_mark_is_separate_from_previous_marks_and_links_to_the_diary)",
+      "FAIL: test_legacy_sources_and_first_visit_versions_are_not_duplicated (test_follow_up.FollowUpTests.test_legacy_sources_and_first_visit_versions_are_not_duplicated)"
+    ],
+    "targeted.log": [
+      "FAIL: test_complete_payloads_authors_dates_states_and_all_revisions_live_in_card (test_visit_history_single_home.VisitHistorySingleHomeTests.test_complete_payloads_authors_dates_states_and_all_revisions_live_in_card)",
+      "FAIL: test_editor_keeps_only_current_form_and_completion_is_immutable (test_visit_history_single_home.VisitHistorySingleHomeTests.test_editor_keeps_only_current_form_and_completion_is_immutable)",
+      "FAIL: test_period_selects_visit_once_but_keeps_its_complete_revision_chain (test_visit_history_single_home.VisitHistorySingleHomeTests.test_period_selects_visit_once_but_keeps_its_complete_revision_chain)"
+    ],
+    "make-check.log": [
+      "FAIL: test_complete_payloads_authors_dates_states_and_all_revisions_live_in_card (test_visit_history_single_home.VisitHistorySingleHomeTests.test_complete_payloads_authors_dates_states_and_all_revisions_live_in_card)",
+      "FAIL: test_editor_keeps_only_current_form_and_completion_is_immutable (test_visit_history_single_home.VisitHistorySingleHomeTests.test_editor_keeps_only_current_form_and_completion_is_immutable)",
+      "FAIL: test_period_selects_visit_once_but_keeps_its_complete_revision_chain (test_visit_history_single_home.VisitHistorySingleHomeTests.test_period_selects_visit_once_but_keeps_its_complete_revision_chain)"
+    ]
+  },
+  "resolutions": [
+    "Moved old history/source/redirect expectations from editor to the card; secondary questionnaire/plan blocks remain in the editor.",
+    "Aligned diary-link fixtures with the actual Moscow day of the task at midnight; application logic/data unchanged.",
+    "The new multi-revision fixture incorrectly supplied text for denied fields; kept the existing validation and corrected the fixture. Three preservation tests now pass."
+  ]
+}

@@ -36,8 +36,43 @@
 <h3>Архивные записи приёма</h3>
 <ul class="plain">
   {% for enc in encounters %}
-  <li id="encounter-{{ enc.id }}"><time class="num" datetime="{{ enc.occurred_at }}">{{ enc.occurred_at|msk }}</time> · <span translate="no">{{ enc.display_name or 'автор не указан' }}</span><p class="entry-text">{{ enc.narrative }}</p><a href="{{ url_for('first_visit_page', patient_id=patient_id) }}#encounter-{{ enc.id }}">к записи</a></li>
+  <li id="encounter-{{ enc.id }}"><time class="num" datetime="{{ enc.occurred_at }}">{{ enc.occurred_at|msk }}</time> · <span translate="no">{{ enc.display_name or 'автор не указан' }}</span><p class="entry-text">{{ enc.narrative }}</p><a href="{{ url_for('demo_patient', patient_id=patient_id) }}#encounter-{{ enc.id }}">к записи</a></li>
   {% endfor %}
 </ul>
 {% endif %}
+{% endmacro %}
+
+{% macro detailed(item, fields, statuses, sources, authors) %}
+  {% set p = item.payload %}
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="{{ p.observed_on }}">{{ p.observed_on|full_date }}</time> · {{ {'first': 'Первый приём', 'repeat': 'Повторный приём'}.get(p.visit_kind, 'Приём') }}</dd>
+    <dt>Версия</dt><dd>версия <span class="num">{{ item.revision }}</span> · {{ 'черновик' if item.state == 'draft' else 'запись завершена' }}<span class="sub"><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.recorded_at }}">{{ item.recorded_at|msk }}</time></span></dd>
+    <dt>Возраст</dt><dd>{{ ui.state(state_kind[p.age.status], age_line(p.age)) }}<span class="sub">{{ sources.get(p.age_source, '') }}{% if p.age_basis %}: {{ p.age_basis }}{% endif %}</span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+      {% for code, field in p.fields.items() %}
+      <tr><td>{{ fields[code][1] }}</td>
+        <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
+        <td>{% if field.status == 'unknown' %}<span class="sub">источник не указан</span>{% else %}{{ sources.get(field.source, 'не указан') }}, <time class="num" datetime="{{ field.observed_on }}">{{ field.observed_on|short_date }}</time>{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}{% endif %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h3>Документированные врачебные факты</h3>
+  {% if p.documented_facts %}<p class="entry-text">{{ p.documented_facts }}</p><p class="meta">{{ p.document_basis }}</p>{% else %}<p class="meta">Фактов из документов не внесено.</p>{% endif %}
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+    {% if p.not_collected %}<li>{{ ui.state('unknown', 'Сведения о жалобах отмечены как ещё не собранные') }}</li>{% endif %}
+    {% if p.age.status != 'known' %}<li>{{ ui.state('unknown' if p.age.status == 'unknown' else 'conflict', 'Возраст: ' ~ ('неизвестен' if p.age.status == 'unknown' else 'противоречие')) }}</li>{% endif %}
+    {% for code, field in p.fields.items() if field.status in ('unknown', 'conflicting') %}
+    <li>{{ ui.state('unknown' if field.status == 'unknown' else 'conflict', fields[code][1] ~ ': ' ~ ('неизвестно' if field.status == 'unknown' else 'противоречие')) }}</li>
+    {% endfor %}
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+  <h3>Проект действия</h3>
+  {% if p.action_draft %}<p class="entry-text">{{ p.action_draft }}</p><p class="meta">Запись врача. План не изменён: назначение, направление и изменение плана — только в разделе «План и решения».</p>
+  {% else %}<p class="meta">Не составлен.</p>{% endif %}
 {% endmacro %}

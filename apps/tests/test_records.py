@@ -116,7 +116,7 @@ class RecordsTests(unittest.TestCase):
     def test_doctor_record_redirects_to_history_and_is_not_duplicated_as_archive(self):
         response = self.submit('doc-a', kind='visits', data=self.values(summary='Новая запись врача'))
         self.assertEqual(303, response.status_code)
-        self.assertTrue(response.location.startswith('/patients/D01/first-visits#entry-'))
+        self.assertTrue(response.location.startswith('/demo/D01#entry-'))
         page = self.clients['doc-a'].get(response.location)
         self.assertEqual(200, page.status_code)
         entry = self.db.execute('SELECT id FROM clinical_entries').fetchone()[0]

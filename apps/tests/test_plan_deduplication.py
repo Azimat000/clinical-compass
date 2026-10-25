@@ -2,7 +2,7 @@
 import re
 import secrets
 import unittest
-from apps.compass import communication, records
+from apps.compass import communication, records, follow_up
 import test_follow_up
 import test_medications
 
@@ -27,7 +27,7 @@ class PlanDeduplicationTests(unittest.TestCase):
         proposal = self.schedule(content='UNIQUE-CONFIRMED-PLAN')
         action = self.db.execute('SELECT id FROM care_actions WHERE confirmation_id=(SELECT id FROM doctor_confirmations WHERE proposal_id=?)', (proposal['id'],)).fetchone()[0]
         task, _ = self.task(action, label='UNIQUE-TASK')
-        report = self.entry(summary='PATIENT-SOURCE')
+        report = self.entry(follow_up.local_day(task['due_at']), summary='PATIENT-SOURCE')
         for outcome, reason in [('missed', 'OLD-REASON'), ('taken', 'LATEST-REASON')]:
             communication.report(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', task['id'],
                                  {'request_key': secrets.token_hex(16), 'outcome': outcome, 'reason': reason})

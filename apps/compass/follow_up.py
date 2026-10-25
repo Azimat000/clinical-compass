@@ -73,9 +73,11 @@ def _view(db, user, patient_id, values, *, all_history=False, include_plan=True)
     # Legacy encounters are separate sources, not duplicate representations of clinical entries.
     encounters = [e for e in records.legacy_encounters(db, patient_id) if includes(e['occurred_at'])]
     latest_visits = {}
-    for v in first_visits.history(db, user, patient_id):
+    history = first_visits.history(db, user, patient_id)
+    for v in history:
         latest_visits.setdefault(v['visit_id'], v)
     visits = [v for v in latest_visits.values() if includes(v['payload']['observed_on'])]
+    visit_versions = {v['visit_id']: [old for old in history if old['visit_id'] == v['visit_id']] for v in visits}
 
     # Carry the last confirmed decision before the interval forward, then show changes.
     actions = [dict(r) for r in db.execute('''SELECT a.*,p.id proposal_id,p.kind,p.version,p.payload_json,
@@ -125,6 +127,6 @@ def _view(db, user, patient_id, values, *, all_history=False, include_plan=True)
             warnings.append(f'Пункт «{task["label"]}»: последняя отметка — противоречие. '
                             'Все авторы и отметки сохранены в разделе выполнения.')
     return dict(start=start, end=end, generated_at=now(), entries=entries, measured=measured, assessment_trends=assessments.trends(measured),
-                encounters=encounters, doctor_entries=doctor_entries, visits=visits, plans=plans, tasks=tasks, authors=authors,
+                encounters=encounters, doctor_entries=doctor_entries, visits=visits, visit_versions=visit_versions, plans=plans, tasks=tasks, authors=authors,
                 warnings=warnings,
                 missing_diary_days=(date.fromisoformat(end)-date.fromisoformat(start)).days+1-len(days))

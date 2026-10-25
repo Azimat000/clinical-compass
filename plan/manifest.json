@@ -3028,6 +3028,53 @@
       "acceptance_tag": "slice/S45"
     },
     {
+      "id": "S46",
+      "title": "История приёмов только в карточке пациента",
+      "target_date": "26.10.2026 — прямое поручение",
+      "depends_on": [
+        "S45"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Перенести в карточку все версии и подробности истории приёмов, сохранив короткие/архивные записи.",
+        "Убрать повтор истории из раздела «Приём», сохранить создание/редактирование/завершение и ссылки.",
+        "Проверить сохранность, интерфейс, сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/doctor_patient.html",
+        "apps/compass/templates/first_visit.html",
+        "apps/compass/templates/visit_records.html",
+        "apps/compass/web.py",
+        "apps/compass/follow_up.py",
+        "apps/tests/test_visit_history_single_home.py",
+        "evidence/S46/acceptance.md"
+      ],
+      "acceptance": [
+        "История приёмов находится только в карточке; редактор не повторяет список или прошлые версии.",
+        "Короткие и архивные записи, подробные приёмы, все версии, источники/даты/авторы/состояния/документы/проекты действий доступны без потери.",
+        "Создание/редактирование/завершение, прежние ссылки и границы ролей сохраняются.",
+        "Рабочие данные неизменны, проверки пройдены, сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S46.md",
+      "evidence_dir": "evidence/S46",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S46): keep visit history in patient card",
+      "acceptance_tag": "slice/S46"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",
