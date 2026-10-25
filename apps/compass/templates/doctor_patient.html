@@ -131,6 +131,7 @@
     {% for v in data.visits %}
     <details class="fold visit" id="visit-{{ v.visit_id }}"{% if loop.first %} open{% endif %}>
       <summary>{{ visit_kinds.get(v.payload.visit_kind, 'Приём') }} · <time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time>
+        <span class="sub">{{ ui.wellbeing([v.payload.get('wellbeing', 'unknown')], decorative=True) }} Динамика по оценке врача: {{ words.get(v.payload.get('wellbeing', 'unknown')) if v.payload.get('wellbeing', 'unknown') != 'unknown' else 'Не оценено' }}</span>
         <span class="sub">{{ data.authors.get(v.actor_id, v.actor_id) }}, версия {{ v.revision }} · {{ 'Завершена' if v.state == 'completed' else 'Черновик' }}</span></summary>
       <div class="fold-body">
         <h3>Запись приёма</h3>

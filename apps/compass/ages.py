@@ -29,7 +29,7 @@ def source_snapshot(db, patient):
     for row in db.execute('SELECT * FROM first_visit_versions WHERE patient_id=? ORDER BY rowid', (patient['id'],)):
         payload = json.loads(row['payload_json'])
         sources.append({'id': row['id'], 'actor_id': row['actor_id'], 'kind': 'first_visit',
-                        'observed_on': payload['observed_on'], 'recorded_at': row['recorded_at'],
+                        'observed_on': payload.get('age_observed_on', payload['observed_on']), 'recorded_at': row['recorded_at'],
                         'age': payload['age']})
     return canonical(sources)
 

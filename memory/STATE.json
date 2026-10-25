@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T01:10:21+03:00",
+  "updated_on": "2026-10-26T01:33:10+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S50",
+  "last_accepted_slice": "S51",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -485,6 +485,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S50",
       "handoff": "memory/sessions/S50.md",
+      "reason": null
+    },
+    "S51": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S51",
+      "handoff": "memory/sessions/S51.md",
       "reason": null
     }
   },
@@ -1041,6 +1047,23 @@
       "removed": "action project field, section and navigation in visit editor",
       "historical_notes": "preserved in card when nonempty; omitted field inherits exact base",
       "stored_medical_data_unchanged": true,
+      "clinical_validation": false
+    },
+    "visit_continuity": {
+      "date": "2026-10-26",
+      "slice": "S51",
+      "report": "memory/sessions/S51.md",
+      "evidence": "evidence/S51/acceptance.md",
+      "static_fields": [
+        "history",
+        "life_history",
+        "family_history",
+        "somatic",
+        "allergies"
+      ],
+      "age_source_date_preserved": true,
+      "current_fields_and_trend_not_copied": true,
+      "physician_trend_in_history": true,
       "clinical_validation": false
     }
   },

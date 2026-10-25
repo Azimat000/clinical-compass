@@ -7,26 +7,31 @@
 {% set kind_words = {'first': 'Первый приём', 'repeat': 'Повторный приём'} %}
 {% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
 {% set editing = (current is none or current.state == 'draft' or error) %}
-{% set page_title = kind_words.get(values.get('visit_kind') if editing else current.payload.visit_kind, 'Приём') if (current or values) else 'Новый приём' %}
+{% set page_title = kind_words.get(values.get('visit_kind') if editing else current.payload.visit_kind, 'Приём') if (current or error) else 'Новый приём' %}
 {% block title %}{{ page_title }}{% endblock %}
 {% macro age_line(age) -%}
   {%- if age.status == 'known' and age.years is not none -%}{{ age.years|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
 {%- endmacro %}
 
-{#- Один раздел приёма: состояние, затем источник, дата, текст и основание. При «Неизвестно» лишнее скрыто стилем (без скрипта). -#}
+{#- Текст доступен сразу. Пустота означает отсутствие сведений; источник можно уточнить. -#}
 {% macro fact(code) %}
-{% set filled = values.get(code ~ '_text') or values.get(code ~ '_basis') %}
-<fieldset class="vf{% if filled %} vf--filled{% endif %}">
-  <legend><span class="num">{{ fields[code][0] }}</span> {{ fields[code][1] }}</legend>
-  <div class="vf-row">
-    {{ ui.select(code ~ '_status', 'Состояние', statuses.items()|list, selected=values.get(code ~ '_status', 'unknown')) }}
-  </div>
-  <div class="vf-row vf-more">
-    {{ ui.select(code ~ '_source', 'Источник', sources.items()|list, selected=values.get(code ~ '_source', 'patient')) }}
-    {{ ui.field(code ~ '_on', 'Дата сведений', type='date', value=values.get(code ~ '_on', ''), hint='Если пусто, берётся дата приёма.', extra={'max': today, 'min': '1900-01-01', 'autocomplete': 'off'}) }}
-  </div>
-  <div class="vf-text">{{ ui.textarea(code ~ '_text', 'Что записано', value=values.get(code ~ '_text', ''), hint='Нужно при «Есть сведения» и «Противоречие».', rows=2, maxlength=2000) }}</div>
-  <div class="vf-basis">{{ ui.field(code ~ '_basis', 'Основание', value=values.get(code ~ '_basis', ''), hint='Откуда сведения: беседа, осмотр, документ. Нужно, если состояние не «Неизвестно».', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}</div>
+<fieldset class="vf vf--note">
+  <legend id="legend-{{ code }}">{{ fields[code][1] }}</legend>
+  {% if values.get(code ~ '_from') %}
+  <input type="hidden" name="{{ code }}_from" value="{{ values.get(code ~ '_from') }}">
+  <p class="meta">Перенесено из <a href="{{ card }}#visit-source-{{ values.get(code ~ '_from') }}">предыдущей записи</a>. Дата сведений: {{ values.get(code ~ '_on')|full_date }}. Можно изменить.</p>
+  {% endif %}
+  <div class="field"><textarea class="textarea" id="f-{{ code }}_text" name="{{ code }}_text" aria-labelledby="legend-{{ code }}" rows="3" maxlength="2000">{{ values.get(code ~ '_text', '') }}</textarea></div>
+  <details class="fold"{% if error or values.get(code ~ '_status') in ['denied', 'conflicting'] %} open{% endif %}>
+    <summary>Состояние сведений и источник</summary>
+    <div class="vf-row">
+      {{ ui.select(code ~ '_status', 'Состояние сведений', [('auto', 'По тексту: пусто — нет сведений')] + statuses.items()|list, selected=values.get(code ~ '_status') if error or values.get(code ~ '_status') in ['denied', 'conflicting'] else 'auto') }}
+      {{ ui.select(code ~ '_source', 'Источник', sources.items()|list, selected=values.get(code ~ '_source', 'doctor' if code in ['mental_status', 'physical_status', 'other_states', 'safety', 'acute', 'conclusion'] else 'patient')) }}
+      {{ ui.field(code ~ '_on', 'Дата сведений', type='date', value=values.get(code ~ '_on', ''), hint='Если пусто, дата приёма.', extra={'max': today, 'min': '1900-01-01', 'autocomplete': 'off'}) }}
+    </div>
+    {{ ui.field(code ~ '_basis', 'Основание', value=values.get(code ~ '_basis', ''), hint='Для беседы и осмотра заполняется при сохранении. Для документа укажите его название и дату.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
+    <p class="meta">«Явно отрицает» — только при прямом отрицании, без текста. При противоречии опишите расхождение. Пустое поле не означает «нет».</p>
+  </details>
 </fieldset>
 {% endmacro %}
 
@@ -36,7 +41,7 @@
     <p class="crumb"><a href="{{ card }}">← Карточка пациента</a></p>
     <h1>{{ page_title }}</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Запись сведений врача до диагноза: каждое с источником и датой.</p>
+    <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. История болезни: текущая запись врача и накопленный анамнез.</p>
   </div>
   {% if current and not editing %}<div class="title-actions">{{ ui.button('Начать новый приём', kind='primary', href=url_for('first_visit_page', patient_id=patient.id, visit_id='new')) }}</div>{% endif %}
 </div>
@@ -46,13 +51,14 @@
 
 <div class="sheet-pad">
   {% if error %}{{ ui.notice('Новая версия не сохранена', error ~ ' Введённое осталось в форме.', kind='error', id='visit-error') }}<p class="meta"><a href="#v-visit">К форме</a></p>{% endif %}
-  {{ ui.notice('Это запись, а не оценка', 'Диагноз и назначение для начала не нужны. Правила безопасности пока не активны. Отсутствие сведений не означает отсутствия риска. Кабинет не оказывает экстренную помощь.', kind='info') }}
+  <p class="meta">Заполняйте только собранные сведения. Пустые разделы останутся без данных. Это вспомогательная запись сервиса, не официальная медицинская карта 025/у.</p>
 </div>
 
 {% if current %}
 {% set p = current.payload %}
 <div class="card-state">
   <div><span class="label">Запись</span><b>{{ 'Черновик' if current.state == 'draft' else 'Завершена' }}</b> <span class="sub">версия <span class="num">{{ current.revision }}</span></span></div>
+  <div><span class="label">Динамика по оценке врача</span>{{ ui.wellbeing([p.get('wellbeing', 'unknown')], decorative=True) }}{{ {'worse': 'Хуже', 'same': 'Без изменений', 'better': 'Лучше', 'unknown': 'Не оценено'}.get(p.get('wellbeing', 'unknown')) }}</div>
   <div><span class="label">Возраст</span>{{ ui.state(state_kind[p.age.status], age_line(p.age)) }}</div>
   <div><span class="label">Безопасность (запись врача)</span>{{ ui.state(state_kind[p.fields.safety.status], statuses[p.fields.safety.status]) }}</div>
   <div><span class="label">Острые телесные жалобы</span>{{ ui.state(state_kind[p.fields.acute.status], statuses[p.fields.acute.status]) }}</div>
@@ -61,9 +67,10 @@
 
 {% if editing %}
 <nav class="jump" aria-label="Разделы формы">
-  <a href="#v-visit">Приём</a><a href="#v-complaints">Жалобы и ход</a><a href="#v-age">Возраст</a><a href="#v-safety">Состояние и безопасность</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a><a id="v-tool" href="{{ card }}#assessments">Анкеты в карточке</a>
+  <a href="#v-visit">Приём</a><a href="#v-complaints">Текущий приём</a><a href="#v-history">Анамнез</a><a href="#v-age">Возраст</a><a href="#v-safety">Осмотр и заключение</a><a id="v-list" href="{{ card }}#visit-history">История приёмов в карточке</a><a id="v-tool" href="{{ card }}#assessments">Анкеты в карточке</a>
 </nav>
 <form method="post" action="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=visit_id) }}" data-busy data-visit-form>
+  <input type="hidden" name="note_schema" value="outpatient-v1">
   <input type="hidden" name="csrf" value="{{ csrf }}">
   <input type="hidden" name="request_key" value="{{ request_key }}">
   <input type="hidden" name="base_revision" value="{{ values.get('base_revision', '0') }}">
@@ -77,18 +84,31 @@
     </section>
 
     <section class="block" id="v-complaints" aria-labelledby="h-complaints">
-      <h2 id="h-complaints">Жалобы и ход</h2>
-      {{ ui.choice('not_collected', 'Если жалобы ещё не собраны', [('yes', 'Сведения о жалобах пока не собраны')], type='checkbox', checked=values.get('not_collected')) }}
-      {% for code in ['complaints', 'course', 'impact', 'history', 'followup'] %}{{ fact(code) }}{% endfor %}
+      <h2 id="h-complaints">Текущий приём</h2>
+      <p class="meta">Жалобы, изменения и состояние записываются заново на каждом приёме.</p>
+      {{ ui.choice('wellbeing', 'Динамика состояния по оценке врача', [('worse', 'Хуже'), ('same', 'Без изменений'), ('better', 'Лучше'), ('unknown', 'Не оценено')], checked=values.get('wellbeing', 'unknown')) }}
+      <p class="meta">По сравнению с прошлым приёмом. Это отметка врача, отдельно от дневника пациента.</p>
+      {% for code in ['complaints', 'followup', 'course', 'impact'] %}{{ fact(code) }}{% endfor %}
+    </section>
+
+    <section class="block" id="v-history" aria-labelledby="h-history">
+      <h2 id="h-history">Накопленный анамнез</h2>
+      <p class="meta">Переносятся сведения из завершённых приёмов. Проверьте и при необходимости исправьте их. Неизменённый текст сохраняет прежние источник и дату; уточнения относятся к текущему приёму. Чтобы убрать устаревшее сведение, очистите текст и выберите «Неизвестно».</p>
+      <details class="fold"{% if values.get('visit_kind', 'first') == 'first' or error %} open{% endif %}>
+        <summary>Показать и изменить анамнез</summary>
+        {% for code in static_fields %}{{ fact(code) }}{% endfor %}
+      </details>
     </section>
 
     <section class="block" id="v-age" aria-labelledby="h-age">
       <h2 id="h-age">Возраст</h2>
+      {% if values.get('age_from') %}<input type="hidden" name="age_from" value="{{ values.get('age_from') }}"><p class="meta">Перенесено из <a href="{{ card }}#visit-source-{{ values.get('age_from') }}">предыдущей записи</a>. Можно уточнить; возраст в годах относится к дате сведений ниже.</p>{% endif %}
       <p class="meta">Возрастная применимость зависит от выбранной анкеты. Неизвестный возраст оставьте без чисел.</p>
       <div class="form-grid">
         {{ ui.select('age_status', 'Состояние возраста', [('unknown', 'Неизвестно'), ('known', 'Известен'), ('conflicting', 'Противоречие')], selected=values.get('age_status', 'unknown')) }}
-        {{ ui.field('age_years', 'Полных лет', value=values.get('age_years', ''), size='sm', extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
+        {{ ui.field('age_years', 'Полных лет на дату сведений', value=values.get('age_years', ''), size='sm', extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
         {{ ui.field('birth_date', 'Дата рождения', type='date', value=values.get('birth_date', ''), extra={'max': today, 'min': '1900-01-01', 'autocomplete': 'off'}) }}
+        {{ ui.field('age_observed_on', 'Дата сведений о возрасте', type='date', value=values.get('age_observed_on', values.get('observed_on', today)), extra={'max': today, 'min': '1900-01-01'}) }}
         {{ ui.select('age_source', 'Источник возраста', sources.items()|list, selected=values.get('age_source', 'patient')) }}
       </div>
       {{ ui.textarea('age_detail', 'Расхождение', value=values.get('age_detail', ''), hint='Что именно не сходится. Только при противоречии.', rows=2, maxlength=1000) }}
@@ -96,9 +116,9 @@
     </section>
 
     <section class="block" id="v-safety" aria-labelledby="h-safety">
-      <h2 id="h-safety">Состояние и безопасность</h2>
-      <p class="meta">Сведения безопасности записывает врач. Порядок разделов не задаёт срочность.</p>
-      {% for code in ['other_states', 'medications', 'somatic', 'safety', 'acute'] %}{{ fact(code) }}{% endfor %}
+      <h2 id="h-safety">Осмотр и заключение</h2>
+      <p class="meta">Запись врача по результатам текущей беседы и осмотра. Разделы необязательны; заключение не меняет диагноз или план автоматически.</p>
+      {% for code in ['mental_status', 'physical_status', 'other_states', 'safety', 'acute', 'conclusion'] %}{{ fact(code) }}{% endfor %}
     </section>
 
   </div>

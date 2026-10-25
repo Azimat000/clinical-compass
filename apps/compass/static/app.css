@@ -702,6 +702,13 @@ h4 { margin: var(--sp-lg) 0 var(--sp-sm); font-size: var(--fs-cell); }
 .vf > legend .num { margin-right: var(--sp-xs); color: var(--muted); font-weight: 400; }
 .vf:not(.vf--filled):has(select[name$="_status"] option[value="unknown"]:checked) :is(.vf-more, .vf-text, .vf-basis) { display: none; }
 .vf:has(select[name$="_status"] option[value="denied"]:checked) .vf-text { display: none; }
+.vf--note { padding: 0 0 var(--sp-lg); border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; }
+.vf--note > legend { padding: 0; }
+.vf--note > .field { margin-top: var(--sp-sm); }
+.vf--note > .fold { margin-top: var(--sp-md); border: 0; }
+.vf--note > .fold > summary { color: var(--muted); }
+.vf--note .vf-row { margin-top: var(--sp-md); }
+.vf--note .meta { max-width: 75ch; overflow-wrap: anywhere; }
 .vf-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--sp-lg); }
 .vf-row .field + .field { margin-top: 0; }
 .vf > .field { margin-top: var(--sp-lg); }

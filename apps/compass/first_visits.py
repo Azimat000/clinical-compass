@@ -7,19 +7,32 @@ import secrets
 from . import access, records
 from .db import now, transaction
 
-PROTOCOL = 'first-visit-s17b-v1'
+PROTOCOL = 'physician-visit-s51-v2'
+NOTE_SCHEMA = 'outpatient-v1'
 FIELDS = {
-    'complaints': ('V02', 'Жалобы своими словами'),
-    'course': ('V03', 'Начало, течение и длительность'),
+    'complaints': ('V02', 'Жалобы'),
+    'course': ('V03', 'Анамнез заболевания: начало и течение'),
     'impact': ('V04', 'Влияние на повседневную жизнь'),
-    'history': ('V05', 'Прежние эпизоды, помощь и эффект'),
+    'history': ('V05', 'Анамнез заболевания: прежние эпизоды'),
     'other_states': ('V06', 'Другие психические проявления: сведения врача'),
     'medications': ('V07', 'Фактический приём препаратов, вещества и реакции'),
     'somatic': ('V08', 'Соматические и неврологические обстоятельства'),
     'safety': ('V09', 'Сведения о безопасности: запись врача'),
     'acute': ('V10', 'Внезапные или острые телесные жалобы'),
-    'followup': ('V12', 'Повторный приём: изменения и выполнение плана'),
+    'followup': ('V12', 'Изменения с прошлого приёма'),
+    'life_history': ('V13', 'Анамнез жизни'),
+    'family_history': ('V14', 'Семейный анамнез'),
+    'allergies': ('V15', 'Аллергии и непереносимость'),
+    'mental_status': ('V16', 'Психический статус'),
+    'physical_status': ('V17', 'Объективные данные осмотра'),
+    'conclusion': ('V18', 'Заключение врача о текущем состоянии'),
 }
+LEGACY_FIELDS = tuple(FIELDS)[:10]
+STATIC_FIELDS = ('history', 'life_history', 'family_history', 'somatic', 'allergies')
+CURRENT_FIELDS = ('complaints', 'followup', 'course', 'impact', 'mental_status',
+                  'physical_status', 'other_states', 'safety', 'acute', 'conclusion')
+DOCTOR_FIELDS = ('mental_status', 'physical_status', 'other_states', 'safety', 'acute', 'conclusion')
+FIELDS = {code: FIELDS[code] for code in (*CURRENT_FIELDS[:4], *STATIC_FIELDS, *CURRENT_FIELDS[4:], 'medications')}
 SOURCES = {'patient': 'Со слов пациента', 'doctor': 'Наблюдение врача', 'document': 'Из документа'}
 
 
@@ -48,12 +61,19 @@ def observed(value):
 
 def validate(values):
     day = observed(text(values, 'observed_on', 10))
+    schema = text(values, 'note_schema', 30)
+    if schema and schema != NOTE_SCHEMA:
+        raise Error('Обновите форму приёма.')
+    modern = schema == NOTE_SCHEMA
     kind = text(values, 'visit_kind', 20)
     if kind not in ('first', 'repeat'):
         raise Error('Выберите первый или повторный приём.')
+    age_on = observed(text(values, 'age_observed_on', 10) or day)
+    if age_on > day:
+        raise Error('Дата сведений о возрасте не может быть позже приёма.')
     try:
-        age = records.validate({k: values.get(k, '') for k in
-            ('observed_on', 'age_status', 'age_years', 'birth_date', 'age_detail')})['age']
+        age = records.validate({**{k: values.get(k, '') for k in
+            ('age_status', 'age_years', 'birth_date', 'age_detail')}, 'observed_on': age_on})['age']
     except records.RecordError as error:
         raise Error(str(error)) from None
     age_source = text(values, 'age_source', 20)
@@ -62,12 +82,31 @@ def validate(values):
         raise Error('Для возраста выберите источник; известные или противоречивые сведения требуют основания.')
     payload = {'observed_on': day, 'visit_kind': kind, 'age': age,
                'age_source': age_source, 'age_basis': age_basis, 'fields': {}}
+    if modern or 'age_observed_on' in values:
+        payload['age_observed_on'] = age_on
+    if modern:
+        payload['note_schema'] = schema
+    if modern or 'wellbeing' in values:
+        wellbeing = text(values, 'wellbeing', 20) or 'unknown'
+        if wellbeing not in records.WELLBEING:
+            raise Error('Выберите динамику состояния: хуже, без изменений, лучше или не оценено.')
+        payload['wellbeing'] = wellbeing
     for code, (_, label) in FIELDS.items():
+        if code == 'medications' and modern and code + '_status' not in values:
+            continue
+        if not modern and code not in LEGACY_FIELDS and code + '_status' not in values:
+            continue
         status = text(values, code + '_status', 20) or 'unknown'
         detail = text(values, code + '_text')
-        source = text(values, code + '_source', 20) or 'patient'
+        if modern and status == 'auto':
+            status = 'known' if detail else 'unknown'
+        source = text(values, code + '_source', 20) or ('doctor' if modern and code in DOCTOR_FIELDS else 'patient')
         basis = text(values, code + '_basis', 1000)
+        if modern and status != 'unknown' and not basis:
+            basis = {'patient': 'Беседа на приёме', 'doctor': 'Запись врача на приёме'}.get(source, '')
         field_day = observed(text(values, code + '_on', 10) or day)
+        if modern and field_day > day:
+            raise Error('Дата сведений не может быть позже приёма: ' + label)
         if status not in records.STATUSES or source not in SOURCES:
             raise Error('Проверьте состояние и источник: ' + label)
         if (status in ('known', 'conflicting') and not detail) or (status in ('unknown', 'denied') and detail):
@@ -76,8 +115,8 @@ def validate(values):
             raise Error('Укажите основание сведений: ' + label)
         payload['fields'][code] = {'status': status, 'text': detail, 'source': source,
                                    'basis': basis, 'observed_on': field_day}
-    payload['not_collected'] = values.get('not_collected') == 'yes'
-    if payload['fields']['complaints']['status'] == 'unknown' and not payload['not_collected']:
+    payload['not_collected'] = (payload['fields']['complaints']['status'] == 'unknown') if modern else values.get('not_collected') == 'yes'
+    if not modern and payload['fields']['complaints']['status'] == 'unknown' and not payload['not_collected']:
         raise Error('Запишите жалобы либо отметьте, что сведения пока не собраны.')
     payload['documented_facts'] = text(values, 'documented_facts', 4000)
     payload['document_basis'] = text(values, 'document_basis', 1000)
@@ -108,9 +147,15 @@ def save(db, user, patient_id, visit_id, values):
     # including document notes and retired action notes, also on a retry.
     base_row = db.execute('SELECT payload_json FROM first_visit_versions WHERE visit_id=? AND patient_id=? AND revision=?',
                           (visit_id, patient_id, values.get('base_revision', ''))).fetchone()
-    inherited = {key: json.loads(base_row['payload_json']).get(key, '') if base_row else ''
+    base_payload = json.loads(base_row['payload_json']) if base_row else {}
+    inherited = {key: base_payload.get(key, '')
                  for key in ('documented_facts', 'document_basis', 'action_draft')}
+    # The retired medication section remains in old records, outside the new editor.
+    for suffix, key in [('status', 'status'), ('text', 'text'), ('source', 'source'), ('basis', 'basis'), ('on', 'observed_on')]:
+        if 'medications' in base_payload.get('fields', {}):
+            inherited['medications_' + suffix] = base_payload['fields']['medications'][key]
     payload = validate({**inherited, **values})
+    attach_provenance(db, patient_id, values, payload)
     retry = text(values, 'request_key', 32)
     if not re.fullmatch('[0-9a-f]{32}', retry):
         raise Error('Обновите форму перед сохранением.')
@@ -159,7 +204,87 @@ def form_values(item):
     for code, fact in p['fields'].items():
         for suffix, key in [('status', 'status'), ('text', 'text'), ('source', 'source'), ('basis', 'basis'), ('on', 'observed_on')]:
             values[code + '_' + suffix] = fact[key]
+        if fact.get('carried_from'):
+            values[code + '_from'] = fact['carried_from']['version_id']
+    for key in ('note_schema', 'wellbeing', 'age_observed_on'):
+        if key in p:
+            values[key] = p[key]
+    if p.get('age_carried_from'):
+        values['age_from'] = p['age_carried_from']['version_id']
     return values
+
+
+def reference(item):
+    return {'version_id': item['id'], 'visit_id': item['visit_id'],
+            'revision': item['revision'], 'observed_on': item['payload']['observed_on']}
+
+
+def initial_values(db, user, patient_id):
+    """Only completed visits supply history; current observations never carry forward."""
+    patient = require_doctor(db, user, patient_id)
+    items = [i for i in history(db, user, patient_id) if i['state'] == 'completed']
+    items.sort(key=lambda i: (i['payload']['observed_on'], i['recorded_at']), reverse=True)
+    values = {'observed_on': records.today().isoformat(), 'visit_kind': 'repeat' if items else 'first',
+              'base_revision': '0', 'age_source': 'patient', 'note_schema': NOTE_SCHEMA, 'wellbeing': 'unknown'}
+    for code in STATIC_FIELDS:
+        # A modern unknown is an explicit clearing; older empty visits need not erase history.
+        source = next((i for i in items if code in i['payload']['fields'] and
+                       (i['payload'].get('note_schema') == NOTE_SCHEMA or
+                        i['payload']['fields'][code]['status'] != 'unknown')), None)
+        if source:
+            form = form_values(source)
+            values.update({k: v for k, v in form.items() if k.startswith(code + '_')})
+            if source['payload']['fields'][code]['status'] != 'unknown':
+                values[code + '_from'] = source['id']
+            else:
+                values.pop(code + '_from', None)
+    source = next((i for i in items if i['payload'].get('note_schema') == NOTE_SCHEMA or
+                   i['payload']['age']['status'] != 'unknown'), None)
+    if source:
+        form = form_values(source)
+        values.update({k: v for k, v in form.items() if k.startswith('age_') or k == 'birth_date'})
+        values['age_observed_on'] = source['payload'].get('age_observed_on', source['payload']['observed_on'])
+        if source['payload']['age']['status'] != 'unknown':
+            values['age_from'] = source['id']
+        else:
+            values.pop('age_from', None)
+    elif patient['age_status'] != 'unknown':
+        values.update(age_status=patient['age_status'], age_years=str(patient['age_years']) if patient['age_years'] is not None else '',
+                      birth_date=patient['birth_date'] or '', age_observed_on=patient['created_at'][:10],
+                      age_basis='Сохранённые сведения синтетической карточки')
+        if patient['age_status'] == 'conflicting':
+            values['age_detail'] = 'Сведения карточки о возрасте противоречивы'
+    return values
+
+
+def attach_provenance(db, patient_id, values, payload):
+    """Resolve references on the server; never accept client-authored provenance."""
+    for code in (*STATIC_FIELDS, 'age'):
+        token = text(values, code + '_from', 32)
+        if not token:
+            continue
+        row = db.execute('SELECT * FROM first_visit_versions WHERE id=? AND patient_id=? AND state=?',
+                         (token, patient_id, 'completed')).fetchone()
+        if not row:
+            raise Error('Исходная запись анамнеза недоступна. Откройте форму заново.', 409)
+        item = {**dict(row), 'payload': json.loads(row['payload_json'])}
+        original = item['payload']
+        if code == 'age':
+            if (payload['age'] == original['age'] and payload['age_source'] == original['age_source']
+                    and payload['age_basis'] == original['age_basis']
+                    and payload.get('age_observed_on') == original.get('age_observed_on', original['observed_on'])):
+                payload['age_carried_from'] = reference(item)
+            continue
+        old = original['fields'].get(code)
+        if old is None:
+            raise Error('В исходной записи нет этого раздела анамнеза.', 409)
+        field = payload['fields'][code]
+        if all(field[k] == old[k] for k in ('status', 'text', 'source', 'basis', 'observed_on')):
+            field['carried_from'] = reference(item)
+        elif field['observed_on'] == old['observed_on'] and (field['text'], field['status']) != (old['text'], old['status']):
+            field['observed_on'] = payload['observed_on']
+            if (field['source'], field['basis']) == (old['source'], old['basis']):
+                field.update(source='doctor', basis='Уточнено врачом на текущем приёме')
 
 
 def save_documents(db, user, patient_id, visit_id, values):

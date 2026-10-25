@@ -44,20 +44,23 @@
 
 {% macro detailed(item, fields, statuses, sources, authors) %}
   {% set p = item.payload %}
+  <span id="visit-source-{{ item.id }}"></span>
   <dl class="facts">
     <dt>Дата приёма</dt><dd><time class="num" datetime="{{ p.observed_on }}">{{ p.observed_on|full_date }}</time> · {{ {'first': 'Первый приём', 'repeat': 'Повторный приём'}.get(p.visit_kind, 'Приём') }}</dd>
     <dt>Версия</dt><dd>версия <span class="num">{{ item.revision }}</span> · {{ 'черновик' if item.state == 'draft' else 'запись завершена' }}<span class="sub"><span translate="no">{{ authors.get(item.actor_id, item.actor_id) }}</span>, <time class="num" datetime="{{ item.recorded_at }}">{{ item.recorded_at|msk }}</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd>{{ ui.wellbeing([p.get('wellbeing', 'unknown')], decorative=True) }}{{ words.get(p.get('wellbeing', 'unknown')) if p.get('wellbeing', 'unknown') != 'unknown' else 'Не оценено' }}<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
     <dt>Возраст</dt><dd>{{ ui.state(state_kind[p.age.status], age_line(p.age)) }}<span class="sub">{{ sources.get(p.age_source, '') }}{% if p.age_basis %}: {{ p.age_basis }}{% endif %}</span></dd>
+    {% if p.get('age_observed_on') %}<dt>Дата сведений о возрасте</dt><dd>{{ p.age_observed_on|full_date }}{% if p.get('age_carried_from') %}<span class="sub">Перенесено из <a href="#visit-source-{{ p.age_carried_from.version_id }}">предыдущей записи</a></span>{% endif %}</dd>{% endif %}
   </dl>
   <h3>Жалобы и сведения с источниками</h3>
   <table class="results records sources">
     <caption class="visually-hidden">Сведения приёма с источниками</caption>
     <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
     <tbody>
-      {% for code, field in p.fields.items() %}
+      {% for code in fields if code in p.fields %}{% set field = p.fields[code] %}
       <tr><td>{{ fields[code][1] }}</td>
         <td>{{ ui.state(state_kind[field.status], statuses[field.status]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% endif %}</td>
-        <td>{% if field.status == 'unknown' %}<span class="sub">источник не указан</span>{% else %}{{ sources.get(field.source, 'не указан') }}, <time class="num" datetime="{{ field.observed_on }}">{{ field.observed_on|short_date }}</time>{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}{% endif %}</td></tr>
+        <td>{% if field.status == 'unknown' %}<span class="sub">источник не указан</span>{% else %}{{ sources.get(field.source, 'не указан') }}, <time class="num" datetime="{{ field.observed_on }}">{{ field.observed_on|short_date }}</time>{% if field.basis %}<span class="sub">{{ field.basis }}</span>{% endif %}{% endif %}{% if field.get('carried_from') %}<span class="sub">Перенесено из <a href="#visit-source-{{ field.carried_from.version_id }}">приёма {{ field.carried_from.observed_on|short_date }}, версия {{ field.carried_from.revision }}</a>; повторно не собиралось.</span>{% endif %}</td></tr>
       {% endfor %}
     </tbody>
   </table>
