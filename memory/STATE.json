@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T00:57:10+03:00",
+  "updated_on": "2026-10-26T01:10:21+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S49",
+  "last_accepted_slice": "S50",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -479,6 +479,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S49",
       "handoff": "memory/sessions/S49.md",
+      "reason": null
+    },
+    "S50": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S50",
+      "handoff": "memory/sessions/S50.md",
       "reason": null
     }
   },
@@ -1024,6 +1030,16 @@
       "home": "documents screen: imports/reviews and all versioned visit document notes",
       "visit": "only links; document fields inherited from exact base when absent",
       "editing": "draft notes only, via version/retry/conflict guards; completed records immutable",
+      "stored_medical_data_unchanged": true,
+      "clinical_validation": false
+    },
+    "visit_action_removal": {
+      "date": "2026-10-26",
+      "slice": "S50",
+      "report": "memory/sessions/S50.md",
+      "evidence": "evidence/S50/acceptance.md",
+      "removed": "action project field, section and navigation in visit editor",
+      "historical_notes": "preserved in card when nonempty; omitted field inherits exact base",
       "stored_medical_data_unchanged": true,
       "clinical_validation": false
     }

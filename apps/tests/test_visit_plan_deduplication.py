@@ -23,10 +23,10 @@ class VisitPlanDeduplicationTests(unittest.TestCase):
         self.assertIn('<span id="v-plan"></span>', page)
         self.assertIn('href="/patients/D01/decisions"', page)
         for removed in ('Подтверждённый план', 'Подтверждённого плана нет', 'id="h-vplan"',
-                        'id="decision-', 'class="plan current-plan"', 'Открыть в плане и решениях'):
+                        'id="decision-', 'class="plan current-plan"', 'Открыть в плане и решениях', 'name="action_draft"'):
             self.assertNotIn(removed, page)
         for kept in ('Короткая оценка пока недоступна', 'Правила оценки не подтверждены источниками',
-                     'name="action_draft"', 'value="draft"', 'value="completed"'):
+                     'value="draft"', 'value="completed"'):
             self.assertIn(kept, page)
 
     def visit_values(self, **updates):
@@ -73,14 +73,15 @@ class VisitPlanDeduplicationTests(unittest.TestCase):
         response = self.case.post('doc-a', '/patients/D01/first-visits/new', self.visit_values())
         self.assertEqual(303, response.status_code)
         self.assert_editor(self.client.get(response.location).text)
-        self.assertIn('Уникальная заметка о будущем действии', self.client.get(response.location).text)
+        self.assertNotIn('Уникальная заметка о будущем действии', self.client.get(response.location).text)
+        self.assertIn('Уникальная заметка о будущем действии', self.client.get('/demo/D01').text)
         before = self.snapshot()
         error = self.case.post('doc-a', '/patients/D01/first-visits/new', self.visit_values(
             complaints_status='known', complaints_text='Сохранить введённую жалобу'))
         self.assertEqual(400, error.status_code)
         self.assert_editor(error.text)
         self.assertIn('Сохранить введённую жалобу', error.text)
-        self.assertIn('Уникальная заметка о будущем действии', error.text)
+        self.assertNotIn('Уникальная заметка о будущем действии', error.text)
         self.assertEqual(before, self.snapshot())
         complete = self.case.post('doc-a', response.location,
                                  self.visit_values(state='completed', base_revision='1'))

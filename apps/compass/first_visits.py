@@ -104,12 +104,12 @@ def history(db, user, patient_id):
 
 def save(db, user, patient_id, visit_id, values):
     require_doctor(db, user, patient_id)
-    # Document fields live on the documents screen. An ordinary visit submission
-    # inherits them from its exact base version, including an idempotent retry.
+    # Keep fields omitted by the current UI from their exact base version,
+    # including document notes and retired action notes, also on a retry.
     base_row = db.execute('SELECT payload_json FROM first_visit_versions WHERE visit_id=? AND patient_id=? AND revision=?',
                           (visit_id, patient_id, values.get('base_revision', ''))).fetchone()
     inherited = {key: json.loads(base_row['payload_json']).get(key, '') if base_row else ''
-                 for key in ('documented_facts', 'document_basis')}
+                 for key in ('documented_facts', 'document_basis', 'action_draft')}
     payload = validate({**inherited, **values})
     retry = text(values, 'request_key', 32)
     if not re.fullmatch('[0-9a-f]{32}', retry):

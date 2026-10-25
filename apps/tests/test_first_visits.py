@@ -131,7 +131,10 @@ class FirstVisitTests(unittest.TestCase):
         r=self.post(self.values(action_draft='<script>alert(1)</script>'))
         page=self.clients['doc-a'].get(r.location).get_data(as_text=True)
         self.assertNotIn('<script>alert(1)',page)
-        self.assertIn('&lt;script&gt;',page)
+        self.assertNotIn('alert(1)',page)
+        history=self.clients['doc-a'].get('/demo/FV01').text
+        self.assertIn('&lt;script&gt;',history)
+        self.assertNotIn('<script>alert(1)',history)
         audit=str([tuple(r) for r in self.db.execute("SELECT * FROM audit_entries WHERE event LIKE 'first_visit.%'")])
         self.assertNotIn('alert(1)',audit)
         self.db.execute("UPDATE care_relationships SET ends_at=?",(now(),))
