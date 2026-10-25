@@ -746,12 +746,12 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 
 /* ---------- Сообщения и уведомления (UI06) ---------- */
 /* Переписка: свои сообщения белые, чужие на полосе; кто пишет, названо словом */
-.thread, .items { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-md); }
+.thread { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-md); }
 .msg { padding: 14px var(--sp-lg); background: var(--band); border: 1px solid var(--border); border-radius: var(--r-sheet); max-width: 680px; scroll-margin-top: var(--sp-lg); }
 .msg--mine { background: var(--sheet); }
 .msg:target, .item:target { border-color: var(--ink); }
-.msg-head, .item-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--sp-md); }
-.msg-head time, .item-head .meta { color: var(--muted); font-size: var(--fs-meta); }
+.msg-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--sp-md); }
+.msg-head time { color: var(--muted); font-size: var(--fs-meta); }
 .msg-body { margin-top: var(--sp-xs); max-width: 60ch; text-wrap: pretty; }
 .msg-ctx { margin-top: var(--sp-sm); }
 /* Три состояния сообщения — три отдельные строки с линией состояния */
@@ -772,34 +772,24 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .compose > .meta { margin-top: var(--sp-md); }
 .p-block > .compose { margin-top: 0; max-width: none; }
 
-/* Пункты плана и уведомления: список записей с состоянием */
-.item { padding: 14px var(--sp-lg); background: var(--sheet); border: 1px solid var(--border); border-radius: var(--r-sheet); max-width: 760px; scroll-margin-top: var(--sp-lg); }
-.item > p { margin-top: var(--sp-xs); }
-.item > .meta { margin-top: var(--sp-xs); }
-.item .msg-states { margin-top: var(--sp-sm); }
+/* История выполнения на странице плана */
 .item-history { margin-top: var(--sp-sm); }
 .item-history > summary { min-height: 44px; justify-content: flex-start; font-weight: 400; }
 .item-history > summary::after { margin-left: var(--sp-sm); }
 .item-history .plain { padding: 0 0 var(--sp-sm) var(--sp-xs); font-size: var(--fs-cell); }
 .item-history .sub { margin-top: 2px; max-width: 60ch; }
-.item-form { margin-top: var(--sp-sm); }
-.item-form .action-form { max-width: none; margin: 0; border: 0; padding: var(--sp-lg) 14px; }
-.tally { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--sp-md) var(--sp-xl); padding: var(--sp-md) 0 var(--sp-lg); max-width: 760px; }
-.tally > div { min-width: 0; overflow-wrap: anywhere; }
-.tally--wide > div:first-child { grid-column: 1 / -1; }
 .older { margin-top: var(--sp-md); max-width: 760px; }
 .older .fold-body .thread { padding-top: var(--sp-xs); }
-.p-block .tally { padding-top: var(--sp-xs); }
-.p-block > .items, .p-block > .thread { max-width: none; }
+.p-block > .thread { max-width: none; }
 .p-main > .notice { margin-top: var(--sp-lg); }
 .top-error { margin-top: var(--sp-lg); }
 .top-error .meta { margin-top: var(--sp-xs); }
 .p-block h2 { margin-bottom: var(--sp-xs); }
 .p-block > .meta { margin-bottom: var(--sp-md); max-width: 60ch; }
-.block > .thread, .block > .items { max-width: 760px; }
+.block > .thread { max-width: 760px; }
 
 @media (max-width: 760px) {
-  .msg, .item { padding-inline: 14px; }
+  .msg { padding-inline: 14px; }
   .msg-actions .button { width: 100%; }
   .msg-actions form { flex: 1 1 100%; }
 }
@@ -816,8 +806,6 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .plan-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-xs) var(--sp-md); margin-top: var(--sp-md); padding-top: var(--sp-sm); border-top: 1px solid var(--rule); font-size: var(--fs-meta); }
 .plan-meta .state { align-items: baseline; }
 .plan-meta .state::before { align-self: baseline; transform: translateY(-3px); }
-.plan-next { margin-top: var(--sp-lg); font-size: var(--fs-cell); }
-.plan-next a { display: inline-flex; align-items: center; min-height: 44px; }
 .p-block > .plan-list { max-width: none; }
 
 /* ---------- Каталог компонентов (только для проверки, COMPASS_UI_GALLERY=1) ---------- */

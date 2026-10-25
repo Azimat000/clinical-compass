@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "table_count": 81,
+  "unchanged_tables": 79,
+  "changed_auth_tables": {
+    "audit_entries": {
+      "before": {
+        "rows": 490,
+        "sha256": "c815c4848f384b88470465a4d1e5d4941356cfbcb7e24dc6a94f91d390dcbfaf"
+      },
+      "after": {
+        "rows": 492,
+        "sha256": "00d189fcf370f4c003ba21357dd3a8ebc9947f3cba1e2c4c835a9c127856b0bd"
+      }
+    },
+    "sessions": {
+      "before": {
+        "rows": 47,
+        "sha256": "75f43538e7532d4dc8d5563d345c25ccd2b0bfbfa3d308a09f0dc4d30a19a7b9"
+      },
+      "after": {
+        "rows": 49,
+        "sha256": "a5746b43e309c8a62d798a5ccc2e401cdb270212b20347561c19fdea5e251810"
+      }
+    }
+  },
+  "clinical_contexts_unchanged": true,
+  "old_audit_preserved": true,
+  "new_audit_rows": 2,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_untracked_files_unchanged": 4,
+  "backup_permissions": "0o600"
+}

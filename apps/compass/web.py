@@ -466,8 +466,7 @@ def create_app(database=None):
         return interface_response('communication.html', patient=patient, data=data, error=error, error_op=error_op,
                                values=values or {}, kinds=decisions.KINDS, patient_name=overview.person(patient['code'])[0],
                                doctor_name=doctor['display_name'] if doctor else '',
-                               message_key=secrets.token_hex(16), task_key=secrets.token_hex(16),
-                               report_keys={t['id']: secrets.token_hex(16) for t in data['tasks']}), status
+                               message_key=secrets.token_hex(16)), status
 
     @app.get('/patients/<patient_id>/communication')
     def communication_page(patient_id):
@@ -496,17 +495,19 @@ def create_app(database=None):
                 communication.schedule(get_db(),g.user,patient_id,form)
             elif operation == 'report':
                 communication.report(get_db(),g.user,patient_id,request.form.get('task_id',''),request.form)
-                anchor = '#task-' + request.form.get('task_id','')
             elif operation in ('received','read'):
                 communication.receipt(get_db(),g.user,patient_id,request.form.get('message_id',''),operation)
                 anchor = '#message-' + request.form.get('message_id','')
             else:
                 abort(404)
         except communication.Error as error:
+            # Legacy task writes remain available, but their forms were removed in S53.
+            if operation in ('schedule', 'report'):
+                title = 'Пункт не запланирован' if operation == 'schedule' else 'Отметка не сохранена'
+                return interface_response('result.html', title=title, message=str(error)), error.status
             if error.status in (403, 404):
                 return interface_response('result.html', title='Не сохранено', message=str(error)), error.status
-            where = operation + (':' + request.form.get('task_id','') if operation == 'report' else '')
-            return communication_view(patient, patient_id, error=str(error), error_op=where, values=request.form, status=error.status)
+            return communication_view(patient, patient_id, error=str(error), error_op=operation, values=request.form, status=error.status)
         return redirect(url_for('communication_page',patient_id=patient_id)+anchor,code=303)
 
     @app.get('/notifications')

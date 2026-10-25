@@ -60,8 +60,8 @@ class MessagesTests(unittest.TestCase):
         self.assertNotIn('name="due_local"', patient)
         self.assertNotIn(self.db.execute('SELECT payload_json FROM proposals').fetchone()[0][:30], patient)
         doctor = self.page()
-        self.assertIn('name="due_local"', doctor)
-        self.assertIn('Запланировать пункт', doctor)
+        self.assertNotIn('name="due_local"', doctor)
+        self.assertNotIn('Запланировать пункт', doctor)
 
     def test_messages_are_isolated_between_cabinets(self):
         self.say(body='ЛИЧНОЕ-ОДНО')
@@ -153,7 +153,7 @@ class MessagesTests(unittest.TestCase):
         self.assertNotIn('<script>x()', page)
         self.assertIn('class="msg-body keep"', page)
 
-    def test_links_to_entry_and_task_resolve_on_the_screen(self):
+    def test_entry_link_resolves_and_task_context_has_no_removed_anchor(self):
         entry = records.save(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', 'self_report',
                              {'request_key': secrets.token_hex(16), 'observed_on': records.today().isoformat(), 'wellbeing': 'worse'})
         task, _ = self.task()
@@ -165,44 +165,46 @@ class MessagesTests(unittest.TestCase):
             self.assertEqual(302, response.status_code)
             self.assertIn('id="entry-' + entry + '"', self.clients[who].get(response.location).text)
         for page in (doctor, patient):
-            self.assertIn('href="#task-' + task['id'] + '"', page)
-            self.assertIn('id="task-' + task['id'] + '"', page)
+            self.assertNotIn('href="#task-', page)
+            self.assertNotIn('id="task-', page)
+            self.assertIn(task['label'], page)
+            self.assertIn(task['due_at'], page)
 
     # ---- пункты плана ----
 
-    def test_plan_items_show_denominator_states_history_and_correction(self):
-        page = self.page()
-        self.assertIn('Пунктов плана пока нет', page)
-        action = self.action()
-        done, _ = self.task(action)
-        self.task(action, due_at='2030-01-01T10:00:00+03:00')
-        page = self.page()
-        self.assertIn('не рассчитывается: знаменатель 0', page)
-        self.assertIn('Срок не наступил', page)
-        self.assertIn('Отметить результат можно после срока', page)
-        self.assertEqual(303, self.post('pat-a', URL + '/report', {'task_id': done['id'], 'request_key': secrets.token_hex(16),
-                                                                   'outcome': 'missed', 'reason': 'Причина-ПРОПУСКА'}).status_code)
-        page = self.page(who='pat-a')
-        self.assertIn('0.0% (0 / 1)', page)
-        self.assertIn('Причина-ПРОПУСКА', page)
-        self.assertIn('История отметок (1)', page)
-        self.assertEqual(303, self.post('doc-a', URL + '/report', {'task_id': done['id'], 'request_key': secrets.token_hex(16),
-                                                                   'outcome': 'taken', 'reason': 'Уточнено с пациентом'}).status_code)
-        page = self.page()
-        self.assertIn('100.0% (1 / 1)', page)
-        self.assertIn('История отметок (2)', page)
+    def test_plan_sections_removed_for_both_roles_without_deleting_history(self):
+        for populated in (False, True):
+            if populated:
+                action = self.action()
+                done, _ = self.task(action)
+                self.task(action, due_at='2030-01-01T10:00:00+03:00')
+                self.post('pat-a', URL + '/report', {'task_id': done['id'], 'request_key': secrets.token_hex(16),
+                                                   'outcome': 'missed', 'reason': 'Причина-ПРОПУСКА'})
+            for who in ('doc-a', 'pat-a'):
+                for method in ('get', 'head'):
+                    self.assertEqual(200, getattr(self.clients[who], method)(URL).status_code)
+                page = self.page(who=who)
+                for removed in ('Выполнение пунктов плана', 'Запланировать пункт', 'Доля выполненных пунктов',
+                                'id="plan-items"', 'id="schedule"', '/communication/schedule', '/communication/report',
+                                'name="due_local"', 'name="outcome"', 'Причина-ПРОПУСКА'):
+                    self.assertNotIn(removed, page)
+                self.assertIn('id="compose"', page)
+                self.assertIn('Переписка', page)
+        self.assertEqual(2, self.db.execute('SELECT count(*) FROM adherence_tasks').fetchone()[0])
+        self.assertEqual(1, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
 
-    def test_report_without_reason_returns_to_the_item_with_what_was_typed(self):
+    def test_legacy_report_error_does_not_link_to_removed_form(self):
         task, _ = self.task()
         response = self.post('pat-a', URL + '/report', {'task_id': task['id'], 'request_key': secrets.token_hex(16), 'outcome': 'missed', 'reason': ''})
         self.assertEqual(400, response.status_code)
         page = response.get_data(as_text=True)
         self.assertIn('Отметка не сохранена', page)
-        self.assertRegex(page, r'<details class="fold item-form" open>')
-        self.assertRegex(page, r'value="missed" checked')
+        self.assertNotIn('Введённое осталось в форме', page)
+        self.assertNotIn('href="#task-', page)
+        self.assertNotIn('item-form', page)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
 
-    def test_schedule_accepts_a_browser_time_as_moscow_and_keeps_input_on_refusal(self):
+    def test_legacy_schedule_preserves_moscow_time_and_uses_plain_error(self):
         action = self.action()
         data = {'action_id': action, 'request_key': secrets.token_hex(16), 'label': 'Синтетическое упражнение',
                 'due_local': '2030-05-01T09:30', 'reviewed': 'yes'}
@@ -212,15 +214,16 @@ class MessagesTests(unittest.TestCase):
         self.assertEqual(400, refused.status_code)
         page = refused.get_data(as_text=True)
         self.assertIn('Пункт не запланирован', page)
-        self.assertIn('ОСТАЛОСЬ-В-ФОРМЕ', page)
+        self.assertNotIn('Введённое осталось в форме', page)
+        self.assertNotIn('href="#schedule', page)
         self.assertEqual(1, self.db.execute('SELECT count(*) FROM adherence_tasks').fetchone()[0])
         self.assertEqual(403, self.post('pat-a', URL + '/schedule', data).status_code)
 
     def test_no_schedule_form_without_a_confirmed_treatment_plan(self):
-        self.assertIn('Подтверждённого плана нет, пункты не задать', self.page())
+        self.assertNotIn('id="schedule"', self.page())
         self.action(kind='referral')
         page = self.page()
-        self.assertIn('Пункт запланировать нельзя', page)
+        self.assertNotIn('id="schedule"', page)
         self.assertNotIn('name="due_local"', page)
 
     def test_relationship_ended_gives_the_plain_result_page(self):

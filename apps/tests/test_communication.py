@@ -87,7 +87,7 @@ class CommunicationTests(unittest.TestCase):
         v=comm.view(self.db,{'id':'pat-a','role':'patient'},'D01')
         self.assertEqual(100.0,v['counts']['percent'])
         self.assertEqual(5,self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
-        self.assertIn('Уточнено',self.clients['pat-a'].get(self.url).get_data(as_text=True))
+        self.assertEqual('Уточнено с пациентом',next(t for t in v['tasks'] if t['id']==tasks[1]['id'])['history'][-1]['reason'])
 
     def test_plan_confirmation_change_and_schedule_idempotency(self):
         form={'request_key':secrets.token_hex(16),'action_id':'draft','label':'test','due_at':'2026-10-01T09:00:00+03:00','reviewed':'yes'}
@@ -128,7 +128,7 @@ class CommunicationTests(unittest.TestCase):
         self.assertEqual(303,self.send(entry_id=entry,task_id=task['id'])[0].status_code)
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM adverse_events').fetchone()[0])
         page=self.clients['doc-a'].get(self.url).get_data(as_text=True)
-        self.assertIn('/patients/D01/records/'+entry,page);self.assertIn('#task-'+task['id'],page)
+        self.assertIn('/patients/D01/records/'+entry,page);self.assertNotIn('#task-',page);self.assertIn(task['label'],page)
 
     def test_all_eight_functions_connected_two_cabinets(self):
         from apps.compass import assessments
@@ -159,11 +159,12 @@ class CommunicationTests(unittest.TestCase):
         # F06: both directions, each linked to the same AE/wellbeing entry.
         self.assertEqual(303,self.send(entry_id=entry)[0].status_code)
         self.assertEqual(303,self.send('doc-a',entry_id=entry,body='Вымышленный ответ')[0].status_code)
-        # F07: physician-specified confirmed task, patient outcome, visible descriptive calculation.
+        # F07: legacy confirmed task and outcome remain stored; task UI retired by S53.
         task,_=self.task(action)
         self.assertEqual(303,self.post('pat-a',self.url+'/report',{'task_id':task['id'],
             'request_key':secrets.token_hex(16),'outcome':'missed','reason':'Вымышленная причина'}).status_code)
-        self.assertIn('0.0% (0 / 1)',self.clients['doc-a'].get(self.url).text)
+        self.assertEqual(0.0,comm.view(self.db,{'id':'doc-a','role':'doctor'},'D01')['counts']['percent'])
+        self.assertNotIn('Доля выполненных пунктов',self.clients['doc-a'].get(self.url).text)
         # F08: physician-authored routes still need separate confirmation.
         for category in ('desirable','mandatory'):
             proposal=self.draft(kind='referral',route_category=category,route_urgency='planned')
@@ -193,7 +194,7 @@ class CommunicationTests(unittest.TestCase):
             v=comm.view(self.db,{'id':'doc-a','role':'doctor'},'D01')['counts']
             self.assertEqual(0,v['known']);self.assertEqual(0,v['missed']);self.assertIsNone(v['percent'])
             self.assertEqual(0 if state=='empty' else 1,v['unknown'])
-        self.assertIn('не рассчитывается: знаменатель 0',self.clients['doc-a'].get(self.url).text)
+        self.assertNotIn('Доля выполненных пунктов',self.clients['doc-a'].get(self.url).text)
 
     def test_intermediate_plan_stop_stays_excluded_after_another_change(self):
         from apps.compass import decisions

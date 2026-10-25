@@ -48,7 +48,6 @@
 </section>
 {% endif %}
 
-<p class="plan-next"><a href="{{ url_for('communication_page', patient_id=patient.id) }}#plan-items">Пункты плана со сроками и отметками (раздел «Сообщения»)</a></p>
 {% endif %}
 {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', True) }}
 {% endblock %}

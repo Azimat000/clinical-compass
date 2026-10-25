@@ -3349,6 +3349,51 @@
       "acceptance_tag": "slice/S52"
     },
     {
+      "id": "S53",
+      "title": "Убрать пункты плана из сообщений",
+      "target_date": "26.10.2026 — прямое поручение",
+      "depends_on": [
+        "S52"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Удалить выполнение, планирование и сводку пунктов со страницы сообщений обеих ролей.",
+        "Сохранить переписку, контекст старых сообщений и серверные данные; убрать ссылки к удалённым блокам.",
+        "Проверить роли, отправку, ошибки, браузеры и сохранность; обновить сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/communication.html",
+        "apps/compass/templates/plan.html",
+        "apps/compass/web.py",
+        "evidence/S53/acceptance.md"
+      ],
+      "acceptance": [
+        "В сообщениях обеих ролей нет выполнения/планирования пунктов, их форм и сводки.",
+        "Сообщения, состояния и привязки сохранены; нет битых ссылок к удалённым блокам и ложного обещания восстановления формы.",
+        "Сохранены серверные операции, роли, данные плана и история; проверки и браузеры пройдены, сервис обновлён."
+      ],
+      "handoff_path": "memory/sessions/S53.md",
+      "evidence_dir": "evidence/S53",
+      "requirement_ids": [
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S53): remove plan task sections from messages",
+      "acceptance_tag": "slice/S53"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

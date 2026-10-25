@@ -148,7 +148,7 @@ class PlanScreenTests(unittest.TestCase):
         self.assertIn('Кабинет не оказывает экстренную помощь', page)
         self.assertIn('не обеспечивает экстренную помощь', page)  # общая подпись кабинета
         self.assertNotRegex(page, r'врач (увидит|ответит|свяжется|посмотрит)')
-        self.assertIn('communication#plan-items', page)
+        self.assertNotIn('communication#plan-items', page)
 
     def test_other_roles_and_patients_keep_their_old_answers(self):
         proposal = self.approved('ЧУЖОЕ')
