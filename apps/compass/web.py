@@ -624,6 +624,9 @@ def create_app(database=None):
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None,
                        section='today'):
         patient = patient_or_404(patient_id)
+        if g.user['role'] == 'doctor' and request.method == 'GET' and 'med_day' in request.args:
+            # Old medication-day bookmarks now lead to the one plan screen.
+            return redirect(url_for('decisions_page', patient_id=patient_id, med_day=request.args.get('med_day')) + '#medications')
         db = get_db()
         personal_draft = report_drafts.view(db, g.user, patient_id) if g.user['role'] == 'patient' else None
         draft_restored = bool(personal_draft and personal_draft['active'] and form_values is None)
@@ -646,7 +649,7 @@ def create_app(database=None):
             try:
                 if any(len(request.args.getlist(k)) != 1 for k in ('start', 'end') if k in request.args):
                     raise decisions.DecisionError('Укажите один период: по одной начальной и конечной дате.')
-                data = follow_up.view(db, g.user, patient_id, request.args, all_history=all_history)
+                data = follow_up.view(db, g.user, patient_id, request.args, all_history=all_history, include_plan=False)
             except decisions.DecisionError as failure:
                 if failure.status in (403, 404):
                     abort(failure.status)
@@ -656,7 +659,7 @@ def create_app(database=None):
             encounters = data['encounters'] if data else []
             measured = data['measured'] if data else []
         response = interface_response('patient.html' if is_patient else 'doctor_patient.html', section=section,
-                               data=data, selected_period={'start': data['start'], 'end': data['end']} if data and not all_history else {}, period_error=period_error, period_values=request.args, all_history=all_history,
+                               data=data, period_error=period_error, period_values=request.args, all_history=all_history,
                                period_days=(date.fromisoformat(data['end']) - date.fromisoformat(data['start'])).days + 1 if data else 0,
                                recent_start=(records.today() - timedelta(days=29)).isoformat(),
                                kinds=decisions.KINDS, labels=communication.LABELS,
@@ -664,14 +667,13 @@ def create_app(database=None):
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES,
                                overview=None if is_patient else overview.summary(db, g.user, patient), own_marks=[e for e in entries if e['kind'] == 'self_report'],
                                plan=patient_plan(patient_id) if is_patient else [],
-                               med_calendar=medication_calendar(patient_id),
+                               med_calendar=medication_calendar(patient_id) if is_patient else None,
                                medication_feedback=medication_feedback.view(db, patient_id, form_values if section == 'report' else None) if is_patient else None,
                                today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                doctor_entries=doctor_entries,
-                               route_items=routing.summaries(db, g.user, patient_id),
                                entries=entries, record_warnings=data['warnings'] if data else records.warnings(patient, all_entries) if is_patient else [],
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
@@ -932,6 +934,7 @@ def create_app(database=None):
         if request.method == 'GET' and request.args.get('med_edit') == '1':
             values = {**values, 'med_change': 'replace'}
         return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
+                               plan_data=follow_up.view(get_db(), g.user, patient_id, {}, all_history=True), labels=communication.LABELS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
                                route_categories=routing.CATEGORIES, route_urgencies=routing.URGENCIES, route_statuses=routing.STATUSES,

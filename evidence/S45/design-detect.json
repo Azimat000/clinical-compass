@@ -1,0 +1,50 @@
+[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/doctor_patient.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on caption \"Самоотчёты пациента, сначала новые\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/decisions.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on p \"Направление\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/plan_outcomes.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on section \"Выполнение плана Вся история отметок. По\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/dashboard.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on li \"{% if primary %}{{ ui.marker(reason.text\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  }
+]

@@ -56,7 +56,7 @@ class FollowUpTests(unittest.TestCase):
         for outcome, reason in [('missed', 'ПРЕЖНЯЯ-ОТМЕТКА'), ('taken', 'ДЕЙСТВУЮЩАЯ-ОТМЕТКА')]:
             communication.report(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', task['id'],
                                  {'request_key': secrets.token_hex(16), 'outcome': outcome, 'reason': reason})
-        page = self.clients['doc-a'].get(self.summary).text
+        page = self.clients['doc-a'].get('/patients/D01/decisions').text
         self.assertIn('href="/demo/D01#entry-%s"' % report, page)
         self.assertIn('Предыдущие отметки (1)', page)
         visible = re.sub(r'<details\b.*?</details>', '', page, flags=re.S)
@@ -119,10 +119,10 @@ class FollowUpTests(unittest.TestCase):
         self.assertEqual(['missed','conflicting'],[h['outcome'] for h in data['tasks'][0]['history']])
         self.assertEqual('conflicting',data['tasks'][0]['outcome'])
         self.assertTrue(any('последняя отметка — противоречие' in w for w in data['warnings']))
-        html=self.clients['doc-a'].get(self.summary).text
+        html=self.clients['doc-a'].get('/patients/D01/decisions').text
         self.assertIn('Противоречие',html);self.assertIn('Пропущено',html)
         self.assertIn('doc-a',html);self.assertIn('pat-a',html)
-        self.assertNotIn('UNCONFIRMED-PROJECT',html)
+        self.assertNotIn('UNCONFIRMED-PROJECT',self.clients['doc-a'].get(self.summary).text)
         # Superseded old tasks are retained, explicitly excluded, with their plan link.
         with patch.object(records,'today',return_value=today+timedelta(days=3)):
             data=self.view(today.isoformat(),(today+timedelta(days=3)).isoformat())
@@ -134,9 +134,9 @@ class FollowUpTests(unittest.TestCase):
         task,_=self.task()
         self.assertEqual('unknown',self.view()['tasks'][0]['outcome'])
         self.assertEqual([],self.view()['tasks'][0]['history'])
-        html=self.clients['doc-a'].get(self.summary).text
+        html=self.clients['doc-a'].get('/patients/D01/decisions').text
         self.assertIn('Отметок нет. Результат неизвестен.',html)
-        self.assertNotIn('ONLY-DRAFT',html)
+        self.assertNotIn('ONLY-DRAFT',self.clients['doc-a'].get(self.summary).text)
 
     def test_assessments_on_distinct_days_keep_their_own_period(self):
         past=records.today()-timedelta(days=7)

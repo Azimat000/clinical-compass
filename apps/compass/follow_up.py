@@ -37,17 +37,17 @@ def local_day(stamp):
     return value.astimezone(MOSCOW).date().isoformat()
 
 
-def view(db, user, patient_id, values, *, all_history=False):
+def view(db, user, patient_id, values, *, all_history=False, include_plan=True):
     # A single read snapshot keeps the plan and its linked outcomes consistent.
     db.execute('SAVEPOINT follow_up_read')
     try:
-        return _view(db, user, patient_id, values, all_history=all_history)
+        return _view(db, user, patient_id, values, all_history=all_history, include_plan=include_plan)
     finally:
         db.execute('ROLLBACK TO follow_up_read')
         db.execute('RELEASE follow_up_read')
 
 
-def _view(db, user, patient_id, values, *, all_history=False):
+def _view(db, user, patient_id, values, *, all_history=False, include_plan=True):
     if user['role'] != 'doctor' or not db.execute(
             "SELECT 1 FROM users WHERE id=? AND role='doctor' AND disabled=0", (user['id'],)).fetchone():
         raise decisions.DecisionError('Сводка повторного приёма доступна врачу.', 403)
@@ -81,7 +81,7 @@ def _view(db, user, patient_id, values, *, all_history=False):
     actions = [dict(r) for r in db.execute('''SELECT a.*,p.id proposal_id,p.kind,p.version,p.payload_json,
         c.doctor_id,c.confirmed_at FROM care_actions a
         JOIN doctor_confirmations c ON c.id=a.confirmation_id JOIN proposals p ON p.id=c.proposal_id
-        WHERE p.patient_id=? AND c.decision='approved' ORDER BY p.version''', (patient_id,))]
+        WHERE p.patient_id=? AND c.decision='approved' ORDER BY p.version''', (patient_id,))] if include_plan else []
     before = [a for a in actions if local_day(a['effective_at']) and local_day(a['effective_at']) < start]
     plans = before[-1:] + [a for a in actions if includes(a['effective_at'])]
     for a in plans:
@@ -89,7 +89,7 @@ def _view(db, user, patient_id, values, *, all_history=False):
         a['carried'] = local_day(a['effective_at']) < start
 
     relationship = db.execute('''SELECT id FROM care_relationships WHERE patient_id=? AND doctor_id=?
-        AND ends_at IS NULL AND starts_at<=?''', (patient_id, user['id'], now())).fetchone()
+        AND ends_at IS NULL AND starts_at<=?''', (patient_id, user['id'], now())).fetchone() if include_plan else None
     tasks = []
     if relationship:
         for r in db.execute('''SELECT t.*,p.id proposal_id,p.version FROM adherence_tasks t

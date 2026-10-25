@@ -67,7 +67,7 @@ class PatientCardMergeTests(unittest.TestCase):
             self.assertIn('Исходные ответы (42 пункта)', html)
             self.assertIn('1 из 1', html)
             empty = self.clients['doc-a'].get(path, query_string={'start': '2000-01-01', 'end': '2000-01-01'}).text
-            for missing in ('Записей за период нет', 'Анкет за период нет', 'Подтверждённого плана за период нет'):
+            for missing in ('Записей за период нет', 'Анкет за период нет'):
                 self.assertIn(missing, empty)
             self.assertNotIn('INSIDE-FACT', empty)
             self.assertNotIn('Исходные ответы (42 пункта)', empty)

@@ -34,9 +34,9 @@ class RoutingTests(unittest.TestCase):
             self.assertIn('Срочность',page)
             self.assertIn('Подтверждено врачом',page)
             card = self.clients['doc-a'].get('/demo/D01').text
-            self.assertIn('Психиатр — '+label,card)
-            self.assertIn('срочность:',card)
-            self.assertIn('подтверждено врачом',card)
+            self.assertNotIn('Психиатр — '+label,card)
+            self.assertNotIn('Записанные направления',card)
+            self.assertIn(routing.URGENCIES[urgency].lower(),page)
 
     def test_missing_data_not_negative_or_planned_and_confirmation_requires_choice(self):
         p=self.draft(kind='referral',route_category='unknown',route_urgency='unknown',route_population_status='unknown')

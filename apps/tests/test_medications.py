@@ -62,7 +62,7 @@ class MedicationTests(unittest.TestCase):
         c=medications.calendar(self.db,'D01',d['day'])
         self.assertEqual(7,len(c['days']));self.assertEqual(2,len(c['doses']))
         self.assertEqual('2',c['doses'][1]['amount'])
-        for uid,url in [('pat-a','/demo/D01'),('pat-a','/patients/D01/decisions'),('doc-a','/demo/D01'),('doc-a','/patients/D01/decisions')]:
+        for uid,url in [('pat-a','/demo/D01'),('pat-a','/patients/D01/decisions'),('doc-a','/patients/D01/decisions')]:
             html=self.clients[uid].get(url+'?med_day='+d['day']).text
             self.assertIn('Вымышленная таблетка',html);self.assertIn('Предыдущая неделя',html);self.assertIn('pill.svg',html)
         end=records.today()+timedelta(days=4)
@@ -129,7 +129,7 @@ class MedicationTests(unittest.TestCase):
         self.assertEqual(303,self.mark(d,outcome='missed').status_code)
         c=medications.calendar(self.db,'D01',d['day'])
         self.assertEqual('missed',c['doses'][0]['state'])
-        html=self.clients['doc-a'].get('/demo/D01?med_day='+d['day']).text
+        html=self.clients['doc-a'].get('/patients/D01/decisions?med_day='+d['day']).text
         self.assertIn('Пропущено',html);self.assertNotIn('med-mark-form',html)
         page=self.clients['doc-a'].get('/').text
         self.assertIn('Проверить приём препаратов',page);self.assertIn('med_day=',page)

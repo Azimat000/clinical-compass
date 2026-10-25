@@ -1,0 +1,23 @@
+{
+  "suite": "93 tests; 9 failures",
+  "findings": [
+    "FAIL: test_latest_mark_is_separate_from_previous_marks_and_links_to_the_diary (test_follow_up.FollowUpTests.test_latest_mark_is_separate_from_previous_marks_and_links_to_the_diary)",
+    "FAIL: test_no_outcome_not_missed_no_plan_not_draft (test_follow_up.FollowUpTests.test_no_outcome_not_missed_no_plan_not_draft)",
+    "FAIL: test_plan_anchor_changes_tasks_all_authors_and_late_corrections (test_follow_up.FollowUpTests.test_plan_anchor_changes_tasks_all_authors_and_late_corrections)",
+    "FAIL: test_period_applies_to_records_visits_assessments_and_plan_not_current_actions (test_patient_card_merge.PatientCardMergeTests.test_period_applies_to_records_visits_assessments_and_plan_not_current_actions)",
+    "FAIL: test_split_doses_fraction_course_and_navigation (test_medications.MedicationTests.test_split_doses_fraction_course_and_navigation)",
+    "FAIL: test_unmarked_is_distinct_and_doctor_sees_missed_partial_and_attention (test_medications.MedicationTests.test_unmarked_is_distinct_and_doctor_sees_missed_partial_and_attention)",
+    "FAIL: test_missed_and_unknown_completion_are_shown_separately (test_review_list.ReviewListTests.test_missed_and_unknown_completion_are_shown_separately)",
+    "FAIL: test_follow_up_empty_period_is_not_good_news (test_ui04.DoctorCabinetTests.test_follow_up_empty_period_is_not_good_news)",
+    "FAIL: test_card_navigation_is_short_and_offers_only_screens_that_exist (test_s26b.DoctorWorkspaceTests.test_card_navigation_is_short_and_offers_only_screens_that_exist)"
+  ],
+  "resolution": "Previous tests expected plan/calendar/outcomes on the card. Checks moved to the plan screen; legacy-day redirect and non-duplication are tested explicitly. Final targeted suite:77PASS.",
+  "first_full_suite": {
+    "tests": 549,
+    "failures": [
+      "FAIL: test_all_eight_functions_connected_two_cabinets (test_communication.CommunicationTests.test_all_eight_functions_connected_two_cabinets)",
+      "FAIL: test_categories_separate_from_urgency_and_approval_only_patient (test_routing.RoutingTests.test_categories_separate_from_urgency_and_approval_only_patient)"
+    ],
+    "resolution": "F08 integration/routing assertions now verify confirmed categories and urgency on the single plan screen, and their absence from the card. All server approval/role tests retained."
+  }
+}

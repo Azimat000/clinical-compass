@@ -132,7 +132,7 @@ def summary(db, user, patient):
     elif adverse['status'] == 'conflicting':
         reason('Сверить сведения о нежелательном явлении', 'В записях есть противоречие.', anchor='entry-' + adverse['entry_id'])
     if plan['counts'].get('conflicting'):
-        reason('Сверить выполнение плана', 'Отметки о выполнении расходятся.', page='follow', anchor='fu-plan')
+        reason('Сверить выполнение плана', 'Отметки о выполнении расходятся.', page='plan', anchor='fu-plan')
     if marks['streak'] >= 2:
         reason('Самочувствие хуже %s подряд' % times_word(marks['streak']), 'По последним отметкам пациента.', anchor='records')
     open_items = plan['counts'].get('missed', 0) + plan['counts'].get('unknown', 0)
@@ -145,7 +145,7 @@ def summary(db, user, patient):
         if unknown:
             parts.append('Без отметки: %d' % unknown)
         reason('Есть пропуски в плане' if missed else 'Не отмечено выполнение плана',
-               '; '.join(parts) + '.', page='follow', anchor='fu-plan')
+               '; '.join(parts) + '.', page='plan', anchor='fu-plan')
 
     med_doses = medications.occurrences(db, patient_id, records.today()-timedelta(days=6), records.today())
     med_gaps = [d for d in med_doses if d['state'] in ('missed', 'partial') or d['overdue']]
@@ -154,7 +154,7 @@ def summary(db, user, patient):
         partial = sum(d['state'] == 'partial' for d in med_gaps)
         unknown = sum(d['overdue'] for d in med_gaps)
         reason('Проверить приём препаратов', f'За 7 дней: пропущено {missed}, частично {partial}, без отметки {unknown}.',
-               anchor='medications', page='card')
+               anchor='medications', page='plan')
         reasons[-1]['med_day'] = med_gaps[0]['day']
 
     if marks['total'] == 0:

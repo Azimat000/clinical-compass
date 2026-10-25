@@ -2982,6 +2982,52 @@
       "acceptance_tag": "slice/S44"
     },
     {
+      "id": "S45",
+      "title": "План только в разделе «План и решения»",
+      "target_date": "25.10.2026 — прямое поручение",
+      "depends_on": [
+        "S44"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Убрать из карточки повтор плана, календаря, направлений и итогов выполнения.",
+        "Сохранить сведения и историю выполнения в разделе плана, обновить ссылки.",
+        "Проверить данные и интерфейс, обновить сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/doctor_patient.html",
+        "apps/compass/templates/decisions.html",
+        "apps/compass/templates/plan_outcomes.html",
+        "apps/compass/web.py",
+        "apps/tests/test_plan_deduplication.py",
+        "evidence/S45/acceptance.md"
+      ],
+      "acceptance": [
+        "Карточка не повторяет текст плана, календарь, направления или таблицу выполнения.",
+        "План/препараты/направления/история решений и отметок с авторами доступны в «Плане и решениях».",
+        "Причины списка ведут к нужному месту; прежние адреса и пациентский кабинет сохраняют доступ/сведения.",
+        "Данные сохранены, проверки пройдены, сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S45.md",
+      "evidence_dir": "evidence/S45",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S45): show plan only in decisions",
+      "acceptance_tag": "slice/S45"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

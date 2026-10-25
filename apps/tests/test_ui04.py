@@ -186,7 +186,8 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertIn('Архивные записи приёма', page)
         self.assertNotIn('Приёмов за период нет', page)
         self.assertIn('Анкет за период нет. Это не означает, что состояние в норме', page)
-        self.assertIn('Подтверждённого плана за период нет. Это не означает, что план не нужен', page)
+        self.assertNotIn('Подтверждённого плана', page)
+        self.assertIn('href="/patients/D01/decisions"', page)
 
     def test_follow_up_links_back_to_source_records(self):
         self.self_report('Исходная запись', 'worse', adverse_events_status='known', adverse_events_text='Тошнота')

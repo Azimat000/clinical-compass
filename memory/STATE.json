@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-25T22:20:28+03:00",
+  "updated_on": "2026-10-25T23:35:53+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S44",
+  "last_accepted_slice": "S45",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -449,6 +449,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S44",
       "handoff": "memory/sessions/S44.md",
+      "reason": null
+    },
+    "S45": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S45",
+      "handoff": "memory/sessions/S45.md",
       "reason": null
     }
   },
@@ -944,6 +950,15 @@
       "single_template": "doctor_patient.html",
       "default_period": "all_history",
       "legacy_summary_url": "same unified card; legacy anchors preserved",
+      "clinical_validation": false
+    },
+    "plan_single_home": {
+      "date": "2026-10-25",
+      "slice": "S45",
+      "report": "memory/sessions/S45.md",
+      "evidence": "evidence/S45/acceptance.md",
+      "doctor_plan": "decisions.html only; calendar, routing, confirmation and historical outcomes",
+      "card": "records, visits, assessments, connection; plan through patient navigation",
       "clinical_validation": false
     }
   },

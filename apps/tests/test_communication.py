@@ -168,8 +168,9 @@ class CommunicationTests(unittest.TestCase):
         for category in ('desirable','mandatory'):
             proposal=self.draft(kind='referral',route_category=category,route_urgency='planned')
             self.assertEqual(303,self.confirm(proposal).status_code)
-            html=self.clients['doc-a'].get('/demo/D01').text
+            html=self.clients['doc-a'].get('/patients/D01/decisions').text
             self.assertIn('Желательно' if category=='desirable' else 'Обязательно',html)
+            self.assertNotIn('Записанные направления',self.clients['doc-a'].get('/demo/D01').text)
         self.assertEqual(2,self.db.execute('SELECT count(*) FROM messages').fetchone()[0])
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
         self.assertEqual([],self.db.execute('PRAGMA foreign_key_check').fetchall())

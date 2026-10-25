@@ -95,7 +95,7 @@
 <nav class="jump plan-jump" aria-label="Разделы экрана">
   <a href="#current">Текущий план</a><a href="#medications">Препараты</a>
   {% if waiting %}<a href="#waiting">На подтверждении · {{ waiting|length }}</a>{% endif %}
-  <a href="#history">История решений</a>
+  <a href="#fu-plan">Выполнение плана</a><a href="#history">История решений</a>
 </nav>
 
 <div class="card-body">
@@ -155,6 +155,8 @@
   {% if waiting %}{{ sec_waiting }}{% endif %}{{ sec_current }}
 
   {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', False) }}
+
+  {% include 'plan_outcomes.html' %}
 
   <details class="block plan-fold" id="history">
     <summary><span>История решений</span><span class="meta">{{ closed|length }} · включая текущую версию</span></summary>
