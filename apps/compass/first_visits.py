@@ -9,6 +9,7 @@ from .db import now, transaction
 
 PROTOCOL = 'physician-visit-s51-v2'
 NOTE_SCHEMA = 'outpatient-v1'
+TEXT_EDITOR = 'text-only-v1'
 FIELDS = {
     'complaints': ('V02', 'Жалобы'),
     'course': ('V03', 'Анамнез заболевания: начало и течение'),
@@ -33,7 +34,8 @@ CURRENT_FIELDS = ('complaints', 'followup', 'course', 'impact', 'mental_status',
                   'physical_status', 'other_states', 'safety', 'acute', 'conclusion')
 DOCTOR_FIELDS = ('mental_status', 'physical_status', 'other_states', 'safety', 'acute', 'conclusion')
 FIELDS = {code: FIELDS[code] for code in (*CURRENT_FIELDS[:4], *STATIC_FIELDS, *CURRENT_FIELDS[4:], 'medications')}
-SOURCES = {'patient': 'Со слов пациента', 'doctor': 'Наблюдение врача', 'document': 'Из документа'}
+SOURCES = {'patient': 'Со слов пациента', 'doctor': 'Наблюдение врача', 'document': 'Из документа',
+           'physician_note': 'Запись врача'}
 
 
 class Error(ValueError):
@@ -154,8 +156,16 @@ def save(db, user, patient_id, visit_id, values):
     for suffix, key in [('status', 'status'), ('text', 'text'), ('source', 'source'), ('basis', 'basis'), ('on', 'observed_on')]:
         if 'medications' in base_payload.get('fields', {}):
             inherited['medications_' + suffix] = base_payload['fields']['medications'][key]
-    payload = validate({**inherited, **values})
-    attach_provenance(db, patient_id, values, payload)
+    working = {**inherited, **values}
+    editor_mode = text(values, 'editor_mode', 30)
+    if editor_mode:
+        if editor_mode != TEXT_EDITOR:
+            raise Error('Обновите форму приёма.')
+        working = editor_metadata(db, patient_id, base_payload, working)
+    payload = validate(working)
+    if editor_mode:
+        payload['editor_mode'] = editor_mode
+    attach_provenance(db, patient_id, working, payload)
     retry = text(values, 'request_key', 32)
     if not re.fullmatch('[0-9a-f]{32}', retry):
         raise Error('Обновите форму перед сохранением.')
@@ -206,11 +216,69 @@ def form_values(item):
             values[code + '_' + suffix] = fact[key]
         if fact.get('carried_from'):
             values[code + '_from'] = fact['carried_from']['version_id']
-    for key in ('note_schema', 'wellbeing', 'age_observed_on'):
+    for key in ('note_schema', 'wellbeing', 'age_observed_on', 'editor_mode'):
         if key in p:
             values[key] = p[key]
     if p.get('age_carried_from'):
         values['age_from'] = p['age_carried_from']['version_id']
+    return values
+
+
+def display_text(field):
+    return 'Явно отрицает.' if field['status'] == 'denied' and not field['text'] else field['text']
+
+
+def editor_values(values):
+    """Expose a prior explicit denial as ordinary editable text, not an empty field."""
+    values = dict(values)
+    for code in (*CURRENT_FIELDS, *STATIC_FIELDS):
+        if values.get(code + '_status') == 'denied' and not values.get(code + '_text'):
+            values[code + '_text'] = 'Явно отрицает.'
+    return values
+
+
+def editor_metadata(db, patient_id, base, values):
+    """Reconstruct omitted metadata from exact stored versions, never hidden form data."""
+    values = dict(values)
+    day = observed(text(values, 'observed_on', 10))
+
+    def origin(code):
+        if base:
+            return base
+        token = text(values, code + '_from', 32)
+        if not token:
+            return {}
+        row = db.execute('SELECT payload_json FROM first_visit_versions WHERE id=? AND patient_id=? AND state=?',
+                         (token, patient_id, 'completed')).fetchone()
+        if not row:
+            raise Error('Исходная запись недоступна. Откройте форму заново.', 409)
+        return json.loads(row['payload_json'])
+
+    for code in (*CURRENT_FIELDS, *STATIC_FIELDS):
+        keys = [code + '_' + suffix for suffix in ('status', 'source', 'basis', 'on')]
+        if all(key in values for key in keys):
+            continue  # Full attributed submissions, including document edits, keep their semantics.
+        previous = origin(code).get('fields', {}).get(code)
+        detail = text(values, code + '_text')
+        if previous and detail == display_text(previous):
+            values[code + '_text'] = previous['text']
+            defaults = {suffix: previous[key] for suffix, key in
+                        [('status', 'status'), ('source', 'source'), ('basis', 'basis'), ('on', 'observed_on')]}
+        else:
+            defaults = {'status': 'conflicting' if detail and previous and previous['status'] == 'conflicting'
+                        else 'known' if detail else 'unknown', 'source': 'physician_note', 'on': day,
+                        'basis': ('Уточнено врачом на текущем приёме' if previous else 'Запись врача на приёме') if detail else ''}
+        for suffix, value in defaults.items():
+            values.setdefault(code + '_' + suffix, value)
+    if 'age_basis' not in values:
+        previous = origin('age')
+        old = form_values({'payload': previous, 'revision': 0}) if previous else {}
+        if previous:
+            old['age_observed_on'] = previous.get('age_observed_on', previous['observed_on'])
+        age_keys = ('age_status', 'age_years', 'birth_date', 'age_detail', 'age_source', 'age_observed_on')
+        unchanged = previous and all(str(values.get(k, '')).strip() == str(old.get(k, '')).strip() for k in age_keys)
+        values['age_basis'] = previous['age_basis'] if unchanged else (
+            'Возраст записан врачом на приёме' if values.get('age_status', 'unknown') != 'unknown' else '')
     return values
 
 
@@ -281,7 +349,7 @@ def attach_provenance(db, patient_id, values, payload):
         field = payload['fields'][code]
         if all(field[k] == old[k] for k in ('status', 'text', 'source', 'basis', 'observed_on')):
             field['carried_from'] = reference(item)
-        elif field['observed_on'] == old['observed_on'] and (field['text'], field['status']) != (old['text'], old['status']):
+        elif values.get('editor_mode') != TEXT_EDITOR and field['observed_on'] == old['observed_on'] and (field['text'], field['status']) != (old['text'], old['status']):
             field['observed_on'] = payload['observed_on']
             if (field['source'], field['basis']) == (old['source'], old['basis']):
                 field.update(source='doctor', basis='Уточнено врачом на текущем приёме')

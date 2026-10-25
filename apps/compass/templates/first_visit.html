@@ -13,7 +13,7 @@
   {%- if age.status == 'known' and age.years is not none -%}{{ age.years|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
 {%- endmacro %}
 
-{#- Текст доступен сразу. Пустота означает отсутствие сведений; источник можно уточнить. -#}
+{#- Текстовая запись врача; атрибуция и прежние состояния сохраняются сервером. -#}
 {% macro fact(code) %}
 <fieldset class="vf vf--note">
   <legend id="legend-{{ code }}">{{ fields[code][1] }}</legend>
@@ -22,16 +22,7 @@
   <p class="meta">Перенесено из <a href="{{ card }}#visit-source-{{ values.get(code ~ '_from') }}">предыдущей записи</a>. Дата сведений: {{ values.get(code ~ '_on')|full_date }}. Можно изменить.</p>
   {% endif %}
   <div class="field"><textarea class="textarea" id="f-{{ code }}_text" name="{{ code }}_text" aria-labelledby="legend-{{ code }}" rows="3" maxlength="2000">{{ values.get(code ~ '_text', '') }}</textarea></div>
-  <details class="fold"{% if error or values.get(code ~ '_status') in ['denied', 'conflicting'] %} open{% endif %}>
-    <summary>Состояние сведений и источник</summary>
-    <div class="vf-row">
-      {{ ui.select(code ~ '_status', 'Состояние сведений', [('auto', 'По тексту: пусто — нет сведений')] + statuses.items()|list, selected=values.get(code ~ '_status') if error or values.get(code ~ '_status') in ['denied', 'conflicting'] else 'auto') }}
-      {{ ui.select(code ~ '_source', 'Источник', sources.items()|list, selected=values.get(code ~ '_source', 'doctor' if code in ['mental_status', 'physical_status', 'other_states', 'safety', 'acute', 'conclusion'] else 'patient')) }}
-      {{ ui.field(code ~ '_on', 'Дата сведений', type='date', value=values.get(code ~ '_on', ''), hint='Если пусто, дата приёма.', extra={'max': today, 'min': '1900-01-01', 'autocomplete': 'off'}) }}
-    </div>
-    {{ ui.field(code ~ '_basis', 'Основание', value=values.get(code ~ '_basis', ''), hint='Для беседы и осмотра заполняется при сохранении. Для документа укажите его название и дату.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
-    <p class="meta">«Явно отрицает» — только при прямом отрицании, без текста. При противоречии опишите расхождение. Пустое поле не означает «нет».</p>
-  </details>
+
 </fieldset>
 {% endmacro %}
 
@@ -71,6 +62,7 @@
 </nav>
 <form method="post" action="{{ url_for('first_visit_page', patient_id=patient.id, visit_id=visit_id) }}" data-busy data-visit-form>
   <input type="hidden" name="note_schema" value="outpatient-v1">
+  <input type="hidden" name="editor_mode" value="text-only-v1">
   <input type="hidden" name="csrf" value="{{ csrf }}">
   <input type="hidden" name="request_key" value="{{ request_key }}">
   <input type="hidden" name="base_revision" value="{{ values.get('base_revision', '0') }}">
@@ -93,7 +85,7 @@
 
     <section class="block" id="v-history" aria-labelledby="h-history">
       <h2 id="h-history">Накопленный анамнез</h2>
-      <p class="meta">Переносятся сведения из завершённых приёмов. Проверьте и при необходимости исправьте их. Неизменённый текст сохраняет прежние источник и дату; уточнения относятся к текущему приёму. Чтобы убрать устаревшее сведение, очистите текст и выберите «Неизвестно».</p>
+      <p class="meta">Переносятся сведения из завершённых приёмов. Проверьте и при необходимости исправьте их. Неизменённый текст сохраняет прежние источник и дату; уточнения относятся к текущему приёму. Чтобы убрать устаревшее сведение, очистите текст.</p>
       <details class="fold"{% if values.get('visit_kind', 'first') == 'first' or error %} open{% endif %}>
         <summary>Показать и изменить анамнез</summary>
         {% for code in static_fields %}{{ fact(code) }}{% endfor %}
@@ -112,7 +104,6 @@
         {{ ui.select('age_source', 'Источник возраста', sources.items()|list, selected=values.get('age_source', 'patient')) }}
       </div>
       {{ ui.textarea('age_detail', 'Расхождение', value=values.get('age_detail', ''), hint='Что именно не сходится. Только при противоречии.', rows=2, maxlength=1000) }}
-      {{ ui.textarea('age_basis', 'Основание возраста', value=values.get('age_basis', ''), hint='Нужно для известного и противоречивого возраста.', rows=2, maxlength=1000) }}
     </section>
 
     <section class="block" id="v-safety" aria-labelledby="h-safety">

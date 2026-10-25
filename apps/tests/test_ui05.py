@@ -193,15 +193,17 @@ class DoctorWorkTests(unittest.TestCase):
 
     # ---- приём ----
 
-    def test_first_visit_form_has_every_field_with_source_and_basis(self):
+    def test_first_visit_form_has_text_fields_without_metadata_controls(self):
         page = self.page('/patients/D01/first-visits')
         for code in (*first_visits.CURRENT_FIELDS, *first_visits.STATIC_FIELDS):
-            for suffix in ('status', 'source', 'on', 'text', 'basis'):
-                self.assertIn('name="%s_%s"' % (code, suffix), page)
+            self.assertIn('name="%s_text"' % code, page)
+            for suffix in ('status', 'source', 'on', 'basis'):
+                self.assertNotIn('name="%s_%s"' % (code, suffix), page)
         self.assertIn('name="state" value="draft"', page)
         self.assertIn('name="state" value="completed"', page)
         self.assertIn('Новый приём', page)
         self.assertNotIn('name="medications_text"', page)
+        self.assertNotIn('name="age_basis"', page)
 
     def test_completed_visit_is_a_closed_record_without_a_form(self):
         values = {'request_key': secrets.token_hex(16), 'base_revision': '0', 'state': 'completed',

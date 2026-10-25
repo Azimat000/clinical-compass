@@ -446,6 +446,7 @@ def create_app(database=None):
         if request.method in ('GET', 'HEAD') and current and current['state'] == 'completed':
             return redirect(url_for('demo_patient', patient_id=patient_id) + '#visit-' + visit_id)
         values = dict(request.form) if error else first_visits.form_values(current) if current else first_visits.initial_values(db, g.user, patient_id)
+        values = first_visits.editor_values(values)
         return interface_response('first_visit.html', patient=patient,
             patient_name=overview.person(patient['code'])[0],
             current=current, visit_id=visit_id, values=values, error=error,
