@@ -130,13 +130,12 @@ class PatientWorkspaceTests(unittest.TestCase):
         page = self.page('/demo/D01/report')
         self.assertIn('data-report-form', page)
         self.assertNotIn('data-report-step', page)
-        for name in ['observed_on', 'wellbeing', 'age_status', 'age_years', 'birth_date', 'age_detail', 'summary',
-                     'complaints_status', 'complaints_text', 'risk_factors_status', 'concomitant_medications_status',
-                     'adverse_events_status', 'safety_taken', 'safety_hemoglobin', 'safety_form_version',
-                     'csrf', 'request_key', 'draft_revision']:
+        for name in ['observed_on', 'wellbeing', 'summary', 'medication_feedback_version',
+                     'medication_feedback_plan', 'complaints_status', 'complaints_text', 'csrf', 'request_key', 'draft_revision']:
             self.assertTrue(re.search(r'name="%s"' % name, page), name)
         self.assertEqual(4, len(re.findall(r'name="wellbeing"', page)))
-        self.assertIn('Не ждите ответа через кабинет', page)
+        self.assertIn('не ждите ответа через сайт', page)
+        self.assertNotRegex(page, r'name="(?:age_|risk_factors_|concomitant_medications_|adverse_events_|safety_)[^"]*"')
         self.assertIn('/static/report_draft.js', page)
         self.assertIn('/static/self_report.js', page)
         self.assertIn('action="/patients/D01/self-report-draft"', page)
@@ -158,22 +157,18 @@ class PatientWorkspaceTests(unittest.TestCase):
 
     def test_failed_submission_keeps_every_entered_value_and_saves_nothing(self):
         before = self.db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0]
-        form = {'request_key': secrets.token_hex(16), 'observed_on': records.today().isoformat(),
-                'wellbeing': 'worse', 'age_status': 'unknown', 'complaints_status': 'known', 'complaints_text': '',
-                'adverse_events_status': 'denied', 'adverse_events_text': 'Текст при отрицании: должен остаться в форме',
-                'summary': 'Синтетическое резюме, которое нельзя терять'}
+        form = {'request_key': secrets.token_hex(16), 'observed_on': '2999-01-01',
+                'wellbeing': 'worse', 'summary': 'Синтетическое резюме, которое нельзя терять'}
         response = self.post('pat-a', '/patients/D01/self-reports', form)
         self.assertEqual(400, response.status_code)
         page = response.get_data(as_text=True)
-        self.assertIn('Текст при отрицании: должен остаться в форме', page)
         self.assertIn('Синтетическое резюме, которое нельзя терять', page)
         self.assertRegex(page, r'<input type="radio" name="wellbeing" value="worse" checked>')
         self.assertIn('data-has-error="yes"', page)
         self.assertIn('id="record-error"', page)
         self.assertIn('role="alert"', page)
-        self.assertIn('Добавьте описание сведений.', page)
-        self.assertIn('Удалите описание или выберите состояние', page)
-        self.assertRegex(page, r'<details class="more" data-more open>')  # поля с ошибкой раскрыты
+        self.assertIn('Укажите дату наблюдения', page)
+        self.assertIn('value="2999-01-01"', page)
         self.assertEqual(before, self.db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0])
 
     def test_diary_shows_saved_entry_with_escaped_text_and_no_scores(self):

@@ -74,7 +74,7 @@ class RosterAdherenceRepairTests(unittest.TestCase):
         for rid, row in original.items():
             self.assertEqual(row, tuple(self.db.execute('SELECT * FROM adherence_entries WHERE id=?', (rid,)).fetchone()))
         self.assertEqual(len(original) + 11, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
-        data = follow_up.view(self.db, {'id': 'm.sokolova', 'role': 'doctor'}, 'P103', {})
+        data = follow_up.view(self.db, {'id': 'm.sokolova', 'role': 'doctor'}, 'P103', {'start': '2026-09-11', 'end': '2026-10-23'})
         item = next(t for t in data['tasks'] if t['due_at'].startswith('2026-09-25'))
         self.assertEqual('taken', item['outcome'])
         self.assertEqual(['missed', 'taken'], [h['outcome'] for h in item['history']])
@@ -128,7 +128,7 @@ class RosterAdherenceRepairTests(unittest.TestCase):
     def test_ordinary_self_report_never_automatically_confirms_plan_completion(self):
         records.save(self.db, {'id': 'olga.vorontsova', 'role': 'patient'}, 'P103', 'self_report',
                      {'request_key': secrets.token_hex(16), 'observed_on': '2026-09-25', 'summary': 'Есть сообщение, но о выполнении плана ничего не сказано'})
-        item = next(t for t in follow_up.view(self.db, {'id': 'm.sokolova', 'role': 'doctor'}, 'P103', {})['tasks'] if t['id'] == self.mark())
+        item = next(t for t in follow_up.view(self.db, {'id': 'm.sokolova', 'role': 'doctor'}, 'P103', {'start': '2026-09-11', 'end': '2026-10-23'})['tasks'] if t['id'] == self.mark())
         self.assertEqual('missed', item['outcome'])
         self.assertEqual(2, len(item['diary_entries']))
 

@@ -99,12 +99,20 @@ def save(db, user, patient_id, kind, form):
     retry = text_field(form, 'request_key', 64)
     if not re.fullmatch(r'[0-9a-f]{32}', retry):
         raise RecordError('Обновите форму перед отправкой.')
-    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True)
+    from . import medication_feedback
+    feedback = medication_feedback.parse(form) if kind == 'self_report' else None
     key = hashlib.sha256(f'{user["id"]}:{patient_id}:{kind}:{retry}'.encode()).hexdigest()
     with transaction(db):
         # Recheck authorization while holding the write transaction.
         if access.visible_patient(db, user, patient_id) is None:
             raise RecordError('Карточка недоступна.', 404)
+        if feedback is not None:
+            payload['medication_feedback'] = medication_feedback.resolve(db, patient_id, feedback)
+            payload['medication_feedback_plan'] = feedback['plan_id']
+            adverse = medication_feedback.adverse_text(payload['medication_feedback'])
+            if adverse:
+                payload['fields']['adverse_events'] = {'status': 'known', 'text': adverse}
+        canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True)
         available_doctor = db.execute('''SELECT 1 FROM care_relationships r JOIN users u ON u.id=r.doctor_id
                 WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=? AND u.disabled=0''', (patient_id, now())).fetchone()
         if kind == 'self_report' and not available_doctor and 'medication_safety' not in payload:
@@ -114,6 +122,10 @@ def save(db, user, patient_id, kind, form):
             if existing['payload_json'] != canonical:
                 raise RecordError('Эта отправка уже сохранена с другим содержимым. Откройте новую форму.', 409)
             return existing['id']
+        if feedback is not None:
+            from . import medications
+            if medications.base_id(db, patient_id) != feedback['plan_id']:
+                raise RecordError('Врач изменил назначения. Ответы остались у вас; откройте новую форму и сверьте препараты.', 409)
         if kind == 'self_report':
             from . import report_drafts
             try:
@@ -129,7 +141,7 @@ def save(db, user, patient_id, kind, form):
         else:
             db.execute('INSERT INTO self_reports VALUES(?,?,?,?,?,?,?)',
                        (entry_id, patient_id, stamp, payload['observed_on'], canonical, key,
-                        3 if 'medication_safety' in payload else 2))
+                        4 if feedback is not None else 3 if 'medication_safety' in payload else 2))
         db.execute('INSERT INTO clinical_entries VALUES(?,?,?,?,?,?,?,?,?,?,?)',
                    (entry_id, patient_id, user['id'], kind, payload['observed_on'], stamp, payload['summary'], canonical, key, encounter_id, report_id))
         provenance = json.dumps({'entry_id': entry_id, 'actor_id': user['id'], 'role': user['role'],

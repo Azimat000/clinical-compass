@@ -49,7 +49,9 @@ class ReportDraftTests(unittest.TestCase):
         for key,value in form.items():
             if key!='draft_revision':self.assertEqual(value,data['values'][key],key)
         page=c.get('/demo/D01/report').text
-        self.assertIn('Черновик восстановлен',page);self.assertIn('Противоречие ещё не исправлено',page)
+        self.assertIn('Черновик восстановлен',page)
+        # Removed fields remain in the private stored draft, not in the new form.
+        self.assertNotIn('name="adverse_events_text"',page)
         self.assertIn('value="'+form['request_key']+'"',page)
         stored=self.db.execute('SELECT values_json FROM self_report_drafts').fetchone()[0]
         self.assertNotIn('csrf',stored);self.assertNotIn('draft_revision',stored)

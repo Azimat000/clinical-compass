@@ -2,7 +2,7 @@
 import hashlib
 import json
 import re
-from . import records, clinical_rules
+from . import records, clinical_rules, medication_feedback
 from .db import now, transaction
 
 LIMITS = {'request_key':32, 'observed_on':10, 'wellbeing':20, 'age_status':20,
@@ -11,6 +11,7 @@ LIMITS = {'request_key':32, 'observed_on':10, 'wellbeing':20, 'age_status':20,
           **{code+'_status':20 for code in records.FIELDS},
           **{code+'_text':2000 for code in records.FIELDS},
           **{'safety_'+code:20 for code in clinical_rules.SAFETY_FIELDS}}
+LIMITS.update(medication_feedback.LIMITS)
 
 
 class Error(ValueError):
@@ -64,6 +65,11 @@ def values(form):
             raise Error('Неизвестное состояние поля черновика.')
     if 'safety_form_version' in result and result['safety_form_version']!='aviandr-safety-v1':
         raise Error('Версия бланка изменилась. Сохраните текст отдельно и откройте новую форму.',409)
+    if 'medication_feedback_version' in result and result['medication_feedback_version'] != medication_feedback.VERSION:
+        raise Error('Версия дневника изменилась. Откройте новую форму.', 409)
+    for key, value in result.items():
+        if key.startswith('feedback_') and not key.endswith('_text') and value not in ('', 'yes'):
+            raise Error('Неизвестная отметка препарата.')
     return result
 
 

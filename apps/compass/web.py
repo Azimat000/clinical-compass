@@ -11,7 +11,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up, report_drafts, overview, medications
+from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
@@ -653,6 +653,7 @@ def create_app(database=None):
                                overview=None if is_patient else overview.summary(db, g.user, patient), own_marks=[e for e in entries if e['kind'] == 'self_report'],
                                plan=patient_plan(patient_id) if is_patient else [],
                                med_calendar=medication_calendar(patient_id),
+                               medication_feedback=medication_feedback.view(db, patient_id, form_values if section == 'report' else None) if is_patient else None,
                                today_view=patient_today(patient_id, relationship, pending, personal_draft) if is_patient else None,
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
@@ -768,8 +769,8 @@ def create_app(database=None):
             if json_reply:
                 return jsonify(error=str(error)), error.status
             # Keep entered values on error without creating a partial record.
-            if error.status == 400:
-                return render_patient(patient_id, request.form, str(error), section='report'), 400
+            if error.status == 400 or (error.status == 409 and 'medication_feedback_version' in request.form):
+                return render_patient(patient_id, request.form, str(error), section='report'), error.status
             return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
         destination = 'demo_patient' if kind == 'visit' else 'patient_diary'
         location = url_for(destination, patient_id=patient_id) + '#entry-' + entry_id

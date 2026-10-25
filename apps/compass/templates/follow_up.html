@@ -1,6 +1,7 @@
 {#- Сводка повторного приёма: всё, что записано за период, с переходами к исходным записям. Только чтение, без оценок. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'medication_components.html' as med with context %}
 {% set nav_active = 'queue' %}
 {% block title %}Сводка к приёму{% endblock %}
 {% set weekday, day, iso = sheet_date() %}
@@ -86,6 +87,7 @@
           <td>{{ 'Пациент' if e.kind == 'self_report' else 'Врач' }}<span class="sub" translate="no">{{ data.authors.get(e.actor_id, e.actor_id) }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
           <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
           <td>{% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
+            {{ med.feedback(e.payload) }}
             <ul class="fields">
               {% for code, field in e.payload.fields.items() %}
               <li>{{ ui.state(state_kind[field.status], fields[code]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% else %}<span class="sub">{{ statuses[field.status] }}</span>{% endif %}</li>

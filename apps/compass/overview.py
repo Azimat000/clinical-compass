@@ -109,7 +109,18 @@ def summary(db, user, patient):
     def reason(text, sub=None, page='card', anchor=None):
         reasons.append({'text': text, 'sub': sub, 'page': page, 'anchor': anchor})
 
-    if adverse['status'] == 'known':
+    # A later silent report is not a withdrawal of an adverse-event description.
+    # Keep the latest explicit description for each approved prescription item.
+    medication_events = {}
+    for entry in entries:
+        for drug in entry['payload'].get('medication_feedback', []):
+            identity = (drug['proposal_id'], drug['med_index'])
+            if 'adverse' in drug['responses'] and identity not in medication_events:
+                medication_events[identity] = entry['id']
+                reason('Требует внимания: нежелательные явления',
+                       cut(drug['name'] + ': ' + drug['responses']['adverse'], 160) + ' · запись от ' + dm(entry['observed_on']),
+                       anchor='entry-' + entry['id'])
+    if adverse['status'] == 'known' and adverse['entry_id'] not in medication_events.values():
         sub = 'запись от %s' % dm(adverse['on'])
         if adverse['since'] != adverse['on']:
             sub += ', в записях с %s' % dm(adverse['since'])

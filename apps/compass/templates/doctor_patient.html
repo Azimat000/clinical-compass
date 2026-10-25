@@ -33,6 +33,7 @@
       <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
       <td>
         {% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
+        {{ med.feedback(e.payload) }}
         <ul class="fields">
           {% for code, field in e.payload.fields.items() %}
           <li>{{ ui.state(state_kind[field.status], record_fields[code]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% else %}<span class="sub">{{ statuses[field.status] }}</span>{% endif %}</li>

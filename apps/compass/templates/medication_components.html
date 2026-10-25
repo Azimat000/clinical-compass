@@ -108,3 +108,21 @@
   {% endif %}
 </section>
 {% endmacro %}
+{% macro feedback(payload) %}
+{% if payload.get('medication_feedback') %}
+<ul class="med-feedback-list">
+  {% for drug in payload.medication_feedback %}
+  <li><strong class="keep">{{ drug.name }}</strong>
+    <dl class="facts">
+    {% for code, label in [('effect', 'Есть эффект'), ('no_effect', 'Нет эффекта'), ('adverse', 'Нежелательные явления')] %}
+      {% if code in drug.responses %}
+      <dt{% if code == 'adverse' %} class="feedback-adverse"{% endif %}>{{ label }}</dt>
+      <dd class="keep">{{ drug.responses[code] }}</dd>
+      {% endif %}
+    {% endfor %}
+    </dl>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}

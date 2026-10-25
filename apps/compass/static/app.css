@@ -1022,3 +1022,12 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
   .invite-dialog .pending { flex-wrap: wrap; }
   .invite-dialog .revoke[open] { max-width: 100%; }
 }
+/* Descriptions attached to physician-approved medications in the diary. */
+.feedback { margin-block: var(--sp-xl); }
+.feedback-drug { min-width: 0; margin: var(--sp-lg) 0 0; padding: var(--sp-lg) 0; border: 0; border-top: 1px solid var(--border); }
+.feedback-drug legend { max-width: 100%; font-weight: 700; }
+.feedback-response .option { min-height: 44px; }
+.feedback-response [data-feedback-detail] { padding-block: var(--sp-sm) var(--sp-lg); }
+.med-feedback-list { margin: var(--sp-md) 0; padding: 0; list-style: none; }
+.med-feedback-list > li + li { margin-top: var(--sp-lg); }
+.shell .feedback-adverse { color: var(--flag); font-weight: 700; }
