@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-25",
+  "updated_on": "2026-10-25T22:04:10+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S42",
+  "last_accepted_slice": "S43",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -437,6 +437,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S42",
       "handoff": "memory/sessions/S42.md",
+      "reason": null
+    },
+    "S43": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S43",
+      "handoff": "memory/sessions/S43.md",
       "reason": null
     }
   },
@@ -914,6 +920,15 @@
       "typed_record_links": true,
       "evidence": "evidence/S42/acceptance.md",
       "clinical_validation": false
+    },
+    "physician_context_removal": {
+      "date": "2026-10-25",
+      "slice": "S43",
+      "report": "memory/sessions/S43.md",
+      "evidence": "evidence/S43/acceptance.md",
+      "workflow_removed": true,
+      "historical_data_preserved": true,
+      "connection_preserved": true
     }
   },
   "latest_roster": {

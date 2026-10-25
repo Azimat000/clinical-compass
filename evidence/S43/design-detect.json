@@ -1,0 +1,14 @@
+[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "/Users/azamatsibgatullin/Documents/HAC/apps/compass/templates/doctor_patient.html",
+    "line": 0,
+    "snippet": "text color rgb(0, 0, 0) on caption \"Самоотчёты пациента, сначала новые\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  }
+]

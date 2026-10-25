@@ -2893,6 +2893,51 @@
       "acceptance_tag": "slice/S42"
     },
     {
+      "id": "S43",
+      "title": "Полное удаление раздела «Врачебные сведения»",
+      "target_date": "25.10.2026 — прямое поручение",
+      "depends_on": [
+        "S42"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Удалить раздел, форму, переход и серверное сохранение врачебных сведений.",
+        "Сохранить исторические данные, назначения, историю приёмов, связь и медицинские границы.",
+        "Проверить результат, обновить сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/doctor_patient.html",
+        "apps/compass/web.py",
+        "apps/compass/clinical_rules.py",
+        "apps/tests/test_clinical_context_removal.py",
+        "evidence/S43/acceptance.md"
+      ],
+      "acceptance": [
+        "Раздел, форма, подсказка раздела и ссылки на него отсутствуют.",
+        "Удалённый адрес и функция сохранения не создают новых сведений.",
+        "Исторические данные и остальные функции сохранены.",
+        "Проверки пройдены; сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S43.md",
+      "evidence_dir": "evidence/S43",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S43): remove physician context workflow",
+      "acceptance_tag": "slice/S43"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

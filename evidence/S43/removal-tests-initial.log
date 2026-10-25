@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_connection_check_still_reaches_doctor (test_clinical_context_removal.ClinicalContextRemovalTests.test_connection_check_still_reaches_doctor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_clinical_context_removal.py", line 59, in test_connection_check_still_reaches_doctor
+    self.assertEqual(303, self.post('pat-a', '/patients/D01/connection-check').status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 303 != 302
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.846s
+
+FAILED (failures=1)

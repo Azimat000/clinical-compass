@@ -665,8 +665,6 @@ def create_app(database=None):
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
                                doctor_entries=doctor_entries,
-                               clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
-                               clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
                                entries=entries, record_warnings=records.warnings(patient, all_entries),
                                wellbeing_trend=records.wellbeing_trend(entries),
@@ -706,16 +704,6 @@ def create_app(database=None):
         names = author_names(confirmed)
         return [{'id': i['id'], 'kind': i['kind'], 'content': i['payload'].get('content', ''), 'confirmed_at': i['confirmed_at'],
                  'doctor': names.get(i['doctor_id']) or 'врач (имя не указано)'} for i in confirmed]
-
-    @app.post('/patients/<patient_id>/clinical-context')
-    def clinical_context(patient_id):
-        role('doctor')
-        patient_or_404(patient_id)
-        try:
-            clinical_rules.save_context(get_db(), g.user, patient_id, request.form)
-        except clinical_rules.RuleError as error:
-            return interface_response('result.html', title='Сведения не сохранены', message=str(error)), error.status
-        return redirect(url_for('demo_patient', patient_id=patient_id) + '#clinical-rules', code=303)
 
     @app.get('/invitations/new')
     def invitation_page():

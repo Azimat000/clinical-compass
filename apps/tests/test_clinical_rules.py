@@ -12,6 +12,7 @@ from apps.compass import ages, clinical_rules as rules, events, records
 from apps.compass.db import connect, migrate, now
 from apps.compass.repository import seed_demo
 from test_access import setup_identities
+from context_fixture import historical_context
 
 
 class ClinicalRuleTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class ClinicalRuleTests(unittest.TestCase):
                 'prescription_basis': 'Synthetic existing prescription', **kw}
 
     def context(self, **kw):
-        return rules.save_context(self.db, self.doc, 'D01', self.context_form(**kw))
+        return historical_context(self.db, 'D01', self.doc['id'], self.context_form(**kw))
 
     def form(self, **kw):
         return {'request_key': secrets.token_hex(16), 'observed_on': records.today().isoformat(),
@@ -155,36 +156,22 @@ class ClinicalRuleTests(unittest.TestCase):
         self.assertEqual(0,self.count('care_actions'))
         self.assertEqual(0,self.count('proposals'))
 
-    def test_context_idempotency_conflict_and_role_current_authorization(self):
-        form = self.context_form()
-        first = rules.save_context(self.db, self.doc, 'D01', form)
-        self.assertEqual(first, rules.save_context(self.db, self.doc, 'D01', form))
-        self.db.execute("UPDATE users SET display_name='changed name' WHERE id='doc-a'")
-        self.assertEqual(first, rules.save_context(self.db, self.doc, 'D01', form))
-        self.assertEqual('doc-a', rules._context(self.db,'D01')['payload']['source_author']['display_name'])
-        with self.assertRaises(rules.RuleError) as caught:
-            rules.save_context(self.db, self.doc, 'D01', {**form,'severity':'severe'})
-        self.assertEqual(409,caught.exception.status)
+    def test_historical_recommendation_still_requires_current_doctor_access(self):
         for user in (self.pat, {'id':'doc-b','role':'doctor'}, {'id':'pat-a','role':'doctor'}):
             with self.assertRaises(rules.RuleError):
-                rules.save_context(self.db,user,'D01', self.context_form())
-            with self.assertRaises(rules.RuleError):
-                rules.panel(self.db,user,'D01')
+                rules.recommendation(self.db,user,'D01')
         self.db.execute("UPDATE users SET disabled=1 WHERE id='doc-a'")
         with self.assertRaises(rules.RuleError):
-            rules.save_context(self.db,self.doc,'D01',self.context_form())
+            rules.recommendation(self.db,self.doc,'D01')
         self.assertEqual('doc-a', rules._context(self.db,'D01')['actor_id'])
 
-    def test_validation_duplicates_and_required_prescription_basis(self):
+    def test_safety_validation_and_duplicates(self):
         self.assertIsNone(rules.parse_safety({}))
         parsed = rules.parse_safety({'safety_form_version':'aviandr-safety-v1'})
         self.assertTrue(all(parsed[f]=='unknown' for f in rules.SAFETY_FIELDS))
         for bad in ({'safety_form_version':'v0'}, {'safety_form_version':'aviandr-safety-v1','safety_taken':'yes'},
                     MultiDict([('safety_form_version','aviandr-safety-v1'),('safety_taken','present'),('safety_taken','denied')])):
             with self.assertRaises(rules.RuleError): rules.parse_safety(bad)
-        for changes in ({'prescription_basis':''},{'clinical_basis':''},{'severity':'mild'},
-                        {'observed_on':(records.today()+timedelta(days=1)).isoformat()}, {'clinical_basis':'x'*2001}):
-            with self.assertRaises(rules.RuleError): self.context(**changes)
 
     def test_record_retry_atomic_rollback_and_critical_consumer(self):
         form = self.form()
@@ -245,11 +232,7 @@ class ClinicalRuleTests(unittest.TestCase):
             self.db.execute("UPDATE patients SET synthetic=0 WHERE id='D01'")
         self.assertEqual(0,self.count('critical_events'))
 
-    def test_context_transaction_rolls_back_and_event_failure_rolls_back_entire_report(self):
-        before_context = self.count('clinical_contexts')
-        with patch.object(rules.access,'audit',side_effect=RuntimeError('audit failed')):
-            with self.assertRaises(RuntimeError): self.context()
-        self.assertEqual(before_context,self.count('clinical_contexts'))
+    def test_event_failure_rolls_back_entire_report(self):
         before = {t:self.count(t) for t in ('clinical_entries','clinical_rule_evaluations','critical_events','outbox_events')}
         self.db.execute("CREATE TEMP TRIGGER fail_event BEFORE INSERT ON critical_events BEGIN SELECT RAISE(ABORT,'test event failure'); END;")
         with self.assertRaises(sqlite3.IntegrityError): self.save()

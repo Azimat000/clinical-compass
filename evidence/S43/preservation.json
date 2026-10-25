@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "table_count": 81,
+  "unchanged_tables": 78,
+  "changed_auth_tables": {
+    "audit_entries": {
+      "before": {
+        "rows": 470,
+        "sha256": "04e1b1c4d6383e4198910403ede9bc985fdcced0820a8ee457e9fda8535b763e"
+      },
+      "after": {
+        "rows": 473,
+        "sha256": "dc40851194e523576840bb1536a9951b8089d345530b1404731772e02877c435"
+      }
+    },
+    "login_limits": {
+      "before": {
+        "rows": 11,
+        "sha256": "57e0987255ec11e6a7f31cb3a5116f9f025a85b6ebeec1f680667ba58f4f245d"
+      },
+      "after": {
+        "rows": 11,
+        "sha256": "8a1d0e6a52c8e6e561fb230bb3169251e8e277af671096e1797e1f352e82e4ec"
+      }
+    },
+    "sessions": {
+      "before": {
+        "rows": 29,
+        "sha256": "8dab052d74b28f981346bfa7b24d4a290583f8054ff1b2efd4d0dc24fa27d049"
+      },
+      "after": {
+        "rows": 32,
+        "sha256": "0d9912401c6273c72c7a82ef88ffad51e6aa224b594ce729e16dd6085dc8533d"
+      }
+    }
+  },
+  "clinical_contexts_unchanged": true,
+  "old_audit_preserved": true,
+  "new_audit_rows": 3,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_untracked_files_unchanged": 4,
+  "backup_permissions": "0o600"
+}

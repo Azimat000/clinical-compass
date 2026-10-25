@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_card_navigation_is_short_and_offers_only_screens_that_exist (test_s26b.DoctorWorkspaceTests.test_card_navigation_is_short_and_offers_only_screens_that_exist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/Documents/HAC/apps/tests/test_s26b.py", line 87, in test_card_navigation_is_short_and_offers_only_screens_that_exist
+    self.assertEqual(5, nav.count('<a '))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 5 != 4
+
+----------------------------------------------------------------------
+Ran 56 tests in 17.567s
+
+FAILED (failures=1)

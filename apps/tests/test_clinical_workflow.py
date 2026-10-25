@@ -6,6 +6,7 @@ from unittest.mock import patch
 import test_access
 from apps.compass import clinical_rules, records, decisions, events
 from apps.compass.db import now
+from context_fixture import historical_context
 
 
 class ClinicalWorkflowTests(unittest.TestCase):
@@ -32,7 +33,7 @@ class ClinicalWorkflowTests(unittest.TestCase):
         self.link()
         from test_decisions import DecisionTests
         for severity, expected in [('nonsevere', 'desirable'), ('severe', 'mandatory')]:
-            self.assertEqual(303, self.post('doc-a', '/patients/D01/clinical-context', self.context(severity=severity)).status_code)
+            historical_context(self.db, 'D01', 'doc-a', self.context(severity=severity))
             advice = clinical_rules.recommendation(self.db, {'id': 'doc-a', 'role': 'doctor'}, 'D01')
             self.assertEqual(expected, advice['category'])
             self.assertEqual('unknown', advice['urgency'])
@@ -56,14 +57,14 @@ class ClinicalWorkflowTests(unittest.TestCase):
             self.assertEqual(expected, patient['payload']['route']['category'])
             self.assertNotIn('suggestion', str(patient))
         old = advice['context_id']
-        self.assertEqual(303, self.post('doc-a', '/patients/D01/clinical-context', self.context()).status_code)
+        historical_context(self.db, 'D01', 'doc-a', self.context())
         self.assertEqual(409, self.clients['doc-a'].get('/patients/D01/decisions?from_context=' + old).status_code)
         self.assertEqual(404, self.clients['doc-b'].get('/patients/D01/decisions?from_context=' + old).status_code)
         self.assertEqual(403, self.clients['pat-a'].get('/patients/D01/decisions?from_context=' + old).status_code)
 
     def test_real_safety_event_survives_unavailable_recipient_and_routine_worker(self):
         self.link()
-        self.post('doc-a', '/patients/D01/clinical-context', self.context())
+        historical_context(self.db, 'D01', 'doc-a', self.context())
         self.db.execute("UPDATE users SET disabled=1 WHERE id='doc-a'")
         report = self.report()
         self.assertEqual(303, self.post('pat-a', '/patients/D01/self-reports', report).status_code)
@@ -95,13 +96,10 @@ class ClinicalWorkflowTests(unittest.TestCase):
         self.assertIsNone(unassigned['recipient_id'])
         self.assertEqual(404, self.clients['doc-a'].get('/demo/D01').status_code)
 
-    def test_context_auth_csrf_and_changed_source_fail_closed(self):
+    def test_historical_context_not_rendered_and_changed_source_fails_closed(self):
         self.link()
         context = self.context(clinical_basis='<script>synthetic()</script>')
-        self.assertEqual(403, self.post('pat-a', '/patients/D01/clinical-context', context).status_code)
-        self.assertEqual(404, self.post('doc-b', '/patients/D01/clinical-context', context).status_code)
-        self.assertEqual(403, self.clients['doc-a'].post('/patients/D01/clinical-context', data=context).status_code)
-        self.assertEqual(303, self.post('doc-a', '/patients/D01/clinical-context', context).status_code)
+        historical_context(self.db, 'D01', 'doc-a', context)
         self.assertNotIn('<script>synthetic()', self.clients['doc-a'].get('/demo/D01').text)
         with patch.object(clinical_rules, 'release', side_effect=clinical_rules.RuleError('Источник изменён.')):
             self.assertEqual(409, self.post('pat-a', '/patients/D01/self-reports', self.report()).status_code)

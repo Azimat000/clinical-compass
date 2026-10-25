@@ -119,9 +119,8 @@ class DoctorCabinetTests(unittest.TestCase):
         card = self.page('/demo/D01')
         self.assertIn('Записей пока нет', card)
         self.assertIn('отсутствие сведений, а не отсутствие жалоб', card)
-        self.assertIn('Врачебные сведения не вносились', card)
-        self.assertIn('Отсутствие сведений не означает отсутствия риска', card)
-        self.assertIn('Рекомендация не сформирована', card)
+        self.assertNotIn('Врачебные сведения', card)
+        self.assertNotIn('Рекомендация не сформирована', card)
 
     def test_card_shows_records_with_source_state_lines_and_anchors(self):
         self.self_report('Дневник', 'better', complaints_status='known', complaints_text='Спала лучше')
@@ -167,12 +166,6 @@ class DoctorCabinetTests(unittest.TestCase):
             for retired in ('#age-review', '/age-reviews', 'Сверка возраста', 'Сохранить сверку',
                             'Журнал сверок', 'после сверки возраста', 'сверку возраста в карточке'):
                 self.assertNotIn(retired, page, route)
-
-    def test_clinical_context_form_is_reachable_and_checks_input(self):
-        card = self.page('/demo/D01')
-        self.assertIn('action="/patients/D01/clinical-context"', card)
-        self.assertEqual(400, self.post('doc-a', '/patients/D01/clinical-context', {'request_key': 'bad'}).status_code)
-        self.assertEqual(403, self.post('pat-a', '/patients/D01/clinical-context', {'request_key': 'bad'}).status_code)
 
     def test_other_doctor_and_patient_boundaries(self):
         for path in ('/demo/D01', '/patients/D01/follow-up'):

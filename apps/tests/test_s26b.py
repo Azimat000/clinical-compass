@@ -84,8 +84,8 @@ class DoctorWorkspaceTests(unittest.TestCase):
         page = doctor.get('/demo/D01').text
         nav = page[page.index('aria-label="Разделы карточки"'):]
         nav = nav[:nav.index('</nav>')]
-        self.assertEqual(5, nav.count('<a '))
-        for link in ['#records', '#visit-history', '#assessments', '#clinical-rules', '#link']:
+        self.assertEqual(4, nav.count('<a '))
+        for link in ['#records', '#visit-history', '#assessments', '#link']:
             self.assertIn(link, nav)
             self.assertIn('id="%s"' % link[1:], page)
         # Решения, приём, сообщения (UI06) и документы есть в строке разделов пациента.

@@ -1,18 +1,15 @@
 """Source-bound rules for synthetic demonstration; no diagnosis or clinical action."""
-from datetime import date
 import hashlib
 import json
 from pathlib import Path
-import re
 import secrets
 from . import access, ages, events, records
-from .db import now, transaction
+from .db import now
 
 ROOT = Path(__file__).resolve().parents[2]
 RESOURCE = Path(__file__).with_name('resources') / 'clinical-rules-v1.json'
 STATUSES = ('present', 'denied', 'unknown', 'conflicting')
 SAFETY_FIELDS = ('taken', 'after_dose', 'current', 'rigidity', 'trismus', 'hyperhidrosis', 'hemoglobin')
-CONTEXT_FIELDS = ('gad_status', 'severity', 'suicide_risk', 'psychiatric_comorbidity', 'treatment_resistance', 'aviandr_prescription')
 TOPIC = 'clinical.critical.medication_safety.v1'
 
 
@@ -76,53 +73,6 @@ def _doctor(db, user, patient_id):
     if not patient or not active:
         raise RuleError('Карточка недоступна.', 404)
     return patient
-
-
-def save_context(db, user, patient_id, form):
-    key = _field(form, 'request_key', 32)
-    if not re.fullmatch('[0-9a-f]{32}', key):
-        raise RuleError('Обновите форму.', 400)
-    try:
-        observed = date.fromisoformat(_field(form, 'observed_on', 10))
-        if observed > records.today() or observed.year < 1900:
-            raise ValueError()
-    except ValueError:
-        raise RuleError('Проверьте дату врачебных сведений.', 400) from None
-    payload = {'observed_on': observed.isoformat()}
-    for name in CONTEXT_FIELDS:
-        value = _field(form, name) or 'unknown'
-        allowed = ('severe', 'nonsevere', 'unknown', 'conflicting') if name == 'severity' else (
-            ('active', 'denied', 'unknown', 'conflicting') if name == 'aviandr_prescription' else STATUSES)
-        if value not in allowed:
-            raise RuleError('Недопустимое врачебное сведение.', 400)
-        payload[name] = value
-    for name in ('clinical_basis', 'prescription_basis'):
-        payload[name] = _field(form, name, 2000)
-    if not payload['clinical_basis'] or (payload['aviandr_prescription'] == 'active' and not payload['prescription_basis']):
-        raise RuleError('Укажите источник существующих врачебных фактов и назначения.', 400)
-    encoded = canonical(payload)
-    retry = hashlib.sha256(f'{user["id"]}:{patient_id}:{key}'.encode()).hexdigest()
-    with transaction(db):
-        patient = _doctor(db, user, patient_id)
-        if patient['synthetic'] != 1:
-            raise RuleError('Правила доступны только для синтетических случаев.')
-        relationship = _relationship(db, patient_id)
-        if not relationship or relationship['doctor_id'] != user['id']:
-            raise RuleError('Нужна действующая связь ведущего врача.')
-        old = db.execute('SELECT * FROM clinical_contexts WHERE request_key=?', (retry,)).fetchone()
-        if old:
-            previous = json.loads(old['payload_json'])
-            previous.pop('source_author', None)
-            if canonical(previous) != encoded:
-                raise RuleError('Эта отправка сохранена с другим содержимым.')
-            return old['id']
-        author = db.execute('SELECT id,role,display_name FROM users WHERE id=?', (user['id'],)).fetchone()
-        encoded = canonical({**payload, 'source_author': dict(author)})
-        context_id = secrets.token_hex(16)
-        db.execute('INSERT INTO clinical_contexts VALUES(?,?,?,?,?,?,?,?)',
-                   (context_id, patient_id, user['id'], relationship['id'], observed.isoformat(), now(), encoded, retry))
-        access.audit(db, user['id'], 'clinical_context.created', context_id)
-        return context_id
 
 
 def _relationship(db, patient_id):
@@ -237,11 +187,3 @@ def recommendation(db, user, patient_id):
     elif p['severity'] == 'nonsevere' and all(v == 'denied' for v in flags):
         advice.update(category='desirable', alternative='psychotherapist', reason='§5 рекомендует наблюдение психотерапевтом или психиатром всем пациентам с ГТР.')
     return advice
-
-
-def panel(db, user, patient_id):
-    advice = recommendation(db, user, patient_id)
-    evaluations = [{**dict(r), 'evidence': json.loads(r['evidence_json'])} for r in db.execute(
-        'SELECT * FROM clinical_rule_evaluations WHERE patient_id=? ORDER BY rowid DESC', (patient_id,))]
-    return {'context': _context(db, patient_id), 'advice': advice, 'evaluations': evaluations,
-            'events': [dict(r) for r in db.execute('SELECT * FROM critical_events WHERE patient_id=? ORDER BY rowid DESC', (patient_id,))]}

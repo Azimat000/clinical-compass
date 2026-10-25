@@ -8,12 +8,6 @@
 {% set weekday, day, iso = sheet_date() %}
 {% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
 {% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
-{% set levels = {'present': 'есть', 'denied': 'нет', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
-{% set context_fields = [('gad_status', 'ГТР: врачебные сведения'), ('severity', 'Тяжесть'), ('suicide_risk', 'Суицидальный риск, запись врача'),
-                         ('psychiatric_comorbidity', 'Психиатрическая коморбидность'), ('treatment_resistance', 'Резистентность к лечению'),
-                         ('aviandr_prescription', 'Назначение Авиандра')] %}
-{% set severity_levels = {'severe': 'тяжёлая', 'nonsevere': 'нетяжёлая', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
-{% set prescription_levels = {'active': 'действует', 'denied': 'нет', 'unknown': 'неизвестно', 'conflicting': 'противоречие'} %}
 {% set shown = entries[:15] %}
 {% set rest = entries[15:] %}
 
@@ -81,7 +75,7 @@
 </div>
 
 <nav class="jump" aria-label="Разделы карточки">
-  <a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
+  <a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a><a href="#link">Связь</a>
 </nav>
 
 <div class="card-body">
@@ -150,45 +144,6 @@
       </details>
       {{ ui.button('Предложить выбранную анкету') }}
     </form>
-  </section>
-
-  {#- ---------- Врачебные сведения ---------- #}
-  <section class="block" id="clinical-rules" aria-labelledby="h-rules">
-    <h2 id="h-rules">Врачебные сведения</h2>
-    {% set advice = clinical_panel.advice %}
-    {{ ui.notice('Рекомендация не сформирована' if advice.category == 'unknown' else route_categories[advice.category] ~ ': по клиническим рекомендациям', advice.reason, kind='info') }}
-    {% if advice.source_url %}<p class="meta">Источник: <a href="{{ advice.source_url }}" rel="noopener noreferrer">клинические рекомендации</a>, {{ advice.source_section }}. Решения по ним принимает врач.</p>{% endif %}
-    {% set ctx = clinical_panel.context %}
-    {% if ctx %}
-    <dl class="facts">
-      <dt>Сведения на</dt><dd><time class="num" datetime="{{ ctx.payload.observed_on }}">{{ ctx.payload.observed_on|full_date }}</time></dd>
-      {% for key, label in context_fields %}
-      <dt>{{ label }}</dt><dd>{% if key == 'severity' %}{{ severity_levels[ctx.payload[key]] }}{% elif key == 'aviandr_prescription' %}{{ prescription_levels[ctx.payload[key]] }}{% else %}{{ levels[ctx.payload[key]] }}{% endif %}</dd>
-      {% endfor %}
-      <dt>Основание</dt><dd>{{ ctx.payload.clinical_basis }}</dd>
-      {% if ctx.payload.prescription_basis %}<dt>Основание назначения</dt><dd>{{ ctx.payload.prescription_basis }}</dd>{% endif %}
-    </dl>
-    {% else %}
-      {{ ui.empty('Врачебные сведения не вносились. Отсутствие сведений не означает отсутствия риска.') }}
-    {% endif %}
-    <details class="fold"{% if form_error %} open{% endif %}>
-      <summary>{{ 'Обновить сведения' if ctx else 'Внести сведения' }}</summary>
-      <form method="post" action="{{ url_for('clinical_context', patient_id=patient.id) }}" class="action-form">
-        <input type="hidden" name="csrf" value="{{ csrf }}">
-        <input type="hidden" name="request_key" value="{{ clinical_context_key }}">
-        {{ ui.field('observed_on', 'Дата сведений', type='date', value=today, required=True, autocomplete='off', extra={'max': today}) }}
-        <div class="form-grid">
-          {% for key, label in context_fields %}
-            {% if key == 'severity' %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('nonsevere', 'нетяжёлая'), ('severe', 'тяжёлая'), ('conflicting', 'противоречие')], selected='unknown') }}
-            {% elif key == 'aviandr_prescription' %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('denied', 'нет'), ('active', 'действует'), ('conflicting', 'противоречие')], selected='unknown') }}
-            {% else %}{{ ui.select(key, label, [('unknown', 'неизвестно'), ('denied', 'нет'), ('present', 'есть'), ('conflicting', 'противоречие')], selected='unknown') }}{% endif %}
-          {% endfor %}
-        </div>
-        {{ ui.textarea('clinical_basis', 'Источник врачебных фактов', hint='Откуда известны эти сведения. Обязательно.', required=True, rows=3) }}
-        {{ ui.textarea('prescription_basis', 'Основание назначения', hint='Нужно, если назначение действует.', rows=2) }}
-        {{ ui.button('Сохранить сведения') }}
-      </form>
-    </details>
   </section>
 
   {#- ---------- Направления ---------- #}
