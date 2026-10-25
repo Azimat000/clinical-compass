@@ -18,12 +18,12 @@ READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
                          'dashboard.html', 'invitation_manage.html', 'doctor_patient.html', 'follow_up.html',
                          'decisions.html', 'first_visit.html', 'imports.html',
-                         'communication.html', 'notifications.html', 'plan.html'})
+                         'communication.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'plan.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
 # communication.html is for both roles.
-DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'notifications.html', 'critical.html', 'invitation_manage.html'})
+DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'critical.html', 'invitation_manage.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
@@ -107,20 +107,6 @@ def create_app(database=None):
         except (TypeError, ValueError):
             return value
 
-    def inbox_counts():
-        """Ordinary notification counter. Read-only; no critical-event UI."""
-        if 'inbox_counts' not in g:
-            user = g.get('user')
-            if not user or user['role'] != 'doctor':
-                g.inbox_counts = {'notices': None}
-            else:
-                db = get_db()
-                try:
-                    g.inbox_counts = {'notices': notifications.waiting(db, user)}
-                except notifications.NotificationError:
-                    g.inbox_counts = {'notices': None}
-        return g.inbox_counts
-
     def pending_invitations():
         user = g.get('user')
         if not user or user['role'] != 'doctor':
@@ -133,7 +119,7 @@ def create_app(database=None):
     def session_context():
         user = g.get('user')
         return {'current_user': user, 'csrf': user['csrf_token'] if user else '',
-                'inbox_counts': inbox_counts, 'pending_invitations': pending_invitations}
+                'pending_invitations': pending_invitations}
 
     @app.template_filter()
     def person_name(code):
@@ -518,11 +504,10 @@ def create_app(database=None):
     @app.get('/notifications')
     def notification_inbox():
         role('doctor')
-        try:
-            items = notifications.inbox(get_db(), g.user, prepare=request.method != 'HEAD')
-        except notifications.NotificationError as error:
-            abort(error.status)
-        return interface_response('notifications.html', items=items)
+        # Retired UI: an old bookmark must not record delivery or reading.
+        if wants_html():
+            return redirect(url_for('dashboard'))
+        return interface_response('notifications.html')
 
     @app.post('/notifications/<notification_id>/<action>')
     def notification_mark(notification_id, action):
@@ -531,7 +516,8 @@ def create_app(database=None):
             notifications.mark(get_db(), g.user, notification_id, action)
         except notifications.NotificationError as error:
             return interface_response('result.html', title='Отметка не сохранена', message=str(error)), error.status
-        return redirect(url_for('notification_inbox')+'#notification-'+notification_id, code=303)
+        # Historical server operation only; no doctor screen exposes receipt actions.
+        return redirect(url_for('dashboard'), code=303)
 
     @app.get('/critical')
     def critical_inbox():

@@ -96,10 +96,10 @@ class NotificationTests(unittest.TestCase):
         self.assertIsNone(self.row(entry)['delivered_at'])
         attempts = self.db.execute('SELECT attempt,outcome,error FROM outbox_attempts WHERE event_id=? ORDER BY attempt', (event_id,)).fetchall()
         self.assertEqual([(1, 'retry', 'RuntimeError'), (2, 'processed', None)], [tuple(r) for r in attempts])
-        page = self.clients['doc-a'].get('/notifications').get_data(as_text=True)
+        page = self.clients['doc-a'].get('/demo/D01').get_data(as_text=True)
         self.assertIn('&lt;script&gt;syntheticMarker()&lt;/script&gt;', page)
         self.assertNotIn('<script>syntheticMarker()', page)
-        self.assertIsNotNone(self.row(entry)['delivered_at'])
+        self.assertIsNone(self.row(entry)['delivered_at'])
         self.assertEqual(1, self.db.execute('SELECT count(*) FROM routine_notifications').fetchone()[0])
 
     def test_concurrent_same_request_serializes_to_one_report_event_notification(self):
@@ -142,7 +142,7 @@ class NotificationTests(unittest.TestCase):
         self.assertEqual([1, 2, 3, 4, 5], [r['attempt'] for r in attempts])
         self.assertEqual(['retry'] * 4 + ['dead'], [r['outcome'] for r in attempts])
         self.assertNotIn('private clinical', str([tuple(r) for r in attempts]))
-        self.assertIn(entry, self.clients['doc-a'].get('/notifications').get_data(as_text=True))
+        self.assertIn(entry, [n['id'] for n in notifications.inbox(self.db, {'id':'doc-a','role':'doctor'}, prepare=False)])
         self.assertIsNone(self.row(entry)['delivered_at'])
 
     def test_delivery_seen_ack_order_idempotency_and_no_clinical_actions(self):
@@ -152,11 +152,12 @@ class NotificationTests(unittest.TestCase):
         self.assertEqual(409, self.post('doc-a', entry, 'acknowledged').status_code)
         events.process_one(self.db)
         self.assertIsNone(self.row(entry)['delivered_at'])
-        self.assertEqual(200, self.clients['doc-a'].head('/notifications').status_code)
+        self.assertEqual(302, self.clients['doc-a'].head('/notifications').status_code)
         self.assertIsNone(self.row(entry)['delivered_at'])
         self.assertEqual(409, self.post('doc-a', entry, 'seen').status_code)
-        page = self.clients['doc-a'].get('/notifications').get_data(as_text=True)
-        self.assertIn(entry, page)
+        # Historical backend receipts remain testable without a user-facing inbox.
+        items = notifications.inbox(self.db, {'id':'doc-a','role':'doctor'})
+        self.assertIn(entry, [n['id'] for n in items])
         self.assertEqual(409, self.post('doc-a', entry, 'acknowledged').status_code)
         self.assertIn(self.post('doc-a', entry, 'seen').status_code, (302, 303))
         self.assertIn(self.post('doc-a', entry, 'acknowledged').status_code, (302, 303))

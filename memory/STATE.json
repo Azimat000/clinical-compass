@@ -2,7 +2,7 @@
   "schema_version": 1,
   "updated_on": "2026-10-25",
   "current_slice": null,
-  "last_accepted_slice": "S38",
+  "last_accepted_slice": "S39",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -413,6 +413,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S38",
       "handoff": "memory/sessions/S38.md",
+      "reason": null
+    },
+    "S39": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S39",
+      "handoff": "memory/sessions/S39.md",
       "reason": null
     }
   },
@@ -848,6 +854,20 @@
       "opening": "explicit_click_only",
       "corrective_ref": "refs/tags/fix/S37-invitation-click-only",
       "corrective_evidence": "evidence/S37/click-only/acceptance.md"
+    },
+    "s39_notification_removal": {
+      "date": "2026-10-25",
+      "status": "removed_by_direct_user_request",
+      "removed": [
+        "notifications.html",
+        "doctor_notification_menu",
+        "notification_counter",
+        "seen_acknowledged_buttons"
+      ],
+      "old_url": "GET/HEAD /notifications -> / без изменения меток",
+      "backend_history_preserved": true,
+      "patient_records_and_attention_reasons_preserved": true,
+      "evidence": "evidence/S39/acceptance.md"
     }
   },
   "latest_roster": {

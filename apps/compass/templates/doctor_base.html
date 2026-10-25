@@ -3,13 +3,11 @@
 {% import 'components.html' as ui %}
 {% block body %}
 {% set weekday, day, iso = sheet_date() %}
-{% set unread = inbox_counts() %}
-{% set nav = [('queue', 'Пациенты', url_for('dashboard'), None, False),
-              ('notices', 'Уведомления', url_for('notification_inbox'), unread.notices, False),
-              ('invites', 'Пригласить пациента', url_for('invitation_page'), None, False)] %}
+{% set nav = [('queue', 'Пациенты', url_for('dashboard')),
+              ('invites', 'Пригласить пациента', url_for('invitation_page'))] %}
 {% macro menu() %}
-  {% for key, label, href, count, alert in nav %}
-    <a href="{{ href }}"{% if key == 'invites' and request.endpoint != 'invitation_page' %} data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog"{% endif %}{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}{% if count %} <span class="count num">{{ count }}</span><span class="visually-hidden"> ждут отметки</span>{% endif %}</a>
+  {% for key, label, href in nav %}
+    <a href="{{ href }}"{% if key == 'invites' and request.endpoint != 'invitation_page' %} data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog"{% endif %}{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}</a>
   {% endfor %}
 {% endmacro %}
 <div class="shell">

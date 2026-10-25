@@ -294,37 +294,31 @@ class InboxTests(unittest.TestCase):
         self.assertEqual('Синтетическая фактическая реакция', self.db.execute('SELECT reaction FROM critical_delivery').fetchone()[0])
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
 
-    def test_notifications_list_chain_buttons_and_counters(self):
-        from apps.compass import access
-        access.accept_invite  # связь уже есть в наборе ClinicalRuleTests
+    def test_removed_notifications_redirect_without_delivery_and_leave_patient_records(self):
         entry = records.save(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', 'self_report',
                              {'request_key': secrets.token_hex(16), 'observed_on': records.today().isoformat(),
-                              'summary': '<b>Текст-отметки</b>', 'wellbeing': 'unknown'})
-        doctor = self.clients_ready()['doc-a']
-        page = doctor.get('/notifications').get_data(as_text=True)
-        self.assertIn('Ещё готовятся', page)  # воркер ещё не обработал событие
-        self.assertNotIn('/notifications/%s/seen' % entry, page)
+                              'summary': 'Сохранённая запись пациента', 'wellbeing': 'unknown'})
         while events.process_one(self.db):
             pass
-        self.assertRegex(doctor.get('/').get_data(as_text=True), r'<a href="/notifications">Уведомления <span class="count num">1</span>')
-        page = doctor.get('/notifications').get_data(as_text=True)
-        self.assertIn('&lt;b&gt;Текст-отметки&lt;/b&gt;', page)
-        self.assertIn('Выдано на страницу: <time', page)
-        self.assertIn('Просмотрено вами: не отмечено', page)
-        self.assertIn('/notifications/%s/seen' % entry, page)
-        self.assertNotIn('/notifications/%s/acknowledged' % entry, page)
-        csrf = test_access.csrf(doctor)
-        seen = doctor.post('/notifications/%s/seen' % entry, data={'csrf': csrf})
-        self.assertEqual(303, seen.status_code)
-        self.assertTrue(seen.headers['Location'].endswith('/notifications#notification-' + entry))
-        page = doctor.get('/notifications').get_data(as_text=True)
-        self.assertIn('/notifications/%s/acknowledged' % entry, page)
-        doctor.post('/notifications/%s/acknowledged' % entry, data={'csrf': csrf})
-        page = doctor.get('/notifications').get_data(as_text=True)
-        self.assertIn('Показать принятые (1)', page)
-        self.assertNotRegex(doctor.get('/').get_data(as_text=True), r'<a href="/notifications">Уведомления <span class="count')
+        doctor = self.clients_ready()['doc-a']
+        before = dict(self.db.execute('SELECT * FROM routine_notifications WHERE id=?', (entry,)).fetchone())
+        for method in ('get', 'head'):
+            response = getattr(doctor, method)('/notifications')
+            self.assertEqual(302, response.status_code)
+            self.assertEqual('/', response.headers['Location'])
+        for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/decisions',
+                     '/patients/D01/first-visits', '/patients/D01/imports', URL, '/invitations/new'):
+            response = doctor.get(path)
+            self.assertEqual(200, response.status_code, path)
+            for removed in ('href="/notifications', 'Отметить: просмотрено', 'Отметить: принято',
+                            'Просмотрено вами', 'Принято вами', 'ждут отметки'):
+                self.assertNotIn(removed, response.text, path)
+        self.assertIn('Сохранённая запись пациента', doctor.get('/demo/D01').text)
+        self.assertIn('Нужно проверить', doctor.get('/').text)
+        after = dict(self.db.execute('SELECT * FROM routine_notifications WHERE id=?', (entry,)).fetchone())
+        self.assertEqual(before, after)
 
-    def test_menu_counter_does_not_mark_notifications_as_shown(self):
+    def test_doctor_pages_do_not_mark_notifications_as_shown(self):
         entry = records.save(self.db, {'id': 'pat-a', 'role': 'patient'}, 'D01', 'self_report',
                              {'request_key': secrets.token_hex(16), 'observed_on': records.today().isoformat(), 'wellbeing': 'unknown'})
         while events.process_one(self.db):

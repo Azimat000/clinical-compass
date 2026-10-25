@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "table_count": 81,
+  "unchanged_tables": 78,
+  "changed_auth_tables": {
+    "sessions": {
+      "before": {
+        "rows": 23,
+        "sha256": "73da61c5605516726cf0849c81f514e2e42baa40c5d919fc93a0f7145e431671"
+      },
+      "after": {
+        "rows": 24,
+        "sha256": "f2315ff1aae4e4eba237cc8477da49aa92a3722b27d407764c2bb9987147f0da"
+      }
+    },
+    "audit_entries": {
+      "before": {
+        "rows": 464,
+        "sha256": "318628b183787181066de042dc81492cbae719088131fc1aecc11dda04e89ef1"
+      },
+      "after": {
+        "rows": 465,
+        "sha256": "ee24fed92ca8e356d50ec18024ccba3354ed7d38083c1ae3defa2c9432fe7d17"
+      }
+    },
+    "login_limits": {
+      "before": {
+        "rows": 11,
+        "sha256": "f21538da9aeba72356ed219742e7c1f44df6442faa5de11ce0a6fee797ed3738"
+      },
+      "after": {
+        "rows": 11,
+        "sha256": "319723fae36cce9054e20dbf20e0e3fcff9eb89ce29db6f0e362bde463654030"
+      }
+    }
+  },
+  "old_audit_preserved": true,
+  "new_audit_rows": 1,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_untracked_files_unchanged": 4,
+  "backup_permissions": "0o600"
+}
