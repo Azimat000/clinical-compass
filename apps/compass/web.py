@@ -446,12 +446,11 @@ def create_app(database=None):
         if request.method in ('GET', 'HEAD') and current and current['state'] == 'completed':
             return redirect(url_for('demo_patient', patient_id=patient_id) + '#visit-' + visit_id)
         values = dict(request.form) if error else first_visits.form_values(current) if current else {}
-        return interface_response('first_visit.html', patient=patient, kinds=decisions.KINDS,
+        return interface_response('first_visit.html', patient=patient,
             patient_name=overview.person(patient['code'])[0],
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
-            fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES,
-            decisions=decisions.history(db, g.user, patient_id)), status
+            fields=first_visits.FIELDS, statuses=records.STATUSES, sources=first_visits.SOURCES), status
 
     def communication_view(patient, patient_id, error=None, error_op=None, values=None, status=200):
         """The conversation screen for both roles; a refused write comes back here with what was typed."""

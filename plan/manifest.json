@@ -3121,6 +3121,50 @@
       "acceptance_tag": "slice/S47"
     },
     {
+      "id": "S48",
+      "title": "План только в «Плане и решениях», без повтора в «Приёме»",
+      "target_date": "26.10.2026 — прямое поручение",
+      "depends_on": [
+        "S47"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Убрать блок подтверждённого плана из редактора приёма и лишнюю загрузку решений.",
+        "Сохранить доступ к плану, все версии/даты/подтверждения и уникальные заметки приёма.",
+        "Проверить данные, формы, роли и браузеры; обновить сервис и память."
+      ],
+      "outputs": [
+        "apps/compass/templates/first_visit.html",
+        "apps/compass/web.py",
+        "apps/tests/test_visit_plan_deduplication.py",
+        "evidence/S48/acceptance.md"
+      ],
+      "acceptance": [
+        "План и сведения о его подтверждении только в «Плане и решениях», редактор не повторяет их.",
+        "Все решения, версии, даты, авторы, основания, подтверждения и история сохранены; переход к плану доступен.",
+        "Форма приёма, заметки о будущем действии, ошибки, предупреждения и границы ролей сохранены.",
+        "Рабочие медицинские данные неизменны, проверки пройдены, сервис обновлён; UI08 отдельно."
+      ],
+      "handoff_path": "memory/sessions/S48.md",
+      "evidence_dir": "evidence/S48",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T12",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S48): remove plan duplicate from visit editor",
+      "acceptance_tag": "slice/S48"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

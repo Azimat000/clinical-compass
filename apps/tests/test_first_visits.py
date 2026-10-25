@@ -95,7 +95,7 @@ class FirstVisitTests(unittest.TestCase):
                       'Проект действия'):
             self.assertIn(label,page)
         editor=self.clients['doc-a'].get('/patients/FV01/first-visits').text
-        for label in ('Анкеты в карточке','Подтверждённый план','Короткая оценка пока недоступна'):
+        for label in ('Анкеты в карточке','План и решения','Короткая оценка пока недоступна'):
             self.assertIn(label,editor)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE first_visit_versions SET state='completed'")

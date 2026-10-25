@@ -41,7 +41,7 @@ class AssessmentSingleHomeTests(unittest.TestCase):
         for removed in ('Результат инструмента отдельно', 'assessment-series', 'assessment-plot',
                         'Исходные ответы (', 'Заполненные анкеты, сначала новые', 'data-form-version='):
             self.assertNotIn(removed, html)
-        for kept in ('name="complaints_text"', 'value="draft"', 'value="completed"', 'Подтверждённый план'):
+        for kept in ('name="complaints_text"', 'value="draft"', 'value="completed"', 'План и решения'):
             self.assertIn(kept, html)
 
     def test_every_full_partial_answer_score_version_and_source_stays_in_card(self):

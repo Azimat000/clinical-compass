@@ -9,7 +9,6 @@
 {% set editing = (current is none or current.state == 'draft' or error) %}
 {% set page_title = kind_words.get(values.get('visit_kind') if editing else current.payload.visit_kind, 'Приём') if (current or values) else 'Новый приём' %}
 {% block title %}{{ page_title }}{% endblock %}
-{% set approved = decisions|selectattr('decision', 'equalto', 'approved')|list %}
 {% macro age_line(age) -%}
   {%- if age.status == 'known' and age.years is not none -%}{{ age.years|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
 {%- endmacro %}
@@ -42,6 +41,7 @@
   {% if current and not editing %}<div class="title-actions">{{ ui.button('Начать новый приём', kind='primary', href=url_for('first_visit_page', patient_id=patient.id, visit_id='new')) }}</div>{% endif %}
 </div>
 
+<span id="v-plan"></span>
 {{ ui.patient_nav(patient.id, 'visit') }}
 
 <div class="sheet-pad">
@@ -125,18 +125,8 @@
 </form>
 {% endif %}
 
-<div class="card-body">
-  <section class="block" id="v-plan" aria-labelledby="h-vplan">
-    <h2 id="h-vplan">Подтверждённый план</h2>
-    {% if approved %}
-      <p><b>{{ kinds[approved[0].kind] }}</b> · версия <span class="num">{{ approved[0].version }}</span> · <time class="num" datetime="{{ approved[0].confirmed_at }}">{{ approved[0].confirmed_at|msk }}</time>. <a href="{{ url_for('decisions_page', patient_id=patient.id) }}#decision-{{ approved[0].id }}">Открыть в плане и решениях</a></p>
-    {% else %}
-      {{ ui.empty('Подтверждённого плана нет. Это не означает, что план не нужен.', href=url_for('decisions_page', patient_id=patient.id), link='План и решения') }}
-    {% endif %}
-    {{ ui.notice('Короткая оценка пока недоступна', 'Правила оценки не подтверждены источниками. Сервис не оценивает ответы и не определяет срочность: решение остаётся за врачом.', kind='info') }}
-  </section>
-
-
+<div class="sheet-pad">
+  {{ ui.notice('Короткая оценка пока недоступна', 'Правила оценки не подтверждены источниками. Сервис не оценивает ответы и не определяет срочность: решение остаётся за врачом.', kind='info') }}
 </div>
 {% endblock %}
 {% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}
