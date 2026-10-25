@@ -133,10 +133,6 @@ def summary(db, user, patient):
         reason('Сверить сведения о нежелательном явлении', 'В записях есть противоречие.', anchor='entry-' + adverse['entry_id'])
     if plan['counts'].get('conflicting'):
         reason('Сверить выполнение плана', 'Отметки о выполнении расходятся.', page='follow', anchor='fu-plan')
-    if patient['age_status'] == 'unknown':
-        reason('Уточнить возраст', 'Возраст не указан; анкета недоступна.', anchor='age-review')
-    elif patient['age_status'] == 'conflicting':
-        reason('Уточнить возраст', 'Сведения о возрасте расходятся; анкета недоступна.', anchor='age-review')
     if marks['streak'] >= 2:
         reason('Самочувствие хуже %s подряд' % times_word(marks['streak']), 'По последним отметкам пациента.', anchor='records')
     open_items = plan['counts'].get('missed', 0) + plan['counts'].get('unknown', 0)

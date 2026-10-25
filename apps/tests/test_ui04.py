@@ -53,12 +53,12 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertIn('Тошнота', page)
         self.assertEqual(3, len(re.findall(r'<th scope="col">', page)))
 
-    def test_unknown_age_is_flagged_and_dass_is_unavailable(self):
+    def test_unknown_age_remains_visible_without_review_prompt(self):
         self.add_patient('D09', 'Учебный 09 · Ирина — Возраст не указан', 'unknown')
         page = self.page('/')
-        self.assertIn('Уточнить возраст', page)
-        self.assertIn('Возраст не указан; анкета недоступна', page)
-        self.assertIn('href="/demo/D09#age-review"', page)
+        self.assertNotIn('Уточнить возраст', page)
+        self.assertIn('возраст не указан', page)
+        self.assertNotIn('#age-review', page)
         self.assertNotIn('>ВОЗРАСТ<', page)
         self.assertIn('Ирина', page)
         self.assertNotIn('Возраст не указан</a>', page)
@@ -72,7 +72,7 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertIn('По этому запросу пациентов нет', self.page('/?q=нет-такого'))
         self.assertIn('Показать всех', self.page('/?q=нет-такого'))
         self.assertNotIn('Демо 01', self.page('/?show=flagged'))
-        self.assertIn('Ирина', self.page('/?show=flagged'))
+        self.assertNotIn('Ирина', self.page('/?show=flagged'))
         self.assertIn('aria-current="true"', self.page('/?show=flagged'))
         for bad in ('/?show=x', '/?age_status=x', '/?record_kind=x', '/?route_category=x', '/?attention=x'):
             self.assertEqual(400, self.clients['doc-a'].get(bad).status_code, bad)
@@ -159,20 +159,13 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertNotIn('<td class="num">28</td>', self.page('/demo/D01', 'pat-a'))
         self.assertIn('id="assessment-', card)
 
-    def test_age_review_error_keeps_values(self):
-        card = self.page('/demo/D01')
-        key = re.search(r'name="request_key" value="([0-9a-f]{32})"', card)
-        # Карточка D01 из фикстуры уже сверена или нет: принимаем оба состояния, но ошибка формы всегда сохраняет ввод.
-        response = self.post('doc-a', '/patients/D01/age-reviews',
-                             {'request_key': secrets.token_hex(16), 'sources_fingerprint': 'x' * 64, 'birth_date': '1990-01-01',
-                              'basis': 'Сверено по документу', 'reviewed_sources': ''})
-        self.assertEqual(400, response.status_code)
-        page = response.get_data(as_text=True)
-        self.assertIn('id="age-error"', page)
-        self.assertIn('Сохранить сверку', page)
-        self.assertIn('Сверено по документу', page)
-        self.assertIn('value="1990-01-01"', page)
-        self.assertIsNotNone(key or True)
+    def test_age_review_controls_and_links_are_removed_on_all_doctor_pages(self):
+        for route in ('/', '/demo/D01', '/patients/D01/first-visits', '/patients/D01/decisions',
+                      '/patients/D01/follow-up'):
+            page = self.page(route)
+            for retired in ('#age-review', '/age-reviews', 'Сверка возраста', 'Сохранить сверку',
+                            'Журнал сверок', 'после сверки возраста', 'сверку возраста в карточке'):
+                self.assertNotIn(retired, page, route)
 
     def test_clinical_context_form_is_reachable_and_checks_input(self):
         card = self.page('/demo/D01')

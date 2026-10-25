@@ -2759,6 +2759,50 @@
       "acceptance_tag": "slice/S39"
     },
     {
+      "id": "S40",
+      "title": "Удаление отдельной сверки возраста",
+      "target_date": "25.10.2026 — прямое поручение",
+      "depends_on": [
+        "S39"
+      ],
+      "condition": "always",
+      "stage": "service",
+      "tasks": [
+        "Удалить отдельную сверку возраста из карточки, переходы и напоминания; исключить создание новых сверок на сервере.",
+        "Сохранить исторические данные и возрастные ограничения инструментов без использования прежних сверок как допуска.",
+        "Проверить связанные экраны, роли, данные и сервис; обновить память и доказательства."
+      ],
+      "outputs": [
+        "apps/compass/ages.py",
+        "apps/compass/web.py",
+        "apps/compass/templates/doctor_patient.html",
+        "evidence/S40/acceptance.md"
+      ],
+      "acceptance": [
+        "Нет блока, формы, журнала, ссылок и отдельных напоминаний о сверке возраста.",
+        "Удалённый адрес не создаёт записей ни для одной роли; функция reconcile отсутствует.",
+        "Исторические строки/рабочая база сохранены; возрастная применимость анкет и справок, роли и подтверждение врача не обходятся.",
+        "Проверки приложения и связанных экранов проходят; UI08 остаётся отдельным срезом."
+      ],
+      "handoff_path": "memory/sessions/S40.md",
+      "evidence_dir": "evidence/S40",
+      "requirement_ids": [
+        "F04",
+        "F08",
+        "T04",
+        "T08",
+        "T13"
+      ],
+      "verification_commands": [
+        "make check",
+        "python3 tools/design_skills.py check",
+        "python3 tools/validate_plan.py",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(S40): remove age reconciliation workflow",
+      "acceptance_tag": "slice/S40"
+    },
+    {
       "id": "UI08",
       "title": "Новый интерфейс: общая проверка и зелёный набор тестов",
       "target_date": "Отдельная сессия после UI07",

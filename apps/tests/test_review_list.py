@@ -47,11 +47,11 @@ class ReviewListTests(unittest.TestCase):
         with self.plan(missed=1, unknown=1, conflicting=1):
             page = self.page()
         for reason in ('Записано нежелательное явление', 'Сверить противоречивые сведения', 'Сверить выполнение плана',
-                       'Уточнить возраст', 'Самочувствие хуже 2 раза подряд', 'Есть пропуски в плане'):
+                       'Самочувствие хуже 2 раза подряд', 'Есть пропуски в плане'):
             self.assertIn(reason, page)
         listing = re.search(r'<ul class="review-reasons">.*?</ul>', page, re.S).group(0)
         links = re.findall(r'href="([^"]+)"', listing)
-        self.assertEqual(6, len(links))
+        self.assertEqual(5, len(links))
         for link in links:
             path, anchor = link.split('#')
             destination = self.clients['doc-a'].get(path)

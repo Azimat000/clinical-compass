@@ -123,7 +123,7 @@
 
     <section class="block" id="v-age" aria-labelledby="h-age">
       <h2 id="h-age">Возраст</h2>
-      <p class="meta">Запись возраста не допускает пациента к инструменту: анкеты предлагаются после сверки возраста в <a href="{{ card }}#age-review">карточке</a>. Неизвестный возраст оставьте без чисел.</p>
+      <p class="meta">Возрастная применимость зависит от выбранной анкеты. Неизвестный возраст оставьте без чисел.</p>
       <div class="form-grid">
         {{ ui.select('age_status', 'Состояние возраста', [('unknown', 'Неизвестно'), ('known', 'Известен'), ('conflicting', 'Противоречие')], selected=values.get('age_status', 'unknown')) }}
         {{ ui.field('age_years', 'Полных лет', value=values.get('age_years', ''), size='sm', extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
@@ -193,7 +193,7 @@
       </tbody>
     </table>
     {% else %}
-      {{ ui.empty('Заполненных анкет нет. Предложить анкету можно в карточке после сверки возраста.', href=card ~ '#assessments', link='Открыть анкеты') }}
+      {{ ui.empty('Заполненных анкет нет. Предложить анкету можно в карточке пациента.', href=card ~ '#assessments', link='Открыть анкеты') }}
     {% endif %}
   </section>
 

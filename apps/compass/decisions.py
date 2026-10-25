@@ -9,7 +9,7 @@ from .db import now, transaction
 
 KINDS = {'therapy_start': 'Назначение терапии', 'therapy_change': 'Изменение терапии',
          'therapy_stop': 'Отмена терапии', 'referral': 'Направление', 'plan_change': 'Изменение плана'}
-REFERENCE_PATH = Path(__file__).with_name('resources') / 'therapy-reference-v2.json'
+REFERENCE_PATH = Path(__file__).with_name('resources') / 'therapy-reference-v3.json'
 
 
 class DecisionError(ValueError):

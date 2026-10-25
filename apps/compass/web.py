@@ -10,7 +10,7 @@ from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, ages, routing, notifications, clinical_rules, critical_delivery, communication, extraction
+from . import access, records, assessments, decisions, routing, notifications, clinical_rules, critical_delivery, communication, extraction
 from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
@@ -169,7 +169,7 @@ def create_app(database=None):
         payload = {'status': 'interface_removed',
                    'message': 'Интерфейс удалён. Новый интерфейс пока не создан.'}
         failure = (context.get('error') or context.get('form_error')
-                   or context.get('assessment_error') or context.get('age_error'))
+                   or context.get('assessment_error'))
         if failure:
             payload['error'] = str(failure)
         if g.get('user'):
@@ -616,7 +616,7 @@ def create_app(database=None):
         return view
 
     def render_patient(patient_id, form_values=None, form_error=None, assessment_error=None, assessment_values=None,
-                       age_error=None, age_values=None, section='today'):
+                       section='today'):
         patient = patient_or_404(patient_id)
         db = get_db()
         personal_draft = report_drafts.view(db, g.user, patient_id) if g.user['role'] == 'patient' else None
@@ -648,8 +648,6 @@ def create_app(database=None):
                                clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
                                entries=entries, record_warnings=records.warnings(patient, entries),
-                               age_view=ages.view(db, patient), age_error=age_error, age_values=age_values or {},
-                               age_request_key=secrets.token_hex(16),
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
                                pending_assessments=pending, assessment_form=assessments.definition(),
@@ -799,16 +797,6 @@ def create_app(database=None):
         return jsonify({'entries': [{k: v for k, v in e.items() if k not in ('request_key', 'payload_json')} for e in entries],
                         'warnings': records.warnings(patient, entries)})
 
-    @app.post('/patients/<patient_id>/age-reviews')
-    def review_age(patient_id):
-        role('doctor')
-        patient_or_404(patient_id)
-        try:
-            ages.reconcile(get_db(), g.user, patient_id, request.form)
-        except ages.AgeError as error:
-            return render_patient(patient_id, age_error=str(error), age_values=request.form), error.status
-        return redirect(url_for('demo_patient', patient_id=patient_id)+'#age-review', code=303)
-
     @app.post('/patients/<patient_id>/assessment-requests')
     def request_assessment(patient_id):
         role('doctor')
@@ -915,7 +903,7 @@ def create_app(database=None):
                       'route_rule_context_id': advice['context_id'],
                       'route_category': advice['category'], 'route_urgency': 'unknown',
                       'route_population_status': 'known', 'route_age_years': str(advice['age_years']),
-                      'route_population': 'Взрослая применимость проверена по имеющимся возрастным источникам; требуется сверка врача.',
+                      'route_population': 'Справка для взрослых; применимость и решение определяет врач.',
                       'route_severity': advice['basis'], 'route_severity_status': 'unknown',
                       'route_evidence': advice['source_url'] + ' · ' + advice['source_section'] + ' · ' + advice['reason'],
                       'route_unavailable': 'Не ожидать помощи через демо: использовать доступный обычный канал связи с врачом или обратиться в медицинскую организацию.'}

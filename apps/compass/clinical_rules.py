@@ -138,17 +138,14 @@ def _context(db, patient_id):
 def _age(db, patient, minimum):
     state = ages.view(db, patient)
     try:
-        if state['current']:
-            allowed = {ages.years_on(date.fromisoformat(state['current']['birth_date']), records.today())}
-        else:
-            allowed, known = set(range(121)), False
-            for source in state['sources']:
-                candidates = ages.possible_years(source, records.today())
-                if candidates is not None:
-                    known = True
-                    allowed &= candidates
-            if not known:
-                return {'status': 'unknown', 'sources': state}
+        allowed, known = set(range(121)), False
+        for source in state['sources']:
+            candidates = ages.possible_years(source, records.today())
+            if candidates is not None:
+                known = True
+                allowed &= candidates
+        if not known:
+            return {'status': 'unknown', 'sources': state}
         if not allowed:
             return {'status': 'conflicting', 'sources': state}
     except (ages.AgeError, ValueError):

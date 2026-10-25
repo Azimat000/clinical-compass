@@ -2,7 +2,7 @@
   "schema_version": 1,
   "updated_on": "2026-10-25",
   "current_slice": null,
-  "last_accepted_slice": "S39",
+  "last_accepted_slice": "S40",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -419,6 +419,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S39",
       "handoff": "memory/sessions/S39.md",
+      "reason": null
+    },
+    "S40": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S40",
+      "handoff": "memory/sessions/S40.md",
       "reason": null
     }
   },
@@ -868,6 +874,15 @@
       "backend_history_preserved": true,
       "patient_records_and_attention_reasons_preserved": true,
       "evidence": "evidence/S39/acceptance.md"
+    },
+    "age_reconciliation_removal": {
+      "date": "2026-10-25",
+      "slice": "S40",
+      "report": "memory/sessions/S40.md",
+      "evidence": "evidence/S40/acceptance.md",
+      "workflow_removed": true,
+      "historical_data_preserved": true,
+      "instrument_age_limits_preserved": true
     }
   },
   "latest_roster": {

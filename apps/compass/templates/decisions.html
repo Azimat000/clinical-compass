@@ -199,7 +199,7 @@
 
         <fieldset class="kind-group" data-for-kinds="referral">
           <legend>Направление к психиатру</legend>
-          <p class="meta">Нужно только для вида «Направление». Категорию и срочность выбираете отдельно, сервис их не вычисляет. Возраст сверяется в <a href="{{ card }}#age-review">карточке</a>.</p>
+          <p class="meta">Нужно только для вида «Направление». Категорию и срочность выбираете отдельно, сервис их не вычисляет. Применимость справки зависит от возраста.</p>
           <div class="form-grid">
             {{ ui.field('route_specialty', 'Специальность направляющего врача', value=values.get('route_specialty', ''), extra={'maxlength': '2000', 'autocomplete': 'off'}) }}
             {{ ui.select('route_category', 'Категория', route_categories.items()|list, selected=values.get('route_category', 'unknown')) }}

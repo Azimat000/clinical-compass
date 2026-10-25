@@ -101,16 +101,8 @@ class ClinicalRuleTests(unittest.TestCase):
         self.db.execute("UPDATE patients SET age_years=19,age_status='known' WHERE id='D01'")
         self.save(age_status='known', age_years='18')
         self.assertEqual('conflicting', self.save()['result'])
-        patient = self.db.execute("SELECT * FROM patients WHERE id='D01'").fetchone()
-        state = ages.view(self.db, patient)
-        today = records.today()
-        birth = today.replace(year=today.year - 19).isoformat()
-        ages.reconcile(self.db, self.doc, 'D01', {'birth_date': birth, 'basis':'Synthetic reconciliation',
-            'reviewed_sources':'yes','sources_fingerprint':state['fingerprint'],'request_key':secrets.token_hex(16)})
-        # New unknown age contributes no new age source: reconciliation remains current.
-        self.assertEqual('triggered', self.save()['result'])
-        # New explicit incompatible source invalidates the current reconciliation.
-        self.assertEqual('conflicting', self.save(age_status='known', age_years='18')['result'])
+        # There is no separate reconciliation that can override recorded conflicts.
+        self.assertEqual('conflicting', self.save()['result'])
 
     def test_age_range_crossing_boundary_does_not_choose_adult(self):
         self.db.execute("UPDATE patients SET age_years=18,created_at=? WHERE id='D01'", ((records.today()-timedelta(days=1)).isoformat(),))

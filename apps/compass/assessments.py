@@ -195,7 +195,7 @@ def checked_age(db, patient, values, form=None):
         raise AssessmentError(str(error)) from None
     years = age['years'] if age['years'] is not None else age['calculated_years']
     if age['status'] != 'known' or years is None or not 18 <= years <= 120 or not basis:
-        raise AssessmentError('Нужны сверенный возраст от 18 лет и источник сведений. Неизвестный возраст не даёт допуск.')
+        raise AssessmentError('Укажите возраст от 18 лет и источник сведений. Неизвестный возраст не даёт допуск.')
     try:
         token = ages.verify(db, patient, years)
     except ages.AgeError as error:
@@ -287,7 +287,7 @@ def submit(db, user, request_id, values):
         patient = access.visible_patient(db, user, task['patient_id'])
         _, _, current_age = checked_age(db, patient, {'age_status': 'known', 'age_years': str(task['age_years']), 'age_basis': task['age_basis']}, form)
         if json.loads(task['age_snapshot_json']).get('verification_token') != current_age['verification_token']:
-            raise AssessmentError('Сведения или сверка возраста изменились. Врач должен предложить новую анкету.', 409)
+            raise AssessmentError('Сведения о возрасте изменились. Врач должен предложить новую анкету.', 409)
         answers = parse_answers(values, form)
         scores = score_answers(answers, form)
         encoded = canonical(answers)

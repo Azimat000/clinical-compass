@@ -146,7 +146,7 @@ class FirstVisitTests(unittest.TestCase):
                 self.assertIn('Новая версия не сохранена',r.get_data(as_text=True))
         self.assertEqual([],self.rows())
 
-    def test_new_age_sources_block_dass_and_invalidate_prior_review(self):
+    def test_new_age_sources_still_block_inapplicable_dass(self):
         patient=self.db.execute("SELECT * FROM patients WHERE id='FV01'").fetchone()
         before=ages.view(self.db,patient)['fingerprint']
         self.post(self.values(age_status='known',age_years='17',age_basis='Со слов пациента'))
@@ -173,17 +173,11 @@ class FirstVisitTests(unittest.TestCase):
         self.assertEqual(409,error.exception.status)
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
 
-    def test_new_visit_invalidates_age_reconciliation_and_outstanding_dass(self):
-        patient=self.db.execute("SELECT * FROM patients WHERE id='FV01'").fetchone()
-        ages.reconcile(self.db,self.doctor,'FV01',{'request_key':secrets.token_hex(16),
-            'sources_fingerprint':ages.view(self.db,patient)['fingerprint'],
-            'birth_date':'1991-01-01','basis':'Синтетический документ','reviewed_sources':'yes'})
-        self.assertIsNotNone(ages.view(self.db,patient)['current'])
+    def test_new_visit_invalidates_outstanding_dass_without_reconciliation(self):
         request_id=assessments.assign(self.db,self.doctor,'FV01',{'assignment_key':secrets.token_hex(16),
             'form_version_id':assessments.definition()['id'],'age_status':'known','age_years':'35',
-            'age_basis':'Сверка врача'})
+            'age_basis':'Синтетический профиль'})
         self.post(self.values(age_status='conflicting',age_detail='Разные даты рождения',age_basis='Новый документ'))
-        self.assertIsNone(ages.view(self.db,patient)['current'])
         with self.assertRaises(assessments.AssessmentError):
             assessments.submit(self.db,{'id':'pat-fv','role':'patient'},request_id,
                 {'form_version_id':assessments.definition()['id'],**{f'answer_{n}':'0' for n in range(1,43)}})

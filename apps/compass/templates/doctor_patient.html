@@ -80,7 +80,7 @@
 </div>
 
 <nav class="jump" aria-label="Разделы карточки">
-  <a href="#records">Записи</a><a href="#assessments">Анкеты</a><a href="#age-review">Возраст</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
+  <a href="#records">Записи</a><a href="#assessments">Анкеты</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
 </nav>
 
 <div class="card-body">
@@ -132,7 +132,7 @@
       <input type="hidden" name="assignment_key" value="{{ assignment_key }}">
       <input type="hidden" name="age_status" value="known">
       <h3>Предложить анкету</h3>
-      <p class="meta">Предложение появится в кабинете пациента и действует до конца текущих суток по Москве. Нужен сверенный возраст от 18 лет.</p>
+      <p class="meta">Предложение появится в кабинете пациента и действует до конца текущих суток по Москве. Анкеты доступны от 18 лет с учётом ограничений выбранной формы.</p>
       <div class="assessment-catalogue">
         {% for choice in assessment_catalogue %}
         <label class="assessment-choice">
@@ -150,54 +150,10 @@
       <div class="form-row">
         {{ ui.field('age_years', 'Возраст, лет', type='text', value=assessment_values.get('age_years', patient.age_years if patient.age_status == 'known' else ''), size='sm',
                     extra={'inputmode': 'numeric', 'maxlength': '3', 'autocomplete': 'off'}) }}
-        {{ ui.field('age_basis', 'Откуда возраст', value=assessment_values.get('age_basis', ''), hint='Например: сверен по документу на приёме.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
+        {{ ui.field('age_basis', 'Откуда возраст', value=assessment_values.get('age_basis', ''), hint='Например: документ или запись приёма.', extra={'maxlength': '1000', 'autocomplete': 'off'}) }}
       </div>
       {{ ui.button('Предложить выбранную анкету') }}
     </form>
-  </section>
-
-  {#- ---------- Возраст ---------- #}
-  <section class="block" id="age-review" aria-labelledby="h-age">
-    <h2 id="h-age">Сверка возраста</h2>
-    {% if age_error %}{{ ui.notice('Сверка не сохранена', age_error, kind='error', id='age-error') }}{% endif %}
-    <p>В карточке: {{ ui.state(state_kind[patient.age_status], overview.age) }}</p>
-    <table class="results records">
-      <caption class="visually-hidden">Источники возраста в записях</caption>
-      <thead><tr><th scope="col">Дата</th><th scope="col">Источник</th><th scope="col">Возраст</th></tr></thead>
-      <tbody>
-        {% for s in age_view.sources %}
-        <tr><td><time class="num" datetime="{{ s.observed_on }}">{{ s.observed_on|short_date }}</time></td>
-          <td>{% if s.kind == 'self_report' %}самоотчёт{% elif s.kind == 'visit' %}запись врача{% elif s.kind == 'first_visit' %}первый приём{% else %}исходный профиль{% endif %}</td>
-          <td>{{ ui.state(state_kind[s.age.status], age_line(s.age)) }}</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% if age_view.reviews %}
-    <h3>Журнал сверок</h3>
-    <table class="results records">
-      <caption class="visually-hidden">Сверки возраста, сначала новые</caption>
-      <thead><tr><th scope="col">Когда</th><th scope="col">Дата рождения</th><th scope="col">Основание</th><th scope="col">Номер</th></tr></thead>
-      <tbody>
-        {% for r in age_view.reviews %}
-        <tr id="age-review-{{ r.id }}"><td><time class="num" datetime="{{ r.recorded_at }}">{{ r.recorded_at|msk }}</time></td><td class="num">{{ r.birth_date|full_date }}</td><td>{{ r.basis }}</td><td class="num id">{{ r.id }}</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% endif %}
-    {% if age_view.current %}
-      {{ ui.notice('Сверка актуальна', 'Источники не менялись после последней сверки.', kind='done') }}
-    {% else %}
-    <form method="post" action="{{ url_for('review_age', patient_id=patient.id) }}" class="action-form">
-      <input type="hidden" name="csrf" value="{{ csrf }}">
-      <input type="hidden" name="request_key" value="{{ age_request_key }}">
-      <input type="hidden" name="sources_fingerprint" value="{{ age_view.fingerprint }}">
-      <h3>Сверить возраст</h3>
-      {{ ui.field('birth_date', 'Сверенная дата рождения', type='date', value=age_values.get('birth_date', ''), required=True, autocomplete='off') }}
-      {{ ui.textarea('basis', 'Основание', value=age_values.get('basis', ''), hint='Какие документы или сведения сверены.', required=True, rows=3) }}
-      {{ ui.choice('reviewed_sources', 'Подтверждение', [('yes', 'Я сверил(а) все источники возраста из таблицы выше')], type='checkbox') }}
-      {{ ui.button('Сохранить сверку') }}
-    </form>
-    {% endif %}
   </section>
 
   {#- ---------- Врачебные сведения ---------- #}

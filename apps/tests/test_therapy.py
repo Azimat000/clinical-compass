@@ -91,7 +91,7 @@ class TherapyTests(unittest.TestCase):
         self.assertIn('&lt;script&gt;synthetic()&lt;/script&gt;', html)
         self.assertNotIn('<script>synthetic()', html)
         self.assertIn('review_indication', html)
-        self.assertIn('#age-review', html)
+        self.assertNotIn('#age-review', html)
         r = self.post('doc-a', '/patients/D01/decisions', self.values(note_age='Сохранить при ошибке', aviandr_basis=''))
         self.assertEqual(400, r.status_code)
         self.assertIn('Сохранить при ошибке', r.get_data(as_text=True))
