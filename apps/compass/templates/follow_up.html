@@ -1,6 +1,7 @@
 {#- Сводка повторного приёма: всё, что записано за период, с переходами к исходным записям. Только чтение, без оценок. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'visit_records.html' as visit_records %}
 {% import 'medication_components.html' as med with context %}
 {% set nav_active = 'queue' %}
 {% block title %}Сводка к приёму{% endblock %}
@@ -48,7 +49,7 @@
   </div>
   <div>
     <span class="label">Приёмы и анкеты</span>
-    {% set seen = data.visits|length + data.encounters|length %}
+    {% set seen = data.visits|length + data.encounters|length + data.doctor_entries|length %}
     {% if seen or data.measured %}<b class="num">{{ seen }}</b> приёмов · <b class="num">{{ data.measured|length }}</b> анкет{% else %}{{ ui.state('unknown', 'приёмов и анкет нет') }}{% endif %}
   </div>
   <div>
@@ -75,7 +76,7 @@
   {% endif %}
 
   <section class="block" id="fu-records" aria-labelledby="h-rec">
-    <h2 id="h-rec">Записи самочувствия</h2>
+    <h2 id="h-rec">Самочувствие пациента</h2>
     {% if data.entries %}
     <table class="results records entry-table">
       <caption class="visually-hidden">Записи за период, сначала новые</caption>
@@ -84,7 +85,7 @@
         {% for e in data.entries %}
         <tr>
           <td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
-          <td>{{ 'Пациент' if e.kind == 'self_report' else 'Врач' }}<span class="sub" translate="no">{{ data.authors.get(e.actor_id, e.actor_id) }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
+          <td>Пациент<span class="sub" translate="no">{{ data.authors.get(e.actor_id, e.actor_id) }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
           <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
           <td>{% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
             {{ med.feedback(e.payload) }}
@@ -101,18 +102,14 @@
     {% else %}
       {{ ui.notice('Записей за период нет', 'Это отсутствие сведений, а не отсутствие жалоб. Уточните самочувствие на приёме.', kind='info') }}
     {% endif %}
-    {% if data.encounters %}
-    <h3>Архивные записи приёма</h3>
-    <ul class="plain">
-      {% for enc in data.encounters %}
-      <li><time class="num" datetime="{{ enc.occurred_at }}">{{ enc.occurred_at|msk }}</time> · <span translate="no">{{ enc.display_name or 'автор не указан' }}</span><p class="entry-text">{{ enc.narrative }}</p><a class="row-link" href="{{ card }}#encounter-{{ enc.id }}">к записи</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
   </section>
 
   <section class="block" id="fu-visits" aria-labelledby="h-visits">
-    <h2 id="h-visits">Приёмы</h2>
+    <h2 id="h-visits">История приёмов</h2>
+    {% if data.doctor_entries %}
+      {{ visit_records.doctor_records(data.doctor_entries, fields, statuses) }}
+    {% endif %}
+    {{ visit_records.archives(data.encounters, patient.id) }}
     {% for v in data.visits %}
     <details class="fold visit"{% if loop.first %} open{% endif %}>
       <summary>{{ visit_kinds.get(v.payload.visit_kind, 'Приём') }} · <time class="num" datetime="{{ v.payload.observed_on }}">{{ v.payload.observed_on|short_date }}</time>
@@ -136,7 +133,7 @@
       </dl>
     </details>
     {% else %}
-      {{ ui.empty('Приёмов за период нет.') }}
+      {% if not data.doctor_entries and not data.encounters %}{{ ui.empty('Приёмов за период нет.') }}{% endif %}
     {% endfor %}
   </section>
 

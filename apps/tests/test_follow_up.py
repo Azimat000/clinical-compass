@@ -70,7 +70,8 @@ class FollowUpTests(unittest.TestCase):
         b=self.entry(day,'doc-a',adverse_events_status='denied')
         outside=self.entry(old,summary='OUTSIDE-INTERVAL')
         data=self.view(day)
-        self.assertEqual({a,b},{e['id'] for e in data['entries']})
+        self.assertEqual({a},{e['id'] for e in data['entries']})
+        self.assertEqual({b},{e['id'] for e in data['doctor_entries']})
         self.assertTrue(any('различаются сведения' in w for w in data['warnings']))
         self.assertEqual(0,data['missing_diary_days'])
         html=self.clients['doc-a'].get(self.summary,query_string={'start':day,'end':day}).text

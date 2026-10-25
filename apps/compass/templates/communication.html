@@ -25,7 +25,7 @@
     <p class="msg-body keep">{{ m.body }}</p>
     {% if m.entry_id or m.task_id %}
     <p class="meta msg-ctx">Относится к:
-      {% if m.entry_id %}<a href="{{ (url_for('demo_patient', patient_id=patient.id) if is_doctor else url_for('patient_diary', patient_id=patient.id)) ~ '#entry-' ~ m.entry_id }}">записи в дневнике</a>{% endif %}{% if m.entry_id and m.task_id %}, {% endif %}{% if m.task_id %}<a href="#task-{{ m.task_id }}">пункту плана</a>{% endif %}
+      {% if m.entry_id %}<a href="{{ url_for('record_location', patient_id=patient.id, entry_id=m.entry_id) }}">{{ 'записи приёма' if m.entry_kind == 'visit' else 'записи самочувствия' }}</a>{% endif %}{% if m.entry_id and m.task_id %}, {% endif %}{% if m.task_id %}<a href="#task-{{ m.task_id }}">пункту плана</a>{% endif %}
     </p>
     {% endif %}
     <ul class="msg-states" aria-label="Состояние сообщения">
@@ -80,7 +80,7 @@
     <details class="compose-more"{% if values.get('entry_id') or values.get('task_id') %} open{% endif %}>
       <summary>Связать с записью или пунктом плана</summary>
       <div class="compose-more-body">
-        {% if entry_options|length > 1 %}{{ ui.select('entry_id', 'Запись в дневнике', entry_options, selected=values.get('entry_id', '') if error_op == 'send' else '', hint='Связь помогает понять, о чём сообщение. Она не заменяет самой записи.') }}{% endif %}
+        {% if entry_options|length > 1 %}{{ ui.select('entry_id', 'Связанная запись', entry_options, selected=values.get('entry_id', '') if error_op == 'send' else '', hint='Связь помогает понять, о чём сообщение. Она не заменяет самой записи.') }}{% endif %}
         {% if task_options|length > 1 %}{{ ui.select('task_id', 'Пункт плана', task_options, selected=values.get('task_id', '') if error_op == 'send' else '') }}{% endif %}
       </div>
     </details>

@@ -1,9 +1,10 @@
 {#- Кабинет пациента. section: today | diary | report | forms. Врач этот шаблон не получает (web.py). -#}
 {% extends 'patient_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'visit_records.html' as visit_records %}
 {% import 'medication_components.html' as med with context %}
-{% set nav_active = {'today': 'today', 'diary': 'diary', 'report': 'diary', 'forms': 'forms'}[section] %}
-{% set titles = {'today': 'Сегодня', 'diary': 'Дневник', 'report': 'Самочувствие', 'forms': 'Анкеты'} %}
+{% set nav_active = {'today': 'today', 'diary': 'diary', 'report': 'diary', 'forms': 'forms', 'visits': 'diary'}[section] %}
+{% set titles = {'today': 'Сегодня', 'diary': 'Дневник', 'report': 'Самочувствие', 'forms': 'Анкеты', 'visits': 'История приёмов'} %}
 {% block title %}{{ titles[section] }}{% endblock %}
 {% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
 {% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
@@ -93,6 +94,7 @@
 
 {% elif section == 'diary' %}
   {{ heading('Дневник') }}
+  {% if doctor_entries %}<p class="p-block"><a href="{{ url_for('patient_visits', patient_id=patient.id) }}">История приёмов</a></p>{% endif %}
   <div class="p-actions">{{ ui.button('Записать самочувствие', kind='primary', size='action', href=url_for('patient_report', patient_id=patient.id)) }}</div>
 
   <section class="p-block" aria-labelledby="h-diary-medications">
@@ -148,6 +150,15 @@
       {% endfor %}
     </ol>
     {% endif %}
+  </section>
+
+{% elif section == 'visits' %}
+  {{ heading('История приёмов') }}
+  <section class="p-block" aria-label="Записи врача">
+    {% if doctor_entries %}
+      {{ visit_records.doctor_records(doctor_entries, record_fields, statuses, calm=True) }}
+    {% else %}{{ ui.empty('Записей врача пока нет.') }}{% endif %}
+    <p><a href="{{ url_for('patient_diary', patient_id=patient.id) }}">Вернуться к дневнику</a></p>
   </section>
 
 {% elif section == 'report' %}

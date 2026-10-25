@@ -92,6 +92,8 @@ def validate(form):
 
 
 def save(db, user, patient_id, kind, form):
+    if kind not in ('self_report', 'visit'):
+        raise RecordError('Неизвестный вид записи.')
     expected = 'patient' if kind == 'self_report' else 'doctor'
     if user['role'] != expected:
         raise RecordError('Эта функция недоступна вашей роли.', 403)
@@ -174,6 +176,14 @@ def history(db, patient_id):
     rows = db.execute('''SELECT e.*,u.display_name FROM clinical_entries e JOIN users u ON u.id=e.actor_id
                         WHERE e.patient_id=? ORDER BY e.observed_on DESC,e.recorded_at DESC,e.id DESC''', (patient_id,)).fetchall()
     return [{**dict(r), 'payload': json.loads(r['payload_json'])} for r in rows]
+
+
+def legacy_encounters(db, patient_id):
+    """Standalone encounters only: linked visit entries are rendered once, with all facts."""
+    return [dict(r) for r in db.execute('''SELECT e.*,u.display_name FROM encounters e
+        LEFT JOIN users u ON u.id=e.author_id WHERE e.patient_id=?
+        AND NOT EXISTS(SELECT 1 FROM clinical_entries c WHERE c.encounter_id=e.id)
+        ORDER BY e.occurred_at DESC,e.id''', (patient_id,))]
 
 
 def warnings(patient, entries):

@@ -387,6 +387,24 @@ def create_app(database=None):
         role('patient')
         return render_patient(patient_id, section='diary')
 
+    @app.get('/demo/<patient_id>/visits')
+    def patient_visits(patient_id):
+        role('patient')
+        return render_patient(patient_id, section='visits')
+
+    @app.get('/patients/<patient_id>/records/<entry_id>')
+    def record_location(patient_id, entry_id):
+        patient_or_404(patient_id)
+        entry = get_db().execute('SELECT kind FROM clinical_entries WHERE id=? AND patient_id=?',
+                                 (entry_id, patient_id)).fetchone()
+        if entry is None:
+            abort(404)
+        if entry['kind'] == 'visit':
+            destination = 'first_visit_page' if g.user['role'] == 'doctor' else 'patient_visits'
+        else:
+            destination = 'demo_patient' if g.user['role'] == 'doctor' else 'patient_diary'
+        return redirect(url_for(destination, patient_id=patient_id) + '#entry-' + entry_id)
+
     @app.get('/demo/<patient_id>/report')
     def patient_report(patient_id):
         role('patient')
@@ -439,6 +457,8 @@ def create_app(database=None):
         current = selected[0] if selected else None
         values = dict(request.form) if error else first_visits.form_values(current) if current else {}
         return interface_response('first_visit.html', patient=patient, visits=items, authors=author_names(items), kinds=decisions.KINDS,
+            doctor_entries=[e for e in records.history(db, patient_id) if e['kind'] == 'visit'],
+            encounters=records.legacy_encounters(db, patient_id), record_fields=records.FIELDS, wellbeing=records.WELLBEING,
             patient_name=overview.person(patient['code'])[0],
             current=current, visit_id=visit_id, values=values, error=error,
             request_key=values.get('request_key') or secrets.token_hex(16), today=records.today().isoformat(),
@@ -623,14 +643,14 @@ def create_app(database=None):
         draft_restored = bool(personal_draft and personal_draft['active'] and form_values is None)
         if draft_restored:
             form_values = personal_draft['values']
-        encounters = db.execute('''SELECT e.* FROM encounters e WHERE e.patient_id=?
-            AND NOT EXISTS(SELECT 1 FROM clinical_entries c WHERE c.encounter_id=e.id)
-            ORDER BY e.occurred_at DESC''', (patient_id,)).fetchall()
+        encounters = records.legacy_encounters(db, patient_id) if g.user['role'] == 'doctor' else []
         relationship = db.execute('''SELECT r.*,u.display_name FROM care_relationships r JOIN users u ON u.id=r.doctor_id
             WHERE r.patient_id=? AND r.ends_at IS NULL AND r.starts_at<=?''', (patient_id, now())).fetchone()
         checks = db.execute('''SELECT c.* FROM relationship_checks c JOIN care_relationships r ON r.id=c.relationship_id
             WHERE r.patient_id=? AND r.ends_at IS NULL ORDER BY c.received_at DESC LIMIT 20''', (patient_id,)).fetchall()
-        entries = records.history(db, patient_id)
+        all_entries = records.history(db, patient_id)
+        entries = [e for e in all_entries if e['kind'] == 'self_report']
+        doctor_entries = [e for e in all_entries if e['kind'] == 'visit']
         measured = assessments.history(db, g.user, patient_id)
         pending = assessments.pending(db, g.user, patient_id)
         is_patient = g.user['role'] == 'patient'
@@ -644,10 +664,11 @@ def create_app(database=None):
                                personal_draft=personal_draft, draft_restored=draft_restored,
                                draft_revision=(form_values.get('draft_revision', personal_draft['revision']) if form_values is not None else personal_draft['revision']) if personal_draft else None,
                                patient=patient, encounters=encounters, relationship=relationship, checks=checks,
+                               doctor_entries=doctor_entries,
                                clinical_panel=clinical_rules.panel(db, g.user, patient_id) if g.user['role']=='doctor' else None,
                                clinical_context_key=secrets.token_hex(16),
                                route_items=routing.summaries(db, g.user, patient_id),
-                               entries=entries, record_warnings=records.warnings(patient, entries),
+                               entries=entries, record_warnings=records.warnings(patient, all_entries),
                                wellbeing_trend=records.wellbeing_trend(entries),
                                measured=measured, assessment_trends=assessments.trends(measured) if g.user['role']=='doctor' else [],
                                pending_assessments=pending, assessment_form=assessments.definition(),
@@ -753,10 +774,10 @@ def create_app(database=None):
             if json_reply:
                 return jsonify(error=str(error)), error.status
             # Keep entered values on error without creating a partial record.
-            if error.status == 400 or (error.status == 409 and 'medication_feedback_version' in request.form):
+            if kind == 'self_report' and (error.status == 400 or (error.status == 409 and 'medication_feedback_version' in request.form)):
                 return render_patient(patient_id, request.form, str(error), section='report'), error.status
             return interface_response('result.html', title='Запись не сохранена', message=str(error)), error.status
-        destination = 'demo_patient' if kind == 'visit' else 'patient_diary'
+        destination = 'first_visit_page' if kind == 'visit' else 'patient_diary'
         location = url_for(destination, patient_id=patient_id) + '#entry-' + entry_id
         if json_reply:
             return jsonify(location=location)

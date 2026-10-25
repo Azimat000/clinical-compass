@@ -188,7 +188,9 @@ class DoctorCabinetTests(unittest.TestCase):
         self.assertIn('Записей за период нет', page)
         self.assertIn('отсутствие сведений, а не отсутствие жалоб', page)
         self.assertIn('ни одной за 30 дн.', page)
-        self.assertIn('Приёмов за период нет', page)
+        self.assertIn('История приёмов', page)
+        self.assertIn('Архивные записи приёма', page)
+        self.assertNotIn('Приёмов за период нет', page)
         self.assertIn('Анкет за период нет. Это не означает, что состояние в норме', page)
         self.assertIn('Подтверждённого плана за период нет. Это не означает, что план не нужен', page)
 

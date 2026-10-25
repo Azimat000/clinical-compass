@@ -33,7 +33,7 @@ class InterfaceRemovedTests(unittest.TestCase):
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
                           'doctor_base.html', 'dashboard.html', 'invitation_content.html', 'invitation_manage.html', 'doctor_patient.html', 'follow_up.html',
                           'decisions.html', 'first_visit.html', 'imports.html',
-                          'communication.html', 'plan.html', 'medication_components.html', 'medication_editor.html', 'assessment_charts.html'},
+                          'communication.html', 'plan.html', 'visit_records.html', 'medication_components.html', 'medication_editor.html', 'assessment_charts.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
             response = self.app.test_client().get('/static/' + name)

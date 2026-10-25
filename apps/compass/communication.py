@@ -151,6 +151,7 @@ def report(db,user,patient_id,task_id,form):
 def view(db,user,patient_id):
     r=pair(db,user,patient_id)
     messages=[dict(m) for m in db.execute('''SELECT m.*,x.recipient_id,x.entry_id,x.task_id,
+        (SELECT kind FROM clinical_entries WHERE id=x.entry_id) AS entry_kind,
         (SELECT occurred_at FROM message_receipts WHERE message_id=m.id AND kind='received') AS received_at,
         (SELECT occurred_at FROM message_receipts WHERE message_id=m.id AND kind='read') AS read_at
         FROM messages m JOIN conversations c ON c.id=m.conversation_id JOIN message_context x ON x.message_id=m.id

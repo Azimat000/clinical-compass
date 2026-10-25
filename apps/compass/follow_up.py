@@ -60,13 +60,12 @@ def _view(db, user, patient_id, values):
         return day is not None and start <= day <= end
 
     authors = {r['id']: r['display_name'] for r in db.execute('SELECT id,display_name FROM users')}
-    entries = [e for e in records.history(db, patient_id) if includes(e['observed_on'])]
+    all_entries = [e for e in records.history(db, patient_id) if includes(e['observed_on'])]
+    entries = [e for e in all_entries if e['kind'] == 'self_report']
+    doctor_entries = [e for e in all_entries if e['kind'] == 'visit']
     measured = [a for a in assessments.history(db, user, patient_id) if includes(a['observed_on'])]
     # Legacy encounters are separate sources, not duplicate representations of clinical entries.
-    encounters = [dict(r) for r in db.execute('''SELECT e.*,u.display_name FROM encounters e
-        LEFT JOIN users u ON u.id=e.author_id WHERE e.patient_id=?
-        AND NOT EXISTS(SELECT 1 FROM clinical_entries c WHERE c.encounter_id=e.id)
-        ORDER BY e.occurred_at DESC,e.id''', (patient_id,)) if includes(r['occurred_at'])]
+    encounters = [e for e in records.legacy_encounters(db, patient_id) if includes(e['occurred_at'])]
     latest_visits = {}
     for v in first_visits.history(db, user, patient_id):
         latest_visits.setdefault(v['visit_id'], v)
@@ -104,7 +103,7 @@ def _view(db, user, patient_id, values):
             tasks.append(task)
 
     days = {e['observed_on'] for e in entries if e['kind'] == 'self_report'}
-    warnings = records.warnings(patient, entries)
+    warnings = records.warnings(patient, all_entries)
     for v in visits:
         if v['payload']['age']['status'] == 'conflicting':
             warnings.append(f'{v["payload"]["observed_on"]}: противоречие возраста в приёме {v["visit_id"]}.')
@@ -117,6 +116,6 @@ def _view(db, user, patient_id, values):
             warnings.append(f'Пункт «{task["label"]}»: последняя отметка — противоречие. '
                             'Все авторы и отметки сохранены в разделе выполнения.')
     return dict(start=start, end=end, generated_at=now(), entries=entries, measured=measured, assessment_trends=assessments.trends(measured),
-                encounters=encounters, visits=visits, plans=plans, tasks=tasks, authors=authors,
+                encounters=encounters, doctor_entries=doctor_entries, visits=visits, plans=plans, tasks=tasks, authors=authors,
                 warnings=warnings,
                 missing_diary_days=(date.fromisoformat(end)-date.fromisoformat(start)).days+1-len(days))

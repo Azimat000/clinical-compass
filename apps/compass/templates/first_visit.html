@@ -1,6 +1,7 @@
 {#- Приём: запись сведений врача с источниками до диагноза. Версии неизменяемы; завершённая запись закрыта для правок. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'visit_records.html' as visit_records %}
 {% set nav_active = 'queue' %}
 {% set weekday, day, iso = sheet_date() %}
 {% set card = url_for('demo_patient', patient_id=patient.id) %}
@@ -208,7 +209,7 @@
   </section>
 
   <section class="block" id="v-list" aria-labelledby="h-list">
-    <h2 id="h-list">Приёмы</h2>
+    <h2 id="h-list">История приёмов</h2>
     {% if seen.latest %}
     <table class="results records">
       <caption class="visually-hidden">Сохранённые приёмы, сначала новые</caption>
@@ -240,8 +241,13 @@
       {% endif %}
     {% endif %}
     {% else %}
-      {{ ui.empty('Приёмов ещё нет. Запишите жалобы или отметьте, что сведения пока не собраны.') }}
+      {% if not doctor_entries and not encounters %}{{ ui.empty('Приёмов ещё нет. Запишите жалобы или отметьте, что сведения пока не собраны.') }}{% endif %}
     {% endif %}
+    {% if doctor_entries %}
+      <h3>Записи врача</h3>
+      {{ visit_records.doctor_records(doctor_entries, record_fields, statuses) }}
+    {% endif %}
+    {{ visit_records.archives(encounters, patient.id) }}
     {% if current %}<p class="meta"><a href="{{ url_for('first_visit_page', patient_id=patient.id, visit_id='new') }}">Начать новый приём</a></p>{% endif %}
   </section>
 </div>

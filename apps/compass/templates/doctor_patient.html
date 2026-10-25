@@ -1,6 +1,7 @@
 {#- Карточка пациента для врача. Разделы одной страницей, переходы по якорям; действия — обычные формы. -#}
 {% extends 'doctor_base.html' %}
 {% import 'components.html' as ui %}
+{% import 'visit_records.html' as visit_records %}
 {% import 'medication_components.html' as med with context %}
 {% set nav_active = 'queue' %}
 {% block title %}{{ overview.name|truncate(60, True, '…') }}{% endblock %}
@@ -23,13 +24,13 @@
 
 {% macro records_table(rows) %}
 <table class="results records entry-table">
-  <caption class="visually-hidden">Записи пациента и врача, сначала новые</caption>
+  <caption class="visually-hidden">Самоотчёты пациента, сначала новые</caption>
   <thead><tr><th scope="col">Дата</th><th scope="col">Кто записал</th><th scope="col">Самочувствие</th><th scope="col">Что записано</th></tr></thead>
   <tbody>
     {% for e in rows %}
     <tr id="entry-{{ e.id }}">
       <td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
-      <td>{{ 'Пациент' if e.kind == 'self_report' else 'Врач' }}<span class="sub" translate="no">{{ e.display_name }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
+      <td>Пациент<span class="sub" translate="no">{{ e.display_name }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
       <td>{{ ui.wellbeing([e.payload.wellbeing], decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
       <td>
         {% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
@@ -80,14 +81,14 @@
 </div>
 
 <nav class="jump" aria-label="Разделы карточки">
-  <a href="#records">Записи</a><a href="#assessments">Анкеты</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
+  <a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a><a href="#clinical-rules">Врачебные сведения</a><a href="#link">Связь</a>
 </nav>
 
 <div class="card-body">
   {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', False) }}
   {#- ---------- Записи ---------- #}
   <section class="block" id="records" aria-labelledby="h-records">
-    <h2 id="h-records">Записи и самочувствие</h2>
+    <h2 id="h-records">Самочувствие пациента</h2>
     {% if record_warnings %}
       <div id="warnings">
       {% for w in record_warnings %}{% set text, entry_id = w|note_parts %}
@@ -107,14 +108,15 @@
     {% else %}
       {{ ui.empty('Записей пока нет. Пустой список — отсутствие сведений, а не отсутствие жалоб.') }}
     {% endif %}
-    {% if encounters %}
-    <h3>Архивные записи приёма</h3>
-    <ul class="plain">
-      {% for enc in encounters %}
-      <li id="encounter-{{ enc['id'] }}"><time class="num" datetime="{{ enc['occurred_at'] }}">{{ enc['occurred_at']|msk }}</time><p class="entry-text">{{ enc['narrative'] }}</p></li>
-      {% endfor %}
-    </ul>
+  </section>
+
+  <section class="block" id="visit-history" aria-labelledby="h-visit-history">
+    <h2 id="h-visit-history">История приёмов</h2>
+    <p><a href="{{ url_for('first_visit_page', patient_id=patient.id) }}#v-list">Все приёмы и новая запись</a></p>
+    {% if doctor_entries %}
+      {{ visit_records.doctor_records(doctor_entries, record_fields, statuses) }}
     {% endif %}
+    {{ visit_records.archives(encounters, patient.id) }}
   </section>
 
   {#- ---------- Анкеты ---------- #}

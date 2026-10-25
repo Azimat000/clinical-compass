@@ -1,0 +1,41 @@
+{
+  "process_restart": [
+    {
+      "manual_decision_preserved": true,
+      "restart_round": 1,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "015_medication_marks",
+        "status": "ok"
+      },
+      "shared_report": true,
+      "foreign_denied": true,
+      "shared_clinical_history": true,
+      "doctor_assessments_preserved": true,
+      "patient_scores_hidden": true
+    },
+    {
+      "manual_decision_preserved": true,
+      "restart_round": 2,
+      "health": {
+        "foreign_keys": true,
+        "journal_mode": "delete",
+        "schema_version": "015_medication_marks",
+        "status": "ok"
+      },
+      "shared_report": true,
+      "foreign_denied": true,
+      "shared_clinical_history": true,
+      "doctor_assessments_preserved": true,
+      "patient_scores_hidden": true
+    }
+  ],
+  "durable_events_after_restart": 7,
+  "durable_routine_notifications": 1,
+  "durable_technical_reports": 1,
+  "durable_clinical_entries": 2,
+  "durable_adverse_events": 1,
+  "durable_assessments": 2,
+  "integrity": "ok"
+}

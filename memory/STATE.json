@@ -2,7 +2,7 @@
   "schema_version": 1,
   "updated_on": "2026-10-25",
   "current_slice": null,
-  "last_accepted_slice": "S41",
+  "last_accepted_slice": "S42",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -431,6 +431,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S41",
       "handoff": "memory/sessions/S41.md",
+      "reason": null
+    },
+    "S42": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S42",
+      "handoff": "memory/sessions/S42.md",
       "reason": null
     }
   },
@@ -898,6 +904,16 @@
       "age_inputs_removed": true,
       "stored_sources_used": true,
       "age_limits_preserved": true
+    },
+    "record_routing": {
+      "date": "2026-10-25",
+      "slice": "S42",
+      "patient_diary": "self_report only",
+      "physician_history": "short visit entries, standalone archives and detailed versioned visits",
+      "storage_migration": false,
+      "typed_record_links": true,
+      "evidence": "evidence/S42/acceptance.md",
+      "clinical_validation": false
     }
   },
   "latest_roster": {

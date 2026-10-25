@@ -159,8 +159,11 @@ class MessagesTests(unittest.TestCase):
         task, _ = self.task()
         self.say(entry_id=entry, task_id=task['id'])
         doctor, patient = self.page(), self.page(who='pat-a')
-        self.assertIn('/demo/D01#entry-' + entry, doctor)
-        self.assertIn('/demo/D01/diary#entry-' + entry, patient)
+        for who, page in [('doc-a', doctor), ('pat-a', patient)]:
+            self.assertIn('/patients/D01/records/' + entry, page)
+            response = self.clients[who].get('/patients/D01/records/' + entry)
+            self.assertEqual(302, response.status_code)
+            self.assertIn('id="entry-' + entry + '"', self.clients[who].get(response.location).text)
         for page in (doctor, patient):
             self.assertIn('href="#task-' + task['id'] + '"', page)
             self.assertIn('id="task-' + task['id'] + '"', page)

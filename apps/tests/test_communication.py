@@ -128,7 +128,7 @@ class CommunicationTests(unittest.TestCase):
         self.assertEqual(303,self.send(entry_id=entry,task_id=task['id'])[0].status_code)
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM adverse_events').fetchone()[0])
         page=self.clients['doc-a'].get(self.url).get_data(as_text=True)
-        self.assertIn('#entry-'+entry,page);self.assertIn('#task-'+task['id'],page)
+        self.assertIn('/patients/D01/records/'+entry,page);self.assertIn('#task-'+task['id'],page)
 
     def test_all_eight_functions_connected_two_cabinets(self):
         from apps.compass import assessments

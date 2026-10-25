@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "processes": {
+    "server": 79253,
+    "worker": 79267
+  },
+  "database": "var/compass.sqlite3",
+  "readiness_probe_note": "Initial restart script used /health (404); verified correct /healthz and live browser session afterwards."
+}

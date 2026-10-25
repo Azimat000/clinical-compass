@@ -1,0 +1,43 @@
+{% import 'components.html' as ui %}
+{% set words = {'better': 'Лучше', 'same': 'Без изменений', 'worse': 'Хуже', 'unknown': 'Не указано'} %}
+{% set state_kind = {'known': 'known', 'unknown': 'unknown', 'denied': 'denied', 'conflicting': 'conflict'} %}
+{% macro age_line(age) -%}
+  {%- set n = age.years if age.years is not none else age.get('calculated_years') -%}
+  {%- if age.status == 'known' and n is not none -%}{{ n|years }}{%- elif age.status == 'known' and age.birth_date -%}рождение {{ age.birth_date|full_date }}{%- elif age.status == 'conflicting' -%}противоречие: {{ age.detail }}{%- else -%}не указан{%- endif -%}
+{%- endmacro %}
+
+{% macro doctor_records(rows, record_fields, statuses, calm=False) %}
+<table class="results records entry-table">
+  <caption class="visually-hidden">Записи приёмов врача, сначала новые</caption>
+  <thead><tr><th scope="col">Дата</th><th scope="col">Кто записал</th><th scope="col">Самочувствие</th><th scope="col">Что записано</th></tr></thead>
+  <tbody>
+    {% for e in rows %}
+    <tr id="entry-{{ e.id }}">
+      <td><time class="num" datetime="{{ e.observed_on }}">{{ e.observed_on|short_date }}</time></td>
+      <td>Врач<span class="sub" translate="no">{{ e.display_name }}</span><span class="sub">Получено: <time datetime="{{ e.recorded_at }}">{{ e.recorded_at|msk }}</time></span></td>
+      <td>{{ ui.wellbeing([e.payload.wellbeing], calm=calm, decorative=True) }}{{ words[e.payload.wellbeing] }}</td>
+      <td>
+        {% if e.summary %}<p class="entry-text">{{ e.summary }}</p>{% endif %}
+        <ul class="fields">
+          {% for code, field in e.payload.fields.items() %}
+          <li>{{ ui.state(state_kind[field.status], record_fields[code]) }}{% if field.text %}<span class="field-text">{{ field.text }}</span>{% else %}<span class="sub">{{ statuses[field.status] }}</span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+        <span class="sub">Возраст в записи: {{ age_line(e.payload.age) }}</span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro archives(encounters, patient_id) %}
+{% if encounters %}
+<h3>Архивные записи приёма</h3>
+<ul class="plain">
+  {% for enc in encounters %}
+  <li id="encounter-{{ enc.id }}"><time class="num" datetime="{{ enc.occurred_at }}">{{ enc.occurred_at|msk }}</time> · <span translate="no">{{ enc.display_name or 'автор не указан' }}</span><p class="entry-text">{{ enc.narrative }}</p><a href="{{ url_for('first_visit_page', patient_id=patient_id) }}#encounter-{{ enc.id }}">к записи</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
