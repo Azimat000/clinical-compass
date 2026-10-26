@@ -26,7 +26,7 @@ class BackendContractTests(unittest.TestCase):
         test_access.AccessTests.setUp(self)
         test_access.AccessTests.link(self)
         self.user = {'id': 'doc-a', 'role': 'doctor'}
-        self.db.execute("UPDATE patients SET age_status='known',age_years=35,birth_date=NULL,created_at=? WHERE id='D01'", (now(),))
+        self.db.execute("UPDATE patients SET age_status='known',age_years=35,birth_date=NULL,created_at=? WHERE id='D01'", (records.today().isoformat()+'T00:00:00+03:00',))
         self.url = '/api/v1/patients/D01/analyses'
 
     tearDown = test_access.AccessTests.tearDown
@@ -227,6 +227,14 @@ class BackendContractTests(unittest.TestCase):
             self.assertEqual(expected, value['status'])
             self.assertIsNone(value['result'])
             self.assertEqual('blocked', value['release']['status'])
+
+    def test_prior_day_integer_age_still_requires_clarification_at_adult_boundary(self):
+        from datetime import timedelta
+        observed=(records.today()-timedelta(days=1)).isoformat()
+        self.db.execute("UPDATE patients SET age_years=17,created_at=? WHERE id='D01'",(observed+'T00:00:00+03:00',))
+        value=self.request().json
+        self.assertEqual('insufficient_data',value['status'])
+        self.assertIsNone(value['result'])
 
     def test_concurrent_retries_create_one_run_and_one_request_audit(self):
         body = self.body()

@@ -1,0 +1,15 @@
+E............................................
+======================================================================
+ERROR: test_all_new_cases_are_fresh_and_have_only_authored_notes_and_empty_defaults (apps.tests.test_backend_diagnosis_codec.CleanCorpusTests.test_all_new_cases_are_fresh_and_have_only_authored_notes_and_empty_defaults) (case='H02')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_codec.py", line 151, in test_all_new_cases_are_fresh_and_have_only_authored_notes_and_empty_defaults
+    metrics=model.preflight(service.payload(snapshot,kind),codec.schema(kind),cfg)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_model.py", line 135, in preflight
+    raise ModelError('call_cost_limit')
+apps.compass.backend_model.ModelError: call_cost_limit
+
+----------------------------------------------------------------------
+Ran 45 tests in 12.440s
+
+FAILED (errors=1)

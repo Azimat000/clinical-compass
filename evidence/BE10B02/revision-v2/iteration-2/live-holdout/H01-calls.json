@@ -1,0 +1,544 @@
+[
+  {
+    "branch": "depressive_episode",
+    "payload_sha256": "93983d1a4c807e323b186c35ad684474854a826851837ed1d0c83437ff36c6fd",
+    "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Сейчас описан один общий период продолжительностью 19 дней."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Настроение снижено, интерес и удовольствие утрачены."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Плохо спит и трудно сосредоточиться."
+          },
+          {
+            "id": "q4",
+            "unit_id": "u14",
+            "quote": "Утомляемость и снижение энергии отрицает."
+          },
+          {
+            "id": "q5",
+            "unit_id": "u14",
+            "quote": "Работать стало труднее, но значительного ограничения повседневного функционирования нет."
+          },
+          {
+            "id": "q6",
+            "unit_id": "u14",
+            "quote": "Ни один симптом не имеет значительной выраженности."
+          },
+          {
+            "id": "q7",
+            "unit_id": "u14",
+            "quote": "Снижение аппетита, чувство вины, снижение самооценки, пессимизм и суицидные и самоповреждающие мысли или действия отрицает."
+          },
+          {
+            "id": "q8",
+            "unit_id": "u14",
+            "quote": "Раньше депрессивных эпизодов не было."
+          },
+          {
+            "id": "q9",
+            "unit_id": "u14",
+            "quote": "При текущем расспросе отрицает когда-либо бывшие манию и гипоманию."
+          },
+          {
+            "id": "q10",
+            "unit_id": "u14",
+            "quote": "Врач явно исключил психоз, ступор, органическую, лекарственную, связанную с веществами и иную первичную причину."
+          },
+          {
+            "id": "q11",
+            "unit_id": "u14",
+            "quote": "Все перечисленные текущие проявления относятся к одному и тому же нынешнему периоду."
+          }
+        ],
+        "facts": [
+          {
+            "id": "appetite",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "concentration",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "functional_difficulty",
+            "state": "present",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "guilt",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "loss_interest",
+            "state": "present",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "low_energy",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "low_mood",
+            "state": "present",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "major_functional_impairment",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "marked_symptom_intensity",
+            "state": "denied",
+            "refs": [
+              "q6"
+            ]
+          },
+          {
+            "id": "medication_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "organic_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "pessimism",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "prior_depressive_episode",
+            "state": "denied",
+            "refs": [
+              "q8"
+            ]
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "same_current_period",
+            "state": "present",
+            "refs": [
+              "q11"
+            ]
+          },
+          {
+            "id": "self_esteem",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "self_harm",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "sleep",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "substance_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          }
+        ],
+        "duration": {
+          "state": "known",
+          "value": 19,
+          "refs": [
+            "q1"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+        "elapsed_seconds": 3.368,
+        "usage": {
+          "prompt_tokens": 2878,
+          "completion_tokens": 818,
+          "total_tokens": 3696
+        },
+        "cache_hit_tokens": 256,
+        "cache_miss_tokens": 2622,
+        "estimated_peak_cost_nano_usd": 1769736,
+        "estimated_offpeak_cost_nano_usd": 884868,
+        "cost_ceiling_micro_usd": 6968,
+        "reservation_micro_usd": 18186,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  },
+  {
+    "branch": "generalized_anxiety",
+    "payload_sha256": "c4a5e91d433cfc09269e13bd731ba052e10d91bbe902f66fea13e8c72551f473",
+    "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Сейчас описан один общий период продолжительностью 19 дней."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Настроение снижено, интерес и удовольствие утрачены."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Плохо спит и трудно сосредоточиться."
+          },
+          {
+            "id": "q4",
+            "unit_id": "u14",
+            "quote": "Утомляемость и снижение энергии отрицает."
+          },
+          {
+            "id": "q5",
+            "unit_id": "u14",
+            "quote": "Работать стало труднее, но значительного ограничения повседневного функционирования нет."
+          },
+          {
+            "id": "q6",
+            "unit_id": "u14",
+            "quote": "Ни один симптом не имеет значительной выраженности."
+          },
+          {
+            "id": "q7",
+            "unit_id": "u14",
+            "quote": "Снижение аппетита, чувство вины, снижение самооценки, пессимизм и суицидные и самоповреждающие мысли или действия отрицает."
+          },
+          {
+            "id": "q8",
+            "unit_id": "u14",
+            "quote": "Раньше депрессивных эпизодов не было."
+          },
+          {
+            "id": "q9",
+            "unit_id": "u14",
+            "quote": "При текущем расспросе отрицает когда-либо бывшие манию и гипоманию."
+          },
+          {
+            "id": "q10",
+            "unit_id": "u14",
+            "quote": "Врач явно исключил психоз, ступор, органическую, лекарственную, связанную с веществами и иную первичную причину."
+          },
+          {
+            "id": "q11",
+            "unit_id": "u14",
+            "quote": "Все перечисленные текущие проявления относятся к одному и тому же нынешнему периоду."
+          }
+        ],
+        "facts": [
+          {
+            "id": "abdominal_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "breathlessness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "cannot_relax",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "chest_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "choking",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "derealization",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dizziness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dry_mouth",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_dying",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_losing_control",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "generalized_anxiety",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "hot_cold",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "hypochondriacal_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "irritability",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "medication_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "muscle_tension",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "ocd",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "on_edge",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "organic_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "palpitations",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "panic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "paresthesia",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "phobic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "same_current_period",
+            "state": "present",
+            "refs": [
+              "q11"
+            ]
+          },
+          {
+            "id": "somatic_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "startle",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "substance_cause",
+            "state": "denied",
+            "refs": [
+              "q10"
+            ]
+          },
+          {
+            "id": "sweating",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "throat_lump",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "tremor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_concentration",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_sleep_onset",
+            "state": "unknown",
+            "refs": []
+          }
+        ],
+        "duration": {
+          "state": "unknown",
+          "value": null,
+          "refs": []
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+        "elapsed_seconds": 3.735,
+        "usage": {
+          "prompt_tokens": 3196,
+          "completion_tokens": 985,
+          "total_tokens": 4181
+        },
+        "cache_hit_tokens": 1920,
+        "cache_miss_tokens": 1276,
+        "estimated_peak_cost_nano_usd": 1576320,
+        "estimated_offpeak_cost_nano_usd": 788160,
+        "cost_ceiling_micro_usd": 8121,
+        "reservation_micro_usd": 19540,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]

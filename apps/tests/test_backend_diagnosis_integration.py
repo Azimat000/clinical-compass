@@ -1,12 +1,14 @@
 """Mechanics only. Real semantic evaluation is separate fixed synthetic corpus."""
 from copy import deepcopy
 import json
+from pathlib import Path
 import sqlite3
 import unittest
 from unittest.mock import patch
 from apps.compass import backend_diagnosis_service as service, backend_analyses as analyses
 from apps.compass import backend_jobs as jobs,backend_risk_context as context
 from apps.tests import test_backend_diagnoses as legacy,test_backend_contracts,test_access
+from apps.tests.diagnosis_fixtures import BranchModel, named_responses
 
 class DiagnosisIntegrationTests(unittest.TestCase):
     setUp=legacy.DiagnosisTests.setUp
@@ -23,7 +25,7 @@ class DiagnosisIntegrationTests(unittest.TestCase):
         self.db.execute('UPDATE backend_job_settings SET enabled=1,generation_version=?',(service.EXECUTION_VERSION,))
 
     def fixture(self,positive=False):
-        self.enable();self.diary(summary='Авторское вымышленное основание технического теста, не медицинский случай.')
+        self.enable();self.diary(summary='Авторское вымышленное основание технического теста, не медицинский случай: 14 дней, 6 месяцев.')
         run=analyses.create(self.db,self.user,'D01',self.body('diagnosis'));work=jobs.claim(self.db,'generation')
         raw={'quotes':[],'facts':[[] for _ in range(56)],'durations':{k:{'value':None,'refs':[]} for k in service.legacy.KINDS[:2]},'leading':None}
         if positive:
@@ -38,7 +40,7 @@ class DiagnosisIntegrationTests(unittest.TestCase):
         return run,work,raw
 
     def outcome(self,work,raw):
-        return service.execute('diagnosis',work['snapshot'],legacy.Model(raw))
+        return service.execute('diagnosis',work['snapshot'],BranchModel(named_responses(raw)))
 
     def test_ready_atomic_http_idempotency_details_no_clinical_actions(self):
         run,work,raw=self.fixture(True);before=test_backend_contracts.table_rows(self.db)
@@ -100,6 +102,19 @@ class DiagnosisIntegrationTests(unittest.TestCase):
                 # Finish pending work before the next independent fixture.
                 self.db.execute("UPDATE backend_jobs SET state='done',token=NULL,lease_until=NULL WHERE state IN ('pending','running')")
 
+    def test_existing_queue_retry_recovers_format_without_partial_publication(self):
+        run,work,raw=self.fixture(True)
+        # Return the initial lease through the same technical retry transition.
+        self.assertTrue(jobs.finish(self.db,work,error='executor_error'))
+        self.assertNotIn('diagnosis_context',analyses._latest(self.db,run['run_id']))
+        self.db.execute("UPDATE backend_jobs SET available_at='2000'")
+        self.assertTrue(jobs.process_one(self.db,'generation',executor=lambda op,snapshot:self.outcome({'snapshot':snapshot},raw)))
+        value=analyses.read(self.db,self.user,'D01',run['run_id'])
+        self.assertEqual('ready',value['status'])
+        attempts=self.db.execute('SELECT outcome FROM backend_job_attempts WHERE run_id=? ORDER BY attempt',(run['run_id'],)).fetchall()
+        self.assertEqual(['retry','done'],[r[0] for r in attempts])
+        self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
+
     def test_publication_rollback_and_default_executor_missing_credentials(self):
         run,work,raw=self.fixture(True);outcome=self.outcome(work,raw)
         with patch.object(analyses,'_append',side_effect=sqlite3.IntegrityError('synthetic')):
@@ -126,7 +141,7 @@ class AdmissionAndCancelTests(unittest.TestCase):
 
     def test_failed_quality_blocks_default_before_budget_or_transport(self):
         _,work,_=self.fixture()
-        with patch('apps.compass.backend_model.DeepSeek',side_effect=AssertionError('must not initialize')):
+        with patch.object(service.json,'loads',return_value={'pass':False}), patch('apps.compass.backend_model.DeepSeek',side_effect=AssertionError('must not initialize')):
             with self.assertRaisesRegex(ValueError,'diagnosis_quality_not_admitted'):
                 service.execute('diagnosis',work['snapshot'])
         self.assertTrue(jobs.finish(self.db,work,error='diagnosis_quality_not_admitted'))
@@ -145,5 +160,34 @@ class AdmissionAndCancelTests(unittest.TestCase):
             self.assertEqual(200,response.status_code);self.assertEqual('failed',response.json['status'])
         self.assertFalse(jobs.finish(self.db,work,outcome))
         self.assertEqual(0,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
+
+class ExactAdmissionTests(AdmissionAndCancelTests):
+    # Reuse only the mechanics helpers; avoid inheriting the previous test methods.
+    test_failed_quality_blocks_default_before_budget_or_transport=None
+    test_http_cancel_csrf_roles_repetition_late_result_and_no_side_effect_get=None
+
+    def grade(self, value):
+        original=Path.read_text
+        target=service.criteria.ROOT/'evidence/BE10/diagnosis-quality.json'
+        def read(path,*args,**kw):
+            return json.dumps(value) if path==target else original(path,*args,**kw)
+        return patch.object(Path,'read_text',new=read)
+
+    def test_pass_from_another_runtime_cannot_initialize_adapter(self):
+        _,work,_=self.fixture()
+        with self.grade({'pass':True,'runtime_sha256':'wrong'}), patch('apps.compass.backend_model.DeepSeek',side_effect=AssertionError('must not initialize')):
+            with self.assertRaisesRegex(ValueError,'diagnosis_quality_not_admitted'):
+                service.execute('diagnosis',work['snapshot'])
+
+    def test_exact_synthetic_admission_uses_unchanged_ceiling_without_real_network(self):
+        _,work,raw=self.fixture(True);adapter=BranchModel(named_responses(raw))
+        runtime=service.snapshots.digest(service.release())
+        with self.grade({'pass':True,'runtime_sha256':runtime}), patch('apps.compass.backend_model.Budget',return_value=object()) as budget, patch('apps.compass.backend_model.DeepSeek',return_value=adapter) as constructor:
+            report=service.execute('diagnosis',work['snapshot'])
+        self.assertEqual('depressive_episode',report['diagnosis_report']['context']['leading'])
+        budget.assert_called_once();constructor.assert_called_once()
+        cfg=constructor.call_args.args[0]
+        self.assertEqual(1000000,cfg.total_micro_usd);self.assertEqual(20000,cfg.per_call_micro_usd)
+        self.assertEqual(2,len(adapter.calls))
 
 if __name__=='__main__':unittest.main()

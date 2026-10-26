@@ -1,84 +1,66 @@
 {
-  "version": "diagnosis-workflow-v1",
-  "timestamp_utc": "2026-10-26T20:28:44.983674+00:00",
-  "fixed_dataset": {
-    "cases_sha256": "ac0453f6146fb7d7c5364ec73021eb2f53c4c7003d928cfaf186d9481d2509b4",
-    "policy_sha256": "85b76a25ef4445b0c51e023b195ddd546200263fcbb27537741c11f4b3c5d07f",
-    "before_model_calls": true
-  },
+  "version": "diagnosis-workflow-v5",
+  "pass": true,
+  "admitted": "synthetic_only",
+  "runtime_sha256": "997afee804b7ce8b81c3d5ef175e1f05756aa44e37d64a0ac64515c0997f0cc8",
+  "clinical_ready": false,
   "independent_clinical_review": false,
-  "test_double": false,
-  "expected_cases": 8,
-  "completed_cases": 8,
-  "valid_responses": 3,
-  "leading_exact": 2,
-  "disposition_exact": 1,
-  "alternative_fact_checks": {
-    "correct": 1,
-    "expected": 22,
-    "completed": 9
+  "fixed_dataset": {
+    "development_sha256": "15a8beabe54055114d0bef48e6770d88620571c1733f4726109bfdfbc3c7d63f",
+    "holdout_sha256": "b1721990bbedac282f60ed17ff425cea9d4765c9659376c0e2bbd6eaf6923372",
+    "protocol_sha256": "84436402f2af5869e8460484364f87214a88b9194793229ad268cba37a91ce72",
+    "runtime_sha256": "997afee804b7ce8b81c3d5ef175e1f05756aa44e37d64a0ac64515c0997f0cc8",
+    "fixture_sha256": "2d565b510bc1089cbc62f55b3e16972fc91c2e1325953f6c8884699bd0a5bfa5",
+    "frozen_before_live": true,
+    "independent_clinical_review": false
   },
-  "dangerous_omissions": {
-    "missed": 2,
-    "expected_positive_facts": 3,
-    "unassessed_cases": [
-      "anxiety",
-      "too_short",
-      "screen_only",
-      "conflict",
-      "unrelated"
-    ]
+  "metrics": {
+    "cases": 8,
+    "valid": 8,
+    "leading": 8,
+    "disposition": 8,
+    "facts": 91,
+    "expected_facts": 91,
+    "alternative_facts": 36,
+    "expected_alternative_facts": 36,
+    "durations": 16,
+    "expected_durations": 16,
+    "dangerous_positive_facts": 6,
+    "dangerous_omissions": 0,
+    "raw_model_facts_correct": 82,
+    "raw_model_expected_facts": 91,
+    "raw_model_alternative_facts_correct": 28,
+    "raw_model_expected_alternative_facts": 36,
+    "queue_attempts": 8
   },
-  "ledger_before": [
-    28,
-    50905
+  "mechanics_integration": {
+    "cases": 1,
+    "valid": 1,
+    "leading": 1,
+    "disposition": 1,
+    "facts": 27,
+    "expected_facts": 27,
+    "alternative_facts": 10,
+    "expected_alternative_facts": 10,
+    "durations": 2,
+    "expected_durations": 2,
+    "dangerous_positive_facts": 0,
+    "dangerous_omissions": 0,
+    "raw_model_facts_correct": 22,
+    "raw_model_expected_facts": 27,
+    "raw_model_alternative_facts_correct": 6,
+    "raw_model_expected_alternative_facts": 10,
+    "queue_attempts": 1
+  },
+  "evidence": "evidence/BE10B02/revision-v2/verification.json",
+  "previous_failed_evidence": [
+    "evidence/BE10B02/diagnosis-quality.json",
+    "evidence/BE10B02/revision-v2/iteration-2/live-holdout/summary.json"
   ],
-  "ledger_after": [
-    34,
-    83138
-  ],
-  "cap_micro_usd": 100000,
-  "results": [
-    {
-      "id": "depressive",
-      "evidence": "evidence/BE10B02/live-depressive.json"
-    },
-    {
-      "id": "anxiety",
-      "evidence": "evidence/BE10B02/live-anxiety.json"
-    },
-    {
-      "id": "too_short",
-      "evidence": "evidence/BE10B02/live-too_short.json"
-    },
-    {
-      "id": "screen_only",
-      "evidence": "evidence/BE10B02/live-screen_only.json"
-    },
-    {
-      "id": "mania",
-      "evidence": "evidence/BE10B02/live-mania.json"
-    },
-    {
-      "id": "medication",
-      "evidence": "evidence/BE10B02/live-medication.json"
-    },
-    {
-      "id": "conflict",
-      "evidence": "evidence/BE10B02/live-conflict.json"
-    },
-    {
-      "id": "unrelated",
-      "evidence": "evidence/BE10B02/live-unrelated.json"
-    }
-  ],
-  "pass": false,
-  "runtime_sha256": null,
-  "admitted": false,
-  "quality_limitations": [
-    "Inherited fixture contains a historical synthetic GAD profile and other author defaults; this is not a clean independent held-out dataset.",
-    "Model mapping/provenance failures and 2 dangerous missed cause assertions. No medical accuracy claim.",
-    "Preflight rejections: no network. Six network reservations; no retry after observed responses.",
-    "Remaining 16862 microUSD cannot fund the current conservative request reservation for the incomplete protocol. No cap increase or ledger reset."
+  "limitations": [
+    "Small authored synthetic control, not independent clinical validation.",
+    "Raw model quality is reported separately; unverified qualifiers remain unknown with the proposal preserved.",
+    "Exact quotes/units/formal criteria do not verify clinical interpretation.",
+    "Provider weights are not immutable; sources expire at the unchanged BE03 deadline."
   ]
 }

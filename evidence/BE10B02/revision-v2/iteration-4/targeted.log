@@ -1,0 +1,17 @@
+...........E......................................
+======================================================================
+ERROR: test_quote_duplicates_unknown_state_and_unused_quote_fail (apps.tests.test_backend_diagnosis_codec.NamedCodecTests.test_quote_duplicates_unknown_state_and_unused_quote_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_codec.py", line 84, in test_quote_duplicates_unknown_state_and_unused_quote_fail
+    with self.assertRaises(ValueError):codec.normalize(value)
+                                       ~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_diagnosis_codec.py", line 152, in normalize
+    if qualifier_missing(kind,fid,fact['state'],[quotes[r][1] for r in fact['refs']],value['duration']):
+                                                 ~~~~~~^^^
+KeyError: 'q8'
+
+----------------------------------------------------------------------
+Ran 50 tests in 14.787s
+
+FAILED (errors=1)

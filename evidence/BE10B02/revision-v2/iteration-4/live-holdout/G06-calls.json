@@ -1,0 +1,426 @@
+[
+  {
+    "branch": "depressive_episode",
+    "payload_sha256": "725493d4879445a68bd52d1bde6e648136e252497c339faa72c691558499bd4d",
+    "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Нынешние тревога и снижение настроения, по явному заключению врача в этой записи, обусловлены лекарственной причиной и ПАВ."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Проверку органических причин и анамнеза мании не проводили."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Длительность этих состояний пока неизвестна."
+          }
+        ],
+        "facts": [
+          {
+            "id": "appetite",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "concentration",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "functional_difficulty",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "guilt",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "loss_interest",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "low_energy",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "low_mood",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "major_functional_impairment",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "marked_symptom_intensity",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "medication_cause",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "organic_cause",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "pessimism",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "prior_depressive_episode",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "same_current_period",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "self_esteem",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "self_harm",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "sleep",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "substance_cause",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          }
+        ],
+        "duration": {
+          "state": "unknown",
+          "value": null,
+          "refs": [
+            "q3"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+        "elapsed_seconds": 2.496,
+        "usage": {
+          "prompt_tokens": 2160,
+          "completion_tokens": 485,
+          "total_tokens": 2645
+        },
+        "cache_hit_tokens": 512,
+        "cache_miss_tokens": 1648,
+        "estimated_peak_cost_nano_usd": 1079472,
+        "estimated_offpeak_cost_nano_usd": 539736,
+        "cost_ceiling_micro_usd": 4585,
+        "reservation_micro_usd": 16037,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  },
+  {
+    "branch": "generalized_anxiety",
+    "payload_sha256": "d0059ba2ed8ffab2d68f0afc89f8b9aa0704d11b8534db1df900ce8ce217ac76",
+    "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Нынешние тревога и снижение настроения, по явному заключению врача в этой записи, обусловлены лекарственной причиной и ПАВ."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Проверку органических причин и анамнеза мании не проводили."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Длительность этих состояний пока неизвестна."
+          }
+        ],
+        "facts": [
+          {
+            "id": "abdominal_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "breathlessness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "cannot_relax",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "chest_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "choking",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "derealization",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dizziness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dry_mouth",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_dying",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_losing_control",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "generalized_anxiety",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "hot_cold",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "hypochondriacal_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "irritability",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "medication_cause",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "muscle_tension",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "ocd",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "on_edge",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "organic_cause",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "palpitations",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "panic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "paresthesia",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "phobic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "same_current_period",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "somatic_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "startle",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "substance_cause",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "sweating",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "throat_lump",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "tremor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_concentration",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_sleep_onset",
+            "state": "unknown",
+            "refs": []
+          }
+        ],
+        "duration": {
+          "state": "unknown",
+          "value": null,
+          "refs": [
+            "q3"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+        "elapsed_seconds": 2.931,
+        "usage": {
+          "prompt_tokens": 2478,
+          "completion_tokens": 699,
+          "total_tokens": 3177
+        },
+        "cache_hit_tokens": 1152,
+        "cache_miss_tokens": 1326,
+        "estimated_peak_cost_nano_usd": 1243512,
+        "estimated_offpeak_cost_nano_usd": 621756,
+        "cost_ceiling_micro_usd": 5973,
+        "reservation_micro_usd": 17391,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]

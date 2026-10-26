@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "runtime_sha256": "2aa7faeb0f3d8c3ff65cff3e0b86199e828f1278635a0a46d4932b3a8184d89b",
+  "clinical_ready": false,
+  "active_tables_unchanged": 80,
+  "patients": 10,
+  "integrity": "ok",
+  "foreign_keys": "PASS",
+  "access_and_4_foreign_files": "PASS",
+  "coverage_requirements": 83,
+  "subchecks": 160,
+  "source_gates": "PASS",
+  "citations_independently_checked": 143,
+  "phases": {
+    "development": {
+      "cases": 8,
+      "valid": 8,
+      "leading": 8,
+      "disposition": 8,
+      "facts": 76,
+      "expected_facts": 76,
+      "alternative_facts": 27,
+      "expected_alternative_facts": 27,
+      "durations": 16,
+      "expected_durations": 16,
+      "dangerous_positive_facts": 6,
+      "dangerous_omissions": 0
+    },
+    "holdout": {
+      "cases": 8,
+      "valid": 8,
+      "leading": 8,
+      "disposition": 8,
+      "facts": 79,
+      "expected_facts": 79,
+      "alternative_facts": 27,
+      "expected_alternative_facts": 27,
+      "durations": 16,
+      "expected_durations": 16,
+      "dangerous_positive_facts": 6,
+      "dangerous_omissions": 0
+    },
+    "integration": {
+      "cases": 1,
+      "valid": 1,
+      "leading": 1,
+      "disposition": 1,
+      "facts": 21,
+      "expected_facts": 21,
+      "alternative_facts": 5,
+      "expected_alternative_facts": 5,
+      "durations": 2,
+      "expected_durations": 2,
+      "dangerous_positive_facts": 0,
+      "dangerous_omissions": 0
+    }
+  },
+  "accounting": {
+    "new_calls": 66,
+    "known_prompt_tokens": 176200,
+    "known_completion_tokens": 42311,
+    "new_ledger_ceiling_micro_usd": 387755,
+    "ledger": [
+      100,
+      470893
+    ],
+    "cap_micro_usd": 1000000,
+    "remaining_micro_usd": 529107,
+    "known_estimated_peak_usd": 0.085080624,
+    "known_estimated_offpeak_usd": 0.042540312,
+    "actual_invoice": null,
+    "rub_conversion": null,
+    "old_ledger_preserved": true,
+    "old_unknown_reservations_micro_usd": 4072
+  }
+}

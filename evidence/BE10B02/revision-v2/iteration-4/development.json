@@ -1,0 +1,142 @@
+{
+  "version": "diagnosis-v4-debug-reviewed-qualifiers",
+  "synthetic": true,
+  "independent_clinical_review": false,
+  "frozen_before_live": true,
+  "thresholds": {
+    "valid_response": 1.0,
+    "leading_exact": 1.0,
+    "disposition_exact": 1.0,
+    "expected_fact_accuracy": 1.0,
+    "dangerous_omissions": 0
+  },
+  "cases": [
+    {
+      "id": "F01",
+      "note": "Нынешнее снижение настроения продолжается 23 дня. Утомляется и мало активен, чувствует вину, аппетит снижен. Все эти проявления относятся к одному текущему периоду состояния. Повседневные дела даются труднее, но значительного ограничения функционирования нет. Интерес и удовольствие сохранены. Нарушение сна, трудности сосредоточения, пессимизм и снижение самооценки отрицает. Отрицает суицидные и самоповреждающие мысли или действия. Значительно выраженных симптомов нет. Прежних депрессивных эпизодов не было. Мании и гипомании никогда не было. Врач исключил психоз и ступор, органическую причину, лекарственную причину, влияние ПАВ и другое первичное расстройство как объяснение нынешней картины. Длительность какого-либо тревожного состояния не изучали.",
+      "leading": "depressive_episode",
+      "disposition": "candidates",
+      "expected_facts": {
+        "depressive_episode.appetite": "present",
+        "depressive_episode.concentration": "denied",
+        "depressive_episode.functional_difficulty": "present",
+        "depressive_episode.guilt": "present",
+        "depressive_episode.loss_interest": "denied",
+        "depressive_episode.low_energy": "present",
+        "depressive_episode.low_mood": "present",
+        "depressive_episode.major_functional_impairment": "denied",
+        "depressive_episode.mania_hypomania": "denied",
+        "depressive_episode.marked_symptom_intensity": "denied",
+        "depressive_episode.medication_cause": "denied",
+        "depressive_episode.organic_cause": "denied",
+        "depressive_episode.other_primary_disorder": "denied",
+        "depressive_episode.pessimism": "denied",
+        "depressive_episode.prior_depressive_episode": "denied",
+        "depressive_episode.psychosis_stupor": "denied",
+        "depressive_episode.same_current_period": "present",
+        "depressive_episode.self_esteem": "denied",
+        "depressive_episode.self_harm": "denied",
+        "depressive_episode.sleep": "denied",
+        "depressive_episode.substance_cause": "denied",
+        "generalized_anxiety.somatic_cause": "unknown",
+        "generalized_anxiety.same_current_period": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": 23,
+        "generalized_anxiety": null
+      }
+    },
+    {
+      "id": "F02",
+      "note": "Выраженные постоянные беспокойные ожидания и общая тревога продолжаются 7 месяцев. Все проявления тревоги относятся к этому одному текущему периоду. Отмечает потливость, сердцебиение, дрожь и сухость рта; последняя не вызвана ни обезвоживанием, ни лекарством. Напряжение мышц и трудности расслабления отрицает. Отрицает тошноту и дискомфорт живота, затруднение дыхания, дискомфорт груди, удушье, головокружение и неустойчивость, дереализацию и деперсонализацию. Страха смерти и утраты контроля нет. Приливы, озноб, онемение, покалывание, раздражительность, взвинченность, повышенная пугливость, ком в горле и затруднение глотания отсутствуют. Отрицает нарушение сосредоточения и засыпания именно из-за тревоги. Врач исключил паническое, фобическое, обсессивно-компульсивное и ипохондрическое расстройства, манию, гипоманию, психоз, ступор, органическую, соматическую, лекарственную и связанную с ПАВ причины, а также иное первичное расстройство. Снижение настроения, утрату интереса и снижение энергии отрицает. Длительность депрессивного состояния не оценивалась; отдельно нарушение сосредоточения вне тревоги не изучали.",
+      "leading": "generalized_anxiety",
+      "disposition": "candidates",
+      "expected_facts": {
+        "generalized_anxiety.abdominal_discomfort": "denied",
+        "generalized_anxiety.breathlessness": "denied",
+        "generalized_anxiety.cannot_relax": "denied",
+        "generalized_anxiety.chest_discomfort": "denied",
+        "generalized_anxiety.choking": "denied",
+        "generalized_anxiety.derealization": "denied",
+        "generalized_anxiety.dizziness": "denied",
+        "generalized_anxiety.dry_mouth": "present",
+        "generalized_anxiety.fear_dying": "denied",
+        "generalized_anxiety.fear_losing_control": "denied",
+        "generalized_anxiety.generalized_anxiety": "present",
+        "generalized_anxiety.hot_cold": "denied",
+        "generalized_anxiety.hypochondriacal_disorder": "denied",
+        "generalized_anxiety.irritability": "denied",
+        "generalized_anxiety.mania_hypomania": "denied",
+        "generalized_anxiety.medication_cause": "denied",
+        "generalized_anxiety.muscle_tension": "denied",
+        "generalized_anxiety.ocd": "denied",
+        "generalized_anxiety.on_edge": "denied",
+        "generalized_anxiety.organic_cause": "denied",
+        "generalized_anxiety.other_primary_disorder": "denied",
+        "generalized_anxiety.palpitations": "present",
+        "generalized_anxiety.panic_disorder": "denied",
+        "generalized_anxiety.paresthesia": "denied",
+        "generalized_anxiety.phobic_disorder": "denied",
+        "generalized_anxiety.psychosis_stupor": "denied",
+        "generalized_anxiety.same_current_period": "present",
+        "generalized_anxiety.somatic_cause": "denied",
+        "generalized_anxiety.startle": "denied",
+        "generalized_anxiety.substance_cause": "denied",
+        "generalized_anxiety.sweating": "present",
+        "generalized_anxiety.throat_lump": "denied",
+        "generalized_anxiety.tremor": "present",
+        "generalized_anxiety.worry_concentration": "denied",
+        "generalized_anxiety.worry_sleep_onset": "denied",
+        "depressive_episode.concentration": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": 7
+      }
+    },
+    {
+      "id": "F06",
+      "note": "Врач при нынешнем обследовании прямо указывает две причины текущих тревоги и сниженного настроения: лекарственную и влияние ПАВ. Органическое происхождение не проверяли, про прежнюю манию данных нет. Длительность тревоги и сниженного настроения не установлена.",
+      "leading": null,
+      "disposition": "unsupported",
+      "expected_facts": {
+        "depressive_episode.low_mood": "present",
+        "depressive_episode.medication_cause": "present",
+        "generalized_anxiety.medication_cause": "present",
+        "depressive_episode.substance_cause": "present",
+        "generalized_anxiety.substance_cause": "present",
+        "depressive_episode.organic_cause": "unknown",
+        "generalized_anxiety.generalized_anxiety": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      },
+      "dangerous_facts": [
+        "depressive_episode.medication_cause",
+        "generalized_anxiety.medication_cause",
+        "depressive_episode.substance_cause",
+        "generalized_anxiety.substance_cause"
+      ]
+    },
+    {
+      "id": "F07",
+      "note": "Настроение снижено в течение нынешних 22 дней; в этом же периоде пациент отмечает трудности сосредоточения. Про манию сведений нет. Наличие и длительность общей тревоги не исследовали.",
+      "leading": null,
+      "disposition": "insufficient_data",
+      "expected_facts": {
+        "depressive_episode.low_mood": "present",
+        "depressive_episode.concentration": "conflicting",
+        "depressive_episode.mania_hypomania": "unknown",
+        "generalized_anxiety.worry_concentration": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": 22,
+        "generalized_anxiety": null
+      },
+      "additional_notes": [
+        "В отдельном неотозванном сообщении о тех же 22 днях пациент отрицает какие-либо трудности сосредоточения. Первый рассказ также не исправлялся."
+      ]
+    }
+  ]
+}

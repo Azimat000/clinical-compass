@@ -1,0 +1,540 @@
+[
+  {
+    "branch": "depressive_episode",
+    "payload_sha256": "0fb9879f38696555d0f02866b6175d941c5f959f747692ca4fd2769ccaee9afa",
+    "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Снижение настроения, утрату интереса и снижение энергии отрицает."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Длительность депрессивного состояния не оценивалась; отдельно нарушение сосредоточения вне тревоги не изучали."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Отрицает нарушение сосредоточения и засыпания именно из-за тревоги."
+          },
+          {
+            "id": "q4",
+            "unit_id": "u14",
+            "quote": "Врач исключил паническое, фобическое, обсессивно-компульсивное и ипохондрическое расстройства, манию, гипоманию, психоз, ступор, органическую, соматическую, лекарственную и связанную с ПАВ причины, а также иное первичное расстройство."
+          }
+        ],
+        "facts": [
+          {
+            "id": "appetite",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "concentration",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "functional_difficulty",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "guilt",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "loss_interest",
+            "state": "denied",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "low_energy",
+            "state": "denied",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "low_mood",
+            "state": "denied",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "major_functional_impairment",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "marked_symptom_intensity",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "medication_cause",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "organic_cause",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "pessimism",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "prior_depressive_episode",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "same_current_period",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "self_esteem",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "self_harm",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "sleep",
+            "state": "unknown",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "substance_cause",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          }
+        ],
+        "duration": {
+          "state": "unknown",
+          "value": null,
+          "refs": [
+            "q2"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+        "elapsed_seconds": 2.911,
+        "usage": {
+          "prompt_tokens": 2412,
+          "completion_tokens": 610,
+          "total_tokens": 3022
+        },
+        "cache_hit_tokens": 512,
+        "cache_miss_tokens": 1900,
+        "estimated_peak_cost_nano_usd": 1305072,
+        "estimated_offpeak_cost_nano_usd": 652536,
+        "cost_ceiling_micro_usd": 5462,
+        "reservation_micro_usd": 17478,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  },
+  {
+    "branch": "generalized_anxiety",
+    "payload_sha256": "658ec998153a74470656c3c95940c8c2e69911a46d556d7a97453d731f3be1ac",
+    "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Выраженные постоянные беспокойные ожидания и общая тревога продолжаются 7 месяцев."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Все проявления тревоги относятся к этому одному текущему периоду."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Отмечает потливость, сердцебиение, дрожь и сухость рта; последняя не вызвана ни обезвоживанием, ни лекарством."
+          },
+          {
+            "id": "q4",
+            "unit_id": "u14",
+            "quote": "Напряжение мышц и трудности расслабления отрицает."
+          },
+          {
+            "id": "q5",
+            "unit_id": "u14",
+            "quote": "Отрицает тошноту и дискомфорт живота, затруднение дыхания, дискомфорт груди, удушье, головокружение и неустойчивость, дереализацию и деперсонализацию."
+          },
+          {
+            "id": "q6",
+            "unit_id": "u14",
+            "quote": "Страха смерти и утраты контроля нет."
+          },
+          {
+            "id": "q7",
+            "unit_id": "u14",
+            "quote": "Приливы, озноб, онемение, покалывание, раздражительность, взвинченность, повышенная пугливость, ком в горле и затруднение глотания отсутствуют."
+          },
+          {
+            "id": "q8",
+            "unit_id": "u14",
+            "quote": "Отрицает нарушение сосредоточения и засыпания именно из-за тревоги."
+          },
+          {
+            "id": "q9",
+            "unit_id": "u14",
+            "quote": "Врач исключил паническое, фобическое, обсессивно-компульсивное и ипохондрическое расстройства, манию, гипоманию, психоз, ступор, органическую, соматическую, лекарственную и связанную с ПАВ причины, а также иное первичное расстройство."
+          },
+          {
+            "id": "q10",
+            "unit_id": "u14",
+            "quote": "Длительность депрессивного состояния не оценивалась; отдельно нарушение сосредоточения вне тревоги не изучали."
+          }
+        ],
+        "facts": [
+          {
+            "id": "abdominal_discomfort",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "breathlessness",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "cannot_relax",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "chest_discomfort",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "choking",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "derealization",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "dizziness",
+            "state": "denied",
+            "refs": [
+              "q5"
+            ]
+          },
+          {
+            "id": "dry_mouth",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "fear_dying",
+            "state": "denied",
+            "refs": [
+              "q6"
+            ]
+          },
+          {
+            "id": "fear_losing_control",
+            "state": "denied",
+            "refs": [
+              "q6"
+            ]
+          },
+          {
+            "id": "generalized_anxiety",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "hot_cold",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "hypochondriacal_disorder",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "irritability",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "medication_cause",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "muscle_tension",
+            "state": "denied",
+            "refs": [
+              "q4"
+            ]
+          },
+          {
+            "id": "ocd",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "on_edge",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "organic_cause",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "palpitations",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "panic_disorder",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "paresthesia",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "phobic_disorder",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "same_current_period",
+            "state": "present",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "somatic_cause",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "startle",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "substance_cause",
+            "state": "denied",
+            "refs": [
+              "q9"
+            ]
+          },
+          {
+            "id": "sweating",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "throat_lump",
+            "state": "denied",
+            "refs": [
+              "q7"
+            ]
+          },
+          {
+            "id": "tremor",
+            "state": "present",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "worry_concentration",
+            "state": "denied",
+            "refs": [
+              "q8"
+            ]
+          },
+          {
+            "id": "worry_sleep_onset",
+            "state": "denied",
+            "refs": [
+              "q8"
+            ]
+          }
+        ],
+        "duration": {
+          "state": "known",
+          "value": 7,
+          "refs": [
+            "q1"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+        "elapsed_seconds": 4.182,
+        "usage": {
+          "prompt_tokens": 2730,
+          "completion_tokens": 1191,
+          "total_tokens": 3921
+        },
+        "cache_hit_tokens": 1408,
+        "cache_miss_tokens": 1322,
+        "estimated_peak_cost_nano_usd": 1834248,
+        "estimated_offpeak_cost_nano_usd": 917124,
+        "cost_ceiling_micro_usd": 8685,
+        "reservation_micro_usd": 18832,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]

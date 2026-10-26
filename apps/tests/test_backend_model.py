@@ -180,17 +180,49 @@ class ModelTests(unittest.TestCase):
 
     def test_authorized_connection_cap_keeps_existing_ledger_and_fails_above_limit(self):
         cfg = Config(model='test')
-        self.assertEqual(100000, cfg.total_micro_usd)
+        self.assertEqual(1000000, cfg.total_micro_usd)
         self.assertEqual(20000, cfg.per_call_micro_usd)
         self.budget.reserve(45150, cfg.total_micro_usd)
-        self.budget.reserve(50000, cfg.total_micro_usd)
+        self.budget.reserve(950000, cfg.total_micro_usd)
         with self.assertRaisesRegex(ModelError, 'budget_exceeded'):
             self.budget.reserve(4851, cfg.total_micro_usd)
         with closing(sqlite3.connect(self.path)) as db:
-            self.assertEqual((2, 95150), db.execute('SELECT count(*),sum(micro_usd) FROM calls').fetchone())
+            self.assertEqual((2, 995150), db.execute('SELECT count(*),sum(micro_usd) FROM calls').fetchone())
 
     def test_invalid_configuration(self):
-        for kwargs in [{'timeout': 0}, {'timeout': 61}, {'max_output_tokens': 1025},
-                       {'total_micro_usd': 100001}, {'input_ceiling': 0}]:
+        for kwargs in [{'timeout': 0}, {'timeout': 61}, {'max_output_tokens': 1537},
+                       {'total_micro_usd': 1000001}, {'input_ceiling': 0}]:
             with self.assertRaises(ModelError):
                 Config(model='test', **kwargs)
+
+class RequestSizingTests(unittest.TestCase):
+    def test_preflight_requires_no_credentials_no_ledger_and_matches_actual_http_bytes(self):
+        from apps.compass.backend_model import preflight,request_metrics
+        cfg=Config(model='test-model',max_output_tokens=1536)
+        data={'fictional':True,'text':'Все значения и пробелы в тексте сохраняются.'}
+        with patch.dict(os.environ,{},clear=True):planned=preflight(data,SCHEMA,cfg)
+        self.assertEqual(planned,request_metrics(data,SCHEMA,cfg))
+        captured=[]
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ,{'DEEPSEEK_API_KEY':'local-test-key'}):
+            adapter=DeepSeek(cfg,Budget(Path(tmp)/'ledger.sqlite3'),transport=lambda body,*args:(captured.append(body) or 200,envelope()))
+            adapter.generate(data,SCHEMA,synthetic=True)
+        self.assertEqual(planned['body'],captured[0])
+        decoded=json.loads(json.loads(captured[0])['messages'][1]['content'])
+        self.assertEqual(data,decoded['data'])
+
+    def test_metrics_reports_oversize_without_raising_money_limits(self):
+        from apps.compass.backend_model import preflight,request_metrics
+        cfg=Config(model='test',per_call_micro_usd=1)
+        metrics=request_metrics({'fictional':True},SCHEMA,cfg)
+        self.assertGreater(metrics['reservation_micro_usd'],cfg.per_call_micro_usd)
+        with self.assertRaisesRegex(ModelError,'call_cost_limit'):preflight({'fictional':True},SCHEMA,cfg)
+        with self.assertRaisesRegex(ModelError,'invalid_config'):Config(model='test',total_micro_usd=1000001)
+
+    def test_invalid_model_schema_retains_only_safe_usage_for_accounting(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'DEEPSEEK_API_KEY':'secret-for-test'}):
+            budget=Budget(Path(tmp)/'ledger.sqlite3')
+            adapter=DeepSeek(Config(model='test'),budget,transport=lambda *args:(200,envelope('{"status":"private provider text"}')))
+            with self.assertRaises(ModelError) as caught:adapter.generate({},SCHEMA,synthetic=True)
+            self.assertEqual('invalid_response',caught.exception.code)
+            self.assertEqual({'prompt_tokens':10,'completion_tokens':5,'total_tokens':15,'cost_ceiling_micro_usd':35},caught.exception.usage)
+            self.assertNotIn('private',str(caught.exception));self.assertNotIn('secret-for-test',str(caught.exception))

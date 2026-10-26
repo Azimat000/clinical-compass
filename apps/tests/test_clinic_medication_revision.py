@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import sqlite3
 import unittest
+from unittest.mock import patch
 
 from apps.compass import assessments, decisions, medications, records
 from apps.compass.backup import copy_database
@@ -19,17 +20,25 @@ import test_clinic_roster as base
 class ClinicMedicationRevisionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        base.ClinicRosterTests.setUpClass()
+        # S56 is an exact dated revision of S55 authored on 26 October.
+        # Dynamic 'today' would silently construct a different source fixture.
+        with patch('apps.compass.records.today',return_value=date(2026,10,26)):
+            base.ClinicRosterTests.setUpClass()
         cls.original = base.ClinicRosterTests.target
         cls.target = cls.original.with_name('revised.sqlite3')
         cls.before = hashlib.sha256(cls.original.read_bytes()).hexdigest()
-        cls.result = revision.build(cls.original, cls.target)
+        with patch('apps.compass.records.today',return_value=date(2026,10,26)):
+            cls.result = revision.build(cls.original, cls.target)
         cls.app = create_app(cls.target)
         cls.accounts = base.ClinicRosterTests.accounts
 
     @classmethod
     def tearDownClass(cls):
         base.ClinicRosterTests.tearDownClass()
+
+    def setUp(self):
+        clock=patch('apps.compass.records.today',return_value=date(2026,10,26))
+        clock.start();self.addCleanup(clock.stop)
 
     def login(self, uid):
         client = self.app.test_client()

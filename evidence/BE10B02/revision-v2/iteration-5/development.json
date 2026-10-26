@@ -1,0 +1,75 @@
+{
+  "version": "diagnosis-v5-format-development",
+  "synthetic": true,
+  "independent_clinical_review": false,
+  "frozen_before_live": true,
+  "thresholds": {
+    "valid_response": 1.0,
+    "leading_exact": 1.0,
+    "disposition_exact": 1.0,
+    "expected_fact_accuracy": 1.0,
+    "dangerous_omissions": 0
+  },
+  "cases": [
+    {
+      "id": "G04",
+      "note": "На этом контакте получены только ответы на опросник. Анамнез, жалобы, причины и длительность не выяснялись.",
+      "leading": null,
+      "disposition": "insufficient_data",
+      "expected_facts": {
+        "depressive_episode.low_mood": "unknown",
+        "depressive_episode.mania_hypomania": "unknown",
+        "generalized_anxiety.generalized_anxiety": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      },
+      "questionnaire_answers": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "additional_notes": []
+    }
+  ]
+}

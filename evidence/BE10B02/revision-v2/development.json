@@ -1,0 +1,97 @@
+{
+  "version": "diagnosis-v2-development",
+  "synthetic": true,
+  "independent_clinical_review": false,
+  "frozen_before_live": true,
+  "thresholds": {
+    "valid_response": 1.0,
+    "leading_exact": 1.0,
+    "disposition_exact": 1.0,
+    "expected_fact_accuracy": 1.0,
+    "dangerous_omissions": 0
+  },
+  "cases": [
+    {
+      "id": "D01",
+      "note": "Сейчас описан один общий период продолжительностью 16 дней. Настроение снижено, интерес и удовольствие утрачены. Плохо спит и трудно сосредоточиться. Утомляемость и снижение энергии отрицает. Работать стало труднее, но значительного ограничения повседневного функционирования нет. Ни один симптом не имеет значительной выраженности. Снижение аппетита, чувство вины, снижение самооценки, пессимизм и суицидные и самоповреждающие мысли или действия отрицает. Раньше депрессивных эпизодов не было. При текущем расспросе отрицает когда-либо бывшие манию и гипоманию. Врач явно исключил психоз, ступор, органическую, лекарственную, связанную с веществами и иную первичную причину. Все перечисленные текущие проявления относятся к одному и тому же нынешнему периоду.",
+      "leading": "depressive_episode",
+      "disposition": "candidates",
+      "expected_facts": {
+        "depressive_episode.concentration": "present",
+        "depressive_episode.functional_difficulty": "present",
+        "depressive_episode.loss_interest": "present",
+        "depressive_episode.low_mood": "present",
+        "depressive_episode.same_current_period": "present",
+        "depressive_episode.sleep": "present",
+        "depressive_episode.appetite": "denied",
+        "depressive_episode.guilt": "denied",
+        "depressive_episode.low_energy": "denied",
+        "depressive_episode.major_functional_impairment": "denied",
+        "depressive_episode.mania_hypomania": "denied",
+        "depressive_episode.marked_symptom_intensity": "denied",
+        "depressive_episode.medication_cause": "denied",
+        "depressive_episode.organic_cause": "denied",
+        "depressive_episode.other_primary_disorder": "denied",
+        "depressive_episode.pessimism": "denied",
+        "depressive_episode.prior_depressive_episode": "denied",
+        "depressive_episode.psychosis_stupor": "denied",
+        "depressive_episode.self_esteem": "denied",
+        "depressive_episode.self_harm": "denied",
+        "depressive_episode.substance_cause": "denied"
+      },
+      "expected_durations": {
+        "depressive_episode": 16,
+        "generalized_anxiety": null
+      }
+    },
+    {
+      "id": "D02",
+      "note": "Нынешняя общая тревога сопровождается дрожью и сухостью во рту. Длительность и исключения причин не выяснялись. Сухость во рту явно не объясняется лекарством или обезвоживанием.",
+      "leading": null,
+      "disposition": "insufficient_data",
+      "expected_facts": {
+        "generalized_anxiety.tremor": "present",
+        "generalized_anxiety.dry_mouth": "present",
+        "generalized_anxiety.mania_hypomania": "unknown",
+        "generalized_anxiety.medication_cause": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      }
+    },
+    {
+      "id": "D03",
+      "note": "При текущем осмотре врач явно установил органическую причину тревоги. При нынешнем расспросе мания и гипомания в течение жизни отрицаются.",
+      "leading": null,
+      "disposition": "unsupported",
+      "expected_facts": {
+        "generalized_anxiety.organic_cause": "present",
+        "depressive_episode.mania_hypomania": "denied"
+      },
+      "dangerous_facts": [
+        "generalized_anxiety.organic_cause"
+      ],
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      }
+    },
+    {
+      "id": "D04",
+      "note": "Указывает на чувство вины в течение одного нынешнего периода.",
+      "leading": null,
+      "disposition": "insufficient_data",
+      "expected_facts": {
+        "depressive_episode.guilt": "conflicting"
+      },
+      "additional_notes": [
+        "Отдельно сообщает об отсутствии чувства вины в тот же самый период. Оба рассказа остаются в силе."
+      ],
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      }
+    }
+  ]
+}

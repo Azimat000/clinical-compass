@@ -1,0 +1,55 @@
+{
+  "version": "diagnosis-workflow-v3",
+  "pass": true,
+  "admitted": "synthetic_only",
+  "runtime_sha256": "2aa7faeb0f3d8c3ff65cff3e0b86199e828f1278635a0a46d4932b3a8184d89b",
+  "clinical_ready": false,
+  "independent_clinical_review": false,
+  "fixed_dataset": {
+    "development_sha256": "f43d1a9cf6f609b5bffcbd5461aa8b6dda3318b2f6697814e0193deb82b23c45",
+    "holdout_sha256": "5968343dc4e9211bfc8558d93d53c8b33f713827649b147cee2e50781f5142e8",
+    "protocol_sha256": "470e9fcc43259efead43a2a2b2e857c82a1f6b2f856970374b1ddd7b4ea59e30",
+    "runtime_sha256": "2aa7faeb0f3d8c3ff65cff3e0b86199e828f1278635a0a46d4932b3a8184d89b",
+    "fixture_sha256": "2d565b510bc1089cbc62f55b3e16972fc91c2e1325953f6c8884699bd0a5bfa5",
+    "frozen_before_live": true,
+    "independent_clinical_review": false
+  },
+  "metrics": {
+    "cases": 8,
+    "valid": 8,
+    "leading": 8,
+    "disposition": 8,
+    "facts": 79,
+    "expected_facts": 79,
+    "alternative_facts": 27,
+    "expected_alternative_facts": 27,
+    "durations": 16,
+    "expected_durations": 16,
+    "dangerous_positive_facts": 6,
+    "dangerous_omissions": 0
+  },
+  "mechanics_integration": {
+    "cases": 1,
+    "valid": 1,
+    "leading": 1,
+    "disposition": 1,
+    "facts": 21,
+    "expected_facts": 21,
+    "alternative_facts": 5,
+    "expected_alternative_facts": 5,
+    "durations": 2,
+    "expected_durations": 2,
+    "dangerous_positive_facts": 0,
+    "dangerous_omissions": 0
+  },
+  "evidence": "evidence/BE10B02/revision-v2/verification.json",
+  "previous_failed_evidence": [
+    "evidence/BE10B02/diagnosis-quality.json",
+    "evidence/BE10B02/revision-v2/iteration-2/live-holdout/summary.json"
+  ],
+  "limitations": [
+    "Small authored synthetic control, not independent clinical validation.",
+    "Exact quotes/units/formal criteria do not verify clinical interpretation.",
+    "Provider weights are not immutable; sources expire at the unchanged BE03 deadline."
+  ]
+}

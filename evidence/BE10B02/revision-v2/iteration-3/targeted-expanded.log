@@ -1,0 +1,24 @@
+...............................................[2026-10-27 00:21:50,886] ERROR in web: request_failure incident=340f9562ab86594f type=IntegrityError endpoint=create_analysis
+....................................FF.
+======================================================================
+FAIL: test_reports_mirrors_feedback_marks_snapshots_and_indexes_agree (apps.tests.test_clinic_medication_revision.ClinicMedicationRevisionTests.test_reports_mirrors_feedback_marks_snapshots_and_indexes_agree)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_clinic_medication_revision.py", line 119, in test_reports_mirrors_feedback_marks_snapshots_and_indexes_agree
+    self.assertEqual(decisions.snapshot(db,pid,relationship),draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '{"ac[32800 chars]-10-27","documents":[],"encounters":[],"extrac[91167 chars]:[]}' != '{"ac[32800 chars]-10-26","documents":[],"encounters":[],"extrac[91167 chars]:[]}'
+
+======================================================================
+FAIL: test_same_logins_pages_roles_and_pending_forms_work (apps.tests.test_clinic_medication_revision.ClinicMedicationRevisionTests.test_same_logins_pages_roles_and_pending_forms_work)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_clinic_medication_revision.py", line 148, in test_same_logins_pages_roles_and_pending_forms_work
+    self.assertEqual(3,len(assessments.pending(db,dict(id=p['login'],role='patient'),p['id'])))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 3 != 0
+
+----------------------------------------------------------------------
+Ran 86 tests in 31.233s
+
+FAILED (failures=2)

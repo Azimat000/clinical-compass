@@ -1,0 +1,442 @@
+[
+  {
+    "branch": "depressive_episode",
+    "payload_sha256": "39420be1744fafad99aa3d37be1366fe49acdd5ba757c884f7005bbd4785b3b9",
+    "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Настроение снижено в течение нынешних 22 дней"
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "в этом же периоде пациент отмечает трудности сосредоточения"
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Про манию сведений нет"
+          },
+          {
+            "id": "q4",
+            "unit_id": "u14",
+            "quote": "Наличие и длительность общей тревоги не исследовали"
+          },
+          {
+            "id": "q5",
+            "unit_id": "u21",
+            "quote": "пациент отрицает какие-либо трудности сосредоточения"
+          }
+        ],
+        "facts": [
+          {
+            "id": "appetite",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "concentration",
+            "state": "conflicting",
+            "refs": [
+              "q2",
+              "q5"
+            ]
+          },
+          {
+            "id": "functional_difficulty",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "guilt",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "loss_interest",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "low_energy",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "low_mood",
+            "state": "present",
+            "refs": [
+              "q1"
+            ]
+          },
+          {
+            "id": "major_functional_impairment",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "unknown",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "marked_symptom_intensity",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "medication_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "organic_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "pessimism",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "prior_depressive_episode",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "same_current_period",
+            "state": "present",
+            "refs": [
+              "q1",
+              "q2"
+            ]
+          },
+          {
+            "id": "self_esteem",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "self_harm",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "sleep",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "substance_cause",
+            "state": "unknown",
+            "refs": []
+          }
+        ],
+        "duration": {
+          "state": "known",
+          "value": 22,
+          "refs": [
+            "q1"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e",
+        "elapsed_seconds": 2.325,
+        "usage": {
+          "prompt_tokens": 2407,
+          "completion_tokens": 518,
+          "total_tokens": 2925
+        },
+        "cache_hit_tokens": 512,
+        "cache_miss_tokens": 1895,
+        "estimated_peak_cost_nano_usd": 1193172,
+        "estimated_offpeak_cost_nano_usd": 596586,
+        "cost_ceiling_micro_usd": 4997,
+        "reservation_micro_usd": 16804,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  },
+  {
+    "branch": "generalized_anxiety",
+    "payload_sha256": "917d6772fae329d02e05c4f712e085adaa598b5595f546877d53475bc8516248",
+    "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+    "response": {
+      "value": {
+        "quotes": [
+          {
+            "id": "q1",
+            "unit_id": "u14",
+            "quote": "Настроение снижено в течение нынешних 22 дней; в этом же периоде пациент отмечает трудности сосредоточения."
+          },
+          {
+            "id": "q2",
+            "unit_id": "u14",
+            "quote": "Про манию сведений нет."
+          },
+          {
+            "id": "q3",
+            "unit_id": "u14",
+            "quote": "Наличие и длительность общей тревоги не исследовали."
+          },
+          {
+            "id": "q4",
+            "unit_id": "u21",
+            "quote": "В отдельном неотозванном сообщении о тех же 22 днях пациент отрицает какие-либо трудности сосредоточения."
+          },
+          {
+            "id": "q5",
+            "unit_id": "u21",
+            "quote": "Первый рассказ также не исправлялся."
+          }
+        ],
+        "facts": [
+          {
+            "id": "abdominal_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "breathlessness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "cannot_relax",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "chest_discomfort",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "choking",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "derealization",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dizziness",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "dry_mouth",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_dying",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "fear_losing_control",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "generalized_anxiety",
+            "state": "unknown",
+            "refs": [
+              "q3"
+            ]
+          },
+          {
+            "id": "hot_cold",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "hypochondriacal_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "irritability",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "mania_hypomania",
+            "state": "unknown",
+            "refs": [
+              "q2"
+            ]
+          },
+          {
+            "id": "medication_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "muscle_tension",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "ocd",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "on_edge",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "organic_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "other_primary_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "palpitations",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "panic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "paresthesia",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "phobic_disorder",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "psychosis_stupor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "same_current_period",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "somatic_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "startle",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "substance_cause",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "sweating",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "throat_lump",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "tremor",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_concentration",
+            "state": "unknown",
+            "refs": []
+          },
+          {
+            "id": "worry_sleep_onset",
+            "state": "unknown",
+            "refs": []
+          }
+        ],
+        "duration": {
+          "state": "unknown",
+          "value": null,
+          "refs": [
+            "q3"
+          ]
+        }
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115",
+        "elapsed_seconds": 3.158,
+        "usage": {
+          "prompt_tokens": 2725,
+          "completion_tokens": 751,
+          "total_tokens": 3476
+        },
+        "cache_hit_tokens": 1408,
+        "cache_miss_tokens": 1317,
+        "estimated_peak_cost_nano_usd": 1304748,
+        "estimated_offpeak_cost_nano_usd": 652374,
+        "cost_ceiling_micro_usd": 6480,
+        "reservation_micro_usd": 18158,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]
