@@ -119,6 +119,8 @@ class BackendAlertTests(unittest.TestCase):
         rows=self.prepare();row=rows[0]
         self.db.execute('UPDATE care_relationships SET ends_at=?',(now(),))
         self.db.execute('INSERT INTO care_relationships VALUES(?,?,?,?,NULL)',('replacement','D01','doc-b',now()))
+        # Exercise this signal five times, regardless of the other alert's ID/order.
+        self.db.execute("UPDATE outbox_events SET available_at='2999' WHERE id<>?", (row['event_id'],))
         for _ in range(5):
             self.db.execute("UPDATE outbox_events SET available_at='2000' WHERE id=?",(row['event_id'],))
             self.assertTrue(events.process_one(self.db))

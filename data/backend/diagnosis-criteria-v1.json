@@ -1,0 +1,619 @@
+{
+  "version": "diagnosis-criteria-v1",
+  "mode": "synthetic_only",
+  "clinical_review": null,
+  "authorship": "HAC: самостоятельные краткие вопросы и логика фактов. Без цитат, копирования текста, таблиц, шкал и композиции КР. Только структурированные авторские утверждения; интерпретация не проверена независимо.",
+  "evidence": "evidence/BE10B01/research.md",
+  "content_review": "evidence/BE10B01/content-review.json",
+  "conditions": {
+    "depressive_episode": {
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "branch": "ICD-10 minimum mild nonpsychotic single-episode criteria; HAC narrow scope, no severity assignment",
+      "duration": {
+        "unit": "days",
+        "minimum": 14,
+        "section": "2. Диагностика",
+        "pdf_page": 13
+      },
+      "facts": {
+        "appetite": {
+          "question": "Снижен аппетит?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "concentration": {
+          "question": "Ухудшилось сосредоточение?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "functional_difficulty": {
+          "question": "Повседневное функционирование затруднено?",
+          "section": "2. Диагностика",
+          "pdf_page": 13,
+          "origin": "hac_scope_policy"
+        },
+        "guilt": {
+          "question": "Есть переживания виновности?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "loss_interest": {
+          "question": "Утрачен интерес или удовольствие?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "low_energy": {
+          "question": "Повышена утомляемость и снижена активность?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "low_mood": {
+          "question": "Снижено настроение?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "major_functional_impairment": {
+          "question": "Функционирование значительно ограничено?",
+          "section": "2. Диагностика",
+          "pdf_page": 14,
+          "origin": "hac_scope_policy"
+        },
+        "mania_hypomania": {
+          "question": "Были мания или гипомания?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "marked_symptom_intensity": {
+          "question": "Есть значительно выраженные симптомы?",
+          "section": "2. Диагностика",
+          "pdf_page": 13,
+          "origin": "source_criterion"
+        },
+        "medication_cause": {
+          "question": "Есть лекарственная причина?",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 18,
+          "origin": "source_criterion"
+        },
+        "organic_cause": {
+          "question": "Выявлена органическая причина?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "other_primary_disorder": {
+          "question": "Другое расстройство лучше объясняет картину?",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 18,
+          "origin": "hac_scope_policy"
+        },
+        "pessimism": {
+          "question": "Будущее оценивается пессимистично?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "prior_depressive_episode": {
+          "question": "Были прежние депрессивные эпизоды?",
+          "section": "2. Диагностика",
+          "pdf_page": 16,
+          "origin": "hac_scope_policy"
+        },
+        "psychosis_stupor": {
+          "question": "Есть психоз или ступор?",
+          "section": "2. Диагностика",
+          "pdf_page": 14,
+          "origin": "hac_scope_policy"
+        },
+        "same_current_period": {
+          "question": "Все симптомы и длительность относятся к одному текущему периоду состояния?",
+          "section": "HAC: политика доказательств одного периода",
+          "pdf_page": 13,
+          "origin": "hac_scope_policy"
+        },
+        "self_esteem": {
+          "question": "Снижена самооценка?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "self_harm": {
+          "question": "Есть суицидные или самоповреждающие мысли/действия?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "sleep": {
+          "question": "Нарушен сон?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "substance_cause": {
+          "question": "Состояние обусловлено ПАВ?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        }
+      },
+      "checks": [
+        {
+          "id": "additional",
+          "facts": [
+            "appetite",
+            "concentration",
+            "guilt",
+            "pessimism",
+            "self_esteem",
+            "self_harm",
+            "sleep"
+          ],
+          "state": "present",
+          "minimum": 2,
+          "origin": "source_criterion",
+          "description": "Минимум два дополнительных симптома.",
+          "section": "2. Диагностика",
+          "pdf_page": 13
+        },
+        {
+          "id": "core",
+          "facts": [
+            "loss_interest",
+            "low_energy",
+            "low_mood"
+          ],
+          "state": "present",
+          "minimum": 2,
+          "origin": "source_criterion",
+          "description": "Минимум два основных симптома.",
+          "section": "2. Диагностика",
+          "pdf_page": 13
+        },
+        {
+          "id": "function",
+          "facts": [
+            "functional_difficulty"
+          ],
+          "state": "present",
+          "minimum": 1,
+          "origin": "hac_scope_policy",
+          "description": "HAC требует явных сведений о затруднении функционирования.",
+          "section": "HAC: консервативная область",
+          "pdf_page": 13
+        },
+        {
+          "id": "no_marked_intensity",
+          "facts": [
+            "marked_symptom_intensity"
+          ],
+          "state": "denied",
+          "minimum": 1,
+          "origin": "source_criterion",
+          "description": "Нет значительно выраженных симптомов в выбранной лёгкой ветке.",
+          "section": "2. Диагностика",
+          "pdf_page": 13
+        },
+        {
+          "id": "period_basis",
+          "facts": [
+            "same_current_period"
+          ],
+          "state": "present",
+          "minimum": 1,
+          "origin": "hac_scope_policy",
+          "description": "Явное общее временное основание; дата записи и разные эпизоды его не заменяют.",
+          "section": "HAC: консервативная область",
+          "pdf_page": 13
+        },
+        {
+          "id": "scope_exclusions",
+          "facts": [
+            "major_functional_impairment",
+            "medication_cause",
+            "other_primary_disorder",
+            "prior_depressive_episode",
+            "psychosis_stupor"
+          ],
+          "state": "denied",
+          "minimum": 5,
+          "origin": "hac_scope_policy",
+          "description": "HAC: остальные причины и более широкие ветки не поддержаны.",
+          "section": "HAC: консервативная область",
+          "pdf_page": 18
+        },
+        {
+          "id": "source_exclusions",
+          "facts": [
+            "mania_hypomania",
+            "organic_cause",
+            "substance_cause"
+          ],
+          "state": "denied",
+          "minimum": 3,
+          "origin": "source_criterion",
+          "description": "Исключения базовой ветки.",
+          "section": "2. Диагностика",
+          "pdf_page": 12
+        }
+      ],
+      "unsupported_if": [
+        "major_functional_impairment",
+        "mania_hypomania",
+        "marked_symptom_intensity",
+        "medication_cause",
+        "organic_cause",
+        "other_primary_disorder",
+        "prior_depressive_episode",
+        "psychosis_stupor",
+        "substance_cause"
+      ],
+      "limitations": [
+        "Только минимальная лёгкая непсихотическая ветка; не определяет тяжесть, рекуррентность, диагноз или код.",
+        "Средний/тяжёлый/психотический/сокращённый особо тяжёлый эпизод и F33 вне области.",
+        "Длительность одного текущего эпизода утверждается отдельно; дата записи её не устанавливает.",
+        "HAC требует известности всех фактов, включая явные отрицания исключений. Это строже пороговой логики КР.",
+        "Суицидный факт не заменяет отдельную оценку риска BE07–09. Отрицательный результат не означает отсутствия болезни/риска."
+      ]
+    },
+    "generalized_anxiety": {
+      "source_id": "KR457_3",
+      "admission_claim": "be03-KR457_3-F01",
+      "condition": "F41.1",
+      "branch": "ICD-10 A–Г; four of 22 including one autonomic symptom; not DSM",
+      "duration": {
+        "unit": "months",
+        "minimum": 6,
+        "section": "2. Диагностика",
+        "pdf_page": 11
+      },
+      "facts": {
+        "abdominal_discomfort": {
+          "question": "Есть тошнота/дискомфорт живота?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "breathlessness": {
+          "question": "Затруднено дыхание?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "cannot_relax": {
+          "question": "Трудно расслабиться?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "chest_discomfort": {
+          "question": "Есть дискомфорт в груди?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "choking": {
+          "question": "Есть ощущение удушья?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "derealization": {
+          "question": "Есть дереализация/деперсонализация?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "dizziness": {
+          "question": "Есть головокружение/неустойчивость?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "dry_mouth": {
+          "question": "Есть сухость рта, не объяснённая лекарством/обезвоживанием?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "fear_dying": {
+          "question": "Есть страх смерти?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "fear_losing_control": {
+          "question": "Есть страх утраты контроля?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "generalized_anxiety": {
+          "question": "Есть выраженная общая тревога/напряжение/беспокойные ожидания?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "hot_cold": {
+          "question": "Есть приливы/озноб?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "hypochondriacal_disorder": {
+          "question": "Картина соответствует ипохондрическому расстройству?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "irritability": {
+          "question": "Постоянно повышена раздражительность?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "mania_hypomania": {
+          "question": "Есть признаки мании/гипомании?",
+          "section": "1.6 Клиническая картина / дифференциация; HAC scope",
+          "pdf_page": 10,
+          "origin": "hac_scope_policy"
+        },
+        "medication_cause": {
+          "question": "Есть лекарственная причина?",
+          "section": "1.6 Клиническая картина / дифференциация; HAC scope",
+          "pdf_page": 10,
+          "origin": "hac_scope_policy"
+        },
+        "muscle_tension": {
+          "question": "Есть мышечное напряжение/боли?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "ocd": {
+          "question": "Картина соответствует ОКР?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "on_edge": {
+          "question": "Есть взвинченность/внутреннее напряжение?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "organic_cause": {
+          "question": "Есть органическое расстройство?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "other_primary_disorder": {
+          "question": "Иная первичная причина лучше объясняет картину?",
+          "section": "1.6 Клиническая картина / дифференциация; HAC scope",
+          "pdf_page": 10,
+          "origin": "hac_scope_policy"
+        },
+        "palpitations": {
+          "question": "Есть сердцебиение/учащённый пульс?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "panic_disorder": {
+          "question": "Картина соответствует паническому расстройству?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "paresthesia": {
+          "question": "Есть онемение/покалывание?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "phobic_disorder": {
+          "question": "Картина соответствует фобическому расстройству?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "psychosis_stupor": {
+          "question": "Есть психоз/ступор?",
+          "section": "1.6 Клиническая картина / дифференциация; HAC scope",
+          "pdf_page": 10,
+          "origin": "hac_scope_policy"
+        },
+        "same_current_period": {
+          "question": "Все симптомы и длительность относятся к одному текущему периоду состояния?",
+          "section": "HAC: политика доказательств одного периода",
+          "pdf_page": 11,
+          "origin": "hac_scope_policy"
+        },
+        "somatic_cause": {
+          "question": "Есть соматическая причина?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "startle": {
+          "question": "Повышена пугливость?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "substance_cause": {
+          "question": "Есть причина в ПАВ/стимуляторах/отмене бензодиазепинов?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "sweating": {
+          "question": "Есть потливость?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "throat_lump": {
+          "question": "Есть ком в горле/затруднение глотания?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "tremor": {
+          "question": "Есть дрожь?",
+          "section": "2. Диагностика",
+          "pdf_page": 11,
+          "origin": "source_criterion"
+        },
+        "worry_concentration": {
+          "question": "Тревога нарушает сосредоточение?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        },
+        "worry_sleep_onset": {
+          "question": "Тревога мешает засыпанию?",
+          "section": "2. Диагностика",
+          "pdf_page": 12,
+          "origin": "source_criterion"
+        }
+      },
+      "checks": [
+        {
+          "id": "anxiety",
+          "facts": [
+            "generalized_anxiety"
+          ],
+          "state": "present",
+          "minimum": 1,
+          "origin": "source_criterion",
+          "description": "Генерализованная выраженная тревога.",
+          "section": "2. Диагностика",
+          "pdf_page": 11
+        },
+        {
+          "id": "autonomic",
+          "facts": [
+            "dry_mouth",
+            "palpitations",
+            "sweating",
+            "tremor"
+          ],
+          "state": "present",
+          "minimum": 1,
+          "origin": "source_criterion",
+          "description": "Хотя бы один из четырёх вегетативных.",
+          "section": "2. Диагностика",
+          "pdf_page": 11
+        },
+        {
+          "id": "period_basis",
+          "facts": [
+            "same_current_period"
+          ],
+          "state": "present",
+          "minimum": 1,
+          "origin": "hac_scope_policy",
+          "description": "Явное общее временное основание; дата записи и разные эпизоды его не заменяют.",
+          "section": "HAC: консервативная область",
+          "pdf_page": 11
+        },
+        {
+          "id": "scope_exclusions",
+          "facts": [
+            "mania_hypomania",
+            "medication_cause",
+            "other_primary_disorder",
+            "psychosis_stupor"
+          ],
+          "state": "denied",
+          "minimum": 4,
+          "origin": "hac_scope_policy",
+          "description": "HAC: дополнительные ограничения области.",
+          "section": "HAC: консервативная область",
+          "pdf_page": 10
+        },
+        {
+          "id": "source_exclusions",
+          "facts": [
+            "hypochondriacal_disorder",
+            "ocd",
+            "organic_cause",
+            "panic_disorder",
+            "phobic_disorder",
+            "somatic_cause",
+            "substance_cause"
+          ],
+          "state": "denied",
+          "minimum": 7,
+          "origin": "source_criterion",
+          "description": "Исключения C/Г.",
+          "section": "2. Диагностика",
+          "pdf_page": 12
+        },
+        {
+          "id": "symptoms",
+          "facts": [
+            "abdominal_discomfort",
+            "breathlessness",
+            "cannot_relax",
+            "chest_discomfort",
+            "choking",
+            "derealization",
+            "dizziness",
+            "dry_mouth",
+            "fear_dying",
+            "fear_losing_control",
+            "hot_cold",
+            "irritability",
+            "muscle_tension",
+            "on_edge",
+            "palpitations",
+            "paresthesia",
+            "startle",
+            "sweating",
+            "throat_lump",
+            "tremor",
+            "worry_concentration",
+            "worry_sleep_onset"
+          ],
+          "state": "present",
+          "minimum": 4,
+          "origin": "source_criterion",
+          "description": "Минимум четыре разных симптома.",
+          "section": "2. Диагностика",
+          "pdf_page": 12
+        }
+      ],
+      "unsupported_if": [
+        "hypochondriacal_disorder",
+        "mania_hypomania",
+        "medication_cause",
+        "ocd",
+        "organic_cause",
+        "other_primary_disorder",
+        "panic_disorder",
+        "phobic_disorder",
+        "psychosis_stupor",
+        "somatic_cause",
+        "substance_cause"
+      ],
+      "limitations": [
+        "МКБ-10, не DSM: ветка три из шести не используется.",
+        "Функциональный порог не добавлен к формальным A–Г.",
+        "HAC требует явной известности всех фактов; все исключения должны быть явно отвергнуты.",
+        "Иные расстройства не диагностируются; вопросы о дифференциации не являются положительным диагнозом альтернативы.",
+        "Это структурированный тест авторских утверждений, не оценка настоящей модели и не клиническая валидация."
+      ]
+    }
+  }
+}

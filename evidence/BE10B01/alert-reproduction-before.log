@@ -1,0 +1,19 @@
+test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak) ... FAIL
+
+======================================================================
+FAIL: test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 126, in test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak
+    self.assertEqual('dead',status['status']);self.assertEqual(5,status['attempts'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'dead' != 'pending'
+- dead
++ pending
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.480s
+
+FAILED (failures=1)
+CONFIRMED: unrelated earlier alert consumes one iteration, target receives only four attempts.

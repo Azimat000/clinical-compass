@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T22:33:46+03:00",
+  "updated_on": "2026-10-26T23:19:13+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE10A",
-  "next_slice": "BE10B",
+  "last_accepted_slice": "BE10B01",
+  "next_slice": "BE10B02",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -671,6 +671,18 @@
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/BE10B.md",
+      "reason": "Разделён до реализации: BE10B01 критерии; BE10B02 все исходные A01–A03 и серверная интеграция."
+    },
+    "BE10B01": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE10B01",
+      "handoff": "memory/sessions/BE10B01.md",
+      "reason": null
+    },
+    "BE10B02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE10B02.md",
       "reason": null
     }
   },
@@ -1354,6 +1366,8 @@
       "BE08",
       "BE09",
       "BE10A",
+      "BE10B01",
+      "BE10B02",
       "BE10B",
       "BE10",
       "BE11",
@@ -1372,7 +1386,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE10A",
+    "last_accepted_slice": "BE10B01",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1409,7 +1423,10 @@
     "alert_evidence": "evidence/BE09/acceptance.md",
     "diagnosis_candidate_version": "diagnosis-candidates-v1",
     "diagnosis_candidate_mode": "internal_synthetic_unreviewed_not_published",
-    "diagnosis_candidate_evidence": "evidence/BE10A/acceptance.md"
+    "diagnosis_candidate_evidence": "evidence/BE10A/acceptance.md",
+    "diagnosis_criteria_version": "diagnosis-criteria-v1",
+    "diagnosis_criteria_mode": "internal_structured_synthetic_unreviewed_no_model_or_publication",
+    "diagnosis_criteria_evidence": "evidence/BE10B01/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
