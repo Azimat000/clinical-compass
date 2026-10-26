@@ -4,6 +4,7 @@ import json
 import secrets
 import sqlite3
 import unittest
+from unittest.mock import patch
 
 from apps.compass import access, assessments, backend_analyses as analyses, backend_snapshot as snapshots
 from apps.compass import decisions, first_visits, medications, records
@@ -298,4 +299,7 @@ class BackendSnapshotTests(unittest.TestCase):
         bad = deepcopy(result);bad['facts'][0]['evidence_refs'] = ['s2_'+'0'*64]
         with self.assertRaises(analyses.AnalysisError):
             analyses.advance(self.db, self.user, 'D01', run['run_id'], running['revision'], 'ready', result=bad)
-        self.assertEqual('ready', analyses.advance(self.db, self.user, 'D01', run['run_id'], running['revision'], 'ready', result=result)['status'])
+        # Exact patient-row refs are a BE02 structure test; BE03 checks medical
+        # source eligibility separately against real files/SQLite.
+        with patch.object(analyses.backend_sources, 'check_result'):
+            self.assertEqual('ready', analyses.advance(self.db, self.user, 'D01', run['run_id'], running['revision'], 'ready', result=result)['status'])

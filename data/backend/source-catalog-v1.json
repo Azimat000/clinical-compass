@@ -1,0 +1,98 @@
+{
+  "version": "backend-sources-v1",
+  "mode": "synthetic_only",
+  "clinical_review": null,
+  "sources": [
+    {
+      "id": "KR301_3",
+      "registry_sha256": "6d2ecb1db6a732d80ac7d01206489d5837244ef53236858ad2820bfac0dcfb0a",
+      "age_min": 18,
+      "age_max": 120,
+      "conditions": [
+        "F32",
+        "F33"
+      ],
+      "status": "registered",
+      "verification": {
+        "path": "evidence/BE03/research.md",
+        "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+        "checked_at": "2026-10-26T19:17:00+03:00",
+        "review_due_at": "2026-10-27T19:17:00+03:00",
+        "current_status": "current"
+      }
+    },
+    {
+      "id": "KR457_3",
+      "registry_sha256": "533b4e8e57c52cf63d55acc1a87f585a7bfef4afb4448c45ca90162eec8ef7a3",
+      "age_min": 18,
+      "age_max": 120,
+      "conditions": [
+        "F41.1"
+      ],
+      "status": "registered",
+      "verification": {
+        "path": "evidence/BE03/research.md",
+        "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+        "checked_at": "2026-10-26T19:17:00+03:00",
+        "review_due_at": "2026-10-27T19:17:00+03:00",
+        "current_status": "current"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "be03-KR301_3-F01",
+      "source_id": "KR301_3",
+      "fragment_id": "KR301_3-F01",
+      "operation": "diagnosis",
+      "text_sha256": "b1fa54475fa47083956b1b466feff87d27443cf605377f0a768a3095f1271da6",
+      "section": "2. Диагностика",
+      "page": 12
+    },
+    {
+      "id": "be03-KR301_3-F02",
+      "source_id": "KR301_3",
+      "fragment_id": "KR301_3-F02",
+      "operation": "risk",
+      "text_sha256": "2522d667912880f78c24af8931b7bc06421eef74552441d6e77672fa1382a4d8",
+      "section": "2.1 Жалобы и анамнез",
+      "page": 16
+    },
+    {
+      "id": "be03-KR301_3-F04",
+      "source_id": "KR301_3",
+      "fragment_id": "KR301_3-F04",
+      "operation": "plan",
+      "text_sha256": "4a7a8829305da3efa18dc78ff5f1a28824d59d06a07ceb0ec4e1c3746036e5e0",
+      "section": "3. Лечение",
+      "page": 23
+    },
+    {
+      "id": "be03-KR457_3-F01",
+      "source_id": "KR457_3",
+      "fragment_id": "KR457_3-F01",
+      "operation": "diagnosis",
+      "text_sha256": "fe077b20518fd8b7909e887bbf198de8e75781b45f73588c7c115dfd045e14a2",
+      "section": "1.6 Клиническая картина",
+      "page": 10
+    },
+    {
+      "id": "be03-KR457_3-F02",
+      "source_id": "KR457_3",
+      "fragment_id": "KR457_3-F02",
+      "operation": "risk",
+      "text_sha256": "fc7688dfab17e9e076713b1e70cddddc1d57343ac36e222a552b094979898a8c",
+      "section": "3.2 Психофармакотерапия",
+      "page": 22
+    },
+    {
+      "id": "be03-KR457_3-F03",
+      "source_id": "KR457_3",
+      "fragment_id": "KR457_3-F03",
+      "operation": "plan",
+      "text_sha256": "c5f89cff399313dddb798936248004b4c5f1b7415bc515615219bfa5e78acac5",
+      "section": "3.2 Психофармакотерапия",
+      "page": 30
+    }
+  ]
+}

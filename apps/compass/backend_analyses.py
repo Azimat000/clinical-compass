@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import secrets
 
-from . import access, ages, backend_snapshot, clinical_rules, decisions, records
+from . import access, ages, backend_snapshot, backend_sources, clinical_rules, decisions, records
 from .db import now, transaction
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -147,17 +147,19 @@ def capture(db, patient_id, relationship_id):
             'schema_sha256': hashlib.sha256(CONTRACT_PATH.read_bytes()).hexdigest(),
             'scope_sha256': hashlib.sha256(SCOPE_PATH.read_bytes()).hexdigest()}
         value['patient_history'] = backend_snapshot.enrich(db, value, patient_id)
+        value['backend_sources'] = backend_sources.capture()
         snapshot = decisions.canonical(value)
         if len(snapshot.encode()) > 4194304:
             raise AnalysisError('Входной снимок превышает 4 МиБ.', 409, 'snapshot_too_large')
         return snapshot
-    except clinical_rules.RuleError:
+    except (clinical_rules.RuleError, backend_sources.SourceError):
         raise AnalysisError('Источниковая зависимость недоступна.', 409, 'source_unavailable') from None
 
 
 def source_refs(snapshot):
     return [{'id': r['id'], 'version': r['version'], 'sha256': r['sha256']}
-            for r in json.loads(snapshot)['source_versions']]
+            for r in json.loads(snapshot)['source_versions']] + backend_sources.references(
+                json.loads(snapshot)['backend_sources'])
 
 
 def inputs(db, user, patient_id, run_id, *, reference=None, page=1):
@@ -338,6 +340,7 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
         if status == 'ready' and result is not None:
             # Evidence references are existing stored rows, never arbitrary model strings.
             validate('Result', result)
+            validate({'risk': 'RiskOutput', 'diagnosis': 'DiagnosisOutput', 'plan': 'PlanOutput'}[current['operation']], result['output'])
             raw = db.execute('SELECT payload_json FROM analysis_input_snapshots WHERE id=?', (current['snapshot_id'],)).fetchone()[0]
             snapshot = json.loads(raw)
             known_refs = {'profile:' + patient_id}
@@ -354,6 +357,10 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
                 if (diagnosis['operation'] != 'diagnosis' or diagnosis['status'] != 'ready'
                         or diagnosis['snapshot_id'] != current['snapshot_id']):
                     raise AnalysisError('Нужна актуальная точная версия диагностического анализа.', 409, 'diagnosis_unavailable')
+            try:
+                backend_sources.check_result(snapshot.get('backend_sources'), current['operation'], result)
+            except backend_sources.SourceError as exc:
+                raise AnalysisError('Клиническое основание недоступно: ' + str(exc), 409, 'source_unavailable') from None
         value = {**current, 'status': status, 'revision': expected_revision + 1, 'updated_at': now(),
                  'result': result, 'errors': errors if errors is not None else [], 'model': model, 'stale_reason': stale_reason}
         _append(db, value)

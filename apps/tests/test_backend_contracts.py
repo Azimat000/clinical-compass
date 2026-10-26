@@ -56,7 +56,10 @@ class BackendContractTests(unittest.TestCase):
 
     def ready(self, operation='risk', diagnosis=None):
         run = self.start(operation)
-        return analyses.advance(self.db, self.user, 'D01', run['run_id'], run['revision'], 'ready', result=self.result(operation, diagnosis))
+        # BE01 structural fixture only. BE03 source gate is exercised without
+        # substitution in test_backend_sources; this does not simulate medicine.
+        with patch.object(analyses.backend_sources, 'check_result'):
+            return analyses.advance(self.db, self.user, 'D01', run['run_id'], run['revision'], 'ready', result=self.result(operation, diagnosis))
 
     def test_real_http_create_read_restart_and_idempotent_replay(self):
         body = self.body()
@@ -133,7 +136,8 @@ class BackendContractTests(unittest.TestCase):
         negative = self.result()
         negative['output'] = {'assessment': 'no_pattern_found', 'patterns': []}
         run = self.start()
-        value = analyses.advance(self.db, self.user, 'D01', run['run_id'], run['revision'], 'ready', result=negative)
+        with patch.object(analyses.backend_sources, 'check_result'):
+            value = analyses.advance(self.db, self.user, 'D01', run['run_id'], run['revision'], 'ready', result=negative)
         self.assertEqual('no_pattern_found', value['result']['output']['assessment'])
         self.assertEqual(before, {t: self.db.execute('SELECT count(*) FROM '+t).fetchone()[0] for t in before})
         self.assertEqual(ready_risk['revision'], analyses.read(self.db, self.user, 'D01', ready_risk['run_id'])['revision'])
