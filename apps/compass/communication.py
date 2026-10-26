@@ -96,7 +96,7 @@ def receipt(db,user,patient_id,message_id,kind):
                 access.audit(db,user['id'],'message.'+k,message_id)
 
 
-def schedule(db,user,patient_id,form):
+def schedule(db,user,patient_id,form, *, allow_referral=False):
     retry, label = key(form), text(form,'label',500)
     action_id = text(form,'action_id',64)
     try:
@@ -117,7 +117,7 @@ def schedule(db,user,patient_id,form):
                 raise Error('Ключ уже использован с другим содержимым.',409)
             return old['id']
         head=current_action(db,patient_id)
-        if not head or head['id'] != action_id or head['kind'] in ('therapy_stop','referral'):
+        if not head or head['id'] != action_id or head['kind'] == 'therapy_stop' or (head['kind'] == 'referral' and not allow_referral):
             raise Error('Нужен текущий подтверждённый лечебный план. Обновите страницу.',409)
         tid=secrets.token_hex(16)
         db.execute('INSERT INTO adherence_tasks VALUES(?,?,?,?,?,?,?,?,?)',
@@ -126,18 +126,24 @@ def schedule(db,user,patient_id,form):
         return tid
 
 
-def report(db,user,patient_id,task_id,form):
+def report(db,user,patient_id,task_id,form, *, patient_only=False):
     retry, outcome, reason=key(form),text(form,'outcome',16),text(form,'reason',1000,False)
     if outcome not in LABELS or (outcome in ('missed','conflicting') and not reason):
         raise Error('Выберите результат; для пропуска или противоречия укажите причину.')
     with transaction(db):
         r=pair(db,user,patient_id)
+        if patient_only and (user['role'] != 'patient' or r['user_id'] != user['id']):
+            raise Error('Отмечать выполнение может только сам пациент.',403)
         task=task_for(db,r,task_id)
         old=db.execute('SELECT * FROM adherence_entries WHERE request_key=?',(retry,)).fetchone()
         if old:
             if (old['task_id'],old['actor_id'],old['outcome'],old['reason']) != (task_id,user['id'],outcome,reason):
                 raise Error('Ключ уже использован с другим содержимым.',409)
             return old['id']
+        if patient_only:
+            latest=db.execute('SELECT id FROM adherence_entries WHERE task_id=? ORDER BY recorded_at DESC,id DESC LIMIT 1', (task_id,)).fetchone()
+            if form.get('revision') != (latest['id'] if latest else ''):
+                raise Error('В другой вкладке появилась новая отметка. Обновите страницу перед исправлением.',409)
         if superseded(db,task):
             raise Error('План заменён: этот пункт больше не учитывается.',409)
         if task['due_at']>now():

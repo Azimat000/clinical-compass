@@ -49,5 +49,6 @@
 {% endif %}
 
 {% endif %}
+{% include 'patient_plan_tasks.html' %}
 {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', True) }}
 {% endblock %}

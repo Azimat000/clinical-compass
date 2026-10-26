@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T02:32:08+03:00",
+  "updated_on": "2026-10-26T03:00:09+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S53",
+  "last_accepted_slice": "S54",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -503,6 +503,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S53",
       "handoff": "memory/sessions/S53.md",
+      "reason": null
+    },
+    "S54": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S54",
+      "handoff": "memory/sessions/S54.md",
       "reason": null
     }
   },
@@ -1103,6 +1109,17 @@
       ],
       "messages_and_context_preserved": true,
       "historical_backend_data_preserved": true,
+      "clinical_validation": false
+    },
+    "plan_recommendation_marks": {
+      "date": "2026-10-26",
+      "slice": "S54",
+      "report": "memory/sessions/S54.md",
+      "evidence": "evidence/S54/acceptance.md",
+      "patient_home": "Plan: individual recommendation outcomes, comments and immutable history",
+      "physician_home": "Plan and decisions: explicit items of current approved decision, including referral; author/time/reason/history",
+      "legacy_data_preserved": true,
+      "messages_without_task_forms": true,
       "clinical_validation": false
     }
   },

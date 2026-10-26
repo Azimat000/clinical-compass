@@ -98,9 +98,10 @@ def _view(db, user, patient_id, values, *, all_history=False, include_plan=True)
                 JOIN care_actions a ON a.id=t.action_id JOIN doctor_confirmations c ON c.id=a.confirmation_id
                 JOIN proposals p ON p.id=c.proposal_id WHERE t.relationship_id=? ORDER BY t.due_at,t.id''',
                 (relationship['id'],)):
-            if not includes(r['due_at']):
+            if not includes(r['due_at']) and not all_history:
                 continue
             task = dict(r)
+            task['due_day'] = local_day(task['due_at'])
             task['history'] = [dict(h) for h in db.execute(
                 'SELECT * FROM adherence_entries WHERE task_id=? ORDER BY recorded_at,id', (task['id'],))]
             task['outcome'] = task['history'][-1]['outcome'] if task['history'] else 'unknown'

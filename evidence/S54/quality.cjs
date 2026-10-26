@@ -1,0 +1,11 @@
+const {chromium}=require('playwright'),fs=require('fs');
+(async()=>{const b=await chromium.launch({headless:true});try{const c=await b.newContext({viewport:{width:375,height:900}}),p=await c.newPage();
+const accounts=JSON.parse(fs.readFileSync('var/clinic-20261023-accounts.json')).accounts,f=JSON.parse(fs.readFileSync('var/S54-browser-fixture.json')),a=accounts.find(a=>a.login===f.patient_login);
+await p.goto('http://127.0.0.1:8054/login');await p.locator('[name=login]').fill(a.login);await p.locator('[name=password]').fill(a.password);await p.getByRole('button',{name:'Войти',exact:true}).click();await p.waitForURL(u=>!u.pathname.includes('login'));await p.goto('http://127.0.0.1:8054/patients/P101/decisions');
+const form=p.locator('#task-'+f.task+' form'),select=form.locator('select'),comment=form.locator('textarea'),button=form.locator('button');
+await select.focus();await p.keyboard.press('Tab');if(!await comment.evaluate(e=>document.activeElement===e))throw Error('Keyboard comment focus');await p.keyboard.press('Tab');if(!await button.evaluate(e=>document.activeElement===e))throw Error('Keyboard submit focus');
+const ring=await button.evaluate(e=>({width:getComputedStyle(e).outlineWidth,style:getComputedStyle(e).outlineStyle}));if(ring.style==='none'||ring.width==='0px')throw Error('No visible keyboard focus');
+await p.locator('#task-'+f.task+' h3').evaluate(e=>e.textContent='ДлиннаяРекомендацияБезПробелов'.repeat(25));await comment.fill('Длинный комментарий '.repeat(45));
+if(!await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))throw Error('Long input overflow');
+const labels=await form.evaluate(e=>[...e.querySelectorAll('select,textarea')].every(x=>x.labels.length>0));if(!labels)throw Error('Missing label');
+fs.writeFileSync(__dirname+'/quality.json',JSON.stringify({status:'PASS',keyboard_order:true,visible_focus:ring,labels:true,long_unbroken_heading_overflow:false,width:375,submitted:false},null,2)+'\n');console.log('PASS: keyboard, labels, long heading, no submissions');await c.close();}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

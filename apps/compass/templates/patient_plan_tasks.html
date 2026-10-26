@@ -1,0 +1,52 @@
+{% macro recommendation(t) %}
+  <article class="recommendation" id="task-{{ t.id }}" aria-labelledby="task-title-{{ t.id }}">
+    <h3 class="keep" id="task-title-{{ t.id }}">{{ t.label }}</h3>
+    <p class="meta">Срок: <time class="num" datetime="{{ t.due_at }}">{{ t.due_at|msk }}</time> · <a href="#plan-{{ t.proposal_id }}">Решение врача</a></p>
+    {% if t.superseded %}<p class="meta">Пункт заменён новым планом. Прежние отметки сохранены.</p>
+    {% elif t.future %}<p class="meta">Срок впереди. Отметка будет доступна {{ t.due_at|msk }}.</p>{% endif %}
+    <p class="recommendation-result"><b>{{ task_labels[t.outcome] }}</b>{% if t.history %} · {{ t.history[-1].recorded_at|msk }}{% endif %}</p>
+    {% if t.history %}<p class="meta">{{ plan_task_data.authors.get(t.history[-1].actor_id, 'Автор не указан') }}{% if t.history[-1].reason %}: <span class="keep">{{ t.history[-1].reason }}</span>{% endif %}</p>{% endif %}
+    {% if not t.superseded and not t.future %}
+    {% set failed = task_values.get('task_id') == t.id %}
+    <form method="post" action="{{ url_for('report_plan_task', patient_id=patient.id, task_id=t.id) }}" class="recommendation-form" data-busy aria-label="Отметить: {{ t.label }}">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="request_key" value="{{ task_values.get('request_key') if failed else new_key() }}">
+      <input type="hidden" name="revision" value="{{ task_values.get('revision', '') if failed else t.revision }}">
+      <label class="field">Результат
+        <select class="select" name="outcome">
+          {% for value, label in [('unknown', 'Нет сведений'), ('taken', 'Выполнено'), ('missed', 'Не выполнено'), ('conflicting', 'Нужно уточнить')] %}
+          <option value="{{ value }}"{% if (task_values.get('outcome') if failed else t.outcome) == value %} selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="field">Комментарий
+        <textarea class="textarea" name="reason" rows="2" maxlength="1000" aria-describedby="task-hint-{{ t.id }}">{{ task_values.get('reason', '') if failed else '' }}</textarea>
+      </label>
+      <p class="meta" id="task-hint-{{ t.id }}">Для «Не выполнено» и «Нужно уточнить» укажите причину.</p>
+      <button class="button" type="submit">Сохранить отметку</button>
+    </form>
+    {% endif %}
+    {% if t.history|length > 1 %}
+    <details class="item-history"><summary>Предыдущие отметки ({{ t.history|length - 1 }})</summary>
+      {% for h in t.history[:-1]|reverse %}<p class="meta keep">{{ task_labels[h.outcome] }} · {{ h.recorded_at|msk }} · {{ plan_task_data.authors.get(h.actor_id, 'Автор не указан') }}{% if h.reason %}: {{ h.reason }}{% endif %}</p>{% endfor %}
+    </details>
+    {% endif %}
+  </article>
+{% endmacro %}
+<section class="p-block" id="recommendations" aria-labelledby="h-recommendations">
+  <h2 id="h-recommendations">Другие рекомендации</h2>
+  <p class="meta">Отмечайте выполнение каждого пункта отдельно. Врач увидит результат и комментарий в вашем плане. Приём препаратов отмечается в календаре ниже.</p>
+  {% if task_error %}<div class="notice notice--error" role="alert"><b>Отметка не сохранена</b><p>{{ task_error }}</p>
+    {% if task_values.get('reason') %}<p class="keep">Ваш несохранённый комментарий: {{ task_values.get('reason') }}</p>{% endif %}
+  </div>{% endif %}
+  {% set active_tasks = plan_task_data.tasks|rejectattr('superseded')|list %}
+  {% set previous_tasks = plan_task_data.tasks|selectattr('superseded')|list %}
+  {% for t in active_tasks %}{{ recommendation(t) }}
+  {% else %}<p class="meta">Действующих отдельных рекомендаций для отметки пока нет.</p>{% endfor %}
+  {% if previous_tasks %}
+  <details class="item-history" id="previous-recommendations"><summary>Ранее назначенные рекомендации ({{ previous_tasks|length }})</summary>
+    {% for t in previous_tasks %}{{ recommendation(t) }}{% endfor %}
+  </details>
+  {% endif %}
+  <p class="meta">Отсутствие отметки не означает, что рекомендация не выполнена.</p>
+</section>

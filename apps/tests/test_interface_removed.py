@@ -32,7 +32,7 @@ class InterfaceRemovedTests(unittest.TestCase):
         self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html',
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
                           'doctor_base.html', 'dashboard.html', 'invitation_content.html', 'invitation_manage.html', 'doctor_patient.html',
-                          'decisions.html', 'plan_outcomes.html', 'first_visit.html', 'imports.html',
+                          'decisions.html', 'plan_outcomes.html', 'patient_plan_tasks.html', 'first_visit.html', 'imports.html',
                           'communication.html', 'plan.html', 'visit_records.html', 'medication_components.html', 'medication_editor.html', 'assessment_charts.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):

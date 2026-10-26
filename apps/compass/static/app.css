@@ -1023,3 +1023,12 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .med-feedback-list { margin: var(--sp-md) 0; padding: 0; list-style: none; }
 .med-feedback-list > li + li { margin-top: var(--sp-lg); }
 .shell .feedback-adverse { color: var(--flag); font-weight: 700; }
+
+/* Отдельные рекомендации подтверждённого плана */
+.recommendation { padding-block: var(--sp-lg); border-bottom: 1px solid var(--rule); scroll-margin-top: var(--sp-lg); }
+.recommendation h3 { font-size: var(--fs-section); max-width: 60ch; }
+.recommendation-result { margin-top: var(--sp-md); }
+.recommendation-form { display: grid; gap: var(--sp-md); max-width: 600px; margin-top: var(--sp-md); }
+.recommendation-form .field { margin: 0; min-width: 0; }
+.recommendation-form .input, .recommendation-form .select, .recommendation-form .textarea { width: 100%; min-width: 0; }
+.recommendation-form .button { justify-self: start; min-height: 44px; }

@@ -11,7 +11,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback
+from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback, plan_tasks
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
@@ -916,12 +916,40 @@ def create_app(database=None):
                 error, status = str(failure), failure.status
         return decisions_view(patient, patient_id, error, status)
 
-    def plan_response(patient, items):
-        """The patient's plan screen. It gets a narrow copy of the already patient-safe projection: kind, text, date and the doctor's name; no ids, rationale, basis or uncertainties."""
+    def plan_response(patient, items, task_error=None, task_values=None):
+        """Patient-safe decisions and linked recommendation marks; no private clinical rationale."""
         return interface_response('plan.html', patient=patient, plan=patient_plan(patient['id']), kinds=decisions.KINDS,
+                                  plan_task_data=plan_tasks.view(get_db(), g.user, patient['id']),
+                                  task_error=task_error, task_values=task_values or {}, task_labels=communication.LABELS,
                                   med_calendar=medication_calendar(patient['id']))
 
-    def decisions_view(patient, patient_id, error=None, status=200, confirm_error=None):
+    @app.post('/patients/<patient_id>/plan-tasks')
+    def schedule_plan_task(patient_id):
+        role('doctor')
+        patient = patient_or_404(patient_id)
+        try:
+            task_id = plan_tasks.schedule(get_db(), g.user, patient_id, request.form.to_dict())
+        except decisions.DecisionError as failure:
+            if failure.status in (403, 404):
+                abort(failure.status, description=str(failure))
+            return decisions_view(patient, patient_id, status=failure.status,
+                                  task_error=str(failure), task_values=request.form)
+        return redirect(url_for('decisions_page', patient_id=patient_id)+'#task-'+task_id, code=303)
+
+    @app.post('/patients/<patient_id>/plan-tasks/<task_id>/report')
+    def report_plan_task(patient_id, task_id):
+        role('patient')
+        patient = patient_or_404(patient_id)
+        try:
+            communication.report(get_db(), g.user, patient_id, task_id, request.form, patient_only=True)
+        except decisions.DecisionError as failure:
+            if failure.status in (403, 404):
+                abort(failure.status, description=str(failure))
+            return plan_response(patient, [], task_error=str(failure),
+                                 task_values={**request.form, 'task_id':task_id}), failure.status
+        return redirect(url_for('decisions_page', patient_id=patient_id)+'#task-'+task_id, code=303)
+
+    def decisions_view(patient, patient_id, error=None, status=200, confirm_error=None, task_error=None, task_values=None):
         """The decisions screen; a refused confirmation comes back here with the typed rationale instead of a bare error page."""
         items = decisions.history(get_db(), g.user, patient_id)
         values = request.form if request.method == 'POST' and confirm_error is None else {}
@@ -959,6 +987,8 @@ def create_app(database=None):
         if request.method == 'GET' and request.args.get('med_edit') == '1':
             values = {**values, 'med_change': 'replace'}
         return interface_response('decisions.html', patient=patient, decisions=items, kinds=decisions.KINDS,
+                               plan_task_data=plan_tasks.view(get_db(), g.user, patient_id),
+                               task_error=task_error, task_values=task_values or {},
                                plan_data=follow_up.view(get_db(), g.user, patient_id, {}, all_history=True), labels=communication.LABELS,
                                reference=decisions.reference() if g.user['role']=='doctor' else None,
                                route_reference=routing.reference() if g.user['role']=='doctor' else None,
