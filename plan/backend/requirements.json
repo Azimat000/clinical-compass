@@ -34,7 +34,10 @@
         "docs/architecture/backend-risk-context.md",
         "evidence/BE08B02/acceptance.md",
         "evidence/BE08/risk-quality.json",
-        "apps/tests/test_backend_risk_integration.py"
+        "apps/tests/test_backend_risk_integration.py",
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
       ]
     },
     {
@@ -127,28 +130,40 @@
       "id": "B05",
       "text": "Предлагать ведущую диагностическую гипотезу и существенные альтернативы",
       "implementation_slices": [
-        "BE10"
+        "BE10",
+        "BE10A",
+        "BE10B"
       ],
       "verification_slices": [
         "BE18",
         "BE19"
       ],
-      "status": "planned",
-      "actual_evidence": []
+      "status": "partial",
+      "actual_evidence": [
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
+      ]
     },
     {
       "id": "B06",
       "text": "Обоснование диагноза, противоречия, недостающие сведения, решение врача",
       "implementation_slices": [
         "BE10",
-        "BE11"
+        "BE11",
+        "BE10A",
+        "BE10B"
       ],
       "verification_slices": [
         "BE18",
         "BE19"
       ],
-      "status": "planned",
-      "actual_evidence": []
+      "status": "partial",
+      "actual_evidence": [
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
+      ]
     },
     {
       "id": "B07",
@@ -232,7 +247,9 @@
         "BE12",
         "BE13",
         "BE14",
-        "BE19"
+        "BE19",
+        "BE10A",
+        "BE10B"
       ],
       "status": "partial",
       "actual_evidence": [
@@ -242,7 +259,10 @@
         "evidence/BE03/research.md",
         "evidence/BE07/acceptance.md",
         "apps/tests/test_backend_risk_rules.py",
-        "docs/architecture/backend-risk-rules.md"
+        "docs/architecture/backend-risk-rules.md",
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
       ]
     },
     {
@@ -260,7 +280,9 @@
         "BE08A",
         "BE08B",
         "BE08B01",
-        "BE08B02"
+        "BE08B02",
+        "BE10A",
+        "BE10B"
       ],
       "status": "partial",
       "actual_evidence": [
@@ -277,7 +299,10 @@
         "docs/architecture/backend-risk-context.md",
         "evidence/BE08B02/acceptance.md",
         "evidence/BE08/risk-quality.json",
-        "apps/tests/test_backend_risk_integration.py"
+        "apps/tests/test_backend_risk_integration.py",
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
       ]
     },
     {
@@ -325,7 +350,10 @@
         "apps/tests/test_backend_risk_integration.py",
         "evidence/BE09/acceptance.md",
         "apps/tests/test_backend_alerts.py",
-        "docs/architecture/backend-alerts.md"
+        "docs/architecture/backend-alerts.md",
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
       ]
     },
     {
@@ -369,7 +397,10 @@
         "apps/tests/test_backend_risk_integration.py",
         "evidence/BE09/acceptance.md",
         "apps/tests/test_backend_alerts.py",
-        "docs/architecture/backend-alerts.md"
+        "docs/architecture/backend-alerts.md",
+        "evidence/BE10A/acceptance.md",
+        "apps/tests/test_backend_diagnoses.py",
+        "docs/architecture/backend-diagnoses.md"
       ]
     },
     {

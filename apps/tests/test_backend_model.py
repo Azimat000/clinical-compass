@@ -178,8 +178,19 @@ class ModelTests(unittest.TestCase):
         with closing(sqlite3.connect(self.path)) as db:
             self.assertEqual(db.execute('select state from calls').fetchone()[0], 'reserved')
 
+    def test_authorized_connection_cap_keeps_existing_ledger_and_fails_above_limit(self):
+        cfg = Config(model='test')
+        self.assertEqual(100000, cfg.total_micro_usd)
+        self.assertEqual(20000, cfg.per_call_micro_usd)
+        self.budget.reserve(45150, cfg.total_micro_usd)
+        self.budget.reserve(50000, cfg.total_micro_usd)
+        with self.assertRaisesRegex(ModelError, 'budget_exceeded'):
+            self.budget.reserve(4851, cfg.total_micro_usd)
+        with closing(sqlite3.connect(self.path)) as db:
+            self.assertEqual((2, 95150), db.execute('SELECT count(*),sum(micro_usd) FROM calls').fetchone())
+
     def test_invalid_configuration(self):
         for kwargs in [{'timeout': 0}, {'timeout': 61}, {'max_output_tokens': 1025},
-                       {'total_micro_usd': 50001}, {'input_ceiling': 0}]:
+                       {'total_micro_usd': 100001}, {'input_ceiling': 0}]:
             with self.assertRaises(ModelError):
                 Config(model='test', **kwargs)

@@ -1,0 +1,2181 @@
+{
+  "timestamp_utc": "2026-10-26T19:25:44.160934+00:00",
+  "scope": "one authored mechanics smoke, not clinical quality",
+  "test_double": false,
+  "independent_clinical_review": false,
+  "all_four_categories": [
+    "anamnesis",
+    "questionnaires",
+    "visits",
+    "wellbeing"
+  ],
+  "input_snapshot": {
+    "actions": [],
+    "adverse_events": [],
+    "age_reviews": [],
+    "alerts": [],
+    "assessment_form_releases": [
+      {
+        "definition_sha256": "6f46c3b57dfe57b1f946c8137afa870aaa7df92bb825dcab1f3006cc5a5c3580",
+        "form_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "released_at": "2026-10-26T19:25:41.046794+00:00",
+        "scope": "synthetic_demo"
+      },
+      {
+        "definition_sha256": "7a93c50225b1f477ffd12411f03678b310ce2bc0f0af49cdf5995dbf20ca9656",
+        "form_version_id": "GAD7-RU-Z-2023-demo-v1",
+        "released_at": "2026-10-26T19:25:41.047515+00:00",
+        "scope": "synthetic_demo"
+      },
+      {
+        "definition_sha256": "bdb109aca11e234f73cec5ad1e0391703b987f21b29a7e9f1abfc3d5e6fc8e88",
+        "form_version_id": "PHQ9-RU-Z-2023-demo-v1",
+        "released_at": "2026-10-26T19:25:41.048150+00:00",
+        "scope": "synthetic_demo"
+      }
+    ],
+    "assessment_requests": [
+      {
+        "age_basis": "Синтетический профиль",
+        "age_on": "2026-10-26",
+        "age_snapshot_json": "{\"birth_date\":null,\"calculated_years\":null,\"detail\":null,\"status\":\"known\",\"verification_token\":\"b64266efd4ce79fca15eaef26956c4ef605716007052cb26e4acc73980e32fc9\",\"years\":35}",
+        "age_years": 35,
+        "expires_at": "2026-10-27T19:25:41.410011+00:00",
+        "form_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "id": "78e84274945096e59e1b97710bc6db08",
+        "patient_id": "D01",
+        "payload_json": "{\"age\":{\"birth_date\":null,\"calculated_years\":null,\"detail\":null,\"status\":\"known\",\"verification_token\":\"b64266efd4ce79fca15eaef26956c4ef605716007052cb26e4acc73980e32fc9\",\"years\":35},\"age_basis\":\"Синтетический профиль\",\"form_version_id\":\"DASS42-RU-FG-2024-demo-v1\"}",
+        "relationship_id": "e0bc5dea1d71615f2583f218e051e7cb",
+        "request_key": "570acb4d9b88afddd09dea128f778e5e943642ff2bcf474eb14d457354411bad",
+        "requested_at": "2026-10-26T19:25:41.410011+00:00",
+        "requested_by": "doc-a"
+      }
+    ],
+    "assessment_results": [
+      {
+        "actor_id": "pat-a",
+        "assessment_id": "a602c4581cfc96d606c0e198c249e153",
+        "observed_on": "2026-10-26",
+        "recorded_at": "2026-10-26T19:25:41.410918+00:00",
+        "request_id": "78e84274945096e59e1b97710bc6db08",
+        "scores_json": null
+      }
+    ],
+    "assessments": [
+      {
+        "answers_json": "[1,null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]",
+        "assigned_by": "doc-a",
+        "completed_at": "2026-10-26T19:25:41.410918+00:00",
+        "completeness": "incomplete",
+        "id": "a602c4581cfc96d606c0e198c249e153",
+        "patient_id": "D01",
+        "scale_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "score": null,
+        "scoring_version": "dass42-three-sums-v1"
+      }
+    ],
+    "backend_contract": {
+      "contract_version": "1.0",
+      "schema_sha256": "8fc43e65dd8e43e80b192d963047a48d3b89b869e1f5c04c912855fcef9f4d43",
+      "scope_sha256": "472a9fa88f280dc087cdd9ba916c25a89b4e339983933957183639e100e0dd5a"
+    },
+    "backend_risk_rules": {
+      "authorship": "HAC: собственные краткие фактические изложения; не копия шкалы или алгоритма КР",
+      "clinical_review": null,
+      "engine_sha256": "65bae8fd7dc248a6457ed0b3c79b0095f8fe4b361aef7261585aac7b21eab969",
+      "evidence": "evidence/BE07/research.md",
+      "evidence_sha256": "db669016eaa8f97d81f122e50ab262ccb86c51663416fb1be41233bfd6893266",
+      "mode": "synthetic_only",
+      "rules": [
+        {
+          "admission_claim": "be03-KR301_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F32",
+            "F33"
+          ],
+          "id": "DEP-SUICIDE-FACT",
+          "pdf_page": 21,
+          "printed_page": 16,
+          "section": "2.5 Иные диагностические исследования",
+          "source_id": "KR301_3",
+          "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-PSY-REVIEW",
+          "pdf_page": 39,
+          "printed_page": 39,
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_id": "KR457_3",
+          "text": "При документированном ГТР врач отметил фактор, для которого КР предусматривают наблюдение психиатром. Врачу следует рассмотреть этот вопрос; направление не создано, срок не установлен."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-ADVERSE-REVIEW",
+          "pdf_page": 30,
+          "printed_page": 30,
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "text": "В контексте подтверждённой врачом текущей психофармакотерапии ГТР сообщено нежелательное явление. Врач оценивает переносимость; причинность, тяжесть и изменение терапии правилом не установлены."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-INITIAL-ANXIETY",
+          "pdf_page": 22,
+          "printed_page": 22,
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "text": "Врач указал начальную фазу антидепрессивной терапии ГТР и усиление тревоги. Требуется врачебная оценка динамики; правило не определяет причинность, срочность или изменение лечения."
+        }
+      ],
+      "version": "backend-risk-rules-v1"
+    },
+    "backend_sources": {
+      "catalog_sha256": "46afb2790c398008b5f84d7242d06dd8c9b71b38ad02293703c85b30d47417c5",
+      "claims": {
+        "be03-KR301_3-F01": {
+          "binding": {
+            "fragment_id": "KR301_3-F01",
+            "id": "be03-KR301_3-F01",
+            "operation": "diagnosis",
+            "page": 12,
+            "section": "2. Диагностика",
+            "source_id": "KR301_3",
+            "text_sha256": "b1fa54475fa47083956b1b466feff87d27443cf605377f0a768a3095f1271da6"
+          },
+          "reasons": [],
+          "text": "Анкета и дневник не устанавливают первичный диагноз депрессивного расстройства. Исходную диагностическую оценку проводит психиатр; HAC помогает подготовить сведения для его работы."
+        },
+        "be03-KR301_3-F02": {
+          "binding": {
+            "fragment_id": "KR301_3-F02",
+            "id": "be03-KR301_3-F02",
+            "operation": "risk",
+            "page": 16,
+            "section": "2.1 Жалобы и анамнез",
+            "source_id": "KR301_3",
+            "text_sha256": "2522d667912880f78c24af8931b7bc06421eef74552441d6e77672fa1382a4d8"
+          },
+          "reasons": [],
+          "text": "В диагностический приём при депрессивном расстройстве входит оценка суицидального риска. Сбор ответов в HAC не заменяет эту врачебную оценку и действующий путь реагирования на критические сведения."
+        },
+        "be03-KR301_3-F04": {
+          "binding": {
+            "fragment_id": "KR301_3-F04",
+            "id": "be03-KR301_3-F04",
+            "operation": "plan",
+            "page": 23,
+            "section": "3. Лечение",
+            "source_id": "KR301_3",
+            "text_sha256": "4a7a8829305da3efa18dc78ff5f1a28824d59d06a07ceb0ec4e1c3746036e5e0"
+          },
+          "reasons": [],
+          "text": "Индивидуальный план при депрессивном расстройстве зависит в том числе от прежнего лечения и его переносимости, других болезней и принимаемых средств. Эти сведения собирает и оценивает врач; карточка не выбирает препарат."
+        },
+        "be03-KR457_3-F01": {
+          "binding": {
+            "fragment_id": "KR457_3-F01",
+            "id": "be03-KR457_3-F01",
+            "operation": "diagnosis",
+            "page": 10,
+            "section": "1.6 Клиническая картина",
+            "source_id": "KR457_3",
+            "text_sha256": "fe077b20518fd8b7909e887bbf198de8e75781b45f73588c7c115dfd045e14a2"
+          },
+          "reasons": [],
+          "text": "Уточнение диагноза ГТР требует отличать его от других психических расстройств и соматических причин. Упоминание тревоги в вопросе не создаёт подтверждённый диагноз."
+        },
+        "be03-KR457_3-F02": {
+          "binding": {
+            "fragment_id": "KR457_3-F02",
+            "id": "be03-KR457_3-F02",
+            "operation": "risk",
+            "page": 22,
+            "section": "3.2 Психофармакотерапия",
+            "source_id": "KR457_3",
+            "text_sha256": "fc7688dfab17e9e076713b1e70cddddc1d57343ac36e222a552b094979898a8c"
+          },
+          "reasons": [],
+          "text": "В обсуждении начала антидепрессивной терапии ГТР КР отдельно отмечают наблюдение за суицидальными рисками и возможным усилением тревоги. Краткая справка не определяет срочность и не заменяет врача."
+        },
+        "be03-KR457_3-F03": {
+          "binding": {
+            "fragment_id": "KR457_3-F03",
+            "id": "be03-KR457_3-F03",
+            "operation": "plan",
+            "page": 30,
+            "section": "3.2 Психофармакотерапия",
+            "source_id": "KR457_3",
+            "text_sha256": "c5f89cff399313dddb798936248004b4c5f1b7415bc515615219bfa5e78acac5"
+          },
+          "reasons": [],
+          "text": "Для лекарственного лечения ГТР предусмотрена повторная оценка эффекта и переносимости на протяжении курса. Эта карточка не задаёт программный график, порог ответа или решение о коррекции лечения."
+        }
+      },
+      "clinical_review": null,
+      "engine_sha256": "7770353610b38134a1b2e6a296cd797c2e811077c6b5826502a0dd319119ec0d",
+      "mode": "synthetic_only",
+      "sources": {
+        "KR301_3": {
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00",
+          "effective_verification": {
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "document_type": "clinical_guideline",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+            "publisher": "Минздрав России — официальный распространитель",
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "source_version": "301_3 / 2024 / version=3"
+          },
+          "pin": {
+            "age_max": 120,
+            "age_min": 18,
+            "conditions": [
+              "F32",
+              "F33"
+            ],
+            "id": "KR301_3",
+            "registry_sha256": "6d2ecb1db6a732d80ac7d01206489d5837244ef53236858ad2820bfac0dcfb0a",
+            "status": "registered",
+            "verification": {
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "current_status": "current",
+              "path": "evidence/BE03/research.md",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c"
+            }
+          },
+          "reasons": [],
+          "source": {
+            "admission_id": "S17J02-KR301_3-reference-1",
+            "artifact_path": "data/retrieval/reference-cards/KR301_3.json",
+            "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "document_family": "KR301",
+            "document_id": "KR301_3",
+            "document_type": "clinical_guideline",
+            "full_text_rights": {
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс.",
+              "scopes": [],
+              "status": "unknown"
+            },
+            "indications": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Депрессивный эпизод / рекуррентное депрессивное расстройство; F32/F33",
+              "verified": true
+            },
+            "official_origin_verified": true,
+            "official_status": "current",
+            "path": "evidence/S09/completion-review/sources/kr301.pdf",
+            "population": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "verified": true
+            },
+            "publisher": "Минздрав России — официальный распространитель",
+            "representation": "reviewed_cards",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "rights": {
+              "content_review": {
+                "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+                "attribution_reviewed": true,
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "fragment_ids": [
+                  "KR301_3-F01",
+                  "KR301_3-F02",
+                  "KR301_3-F03",
+                  "KR301_3-F04",
+                  "KR301_3-F05"
+                ],
+                "purpose_and_volume_reviewed": true,
+                "quoted_characters": 101,
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522",
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73"
+              },
+              "index_fields": [
+                "paraphrase"
+              ],
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "status": "verified"
+            },
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "source_version": "301_3 / 2024 / version=3",
+            "status": "approved",
+            "verification": {
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "document_type": "clinical_guideline",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+              "publisher": "Минздрав России — официальный распространитель",
+              "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+              "source_version": "301_3 / 2024 / version=3"
+            },
+            "verified_at": "2026-10-20T22:32:00+03:00"
+          }
+        },
+        "KR457_3": {
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00",
+          "effective_verification": {
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "document_type": "clinical_guideline",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+            "publisher": "Минздрав России — официальный распространитель",
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "source_version": "457_3 / 2024 / version=3"
+          },
+          "pin": {
+            "age_max": 120,
+            "age_min": 18,
+            "conditions": [
+              "F41.1"
+            ],
+            "id": "KR457_3",
+            "registry_sha256": "533b4e8e57c52cf63d55acc1a87f585a7bfef4afb4448c45ca90162eec8ef7a3",
+            "status": "registered",
+            "verification": {
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "current_status": "current",
+              "path": "evidence/BE03/research.md",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c"
+            }
+          },
+          "reasons": [],
+          "source": {
+            "admission_id": "S17J02-KR457_3-reference-1",
+            "artifact_path": "data/retrieval/reference-cards/KR457_3.json",
+            "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "document_family": "KR457",
+            "document_id": "KR457_3",
+            "document_type": "clinical_guideline",
+            "full_text_rights": {
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс.",
+              "scopes": [],
+              "status": "unknown"
+            },
+            "indications": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Генерализованное тревожное расстройство; F41.1",
+              "verified": true
+            },
+            "official_origin_verified": true,
+            "official_status": "current",
+            "path": "evidence/S09/completion-review/sources/kr457.pdf",
+            "population": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "verified": true
+            },
+            "publisher": "Минздрав России — официальный распространитель",
+            "representation": "reviewed_cards",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "rights": {
+              "content_review": {
+                "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+                "attribution_reviewed": true,
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "fragment_ids": [
+                  "KR457_3-F01",
+                  "KR457_3-F02",
+                  "KR457_3-F03",
+                  "KR457_3-F04",
+                  "KR457_3-F05"
+                ],
+                "purpose_and_volume_reviewed": true,
+                "quoted_characters": 159,
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522",
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73"
+              },
+              "index_fields": [
+                "paraphrase"
+              ],
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "status": "verified"
+            },
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "source_version": "457_3 / 2024 / version=3",
+            "status": "approved",
+            "verification": {
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "document_type": "clinical_guideline",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+              "publisher": "Минздрав России — официальный распространитель",
+              "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+              "source_version": "457_3 / 2024 / version=3"
+            },
+            "verified_at": "2026-10-20T22:32:00+03:00"
+          }
+        }
+      },
+      "version": "backend-sources-v1"
+    },
+    "catalog_versions": [
+      {
+        "age_basis": "Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "DASS-42",
+        "definition_json": "{\"attribution\":\"Lovibond & Lovibond, 1995. Перевод: И.М. Фаттахов, Е.А. Горобец, 2024.\",\"code\":\"DASS-42\",\"download_conditions_url\":\"https://dass.psy.unsw.edu.au/down.htm\",\"id\":\"DASS42-RU-FG-2024-demo-v1\",\"instruction\":\"Пожалуйста, прочитайте каждое утверждение и обведите напротив него цифру 0, 1, 2, 3 в зависимости от того, насколько оно соответствовало вашему самочувствию на прошлой неделе. Помните, что здесь нет правильных или неправильных ответов. Также не следует тратить слишком много времени на их обдумывание.\",\"items\":[\"Я замечал, что расстраиваюсь по любому поводу.\",\"У меня возникало ощущение сухости во рту.\",\"Мне казалось, что я совсем не могу испытать положительных эмоций.\",\"Мне было тяжело дышать (напр., возникало учащённое дыхание, одышка в отсутствие физических нагрузок).\",\"Мне было трудно начать делать что-либо.\",\"Я был склонен слишком бурно на всё реагировать.\",\"У меня возникало ощущение шаткости (напр., ноги подкашивались).\",\"Мне было трудно расслабиться.\",\"У меня были ситуации, которые беспокоили меня настолько, что я испытывал большое облегчение, когда они заканчивались.\",\"Я чувствовал, что мне нечего ждать от жизни.\",\"Я замечал, что довольно легко расстраиваюсь.\",\"Я чувствовал, что трачу много душевных сил.\",\"Я чувствовал себя грустным и подавленным.\",\"Я замечал, что начинал терять терпение, когда меня что-то задерживало (напр., лифт, светофор и т.д.).\",\"У меня возникало ощущение дурноты.\",\"Я чувствовал, что потерял интерес почти ко всему в жизни.\",\"Я чувствовал, что не представляю ценности как личность.\",\"Я чувствовал себя достаточно ранимым.\",\"Я сильно потел (напр., потели ладони в отсутствие высокой температуры или физических нагрузок).\",\"Я испытывал страх без какой-либо веской причины.\",\"Я чувствовал, что не стоит жить дальше.\",\"Мне было трудно успокоиться.\",\"Мне было трудно глотать (напр., возникало ощущение кома в горле).\",\"Я не получал никакого удовольствия от того, чем я занимался.\",\"Я ощущал сердцебиение в отсутствие физических нагрузок (напр., возникало учащённое сердцебиение, замирание сердца).\",\"Я чувствовал себя разбитым и унылым.\",\"Я заметил, что бывал очень раздражительным.\",\"Я чувствовал, что был близок к панике.\",\"Мне было трудно прийти в себя после того, как меня что-то расстраивало.\",\"Я боялся, что не смогу справиться с какой-нибудь простой, но незнакомой мне задачей.\",\"Я был в не состоянии чем-то увлечься.\",\"Мне было трудно сохранять спокойствие, когда кто-то прерывал меня во время моих занятий.\",\"Я находился в состоянии нервного напряжения.\",\"Я чувствовал себя совершенно никчёмным человеком.\",\"Меня раздражало всё, что отвлекало меня от дел.\",\"Меня охватывал ужас.\",\"У меня не было светлых надежд на будущее.\",\"Я чувствовал, что моя жизнь не имеет смысла.\",\"Я замечал, что начинал сильно нервничать.\",\"Я опасался ситуаций, в которых я мог запаниковать и оказаться в глупом положении.\",\"Я ощущал дрожь (напр., в руках).\",\"Мне было сложно заставить себя сделать что-либо.\"],\"key_url\":\"https://dass.psy.unsw.edu.au/Download%20files/Dass_template.pdf\",\"options\":[\"Вообще не относилось ко мне.\",\"Относилось ко мне в какой-то степени или некоторое время.\",\"Относилось ко мне в значительной степени или большую часть времени.\",\"Относилось ко мне в крайней степени или практически всё время.\"],\"period\":\"На прошлой неделе\",\"population\":{\"official_age_guidance\":\"DASS FAQ: от 14 лет при обычных языковых навыках.\",\"project_policy\":\"Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.\",\"study\":\"250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан.\"},\"rights_url\":\"https://dass.psy.unsw.edu.au/DASSFAQ.htm\",\"scoring\":{\"interpretation\":\"Без диагноза, уровней тяжести, порогов, общего итога и множителя DASS-21.\",\"missing\":\"Любой пропуск: ни одна сумма не рассчитывается. Консервативная политика проекта; ответы сохраняются.\",\"patient_output\":\"Только квитанция после отправки, без обратной выдачи ответов, сумм или интерпретации.\",\"range_per_subscale\":[0,42],\"version\":\"dass42-three-sums-v1\"},\"source\":{\"checked_on\":\"2026-10-19\",\"sha256\":\"5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86\",\"url\":\"https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf\",\"verification\":\"read-only researcher /root/scale_best_option; exact text and fetched PDF hash\"},\"subscales\":{\"anxiety\":{\"items\":[2,4,7,9,15,19,20,23,25,28,30,36,40,41],\"label\":\"Тревожные симптомы\"},\"depression\":{\"items\":[3,5,10,13,16,17,21,24,26,31,34,37,38,42],\"label\":\"Депрессивные симптомы\"},\"stress\":{\"items\":[1,6,8,11,12,14,18,22,27,29,32,33,35,39],\"label\":\"Стресс\"}},\"title\":\"Шкала депрессии, тревоги и стресса (DASS)\",\"validation_url\":\"https://doi.org/10.17116/jnevro2025125051103\",\"version\":\"RU-FG-2024 / demo-release-2026-10-19-v1\"}",
+        "id": "DASS42-RU-FG-2024-demo-v1",
+        "kind": "scale",
+        "max_age": 120,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "DASS42-RU-FG-2024-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+      },
+      {
+        "age_basis": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "GAD-7",
+        "definition_json": "{\"attribution\":\"Spitzer R.L., Kroenke K., Williams J.B.W., Löwe B., 2006. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC.\",\"code\":\"GAD-7\",\"id\":\"GAD7-RU-Z-2023-demo-v1\",\"instruction\":\"Оцените, пожалуйста, насколько часто следующие проблемы беспокоили вас в течение прошедших двух недель. Для ответов используйте следующую шкалу:\",\"items\":[\"Чувство тревоги или раздражения\",\"Неспособность справиться со своим беспокойством\",\"Чрезмерное беспокойство по разным поводам\",\"Неспособность расслабляться\",\"Ощущение такого беспокойства, что трудно найти себе место\",\"Склонность быстро испытывать злость или раздражительность\",\"Чувство страха, как будто может случиться что-то ужасное\"],\"max_age\":90,\"min_age\":18,\"options\":[\"Совсем нет\",\"В течение нескольких дней\",\"Более чем половину этого времени\",\"Почти каждый день\"],\"period\":\"В течение прошедших двух недель\",\"population\":{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.\"},\"purpose\":\"Тревожные симптомы\",\"repeat_policy\":{\"basis\":\"В проверенных первичных источниках обязательный минимальный интервал не установлен. Период оценки — последние две недели, раннее повторение разрешено.\",\"mandatory_min_interval_days\":null},\"rights_url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"scoring_note\":\"Сумма семи ответов 0–21. Пороговая интерпретация и диагноз не рассчитываются.\",\"scoring_version\":\"gad7-z2023-sum-v1\",\"source\":{\"checked_on\":\"2026-10-23\",\"sha256\":\"5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60\",\"url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"verification\":\"read-only web-researcher /root/questionnaire_research; exact appendix of validation paper\"},\"source_code\":\"SRC-GAD7-Z2023\",\"subscales\":{\"anxiety\":{\"items\":[1,2,3,4,5,6,7],\"label\":\"Тревожные симптомы\"}},\"title\":\"Шкала генерализованного тревожного расстройства (GAD-7)\",\"validation_url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"version\":\"RU-Zolotareva-2023 / demo-release-2026-10-23-v1\"}",
+        "id": "GAD7-RU-Z-2023-demo-v1",
+        "kind": "scale",
+        "max_age": 90,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "GAD7-RU-Z-2023-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "age_basis": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "PHQ-9",
+        "definition_json": "{\"attribution\":\"Kroenke K., Spitzer R.L., Williams J.B.W., 2001. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC.\",\"code\":\"PHQ-9\",\"id\":\"PHQ9-RU-Z-2023-demo-v1\",\"instruction\":\"Оцените, пожалуйста, насколько часто следующие проблемы беспокоили вас в течение прошедших двух недель. Для ответов используйте следующую шкалу:\",\"items\":[\"Снижение интереса и удовольствия от привычных дел\",\"Чувство подавленности или безнадежности\",\"Проблемы со сном (неспособность заснуть, раннее пробуждение или слишком долгий сон)\",\"Чувство усталости или недостатка энергии\",\"Плохой аппетит или переедание\",\"Плохое мнение о себе или чувство, что не смог оправдать ожиданий моей семьи\",\"Проблемы с концентрацией внимания (например, при чтении газеты или просмотре телевизионной передачи)\",\"Замедленность движений или речи, которая стала заметна другим людям, или, напротив, суетливость, когда движения и речь стали более быстрыми и беспокойными\",\"Мысли о том, что мне бы хотелось умереть или причинить себе боль\"],\"max_age\":90,\"min_age\":18,\"options\":[\"совсем нет\",\"в течение нескольких дней\",\"более, чем половину этого времени\",\"почти каждый день\"],\"period\":\"В течение прошедших двух недель\",\"population\":{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.\"},\"purpose\":\"Депрессивные симптомы\",\"repeat_policy\":{\"basis\":\"В проверенных первичных источниках обязательный минимальный интервал не установлен. Период оценки — последние две недели, раннее повторение разрешено.\",\"mandatory_min_interval_days\":null},\"rights_url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"scoring_note\":\"Сумма девяти ответов 0–27. Пороговая интерпретация и диагноз не рассчитываются.\",\"scoring_version\":\"phq9-z2023-sum-v1\",\"source\":{\"checked_on\":\"2026-10-23\",\"sha256\":\"8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3\",\"url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"verification\":\"read-only web-researcher /root/questionnaire_research; exact appendix of validation paper\"},\"source_code\":\"SRC-PHQ9-Z2023\",\"subscales\":{\"depression\":{\"items\":[1,2,3,4,5,6,7,8,9],\"label\":\"Депрессивные симптомы\"}},\"title\":\"Опросник здоровья пациента (PHQ-9)\",\"validation_url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"version\":\"RU-Zolotareva-2023 / demo-release-2026-10-23-v1\"}",
+        "id": "PHQ9-RU-Z-2023-demo-v1",
+        "kind": "scale",
+        "max_age": 90,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "PHQ9-RU-Z-2023-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      }
+    ],
+    "clinical_contexts": [],
+    "clinical_entries": [
+      {
+        "actor_id": "pat-a",
+        "encounter_id": null,
+        "id": "456027c1156a6c4c1db4dd696c999dd4",
+        "kind": "self_report",
+        "observed_on": "2026-10-26",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.\", \"wellbeing\": \"worse\"}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "request_key": "90fc0e82ab27af17f045c98c1c34f30a213dfda3c0fef67369484bf45c7052e6",
+        "self_report_id": "456027c1156a6c4c1db4dd696c999dd4",
+        "summary": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment."
+      }
+    ],
+    "clinical_rule_evaluations": [],
+    "clinical_rule_release": "4abf78a463263eb2d95b8d8d5f3b22c8a96a9cd034e0ffc11306743ad0e9db9d",
+    "critical_events": [],
+    "day": "2026-10-26",
+    "decision_drafts": [],
+    "doctor_confirmations": [],
+    "documents": [],
+    "encounters": [
+      {
+        "author_id": null,
+        "id": "D01-initial",
+        "narrative": "Подтверждённый в синтетическом профиле ГТР; кандидат для врачебного рассмотрения. Клиническое заключение не утверждено.",
+        "occurred_at": "2026-10-26T19:25:41.035825+00:00",
+        "origin": "S03-v1 / D01",
+        "patient_id": "D01",
+        "schema_version": 1
+      }
+    ],
+    "first_visit_versions": [
+      {
+        "actor_id": "doc-a",
+        "id": "6a653545e843326423ef85b46f2b2cf8",
+        "patient_id": "D01",
+        "payload_json": "{\"action_draft\": \"\", \"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"age_basis\": \"\", \"age_source\": \"patient\", \"document_basis\": \"\", \"documented_facts\": \"\", \"fields\": {\"acute\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"complaints\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"course\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"followup\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"history\": {\"basis\": \"Беседа\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"known\", \"text\": \"Entirely fictional adult case. No prior mood episode is documented.\"}, \"impact\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"medications\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"other_states\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"safety\": {\"basis\": \"Явное отрицание\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"denied\", \"text\": \"\"}, \"somatic\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}}, \"not_collected\": true, \"observed_on\": \"2026-10-26\", \"visit_kind\": \"first\"}",
+        "protocol_version": "physician-visit-s51-v2",
+        "recorded_at": "2026-10-26T19:25:41.407506+00:00",
+        "relationship_id": "e0bc5dea1d71615f2583f218e051e7cb",
+        "request_key": "f15ee862a0824f081d6ef44a139dfd98ce5aa7b8ebd56631a52251c44eaf503e",
+        "revision": 1,
+        "state": "draft",
+        "visit_id": "a3b0e83fb16d55dd324d94cab1361b12"
+      }
+    ],
+    "observations": [
+      {
+        "code": "adverse_events",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "0dea4645977b7197bd19d6d9bbfe5a9b",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "risk_factors",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "23dc7b7825e8482e48cacec77d9ad89d",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "concomitant_medications",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "803affec493c4ef4949c8c69921902fc",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "synthetic_profile_snapshot",
+        "data_status": "known",
+        "encounter_id": "D01-initial",
+        "id": "D01-profile",
+        "observed_at": "2026-10-26T19:25:41.035825+00:00",
+        "patient_id": "D01",
+        "provenance_json": "{\"dataset\": \"S03-v1\", \"case_id\": \"D01\", \"clinical_review_status\": \"not_reviewed\"}",
+        "recorded_at": "2026-10-26T19:25:41.035825+00:00",
+        "unit": null,
+        "value_json": "{\"age_years\": 35, \"diagnosis\": \"ГТР, указан врачом в вымышленном случае\", \"leading_specialty\": \"терапевт\", \"symptoms\": [\"постоянное беспокойство\", \"нарушение сна\"], \"medication_allergy\": false, \"pregnancy_status\": false, \"concomitant_medications\": []}"
+      },
+      {
+        "code": "reported_age",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "aa4b75e3a0c2aaa8a5732e0cee14fa51",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "complaints",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "b7ab97f8bf8c812602e2e6908896cf2c",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"456027c1156a6c4c1db4dd696c999dd4\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+        "unit": null,
+        "value_json": null
+      }
+    ],
+    "patient_history": {
+      "active_medication_plan_ref": null,
+      "active_plan_ref": null,
+      "complete": true,
+      "counts": {
+        "anamnesis": 1,
+        "context": 2,
+        "medication_actual": 0,
+        "plans": 0,
+        "questionnaires": 1,
+        "visits": 2,
+        "wellbeing": 1
+      },
+      "entries": [
+        {
+          "author_id": null,
+          "category": "context",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age_status",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/age_status",
+              "source_ref": "s2_7b9683a333f6a2640f905a7be676bf1b2463aeedfd1e0c1c4a73e7e130992c67",
+              "status": "known",
+              "value": "known"
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "birth_date",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/birth_date",
+              "source_ref": "s2_7b9683a333f6a2640f905a7be676bf1b2463aeedfd1e0c1c4a73e7e130992c67",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age_years",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/age_years",
+              "source_ref": "s2_7b9683a333f6a2640f905a7be676bf1b2463aeedfd1e0c1c4a73e7e130992c67",
+              "status": "known",
+              "value": 35
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.406806+00:00",
+          "ref": "s2_7b9683a333f6a2640f905a7be676bf1b2463aeedfd1e0c1c4a73e7e130992c67",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "doc-a",
+          "category": "anamnesis",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": "Беседа",
+              "carried_from": null,
+              "code": "history",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/history/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "known",
+              "value": "Entirely fictional adult case. No prior mood episode is documented."
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "somatic",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/somatic/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.407506+00:00",
+          "ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+          "related_refs": [],
+          "state": "draft",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "doc-a",
+          "category": "visits",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "acute",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/acute/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "complaints",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/complaints/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "course",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/course/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "followup",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/followup/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "Беседа",
+              "carried_from": null,
+              "code": "history",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/history/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "known",
+              "value": "Entirely fictional adult case. No prior mood episode is documented."
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "impact",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/impact/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "medications",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/medications/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "other_states",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/other_states/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "Явное отрицание",
+              "carried_from": null,
+              "code": "safety",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/safety/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "denied",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "somatic",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/somatic/text",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/age",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": {
+                "birth_date": null,
+                "calculated_years": null,
+                "detail": null,
+                "status": "unknown",
+                "years": null
+              }
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "documented_facts",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/documented_facts",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "document_basis",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/document_basis",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "action_draft",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/action_draft",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "status": "unknown",
+              "value": ""
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.407506+00:00",
+          "ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+          "related_refs": [],
+          "state": "draft",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "pat-a",
+          "category": "wellbeing",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "summary",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/summary",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "known",
+              "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment."
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "adverse_events",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/adverse_events/text",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "complaints",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/complaints/text",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "concomitant_medications",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/concomitant_medications/text",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "risk_factors",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/risk_factors/text",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/age",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "unknown",
+              "value": {
+                "birth_date": null,
+                "calculated_years": null,
+                "detail": null,
+                "status": "unknown",
+                "years": null
+              }
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "wellbeing",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/wellbeing",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "status": "known",
+              "value": "worse"
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+          "ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+          "related_refs": [
+            "s2_25c001e679018c2d25fccbf0ea0d54930795be3e350db03fae1f121d62facc3a",
+            "s2_863409385f8faa211ad787fcfe9c85236cefe137609500a88486c34f3816f25b",
+            "s2_aeef878329403ef3df13e49de4e58196afdd205fc91b6c85840e3fc33326091b",
+            "s2_c5800694a24e3edfbcd0065874654aae652b34e0b1549045a5b509fbf4d71beb",
+            "s2_da9ae1a51467961f1fd86782f7e151fa4561a384edb9c0e4373c191e086a7d03",
+            "s2_f7e10949364d294b743e5bcfc94f821af68343a0e3d0c5ddcbee0ad0be1854d3"
+          ],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "pat-a",
+          "category": "questionnaires",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "answers",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/answers_json",
+              "source_ref": "s2_33b72c07526ec6054dcaacafb292a561a27163de3bc43caa522319ed54c25ab1",
+              "status": "known",
+              "value": [
+                1,
+                null,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "legacy_score",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/score",
+              "source_ref": "s2_33b72c07526ec6054dcaacafb292a561a27163de3bc43caa522319ed54c25ab1",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "form_version",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/scale_version_id",
+              "source_ref": "s2_33b72c07526ec6054dcaacafb292a561a27163de3bc43caa522319ed54c25ab1",
+              "status": "known",
+              "value": "DASS42-RU-FG-2024-demo-v1"
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "scores",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/scores_json",
+              "source_ref": "s2_2a289e45522121cab8dbd6439239fb5a538c86aa02876cec93cfa2d71d57e768",
+              "status": "unknown",
+              "value": null
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.410918+00:00",
+          "ref": "s2_33b72c07526ec6054dcaacafb292a561a27163de3bc43caa522319ed54c25ab1",
+          "related_refs": [
+            "s2_2a289e45522121cab8dbd6439239fb5a538c86aa02876cec93cfa2d71d57e768",
+            "s2_88f8d0ca8ba6f1b62efe29410c826a0e518b519f27478eb75efb1b9533b2b689"
+          ],
+          "state": "incomplete",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": "dass42-three-sums-v1"
+        },
+        {
+          "author_id": null,
+          "category": "visits",
+          "current_revision": true,
+          "event_at": "2026-10-26T19:25:41.035825+00:00",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "narrative",
+              "context": "current",
+              "event_at": "2026-10-26T19:25:41.035825+00:00",
+              "origin": "S03-v1 / D01",
+              "path": "/narrative",
+              "source_ref": "s2_39ef1dc2a37eeba32620a18bd8f3022ead5679ff9752137471f99c71a904b6e8",
+              "status": "known",
+              "value": "Подтверждённый в синтетическом профиле ГТР; кандидат для врачебного рассмотрения. Клиническое заключение не утверждено."
+            }
+          ],
+          "issues": [
+            "recorded_time_unknown"
+          ],
+          "recorded_at": null,
+          "ref": "s2_39ef1dc2a37eeba32620a18bd8f3022ead5679ff9752137471f99c71a904b6e8",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": null,
+          "category": "context",
+          "current_revision": true,
+          "event_at": "2026-10-26T19:25:41.035825+00:00",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "synthetic_profile_snapshot",
+              "context": "current",
+              "event_at": "2026-10-26T19:25:41.035825+00:00",
+              "origin": {
+                "case_id": "D01",
+                "clinical_review_status": "not_reviewed",
+                "dataset": "S03-v1"
+              },
+              "path": "/value_json",
+              "source_ref": "s2_3337afa53d1cd5a3eb094b59fd817b606edd711c33e0e1790a6f1d2893b35e32",
+              "status": "known",
+              "value": {
+                "age_years": 35,
+                "concomitant_medications": [],
+                "diagnosis": "ГТР, указан врачом в вымышленном случае",
+                "leading_specialty": "терапевт",
+                "medication_allergy": false,
+                "pregnancy_status": false,
+                "symptoms": [
+                  "постоянное беспокойство",
+                  "нарушение сна"
+                ]
+              }
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T19:25:41.035825+00:00",
+          "ref": "s2_3337afa53d1cd5a3eb094b59fd817b606edd711c33e0e1790a6f1d2893b35e32",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        }
+      ],
+      "entry_count": 7,
+      "missing_categories": [],
+      "page_size": 50,
+      "sources": {
+        "s2_25c001e679018c2d25fccbf0ea0d54930795be3e350db03fae1f121d62facc3a": {
+          "id": "aa4b75e3a0c2aaa8a5732e0cee14fa51",
+          "key": "id",
+          "sha256": "6a0ada7ec90535b2888c23ff551f53c1486ec2c166d6565daa1aeb349e85b0ee",
+          "table": "observations"
+        },
+        "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37": {
+          "id": "6a653545e843326423ef85b46f2b2cf8",
+          "key": "id",
+          "sha256": "28e105145726259ae124b08c93eda0a4d2f5499150ba11c107f39f0f09e1524e",
+          "table": "first_visit_versions"
+        },
+        "s2_2a289e45522121cab8dbd6439239fb5a538c86aa02876cec93cfa2d71d57e768": {
+          "id": "a602c4581cfc96d606c0e198c249e153",
+          "key": "assessment_id",
+          "sha256": "4862db73544842ef8430435efeb1408953156482a958b2adb39ebd1938c0b1ad",
+          "table": "assessment_results"
+        },
+        "s2_3337afa53d1cd5a3eb094b59fd817b606edd711c33e0e1790a6f1d2893b35e32": {
+          "id": "D01-profile",
+          "key": "id",
+          "sha256": "2ddeb1412653061c4f8ca9e4c6fd84b43d4aaf25001acbdbdfefde06f87784ce",
+          "table": "observations"
+        },
+        "s2_33b72c07526ec6054dcaacafb292a561a27163de3bc43caa522319ed54c25ab1": {
+          "id": "a602c4581cfc96d606c0e198c249e153",
+          "key": "id",
+          "sha256": "5ee99f97d0efdaa778b0ce3c02320d6d7c269526c4601e4e73355acb28f04b74",
+          "table": "assessments"
+        },
+        "s2_39ef1dc2a37eeba32620a18bd8f3022ead5679ff9752137471f99c71a904b6e8": {
+          "id": "D01-initial",
+          "key": "id",
+          "sha256": "894b819b82d28a3ed92d87a8ea18e587bdf73e18b558214c08b45ff0e12a783e",
+          "table": "encounters"
+        },
+        "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f": {
+          "id": "456027c1156a6c4c1db4dd696c999dd4",
+          "key": "id",
+          "sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+          "table": "clinical_entries"
+        },
+        "s2_7b9683a333f6a2640f905a7be676bf1b2463aeedfd1e0c1c4a73e7e130992c67": {
+          "id": "D01",
+          "key": "id",
+          "sha256": "9941c4c0061c223593343cdae1a8851e5ff6a03ff43dbfb7f83a08b57b060bb0",
+          "table": "patients"
+        },
+        "s2_863409385f8faa211ad787fcfe9c85236cefe137609500a88486c34f3816f25b": {
+          "id": "803affec493c4ef4949c8c69921902fc",
+          "key": "id",
+          "sha256": "78676b5729d4223178cd5cac4f6d12173bb414b500f28bdad10b655e5b1a78c7",
+          "table": "observations"
+        },
+        "s2_88f8d0ca8ba6f1b62efe29410c826a0e518b519f27478eb75efb1b9533b2b689": {
+          "id": "78e84274945096e59e1b97710bc6db08",
+          "key": "id",
+          "sha256": "6a8efc364d206520366851994b7eb98dc146e82aabea9af73ba7b4b18fecedff",
+          "table": "assessment_requests"
+        },
+        "s2_aeef878329403ef3df13e49de4e58196afdd205fc91b6c85840e3fc33326091b": {
+          "id": "b7ab97f8bf8c812602e2e6908896cf2c",
+          "key": "id",
+          "sha256": "7e62816ac40fafa3a820249da1f2614411e461aeb3a89b30a3dd1ea5d0a90a52",
+          "table": "observations"
+        },
+        "s2_c5800694a24e3edfbcd0065874654aae652b34e0b1549045a5b509fbf4d71beb": {
+          "id": "456027c1156a6c4c1db4dd696c999dd4",
+          "key": "id",
+          "sha256": "1760071579323c68c2e9a2004ed028b01ad85464ab06f48d65939636764aed9c",
+          "table": "self_reports"
+        },
+        "s2_da9ae1a51467961f1fd86782f7e151fa4561a384edb9c0e4373c191e086a7d03": {
+          "id": "23dc7b7825e8482e48cacec77d9ad89d",
+          "key": "id",
+          "sha256": "f50856a52228db534466cf24f962a5c198f5eeb3432f7f65f81c8af350c3e731",
+          "table": "observations"
+        },
+        "s2_f7e10949364d294b743e5bcfc94f821af68343a0e3d0c5ddcbee0ad0be1854d3": {
+          "id": "0dea4645977b7197bd19d6d9bbfe5a9b",
+          "key": "id",
+          "sha256": "bf213cfca11f1447a222011f498ba63cdf7c027d4a75c78b3f196aac7b4c4b86",
+          "table": "observations"
+        }
+      },
+      "truncated": false,
+      "version": "patient-history-v2"
+    },
+    "patients": [
+      {
+        "age_status": "known",
+        "age_years": 35,
+        "birth_date": null,
+        "code": "Демо 01",
+        "created_at": "2026-10-26T19:25:41.406806+00:00",
+        "id": "D01",
+        "synthetic": 1,
+        "user_id": "pat-a"
+      }
+    ],
+    "policy": "synthetic-inputs-v1",
+    "proposals": [],
+    "reference": "f924a03b9c7cf92e1d3f56edbd4b19bbf6ae5d0008f3f40a2eada4b1a9990d45",
+    "relationship": "e0bc5dea1d71615f2583f218e051e7cb",
+    "self_reports": [
+      {
+        "id": "456027c1156a6c4c1db4dd696c999dd4",
+        "idempotency_key": "90fc0e82ab27af17f045c98c1c34f30a213dfda3c0fef67369484bf45c7052e6",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.\", \"wellbeing\": \"worse\"}",
+        "received_at": "2026-10-26T19:25:41.408145+00:00",
+        "reported_at": "2026-10-26",
+        "schema_version": 2
+      }
+    ],
+    "source_versions": [
+      {
+        "checked_at": "2026-10-19",
+        "id": "DASS42-RU-FG-2024-demo-v1-source",
+        "population_json": "{\"official_age_guidance\":\"DASS FAQ: от 14 лет при обычных языковых навыках.\",\"project_policy\":\"Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.\",\"study\":\"250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан.\"}",
+        "rights_status": "verified",
+        "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+        "source_code": "SRC19",
+        "status": "current",
+        "url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+        "validation_status": "verified",
+        "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+      },
+      {
+        "checked_at": "2026-10-23",
+        "id": "GAD7-RU-Z-2023-demo-v1-source",
+        "population_json": "{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.\"}",
+        "rights_status": "verified",
+        "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+        "source_code": "SRC-GAD7-Z2023",
+        "status": "current",
+        "url": "https://publications.hse.ru/pubs/share/direct/889173128.pdf",
+        "validation_status": "verified",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "checked_at": "2026-10-23",
+        "id": "PHQ9-RU-Z-2023-demo-v1-source",
+        "population_json": "{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.\"}",
+        "rights_status": "verified",
+        "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+        "source_code": "SRC-PHQ9-Z2023",
+        "status": "current",
+        "url": "https://publications.hse.ru/pubs/share/direct/896524950.pdf",
+        "validation_status": "verified",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      }
+    ],
+    "therapy_courses": []
+  },
+  "report": {
+    "version": "diagnosis-candidates-v1",
+    "status": "unreviewed",
+    "clinical_ready": false,
+    "established_diagnosis": null,
+    "plan": null,
+    "snapshot_sha256": "b5567980cc0fb3c4a5fc2418ee26d1ba2ba3dd3a32415b2411eb33fe662cbcec",
+    "catalog": {
+      "version": "diagnosis-candidates-v1",
+      "mode": "synthetic_only",
+      "clinical_review": null,
+      "authorship": "HAC: краткие собственные вопросы для обсуждения оснований; не копия критериальной таблицы, шкалы или алгоритма и не полноценная проверка диагностических критериев.",
+      "evidence": "evidence/BE10A/research.md",
+      "kinds": {
+        "depressive_episode": [
+          "dep_features",
+          "dep_course",
+          "dep_exclusions"
+        ],
+        "generalized_anxiety": [
+          "gad_features",
+          "gad_course",
+          "gad_exclusions"
+        ],
+        "bipolar_differential": [
+          "bipolar_history"
+        ],
+        "medical_substance_differential": [
+          "medical_substance"
+        ]
+      },
+      "domains": [
+        {
+          "id": "dep_features",
+          "question": "Какие симптомы поддерживают или опровергают депрессивный синдром?",
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F01",
+          "condition": "F32",
+          "section": "2. Диагностика",
+          "pdf_page": 13
+        },
+        {
+          "id": "dep_course",
+          "question": "Подтверждены ли длительность симптомов, их сочетание и влияние на повседневную жизнь? Уточнить начало, течение и предыдущие эпизоды.",
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F01",
+          "condition": "F32",
+          "section": "2. Диагностика",
+          "pdf_page": 13
+        },
+        {
+          "id": "gad_features",
+          "question": "Подтверждены ли генерализованная тревога, её контролируемость, сопутствующие симптомы и влияние на жизнь?",
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F01",
+          "condition": "F41.1",
+          "section": "2. Диагностика",
+          "pdf_page": 10
+        },
+        {
+          "id": "gad_course",
+          "question": "Установлены ли длительность и непрерывность тревоги? Уточнить начало симптомов, а не только дату записи.",
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F01",
+          "condition": "F41.1",
+          "section": "2. Диагностика",
+          "pdf_page": 10
+        },
+        {
+          "id": "dep_exclusions",
+          "question": "Проверены ли мания/гипомания/смешанные эпизоды, соматические/органические причины, ПАВ и лекарства? Отсутствие записи не исключает причину.",
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F01",
+          "condition": "F32",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 16
+        },
+        {
+          "id": "gad_exclusions",
+          "question": "Проверены ли другие психические расстройства, соматические/органические и связанные с ПАВ причины тревоги?",
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F01",
+          "condition": "F41.1",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 12
+        },
+        {
+          "id": "bipolar_history",
+          "question": "Есть ли текущие или прошлые маниакальные, гипоманиакальные либо смешанные признаки? Это вопрос дифференциации, не установленный БАР.",
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F01",
+          "condition": "F32",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 16
+        },
+        {
+          "id": "medical_substance",
+          "question": "Что известно о соматических/органических заболеваниях, ПАВ и лекарствах перед появлением симптомов?",
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F01",
+          "condition": "F32",
+          "section": "2.1 Жалобы и анамнез",
+          "pdf_page": 16
+        }
+      ],
+      "catalog_sha256": "aaba440330924757fb2ca023000f35f45616e4d4f8a374328a810c169252a93b",
+      "evidence_sha256": "a8c090b161572d1f48974c6295493ce22e3c544b7a1f4f6e19c77f1fd5089ba8",
+      "engine_sha256": "8b9212e0d441f6c504da34507770ab8ad1a740bcbc901ef628593dc832e03be5",
+      "prompt_sha256": "81f3d92ab2d3185e6cf8a0dbca2055f86629aa3d06f85d2a7eaaa17c77221f8e"
+    },
+    "candidates": {
+      "disposition": "candidates",
+      "leading": {
+        "kind": "depressive_episode",
+        "criteria": [
+          {
+            "id": "dep_features",
+            "state": "supporting",
+            "evidence": [
+              {
+                "unit_id": "u14",
+                "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                "path": "/payload_json/summary",
+                "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "pat-a"
+                },
+                "code": "summary",
+                "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                "quote": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired.",
+                "start": 0,
+                "end": 149,
+                "offset_basis": "original_text"
+              }
+            ],
+            "basis": {
+              "id": "dep_features",
+              "question": "Какие симптомы поддерживают или опровергают депрессивный синдром?",
+              "source_id": "KR301_3",
+              "admission_claim": "be03-KR301_3-F01",
+              "condition": "F32",
+              "section": "2. Диагностика",
+              "pdf_page": 13
+            },
+            "interpretation": "model_assignment_unreviewed"
+          },
+          {
+            "id": "dep_course",
+            "state": "supporting",
+            "evidence": [
+              {
+                "unit_id": "u14",
+                "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                "path": "/payload_json/summary",
+                "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "pat-a"
+                },
+                "code": "summary",
+                "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                "quote": "persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired",
+                "start": 29,
+                "end": 148,
+                "offset_basis": "original_text"
+              }
+            ],
+            "basis": {
+              "id": "dep_course",
+              "question": "Подтверждены ли длительность симптомов, их сочетание и влияние на повседневную жизнь? Уточнить начало, течение и предыдущие эпизоды.",
+              "source_id": "KR301_3",
+              "admission_claim": "be03-KR301_3-F01",
+              "condition": "F32",
+              "section": "2. Диагностика",
+              "pdf_page": 13
+            },
+            "interpretation": "model_assignment_unreviewed"
+          },
+          {
+            "id": "dep_exclusions",
+            "state": "supporting",
+            "evidence": [
+              {
+                "unit_id": "u14",
+                "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                "path": "/payload_json/summary",
+                "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "pat-a"
+                },
+                "code": "summary",
+                "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                "quote": "the patient explicitly denies any lifetime mania or hypomania",
+                "start": 178,
+                "end": 239,
+                "offset_basis": "original_text"
+              },
+              {
+                "unit_id": "u14",
+                "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                "path": "/payload_json/summary",
+                "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "pat-a"
+                },
+                "code": "summary",
+                "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                "quote": "The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment.",
+                "start": 241,
+                "end": 396,
+                "offset_basis": "original_text"
+              }
+            ],
+            "basis": {
+              "id": "dep_exclusions",
+              "question": "Проверены ли мания/гипомания/смешанные эпизоды, соматические/органические причины, ПАВ и лекарства? Отсутствие записи не исключает причину.",
+              "source_id": "KR301_3",
+              "admission_claim": "be03-KR301_3-F01",
+              "condition": "F32",
+              "section": "2.1 Жалобы и анамнез",
+              "pdf_page": 16
+            },
+            "interpretation": "model_assignment_unreviewed"
+          }
+        ],
+        "supporting_evidence": [
+          {
+            "unit_id": "u14",
+            "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+            "path": "/payload_json/summary",
+            "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+            "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "categories": [
+              "wellbeing"
+            ],
+            "metadata": {
+              "event_at": "2026-10-26",
+              "context": "current",
+              "status": "known",
+              "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+              "current_revision": true,
+              "state": "recorded",
+              "author_id": "pat-a"
+            },
+            "code": "summary",
+            "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+            "quote": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired.",
+            "start": 0,
+            "end": 149,
+            "offset_basis": "original_text"
+          },
+          {
+            "unit_id": "u14",
+            "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+            "path": "/payload_json/summary",
+            "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+            "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "categories": [
+              "wellbeing"
+            ],
+            "metadata": {
+              "event_at": "2026-10-26",
+              "context": "current",
+              "status": "known",
+              "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+              "current_revision": true,
+              "state": "recorded",
+              "author_id": "pat-a"
+            },
+            "code": "summary",
+            "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+            "quote": "persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired",
+            "start": 29,
+            "end": 148,
+            "offset_basis": "original_text"
+          },
+          {
+            "unit_id": "u14",
+            "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+            "path": "/payload_json/summary",
+            "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+            "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "categories": [
+              "wellbeing"
+            ],
+            "metadata": {
+              "event_at": "2026-10-26",
+              "context": "current",
+              "status": "known",
+              "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+              "current_revision": true,
+              "state": "recorded",
+              "author_id": "pat-a"
+            },
+            "code": "summary",
+            "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+            "quote": "the patient explicitly denies any lifetime mania or hypomania",
+            "start": 178,
+            "end": 239,
+            "offset_basis": "original_text"
+          },
+          {
+            "unit_id": "u14",
+            "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+            "path": "/payload_json/summary",
+            "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+            "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+            "categories": [
+              "wellbeing"
+            ],
+            "metadata": {
+              "event_at": "2026-10-26",
+              "context": "current",
+              "status": "known",
+              "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+              "current_revision": true,
+              "state": "recorded",
+              "author_id": "pat-a"
+            },
+            "code": "summary",
+            "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+            "quote": "The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment.",
+            "start": 241,
+            "end": 396,
+            "offset_basis": "original_text"
+          }
+        ],
+        "contradicting_evidence": [],
+        "distinguishing_questions": [],
+        "applicability": {
+          "age_min": 35,
+          "age_max": 35,
+          "population": "synthetic_adults_only"
+        },
+        "diagnosis_code": null,
+        "interpretation": "hypothesis_unreviewed"
+      },
+      "alternatives": [
+        {
+          "kind": "generalized_anxiety",
+          "criteria": [
+            {
+              "id": "gad_features",
+              "state": "contradicting",
+              "evidence": [
+                {
+                  "unit_id": "u14",
+                  "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                  "path": "/payload_json/summary",
+                  "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                  "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "metadata": {
+                    "event_at": "2026-10-26",
+                    "context": "current",
+                    "status": "known",
+                    "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                    "current_revision": true,
+                    "state": "recorded",
+                    "author_id": "pat-a"
+                  },
+                  "code": "summary",
+                  "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                  "quote": "No pervasive six-month worry is described.",
+                  "start": 501,
+                  "end": 543,
+                  "offset_basis": "original_text"
+                }
+              ],
+              "basis": {
+                "id": "gad_features",
+                "question": "Подтверждены ли генерализованная тревога, её контролируемость, сопутствующие симптомы и влияние на жизнь?",
+                "source_id": "KR457_3",
+                "admission_claim": "be03-KR457_3-F01",
+                "condition": "F41.1",
+                "section": "2. Диагностика",
+                "pdf_page": 10
+              },
+              "interpretation": "model_assignment_unreviewed"
+            },
+            {
+              "id": "gad_course",
+              "state": "unknown",
+              "evidence": [],
+              "basis": {
+                "id": "gad_course",
+                "question": "Установлены ли длительность и непрерывность тревоги? Уточнить начало симптомов, а не только дату записи.",
+                "source_id": "KR457_3",
+                "admission_claim": "be03-KR457_3-F01",
+                "condition": "F41.1",
+                "section": "2. Диагностика",
+                "pdf_page": 10
+              },
+              "interpretation": "model_assignment_unreviewed"
+            },
+            {
+              "id": "gad_exclusions",
+              "state": "unknown",
+              "evidence": [],
+              "basis": {
+                "id": "gad_exclusions",
+                "question": "Проверены ли другие психические расстройства, соматические/органические и связанные с ПАВ причины тревоги?",
+                "source_id": "KR457_3",
+                "admission_claim": "be03-KR457_3-F01",
+                "condition": "F41.1",
+                "section": "2.1 Жалобы и анамнез",
+                "pdf_page": 12
+              },
+              "interpretation": "model_assignment_unreviewed"
+            }
+          ],
+          "supporting_evidence": [],
+          "contradicting_evidence": [
+            {
+              "unit_id": "u14",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "path": "/payload_json/summary",
+              "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+              "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "categories": [
+                "wellbeing"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "current",
+                "status": "known",
+                "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                "current_revision": true,
+                "state": "recorded",
+                "author_id": "pat-a"
+              },
+              "code": "summary",
+              "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+              "quote": "No pervasive six-month worry is described.",
+              "start": 501,
+              "end": 543,
+              "offset_basis": "original_text"
+            }
+          ],
+          "distinguishing_questions": [
+            "Установлены ли длительность и непрерывность тревоги? Уточнить начало симптомов, а не только дату записи.",
+            "Проверены ли другие психические расстройства, соматические/органические и связанные с ПАВ причины тревоги?"
+          ],
+          "applicability": {
+            "age_min": 35,
+            "age_max": 35,
+            "population": "synthetic_adults_only"
+          },
+          "diagnosis_code": null,
+          "interpretation": "hypothesis_unreviewed"
+        },
+        {
+          "kind": "bipolar_differential",
+          "criteria": [
+            {
+              "id": "bipolar_history",
+              "state": "contradicting",
+              "evidence": [
+                {
+                  "unit_id": "u14",
+                  "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                  "path": "/payload_json/summary",
+                  "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                  "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "metadata": {
+                    "event_at": "2026-10-26",
+                    "context": "current",
+                    "status": "known",
+                    "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                    "current_revision": true,
+                    "state": "recorded",
+                    "author_id": "pat-a"
+                  },
+                  "code": "summary",
+                  "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                  "quote": "the patient explicitly denies any lifetime mania or hypomania",
+                  "start": 178,
+                  "end": 239,
+                  "offset_basis": "original_text"
+                },
+                {
+                  "unit_id": "u0",
+                  "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+                  "path": "/payload_json/fields/history/text",
+                  "source_sha256": "28e105145726259ae124b08c93eda0a4d2f5499150ba11c107f39f0f09e1524e",
+                  "text": "Entirely fictional adult case. No prior mood episode is documented.",
+                  "value": "Entirely fictional adult case. No prior mood episode is documented.",
+                  "categories": [
+                    "anamnesis",
+                    "visits"
+                  ],
+                  "metadata": {
+                    "event_at": "2026-10-26",
+                    "context": "cumulative_history",
+                    "status": "known",
+                    "recorded_at": "2026-10-26T19:25:41.407506+00:00",
+                    "current_revision": true,
+                    "state": "draft",
+                    "author_id": "doc-a"
+                  },
+                  "code": "history",
+                  "field_sha256": "908c29e75097787d86cbf811d02c96a2bd054125c8d1ac818895b467e2b7530b",
+                  "quote": "No prior mood episode is documented.",
+                  "start": 31,
+                  "end": 67,
+                  "offset_basis": "original_text"
+                }
+              ],
+              "basis": {
+                "id": "bipolar_history",
+                "question": "Есть ли текущие или прошлые маниакальные, гипоманиакальные либо смешанные признаки? Это вопрос дифференциации, не установленный БАР.",
+                "source_id": "KR301_3",
+                "admission_claim": "be03-KR301_3-F01",
+                "condition": "F32",
+                "section": "2.1 Жалобы и анамнез",
+                "pdf_page": 16
+              },
+              "interpretation": "model_assignment_unreviewed"
+            }
+          ],
+          "supporting_evidence": [],
+          "contradicting_evidence": [
+            {
+              "unit_id": "u14",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "path": "/payload_json/summary",
+              "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+              "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "categories": [
+                "wellbeing"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "current",
+                "status": "known",
+                "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                "current_revision": true,
+                "state": "recorded",
+                "author_id": "pat-a"
+              },
+              "code": "summary",
+              "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+              "quote": "the patient explicitly denies any lifetime mania or hypomania",
+              "start": 178,
+              "end": 239,
+              "offset_basis": "original_text"
+            },
+            {
+              "unit_id": "u0",
+              "source_ref": "s2_29832564e2ad3344be589f0dd00de2eec4e6d8f09b2bf7a56234ce30b1073c37",
+              "path": "/payload_json/fields/history/text",
+              "source_sha256": "28e105145726259ae124b08c93eda0a4d2f5499150ba11c107f39f0f09e1524e",
+              "text": "Entirely fictional adult case. No prior mood episode is documented.",
+              "value": "Entirely fictional adult case. No prior mood episode is documented.",
+              "categories": [
+                "anamnesis",
+                "visits"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "cumulative_history",
+                "status": "known",
+                "recorded_at": "2026-10-26T19:25:41.407506+00:00",
+                "current_revision": true,
+                "state": "draft",
+                "author_id": "doc-a"
+              },
+              "code": "history",
+              "field_sha256": "908c29e75097787d86cbf811d02c96a2bd054125c8d1ac818895b467e2b7530b",
+              "quote": "No prior mood episode is documented.",
+              "start": 31,
+              "end": 67,
+              "offset_basis": "original_text"
+            }
+          ],
+          "distinguishing_questions": [],
+          "applicability": {
+            "age_min": 35,
+            "age_max": 35,
+            "population": "synthetic_adults_only"
+          },
+          "diagnosis_code": null,
+          "interpretation": "hypothesis_unreviewed"
+        },
+        {
+          "kind": "medical_substance_differential",
+          "criteria": [
+            {
+              "id": "medical_substance",
+              "state": "contradicting",
+              "evidence": [
+                {
+                  "unit_id": "u14",
+                  "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+                  "path": "/payload_json/summary",
+                  "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+                  "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "metadata": {
+                    "event_at": "2026-10-26",
+                    "context": "current",
+                    "status": "known",
+                    "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                    "current_revision": true,
+                    "state": "recorded",
+                    "author_id": "pat-a"
+                  },
+                  "code": "summary",
+                  "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+                  "quote": "The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment.",
+                  "start": 241,
+                  "end": 396,
+                  "offset_basis": "original_text"
+                }
+              ],
+              "basis": {
+                "id": "medical_substance",
+                "question": "Что известно о соматических/органических заболеваниях, ПАВ и лекарствах перед появлением симптомов?",
+                "source_id": "KR301_3",
+                "admission_claim": "be03-KR301_3-F01",
+                "condition": "F32",
+                "section": "2.1 Жалобы и анамнез",
+                "pdf_page": 16
+              },
+              "interpretation": "model_assignment_unreviewed"
+            }
+          ],
+          "supporting_evidence": [],
+          "contradicting_evidence": [
+            {
+              "unit_id": "u14",
+              "source_ref": "s2_438f071b30b5c86f3539896276fd4b35f8e9879b1cb6d5feaf99bbe956187f8f",
+              "path": "/payload_json/summary",
+              "source_sha256": "e8577cd19aa261575bfe254c2e77531bfba2a7d857a9850d24d6347ac66afe61",
+              "text": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "value": "Fictional test adult reports persistent low mood, loss of enjoyment, low energy, poor sleep and poor concentration for three weeks; work is impaired. In this fictional interview the patient explicitly denies any lifetime mania or hypomania. The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment. Current suicidal thoughts, intent, plan and behavior are explicitly denied in this fictional interview. No pervasive six-month worry is described. These are synthetic author statements, not a real clinical assessment.",
+              "categories": [
+                "wellbeing"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "current",
+                "status": "known",
+                "recorded_at": "2026-10-26T19:25:41.408145+00:00",
+                "current_revision": true,
+                "state": "recorded",
+                "author_id": "pat-a"
+              },
+              "code": "summary",
+              "field_sha256": "273d152d9e8d3f741da6513bc67d87b60668027c8124d30a50449324070f737e",
+              "quote": "The fictional physician documented no psychosis, no substance use, no medication-related onset and no identified organic or medical cause after assessment.",
+              "start": 241,
+              "end": 396,
+              "offset_basis": "original_text"
+            }
+          ],
+          "distinguishing_questions": [],
+          "applicability": {
+            "age_min": 35,
+            "age_max": 35,
+            "population": "synthetic_adults_only"
+          },
+          "diagnosis_code": null,
+          "interpretation": "hypothesis_unreviewed"
+        }
+      ],
+      "snapshot_sha256": "b5567980cc0fb3c4a5fc2418ee26d1ba2ba3dd3a32415b2411eb33fe662cbcec"
+    },
+    "model_metadata": {
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "thinking": "disabled",
+      "temperature": 0,
+      "timeout_seconds": 60,
+      "max_input_bytes": 16000,
+      "max_output_tokens": 1024,
+      "provider": "deepseek",
+      "requested_model": "deepseek-flash",
+      "returned_model": "deepseek-flash",
+      "prompt_version": "compass-model-v1",
+      "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+      "schema_sha256": "8fcae05fe657eed894eb0f5c19c2e2d0154df685ecb6146c07bd3f6562f6a11e",
+      "elapsed_seconds": 2.703,
+      "usage": {
+        "prompt_tokens": 3295,
+        "completion_tokens": 492,
+        "total_tokens": 3787
+      },
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 3295,
+      "estimated_peak_cost_nano_usd": 1578900,
+      "estimated_offpeak_cost_nano_usd": 789450,
+      "cost_ceiling_micro_usd": 5755,
+      "reservation_micro_usd": 16624,
+      "synthetic_only": true,
+      "test_double": false
+    },
+    "missing_categories": [],
+    "errors": [],
+    "limitation": "Модельные диагностические кандидаты не проверены врачом. Точные цитаты подтверждают происхождение текста, но не клинический смысл. Диагноз, безопасность и план не установлены; клинический выпуск заблокирован."
+  },
+  "citations_independently_verified": 8,
+  "ledger_before": {
+    "calls": 27,
+    "micro_usd": 45150
+  },
+  "ledger_after": {
+    "calls": 28,
+    "micro_usd": 50905
+  },
+  "connection_cap_micro_usd": 100000,
+  "new_clinical_actions": 0,
+  "snapshot_unchanged": true
+}

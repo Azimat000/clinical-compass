@@ -1,0 +1,99 @@
+{
+  "version": "diagnosis-candidates-v1",
+  "mode": "synthetic_only",
+  "clinical_review": null,
+  "authorship": "HAC: краткие собственные вопросы для обсуждения оснований; не копия критериальной таблицы, шкалы или алгоритма и не полноценная проверка диагностических критериев.",
+  "evidence": "evidence/BE10A/research.md",
+  "kinds": {
+    "depressive_episode": [
+      "dep_features",
+      "dep_course",
+      "dep_exclusions"
+    ],
+    "generalized_anxiety": [
+      "gad_features",
+      "gad_course",
+      "gad_exclusions"
+    ],
+    "bipolar_differential": [
+      "bipolar_history"
+    ],
+    "medical_substance_differential": [
+      "medical_substance"
+    ]
+  },
+  "domains": [
+    {
+      "id": "dep_features",
+      "question": "Какие симптомы поддерживают или опровергают депрессивный синдром?",
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "section": "2. Диагностика",
+      "pdf_page": 13
+    },
+    {
+      "id": "dep_course",
+      "question": "Подтверждены ли длительность симптомов, их сочетание и влияние на повседневную жизнь? Уточнить начало, течение и предыдущие эпизоды.",
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "section": "2. Диагностика",
+      "pdf_page": 13
+    },
+    {
+      "id": "gad_features",
+      "question": "Подтверждены ли генерализованная тревога, её контролируемость, сопутствующие симптомы и влияние на жизнь?",
+      "source_id": "KR457_3",
+      "admission_claim": "be03-KR457_3-F01",
+      "condition": "F41.1",
+      "section": "2. Диагностика",
+      "pdf_page": 10
+    },
+    {
+      "id": "gad_course",
+      "question": "Установлены ли длительность и непрерывность тревоги? Уточнить начало симптомов, а не только дату записи.",
+      "source_id": "KR457_3",
+      "admission_claim": "be03-KR457_3-F01",
+      "condition": "F41.1",
+      "section": "2. Диагностика",
+      "pdf_page": 10
+    },
+    {
+      "id": "dep_exclusions",
+      "question": "Проверены ли мания/гипомания/смешанные эпизоды, соматические/органические причины, ПАВ и лекарства? Отсутствие записи не исключает причину.",
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "section": "2.1 Жалобы и анамнез",
+      "pdf_page": 16
+    },
+    {
+      "id": "gad_exclusions",
+      "question": "Проверены ли другие психические расстройства, соматические/органические и связанные с ПАВ причины тревоги?",
+      "source_id": "KR457_3",
+      "admission_claim": "be03-KR457_3-F01",
+      "condition": "F41.1",
+      "section": "2.1 Жалобы и анамнез",
+      "pdf_page": 12
+    },
+    {
+      "id": "bipolar_history",
+      "question": "Есть ли текущие или прошлые маниакальные, гипоманиакальные либо смешанные признаки? Это вопрос дифференциации, не установленный БАР.",
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "section": "2.1 Жалобы и анамнез",
+      "pdf_page": 16
+    },
+    {
+      "id": "medical_substance",
+      "question": "Что известно о соматических/органических заболеваниях, ПАВ и лекарствах перед появлением симптомов?",
+      "source_id": "KR301_3",
+      "admission_claim": "be03-KR301_3-F01",
+      "condition": "F32",
+      "section": "2.1 Жалобы и анамнез",
+      "pdf_page": 16
+    }
+  ]
+}

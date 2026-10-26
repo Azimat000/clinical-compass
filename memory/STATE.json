@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T22:12:40+03:00",
+  "updated_on": "2026-10-26T22:33:46+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE09",
-  "next_slice": "BE10",
+  "last_accepted_slice": "BE10A",
+  "next_slice": "BE10B",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -581,7 +581,7 @@
       "status": "planned",
       "commit_ref": null,
       "handoff": "memory/sessions/BE10.md",
-      "reason": null
+      "reason": "Сохранены все исходные A01–A03; полная приёмка только после BE10A/BE10B."
     },
     "BE11": {
       "status": "planned",
@@ -659,6 +659,18 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/BE08B02",
       "handoff": "memory/sessions/BE08B02.md",
+      "reason": null
+    },
+    "BE10A": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE10A",
+      "handoff": "memory/sessions/BE10A.md",
+      "reason": null
+    },
+    "BE10B": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE10B.md",
       "reason": null
     }
   },
@@ -1341,6 +1353,8 @@
       "BE08B",
       "BE08",
       "BE09",
+      "BE10A",
+      "BE10B",
       "BE10",
       "BE11",
       "BE12",
@@ -1358,7 +1372,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE09",
+    "last_accepted_slice": "BE10A",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1392,7 +1406,10 @@
     "alert_version": "backend-alerts-v1",
     "alert_channel": "physician_api_v1",
     "alert_mode": "synthetic_only_original_physician",
-    "alert_evidence": "evidence/BE09/acceptance.md"
+    "alert_evidence": "evidence/BE09/acceptance.md",
+    "diagnosis_candidate_version": "diagnosis-candidates-v1",
+    "diagnosis_candidate_mode": "internal_synthetic_unreviewed_not_published",
+    "diagnosis_candidate_evidence": "evidence/BE10A/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
