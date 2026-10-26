@@ -1,0 +1,120 @@
+{
+  "version": "backend-scope-v1",
+  "clinical_release": "blocked",
+  "meaning": "Матрица первой версии: поддержка хранения/контрактов сейчас, клинические кандидаты для BE03–BE19. Не клинический допуск.",
+  "operations": [
+    "risk",
+    "diagnosis",
+    "plan"
+  ],
+  "candidate_conditions": [
+    {
+      "codes": [
+        "F32",
+        "F33"
+      ],
+      "population": "adults",
+      "source": "https://cr.minzdrav.gov.ru/view-cr/301_3",
+      "source_version": "301_3 / 2024",
+      "current_status": "not_independently_confirmed_2026-10-26",
+      "risk": "Потенциально опасные паттерны и динамика по точным проверенным правилам",
+      "diagnosis": "Ведущая гипотеза и существенные альтернативы с противоречиями/пробелами",
+      "plan": "Содержательный проект обследований, наблюдения и лечения; применение отдельно врачом"
+    },
+    {
+      "codes": [
+        "F41.1"
+      ],
+      "population": "adults",
+      "source": "https://cr.minzdrav.gov.ru/view-cr/457_3",
+      "source_version": "457_3 / 2024",
+      "current_status": "not_independently_confirmed_2026-10-26",
+      "risk": "Потенциально опасные паттерны и динамика по точным проверенным правилам",
+      "diagnosis": "Ведущая гипотеза и существенные альтернативы с противоречиями/пробелами",
+      "plan": "Содержательный проект обследований, наблюдения и лечения; применение отдельно врачом"
+    }
+  ],
+  "boundaries": [
+    {
+      "context": "synthetic adult, known consistent age",
+      "technical_status": "queued",
+      "reason": "Поддерживается запись запроса; исполнитель BE04/06 ещё не подключён. Взрослый возраст сам по себе не подтверждает полную применимость."
+    },
+    {
+      "context": "unknown/conflicting/invalid age or possible age spanning 18",
+      "technical_status": "insufficient_data",
+      "reason": "Нельзя выбрать взрослую область. Проверяются все сохранённые возрастные источники."
+    },
+    {
+      "context": "known age below 18",
+      "technical_status": "unsupported",
+      "reason": "Детская область не покрыта выбранными взрослыми КР; это ограничение V1, не доказательство непригодности всех шкал."
+    },
+    {
+      "context": "pregnancy/lactation, mania/hypomania/bipolar, psychosis, substance-related or organic causes, complex comorbidity",
+      "technical_status": "deferred_scope_assessment",
+      "reason": "Отдельные правила/источники ещё не проверены. Будущая оценка обязана различать insufficient_data/unsupported и существенные альтернативы; нельзя считать эти состояния исключёнными или отсутствующими по умолчанию. BE01 не извлекает их из текста."
+    },
+    {
+      "context": "outside F32/F33/F41.1",
+      "technical_status": "unsupported_by_v1_clinical_scope",
+      "reason": "Возможна фиксация фактов/альтернатив и отдельного риска по проверенному правилу; полный универсальный диагноз/план не заявлен. Семантическая проверка — BE05/07/10/12/14."
+    },
+    {
+      "context": "real patient or autonomous application",
+      "technical_status": "blocked",
+      "reason": "Схема существующей базы разрешает только synthetic=1; выпуска до BE19 нет. Назначение/отмена/направление только через прежнее отдельное серверное решение врача."
+    }
+  ],
+  "instruments": [
+    {
+      "id": "DASS42-RU-FG-2024-demo-v1",
+      "application_age_min": 18,
+      "application_age_max": 120,
+      "basis": {
+        "study": "250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан.",
+        "official_age_guidance": "DASS FAQ: от 14 лет при обычных языковых навыках.",
+        "project_policy": "Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация."
+      },
+      "mode": "existing_synthetic_only",
+      "changes_in_BE01": false
+    },
+    {
+      "id": "PHQ9-RU-Z-2023-demo-v1",
+      "application_age_min": 18,
+      "application_age_max": 90,
+      "basis": {
+        "study": "Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.",
+        "project_policy": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение."
+      },
+      "mode": "existing_synthetic_only",
+      "changes_in_BE01": false
+    },
+    {
+      "id": "GAD7-RU-Z-2023-demo-v1",
+      "application_age_min": 18,
+      "application_age_max": 90,
+      "basis": {
+        "study": "Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.",
+        "project_policy": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение."
+      },
+      "mode": "existing_synthetic_only",
+      "changes_in_BE01": false
+    }
+  ],
+  "unknown_is_not_negative": true,
+  "preserved_requirements": [
+    "F01–F08",
+    "M01–M10",
+    "E01–E06",
+    "T01–T13",
+    "C01–C46 and all plan/coverage.json subchecks"
+  ],
+  "release_gates": [
+    "BE03 sources/current versions/rights",
+    "BE04 real model",
+    "BE07/10/12/13/14 exact clinical rules",
+    "BE18 technical integration",
+    "BE19 independent clinical review"
+  ]
+}

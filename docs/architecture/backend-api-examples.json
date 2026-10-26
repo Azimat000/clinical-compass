@@ -1,0 +1,471 @@
+{
+  "synthetic_only": true,
+  "clinical_validation": false,
+  "create": {
+    "contract_version": "1.0",
+    "operation": "risk",
+    "request_key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "queued": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "queued",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": null,
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "running": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "running",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": null,
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "ready": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "ready",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": {
+        "summary": "Вымышленный пример формата; клиническая оценка не выполнена.",
+        "facts": [
+          {
+            "id": "f1",
+            "text": "Вымышленная запись для проверки структуры.",
+            "evidence_refs": [
+              "profile:synthetic-patient"
+            ]
+          }
+        ],
+        "contradictions": [],
+        "missing_data": [
+          "Не выполнена независимая проверка."
+        ],
+        "output": {
+          "assessment": "potential_risk",
+          "patterns": [
+            {
+              "id": "finding1",
+              "text": "Вымышленный паттерн для проверки формата.",
+              "fact_ids": [
+                "f1"
+              ],
+              "source_ids": [
+                "example-source"
+              ]
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "insufficient_data": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "insufficient_data",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": null,
+      "errors": [
+        {
+          "code": "insufficient_data",
+          "message": "Вымышленный пример причины: не использовать клинически.",
+          "retryable": false
+        }
+      ],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "unsupported": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "unsupported",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": null,
+      "errors": [
+        {
+          "code": "unsupported",
+          "message": "Вымышленный пример причины: не использовать клинически.",
+          "retryable": false
+        }
+      ],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "stale": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "stale",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": {
+        "summary": "Вымышленный пример формата; клиническая оценка не выполнена.",
+        "facts": [
+          {
+            "id": "f1",
+            "text": "Вымышленная запись для проверки структуры.",
+            "evidence_refs": [
+              "profile:synthetic-patient"
+            ]
+          }
+        ],
+        "contradictions": [],
+        "missing_data": [
+          "Не выполнена независимая проверка."
+        ],
+        "output": {
+          "assessment": "potential_risk",
+          "patterns": [
+            {
+              "id": "finding1",
+              "text": "Вымышленный паттерн для проверки формата.",
+              "fact_ids": [
+                "f1"
+              ],
+              "source_ids": [
+                "example-source"
+              ]
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": "Входные сведения изменились."
+    },
+    "failed": {
+      "contract_version": "1.0",
+      "operation": "risk",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "failed",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": null,
+      "errors": [
+        {
+          "code": "failed",
+          "message": "Вымышленный пример причины: не использовать клинически.",
+          "retryable": true
+        }
+      ],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "diagnosis_ready": {
+      "contract_version": "1.0",
+      "operation": "diagnosis",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "ready",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": {
+        "summary": "Вымышленный пример формата; клиническая оценка не выполнена.",
+        "facts": [
+          {
+            "id": "f1",
+            "text": "Вымышленная запись для проверки структуры.",
+            "evidence_refs": [
+              "profile:synthetic-patient"
+            ]
+          }
+        ],
+        "contradictions": [],
+        "missing_data": [
+          "Не выполнена независимая проверка."
+        ],
+        "output": {
+          "leading": {
+            "id": "finding1",
+            "text": "Вымышленный паттерн для проверки формата.",
+            "fact_ids": [
+              "f1"
+            ],
+            "source_ids": [
+              "example-source"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    },
+    "plan_ready": {
+      "contract_version": "1.0",
+      "operation": "plan",
+      "patient_id": "synthetic-patient",
+      "snapshot_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "run_id": "example-run",
+      "revision": 1,
+      "status": "ready",
+      "release": {
+        "status": "blocked",
+        "version": "be01-contract-only-v1",
+        "blockers": [
+          "BE03",
+          "BE04",
+          "BE18",
+          "BE19",
+          "B04",
+          "E02",
+          "E06"
+        ]
+      },
+      "scope_version": "backend-scope-v1",
+      "sources": [
+        {
+          "id": "example-source",
+          "version": "example-only",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ],
+      "result": {
+        "summary": "Вымышленный пример формата; клиническая оценка не выполнена.",
+        "facts": [
+          {
+            "id": "f1",
+            "text": "Вымышленная запись для проверки структуры.",
+            "evidence_refs": [
+              "profile:synthetic-patient"
+            ]
+          }
+        ],
+        "contradictions": [],
+        "missing_data": [
+          "Не выполнена независимая проверка."
+        ],
+        "output": {
+          "diagnosis_run_id": "synthetic-diagnosis",
+          "items": [
+            {
+              "id": "finding1",
+              "text": "Вымышленный паттерн для проверки формата.",
+              "fact_ids": [
+                "f1"
+              ],
+              "source_ids": [
+                "example-source"
+              ]
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "model": null,
+      "created_at": "2026-10-26T09:00:00+00:00",
+      "updated_at": "2026-10-26T09:00:00+00:00",
+      "stale_reason": null
+    }
+  }
+}

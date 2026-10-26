@@ -1,0 +1,21 @@
+test_actual_sql_failure_rolls_back_and_redacts_private_details (apps.tests.test_backend_contracts.BackendContractTests.test_actual_sql_failure_rolls_back_and_redacts_private_details) ... [2026-10-26 18:10:56,410] ERROR in web: request_failure incident=6407bc617d8eaf13 type=IntegrityError endpoint=create_analysis
+ok
+test_age_unknown_conflicting_minor_and_adult_do_not_become_no_risk (apps.tests.test_backend_contracts.BackendContractTests.test_age_unknown_conflicting_minor_and_adult_do_not_become_no_risk) ... ok
+test_authentication_roles_csrf_patient_run_and_relationship_isolation (apps.tests.test_backend_contracts.BackendContractTests.test_authentication_roles_csrf_patient_run_and_relationship_isolation) ... ok
+test_changed_inputs_or_sources_make_pure_read_stale_and_block_write (apps.tests.test_backend_contracts.BackendContractTests.test_changed_inputs_or_sources_make_pure_read_stale_and_block_write) ... ok
+test_concurrent_retries_create_one_run_and_one_request_audit (apps.tests.test_backend_contracts.BackendContractTests.test_concurrent_retries_create_one_run_and_one_request_audit) ... ok
+test_every_state_and_three_operation_outputs_validate_without_care_actions (apps.tests.test_backend_contracts.BackendContractTests.test_every_state_and_three_operation_outputs_validate_without_care_actions) ... ok
+test_output_validation_rejects_wrong_operation_forged_links_and_empty_success (apps.tests.test_backend_contracts.BackendContractTests.test_output_validation_rejects_wrong_operation_forged_links_and_empty_success) ... ok
+test_plan_requires_matching_current_diagnosis_and_cannot_apply_itself (apps.tests.test_backend_contracts.BackendContractTests.test_plan_requires_matching_current_diagnosis_and_cannot_apply_itself) ... ok
+test_real_http_create_read_restart_and_idempotent_replay (apps.tests.test_backend_contracts.BackendContractTests.test_real_http_create_read_restart_and_idempotent_replay) ... ok
+test_scope_version_change_invalidates_existing_snapshot (apps.tests.test_backend_contracts.BackendContractTests.test_scope_version_change_invalidates_existing_snapshot) ... ok
+test_snapshot_and_output_byte_budgets_rollback_atomically (apps.tests.test_backend_contracts.BackendContractTests.test_snapshot_and_output_byte_budgets_rollback_atomically) ... ok
+test_strict_inputs_duplicate_keys_media_limits_and_safe_json_errors (apps.tests.test_backend_contracts.BackendContractTests.test_strict_inputs_duplicate_keys_media_limits_and_safe_json_errors) ... ok
+test_transitions_concurrency_preconditions_and_immutable_history (apps.tests.test_backend_contracts.BackendContractTests.test_transitions_concurrency_preconditions_and_immutable_history) ... ok
+test_all_documented_examples_and_matrix (apps.tests.test_backend_contracts.BackendSpecificationTests.test_all_documented_examples_and_matrix) ... ok
+test_migration_preserves_existing_rows_schema_triggers_and_is_repeatable (apps.tests.test_backend_contracts.BackendSpecificationTests.test_migration_preserves_existing_rows_schema_triggers_and_is_repeatable) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 12.465s
+
+OK

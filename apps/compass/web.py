@@ -11,7 +11,7 @@ from flask import Flask, abort, g, jsonify, redirect, render_template, request, 
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
 from . import access, records, assessments, decisions, routing, notifications, clinical_rules, critical_delivery, communication, extraction
-from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback, plan_tasks
+from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback, plan_tasks, backend_analyses
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
@@ -199,6 +199,8 @@ def create_app(database=None):
                 404: ('Запись недоступна', 'Запись не найдена или недоступна этому кабинету.'),
                 405: ('Действие недоступно', 'Используйте соответствующую форму в кабинете.'),
             }.get(code, ('Запрос не выполнен', 'Откройте кабинет и проверьте состояние операции.'))
+            if request.path.startswith('/api/v1/'):
+                return jsonify(error='http_' + str(code), message=message), code
             response = error.get_response()
             body, content_type = failure_body(title, message)
             response.set_data(body)
@@ -213,6 +215,12 @@ def create_app(database=None):
         message = ('Не удалось завершить запрос; результат операции неизвестен. Отсутствие сигнала не означает отсутствие риска. '
                    'После восстановления откройте кабинет и проверьте сохранённые записи перед повтором. '
                    'Не ожидайте помощи через демо. Код ошибки: ' + incident)
+        if request.path.startswith('/api/v1/'):
+            response = jsonify(error='service_unavailable' if unavailable else 'internal_error', message=message)
+            response.status_code = 503 if unavailable else 500
+            if unavailable:
+                response.headers['Retry-After'] = '5'
+            return response
         body, content_type = failure_body('Сервис временно недоступен', message)
         response = app.make_response((body, 503 if unavailable else 500, {'Content-Type': content_type}))
         if unavailable:
@@ -221,6 +229,8 @@ def create_app(database=None):
 
     @app.errorhandler(413)
     def request_too_large(error):
+        if request.path.startswith('/api/v1/'):
+            return jsonify(error='request_too_large', message='Запрос больше 65 536 байт.'), 413
         return interface_response('result.html',title='Ввод слишком большой',
                                message='Запрос больше 65 536 байт. Для импорта нужен текст или .txt UTF-8 до 24 000 байт; уменьшите файл или текст.'),413
 
@@ -266,6 +276,28 @@ def create_app(database=None):
             supplied = request.headers.get('X-CSRF-Token', '') or request.form.get('csrf', '')
             if not access.matches_token(g.user['csrf_token'], supplied):
                 abort(403)
+
+    @app.errorhandler(backend_analyses.AnalysisError)
+    def analysis_failure(error):
+        return jsonify(error=error.code, message=str(error)), error.status
+
+    @app.post('/api/v1/patients/<patient_id>/analyses')
+    def create_analysis(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        if request.mimetype != 'application/json':
+            raise backend_analyses.AnalysisError('Нужен Content-Type application/json.', 415, 'unsupported_media_type')
+        body = backend_analyses.parse_request(request.get_data())
+        value = backend_analyses.create(get_db(), g.user, patient_id, body)
+        response = jsonify(value)
+        response.status_code = 202
+        response.headers['Location'] = url_for('get_analysis', patient_id=patient_id, run_id=value['run_id'])
+        return response
+
+    @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>')
+    def get_analysis(patient_id, run_id):
+        role('doctor')
+        return jsonify(backend_analyses.read(get_db(), g.user, patient_id, run_id))
 
     @app.teardown_appcontext
     def close_db(error):

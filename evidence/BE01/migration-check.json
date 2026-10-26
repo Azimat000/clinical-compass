@@ -1,0 +1,340 @@
+{
+  "source_opened_read_only": true,
+  "live_schema_had_no_BE01": true,
+  "original_table_count": 80,
+  "new_tables": [
+    "analysis_input_snapshots",
+    "analysis_result_versions",
+    "analysis_runs"
+  ],
+  "preexisting_rows_preserved": true,
+  "preexisting_schema_preserved": true,
+  "preexisting_triggers": 74,
+  "repeat_migration_safe": true,
+  "original_history_update_rejected": {
+    "first_visit_versions": true,
+    "care_actions": true,
+    "doctor_confirmations": true
+  },
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "existing_table_digests": {
+    "adherence_entries": {
+      "rows": 71,
+      "sha256": "0e0d4a5ff9f44c50d69bd96c8602bd05cc666bd10a3afb019f0245100c01416b"
+    },
+    "adherence_reports": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "adherence_tasks": {
+      "rows": 90,
+      "sha256": "3e5e24e9a802492f5aee5b26ccc81d0513016aada76a1fbe255d8e57560e5f49"
+    },
+    "adverse_events": {
+      "rows": 4,
+      "sha256": "4126d37d121eb3ff2e4acf23fdd5ce1e3e3c1d04f6218904c87cb7cf23fe0749"
+    },
+    "age_reviews": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alerts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "assessment_form_releases": {
+      "rows": 3,
+      "sha256": "1d94547553b69968caf1c983b696acf9f3700851f09052010be1db53c1cfc5da"
+    },
+    "assessment_requests": {
+      "rows": 120,
+      "sha256": "82c9598995ad1cc1560e8a62dce8b1b23fb0b3bde06a3331486c3e23a5452561"
+    },
+    "assessment_results": {
+      "rows": 90,
+      "sha256": "b6ccd7a36d19d70eeacf919f0ffdf93422855c30a7aa1927d70a9b9e2960ee83"
+    },
+    "assessments": {
+      "rows": 90,
+      "sha256": "0247084046c2463abb180c5b6eec873aa2a205714d2499f9a8c0ca33b2a91e0f"
+    },
+    "audit_entries": {
+      "rows": 1347,
+      "sha256": "49d67b7dba9058d89820f7dc891da088a84a4298261d65f1cf9f611abb9de5ad"
+    },
+    "care_actions": {
+      "rows": 31,
+      "sha256": "888d5787a790f795771b5f79ac699fd6f1097746671506da46458f7b61bc1d95"
+    },
+    "care_invitations": {
+      "rows": 10,
+      "sha256": "7ad7b853eb41a72173de8cc2ba6418dee7684291a0c98f4bda8fcdf7214dac17"
+    },
+    "care_relationships": {
+      "rows": 10,
+      "sha256": "ca848a9f9b827c8c6f21d5c7faeed6f8926abd74a343986c8e97af101bbba73a"
+    },
+    "catalog_versions": {
+      "rows": 3,
+      "sha256": "6f7547c6088daaab3480beb4377febd4e605fa36efde53542fdbd926206e53aa"
+    },
+    "clinical_contexts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "clinical_entries": {
+      "rows": 70,
+      "sha256": "e555b57a0afd9255cad4a4e3375414c98b0b15b1ef7d7a636f417764a06cc6f0"
+    },
+    "clinical_entry_search": {
+      "rows": 70,
+      "sha256": "62d8d9833f38261f479b5c68d5ed0dba61f5f8157738762a970a519898e95302"
+    },
+    "clinical_entry_search_config": {
+      "rows": 1,
+      "sha256": "afaee2b1562b04a97bf25315b158b426795a3b6f88b13fd85d546090fb141946"
+    },
+    "clinical_entry_search_content": {
+      "rows": 70,
+      "sha256": "ce74a077f65beb3a1ebc88a8ab0efc7d558a43a66e19dc2a50c0d6f7c0bb6814"
+    },
+    "clinical_entry_search_data": {
+      "rows": 9,
+      "sha256": "e93d5d65230d1dfe4b4005d08aa3d9f84906aa2387cdda89053b6ae863943fe0"
+    },
+    "clinical_entry_search_docsize": {
+      "rows": 70,
+      "sha256": "09f0d525c6dda6ff42c4ce1cd3f906e3b027bcaa51082a1b19181c7568471a79"
+    },
+    "clinical_entry_search_idx": {
+      "rows": 7,
+      "sha256": "8c1d00c5c387ada4637b1267c7075c7fd41bb93d7b9e74c41ffc81ae0b33f024"
+    },
+    "clinical_rule_evaluations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "consents": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conversations": {
+      "rows": 10,
+      "sha256": "229f580628fd9330e13242f4c196d4daeebd60e667a6d9c06a58b9f5fc28a449"
+    },
+    "critical_delivery": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "critical_delivery_log": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "critical_events": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "decision_drafts": {
+      "rows": 34,
+      "sha256": "5a6f4c5e0a5003464565c81d483691bc3ace7051600ea6baf3ba6065879ad942"
+    },
+    "deliveries": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor_confirmations": {
+      "rows": 32,
+      "sha256": "8f526cad358ee946586abaf989f57075ea43d60c5bdd185eb7c690956580f62c"
+    },
+    "documents": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "encounter_search": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "encounter_search_config": {
+      "rows": 1,
+      "sha256": "afaee2b1562b04a97bf25315b158b426795a3b6f88b13fd85d546090fb141946"
+    },
+    "encounter_search_content": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "encounter_search_data": {
+      "rows": 2,
+      "sha256": "4dc87c4e230e2f27b02cb6afd036f9aef71ba468e328d5f814ef8e0f34a3688e"
+    },
+    "encounter_search_docsize": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "encounter_search_idx": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "encounters": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "event_receipts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "extracted_facts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "extraction_reviews": {
+      "rows": 21,
+      "sha256": "0f2eb98f654fad388d99e7f8b3cc0be830e7d398129682deffb533d652e1fe69"
+    },
+    "extraction_runs": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "first_visit_versions": {
+      "rows": 91,
+      "sha256": "ea65895737ddf69823431afb5fa279e87b8affd561268010d57a1615b2ccdf0e"
+    },
+    "import_search": {
+      "rows": 10,
+      "sha256": "724ea9b30fef8ef0bca2d930cd340733359d04024d91dfca8c044db5c8a30cb7"
+    },
+    "import_search_config": {
+      "rows": 1,
+      "sha256": "afaee2b1562b04a97bf25315b158b426795a3b6f88b13fd85d546090fb141946"
+    },
+    "import_search_content": {
+      "rows": 10,
+      "sha256": "cb9cef9e637664cd503248bf5dafe0240bd174ded639258cc63d1ecaa95fccc6"
+    },
+    "import_search_data": {
+      "rows": 3,
+      "sha256": "6eccba297d0c45e5aadd289e6aecc10464c6482b7ed9735535806b828ff88300"
+    },
+    "import_search_docsize": {
+      "rows": 10,
+      "sha256": "cab0e1e2a7c2cfdc994aee1c035a4cf982a61c332639b0597a1dc2fc2656d45d"
+    },
+    "import_search_idx": {
+      "rows": 1,
+      "sha256": "12a8e031be7180d07c1fe60ef4323f90b741f823475f12ca10a049491723a283"
+    },
+    "login_challenges": {
+      "rows": 1,
+      "sha256": "58f63232ce5b7ff5d19ec3accf4648ea529ae8b01dd171f4b0d57ced7a05b2b7"
+    },
+    "login_limits": {
+      "rows": 13,
+      "sha256": "dd3095ab9c3909170b9865afa1fe82a9947dd57d59894ea8cf8fed7db86b9d6c"
+    },
+    "medication_marks": {
+      "rows": 240,
+      "sha256": "92eba70bc7864451e8bd9d0d0cf5c75bf3cd5eeca7358291f087207eaf8340df"
+    },
+    "message_context": {
+      "rows": 140,
+      "sha256": "6cb356e087c96fabe52cccf259722e9abc0cc7d111103a3f93dbd12401129e3d"
+    },
+    "message_receipts": {
+      "rows": 280,
+      "sha256": "90f009b5a18fe0b025bbcf3212cc72e460d5d7d7d7e9d6f825cc8b3ea9a52509"
+    },
+    "messages": {
+      "rows": 140,
+      "sha256": "acfdb356d78dcbcbedd548bd17c10f9ed6a559724988b6b62ac814f051fafb90"
+    },
+    "observations": {
+      "rows": 350,
+      "sha256": "a45ee928baef784d7c14d11e101430e0d9c73b02fd38451aba3c078e6ca8a860"
+    },
+    "outbox_attempts": {
+      "rows": 70,
+      "sha256": "df4d0749d072598acd0f7b7c264fcf0f72da78fe49912396049ea856930dd354"
+    },
+    "outbox_events": {
+      "rows": 70,
+      "sha256": "36ccd7d4e68cf26cfe3501cb68e6b82d711b7637b13658c0ded88e127a557f31"
+    },
+    "patient_search": {
+      "rows": 10,
+      "sha256": "acbdeec4ce38c82e0fdb9e8946f104f664249e2dc0855ce0367291bec3237000"
+    },
+    "patient_search_config": {
+      "rows": 1,
+      "sha256": "afaee2b1562b04a97bf25315b158b426795a3b6f88b13fd85d546090fb141946"
+    },
+    "patient_search_content": {
+      "rows": 10,
+      "sha256": "4f2a2ab6c2b9e63f0a8900e8d40ac46923d3802f40c0ddf72b9f2cdb57ca3f5e"
+    },
+    "patient_search_data": {
+      "rows": 3,
+      "sha256": "1d05d5b366840d9edea68fce0367a35c8b83f686739e6e227ab3f1024b58688b"
+    },
+    "patient_search_docsize": {
+      "rows": 10,
+      "sha256": "1159f8094a18fd8d204801fbc1e99ca43216df8120bd38b344e8604b7e2ec9ee"
+    },
+    "patient_search_idx": {
+      "rows": 1,
+      "sha256": "12a8e031be7180d07c1fe60ef4323f90b741f823475f12ca10a049491723a283"
+    },
+    "patients": {
+      "rows": 10,
+      "sha256": "f8d13e728aff97f764de540476ce3ca875ae33abc5f5060c04123630a24d3444"
+    },
+    "proposals": {
+      "rows": 34,
+      "sha256": "985597bdbc6ca2b9abc87393854590aea519d84a2a6166b16a031452e07a2c49"
+    },
+    "referrals": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "relationship_checks": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "risk_evaluations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "routine_notifications": {
+      "rows": 70,
+      "sha256": "a93b98990f5b12d48ece9754cf68fa8516e4cfd2962da2ed3254ec5f223cdb31"
+    },
+    "self_report_drafts": {
+      "rows": 1,
+      "sha256": "51f00b276501485f30fa62f66b4438bca49f834d21acafb9c3bdd216e5a84762"
+    },
+    "self_reports": {
+      "rows": 70,
+      "sha256": "1d361ebc77797ecb880a5963fec0d67bf504685886e68870c42db832b51683c3"
+    },
+    "sessions": {
+      "rows": 18,
+      "sha256": "6ad7280fe105dcb5544bc8f858a3a326c63ca5c39fab82840c04150799419a31"
+    },
+    "source_versions": {
+      "rows": 3,
+      "sha256": "a9754a80d9cd1777778428daffe1304dd112bba9a649c46c29aea2f716791a08"
+    },
+    "text_imports": {
+      "rows": 10,
+      "sha256": "7f273d5eedca7735ef099268181f0f47eb102c4ef9dcd389bd23618d8bed3d7d"
+    },
+    "therapy_courses": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "users": {
+      "rows": 12,
+      "sha256": "e1c2e0c9775c7717826e51c227050e3291c773d2b2c1aefc8ae29aee236e6cb5"
+    }
+  },
+  "target_mode": "0o600"
+}

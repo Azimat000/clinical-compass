@@ -1,0 +1,770 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HAC internal three-function analysis API",
+    "version": "1.0"
+  },
+  "security": [
+    {
+      "sessionCookie": []
+    }
+  ],
+  "paths": {
+    "/api/v1/patients/{patient_id}/analyses": {
+      "post": {
+        "operationId": "createAnalysis",
+        "description": "Synthetic physician request; no executor connected in BE01. Key scope actor + patient + request_key. Changed operation conflicts.",
+        "parameters": [
+          {
+            "name": "patient_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 43
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAnalysis"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Validated internal analysis; release remains blocked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "URL of the same patient-bound analysis run",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid contract or JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Doctor role or CSRF token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Patient/run unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict or unavailable synthetic context",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request exceeds 65536 bytes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Content-Type must be application/json",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/patients/{patient_id}/analyses/{run_id}": {
+      "get": {
+        "operationId": "getAnalysis",
+        "parameters": [
+          {
+            "name": "patient_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validated internal analysis; release remains blocked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid contract or JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Doctor role or CSRF token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Patient/run unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict or unavailable synthetic context",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "compass_session"
+      }
+    },
+    "schemas": {
+      "CreateAnalysis": {
+        "type": "object",
+        "properties": {
+          "contract_version": {
+            "const": "1.0"
+          },
+          "operation": {
+            "enum": [
+              "risk",
+              "diagnosis",
+              "plan"
+            ]
+          },
+          "request_key": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          }
+        },
+        "required": [
+          "contract_version",
+          "operation",
+          "request_key"
+        ],
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "retryable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "retryable"
+        ],
+        "additionalProperties": false
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "Fact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "maxItems": 50
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "Finding": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "fact_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            },
+            "maxItems": 50
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            },
+            "maxItems": 50
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "fact_ids",
+          "source_ids"
+        ],
+        "additionalProperties": false
+      },
+      "RiskOutput": {
+        "type": "object",
+        "properties": {
+          "assessment": {
+            "enum": [
+              "potential_risk",
+              "no_pattern_found"
+            ]
+          },
+          "patterns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "assessment",
+          "patterns"
+        ],
+        "additionalProperties": false
+      },
+      "DiagnosisOutput": {
+        "type": "object",
+        "properties": {
+          "leading": {
+            "$ref": "#/components/schemas/Finding"
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "leading",
+          "alternatives"
+        ],
+        "additionalProperties": false
+      },
+      "PlanOutput": {
+        "type": "object",
+        "properties": {
+          "diagnosis_run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "diagnosis_run_id",
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "facts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fact"
+            },
+            "maxItems": 100,
+            "minItems": 1
+          },
+          "contradictions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 100
+          },
+          "missing_data": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 100
+          },
+          "output": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RiskOutput"
+              },
+              {
+                "$ref": "#/components/schemas/DiagnosisOutput"
+              },
+              {
+                "$ref": "#/components/schemas/PlanOutput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "summary",
+          "facts",
+          "contradictions",
+          "missing_data",
+          "output"
+        ],
+        "additionalProperties": false
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "prompt_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "prompt_version"
+        ],
+        "additionalProperties": false
+      },
+      "Release": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "const": "blocked"
+          },
+          "version": {
+            "const": "be01-contract-only-v1"
+          },
+          "blockers": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          }
+        },
+        "required": [
+          "status",
+          "version",
+          "blockers"
+        ],
+        "additionalProperties": false
+      },
+      "Analysis": {
+        "type": "object",
+        "properties": {
+          "contract_version": {
+            "const": "1.0"
+          },
+          "operation": {
+            "enum": [
+              "risk",
+              "diagnosis",
+              "plan"
+            ]
+          },
+          "patient_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "snapshot_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "ready",
+              "insufficient_data",
+              "unsupported",
+              "stale",
+              "failed"
+            ]
+          },
+          "release": {
+            "$ref": "#/components/schemas/Release"
+          },
+          "scope_version": {
+            "const": "backend-scope-v1"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "maxItems": 500
+          },
+          "result": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Result"
+              }
+            ]
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "maxItems": 20
+          },
+          "model": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Model"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stale_reason": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            ]
+          }
+        },
+        "required": [
+          "contract_version",
+          "operation",
+          "patient_id",
+          "snapshot_id",
+          "run_id",
+          "revision",
+          "status",
+          "release",
+          "scope_version",
+          "sources",
+          "result",
+          "errors",
+          "model",
+          "created_at",
+          "updated_at",
+          "stale_reason"
+        ],
+        "additionalProperties": false
+      },
+      "HttpError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "x-contract-notes": [
+    "UTF-8 JSON. Unknown properties/enums and duplicate JSON keys rejected. Null result/model never means no risk. GET/HEAD safe, no-store.",
+    "No update/approval/result-upload HTTP operation. Internal server only writes results. Existing API routes unchanged.",
+    "No external model, clinical delivery or plan application in BE01. Clinical release only blocked."
+  ]
+}

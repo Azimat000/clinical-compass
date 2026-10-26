@@ -468,3 +468,8 @@ Read-only web-researcher сверил Apple System.FileFlags.dataless (https://d
 
 
 Штатное чтение последнего архива выполнено через NSFileCoordinatorReadingWithoutChanges, согласно Apple Foundation coordinateReadingItemAtURL и установленному SDK. Источник не записывался; результат NSCocoaErrorDomain 4101. API: https://developer.apple.com/documentation/foundation/nsfilecoordinator/readingoptions/withoutchanges?language=objc . Принудительная политика setiopolicy, repair/reset и изменение флагов не применялись. После уточнения пользователя дальнейшее восстановление этого архива прекращено.
+
+
+## BE01 —26.10.2026
+
+Read-only web-researcher с fork_turns=none сверил официальные тексты301_3/457_3 и OpenAPI3.1.2. Полный проверенный предел — evidence/BE01/research.md: взрослые/2024 подтверждены, текущий статус применения КР отдельно не подтверждён. Никакие новые клинические правила/пороги/источниковые выпуски/сроки не активированы/продлены; матрица V1 кандидатная, release blocked. Точные существующие формы DASS/PHQ/GAD не менялись. Закрытые каналы/состав/согласия/подписи/новые организационные ответы повторно не проверялись; отложенная работа не возобновлена. Данных пациентов исследователю/поставщику не передавали; новых зависимостей/покупок/расходов/публикаций/сообщений людям нет.
