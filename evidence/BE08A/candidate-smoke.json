@@ -1,0 +1,345 @@
+{
+  "started_at": "2026-10-26T17:46:13.197220+00:00",
+  "synthetic": true,
+  "test_double": false,
+  "policy": {
+    "frozen_at": "2026-10-26T17:45:43.902985+00:00",
+    "corpus_sha256": "b8eb094276f98e98eb621e29904d66b424cfa9699c55c6121e8e66cbccde58db",
+    "metric": "set of candidate topics per case; tp/fp/fn; no clinical sensitivity/specificity",
+    "acceptance": "2 real successful responses with validated citations; real adapter input-limit failure; report all errors without clinical-quality claim",
+    "full_BE08_quality": "BE08B and BE08 remain unaccepted; episodes, gradual changes and closed holdout required there"
+  },
+  "prompt_sha256": "2653f552ede97d3872552ce16aad99f36132cd8446e3b5547f7917f5e45a81a4",
+  "candidate_version": "risk-candidates-v1",
+  "cases": [
+    {
+      "id": "explicit-change-and-concern",
+      "expected_topics": [
+        "safety_concern",
+        "reported_change"
+      ],
+      "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7",
+      "result": {
+        "version": "risk-candidates-v1",
+        "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7",
+        "clinical_ready": false,
+        "status": "partial",
+        "assessment": "not_established",
+        "structured": {
+          "status": "insufficient_data",
+          "errors": [
+            {
+              "code": "risk_context_unavailable",
+              "message": "Нужен один непротиворечивый текущий структурированный контекст врача.",
+              "retryable": false
+            }
+          ]
+        },
+        "model_candidates": [
+          {
+            "id": "0c0a65bd207101600f3efbe6605c74e427752fcf17de90fba0e8132037a160cf",
+            "topic": "safety_concern",
+            "evidence": [
+              {
+                "unit_id": "u1",
+                "source_ref": "s2_e03a985aab647e5da3db7db3925d0f06229780868513320010230d9bb4832f6a",
+                "path": "/value",
+                "source_sha256": "82af43e71d81c186db04a97c8c93409b7108e598b9bc6a2b89c317725e82059e",
+                "text": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "value": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T18:00:00Z",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "fictional-author"
+                },
+                "code": "summary",
+                "field_sha256": "02988475cca61630a989e0655f4c038a90c29a9b3297f2fef290dd1d2141ab16",
+                "quote": "Сегодня думаю покончить с собой.",
+                "start": 0,
+                "end": 32,
+                "offset_basis": "original_text"
+              }
+            ],
+            "interpretation": "model_suspicion_unreviewed",
+            "temporal_relation": "single_observation",
+            "record_days": [
+              "2026-10-26"
+            ],
+            "clinical_causality": "not_established",
+            "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7"
+          },
+          {
+            "id": "83f17ef4d92094811c8f41d37ea276f68591285d97f11c2caafae9317de706df",
+            "topic": "reported_change",
+            "evidence": [
+              {
+                "unit_id": "u1",
+                "source_ref": "s2_e03a985aab647e5da3db7db3925d0f06229780868513320010230d9bb4832f6a",
+                "path": "/value",
+                "source_sha256": "82af43e71d81c186db04a97c8c93409b7108e598b9bc6a2b89c317725e82059e",
+                "text": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "value": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T18:00:00Z",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "fictional-author"
+                },
+                "code": "summary",
+                "field_sha256": "02988475cca61630a989e0655f4c038a90c29a9b3297f2fef290dd1d2141ab16",
+                "quote": "За последние дни мне стало намного хуже.",
+                "start": 33,
+                "end": 73,
+                "offset_basis": "original_text"
+              },
+              {
+                "unit_id": "u3",
+                "source_ref": "s2_028d08f75a900db880bb15bc9111093d5f56263a61c44aba5cde5774991f1bfd",
+                "path": "/value",
+                "source_sha256": "9d56f79b6114103a868fb37411ac214a04f88e31086099e8470beebdde25ff68",
+                "text": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "value": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "categories": [
+                  "visits"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-20",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T18:00:00Z",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "fictional-author"
+                },
+                "code": "complaints",
+                "field_sha256": "a1aad4f9f74599e0829ae83790363b5a2e012223af70660ed7d89653f8e85374",
+                "quote": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "start": 0,
+                "end": 74,
+                "offset_basis": "original_text"
+              }
+            ],
+            "interpretation": "model_suspicion_unreviewed",
+            "temporal_relation": "different_record_days",
+            "record_days": [
+              "2026-10-20",
+              "2026-10-26"
+            ],
+            "clinical_causality": "not_established",
+            "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7"
+          },
+          {
+            "id": "59d9f38b3bfc602baf3398e3a925badcad4e9f25fda0dc147bf6c44d6b83cf61",
+            "topic": "discrepancy",
+            "evidence": [
+              {
+                "unit_id": "u1",
+                "source_ref": "s2_e03a985aab647e5da3db7db3925d0f06229780868513320010230d9bb4832f6a",
+                "path": "/value",
+                "source_sha256": "82af43e71d81c186db04a97c8c93409b7108e598b9bc6a2b89c317725e82059e",
+                "text": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "value": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "categories": [
+                  "wellbeing"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-26",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T18:00:00Z",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "fictional-author"
+                },
+                "code": "summary",
+                "field_sha256": "02988475cca61630a989e0655f4c038a90c29a9b3297f2fef290dd1d2141ab16",
+                "quote": "Сегодня думаю покончить с собой. За последние дни мне стало намного хуже.",
+                "start": 0,
+                "end": 73,
+                "offset_basis": "original_text"
+              },
+              {
+                "unit_id": "u3",
+                "source_ref": "s2_028d08f75a900db880bb15bc9111093d5f56263a61c44aba5cde5774991f1bfd",
+                "path": "/value",
+                "source_sha256": "9d56f79b6114103a868fb37411ac214a04f88e31086099e8470beebdde25ff68",
+                "text": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "value": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "categories": [
+                  "visits"
+                ],
+                "metadata": {
+                  "event_at": "2026-10-20",
+                  "context": "current",
+                  "status": "known",
+                  "recorded_at": "2026-10-26T18:00:00Z",
+                  "current_revision": true,
+                  "state": "recorded",
+                  "author_id": "fictional-author"
+                },
+                "code": "complaints",
+                "field_sha256": "a1aad4f9f74599e0829ae83790363b5a2e012223af70660ed7d89653f8e85374",
+                "quote": "На прошлом приёме вымышленный пациент сообщал о хорошем сне и спокойствии.",
+                "start": 0,
+                "end": 74,
+                "offset_basis": "original_text"
+              }
+            ],
+            "interpretation": "model_suspicion_unreviewed",
+            "temporal_relation": "different_record_days",
+            "record_days": [
+              "2026-10-20",
+              "2026-10-26"
+            ],
+            "clinical_causality": "not_established",
+            "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7"
+          }
+        ],
+        "model_evaluation": "candidates_only",
+        "model_metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 768,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+          "elapsed_seconds": 1.554,
+          "usage": {
+            "prompt_tokens": 1020,
+            "completion_tokens": 202,
+            "total_tokens": 1222
+          },
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 1020,
+          "estimated_peak_cost_nano_usd": 548400,
+          "estimated_offpeak_cost_nano_usd": 274200,
+          "cost_ceiling_micro_usd": 2030,
+          "reservation_micro_usd": 8338,
+          "synthetic_only": true,
+          "test_double": false
+        },
+        "missing_categories": [],
+        "errors": [],
+        "limitation": "Непроверенные модельные предположения; цитата подтверждает только наличие текста, не его клинический смысл. Нет оценки отсутствия опасности, причинности, срочности, диагноза или лечения. Клинический выпуск заблокирован.",
+        "prompt_sha256": "2653f552ede97d3872552ce16aad99f36132cd8446e3b5547f7917f5e45a81a4"
+      }
+    },
+    {
+      "id": "relative-denial-and-instruction",
+      "expected_topics": [],
+      "snapshot_sha256": "4e565d32d7eaa67b9e259b91f54aa7f7afe71a30fba318a3b65b30079c136f21",
+      "result": {
+        "version": "risk-candidates-v1",
+        "snapshot_sha256": "4e565d32d7eaa67b9e259b91f54aa7f7afe71a30fba318a3b65b30079c136f21",
+        "clinical_ready": false,
+        "status": "partial",
+        "assessment": "not_established",
+        "structured": {
+          "status": "insufficient_data",
+          "errors": [
+            {
+              "code": "risk_context_unavailable",
+              "message": "Нужен один непротиворечивый текущий структурированный контекст врача.",
+              "retryable": false
+            }
+          ]
+        },
+        "model_candidates": [],
+        "model_evaluation": "candidates_only",
+        "model_metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 768,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+          "elapsed_seconds": 1.177,
+          "usage": {
+            "prompt_tokens": 1025,
+            "completion_tokens": 6,
+            "total_tokens": 1031
+          },
+          "cache_hit_tokens": 256,
+          "cache_miss_tokens": 769,
+          "estimated_peak_cost_nano_usd": 239436,
+          "estimated_offpeak_cost_nano_usd": 119718,
+          "cost_ceiling_micro_usd": 1055,
+          "reservation_micro_usd": 8377,
+          "synthetic_only": true,
+          "test_double": false
+        },
+        "missing_categories": [],
+        "errors": [],
+        "limitation": "Непроверенные модельные предположения; цитата подтверждает только наличие текста, не его клинический смысл. Нет оценки отсутствия опасности, причинности, срочности, диагноза или лечения. Клинический выпуск заблокирован.",
+        "prompt_sha256": "2653f552ede97d3872552ce16aad99f36132cd8446e3b5547f7917f5e45a81a4"
+      }
+    }
+  ],
+  "complete": true,
+  "real_adapter_failure": {
+    "version": "risk-candidates-v1",
+    "snapshot_sha256": "bb52b1582a42dca288effce5eb6a5e30ed33fadbe3591943ad3262b1ca27cfc7",
+    "clinical_ready": false,
+    "status": "partial",
+    "assessment": "not_established",
+    "structured": {
+      "status": "insufficient_data",
+      "errors": [
+        {
+          "code": "risk_context_unavailable",
+          "message": "Нужен один непротиворечивый текущий структурированный контекст врача.",
+          "retryable": false
+        }
+      ]
+    },
+    "model_candidates": [],
+    "model_evaluation": "not_evaluated",
+    "model_metadata": null,
+    "missing_categories": [],
+    "errors": [
+      {
+        "code": "context_limit",
+        "stage": "model_candidate_evaluation"
+      }
+    ],
+    "limitation": "Непроверенные модельные предположения; цитата подтверждает только наличие текста, не его клинический смысл. Нет оценки отсутствия опасности, причинности, срочности, диагноза или лечения. Клинический выпуск заблокирован.",
+    "prompt_sha256": "2653f552ede97d3872552ce16aad99f36132cd8446e3b5547f7917f5e45a81a4"
+  },
+  "candidate_metrics": {
+    "tp": 2,
+    "fp": 1,
+    "fn": 0
+  },
+  "rule_metrics": {
+    "measured": false,
+    "reason": "This is candidate smoke, BE07 rules tested separately; full BE08B required."
+  },
+  "ledger_micro_usd": 39824,
+  "pass": true,
+  "finished_at": "2026-10-26T17:46:15.933306+00:00"
+}

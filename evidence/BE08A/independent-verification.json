@@ -1,0 +1,25 @@
+{
+  "pass": true,
+  "independent_quote_replay": 5,
+  "candidate_metrics": {
+    "tp": 2,
+    "fp": 1,
+    "fn": 0
+  },
+  "semantic_quality_pass": false,
+  "reason": "One false discrepancy candidate; not a closed quality study, BE08B required.",
+  "all_original_requirements": 83,
+  "preexisting_files_preserved": 4,
+  "main_agent_checks": {
+    "targeted_tests": 11,
+    "application_tests": 736,
+    "tool_tests": 70,
+    "make_check_exit": 0,
+    "database_histories": 10,
+    "source_fields": 2704,
+    "no_clinical_database_writes": true,
+    "no_ui_changes": true
+  },
+  "acceptance_matrix": "evidence/BE08A/acceptance.md",
+  "parent_BE08_accepted": false
+}

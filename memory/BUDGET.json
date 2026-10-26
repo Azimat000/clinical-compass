@@ -20,14 +20,14 @@
     "date": "2026-10-26",
     "model": "deepseek-flash",
     "synthetic_only": true,
-    "successful_calls": 21,
-    "tokens": 21627,
+    "successful_calls": 23,
+    "tokens": 23880,
     "currency": "USD",
-    "usage_based_cost": 0.003526434,
-    "peak_upper_estimate": 0.007052868,
+    "usage_based_cost": 0.003920352,
+    "peak_upper_estimate": 0.007840704,
     "confirmed_invoice": false,
     "rub_conversion": null,
-    "ledger_reserved_and_measured_ceiling_usd": 0.036739,
+    "ledger_reserved_and_measured_ceiling_usd": 0.039824,
     "connection_cap_usd": 0.05,
     "purchases_or_topups": false,
     "evidence": "evidence/BE05/extraction-quality-v2.json",
@@ -43,6 +43,17 @@
         "evidence/BE05/extraction-quality.json",
         "evidence/BE05/extraction-quality-v2.json"
       ]
+    },
+    "BE08A": {
+      "successful_calls": 2,
+      "tokens": 2253,
+      "estimated_offpeak_usd": 0.000393918,
+      "estimated_peak_upper_usd": 0.000787836,
+      "confirmed_invoice": false,
+      "rub_conversion": null,
+      "quality_report": "evidence/BE08A/candidate-smoke.json",
+      "semantic_quality_pass": false,
+      "false_candidate_count": 1
     }
   }
 }
