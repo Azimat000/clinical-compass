@@ -310,6 +310,27 @@ def create_app(database=None):
         value = backend_analyses.inputs(get_db(), g.user, patient_id, run_id, page=int(page))
         return jsonify(value)
 
+    @app.post('/api/v1/patients/<patient_id>/analyses/<run_id>/cancel')
+    def cancel_analysis(patient_id, run_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        if request.args or request.mimetype != 'application/json':
+            raise backend_analyses.AnalysisError('Нужен JSON без параметров адреса.')
+        body = backend_analyses.parse_request(request.get_data(), schema=None)
+        if body != {}:
+            raise backend_analyses.AnalysisError('Для отмены требуется пустой объект.')
+        from . import backend_jobs
+        return jsonify(backend_jobs.cancel(get_db(), g.user, patient_id, run_id))
+
+    @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/diagnosis-context')
+    def analysis_diagnosis_context(patient_id, run_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        from . import backend_diagnosis_service
+        return jsonify(backend_diagnosis_service.details(get_db(), g.user, patient_id, run_id))
+
     @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/risk-context')
     def analysis_risk_context(patient_id, run_id):
         role('doctor')

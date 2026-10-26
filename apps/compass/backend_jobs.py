@@ -38,6 +38,11 @@ def fingerprint(db):
     if config['generation_version'] == backend_risk_context.EXECUTION_VERSION:
         result['risk_candidates'] = backend_risk_context.VERSION
         result['risk_prompt_sha256'] = backend_risk_context.PROMPT_SHA256
+    if config['generation_version'] == 'be10-diagnosis-v1':
+        from . import backend_diagnosis_service
+        result['diagnosis'] = backend_diagnosis_service.release()
+        result['risk_candidates'] = backend_risk_context.VERSION
+        result['risk_prompt_sha256'] = backend_risk_context.PROMPT_SHA256
     return result
 
 
@@ -152,9 +157,12 @@ def unavailable(operation, snapshot):
 
 
 def execute(operation, snapshot):
-    from . import backend_risk_rules, backend_risk_context
+    from . import backend_risk_rules, backend_risk_context, backend_diagnosis_service
+    version = snapshot.get('backend_runtime', {}).get('generation_version')
+    if operation == 'diagnosis' and version == backend_diagnosis_service.EXECUTION_VERSION:
+        return backend_diagnosis_service.execute(operation, snapshot)
     if (operation == 'risk' and snapshot.get('backend_runtime', {}).get('generation_version')
-            == backend_risk_context.EXECUTION_VERSION):
+            in (backend_risk_context.EXECUTION_VERSION, backend_diagnosis_service.EXECUTION_VERSION)):
         try:
             return backend_risk_context.execute(operation, snapshot)
         except Exception:
@@ -189,11 +197,21 @@ def finish(db, claim_value, outcome=None, error=None):
                 if report is not None:
                     from . import backend_risk_context as context, backend_risk_episodes as episodes
                     if (run['operation'] != 'risk' or settings(db)['generation_version']
-                            != context.EXECUTION_VERSION or publication != report.get('structured')):
+                            not in (context.EXECUTION_VERSION, 'be10-diagnosis-v1') or publication != report.get('structured')):
                         raise analyses.AnalysisError('Неверная смысловая оценка.')
                     saved = episodes.observe(db, {'id':run['actor_id'], 'role':'doctor'}, run['patient_id'], run['id'], report)
                     projected = context.projection(saved)
-                analyses.advance_in_job(db, run, value, publication, risk_context=projected)
+                diagnosis = publication.pop('diagnosis_report', None)
+                diagnosis_context = None
+                if diagnosis is not None:
+                    from . import backend_diagnosis_service as diagnostic
+                    if (publication or run['operation'] != 'diagnosis' or settings(db)['generation_version'] != diagnostic.EXECUTION_VERSION):
+                        raise analyses.AnalysisError('Неверная диагностическая оценка.')
+                    publication, diagnostic_value = diagnostic.publication(claim_value['snapshot'], diagnosis)
+                    diagnosis_context = diagnostic.projection(diagnostic_value)
+                elif run['operation'] == 'diagnosis' and settings(db)['generation_version'] == 'be10-diagnosis-v1':
+                    raise analyses.AnalysisError('Отсутствует полная диагностическая оценка.')
+                analyses.advance_in_job(db, run, value, publication, risk_context=projected, diagnosis_context=diagnosis_context)
                 from . import backend_alerts
                 backend_alerts.enqueue_pending(db)
                 db.execute('RELEASE publication')
@@ -227,7 +245,7 @@ def process_one(db, lane='all', executor=None):
         # Never store provider bodies, clinical text, exception strings or secrets.
         from .backend_model import ModelError
         code = exc.code if isinstance(exc, ModelError) and exc.code in {
-            'operation_unavailable', 'timeout', 'transport_error', 'budget_exceeded', 'input_too_large'} else 'executor_error'
+            'operation_unavailable', 'diagnosis_quality_not_admitted', 'timeout', 'transport_error', 'budget_exceeded', 'input_too_large'} else 'executor_error'
         finish(db, work, error=code)
     else:
         finish(db, work, outcome=outcome)

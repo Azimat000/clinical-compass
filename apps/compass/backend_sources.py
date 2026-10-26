@@ -191,6 +191,14 @@ def check_result(frozen, operation, result, *, root=None, context=None, snapshot
         from . import backend_risk_rules
         backend_risk_rules.verify(snapshot, result)
         return current
+    if operation == 'diagnosis' and snapshot is not None and context.get('diagnosis_context') is not None:
+        from . import backend_diagnosis_service as diagnostic
+        saved = context['diagnosis_context']
+        report = diagnostic.interpret(snapshot, saved['raw'])
+        expected, _ = diagnostic.publication(snapshot, {'context': report})
+        if diagnostic.projection(report) != saved or expected['status'] != 'ready' or expected['result'] != result:
+            raise SourceError(['diagnosis_result_mismatch'])
+        return current
     output = result['output']
     findings = (output['patterns'] if operation == 'risk' else
                 [output['leading'], *output['alternatives']] if operation == 'diagnosis' else output['items'])

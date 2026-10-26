@@ -219,6 +219,8 @@ def validate_analysis(value):
     state, result = value['status'], value['result']
     if 'risk_context' in value and (value['operation'] != 'risk' or state in ('queued', 'running', 'failed')):
         raise AnalysisError('Смысловая оценка требует завершённого анализа риска.')
+    if 'diagnosis_context' in value and (value['operation'] != 'diagnosis' or state in ('queued', 'running', 'failed')):
+        raise AnalysisError('Диагностическая оценка требует завершённого анализа.')
     if state == 'ready' and (result is None or value['errors']):
         raise AnalysisError('Готовый результат требует содержимого и не допускает ошибок.')
     if state not in ('ready', 'stale') and result is not None:
@@ -338,7 +340,7 @@ def _read_in_snapshot(db, user, patient_id, run_id):
     return value
 
 
-def advance(db, user, patient_id, run_id, expected_revision, status, *, result=None, errors=None, model=None, stale_reason=None, risk_context=None):
+def advance(db, user, patient_id, run_id, expected_revision, status, *, result=None, errors=None, model=None, stale_reason=None, risk_context=None, diagnosis_context=None):
     """Internal worker boundary, deliberately absent from HTTP. Never applies a plan."""
     if type(expected_revision) is not int:
         raise AnalysisError('Нужна точная версия.', 409, 'revision_conflict')
@@ -380,7 +382,7 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
                         or diagnosis['snapshot_id'] != current['snapshot_id']):
                     raise AnalysisError('Нужна актуальная точная версия диагностического анализа.', 409, 'diagnosis_unavailable')
             try:
-                backend_sources.check_result(snapshot.get('backend_sources'), current['operation'], result, snapshot=snapshot)
+                backend_sources.check_result(snapshot.get('backend_sources'), current['operation'], result, snapshot=snapshot, context={'diagnosis_context': diagnosis_context} if diagnosis_context else None)
                 if current['operation'] == 'risk' and model is not None:
                     raise backend_sources.SourceError(['risk_model_override_forbidden'])
             except backend_sources.SourceError as exc:
@@ -393,12 +395,20 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
             if stored is None or decisions.canonical(context.projection(json.loads(stored[0]))) != decisions.canonical(risk_context):
                 raise AnalysisError('Нет сохранённой смысловой оценки.', 409, 'invalid_risk_context')
             value['risk_context'] = risk_context
+        if diagnosis_context is not None:
+            from . import backend_diagnosis_service as diagnostic
+            raw_snapshot = json.loads(db.execute('SELECT payload_json FROM analysis_input_snapshots WHERE id=?',(current['snapshot_id'],)).fetchone()[0])
+            report = diagnostic.interpret(raw_snapshot, diagnosis_context['raw'])
+            expected, _ = diagnostic.publication(raw_snapshot, {'context': report})
+            if (diagnostic.projection(report) != diagnosis_context or expected != {'status':status,'result':result,'errors':errors or [],'model':model}):
+                raise AnalysisError('Диагностическая оценка расходится с исходными данными.')
+            value['diagnosis_context'] = diagnosis_context
         _append(db, value)
         access.audit(db, user['id'], 'analysis.' + status, run_id)
         return value
 
 
-def advance_in_job(db, run, current, outcome, *, risk_context=None):
+def advance_in_job(db, run, current, outcome, *, risk_context=None, diagnosis_context=None):
     """Publish only through the existing contract and evidence validation."""
     if not db.in_transaction:
         raise RuntimeError('Publication requires the lease transaction')
@@ -407,4 +417,4 @@ def advance_in_job(db, run, current, outcome, *, risk_context=None):
         raise AnalysisError('Недопустимый результат фонового анализа.')
     return advance(db, {'id': run['actor_id'], 'role': 'doctor'}, run['patient_id'],
                    run['id'], current['revision'], outcome['status'],
-                   result=outcome.get('result'), errors=outcome.get('errors'), model=outcome.get('model'), risk_context=risk_context)
+                   result=outcome.get('result'), errors=outcome.get('errors'), model=outcome.get('model'), risk_context=risk_context, diagnosis_context=diagnosis_context)

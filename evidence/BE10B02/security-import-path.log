@@ -1,0 +1,17 @@
+E.......
+======================================================================
+ERROR: test_security (unittest.loader._FailedTest.test_security)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_security
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_security.py", line 11, in <module>
+    import test_access
+ModuleNotFoundError: No module named 'test_access'
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.103s
+
+FAILED (errors=1)

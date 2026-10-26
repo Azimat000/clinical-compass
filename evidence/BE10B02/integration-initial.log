@@ -1,0 +1,68 @@
+EEEEEE....
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='cancel')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 99, in test_cancel_stale_lease_role_version_and_source_fence
+    self.db.execute("UPDATE users SET active=1 WHERE id='doc-a'")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: active
+
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='data')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 99, in test_cancel_stale_lease_role_version_and_source_fence
+    self.db.execute("UPDATE users SET active=1 WHERE id='doc-a'")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: active
+
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='lease')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 99, in test_cancel_stale_lease_role_version_and_source_fence
+    self.db.execute("UPDATE users SET active=1 WHERE id='doc-a'")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: active
+
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='role')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 88, in test_cancel_stale_lease_role_version_and_source_fence
+    run,work,raw=self.fixture(True);outcome=self.outcome(work,raw)
+                 ~~~~~~~~~~~~^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 30, in fixture
+    u=next(u for u in context.prepare_snapshot(work['snapshot']) if u['code']=='summary')
+                                               ~~~~^^^^^^^^^^^^
+KeyError: 'snapshot'
+
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='version')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 88, in test_cancel_stale_lease_role_version_and_source_fence
+    run,work,raw=self.fixture(True);outcome=self.outcome(work,raw)
+                 ~~~~~~~~~~~~^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 30, in fixture
+    u=next(u for u in context.prepare_snapshot(work['snapshot']) if u['code']=='summary')
+                                               ~~~~^^^^^^^^^^^^
+KeyError: 'snapshot'
+
+======================================================================
+ERROR: test_cancel_stale_lease_role_version_and_source_fence (apps.tests.test_backend_diagnosis_integration.DiagnosisIntegrationTests.test_cancel_stale_lease_role_version_and_source_fence) (variant='source')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 88, in test_cancel_stale_lease_role_version_and_source_fence
+    run,work,raw=self.fixture(True);outcome=self.outcome(work,raw)
+                 ~~~~~~~~~~~~^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 30, in fixture
+    u=next(u for u in context.prepare_snapshot(work['snapshot']) if u['code']=='summary')
+                                               ~~~~^^^^^^^^^^^^
+KeyError: 'snapshot'
+
+----------------------------------------------------------------------
+Ran 5 tests in 3.116s
+
+FAILED (errors=6)

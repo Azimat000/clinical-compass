@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T23:19:13+03:00",
-  "current_slice": null,
+  "updated_on": "2026-10-26T23:33:45+03:00",
+  "current_slice": "BE10B02",
   "last_accepted_slice": "BE10B01",
   "next_slice": "BE10B02",
   "qualification": "unknown",
@@ -680,7 +680,7 @@
       "reason": null
     },
     "BE10B02": {
-      "status": "planned",
+      "status": "in_progress",
       "commit_ref": null,
       "handoff": "memory/sessions/BE10B02.md",
       "reason": null
@@ -1426,7 +1426,10 @@
     "diagnosis_candidate_evidence": "evidence/BE10A/acceptance.md",
     "diagnosis_criteria_version": "diagnosis-criteria-v1",
     "diagnosis_criteria_mode": "internal_structured_synthetic_unreviewed_no_model_or_publication",
-    "diagnosis_criteria_evidence": "evidence/BE10B01/acceptance.md"
+    "diagnosis_criteria_evidence": "evidence/BE10B01/acceptance.md",
+    "diagnosis_workflow_version": "diagnosis-workflow-v1",
+    "diagnosis_workflow_mode": "not_admitted_quality_failed_default_worker_blocked",
+    "diagnosis_workflow_evidence": "evidence/BE10B02/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",

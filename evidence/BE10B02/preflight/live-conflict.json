@@ -1,0 +1,1680 @@
+{
+  "id": "conflict",
+  "expected": {
+    "id": "conflict",
+    "note": "Fictional adult current interview: patient explicitly reports low mood during the present period, with poor sleep for 21 days. Exclusions and other criteria remain unknown.",
+    "second_note": "Fictional adult, another current report about the identical present period: patient explicitly denies having low mood at any time in that period. This contradicts the other report; neither report is corrected or withdrawn.",
+    "leading": null,
+    "disposition": "insufficient_data",
+    "alternative_facts": {
+      "depressive_episode.low_mood": "conflicting",
+      "depressive_episode.mania_hypomania": "unknown"
+    }
+  },
+  "real_provider": true,
+  "clinical_review": false,
+  "snapshot": {
+    "actions": [],
+    "adverse_events": [],
+    "age_reviews": [],
+    "alerts": [],
+    "assessment_form_releases": [
+      {
+        "definition_sha256": "6f46c3b57dfe57b1f946c8137afa870aaa7df92bb825dcab1f3006cc5a5c3580",
+        "form_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "released_at": "2026-10-26T20:27:48.264675+00:00",
+        "scope": "synthetic_demo"
+      },
+      {
+        "definition_sha256": "7a93c50225b1f477ffd12411f03678b310ce2bc0f0af49cdf5995dbf20ca9656",
+        "form_version_id": "GAD7-RU-Z-2023-demo-v1",
+        "released_at": "2026-10-26T20:27:48.265289+00:00",
+        "scope": "synthetic_demo"
+      },
+      {
+        "definition_sha256": "bdb109aca11e234f73cec5ad1e0391703b987f21b29a7e9f1abfc3d5e6fc8e88",
+        "form_version_id": "PHQ9-RU-Z-2023-demo-v1",
+        "released_at": "2026-10-26T20:27:48.265845+00:00",
+        "scope": "synthetic_demo"
+      }
+    ],
+    "assessment_requests": [
+      {
+        "age_basis": "Синтетический профиль",
+        "age_on": "2026-10-26",
+        "age_snapshot_json": "{\"birth_date\":null,\"calculated_years\":null,\"detail\":null,\"status\":\"known\",\"verification_token\":\"81a74058a3554212720f58560d26040766ebb93e4c179531c9ba7e4f4dcffa6b\",\"years\":35}",
+        "age_years": 35,
+        "expires_at": "2026-10-27T20:27:48.613682+00:00",
+        "form_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "id": "8f5bc1cb090a2d442443e757b883d3b6",
+        "patient_id": "D01",
+        "payload_json": "{\"age\":{\"birth_date\":null,\"calculated_years\":null,\"detail\":null,\"status\":\"known\",\"verification_token\":\"81a74058a3554212720f58560d26040766ebb93e4c179531c9ba7e4f4dcffa6b\",\"years\":35},\"age_basis\":\"Синтетический профиль\",\"form_version_id\":\"DASS42-RU-FG-2024-demo-v1\"}",
+        "relationship_id": "f4efb8ef614904dd08db65cb1809e10c",
+        "request_key": "ba3e2ad731e3358d06ea43cc6c18170427856407588976dd711920841395a020",
+        "requested_at": "2026-10-26T20:27:48.613682+00:00",
+        "requested_by": "doc-a"
+      }
+    ],
+    "assessment_results": [
+      {
+        "actor_id": "pat-a",
+        "assessment_id": "8ee3d03196d66da094ce16872c75a368",
+        "observed_on": "2026-10-26",
+        "recorded_at": "2026-10-26T20:27:48.614604+00:00",
+        "request_id": "8f5bc1cb090a2d442443e757b883d3b6",
+        "scores_json": null
+      }
+    ],
+    "assessments": [
+      {
+        "answers_json": "[1,null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]",
+        "assigned_by": "doc-a",
+        "completed_at": "2026-10-26T20:27:48.614604+00:00",
+        "completeness": "incomplete",
+        "id": "8ee3d03196d66da094ce16872c75a368",
+        "patient_id": "D01",
+        "scale_version_id": "DASS42-RU-FG-2024-demo-v1",
+        "score": null,
+        "scoring_version": "dass42-three-sums-v1"
+      }
+    ],
+    "backend_contract": {
+      "contract_version": "1.0",
+      "schema_sha256": "8fada8a23d2c1a16548debc9b3df6b5dc06c72e802f2dcf9e2566d31fe9a155e",
+      "scope_sha256": "472a9fa88f280dc087cdd9ba916c25a89b4e339983933957183639e100e0dd5a"
+    },
+    "backend_risk_rules": {
+      "authorship": "HAC: собственные краткие фактические изложения; не копия шкалы или алгоритма КР",
+      "clinical_review": null,
+      "engine_sha256": "65bae8fd7dc248a6457ed0b3c79b0095f8fe4b361aef7261585aac7b21eab969",
+      "evidence": "evidence/BE07/research.md",
+      "evidence_sha256": "db669016eaa8f97d81f122e50ab262ccb86c51663416fb1be41233bfd6893266",
+      "mode": "synthetic_only",
+      "rules": [
+        {
+          "admission_claim": "be03-KR301_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F32",
+            "F33"
+          ],
+          "id": "DEP-SUICIDE-FACT",
+          "pdf_page": 21,
+          "printed_page": 16,
+          "section": "2.5 Иные диагностические исследования",
+          "source_id": "KR301_3",
+          "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-PSY-REVIEW",
+          "pdf_page": 39,
+          "printed_page": 39,
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_id": "KR457_3",
+          "text": "При документированном ГТР врач отметил фактор, для которого КР предусматривают наблюдение психиатром. Врачу следует рассмотреть этот вопрос; направление не создано, срок не установлен."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-ADVERSE-REVIEW",
+          "pdf_page": 30,
+          "printed_page": 30,
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "text": "В контексте подтверждённой врачом текущей психофармакотерапии ГТР сообщено нежелательное явление. Врач оценивает переносимость; причинность, тяжесть и изменение терапии правилом не установлены."
+        },
+        {
+          "admission_claim": "be03-KR457_3-F02",
+          "attention": "physician_review",
+          "conditions": [
+            "F41.1"
+          ],
+          "id": "GAD-INITIAL-ANXIETY",
+          "pdf_page": 22,
+          "printed_page": 22,
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "text": "Врач указал начальную фазу антидепрессивной терапии ГТР и усиление тревоги. Требуется врачебная оценка динамики; правило не определяет причинность, срочность или изменение лечения."
+        }
+      ],
+      "version": "backend-risk-rules-v1"
+    },
+    "backend_runtime": {
+      "adapter": "compass-model-v1",
+      "diagnosis": {
+        "catalog_sha256": "c5235737bd8dacbb47f440d2dfcfb9b626ea6b0e7e601210188a97c2da7789a9",
+        "criteria_engine_sha256": "86c6685cbb957e40897042d1d4841ee875bac381b613cbecf3bc3ae9067a8738",
+        "criteria_evidence_sha256": "ae73281ea0900be564edc0da2d93a390d1978cc0487264ede129bc1fa3b3fdd9",
+        "criteria_review_sha256": "781fe16826fb3251733ec68fc70be6f06c3a68b12996415013be299c2ec23785",
+        "engine_sha256": "fbada38a042da42d6b827826b029e385500bebb58e8859dee451c2bdaa580582",
+        "prompt_sha256": "f3b4b8f10321beed9d112dea0df3c27b12ca5920da4172f00e5d463dac41ce6c",
+        "review_sha256": "3a021ebf741f6b32d7c8f0815fd5af6839f63f8174c27bdffc5ab7293eda3a43",
+        "schema_sha256": "bcd96276744e3f5b358b115d96f50a311a99431b3ab80105432c011811dc977c",
+        "version": "diagnosis-workflow-v1"
+      },
+      "extraction": "extractive-mentions-v2",
+      "generation_version": "be10-diagnosis-v1",
+      "jobs_version": "backend-jobs-v1",
+      "model": "deepseek-flash",
+      "risk_candidates": "risk-candidates-v2",
+      "risk_prompt_sha256": "a0099ae847b3bfa17cea72b11a014a2c4be7d8e072d5b2b630d8bff6a914a16a",
+      "risk_rules": "65bae8fd7dc248a6457ed0b3c79b0095f8fe4b361aef7261585aac7b21eab969",
+      "system_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7"
+    },
+    "backend_sources": {
+      "catalog_sha256": "46afb2790c398008b5f84d7242d06dd8c9b71b38ad02293703c85b30d47417c5",
+      "claims": {
+        "be03-KR301_3-F01": {
+          "binding": {
+            "fragment_id": "KR301_3-F01",
+            "id": "be03-KR301_3-F01",
+            "operation": "diagnosis",
+            "page": 12,
+            "section": "2. Диагностика",
+            "source_id": "KR301_3",
+            "text_sha256": "b1fa54475fa47083956b1b466feff87d27443cf605377f0a768a3095f1271da6"
+          },
+          "reasons": [],
+          "text": "Анкета и дневник не устанавливают первичный диагноз депрессивного расстройства. Исходную диагностическую оценку проводит психиатр; HAC помогает подготовить сведения для его работы."
+        },
+        "be03-KR301_3-F02": {
+          "binding": {
+            "fragment_id": "KR301_3-F02",
+            "id": "be03-KR301_3-F02",
+            "operation": "risk",
+            "page": 16,
+            "section": "2.1 Жалобы и анамнез",
+            "source_id": "KR301_3",
+            "text_sha256": "2522d667912880f78c24af8931b7bc06421eef74552441d6e77672fa1382a4d8"
+          },
+          "reasons": [],
+          "text": "В диагностический приём при депрессивном расстройстве входит оценка суицидального риска. Сбор ответов в HAC не заменяет эту врачебную оценку и действующий путь реагирования на критические сведения."
+        },
+        "be03-KR301_3-F04": {
+          "binding": {
+            "fragment_id": "KR301_3-F04",
+            "id": "be03-KR301_3-F04",
+            "operation": "plan",
+            "page": 23,
+            "section": "3. Лечение",
+            "source_id": "KR301_3",
+            "text_sha256": "4a7a8829305da3efa18dc78ff5f1a28824d59d06a07ceb0ec4e1c3746036e5e0"
+          },
+          "reasons": [],
+          "text": "Индивидуальный план при депрессивном расстройстве зависит в том числе от прежнего лечения и его переносимости, других болезней и принимаемых средств. Эти сведения собирает и оценивает врач; карточка не выбирает препарат."
+        },
+        "be03-KR457_3-F01": {
+          "binding": {
+            "fragment_id": "KR457_3-F01",
+            "id": "be03-KR457_3-F01",
+            "operation": "diagnosis",
+            "page": 10,
+            "section": "1.6 Клиническая картина",
+            "source_id": "KR457_3",
+            "text_sha256": "fe077b20518fd8b7909e887bbf198de8e75781b45f73588c7c115dfd045e14a2"
+          },
+          "reasons": [],
+          "text": "Уточнение диагноза ГТР требует отличать его от других психических расстройств и соматических причин. Упоминание тревоги в вопросе не создаёт подтверждённый диагноз."
+        },
+        "be03-KR457_3-F02": {
+          "binding": {
+            "fragment_id": "KR457_3-F02",
+            "id": "be03-KR457_3-F02",
+            "operation": "risk",
+            "page": 22,
+            "section": "3.2 Психофармакотерапия",
+            "source_id": "KR457_3",
+            "text_sha256": "fc7688dfab17e9e076713b1e70cddddc1d57343ac36e222a552b094979898a8c"
+          },
+          "reasons": [],
+          "text": "В обсуждении начала антидепрессивной терапии ГТР КР отдельно отмечают наблюдение за суицидальными рисками и возможным усилением тревоги. Краткая справка не определяет срочность и не заменяет врача."
+        },
+        "be03-KR457_3-F03": {
+          "binding": {
+            "fragment_id": "KR457_3-F03",
+            "id": "be03-KR457_3-F03",
+            "operation": "plan",
+            "page": 30,
+            "section": "3.2 Психофармакотерапия",
+            "source_id": "KR457_3",
+            "text_sha256": "c5f89cff399313dddb798936248004b4c5f1b7415bc515615219bfa5e78acac5"
+          },
+          "reasons": [],
+          "text": "Для лекарственного лечения ГТР предусмотрена повторная оценка эффекта и переносимости на протяжении курса. Эта карточка не задаёт программный график, порог ответа или решение о коррекции лечения."
+        }
+      },
+      "clinical_review": null,
+      "engine_sha256": "8b6a98e32401a2c8de47b0f37b834b1ee388b51c1bde06d02bedebc3c3fc4db4",
+      "mode": "synthetic_only",
+      "sources": {
+        "KR301_3": {
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00",
+          "effective_verification": {
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "document_type": "clinical_guideline",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+            "publisher": "Минздрав России — официальный распространитель",
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "source_version": "301_3 / 2024 / version=3"
+          },
+          "pin": {
+            "age_max": 120,
+            "age_min": 18,
+            "conditions": [
+              "F32",
+              "F33"
+            ],
+            "id": "KR301_3",
+            "registry_sha256": "6d2ecb1db6a732d80ac7d01206489d5837244ef53236858ad2820bfac0dcfb0a",
+            "status": "registered",
+            "verification": {
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "current_status": "current",
+              "path": "evidence/BE03/research.md",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c"
+            }
+          },
+          "reasons": [],
+          "source": {
+            "admission_id": "S17J02-KR301_3-reference-1",
+            "artifact_path": "data/retrieval/reference-cards/KR301_3.json",
+            "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "document_family": "KR301",
+            "document_id": "KR301_3",
+            "document_type": "clinical_guideline",
+            "full_text_rights": {
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс.",
+              "scopes": [],
+              "status": "unknown"
+            },
+            "indications": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Депрессивный эпизод / рекуррентное депрессивное расстройство; F32/F33",
+              "verified": true
+            },
+            "official_origin_verified": true,
+            "official_status": "current",
+            "path": "evidence/S09/completion-review/sources/kr301.pdf",
+            "population": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "verified": true
+            },
+            "publisher": "Минздрав России — официальный распространитель",
+            "representation": "reviewed_cards",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "rights": {
+              "content_review": {
+                "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+                "attribution_reviewed": true,
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "fragment_ids": [
+                  "KR301_3-F01",
+                  "KR301_3-F02",
+                  "KR301_3-F03",
+                  "KR301_3-F04",
+                  "KR301_3-F05"
+                ],
+                "purpose_and_volume_reviewed": true,
+                "quoted_characters": 101,
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522",
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73"
+              },
+              "index_fields": [
+                "paraphrase"
+              ],
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "status": "verified"
+            },
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "source_version": "301_3 / 2024 / version=3",
+            "status": "approved",
+            "verification": {
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "document_type": "clinical_guideline",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+              "publisher": "Минздрав России — официальный распространитель",
+              "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+              "source_version": "301_3 / 2024 / version=3"
+            },
+            "verified_at": "2026-10-20T22:32:00+03:00"
+          }
+        },
+        "KR457_3": {
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00",
+          "effective_verification": {
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "document_type": "clinical_guideline",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+            "publisher": "Минздрав России — официальный распространитель",
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "source_version": "457_3 / 2024 / version=3"
+          },
+          "pin": {
+            "age_max": 120,
+            "age_min": 18,
+            "conditions": [
+              "F41.1"
+            ],
+            "id": "KR457_3",
+            "registry_sha256": "533b4e8e57c52cf63d55acc1a87f585a7bfef4afb4448c45ca90162eec8ef7a3",
+            "status": "registered",
+            "verification": {
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "current_status": "current",
+              "path": "evidence/BE03/research.md",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c"
+            }
+          },
+          "reasons": [],
+          "source": {
+            "admission_id": "S17J02-KR457_3-reference-1",
+            "artifact_path": "data/retrieval/reference-cards/KR457_3.json",
+            "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "document_family": "KR457",
+            "document_id": "KR457_3",
+            "document_type": "clinical_guideline",
+            "full_text_rights": {
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс.",
+              "scopes": [],
+              "status": "unknown"
+            },
+            "indications": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Генерализованное тревожное расстройство; F41.1",
+              "verified": true
+            },
+            "official_origin_verified": true,
+            "official_status": "current",
+            "path": "evidence/S09/completion-review/sources/kr457.pdf",
+            "population": {
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "verified": true
+            },
+            "publisher": "Минздрав России — официальный распространитель",
+            "representation": "reviewed_cards",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "rights": {
+              "content_review": {
+                "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+                "attribution_reviewed": true,
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "fragment_ids": [
+                  "KR457_3-F01",
+                  "KR457_3-F02",
+                  "KR457_3-F03",
+                  "KR457_3-F04",
+                  "KR457_3-F05"
+                ],
+                "purpose_and_volume_reviewed": true,
+                "quoted_characters": 159,
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522",
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73"
+              },
+              "index_fields": [
+                "paraphrase"
+              ],
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "status": "verified"
+            },
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "source_version": "457_3 / 2024 / version=3",
+            "status": "approved",
+            "verification": {
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "document_type": "clinical_guideline",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata",
+              "publisher": "Минздрав России — официальный распространитель",
+              "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+              "source_version": "457_3 / 2024 / version=3"
+            },
+            "verified_at": "2026-10-20T22:32:00+03:00"
+          }
+        }
+      },
+      "version": "backend-sources-v1"
+    },
+    "catalog_versions": [
+      {
+        "age_basis": "Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "DASS-42",
+        "definition_json": "{\"attribution\":\"Lovibond & Lovibond, 1995. Перевод: И.М. Фаттахов, Е.А. Горобец, 2024.\",\"code\":\"DASS-42\",\"download_conditions_url\":\"https://dass.psy.unsw.edu.au/down.htm\",\"id\":\"DASS42-RU-FG-2024-demo-v1\",\"instruction\":\"Пожалуйста, прочитайте каждое утверждение и обведите напротив него цифру 0, 1, 2, 3 в зависимости от того, насколько оно соответствовало вашему самочувствию на прошлой неделе. Помните, что здесь нет правильных или неправильных ответов. Также не следует тратить слишком много времени на их обдумывание.\",\"items\":[\"Я замечал, что расстраиваюсь по любому поводу.\",\"У меня возникало ощущение сухости во рту.\",\"Мне казалось, что я совсем не могу испытать положительных эмоций.\",\"Мне было тяжело дышать (напр., возникало учащённое дыхание, одышка в отсутствие физических нагрузок).\",\"Мне было трудно начать делать что-либо.\",\"Я был склонен слишком бурно на всё реагировать.\",\"У меня возникало ощущение шаткости (напр., ноги подкашивались).\",\"Мне было трудно расслабиться.\",\"У меня были ситуации, которые беспокоили меня настолько, что я испытывал большое облегчение, когда они заканчивались.\",\"Я чувствовал, что мне нечего ждать от жизни.\",\"Я замечал, что довольно легко расстраиваюсь.\",\"Я чувствовал, что трачу много душевных сил.\",\"Я чувствовал себя грустным и подавленным.\",\"Я замечал, что начинал терять терпение, когда меня что-то задерживало (напр., лифт, светофор и т.д.).\",\"У меня возникало ощущение дурноты.\",\"Я чувствовал, что потерял интерес почти ко всему в жизни.\",\"Я чувствовал, что не представляю ценности как личность.\",\"Я чувствовал себя достаточно ранимым.\",\"Я сильно потел (напр., потели ладони в отсутствие высокой температуры или физических нагрузок).\",\"Я испытывал страх без какой-либо веской причины.\",\"Я чувствовал, что не стоит жить дальше.\",\"Мне было трудно успокоиться.\",\"Мне было трудно глотать (напр., возникало ощущение кома в горле).\",\"Я не получал никакого удовольствия от того, чем я занимался.\",\"Я ощущал сердцебиение в отсутствие физических нагрузок (напр., возникало учащённое сердцебиение, замирание сердца).\",\"Я чувствовал себя разбитым и унылым.\",\"Я заметил, что бывал очень раздражительным.\",\"Я чувствовал, что был близок к панике.\",\"Мне было трудно прийти в себя после того, как меня что-то расстраивало.\",\"Я боялся, что не смогу справиться с какой-нибудь простой, но незнакомой мне задачей.\",\"Я был в не состоянии чем-то увлечься.\",\"Мне было трудно сохранять спокойствие, когда кто-то прерывал меня во время моих занятий.\",\"Я находился в состоянии нервного напряжения.\",\"Я чувствовал себя совершенно никчёмным человеком.\",\"Меня раздражало всё, что отвлекало меня от дел.\",\"Меня охватывал ужас.\",\"У меня не было светлых надежд на будущее.\",\"Я чувствовал, что моя жизнь не имеет смысла.\",\"Я замечал, что начинал сильно нервничать.\",\"Я опасался ситуаций, в которых я мог запаниковать и оказаться в глупом положении.\",\"Я ощущал дрожь (напр., в руках).\",\"Мне было сложно заставить себя сделать что-либо.\"],\"key_url\":\"https://dass.psy.unsw.edu.au/Download%20files/Dass_template.pdf\",\"options\":[\"Вообще не относилось ко мне.\",\"Относилось ко мне в какой-то степени или некоторое время.\",\"Относилось ко мне в значительной степени или большую часть времени.\",\"Относилось ко мне в крайней степени или практически всё время.\"],\"period\":\"На прошлой неделе\",\"population\":{\"official_age_guidance\":\"DASS FAQ: от 14 лет при обычных языковых навыках.\",\"project_policy\":\"Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.\",\"study\":\"250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан.\"},\"rights_url\":\"https://dass.psy.unsw.edu.au/DASSFAQ.htm\",\"scoring\":{\"interpretation\":\"Без диагноза, уровней тяжести, порогов, общего итога и множителя DASS-21.\",\"missing\":\"Любой пропуск: ни одна сумма не рассчитывается. Консервативная политика проекта; ответы сохраняются.\",\"patient_output\":\"Только квитанция после отправки, без обратной выдачи ответов, сумм или интерпретации.\",\"range_per_subscale\":[0,42],\"version\":\"dass42-three-sums-v1\"},\"source\":{\"checked_on\":\"2026-10-19\",\"sha256\":\"5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86\",\"url\":\"https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf\",\"verification\":\"read-only researcher /root/scale_best_option; exact text and fetched PDF hash\"},\"subscales\":{\"anxiety\":{\"items\":[2,4,7,9,15,19,20,23,25,28,30,36,40,41],\"label\":\"Тревожные симптомы\"},\"depression\":{\"items\":[3,5,10,13,16,17,21,24,26,31,34,37,38,42],\"label\":\"Депрессивные симптомы\"},\"stress\":{\"items\":[1,6,8,11,12,14,18,22,27,29,32,33,35,39],\"label\":\"Стресс\"}},\"title\":\"Шкала депрессии, тревоги и стресса (DASS)\",\"validation_url\":\"https://doi.org/10.17116/jnevro2025125051103\",\"version\":\"RU-FG-2024 / demo-release-2026-10-19-v1\"}",
+        "id": "DASS42-RU-FG-2024-demo-v1",
+        "kind": "scale",
+        "max_age": 120,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "DASS42-RU-FG-2024-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+      },
+      {
+        "age_basis": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "GAD-7",
+        "definition_json": "{\"attribution\":\"Spitzer R.L., Kroenke K., Williams J.B.W., Löwe B., 2006. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC.\",\"code\":\"GAD-7\",\"id\":\"GAD7-RU-Z-2023-demo-v1\",\"instruction\":\"Оцените, пожалуйста, насколько часто следующие проблемы беспокоили вас в течение прошедших двух недель. Для ответов используйте следующую шкалу:\",\"items\":[\"Чувство тревоги или раздражения\",\"Неспособность справиться со своим беспокойством\",\"Чрезмерное беспокойство по разным поводам\",\"Неспособность расслабляться\",\"Ощущение такого беспокойства, что трудно найти себе место\",\"Склонность быстро испытывать злость или раздражительность\",\"Чувство страха, как будто может случиться что-то ужасное\"],\"max_age\":90,\"min_age\":18,\"options\":[\"Совсем нет\",\"В течение нескольких дней\",\"Более чем половину этого времени\",\"Почти каждый день\"],\"period\":\"В течение прошедших двух недель\",\"population\":{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.\"},\"purpose\":\"Тревожные симптомы\",\"repeat_policy\":{\"basis\":\"В проверенных первичных источниках обязательный минимальный интервал не установлен. Период оценки — последние две недели, раннее повторение разрешено.\",\"mandatory_min_interval_days\":null},\"rights_url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"scoring_note\":\"Сумма семи ответов 0–21. Пороговая интерпретация и диагноз не рассчитываются.\",\"scoring_version\":\"gad7-z2023-sum-v1\",\"source\":{\"checked_on\":\"2026-10-23\",\"sha256\":\"5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60\",\"url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"verification\":\"read-only web-researcher /root/questionnaire_research; exact appendix of validation paper\"},\"source_code\":\"SRC-GAD7-Z2023\",\"subscales\":{\"anxiety\":{\"items\":[1,2,3,4,5,6,7],\"label\":\"Тревожные симптомы\"}},\"title\":\"Шкала генерализованного тревожного расстройства (GAD-7)\",\"validation_url\":\"https://publications.hse.ru/pubs/share/direct/889173128.pdf\",\"version\":\"RU-Zolotareva-2023 / demo-release-2026-10-23-v1\"}",
+        "id": "GAD7-RU-Z-2023-demo-v1",
+        "kind": "scale",
+        "max_age": 90,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "GAD7-RU-Z-2023-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "age_basis": "Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.",
+        "blocker": "Clinical interpretation/real patient use not enabled; source-verified synthetic measurement only",
+        "code": "PHQ-9",
+        "definition_json": "{\"attribution\":\"Kroenke K., Spitzer R.L., Williams J.B.W., 2001. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC.\",\"code\":\"PHQ-9\",\"id\":\"PHQ9-RU-Z-2023-demo-v1\",\"instruction\":\"Оцените, пожалуйста, насколько часто следующие проблемы беспокоили вас в течение прошедших двух недель. Для ответов используйте следующую шкалу:\",\"items\":[\"Снижение интереса и удовольствия от привычных дел\",\"Чувство подавленности или безнадежности\",\"Проблемы со сном (неспособность заснуть, раннее пробуждение или слишком долгий сон)\",\"Чувство усталости или недостатка энергии\",\"Плохой аппетит или переедание\",\"Плохое мнение о себе или чувство, что не смог оправдать ожиданий моей семьи\",\"Проблемы с концентрацией внимания (например, при чтении газеты или просмотре телевизионной передачи)\",\"Замедленность движений или речи, которая стала заметна другим людям, или, напротив, суетливость, когда движения и речь стали более быстрыми и беспокойными\",\"Мысли о том, что мне бы хотелось умереть или причинить себе боль\"],\"max_age\":90,\"min_age\":18,\"options\":[\"совсем нет\",\"в течение нескольких дней\",\"более, чем половину этого времени\",\"почти каждый день\"],\"period\":\"В течение прошедших двух недель\",\"population\":{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.\"},\"purpose\":\"Депрессивные симптомы\",\"repeat_policy\":{\"basis\":\"В проверенных первичных источниках обязательный минимальный интервал не установлен. Период оценки — последние две недели, раннее повторение разрешено.\",\"mandatory_min_interval_days\":null},\"rights_url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"scoring_note\":\"Сумма девяти ответов 0–27. Пороговая интерпретация и диагноз не рассчитываются.\",\"scoring_version\":\"phq9-z2023-sum-v1\",\"source\":{\"checked_on\":\"2026-10-23\",\"sha256\":\"8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3\",\"url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"verification\":\"read-only web-researcher /root/questionnaire_research; exact appendix of validation paper\"},\"source_code\":\"SRC-PHQ9-Z2023\",\"subscales\":{\"depression\":{\"items\":[1,2,3,4,5,6,7,8,9],\"label\":\"Депрессивные симптомы\"}},\"title\":\"Опросник здоровья пациента (PHQ-9)\",\"validation_url\":\"https://publications.hse.ru/pubs/share/direct/896524950.pdf\",\"version\":\"RU-Zolotareva-2023 / demo-release-2026-10-23-v1\"}",
+        "id": "PHQ9-RU-Z-2023-demo-v1",
+        "kind": "scale",
+        "max_age": 90,
+        "min_age": 18,
+        "reviewed_at": null,
+        "reviewed_by": null,
+        "source_version_id": "PHQ9-RU-Z-2023-demo-v1-source",
+        "status": "inactive",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      }
+    ],
+    "clinical_contexts": [],
+    "clinical_entries": [
+      {
+        "actor_id": "pat-a",
+        "encounter_id": null,
+        "id": "0ee38ac814e381a236c1047c817be470",
+        "kind": "self_report",
+        "observed_on": "2026-10-26",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional adult, another current report about the identical present period: patient explicitly denies having low mood at any time in that period. This contradicts the other report; neither report is corrected or withdrawn.\", \"wellbeing\": \"worse\"}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "request_key": "d0807a9270c46ebd66cc032186e5430b5593dbc4c69128c76f6eff54e47a3c2f",
+        "self_report_id": "0ee38ac814e381a236c1047c817be470",
+        "summary": "Fictional adult, another current report about the identical present period: patient explicitly denies having low mood at any time in that period. This contradicts the other report; neither report is corrected or withdrawn."
+      },
+      {
+        "actor_id": "pat-a",
+        "encounter_id": null,
+        "id": "e0a5dc6e3bb2f5e699f40dea003afd8d",
+        "kind": "self_report",
+        "observed_on": "2026-10-26",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional adult current interview: patient explicitly reports low mood during the present period, with poor sleep for 21 days. Exclusions and other criteria remain unknown.\", \"wellbeing\": \"worse\"}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "request_key": "bfed7727e2b89037a5ebc4d02e27fd7ec5f542d176f773171cb58cd34b3ab051",
+        "self_report_id": "e0a5dc6e3bb2f5e699f40dea003afd8d",
+        "summary": "Fictional adult current interview: patient explicitly reports low mood during the present period, with poor sleep for 21 days. Exclusions and other criteria remain unknown."
+      }
+    ],
+    "clinical_rule_evaluations": [],
+    "clinical_rule_release": "4abf78a463263eb2d95b8d8d5f3b22c8a96a9cd034e0ffc11306743ad0e9db9d",
+    "critical_events": [],
+    "day": "2026-10-26",
+    "decision_drafts": [],
+    "doctor_confirmations": [],
+    "documents": [],
+    "encounters": [
+      {
+        "author_id": null,
+        "id": "D01-initial",
+        "narrative": "Подтверждённый в синтетическом профиле ГТР; кандидат для врачебного рассмотрения. Клиническое заключение не утверждено.",
+        "occurred_at": "2026-10-26T20:27:48.258479+00:00",
+        "origin": "S03-v1 / D01",
+        "patient_id": "D01",
+        "schema_version": 1
+      }
+    ],
+    "first_visit_versions": [
+      {
+        "actor_id": "doc-a",
+        "id": "ad0dd396db1d34a25d11c37506ec8993",
+        "patient_id": "D01",
+        "payload_json": "{\"action_draft\": \"\", \"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"age_basis\": \"\", \"age_source\": \"patient\", \"document_basis\": \"\", \"documented_facts\": \"\", \"fields\": {\"acute\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"complaints\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"course\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"followup\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"history\": {\"basis\": \"Беседа\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"known\", \"text\": \"Synthetic author case; unassessed exclusions are unknown.\"}, \"impact\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"medications\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"other_states\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}, \"safety\": {\"basis\": \"Явное отрицание\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"denied\", \"text\": \"\"}, \"somatic\": {\"basis\": \"\", \"observed_on\": \"2026-10-26\", \"source\": \"patient\", \"status\": \"unknown\", \"text\": \"\"}}, \"not_collected\": true, \"observed_on\": \"2026-10-26\", \"visit_kind\": \"first\"}",
+        "protocol_version": "physician-visit-s51-v2",
+        "recorded_at": "2026-10-26T20:27:48.610988+00:00",
+        "relationship_id": "f4efb8ef614904dd08db65cb1809e10c",
+        "request_key": "20d0616956df43ea82b45f941221332928d9987369b5e87bdd249cd71aec8893",
+        "revision": 1,
+        "state": "draft",
+        "visit_id": "93cf104de109fab0a31ab90b0789055e"
+      }
+    ],
+    "observations": [
+      {
+        "code": "complaints",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "005ed12f383258efb4e6483b7abba4b1",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "concomitant_medications",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "1814e79ef4b9a6a20adc7dadceb24d2e",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "risk_factors",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "21b67e899111f1019f76661538af274f",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"0ee38ac814e381a236c1047c817be470\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"0ee38ac814e381a236c1047c817be470\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "reported_age",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "3c1fabed11d34278e82dda146abf11a1",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "risk_factors",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "4dfc409167795c38b24e3ced1e98ded1",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "complaints",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "55213f215ebd0aa5d85687ab1fc822fc",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"0ee38ac814e381a236c1047c817be470\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"0ee38ac814e381a236c1047c817be470\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "adverse_events",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "6166324f1f764c38292b9e7222d8bd4d",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"0ee38ac814e381a236c1047c817be470\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"0ee38ac814e381a236c1047c817be470\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "reported_age",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "872fc1903c2ed80732915b8cee53cad5",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"0ee38ac814e381a236c1047c817be470\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"0ee38ac814e381a236c1047c817be470\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "synthetic_profile_snapshot",
+        "data_status": "known",
+        "encounter_id": "D01-initial",
+        "id": "D01-profile",
+        "observed_at": "2026-10-26T20:27:48.258479+00:00",
+        "patient_id": "D01",
+        "provenance_json": "{\"dataset\": \"S03-v1\", \"case_id\": \"D01\", \"clinical_review_status\": \"not_reviewed\"}",
+        "recorded_at": "2026-10-26T20:27:48.258479+00:00",
+        "unit": null,
+        "value_json": "{\"age_years\": 35, \"diagnosis\": \"ГТР, указан врачом в вымышленном случае\", \"leading_specialty\": \"терапевт\", \"symptoms\": [\"постоянное беспокойство\", \"нарушение сна\"], \"medication_allergy\": false, \"pregnancy_status\": false, \"concomitant_medications\": []}"
+      },
+      {
+        "code": "adverse_events",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "a4e204ad8ea98758c131e7292816d722",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"e0a5dc6e3bb2f5e699f40dea003afd8d\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+        "unit": null,
+        "value_json": null
+      },
+      {
+        "code": "concomitant_medications",
+        "data_status": "unknown",
+        "encounter_id": null,
+        "id": "d438fcff4c5f75662ca7b7e5e78aa075",
+        "observed_at": "2026-10-26",
+        "patient_id": "D01",
+        "provenance_json": "{\"entry_id\": \"0ee38ac814e381a236c1047c817be470\", \"actor_id\": \"pat-a\", \"role\": \"patient\", \"origin\": \"self_report\", \"self_report_id\": \"0ee38ac814e381a236c1047c817be470\", \"synthetic\": true}",
+        "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+        "unit": null,
+        "value_json": null
+      }
+    ],
+    "patient_history": {
+      "active_medication_plan_ref": null,
+      "active_plan_ref": null,
+      "complete": true,
+      "counts": {
+        "anamnesis": 1,
+        "context": 2,
+        "medication_actual": 0,
+        "plans": 0,
+        "questionnaires": 1,
+        "visits": 2,
+        "wellbeing": 2
+      },
+      "entries": [
+        {
+          "author_id": null,
+          "category": "context",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age_status",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/age_status",
+              "source_ref": "s2_254c94af0d597b28b29786720a53369eaab322395d618577109d4d6a3ee291be",
+              "status": "known",
+              "value": "known"
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "birth_date",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/birth_date",
+              "source_ref": "s2_254c94af0d597b28b29786720a53369eaab322395d618577109d4d6a3ee291be",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age_years",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/age_years",
+              "source_ref": "s2_254c94af0d597b28b29786720a53369eaab322395d618577109d4d6a3ee291be",
+              "status": "known",
+              "value": 35
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.610112+00:00",
+          "ref": "s2_254c94af0d597b28b29786720a53369eaab322395d618577109d4d6a3ee291be",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "doc-a",
+          "category": "anamnesis",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": "Беседа",
+              "carried_from": null,
+              "code": "history",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/history/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "known",
+              "value": "Synthetic author case; unassessed exclusions are unknown."
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "somatic",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/somatic/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.610988+00:00",
+          "ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+          "related_refs": [],
+          "state": "draft",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "doc-a",
+          "category": "visits",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "acute",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/acute/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "complaints",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/complaints/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "course",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/course/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "followup",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/followup/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "Беседа",
+              "carried_from": null,
+              "code": "history",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/history/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "known",
+              "value": "Synthetic author case; unassessed exclusions are unknown."
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "impact",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/impact/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "medications",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/medications/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "other_states",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/other_states/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": "Явное отрицание",
+              "carried_from": null,
+              "code": "safety",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/safety/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "denied",
+              "value": ""
+            },
+            {
+              "basis": "",
+              "carried_from": null,
+              "code": "somatic",
+              "context": "cumulative_history",
+              "event_at": "2026-10-26",
+              "origin": "patient",
+              "path": "/payload_json/fields/somatic/text",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/age",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": {
+                "birth_date": null,
+                "calculated_years": null,
+                "detail": null,
+                "status": "unknown",
+                "years": null
+              }
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "documented_facts",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/documented_facts",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "document_basis",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/document_basis",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "action_draft",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/action_draft",
+              "source_ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+              "status": "unknown",
+              "value": ""
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.610988+00:00",
+          "ref": "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9",
+          "related_refs": [],
+          "state": "draft",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "pat-a",
+          "category": "wellbeing",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "summary",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/summary",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "known",
+              "value": "Fictional adult current interview: patient explicitly reports low mood during the present period, with poor sleep for 21 days. Exclusions and other criteria remain unknown."
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "adverse_events",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/adverse_events/text",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "complaints",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/complaints/text",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "concomitant_medications",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/concomitant_medications/text",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "risk_factors",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/risk_factors/text",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/age",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "unknown",
+              "value": {
+                "birth_date": null,
+                "calculated_years": null,
+                "detail": null,
+                "status": "unknown",
+                "years": null
+              }
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "wellbeing",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/wellbeing",
+              "source_ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+              "status": "known",
+              "value": "worse"
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.611719+00:00",
+          "ref": "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad",
+          "related_refs": [
+            "s2_421736dbc64360e5d26da3d7e429d91f2293ad5c7151cbad9e0020799bee124b",
+            "s2_6996b76538128bc0d6fd84dfd376e05a0b183ad05abb323acff04a2f092a7528",
+            "s2_94136159bb36798f40ac0e924b40ec097006a023e03c11156a39301396fc47f9",
+            "s2_b92a7677a3968fd340ef3f05396121218e87c1eedd64a8c31500bc85ca926c1c",
+            "s2_c899ba0ba6ab61a1c0478f2cdce4e3ff4f13e2f73258c935b51e392e1cff5528",
+            "s2_f613fb239ddd90fcce4fd2ecfccba67bd98226197ed61953061f110bb8c47d22"
+          ],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": "pat-a",
+          "category": "questionnaires",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "answers",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/answers_json",
+              "source_ref": "s2_23a24eeecc739c81f3a60f879cf7a7ccf54ecdfc3bea9059e440a78dbb9f393e",
+              "status": "known",
+              "value": [
+                1,
+                null,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "legacy_score",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/score",
+              "source_ref": "s2_23a24eeecc739c81f3a60f879cf7a7ccf54ecdfc3bea9059e440a78dbb9f393e",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "form_version",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/scale_version_id",
+              "source_ref": "s2_23a24eeecc739c81f3a60f879cf7a7ccf54ecdfc3bea9059e440a78dbb9f393e",
+              "status": "known",
+              "value": "DASS42-RU-FG-2024-demo-v1"
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "scores",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/scores_json",
+              "source_ref": "s2_cbd65ac359e1c657dcf7024bfa532b9cd09ed54c0d4edb6569d4ac17198a3f8c",
+              "status": "unknown",
+              "value": null
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.614604+00:00",
+          "ref": "s2_23a24eeecc739c81f3a60f879cf7a7ccf54ecdfc3bea9059e440a78dbb9f393e",
+          "related_refs": [
+            "s2_a9710fe8d42897b27386509676871af48bf7ded4a7c60445dc50403e66967377",
+            "s2_cbd65ac359e1c657dcf7024bfa532b9cd09ed54c0d4edb6569d4ac17198a3f8c"
+          ],
+          "state": "incomplete",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": "dass42-three-sums-v1"
+        },
+        {
+          "author_id": "pat-a",
+          "category": "wellbeing",
+          "current_revision": true,
+          "event_at": "2026-10-26",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "summary",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/summary",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "known",
+              "value": "Fictional adult, another current report about the identical present period: patient explicitly denies having low mood at any time in that period. This contradicts the other report; neither report is corrected or withdrawn."
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "adverse_events",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/adverse_events/text",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "complaints",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/complaints/text",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "concomitant_medications",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/concomitant_medications/text",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "risk_factors",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": "self_report",
+              "path": "/payload_json/fields/risk_factors/text",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "unknown",
+              "value": null
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "age",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/age",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "unknown",
+              "value": {
+                "birth_date": null,
+                "calculated_years": null,
+                "detail": null,
+                "status": "unknown",
+                "years": null
+              }
+            },
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "wellbeing",
+              "context": "current",
+              "event_at": "2026-10-26",
+              "origin": null,
+              "path": "/payload_json/wellbeing",
+              "source_ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+              "status": "known",
+              "value": "worse"
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.615340+00:00",
+          "ref": "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0",
+          "related_refs": [
+            "s2_1a7a07c6e00b318b78e36b731c11724f89feee9d427b6e0b4c196e0f53a1f4cf",
+            "s2_4fd32927db1ec68ba760e9db2c4c32db23ec970be07a91c21d38fa3e946e93e2",
+            "s2_7fcccd1311c7f0dc08989ce6b35dfc6c882da9e3d6ae37919b474b0473a44434",
+            "s2_87a61d440fe48ca606e1c545d0b1cabb88a583ecfc2a5ced31ddd8920e98e3fb",
+            "s2_a84e53f04459e7e267d023e3063bac5bce23fddb75d8c6b03bd35b75f360f696",
+            "s2_e4817f365fa9f664adec9bb8e29dfa956f5e78576c4c2f42d88efd4992e6cbef"
+          ],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": null,
+          "category": "visits",
+          "current_revision": true,
+          "event_at": "2026-10-26T20:27:48.258479+00:00",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "narrative",
+              "context": "current",
+              "event_at": "2026-10-26T20:27:48.258479+00:00",
+              "origin": "S03-v1 / D01",
+              "path": "/narrative",
+              "source_ref": "s2_ad8cc06ee22b4a68f0d1efae641cab6b4ca63457c7062f824ab94be6555a5ea0",
+              "status": "known",
+              "value": "Подтверждённый в синтетическом профиле ГТР; кандидат для врачебного рассмотрения. Клиническое заключение не утверждено."
+            }
+          ],
+          "issues": [
+            "recorded_time_unknown"
+          ],
+          "recorded_at": null,
+          "ref": "s2_ad8cc06ee22b4a68f0d1efae641cab6b4ca63457c7062f824ab94be6555a5ea0",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        },
+        {
+          "author_id": null,
+          "category": "context",
+          "current_revision": true,
+          "event_at": "2026-10-26T20:27:48.258479+00:00",
+          "fields": [
+            {
+              "basis": null,
+              "carried_from": null,
+              "code": "synthetic_profile_snapshot",
+              "context": "current",
+              "event_at": "2026-10-26T20:27:48.258479+00:00",
+              "origin": {
+                "case_id": "D01",
+                "clinical_review_status": "not_reviewed",
+                "dataset": "S03-v1"
+              },
+              "path": "/value_json",
+              "source_ref": "s2_3150b79ea55c024a1769a95af1ebbf277e02e4e8f222ad7b9e56746312a7dcf8",
+              "status": "known",
+              "value": {
+                "age_years": 35,
+                "concomitant_medications": [],
+                "diagnosis": "ГТР, указан врачом в вымышленном случае",
+                "leading_specialty": "терапевт",
+                "medication_allergy": false,
+                "pregnancy_status": false,
+                "symptoms": [
+                  "постоянное беспокойство",
+                  "нарушение сна"
+                ]
+              }
+            }
+          ],
+          "issues": [],
+          "recorded_at": "2026-10-26T20:27:48.258479+00:00",
+          "ref": "s2_3150b79ea55c024a1769a95af1ebbf277e02e4e8f222ad7b9e56746312a7dcf8",
+          "related_refs": [],
+          "state": "recorded",
+          "supersedes_ref": null,
+          "temporal_scope": "on_snapshot_day",
+          "version": 1
+        }
+      ],
+      "entry_count": 8,
+      "missing_categories": [],
+      "page_size": 50,
+      "sources": {
+        "s2_1a7a07c6e00b318b78e36b731c11724f89feee9d427b6e0b4c196e0f53a1f4cf": {
+          "id": "21b67e899111f1019f76661538af274f",
+          "key": "id",
+          "sha256": "846a85fa72a3b12c776b9d06e3a1e8ad5becaf6239958d68ee084a789e0125ed",
+          "table": "observations"
+        },
+        "s2_1c8e394432a467c0404ab6aabff49ee99bd8cdb03237c359120ec5e01cdb4dad": {
+          "id": "e0a5dc6e3bb2f5e699f40dea003afd8d",
+          "key": "id",
+          "sha256": "6036fcc9fd2f34f9fad7752e90c0f287fa242caeaf27f6535fb9b82bf5038cc2",
+          "table": "clinical_entries"
+        },
+        "s2_23a24eeecc739c81f3a60f879cf7a7ccf54ecdfc3bea9059e440a78dbb9f393e": {
+          "id": "8ee3d03196d66da094ce16872c75a368",
+          "key": "id",
+          "sha256": "aedfc4c692e4b4acfe87a4f0e6d89523fdd516945a9dc1b711c7a8a3a163f3ac",
+          "table": "assessments"
+        },
+        "s2_254c94af0d597b28b29786720a53369eaab322395d618577109d4d6a3ee291be": {
+          "id": "D01",
+          "key": "id",
+          "sha256": "f086a39054d0239c03c21a61c5c547bcd45e2face97b216401e21f7939dd7d34",
+          "table": "patients"
+        },
+        "s2_3150b79ea55c024a1769a95af1ebbf277e02e4e8f222ad7b9e56746312a7dcf8": {
+          "id": "D01-profile",
+          "key": "id",
+          "sha256": "0bd6e128d7bd4e034974d0ff6525cc0b6acecba018a28f007581eb795a47073d",
+          "table": "observations"
+        },
+        "s2_421736dbc64360e5d26da3d7e429d91f2293ad5c7151cbad9e0020799bee124b": {
+          "id": "3c1fabed11d34278e82dda146abf11a1",
+          "key": "id",
+          "sha256": "a42e304aa88e1605f39205414118ad465294f3121d2da0f48ef292c7327c9e60",
+          "table": "observations"
+        },
+        "s2_4fd32927db1ec68ba760e9db2c4c32db23ec970be07a91c21d38fa3e946e93e2": {
+          "id": "55213f215ebd0aa5d85687ab1fc822fc",
+          "key": "id",
+          "sha256": "30795b9d43f323e30e4c649b3078c88ff026f5e1d0bdacaac369c104b6b9fd29",
+          "table": "observations"
+        },
+        "s2_6996b76538128bc0d6fd84dfd376e05a0b183ad05abb323acff04a2f092a7528": {
+          "id": "1814e79ef4b9a6a20adc7dadceb24d2e",
+          "key": "id",
+          "sha256": "e2431f61d505fe2b131cd6b37e4414f96817c6bfc448f85296cbfbd99b2b2293",
+          "table": "observations"
+        },
+        "s2_7de8a43584b1619582235d3db25cb33b22b4dde8ada92d51b1d106143d3e7aa9": {
+          "id": "ad0dd396db1d34a25d11c37506ec8993",
+          "key": "id",
+          "sha256": "5490b92e29749184719ed7927fa71b6cadc426ba75bb1f020f1eb085240fc4ca",
+          "table": "first_visit_versions"
+        },
+        "s2_7fcccd1311c7f0dc08989ce6b35dfc6c882da9e3d6ae37919b474b0473a44434": {
+          "id": "872fc1903c2ed80732915b8cee53cad5",
+          "key": "id",
+          "sha256": "e39663deb32aee1470319eb1cfdaf98523ffdf9f9da50e279f8218be04002d11",
+          "table": "observations"
+        },
+        "s2_87a61d440fe48ca606e1c545d0b1cabb88a583ecfc2a5ced31ddd8920e98e3fb": {
+          "id": "d438fcff4c5f75662ca7b7e5e78aa075",
+          "key": "id",
+          "sha256": "8c1e4a70e146685377977151a81c1b65ad3fa77c5a740c165cdb1befbef93175",
+          "table": "observations"
+        },
+        "s2_94136159bb36798f40ac0e924b40ec097006a023e03c11156a39301396fc47f9": {
+          "id": "a4e204ad8ea98758c131e7292816d722",
+          "key": "id",
+          "sha256": "d0ca55283f2db9cd7423f9e73b41311d0e50d2b9cb7c120381aa8f5bed42423c",
+          "table": "observations"
+        },
+        "s2_a40542acc3145307605e33b3cce23e14b88f278a5d60adeb16ba44db4815a6b0": {
+          "id": "0ee38ac814e381a236c1047c817be470",
+          "key": "id",
+          "sha256": "e9f425a68b6693a063114df34b4b3ee7d5ed655b59b19d9d959d4eb68b84f781",
+          "table": "clinical_entries"
+        },
+        "s2_a84e53f04459e7e267d023e3063bac5bce23fddb75d8c6b03bd35b75f360f696": {
+          "id": "6166324f1f764c38292b9e7222d8bd4d",
+          "key": "id",
+          "sha256": "32be0e1a6cf949d3a3c19fc6b037ba8020f81dde105709bdec556c000a269c6e",
+          "table": "observations"
+        },
+        "s2_a9710fe8d42897b27386509676871af48bf7ded4a7c60445dc50403e66967377": {
+          "id": "8f5bc1cb090a2d442443e757b883d3b6",
+          "key": "id",
+          "sha256": "45b1924f6c33dff9bd6a492a34710384dfeeadef7b5c865ddd6e30b34f14feb0",
+          "table": "assessment_requests"
+        },
+        "s2_ad8cc06ee22b4a68f0d1efae641cab6b4ca63457c7062f824ab94be6555a5ea0": {
+          "id": "D01-initial",
+          "key": "id",
+          "sha256": "6b146d2fd205a4357b6390155c51d7bc4c109919743eddd4efe4f8471810299d",
+          "table": "encounters"
+        },
+        "s2_b92a7677a3968fd340ef3f05396121218e87c1eedd64a8c31500bc85ca926c1c": {
+          "id": "005ed12f383258efb4e6483b7abba4b1",
+          "key": "id",
+          "sha256": "c4ee9e009cac55ebf1302312ab6ae876dddcb760450dc619659c2e210765b64d",
+          "table": "observations"
+        },
+        "s2_c899ba0ba6ab61a1c0478f2cdce4e3ff4f13e2f73258c935b51e392e1cff5528": {
+          "id": "e0a5dc6e3bb2f5e699f40dea003afd8d",
+          "key": "id",
+          "sha256": "70b18e1bffe2da3b728513f534c55707c2e6df7417f24fb0f7ad7e438bc2e657",
+          "table": "self_reports"
+        },
+        "s2_cbd65ac359e1c657dcf7024bfa532b9cd09ed54c0d4edb6569d4ac17198a3f8c": {
+          "id": "8ee3d03196d66da094ce16872c75a368",
+          "key": "assessment_id",
+          "sha256": "9b12a2074f44f8aeac9b4b47f98b8351cba1a7a69b5062bfce36bfb89baeefb0",
+          "table": "assessment_results"
+        },
+        "s2_e4817f365fa9f664adec9bb8e29dfa956f5e78576c4c2f42d88efd4992e6cbef": {
+          "id": "0ee38ac814e381a236c1047c817be470",
+          "key": "id",
+          "sha256": "76bd16e0d9c996a2fc70424320fef95c6fa6bc47e4d36da79c6d8295c0cc466c",
+          "table": "self_reports"
+        },
+        "s2_f613fb239ddd90fcce4fd2ecfccba67bd98226197ed61953061f110bb8c47d22": {
+          "id": "4dfc409167795c38b24e3ced1e98ded1",
+          "key": "id",
+          "sha256": "b829982087d78a2830c13a171f69a7a205922c3ff24ee22debcff52021482e25",
+          "table": "observations"
+        }
+      },
+      "truncated": false,
+      "version": "patient-history-v2"
+    },
+    "patients": [
+      {
+        "age_status": "known",
+        "age_years": 35,
+        "birth_date": null,
+        "code": "Демо 01",
+        "created_at": "2026-10-26T20:27:48.610112+00:00",
+        "id": "D01",
+        "synthetic": 1,
+        "user_id": "pat-a"
+      }
+    ],
+    "policy": "synthetic-inputs-v1",
+    "proposals": [],
+    "reference": "f924a03b9c7cf92e1d3f56edbd4b19bbf6ae5d0008f3f40a2eada4b1a9990d45",
+    "relationship": "f4efb8ef614904dd08db65cb1809e10c",
+    "self_reports": [
+      {
+        "id": "0ee38ac814e381a236c1047c817be470",
+        "idempotency_key": "d0807a9270c46ebd66cc032186e5430b5593dbc4c69128c76f6eff54e47a3c2f",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional adult, another current report about the identical present period: patient explicitly denies having low mood at any time in that period. This contradicts the other report; neither report is corrected or withdrawn.\", \"wellbeing\": \"worse\"}",
+        "received_at": "2026-10-26T20:27:48.615340+00:00",
+        "reported_at": "2026-10-26",
+        "schema_version": 2
+      },
+      {
+        "id": "e0a5dc6e3bb2f5e699f40dea003afd8d",
+        "idempotency_key": "bfed7727e2b89037a5ebc4d02e27fd7ec5f542d176f773171cb58cd34b3ab051",
+        "patient_id": "D01",
+        "payload_json": "{\"age\": {\"birth_date\": null, \"calculated_years\": null, \"detail\": null, \"status\": \"unknown\", \"years\": null}, \"fields\": {\"adverse_events\": {\"status\": \"unknown\", \"text\": null}, \"complaints\": {\"status\": \"unknown\", \"text\": null}, \"concomitant_medications\": {\"status\": \"unknown\", \"text\": null}, \"risk_factors\": {\"status\": \"unknown\", \"text\": null}}, \"observed_on\": \"2026-10-26\", \"summary\": \"Fictional adult current interview: patient explicitly reports low mood during the present period, with poor sleep for 21 days. Exclusions and other criteria remain unknown.\", \"wellbeing\": \"worse\"}",
+        "received_at": "2026-10-26T20:27:48.611719+00:00",
+        "reported_at": "2026-10-26",
+        "schema_version": 2
+      }
+    ],
+    "source_versions": [
+      {
+        "checked_at": "2026-10-19",
+        "id": "DASS42-RU-FG-2024-demo-v1-source",
+        "population_json": "{\"official_age_guidance\":\"DASS FAQ: от 14 лет при обычных языковых навыках.\",\"project_policy\":\"Только известный сверенный возраст 18–120 на дату в синтетическом демо. Это консервативное ограничение проекта, не новая возрастная валидация.\",\"study\":\"250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан.\"}",
+        "rights_status": "verified",
+        "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+        "source_code": "SRC19",
+        "status": "current",
+        "url": "https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf",
+        "validation_status": "verified",
+        "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+      },
+      {
+        "checked_at": "2026-10-23",
+        "id": "GAD7-RU-Z-2023-demo-v1-source",
+        "population_json": "{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.\"}",
+        "rights_status": "verified",
+        "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+        "source_code": "SRC-GAD7-Z2023",
+        "status": "current",
+        "url": "https://publications.hse.ru/pubs/share/direct/889173128.pdf",
+        "validation_status": "verified",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "checked_at": "2026-10-23",
+        "id": "PHQ9-RU-Z-2023-demo-v1-source",
+        "population_json": "{\"project_policy\":\"Этот выпуск: только синтетические истории, сверенный возраст 18–90 лет. Границы выборки не подтверждают применимость к каждому пациенту; не включено клиническое применение.\",\"study\":\"Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.\"}",
+        "rights_status": "verified",
+        "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+        "source_code": "SRC-PHQ9-Z2023",
+        "status": "current",
+        "url": "https://publications.hse.ru/pubs/share/direct/896524950.pdf",
+        "validation_status": "verified",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      }
+    ],
+    "therapy_courses": []
+  },
+  "valid_response": false,
+  "error_type": "ModelError",
+  "error_code": "context_limit",
+  "request": {
+    "payload_sha256": "82a38e76ef5a623cea43b79429d1abd99dd349bffff7836afde75091544d3101",
+    "schema_sha256": "a71135f208c70fce3e44c3e520464b4c90ae9d22802cb0944906496aea12ec90"
+  }
+}

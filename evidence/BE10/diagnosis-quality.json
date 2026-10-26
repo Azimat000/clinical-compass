@@ -1,0 +1,84 @@
+{
+  "version": "diagnosis-workflow-v1",
+  "timestamp_utc": "2026-10-26T20:28:44.983674+00:00",
+  "fixed_dataset": {
+    "cases_sha256": "ac0453f6146fb7d7c5364ec73021eb2f53c4c7003d928cfaf186d9481d2509b4",
+    "policy_sha256": "85b76a25ef4445b0c51e023b195ddd546200263fcbb27537741c11f4b3c5d07f",
+    "before_model_calls": true
+  },
+  "independent_clinical_review": false,
+  "test_double": false,
+  "expected_cases": 8,
+  "completed_cases": 8,
+  "valid_responses": 3,
+  "leading_exact": 2,
+  "disposition_exact": 1,
+  "alternative_fact_checks": {
+    "correct": 1,
+    "expected": 22,
+    "completed": 9
+  },
+  "dangerous_omissions": {
+    "missed": 2,
+    "expected_positive_facts": 3,
+    "unassessed_cases": [
+      "anxiety",
+      "too_short",
+      "screen_only",
+      "conflict",
+      "unrelated"
+    ]
+  },
+  "ledger_before": [
+    28,
+    50905
+  ],
+  "ledger_after": [
+    34,
+    83138
+  ],
+  "cap_micro_usd": 100000,
+  "results": [
+    {
+      "id": "depressive",
+      "evidence": "evidence/BE10B02/live-depressive.json"
+    },
+    {
+      "id": "anxiety",
+      "evidence": "evidence/BE10B02/live-anxiety.json"
+    },
+    {
+      "id": "too_short",
+      "evidence": "evidence/BE10B02/live-too_short.json"
+    },
+    {
+      "id": "screen_only",
+      "evidence": "evidence/BE10B02/live-screen_only.json"
+    },
+    {
+      "id": "mania",
+      "evidence": "evidence/BE10B02/live-mania.json"
+    },
+    {
+      "id": "medication",
+      "evidence": "evidence/BE10B02/live-medication.json"
+    },
+    {
+      "id": "conflict",
+      "evidence": "evidence/BE10B02/live-conflict.json"
+    },
+    {
+      "id": "unrelated",
+      "evidence": "evidence/BE10B02/live-unrelated.json"
+    }
+  ],
+  "pass": false,
+  "runtime_sha256": null,
+  "admitted": false,
+  "quality_limitations": [
+    "Inherited fixture contains a historical synthetic GAD profile and other author defaults; this is not a clean independent held-out dataset.",
+    "Model mapping/provenance failures and 2 dangerous missed cause assertions. No medical accuracy claim.",
+    "Preflight rejections: no network. Six network reservations; no retry after observed responses.",
+    "Remaining 16862 microUSD cannot fund the current conservative request reservation for the incomplete protocol. No cap increase or ledger reset."
+  ]
+}
