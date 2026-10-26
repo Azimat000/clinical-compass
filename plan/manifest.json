@@ -3889,11 +3889,106 @@
       "acceptance_tag": "slice/BE08A"
     },
     {
+      "id": "BE08B01",
+      "title": "Версионная история эпизодов риска",
+      "target_date": "Одна отдельная сессия после зависимостей; без обещания календарной даты",
+      "depends_on": [
+        "BE08A"
+      ],
+      "condition": "always",
+      "stage": "service_backend",
+      "tasks": [
+        "Сохранить раздельные эпизоды правил и модельных кандидатов с точными основаниями и без клинического утверждения.",
+        "Повторы не дублируются; новые основания обновляют открытый эпизод. Отрицание и пропуски не закрывают его.",
+        "Закрытие только действующим врачом с причиной и точной версией; после закрытия только новые основания создают новый эпизод."
+      ],
+      "outputs": [
+        "apps/compass/backend_risk_episodes.py",
+        "apps/compass/migrations/018_backend_risk_episodes.sql",
+        "apps/tests/test_backend_risk_episodes.py",
+        "docs/architecture/backend-risk-episodes.md",
+        "evidence/BE08B01/acceptance.md"
+      ],
+      "acceptance": [
+        "BE08B01-A01: Реальные SQLite-снимки, точные основания и раздельные происхождения; повтор, новые факты, отрицание и пропуски проверены.",
+        "BE08B01-A02: Врачебное закрытие с причиной/версией/повтором; новые основания после закрытия создают новый эпизод, старые не открывают его заново.",
+        "BE08B01-A03: Транзакционность, неизменяемость, конкурентность, доступ/свежесть/синтетика и сохранность прежней базы проверены."
+      ],
+      "handoff_path": "memory/sessions/BE08B01.md",
+      "evidence_dir": "evidence/BE08B01",
+      "requirement_ids": [
+        "F03",
+        "F04",
+        "F08",
+        "M05",
+        "T02",
+        "T03",
+        "T05"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m unittest apps.tests.test_backend_risk_episodes",
+        "make check",
+        "python3 tools/validate_plan.py",
+        "python3 tools/session.py status",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(BE08B01): <конкретный результат>",
+      "acceptance_tag": "slice/BE08B01"
+    },
+    {
+      "id": "BE08B02",
+      "title": "Серверная интеграция и полная оценка BE08",
+      "target_date": "Одна отдельная сессия после зависимостей; без обещания календарной даты",
+      "depends_on": [
+        "BE08B01"
+      ],
+      "condition": "always",
+      "stage": "service_backend",
+      "tasks": [
+        "Подключить кандидаты и эпизоды к очереди/публикации со свежестью, правами и отказами.",
+        "Исправить ложную discrepancy на разных датах до нового закрытого набора.",
+        "Пройти все исходные BE08-A01–A03 целиком: шесть сценариев, отдельные метрики правил/модели и настоящие серверные процессы/сбой."
+      ],
+      "outputs": [
+        "apps/compass/backend_risk_context.py",
+        "apps/tests/test_backend_risk_context.py",
+        "docs/architecture/backend-risk-context.md",
+        "evidence/BE08B02/acceptance.md",
+        "evidence/BE08/risk-quality.json"
+      ],
+      "acceptance": [
+        "BE08-A01 полностью: перефразировки, постепенная динамика, сильный сигнал, конфликт анкеты/текста, пропуски, новый эпизод после закрытия.",
+        "BE08-A02 полностью: пропуски/ложные тревоги правил и модели раздельно; модель не подавляет правило.",
+        "BE08-A03 полностью: ошибки/недоступность модели в реальном серверном пути дают частичность, не отсутствие опасности."
+      ],
+      "handoff_path": "memory/sessions/BE08B02.md",
+      "evidence_dir": "evidence/BE08B02",
+      "requirement_ids": [
+        "F03",
+        "F04",
+        "F08",
+        "M05",
+        "T02",
+        "T03",
+        "T05"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m unittest apps.tests.test_backend_risk_context",
+        "make check",
+        "python3 tools/validate_plan.py",
+        "python3 tools/session.py status",
+        "git diff --check"
+      ],
+      "planned_commit": "slice(BE08B02): <конкретный результат>",
+      "acceptance_tag": "slice/BE08B02"
+    },
+    {
       "id": "BE08B",
       "title": "Эпизоды, серверная интеграция и полная оценка BE08",
       "target_date": "Одна отдельная сессия после зависимостей; без обещания календарной даты",
       "depends_on": [
-        "BE08A"
+        "BE08B01",
+        "BE08B02"
       ],
       "condition": "always",
       "stage": "service_backend",

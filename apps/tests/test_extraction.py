@@ -70,7 +70,14 @@ class ExtractionTests(unittest.TestCase):
             self.db.execute("UPDATE text_imports SET source_text='changed'")
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute('DELETE FROM extraction_reviews')
-        self.assertNotIn('bad',str([tuple(r) for r in self.db.execute("SELECT * FROM audit_entries WHERE event LIKE 'extraction.%'")]))
+        audit_rows = self.db.execute("SELECT * FROM audit_entries WHERE event LIKE 'extraction.%'").fetchall()
+        self.assertTrue(audit_rows)
+        for row in audit_rows:
+            # Random hexadecimal identifiers can legitimately contain "bad".
+            # Check the fields that could carry content, and constrain IDs.
+            self.assertEqual({}, json.loads(row['metadata_json']))
+            self.assertRegex(row['entity_id'], r'^[0-9a-f]{32}$')
+            self.assertNotIn(text, str(tuple(row)))
 
     def test_unsupported_input_limits_and_atomic_rollback(self):
         for value in ('','a\x00b','x'*24001,'9'*5000+' раза в день'):

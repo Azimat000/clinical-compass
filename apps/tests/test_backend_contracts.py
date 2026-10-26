@@ -288,13 +288,17 @@ class BackendSpecificationTests(unittest.TestCase):
             try:
                 migrate(db, old);seed_demo(db);test_access.setup_identities(db)
                 before = table_rows(db)
+                previous_versions = {r[0] for r in db.execute('SELECT version FROM schema_migrations')}
                 schema = dict(db.execute("SELECT name,sql FROM sqlite_master WHERE sql IS NOT NULL"))
                 migrate(db)
                 after = table_rows(db)
                 for table, rows in before.items():
                     actual = after[table]
-                    if table == 'schema_migrations':actual = [r for r in actual if '016_backend_analyses' not in r and '017_backend_jobs' not in r]
+                    if table == 'schema_migrations':
+                        actual = [r for r in actual if json.loads(r)[0] in previous_versions]
                     self.assertEqual(rows, actual, table)
+                self.assertEqual({p.stem for p in MIGRATIONS.glob('*.sql')},
+                                 {r[0] for r in db.execute('SELECT version FROM schema_migrations')})
                 current_schema = dict(db.execute("SELECT name,sql FROM sqlite_master WHERE sql IS NOT NULL"))
                 self.assertTrue(all(current_schema[k] == v for k,v in schema.items()))
                 migrated = table_rows(db);migrate(db)

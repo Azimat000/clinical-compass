@@ -1,0 +1,21 @@
+{
+  "head": "b662f1d05dca238a01e016bf638f40c474289a2f",
+  "status": "?? evidence/audits/2026-10-20-cycles/\n?? tools/run_synthetic_cycles.py\n",
+  "diff": "",
+  "cached_diff": "",
+  "preserved_files": {
+    "tools/run_synthetic_cycles.py": "03acb90a7cd2f5ff3c00691f1f74306988c3b9813828f9ed8ca6e36028c13752",
+    "evidence/audits/2026-10-20-cycles/external-check.md": "3af530b33b3f85bad072b919d0554a24f0555392bc0f4eec89cdf60170429796",
+    "evidence/audits/2026-10-20-cycles/checks.log": "261c46b5229971daa066f8b5e717abe6fe8851c964dc6b8a6c8e758569ec8f69",
+    "evidence/audits/2026-10-20-cycles/results.json": "5adac6404be4349f10bd12095af0e3733d543ee81e58dbd9de4f795b9c739309"
+  },
+  "ownership": "Main agent only; no subagents or delegated writes. New migration018, backend_risk_episodes.py, test_backend_risk_episodes.py, docs/architecture/backend-risk-episodes.md, evidence/BE08B01/, plan/manifest.json, plan/slices/BE08B*.md, plan/backend/{README.md,requirements.json}, plan/{coverage.json,COVERAGE.md}, memory/{STATE.json,DECISIONS.md,BLOCKERS.md,EXTERNAL.md,BUDGET.json,sessions/BE08B01.md}, START_HERE.md.",
+  "regression_scope_extension": {
+    "reason": "First make check: migration test hardcodes016/017, and extraction privacy assertion randomly matches bad in hex IDs. Tests only; no extraction/runtime changes.",
+    "pre_existing_diff": "EMPTY checked before edits",
+    "paths": {
+      "apps/tests/test_backend_contracts.py": "21485a5c0615cded46f75647f4b58ea5bbb8e18cc3bdb5ace1769fc0fb2b6d41",
+      "apps/tests/test_extraction.py": "119b1da3e71f1f6f5b773c726ee6bf031595c5d7f0a2d017a7374d086c90cb90"
+    }
+  }
+}
