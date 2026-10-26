@@ -1,0 +1,185 @@
+{
+  "status": "PASS",
+  "database": "/Users/azamatsibgatullin/Documents/HAC/var/compass.sqlite3",
+  "counts": {
+    "users": 12,
+    "patients": 10,
+    "care_relationships": 10,
+    "first_visit_versions": 91,
+    "self_reports": 70,
+    "assessments": 90,
+    "assessment_requests": 120,
+    "proposals": 34,
+    "doctor_confirmations": 32,
+    "care_actions": 31,
+    "adherence_tasks": 90,
+    "adherence_entries": 71,
+    "medication_marks": 227,
+    "adverse_events": 4,
+    "text_imports": 10,
+    "extraction_reviews": 21,
+    "messages": 140,
+    "message_receipts": 280,
+    "self_report_drafts": 1,
+    "clinical_rule_evaluations": 0,
+    "critical_events": 0
+  },
+  "patients": [
+    {
+      "id": "P201",
+      "name": "Анна Сергеевна Ларина",
+      "doctor": "e.orlova",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "improvement"
+    },
+    {
+      "id": "P202",
+      "name": "Павел Андреевич Громов",
+      "doctor": "e.orlova",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "variable"
+    },
+    {
+      "id": "P203",
+      "name": "Елена Викторовна Ковалёва",
+      "doctor": "e.orlova",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "missed_and_partial"
+    },
+    {
+      "id": "P204",
+      "name": "Никита Олегович Зуев",
+      "doctor": "e.orlova",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "adverse_and_change"
+    },
+    {
+      "id": "P205",
+      "name": "Мария Денисовна Фомина",
+      "doctor": "e.orlova",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "incomplete_assessment"
+    },
+    {
+      "id": "P206",
+      "name": "Сергей Михайлович Волков",
+      "doctor": "a.mironov",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "referral"
+    },
+    {
+      "id": "P207",
+      "name": "Ирина Алексеевна Савина",
+      "doctor": "a.mironov",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "stop_and_gaps"
+    },
+    {
+      "id": "P208",
+      "name": "Дмитрий Ильич Рябов",
+      "doctor": "a.mironov",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "conflict_and_correction"
+    },
+    {
+      "id": "P209",
+      "name": "Светлана Романовна Медведева",
+      "doctor": "a.mironov",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "stable_no_medication"
+    },
+    {
+      "id": "P210",
+      "name": "Роман Евгеньевич Егоров",
+      "doctor": "a.mironov",
+      "completed_visits": 3,
+      "diary_entries": 7,
+      "questionnaires": 9,
+      "pending_questionnaires": 3,
+      "plan_items": 9,
+      "scenario": "pending_drafts"
+    }
+  ],
+  "old_identities_absent": 19,
+  "source_metadata": {
+    "source_versions": {
+      "rows": 3,
+      "unchanged": true
+    },
+    "catalog_versions": {
+      "rows": 3,
+      "unchanged": true
+    },
+    "assessment_form_releases": {
+      "rows": 3,
+      "unchanged": true
+    }
+  },
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "provenance": {
+    "synthetic": true,
+    "simulated_dates": true,
+    "clinical_review": false,
+    "real_user_trial": false,
+    "dataset_version": "clinic-roster-20261026-v1",
+    "neutral_medication_labels": true,
+    "medication_eligibility_established": false,
+    "dataset_sha256": "bf529545a103b8d31d9aed32d018b0a1c3c1b1e0a1c3c9a7ed5c61f3fbfcc088",
+    "actual_generated_at": "2026-10-26T00:16:15.361688+00:00",
+    "observation_start": "2026-09-14",
+    "observation_end": "2026-10-25"
+  },
+  "pre_existing_untracked_files_preserved": 4,
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "processes": {
+    "server": 62657,
+    "worker": 62658
+  },
+  "backup": {
+    "path": "var/backups/S55-before-roster.sqlite3",
+    "sha256": "65e44e0b1dd8ebcef172c94046ec5a6f7ca56cab47186582a5a33f4fbee8c642",
+    "mode": "0o600"
+  }
+}

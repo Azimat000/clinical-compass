@@ -62,6 +62,21 @@ class DocumentsSingleHomeTests(unittest.TestCase):
         self.assertIn('#visit-document-'+old['id'], self.client.get('/demo/FV01').text)
         self.assertIn('#visit-document-'+new['id'], self.client.get('/demo/FV01').text)
 
+    def test_document_edit_with_known_numeric_age_preserves_age_and_fields(self):
+        values = self.case.values(age_status='known', age_years='34', age_basis='Со слов пациента',
+                                  complaints_status='known', complaints_text='Трудности сна', complaints_basis='Беседа')
+        self.assertEqual(303, self.case.post(values).status_code)
+        old = self.rows()[0]
+        change = {'request_key': secrets.token_hex(16), 'base_revision': '1',
+                  'documented_facts': 'Сведения из записи', 'document_basis': 'Представленная запись'}
+        self.assertEqual(303, self.post_docs(old['visit_id'], change).status_code)
+        new = self.rows()[0]
+        self.assertEqual(old['payload']['age'], new['payload']['age'])
+        self.assertEqual(old['payload']['fields'], new['payload']['fields'])
+        self.assertEqual('Сведения из записи', new['payload']['documented_facts'])
+        self.assertEqual(303, self.post_docs(old['visit_id'], change).status_code)
+        self.assertEqual(2, len(self.rows()))
+
     def test_visit_save_and_retries_never_erase_documents_and_stale_edits_do_not_overwrite(self):
         old = self.seed()
         change = {'request_key': secrets.token_hex(16), 'base_revision': '1',

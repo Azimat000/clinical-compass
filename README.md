@@ -12,7 +12,11 @@ python3 tools/validate_plan.py
 python3 tools/session.py status
 ```
 
-## Локальное демо S07
+## Текущий локальный сайт
+
+Сайт: [127.0.0.1:8000](http://127.0.0.1:8000). Активная база `var/compass.sqlite3`: два врача, десять пациентов, индивидуальные вымышленные истории S55. Доступы в приватном `var/clinic-20261026-access.md`. [Карта функций и историй](evidence/S55/walkthrough.md), [приёмка](evidence/S55/acceptance.md). Для текущей базы не запускать старые команды seed/seed-accounts; обычные `make run` и `make worker` открывают новый состав.
+
+## Исторический каркас S07
 
 Создан каркас приложения: шесть синтетических случаев, поиск/фильтр, база данных и обработчик технических событий. Запуск: `make setup migrate seed`, затем `make run`; в другом терминале `make worker`. Проверки: `make check`. Есть запуск через Docker Compose; полная инструкция — [RUNBOOK](docs/RUNBOOK.md).
 

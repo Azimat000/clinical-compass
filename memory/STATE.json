@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T03:00:09+03:00",
+  "updated_on": "2026-10-26T03:22:10+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S54",
+  "last_accepted_slice": "S55",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -509,6 +509,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S54",
       "handoff": "memory/sessions/S54.md",
+      "reason": null
+    },
+    "S55": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S55",
+      "handoff": "memory/sessions/S55.md",
       "reason": null
     }
   },
@@ -1124,51 +1130,26 @@
     }
   },
   "latest_roster": {
-    "slice": "S30",
-    "commit_ref": "refs/tags/slice/S30",
+    "slice": "S55",
+    "commit_ref": "refs/tags/slice/S55",
     "active_database": "var/compass.sqlite3",
-    "accounts_file": "var/clinic-20261023-access.md",
-    "report": "memory/sessions/S30.md",
-    "evidence": "evidence/S30/acceptance.md",
-    "dataset": "data/fictional/clinic-20261023.json",
-    "doctors": 3,
-    "patients": 8,
+    "accounts_file": "var/clinic-20261026-access.md",
+    "report": "memory/sessions/S55.md",
+    "evidence": "evidence/S55/acceptance.md",
+    "dataset": "data/fictional/clinic-20261026.json",
+    "doctors": 2,
+    "patients": 10,
     "synthetic": true,
     "simulated_dates": true,
     "clinical_review": false,
     "real_user_trial": false,
     "previous_roster": "archived_offline_not_served",
     "visible_training_labels": false,
-    "questionnaire_history": {
-      "slice": "S35",
-      "dataset": "data/fictional/questionnaires-20261023.json",
-      "added_results": 48,
-      "forms": [
-        "PHQ-9",
-        "GAD-7"
-      ],
-      "dates": [
-        "2026-09-11",
-        "2026-10-02",
-        "2026-10-22"
-      ],
-      "synthetic": true,
-      "simulated_dates": true,
-      "clinical_review": false,
-      "report": "memory/sessions/S35.md"
-    },
-    "medication_history": {
-      "slice": "S36",
-      "dataset": "data/fictional/medications-20261023.json",
-      "marks": 250,
-      "schedule_snapshots": 14,
-      "explicit_missed": {
-        "patient": "P103",
-        "day": "2026-10-22",
-        "time": "20:00"
-      },
-      "fictional_medication_names": true,
-      "report": "memory/sessions/S36.md"
-    }
+    "completed_visits": 30,
+    "diary_entries": 70,
+    "questionnaire_results": 90,
+    "medication_marks": 227,
+    "neutral_medication_labels": true,
+    "active_clinical_rules": false
   }
 }

@@ -208,7 +208,7 @@ def save(db, user, patient_id, visit_id, values):
 def form_values(item):
     p = item['payload']
     values = {k: p[k] for k in ('observed_on', 'visit_kind', 'age_source', 'age_basis', 'documented_facts', 'document_basis', 'action_draft')}
-    values.update(age_status=p['age']['status'], age_years=p['age']['years'] if p['age']['years'] is not None else '',
+    values.update(age_status=p['age']['status'], age_years=str(p['age']['years']) if p['age']['years'] is not None else '',
                   birth_date=p['age']['birth_date'] or '', age_detail=p['age']['detail'] or '',
                   not_collected='yes' if p['not_collected'] else '', base_revision=str(item['revision']))
     for code, fact in p['fields'].items():
