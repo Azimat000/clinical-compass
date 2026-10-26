@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "scope": "Только новый backend; отдельная матрица поручения, не замена plan/coverage.json",
+  "meaning": "Назначение срезам — план, не доказательство реализации. Статус меняется только по фактической приёмке.",
+  "items": [
+    {
+      "id": "B01",
+      "text": "Все четыре вида входных данных, их версии, время, происхождение и полнота",
+      "implementation_slices": [
+        "BE02",
+        "BE05"
+      ],
+      "verification_slices": [
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B02",
+      "text": "Опасные паттерны по проверяемым правилам, независимо от диагноза/плана",
+      "implementation_slices": [
+        "BE07"
+      ],
+      "verification_slices": [
+        "BE09",
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B03",
+      "text": "Смысловые паттерны и динамика из текста и сочетания данных",
+      "implementation_slices": [
+        "BE05",
+        "BE08"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B04",
+      "text": "Сообщать о рисках только уполномоченному врачу с проверяемой доставкой",
+      "implementation_slices": [
+        "BE06",
+        "BE09"
+      ],
+      "verification_slices": [
+        "BE16",
+        "BE17",
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B05",
+      "text": "Предлагать ведущую диагностическую гипотезу и существенные альтернативы",
+      "implementation_slices": [
+        "BE10"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B06",
+      "text": "Обоснование диагноза, противоречия, недостающие сведения, решение врача",
+      "implementation_slices": [
+        "BE10",
+        "BE11"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B07",
+      "text": "Предлагать содержательный план по данным и диагнозу",
+      "implementation_slices": [
+        "BE12"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B08",
+      "text": "Предлагать лекарственное лечение с проверкой индивидуальных ограничений",
+      "implementation_slices": [
+        "BE13",
+        "BE14"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B09",
+      "text": "Применение и публикация плана только после отдельного решения врача",
+      "implementation_slices": [
+        "BE15"
+      ],
+      "verification_slices": [
+        "BE16",
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B10",
+      "text": "Ровно три продуктовых результата; стабильный API для будущего красивого UI",
+      "implementation_slices": [
+        "BE01",
+        "BE18"
+      ],
+      "verification_slices": [
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B11",
+      "text": "Действующие источники, применимость, права, версии и отзыв",
+      "implementation_slices": [
+        "BE03"
+      ],
+      "verification_slices": [
+        "BE07",
+        "BE10",
+        "BE12",
+        "BE13",
+        "BE14",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B12",
+      "text": "Настоящая модель, отсутствие выдуманных фактов/цитат и честная неопределённость",
+      "implementation_slices": [
+        "BE04",
+        "BE05"
+      ],
+      "verification_slices": [
+        "BE08",
+        "BE10",
+        "BE14",
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B13",
+      "text": "Доступы, конфиденциальность, защита от инструкций внутри входных текстов",
+      "implementation_slices": [
+        "BE01",
+        "BE04",
+        "BE16"
+      ],
+      "verification_slices": [
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B14",
+      "text": "Свежесть, отсутствие дублей, восстановление, скорость и бюджет",
+      "implementation_slices": [
+        "BE06",
+        "BE17"
+      ],
+      "verification_slices": [
+        "BE18"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B15",
+      "text": "Все три функции работают совместно, с содержательными успешными результатами",
+      "implementation_slices": [
+        "BE18"
+      ],
+      "verification_slices": [
+        "BE18",
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "B16",
+      "text": "Независимая клиническая оценка и честные границы допуска",
+      "implementation_slices": [
+        "BE19"
+      ],
+      "verification_slices": [
+        "BE19"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T03:49:32+03:00",
+  "updated_on": "2026-10-26T17:18:29+03:00",
   "current_slice": null,
   "last_accepted_slice": "S56",
-  "next_slice": "UI08",
+  "next_slice": "BE01",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -522,6 +522,120 @@
       "commit_ref": "refs/tags/slice/S56",
       "handoff": "memory/sessions/S56.md",
       "reason": null
+    },
+    "BE01": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE01.md",
+      "reason": null
+    },
+    "BE02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE02.md",
+      "reason": null
+    },
+    "BE03": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE03.md",
+      "reason": null
+    },
+    "BE04": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE04.md",
+      "reason": null
+    },
+    "BE05": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE05.md",
+      "reason": null
+    },
+    "BE06": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE06.md",
+      "reason": null
+    },
+    "BE07": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE07.md",
+      "reason": null
+    },
+    "BE08": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE08.md",
+      "reason": null
+    },
+    "BE09": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE09.md",
+      "reason": null
+    },
+    "BE10": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE10.md",
+      "reason": null
+    },
+    "BE11": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE11.md",
+      "reason": null
+    },
+    "BE12": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE12.md",
+      "reason": null
+    },
+    "BE13": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE13.md",
+      "reason": null
+    },
+    "BE14": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE14.md",
+      "reason": null
+    },
+    "BE15": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE15.md",
+      "reason": null
+    },
+    "BE16": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE16.md",
+      "reason": null
+    },
+    "BE17": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE17.md",
+      "reason": null
+    },
+    "BE18": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE18.md",
+      "reason": null
+    },
+    "BE19": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/BE19.md",
+      "reason": null
     }
   },
   "latest_audit": {
@@ -770,12 +884,14 @@
     "current_scope": "Nine-dossier sequence retained as optional; source checks still apply per enabled function"
   },
   "latest_plan_change": {
-    "kind": "service_simplification_RAG_optional",
-    "date": "2026-10-21",
-    "report": "memory/sessions/service-simplification-2026-10-21.md",
-    "commit_ref": "refs/tags/plan/service-simplification-2026-10-21",
+    "kind": "three_function_backend_plan",
+    "date": "2026-10-26",
+    "report": "memory/sessions/backend-plan-2026-10-26.md",
+    "commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
     "implementation_started": false,
-    "authorization": "evidence/service-simplification-2026-10-21/authorization.json"
+    "authorization": "evidence/backend-plan-2026-10-26/authorization.md",
+    "planned_commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
+    "git_status": "verified_in_recovered_local_checkout"
   },
   "optional_source_program": {
     "status": "deferred_not_mandatory",
@@ -824,6 +940,14 @@
         "S17J02C09"
       ],
       "implementation_started": false
+    },
+    {
+      "kind": "service_simplification_RAG_optional",
+      "date": "2026-10-21",
+      "report": "memory/sessions/service-simplification-2026-10-21.md",
+      "commit_ref": "refs/tags/plan/service-simplification-2026-10-21",
+      "implementation_started": false,
+      "authorization": "evidence/service-simplification-2026-10-21/authorization.json"
     }
   ],
   "interface_state": {
@@ -1174,5 +1298,37 @@
       "clinical_review": false,
       "identities_and_ids_preserved": true
     }
+  },
+  "backend_program": {
+    "plan": "plan/backend/README.md",
+    "requirements": "plan/backend/requirements.json",
+    "session_protocol": "plan/backend/SESSION.md",
+    "slice_ids": [
+      "BE01",
+      "BE02",
+      "BE03",
+      "BE04",
+      "BE05",
+      "BE06",
+      "BE07",
+      "BE08",
+      "BE09",
+      "BE10",
+      "BE11",
+      "BE12",
+      "BE13",
+      "BE14",
+      "BE15",
+      "BE16",
+      "BE17",
+      "BE18",
+      "BE19"
+    ],
+    "status": "planned",
+    "technical_gate": "BE18",
+    "clinical_gate": "BE19",
+    "frontend_in_scope": false,
+    "implementation_started": false,
+    "clinical_validation": false
   }
 }
