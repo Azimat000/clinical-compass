@@ -1,0 +1,11 @@
+h01 received
+h02 received
+h03 received
+h04 received
+h05 received
+h06 received
+h07 received
+h08 received
+h09 received
+h10 received
+{"pass": false, "metrics": {"symptom": {"tp": 8, "fp": 2, "fn": 3, "precision": 0.8, "recall": 0.7272727272727273, "pass": false}, "subject": {"tp": 5, "fp": 0, "fn": 0, "precision": 1.0, "recall": 1.0, "pass": true}, "time": {"tp": 8, "fp": 0, "fn": 1, "precision": 1.0, "recall": 0.8888888888888888, "pass": true}, "duration": {"tp": 2, "fp": 1, "fn": 1, "precision": 0.6666666666666666, "recall": 0.6666666666666666, "pass": false}, "severity": {"tp": 4, "fp": 0, "fn": 0, "precision": 1.0, "recall": 1.0, "pass": true}, "negation": {"tp": 2, "fp": 2, "fn": 2, "precision": 0.5, "recall": 0.5, "pass": false}, "medication": {"tp": 2, "fp": 0, "fn": 0, "precision": 1.0, "recall": 1.0, "pass": true}, "uncertainty": {"tp": 3, "fp": 1, "fn": 1, "precision": 0.75, "recall": 0.75, "pass": false}}, "errors": [{"case": "h01", "direction": "fp", "kind": "duration", "quote": "Последние две недели", "count": 1}, {"case": "h01", "direction": "fp", "kind": "symptom", "quote": "сильную тревогу", "count": 1}, {"case": "h01", "direction": "fn", "kind": "duration", "quote": "две недели", "count": 1}, {"case": "h01", "direction": "fn", "kind": "symptom", "quote": "тревогу", "count": 1}, {"case": "h04", "direction": "fp", "kind": "negation", "quote": "нет", "count": 1}, {"case": "h04", "direction": "fn", "kind": "time", "quote": "сейчас", "count": 1}, {"case": "h04", "direction": "fn", "kind": "negation", "quote": "её нет", "count": 1}, {"case": "h05", "direction": "fp", "kind": "uncertainty", "quote": "Не помню, была ли", "count": 1}, {"case": "h05", "direction": "fn", "kind": "uncertainty", "quote": "Не помню", "count": 1}, {"case": "h06", "direction": "fp", "kind": "symptom", "quote": "спал", "count": 1}, {"case": "h06", "direction": "fn", "kind": "symptom", "quote": "не спал", "count": 1}, {"case": "h08", "direction": "fp", "kind": "negation", "quote": "жалоб нет", "count": 1}, {"case": "h08", "direction": "fn", "kind": "symptom", "quote": "жалоб", "count": 1}, {"case": "h08", "direction": "fn", "kind": "negation", "quote": "нет", "count": 1}]}

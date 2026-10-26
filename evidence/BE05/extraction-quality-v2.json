@@ -1,0 +1,2225 @@
+{
+  "split": "holdout-v2",
+  "started_at": "2026-10-26T16:48:48.720439+00:00",
+  "synthetic": true,
+  "test_double": false,
+  "policy": {
+    "frozen_before_implementation_at": "2026-10-26T16:43:50.590782+00:00",
+    "version": "extraction-eval-v2",
+    "split": "v1 failed preserved; development consists of development.json and opened holdout.json; new holdout-v2 is evaluated once after revision freeze",
+    "kinds": [
+      "symptom",
+      "subject",
+      "time",
+      "duration",
+      "severity",
+      "negation",
+      "medication",
+      "uncertainty"
+    ],
+    "matching": "exact kind+quote multiset; repeated identical mentions counted separately; case and whitespace exact",
+    "thresholds": {
+      "each_kind_precision": 0.9,
+      "each_kind_recall": 0.8,
+      "unsupported_final_spans": 0,
+      "failed_calls": 0
+    },
+    "unmet_policy": "report FAIL and leave BE05 unaccepted; do not average failures away",
+    "scope": "synthetic extractive mentions only; not clinical truth or normalized interpretations",
+    "corpus_sha256": {
+      "development.json": "5f8c7d36d063f1afaa98ce26fd9ac227d93cfb6fce1d40441a18a39e7ad1ac6a",
+      "holdout.json": "c6df33dd1d9d978f5872590369b5fa01af97e0db9cedbde635dbbea3e3b26366",
+      "holdout-v2.json": "7485898e70850b934adbec72571a5756dfe54d3268107ab5797f5d0909dbc99a"
+    },
+    "frozen_before_instruction_revision_at": "2026-10-26T16:48:48.260491+00:00",
+    "annotation_protocol": "symptom: minimal symptom phrase without intensity or negation; negation: single marker отрицает/отрицаю/нет/не; duration: omit approximators уже/около/примерно but retain в течение; uncertainty: explicit probability word; preserve case, prepositions and inflection; medication: full contiguous actual intake phrase excluding subject/time/uncertainty; time: include preposition, omit punctuation"
+  },
+  "prompt_sha256_before_run": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+  "cases": [
+    {
+      "id": "r2-01",
+      "tags": [
+        "doctor",
+        "negation",
+        "medication",
+        "uncertain"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "Пациент"
+        },
+        {
+          "kind": "time",
+          "quote": "позавчера"
+        },
+        {
+          "kind": "severity",
+          "quote": "сильная"
+        },
+        {
+          "kind": "symptom",
+          "quote": "раздражительность"
+        },
+        {
+          "kind": "duration",
+          "quote": "пять дней"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "Возможно"
+        },
+        {
+          "kind": "medication",
+          "quote": "пропустил утренний приём вымышленного препарата Макетин"
+        },
+        {
+          "kind": "symptom",
+          "quote": "Бессонницу"
+        },
+        {
+          "kind": "negation",
+          "quote": "отрицает"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "subject",
+            "quote": "Пациент",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 0,
+            "end": 7,
+            "context_quote": "Пациент сообщает: позавчера отмечалась сильная раздражительность уже пять дней. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "позавчера",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 18,
+            "end": 27,
+            "context_quote": "Пациент сообщает: позавчера отмечалась сильная раздражительность уже пять дней. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "раздражительность",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 47,
+            "end": 64,
+            "context_quote": "Пациент сообщает: позавчера отмечалась сильная раздражительность уже пять дней. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "severity",
+            "quote": "сильная",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 39,
+            "end": 46,
+            "context_quote": "Пациент сообщает: позавчера отмечалась сильная раздражительность уже пять дней. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "duration",
+            "quote": "пять дней",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 69,
+            "end": 78,
+            "context_quote": "Пациент сообщает: позавчера отмечалась сильная раздражительность уже пять дней. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "uncertainty",
+            "quote": "Возможно",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 80,
+            "end": 88,
+            "context_quote": "Возможно, пропустил утренний приём вымышленного препарата Макетин. ",
+            "context_start": 80,
+            "context_end": 147,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "medication",
+            "quote": "пропустил утренний приём вымышленного препарата Макетин",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 90,
+            "end": 145,
+            "context_quote": "Возможно, пропустил утренний приём вымышленного препарата Макетин. ",
+            "context_start": 80,
+            "context_end": 147,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "symptom",
+            "quote": "Бессонницу",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 147,
+            "end": 157,
+            "context_quote": "Бессонницу отрицает.",
+            "context_start": 147,
+            "context_end": 167,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "negation",
+            "quote": "отрицает",
+            "source_ref": "synthetic_r2-01",
+            "path": "/text",
+            "start": 158,
+            "end": 166,
+            "context_quote": "Бессонницу отрицает.",
+            "context_start": 147,
+            "context_end": 167,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-01",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b38f29e758d6d28c0cb7662bfcab4c10afcd3df75acddaad5f14ff14a55516d4",
+            "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+        "snapshot_sha256": "255ccf9c7432779f65a3717f991cffdab14055b62acd568b22e0ef1d75fef564",
+        "input_document_count": 1,
+        "input_unit_count": 3,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.87,
+          "usage": {
+            "prompt_tokens": 961,
+            "completion_tokens": 232,
+            "total_tokens": 1193
+          },
+          "cache_hit_tokens": 128,
+          "cache_miss_tokens": 833,
+          "estimated_peak_cost_nano_usd": 529068,
+          "estimated_offpeak_cost_nano_usd": 264534,
+          "cost_ceiling_micro_usd": 2121,
+          "reservation_micro_usd": 9766,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-02",
+      "tags": [
+        "family",
+        "old",
+        "negation",
+        "intake"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "У бабушки"
+        },
+        {
+          "kind": "time",
+          "quote": "в 2012 году"
+        },
+        {
+          "kind": "severity",
+          "quote": "умеренная"
+        },
+        {
+          "kind": "symptom",
+          "quote": "тревожность"
+        },
+        {
+          "kind": "duration",
+          "quote": "шесть месяцев"
+        },
+        {
+          "kind": "subject",
+          "quote": "У пациента"
+        },
+        {
+          "kind": "symptom",
+          "quote": "тревожности"
+        },
+        {
+          "kind": "negation",
+          "quote": "нет"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "Кажется"
+        },
+        {
+          "kind": "time",
+          "quote": "вчера"
+        },
+        {
+          "kind": "medication",
+          "quote": "выпил половину таблетки вымышленного средства Примерин"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "subject",
+            "quote": "У бабушки",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 0,
+            "end": 9,
+            "context_quote": "У бабушки в 2012 году наблюдалась умеренная тревожность примерно шесть месяцев. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "в 2012 году",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 10,
+            "end": 21,
+            "context_quote": "У бабушки в 2012 году наблюдалась умеренная тревожность примерно шесть месяцев. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "severity",
+            "quote": "умеренная",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 34,
+            "end": 43,
+            "context_quote": "У бабушки в 2012 году наблюдалась умеренная тревожность примерно шесть месяцев. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "тревожность",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 44,
+            "end": 55,
+            "context_quote": "У бабушки в 2012 году наблюдалась умеренная тревожность примерно шесть месяцев. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "duration",
+            "quote": "шесть месяцев",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 65,
+            "end": 78,
+            "context_quote": "У бабушки в 2012 году наблюдалась умеренная тревожность примерно шесть месяцев. ",
+            "context_start": 0,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "subject",
+            "quote": "У пациента",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 80,
+            "end": 90,
+            "context_quote": "У пациента тревожности нет. ",
+            "context_start": 80,
+            "context_end": 108,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "тревожности",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 91,
+            "end": 102,
+            "context_quote": "У пациента тревожности нет. ",
+            "context_start": 80,
+            "context_end": 108,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "negation",
+            "quote": "нет",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 103,
+            "end": 106,
+            "context_quote": "У пациента тревожности нет. ",
+            "context_start": 80,
+            "context_end": 108,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "uncertainty",
+            "quote": "Кажется",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 108,
+            "end": 115,
+            "context_quote": "Кажется, вчера выпил половину таблетки вымышленного средства Примерин.",
+            "context_start": 108,
+            "context_end": 178,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "time",
+            "quote": "вчера",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 117,
+            "end": 122,
+            "context_quote": "Кажется, вчера выпил половину таблетки вымышленного средства Примерин.",
+            "context_start": 108,
+            "context_end": 178,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "medication",
+            "quote": "выпил половину таблетки вымышленного средства Примерин",
+            "source_ref": "synthetic_r2-02",
+            "path": "/text",
+            "start": 123,
+            "end": 177,
+            "context_quote": "Кажется, вчера выпил половину таблетки вымышленного средства Примерин.",
+            "context_start": 108,
+            "context_end": 178,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-02",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "6a92a74aa2fec1c7dbe9f6a296dd4b7ae5e7b59645a7e30d7f91ac30b4f11100",
+            "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+        "snapshot_sha256": "2f78a6bb8f430366f86a59303c7425b7c6cdd3eb2bd31459a07e25dabbcae345",
+        "input_document_count": 1,
+        "input_unit_count": 3,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.574,
+          "usage": {
+            "prompt_tokens": 962,
+            "completion_tokens": 272,
+            "total_tokens": 1234
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 450,
+          "estimated_peak_cost_nano_usd": 464472,
+          "estimated_offpeak_cost_nano_usd": 232236,
+          "cost_ceiling_micro_usd": 2322,
+          "reservation_micro_usd": 9780,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-03",
+      "tags": [
+        "contradiction",
+        "negation",
+        "medication"
+      ],
+      "expected": [
+        {
+          "kind": "time",
+          "quote": "Утром"
+        },
+        {
+          "kind": "symptom",
+          "quote": "тошнота"
+        },
+        {
+          "kind": "severity",
+          "quote": "слабая"
+        },
+        {
+          "kind": "time",
+          "quote": "Вечером"
+        },
+        {
+          "kind": "symptom",
+          "quote": "тошноты"
+        },
+        {
+          "kind": "negation",
+          "quote": "нет"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "Вероятно"
+        },
+        {
+          "kind": "duration",
+          "quote": "два часа"
+        },
+        {
+          "kind": "medication",
+          "quote": "Приём вымышленного препарата Макетин пропущен"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "Утром",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 0,
+            "end": 5,
+            "context_quote": "Утром тошнота была слабая. ",
+            "context_start": 0,
+            "context_end": 27,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "тошнота",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 6,
+            "end": 13,
+            "context_quote": "Утром тошнота была слабая. ",
+            "context_start": 0,
+            "context_end": 27,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "severity",
+            "quote": "слабая",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 19,
+            "end": 25,
+            "context_quote": "Утром тошнота была слабая. ",
+            "context_start": 0,
+            "context_end": 27,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "time",
+            "quote": "Вечером",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 27,
+            "end": 34,
+            "context_quote": "Вечером тошноты нет. ",
+            "context_start": 27,
+            "context_end": 48,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "тошноты",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 35,
+            "end": 42,
+            "context_quote": "Вечером тошноты нет. ",
+            "context_start": 27,
+            "context_end": 48,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "negation",
+            "quote": "нет",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 43,
+            "end": 46,
+            "context_quote": "Вечером тошноты нет. ",
+            "context_start": 27,
+            "context_end": 48,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "uncertainty",
+            "quote": "Вероятно",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 48,
+            "end": 56,
+            "context_quote": "Вероятно, это продолжалось два часа. ",
+            "context_start": 48,
+            "context_end": 85,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "duration",
+            "quote": "два часа",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 75,
+            "end": 83,
+            "context_quote": "Вероятно, это продолжалось два часа. ",
+            "context_start": 48,
+            "context_end": 85,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u3",
+            "kind": "medication",
+            "quote": "Приём вымышленного препарата Макетин пропущен",
+            "source_ref": "synthetic_r2-03",
+            "path": "/text",
+            "start": 85,
+            "end": 130,
+            "context_quote": "Приём вымышленного препарата Макетин пропущен.",
+            "context_start": 85,
+            "context_end": 131,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-03",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a1c1a1d39fa4ec3987cbad81ad01529af29bc70a12bf29e3f0d6ee580ed829e7",
+            "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+        "snapshot_sha256": "efca18f09b37bba6f8f6af932da9b8d697cc2c60e6660f3adc97d9952eef971b",
+        "input_document_count": 1,
+        "input_unit_count": 4,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.353,
+          "usage": {
+            "prompt_tokens": 968,
+            "completion_tokens": 224,
+            "total_tokens": 1192
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 456,
+          "estimated_peak_cost_nano_usd": 408672,
+          "estimated_offpeak_cost_nano_usd": 204336,
+          "cost_ceiling_micro_usd": 2088,
+          "reservation_micro_usd": 9726,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-04",
+      "tags": [
+        "patient",
+        "duration",
+        "severity",
+        "intake"
+      ],
+      "expected": [
+        {
+          "kind": "negation",
+          "quote": "отрицаю"
+        },
+        {
+          "kind": "symptom",
+          "quote": "головную боль"
+        },
+        {
+          "kind": "severity",
+          "quote": "Выраженная"
+        },
+        {
+          "kind": "symptom",
+          "quote": "утомляемость"
+        },
+        {
+          "kind": "duration",
+          "quote": "семи суток"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "Предположительно"
+        },
+        {
+          "kind": "time",
+          "quote": "в понедельник"
+        },
+        {
+          "kind": "medication",
+          "quote": "принял две таблетки вымышленного препарата Примерин"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "головную боль",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 10,
+            "end": 23,
+            "context_quote": "Я отрицаю головную боль. ",
+            "context_start": 0,
+            "context_end": 25,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "negation",
+            "quote": "отрицаю",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 2,
+            "end": 9,
+            "context_quote": "Я отрицаю головную боль. ",
+            "context_start": 0,
+            "context_end": 25,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "утомляемость",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 36,
+            "end": 48,
+            "context_quote": "Выраженная утомляемость мешала около семи суток. ",
+            "context_start": 25,
+            "context_end": 74,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "severity",
+            "quote": "Выраженная",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 25,
+            "end": 35,
+            "context_quote": "Выраженная утомляемость мешала около семи суток. ",
+            "context_start": 25,
+            "context_end": 74,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "duration",
+            "quote": "семи суток",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 62,
+            "end": 72,
+            "context_quote": "Выраженная утомляемость мешала около семи суток. ",
+            "context_start": 25,
+            "context_end": 74,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "uncertainty",
+            "quote": "Предположительно",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 74,
+            "end": 90,
+            "context_quote": "Предположительно, началось в понедельник. ",
+            "context_start": 74,
+            "context_end": 116,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "time",
+            "quote": "в понедельник",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 101,
+            "end": 114,
+            "context_quote": "Предположительно, началось в понедельник. ",
+            "context_start": 74,
+            "context_end": 116,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u3",
+            "kind": "medication",
+            "quote": "принял две таблетки вымышленного препарата Примерин",
+            "source_ref": "synthetic_r2-04",
+            "path": "/text",
+            "start": 118,
+            "end": 169,
+            "context_quote": "Я принял две таблетки вымышленного препарата Примерин.",
+            "context_start": 116,
+            "context_end": 170,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-04",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "b1a9b35da3c022db9bde578d8db36ff54186d9e01914daee600cd7b8a1430ce5",
+            "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+        "snapshot_sha256": "791f080c2e7d1c60163eddcc8a3d45c0eb0c90fe5550304a1d8545c2f098be58",
+        "input_document_count": 1,
+        "input_unit_count": 4,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.524,
+          "usage": {
+            "prompt_tokens": 977,
+            "completion_tokens": 211,
+            "total_tokens": 1188
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 465,
+          "estimated_peak_cost_nano_usd": 395772,
+          "estimated_offpeak_cost_nano_usd": 197886,
+          "cost_ceiling_micro_usd": 2032,
+          "reservation_micro_usd": 9800,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-05",
+      "tags": [
+        "injection",
+        "typo",
+        "family",
+        "old"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "У брата"
+        },
+        {
+          "kind": "symptom",
+          "quote": "тревожнасть"
+        },
+        {
+          "kind": "severity",
+          "quote": "лёгкая"
+        },
+        {
+          "kind": "time",
+          "quote": "в 2016 году"
+        },
+        {
+          "kind": "duration",
+          "quote": "в течение недели"
+        },
+        {
+          "kind": "time",
+          "quote": "Сейчас"
+        },
+        {
+          "kind": "symptom",
+          "quote": "жалоб"
+        },
+        {
+          "kind": "negation",
+          "quote": "нет"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "subject",
+            "quote": "У брата",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 0,
+            "end": 7,
+            "context_quote": "У брата тревожнасть была лёгкая в 2016 году в течение недели. ",
+            "context_start": 0,
+            "context_end": 62,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "тревожнасть",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 8,
+            "end": 19,
+            "context_quote": "У брата тревожнасть была лёгкая в 2016 году в течение недели. ",
+            "context_start": 0,
+            "context_end": 62,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "severity",
+            "quote": "лёгкая",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 25,
+            "end": 31,
+            "context_quote": "У брата тревожнасть была лёгкая в 2016 году в течение недели. ",
+            "context_start": 0,
+            "context_end": 62,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "в 2016 году",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 32,
+            "end": 43,
+            "context_quote": "У брата тревожнасть была лёгкая в 2016 году в течение недели. ",
+            "context_start": 0,
+            "context_end": 62,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "duration",
+            "quote": "в течение недели",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 44,
+            "end": 60,
+            "context_quote": "У брата тревожнасть была лёгкая в 2016 году в течение недели. ",
+            "context_start": 0,
+            "context_end": 62,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "time",
+            "quote": "Сейчас",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 62,
+            "end": 68,
+            "context_quote": "Сейчас жалоб нет.\n",
+            "context_start": 62,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "жалоб",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 69,
+            "end": 74,
+            "context_quote": "Сейчас жалоб нет.\n",
+            "context_start": 62,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "negation",
+            "quote": "нет",
+            "source_ref": "synthetic_r2-05",
+            "path": "/text",
+            "start": 75,
+            "end": 78,
+            "context_quote": "Сейчас жалоб нет.\n",
+            "context_start": 62,
+            "context_end": 80,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-05",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0e02f86799f3cae0c47ae2dda43cd6dfdee2459483ef65f16ede0d299e53a4ea",
+            "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+        "snapshot_sha256": "3a58b9a3389a7a79e065fa52f05fd6bbee504296e01eb38e8303787359bc493d",
+        "input_document_count": 1,
+        "input_unit_count": 3,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.559,
+          "usage": {
+            "prompt_tokens": 969,
+            "completion_tokens": 190,
+            "total_tokens": 1159
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 457,
+          "estimated_peak_cost_nano_usd": 368172,
+          "estimated_offpeak_cost_nano_usd": 184086,
+          "cost_ceiling_micro_usd": 1919,
+          "reservation_micro_usd": 9758,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-06",
+      "tags": [
+        "doctor",
+        "uncertain",
+        "negation",
+        "intake"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "Пациент"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "возможно"
+        },
+        {
+          "kind": "symptom",
+          "quote": "сердцебиение"
+        },
+        {
+          "kind": "duration",
+          "quote": "десять минут"
+        },
+        {
+          "kind": "time",
+          "quote": "сегодня"
+        },
+        {
+          "kind": "severity",
+          "quote": "умеренная"
+        },
+        {
+          "kind": "symptom",
+          "quote": "Тремор"
+        },
+        {
+          "kind": "negation",
+          "quote": "отрицает"
+        },
+        {
+          "kind": "medication",
+          "quote": "Приём вымышленного препарата Примерин состоялся"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "subject",
+            "quote": "Пациент",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 0,
+            "end": 7,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "uncertainty",
+            "quote": "возможно",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 9,
+            "end": 17,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "сердцебиение",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 19,
+            "end": 31,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "duration",
+            "quote": "десять минут",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 40,
+            "end": 52,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "сегодня",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 53,
+            "end": 60,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "severity",
+            "quote": "умеренная",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 75,
+            "end": 84,
+            "context_quote": "Пациент: возможно, сердцебиение длилось десять минут сегодня, выраженность умеренная. ",
+            "context_start": 0,
+            "context_end": 86,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "Тремор",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 86,
+            "end": 92,
+            "context_quote": "Тремор отрицает. ",
+            "context_start": 86,
+            "context_end": 103,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "negation",
+            "quote": "отрицает",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 93,
+            "end": 101,
+            "context_quote": "Тремор отрицает. ",
+            "context_start": 86,
+            "context_end": 103,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u2",
+            "kind": "medication",
+            "quote": "Приём вымышленного препарата Примерин состоялся",
+            "source_ref": "synthetic_r2-06",
+            "path": "/text",
+            "start": 103,
+            "end": 150,
+            "context_quote": "Приём вымышленного препарата Примерин состоялся.",
+            "context_start": 103,
+            "context_end": 151,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-06",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "a670e8e4ad828f981d7a84b9289ca0afe5b8159ff96e01213c9985c477aa24d7",
+            "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+        "snapshot_sha256": "2810237543ece0b5372c2f6a045e552768ed426636204bb2f7ff119b326758e8",
+        "input_document_count": 1,
+        "input_unit_count": 3,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.782,
+          "usage": {
+            "prompt_tokens": 953,
+            "completion_tokens": 224,
+            "total_tokens": 1177
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 441,
+          "estimated_peak_cost_nano_usd": 404172,
+          "estimated_offpeak_cost_nano_usd": 202086,
+          "cost_ceiling_micro_usd": 2073,
+          "reservation_micro_usd": 9735,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-07",
+      "tags": [
+        "long",
+        "family",
+        "old",
+        "uncertain"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "У тёти"
+        },
+        {
+          "kind": "time",
+          "quote": "в 2009 году"
+        },
+        {
+          "kind": "severity",
+          "quote": "тяжёлая"
+        },
+        {
+          "kind": "symptom",
+          "quote": "бессонница"
+        },
+        {
+          "kind": "duration",
+          "quote": "в течение года"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "Вероятно"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u35",
+            "kind": "subject",
+            "quote": "У тёти",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1890,
+            "end": 1896,
+            "context_quote": "У тёти в 2009 году была тяжёлая бессонница в течение года. ",
+            "context_start": 1890,
+            "context_end": 1949,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u35",
+            "kind": "time",
+            "quote": "в 2009 году",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1897,
+            "end": 1908,
+            "context_quote": "У тёти в 2009 году была тяжёлая бессонница в течение года. ",
+            "context_start": 1890,
+            "context_end": 1949,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u35",
+            "kind": "severity",
+            "quote": "тяжёлая",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1914,
+            "end": 1921,
+            "context_quote": "У тёти в 2009 году была тяжёлая бессонница в течение года. ",
+            "context_start": 1890,
+            "context_end": 1949,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u35",
+            "kind": "symptom",
+            "quote": "бессонница",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1922,
+            "end": 1932,
+            "context_quote": "У тёти в 2009 году была тяжёлая бессонница в течение года. ",
+            "context_start": 1890,
+            "context_end": 1949,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u35",
+            "kind": "duration",
+            "quote": "в течение года",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1933,
+            "end": 1947,
+            "context_quote": "У тёти в 2009 году была тяжёлая бессонница в течение года. ",
+            "context_start": 1890,
+            "context_end": 1949,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u36",
+            "kind": "uncertainty",
+            "quote": "Вероятно",
+            "source_ref": "synthetic_r2-07",
+            "path": "/text",
+            "start": 1949,
+            "end": 1957,
+            "context_quote": "Вероятно, уточнение потеряно.\n",
+            "context_start": 1949,
+            "context_end": 1979,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_r2-07",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "0071e72d25eb514ae85a098d55423733826d6506a8b2b66f301b19292fc32743",
+            "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+        "snapshot_sha256": "a6d699856975f553a8f8e39c6e3328f8cfcf4bed2c35d3108a5dacd03e4c001b",
+        "input_document_count": 1,
+        "input_unit_count": 57,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.234,
+          "usage": {
+            "prompt_tokens": 2740,
+            "completion_tokens": 149,
+            "total_tokens": 2889
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 2228,
+          "estimated_peak_cost_nano_usd": 850272,
+          "estimated_offpeak_cost_nano_usd": 425136,
+          "cost_ceiling_micro_usd": 3485,
+          "reservation_micro_usd": 16573,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "r2-08",
+      "tags": [
+        "empty",
+        "injection",
+        "missing"
+      ],
+      "expected": [],
+      "result": {
+        "version": "extractive-mentions-v2",
+        "status": "mentions_only",
+        "facts": [],
+        "input_documents_sha256": "58aefa2f5829a0667b18f5853c488f2535ff9e09d60aa7a6e8fd4605494f66d7",
+        "snapshot_sha256": "58aefa2f5829a0667b18f5853c488f2535ff9e09d60aa7a6e8fd4605494f66d7",
+        "input_document_count": 1,
+        "input_unit_count": 3,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 0.918,
+          "usage": {
+            "prompt_tokens": 956,
+            "completion_tokens": 5,
+            "total_tokens": 961
+          },
+          "cache_hit_tokens": 512,
+          "cache_miss_tokens": 444,
+          "estimated_peak_cost_nano_usd": 142272,
+          "estimated_offpeak_cost_nano_usd": 71136,
+          "cost_ceiling_micro_usd": 981,
+          "reservation_micro_usd": 9731,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "53f51066b82cebe7b102abe97d41072fd80ebe9131ac7731511e1dae57a206f8",
+          "extraction_version": "extractive-mentions-v2"
+        }
+      },
+      "unsupported_final_spans": 0
+    }
+  ],
+  "complete": true,
+  "metrics_by_kind": {
+    "symptom": {
+      "tp": 13,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "subject": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "time": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "duration": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "severity": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "negation": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "medication": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "uncertainty": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    }
+  },
+  "errors": [],
+  "failed_calls": 0,
+  "unsupported_final_spans": 0,
+  "finished_at": "2026-10-26T16:49:00.562671+00:00",
+  "pass": true,
+  "billing": {
+    "cost_ceiling_micro_usd": 17021,
+    "estimated_peak_cost_nano_usd": 3562872,
+    "estimated_offpeak_cost_nano_usd": 1781436
+  }
+}

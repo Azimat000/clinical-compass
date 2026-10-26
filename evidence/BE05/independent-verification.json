@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "reports": [
+    {
+      "file": "development-run.json",
+      "calls": 2,
+      "pass": false,
+      "matched": 10,
+      "predicted": 10,
+      "expected": 10
+    },
+    {
+      "file": "extraction-quality.json",
+      "calls": 10,
+      "pass": false,
+      "matched": 34,
+      "predicted": 40,
+      "expected": 42
+    },
+    {
+      "file": "extraction-quality-v2.json",
+      "calls": 8,
+      "pass": true,
+      "matched": 60,
+      "predicted": 60,
+      "expected": 60
+    }
+  ],
+  "preserved_files": 4,
+  "ledger_micro_usd": 36739,
+  "ledger_calls": 23
+}

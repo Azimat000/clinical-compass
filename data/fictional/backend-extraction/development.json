@@ -1,0 +1,68 @@
+{
+  "synthetic": true,
+  "author": "project author; not independent clinical labels",
+  "cases": [
+    {
+      "id": "dev-patient",
+      "text": "Я плохо сплю уже три недели. Тревогу отрицаю.",
+      "expected": [
+        {
+          "kind": "symptom",
+          "quote": "плохо сплю"
+        },
+        {
+          "kind": "duration",
+          "quote": "три недели"
+        },
+        {
+          "kind": "symptom",
+          "quote": "Тревогу"
+        },
+        {
+          "kind": "negation",
+          "quote": "отрицаю"
+        }
+      ],
+      "tags": [
+        "patient",
+        "negation"
+      ]
+    },
+    {
+      "id": "dev-doctor",
+      "text": "У отца была бессонница в 2018 году. Пациент, возможно, пропустил приём вымышленного препарата Тестин.",
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "У отца"
+        },
+        {
+          "kind": "symptom",
+          "quote": "бессонница"
+        },
+        {
+          "kind": "time",
+          "quote": "в 2018 году"
+        },
+        {
+          "kind": "subject",
+          "quote": "Пациент"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "возможно"
+        },
+        {
+          "kind": "medication",
+          "quote": "пропустил приём вымышленного препарата Тестин"
+        }
+      ],
+      "tags": [
+        "family",
+        "old",
+        "uncertain",
+        "medication"
+      ]
+    }
+  ]
+}

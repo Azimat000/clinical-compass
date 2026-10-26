@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T19:38:23+03:00",
+  "updated_on": "2026-10-26T19:56:46+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE04",
-  "next_slice": "BE05",
+  "last_accepted_slice": "BE05",
+  "next_slice": "BE06",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -548,8 +548,8 @@
       "reason": null
     },
     "BE05": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE05",
       "handoff": "memory/sessions/BE05.md",
       "reason": null
     },
@@ -1330,7 +1330,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE04",
+    "last_accepted_slice": "BE05",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1342,7 +1342,10 @@
     "model_id": "deepseek-flash",
     "model_prompt_version": "compass-model-v1",
     "model_mode": "synthetic_only",
-    "model_live_evidence": "evidence/BE04/live-smoke.json"
+    "model_live_evidence": "evidence/BE04/live-smoke.json",
+    "extraction_version": "extractive-mentions-v2",
+    "extraction_quality_evidence": "evidence/BE05/extraction-quality-v2.json",
+    "extraction_mode": "synthetic_mentions_only"
   },
   "workspace_recovery": {
     "date": "2026-10-26",

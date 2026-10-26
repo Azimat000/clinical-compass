@@ -1,0 +1,31 @@
+{
+  "frozen_before_implementation_at": "2026-10-26T16:43:50.590782+00:00",
+  "version": "extraction-eval-v2",
+  "split": "v1 failed preserved; development consists of development.json and opened holdout.json; new holdout-v2 is evaluated once after revision freeze",
+  "kinds": [
+    "symptom",
+    "subject",
+    "time",
+    "duration",
+    "severity",
+    "negation",
+    "medication",
+    "uncertainty"
+  ],
+  "matching": "exact kind+quote multiset; repeated identical mentions counted separately; case and whitespace exact",
+  "thresholds": {
+    "each_kind_precision": 0.9,
+    "each_kind_recall": 0.8,
+    "unsupported_final_spans": 0,
+    "failed_calls": 0
+  },
+  "unmet_policy": "report FAIL and leave BE05 unaccepted; do not average failures away",
+  "scope": "synthetic extractive mentions only; not clinical truth or normalized interpretations",
+  "corpus_sha256": {
+    "development.json": "5f8c7d36d063f1afaa98ce26fd9ac227d93cfb6fce1d40441a18a39e7ad1ac6a",
+    "holdout.json": "c6df33dd1d9d978f5872590369b5fa01af97e0db9cedbde635dbbea3e3b26366",
+    "holdout-v2.json": "7485898e70850b934adbec72571a5756dfe54d3268107ab5797f5d0909dbc99a"
+  },
+  "frozen_before_instruction_revision_at": "2026-10-26T16:48:48.260491+00:00",
+  "annotation_protocol": "symptom: minimal symptom phrase without intensity or negation; negation: single marker отрицает/отрицаю/нет/не; duration: omit approximators уже/около/примерно but retain в течение; uncertainty: explicit probability word; preserve case, prepositions and inflection; medication: full contiguous actual intake phrase excluding subject/time/uncertainty; time: include preposition, omit punctuation"
+}

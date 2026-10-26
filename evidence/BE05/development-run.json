@@ -1,0 +1,500 @@
+{
+  "split": "development",
+  "started_at": "2026-10-26T16:45:30.493925+00:00",
+  "synthetic": true,
+  "test_double": false,
+  "policy": {
+    "frozen_before_implementation_at": "2026-10-26T16:43:50.590782+00:00",
+    "version": "extraction-eval-v1",
+    "split": "development may tune; holdout evaluated once after prompt freeze; no holdout tuning",
+    "kinds": [
+      "symptom",
+      "subject",
+      "time",
+      "duration",
+      "severity",
+      "negation",
+      "medication",
+      "uncertainty"
+    ],
+    "matching": "exact kind+quote multiset; repeated identical mentions counted separately; case and whitespace exact",
+    "thresholds": {
+      "each_kind_precision": 0.9,
+      "each_kind_recall": 0.8,
+      "unsupported_final_spans": 0,
+      "failed_calls": 0
+    },
+    "unmet_policy": "report FAIL and leave BE05 unaccepted; do not average failures away",
+    "scope": "synthetic extractive mentions only; not clinical truth or normalized interpretations",
+    "corpus_sha256": {
+      "development.json": "5f8c7d36d063f1afaa98ce26fd9ac227d93cfb6fce1d40441a18a39e7ad1ac6a",
+      "holdout.json": "c6df33dd1d9d978f5872590369b5fa01af97e0db9cedbde635dbbea3e3b26366"
+    }
+  },
+  "prompt_sha256_before_run": "fed63f44daedef965ca1e0430fd63dc628f437598fc6813d5b96ab99c528f955",
+  "cases": [
+    {
+      "id": "dev-patient",
+      "tags": [
+        "patient",
+        "negation"
+      ],
+      "expected": [
+        {
+          "kind": "symptom",
+          "quote": "плохо сплю"
+        },
+        {
+          "kind": "duration",
+          "quote": "три недели"
+        },
+        {
+          "kind": "symptom",
+          "quote": "Тревогу"
+        },
+        {
+          "kind": "negation",
+          "quote": "отрицаю"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v1",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "плохо сплю",
+            "source_ref": "synthetic_dev-patient",
+            "path": "/text",
+            "start": 2,
+            "end": 12,
+            "context_quote": "Я плохо сплю уже три недели. ",
+            "context_start": 0,
+            "context_end": 29,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-patient",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "ea80f2a7447930d1a5329d313cedfbe95896a10ee4b02c5a663f36677e026e54",
+            "snapshot_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "duration",
+            "quote": "три недели",
+            "source_ref": "synthetic_dev-patient",
+            "path": "/text",
+            "start": 17,
+            "end": 27,
+            "context_quote": "Я плохо сплю уже три недели. ",
+            "context_start": 0,
+            "context_end": 29,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-patient",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "ea80f2a7447930d1a5329d313cedfbe95896a10ee4b02c5a663f36677e026e54",
+            "snapshot_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "symptom",
+            "quote": "Тревогу",
+            "source_ref": "synthetic_dev-patient",
+            "path": "/text",
+            "start": 29,
+            "end": 36,
+            "context_quote": "Тревогу отрицаю.",
+            "context_start": 29,
+            "context_end": 45,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-patient",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "ea80f2a7447930d1a5329d313cedfbe95896a10ee4b02c5a663f36677e026e54",
+            "snapshot_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "negation",
+            "quote": "отрицаю",
+            "source_ref": "synthetic_dev-patient",
+            "path": "/text",
+            "start": 37,
+            "end": 44,
+            "context_quote": "Тревогу отрицаю.",
+            "context_start": 29,
+            "context_end": 45,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-patient",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "wellbeing"
+            },
+            "field_sha256": "ea80f2a7447930d1a5329d313cedfbe95896a10ee4b02c5a663f36677e026e54",
+            "snapshot_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+        "snapshot_sha256": "68a46192d0e585e0cf210a28f49180f0ac83d20a0d63cbb9e20f1efd77af3ed6",
+        "input_document_count": 1,
+        "input_unit_count": 2,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.878,
+          "usage": {
+            "prompt_tokens": 615,
+            "completion_tokens": 101,
+            "total_tokens": 716
+          },
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 615,
+          "estimated_peak_cost_nano_usd": 305700,
+          "estimated_offpeak_cost_nano_usd": 152850,
+          "cost_ceiling_micro_usd": 1120,
+          "reservation_micro_usd": 8193,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "fed63f44daedef965ca1e0430fd63dc628f437598fc6813d5b96ab99c528f955",
+          "extraction_version": "extractive-mentions-v1"
+        }
+      },
+      "unsupported_final_spans": 0
+    },
+    {
+      "id": "dev-doctor",
+      "tags": [
+        "family",
+        "old",
+        "uncertain",
+        "medication"
+      ],
+      "expected": [
+        {
+          "kind": "subject",
+          "quote": "У отца"
+        },
+        {
+          "kind": "symptom",
+          "quote": "бессонница"
+        },
+        {
+          "kind": "time",
+          "quote": "в 2018 году"
+        },
+        {
+          "kind": "subject",
+          "quote": "Пациент"
+        },
+        {
+          "kind": "uncertainty",
+          "quote": "возможно"
+        },
+        {
+          "kind": "medication",
+          "quote": "пропустил приём вымышленного препарата Тестин"
+        }
+      ],
+      "result": {
+        "version": "extractive-mentions-v1",
+        "status": "mentions_only",
+        "facts": [
+          {
+            "unit_id": "u0",
+            "kind": "subject",
+            "quote": "У отца",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 0,
+            "end": 6,
+            "context_quote": "У отца была бессонница в 2018 году. ",
+            "context_start": 0,
+            "context_end": 36,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "symptom",
+            "quote": "бессонница",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 12,
+            "end": 22,
+            "context_quote": "У отца была бессонница в 2018 году. ",
+            "context_start": 0,
+            "context_end": 36,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u0",
+            "kind": "time",
+            "quote": "в 2018 году",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 23,
+            "end": 34,
+            "context_quote": "У отца была бессонница в 2018 году. ",
+            "context_start": 0,
+            "context_end": 36,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "subject",
+            "quote": "Пациент",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 36,
+            "end": 43,
+            "context_quote": "Пациент, возможно, пропустил приём вымышленного препарата Тестин.",
+            "context_start": 36,
+            "context_end": 101,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "uncertainty",
+            "quote": "возможно",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 45,
+            "end": 53,
+            "context_quote": "Пациент, возможно, пропустил приём вымышленного препарата Тестин.",
+            "context_start": 36,
+            "context_end": 101,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          },
+          {
+            "unit_id": "u1",
+            "kind": "medication",
+            "quote": "пропустил приём вымышленного препарата Тестин",
+            "source_ref": "synthetic_dev-doctor",
+            "path": "/text",
+            "start": 55,
+            "end": 100,
+            "context_quote": "Пациент, возможно, пропустил приём вымышленного препарата Тестин.",
+            "context_start": 36,
+            "context_end": 101,
+            "event_at": "2026-10-26",
+            "recorded_at": "2026-10-26T17:00:00Z",
+            "source_metadata": {
+              "source_ref": "synthetic_dev-doctor",
+              "path": "/text",
+              "event_at": "2026-10-26",
+              "recorded_at": "2026-10-26T17:00:00Z",
+              "category": "anamnesis"
+            },
+            "field_sha256": "56036461e48ce52865c5483eecd1911bd9b0a9a243090bb3062f2ad775f19f30",
+            "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+            "interpretation": "unreviewed_mention_not_patient_truth"
+          }
+        ],
+        "input_documents_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+        "snapshot_sha256": "d18afe2b70165a51562624b0c6c6aeb33742cddea8ccbf40150bc2f87b205eb7",
+        "input_document_count": 1,
+        "input_unit_count": 2,
+        "unknown_time_count": 0,
+        "clinical_ready": false,
+        "metadata": {
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "thinking": "disabled",
+          "temperature": 0,
+          "timeout_seconds": 60,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1024,
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "returned_model": "deepseek-flash",
+          "prompt_version": "compass-model-v1",
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "schema_sha256": "02642e5caa32245aa1ac2f247697a22d868763d55e8eb5441d452fd4884e7b52",
+          "elapsed_seconds": 1.289,
+          "usage": {
+            "prompt_tokens": 635,
+            "completion_tokens": 158,
+            "total_tokens": 793
+          },
+          "cache_hit_tokens": 256,
+          "cache_miss_tokens": 379,
+          "estimated_peak_cost_nano_usd": 304836,
+          "estimated_offpeak_cost_nano_usd": 152418,
+          "cost_ceiling_micro_usd": 1425,
+          "reservation_micro_usd": 8293,
+          "synthetic_only": true,
+          "test_double": false,
+          "extraction_prompt_sha256": "fed63f44daedef965ca1e0430fd63dc628f437598fc6813d5b96ab99c528f955",
+          "extraction_version": "extractive-mentions-v1"
+        }
+      },
+      "unsupported_final_spans": 0
+    }
+  ],
+  "complete": true,
+  "metrics_by_kind": {
+    "symptom": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "subject": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "time": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "duration": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "severity": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "pass": false
+    },
+    "negation": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "medication": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    },
+    "uncertainty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "pass": true
+    }
+  },
+  "errors": [],
+  "failed_calls": 0,
+  "unsupported_final_spans": 0,
+  "finished_at": "2026-10-26T16:45:33.668021+00:00",
+  "pass": false,
+  "billing": {
+    "cost_ceiling_micro_usd": 2545,
+    "estimated_peak_cost_nano_usd": 610536,
+    "estimated_offpeak_cost_nano_usd": 305268
+  }
+}
