@@ -563,6 +563,19 @@
           }
         }
       }
+    },
+    "/api/v1/patients/{patient_id}/analyses/{run_id}/risk-context": {
+      "get": {
+        "description": "Physician-only stored synthetic partial model evaluation, exact citations and episode references. Live authorization and same relationship. GET/HEAD no-store. Stale runs explicitly carry analysis_status=stale; not a current safety assessment. No delivery or clinical application.",
+        "responses": {
+          "200": {
+            "description": "run_id, snapshot_id, analysis_status and immutable partial report"
+          },
+          "404": {
+            "description": "No evaluation or unavailable relationship/run"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1002,6 +1015,9 @@
                 "maxLength": 500
               }
             ]
+          },
+          "risk_context": {
+            "$ref": "#/components/schemas/RiskContextProjection"
           }
         },
         "required": [
@@ -1507,6 +1523,73 @@
           "source_id",
           "section",
           "pdf_page"
+        ],
+        "additionalProperties": false
+      },
+      "RiskContextProjection": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "enum": [
+              "risk-candidates-v1",
+              "risk-candidates-v2"
+            ]
+          },
+          "status": {
+            "const": "partial"
+          },
+          "assessment": {
+            "const": "not_established"
+          },
+          "clinical_ready": {
+            "const": false
+          },
+          "model_evaluation": {
+            "enum": [
+              "candidates_only",
+              "not_evaluated"
+            ]
+          },
+          "candidate_ids": {
+            "type": "array",
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "missing_categories": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "string",
+              "enum": [
+                "questionnaires",
+                "wellbeing",
+                "anamnesis",
+                "visits"
+              ]
+            }
+          },
+          "error_codes": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,79}$"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "status",
+          "assessment",
+          "clinical_ready",
+          "model_evaluation",
+          "candidate_ids",
+          "missing_categories",
+          "error_codes"
         ],
         "additionalProperties": false
       }

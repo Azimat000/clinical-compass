@@ -1,0 +1,25 @@
+{
+  "version": "be08-holdout-v1",
+  "frozen_before_calls": true,
+  "corpus_sha256": "5e5ab3ec4e480fc4cc3760e053eb4481a03c71b98258aad3e7cda4e76217becb",
+  "prompt_sha256": "a0099ae847b3bfa17cea72b11a014a2c4be7d8e072d5b2b630d8bff6a914a16a",
+  "implementation_sha256": {
+    "apps/compass/backend_risk_context.py": "faedc327f9cc9328592c5055789f7b0678dd874d5f1cbb6d9dfb68d61c41a22e",
+    "tools/evaluate_backend_risk.py": "39433cfa3afe5c933cf06425debae831f2667f665438bf09a86ea7b7444f291e"
+  },
+  "acceptance": {
+    "model_precision_min": 0.85,
+    "model_recall_min": 0.85,
+    "strong_and_questionnaire_conflict_signal_must_match": true,
+    "chronology_false_discrepancy_max": 0,
+    "negative_gap_and_family_fp_max": 0,
+    "rule_fp_fn_max": 0,
+    "candidate_integrity_errors_max": 0
+  },
+  "evaluation_unit": "presence of candidate topic / rule id per case; separate denominators, not clinical accuracy",
+  "not_independent_clinical_gold": true,
+  "no_tuning_after_observation": true,
+  "known_BE08A_smoke_is_development_only": true,
+  "model": "deepseek-flash",
+  "adapter": "compass-model-v1"
+}

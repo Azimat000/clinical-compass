@@ -216,6 +216,8 @@ def inputs(db, user, patient_id, run_id, *, reference=None, page=1):
 def validate_analysis(value):
     validate('Analysis', value)
     state, result = value['status'], value['result']
+    if 'risk_context' in value and (value['operation'] != 'risk' or state in ('queued', 'running', 'failed')):
+        raise AnalysisError('Смысловая оценка требует завершённого анализа риска.')
     if state == 'ready' and (result is None or value['errors']):
         raise AnalysisError('Готовый результат требует содержимого и не допускает ошибок.')
     if state not in ('ready', 'stale') and result is not None:
@@ -335,7 +337,7 @@ def _read_in_snapshot(db, user, patient_id, run_id):
     return value
 
 
-def advance(db, user, patient_id, run_id, expected_revision, status, *, result=None, errors=None, model=None, stale_reason=None):
+def advance(db, user, patient_id, run_id, expected_revision, status, *, result=None, errors=None, model=None, stale_reason=None, risk_context=None):
     """Internal worker boundary, deliberately absent from HTTP. Never applies a plan."""
     if type(expected_revision) is not int:
         raise AnalysisError('Нужна точная версия.', 409, 'revision_conflict')
@@ -384,12 +386,18 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
                 raise AnalysisError('Клиническое основание недоступно: ' + str(exc), 409, 'source_unavailable') from None
         value = {**current, 'status': status, 'revision': expected_revision + 1, 'updated_at': now(),
                  'result': result, 'errors': errors if errors is not None else [], 'model': model, 'stale_reason': stale_reason}
+        if risk_context is not None:
+            from . import backend_risk_context as context
+            stored = db.execute('SELECT payload_json FROM backend_risk_episode_evaluations WHERE run_id=?', (run_id,)).fetchone()
+            if stored is None or decisions.canonical(context.projection(json.loads(stored[0]))) != decisions.canonical(risk_context):
+                raise AnalysisError('Нет сохранённой смысловой оценки.', 409, 'invalid_risk_context')
+            value['risk_context'] = risk_context
         _append(db, value)
         access.audit(db, user['id'], 'analysis.' + status, run_id)
         return value
 
 
-def advance_in_job(db, run, current, outcome):
+def advance_in_job(db, run, current, outcome, *, risk_context=None):
     """Publish only through the existing contract and evidence validation."""
     if not db.in_transaction:
         raise RuntimeError('Publication requires the lease transaction')
@@ -398,4 +406,4 @@ def advance_in_job(db, run, current, outcome):
         raise AnalysisError('Недопустимый результат фонового анализа.')
     return advance(db, {'id': run['actor_id'], 'role': 'doctor'}, run['patient_id'],
                    run['id'], current['revision'], outcome['status'],
-                   result=outcome.get('result'), errors=outcome.get('errors'), model=outcome.get('model'))
+                   result=outcome.get('result'), errors=outcome.get('errors'), model=outcome.get('model'), risk_context=risk_context)

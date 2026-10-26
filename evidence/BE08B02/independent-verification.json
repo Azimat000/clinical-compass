@@ -1,0 +1,36 @@
+{
+  "pass": true,
+  "original_requirements": 83,
+  "subchecks": 160,
+  "no_new_slices": true,
+  "preserved_files": 4,
+  "all_four_sources": true,
+  "holdout_cases": 9,
+  "quotes_independently_rebuilt": 10,
+  "model_metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "rule_metrics": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "genuine_api_successes": 2,
+  "genuine_default_adapter_unavailability": true,
+  "atomicity_and_access_tests": true,
+  "application_tests": 764,
+  "tool_tests": 70,
+  "ledger_micro_usd": 45150,
+  "cap_micro_usd": 50000,
+  "clinical_validation": false,
+  "batch_codec_and_production_codec_distinguished": true,
+  "live_token_split_not_retained": true,
+  "source_copy_check": true,
+  "scope_check": true
+}

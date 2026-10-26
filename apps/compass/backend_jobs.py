@@ -29,12 +29,16 @@ def fingerprint(db):
     if config is None:
         return None
     # Lazy import avoids the model -> analyses dependency cycle.
-    from . import backend_model, backend_extraction, backend_risk_rules
-    return {'jobs_version': 'backend-jobs-v1', 'generation_version': config['generation_version'],
+    from . import backend_model, backend_extraction, backend_risk_rules, backend_risk_context
+    result = {'jobs_version': 'backend-jobs-v1', 'generation_version': config['generation_version'],
             'model': 'deepseek-flash', 'adapter': backend_model.PROMPT_VERSION,
             'system_sha256': hashlib.sha256(backend_model.SYSTEM.encode()).hexdigest(),
             'extraction': backend_extraction.VERSION,
             'risk_rules': backend_risk_rules.release()['engine_sha256']}
+    if config['generation_version'] == backend_risk_context.EXECUTION_VERSION:
+        result['risk_candidates'] = backend_risk_context.VERSION
+        result['risk_prompt_sha256'] = backend_risk_context.PROMPT_SHA256
+    return result
 
 
 def schedule(db, value):
@@ -148,7 +152,17 @@ def unavailable(operation, snapshot):
 
 
 def execute(operation, snapshot):
-    from . import backend_risk_rules
+    from . import backend_risk_rules, backend_risk_context
+    if (operation == 'risk' and snapshot.get('backend_runtime', {}).get('generation_version')
+            == backend_risk_context.EXECUTION_VERSION):
+        try:
+            return backend_risk_context.execute(operation, snapshot)
+        except Exception:
+            # Adapter/budget initialization must not erase reproducible flags.
+            # The independent rule evaluator itself still fails closed if broken.
+            report = backend_risk_context.analyze_snapshot(snapshot, synthetic=True)
+            report['errors'] = [{'code': 'model_initialization_error', 'stage': 'model_candidate_evaluation'}]
+            return {**report['structured'], 'risk_context_report': report}
     return backend_risk_rules.execute(operation, snapshot)
 
 
@@ -169,7 +183,17 @@ def finish(db, claim_value, outcome=None, error=None):
             try:
                 # SAVEPOINT: validator or INSERT failure cannot leave partial results.
                 db.execute('SAVEPOINT publication')
-                analyses.advance_in_job(db, run, value, outcome)
+                publication = dict(outcome)
+                report = publication.pop('risk_context_report', None)
+                projected = None
+                if report is not None:
+                    from . import backend_risk_context as context, backend_risk_episodes as episodes
+                    if (run['operation'] != 'risk' or settings(db)['generation_version']
+                            != context.EXECUTION_VERSION or publication != report.get('structured')):
+                        raise analyses.AnalysisError('Неверная смысловая оценка.')
+                    saved = episodes.observe(db, {'id':run['actor_id'], 'role':'doctor'}, run['patient_id'], run['id'], report)
+                    projected = context.projection(saved)
+                analyses.advance_in_job(db, run, value, publication, risk_context=projected)
                 db.execute('RELEASE publication')
             except Exception:
                 db.execute('ROLLBACK TO publication')

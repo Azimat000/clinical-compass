@@ -1,0 +1,148 @@
+{
+  "pass": true,
+  "live_open_mode": "ro",
+  "live_unchanged": true,
+  "copy": "var/BE08B02-migration-check.sqlite3",
+  "copy_mode": "0o600",
+  "existing_tables": 80,
+  "existing_rows_unchanged": true,
+  "existing_triggers_retained": 74,
+  "migration_idempotent": true,
+  "added_tables": [
+    "analysis_input_snapshots",
+    "analysis_result_versions",
+    "analysis_runs",
+    "backend_job_attempts",
+    "backend_job_settings",
+    "backend_jobs",
+    "backend_risk_episode_evaluations",
+    "backend_risk_episode_evidence",
+    "backend_risk_episode_versions",
+    "backend_risk_episodes"
+  ],
+  "schema_after": "018_backend_risk_episodes",
+  "jobs_enabled": 0,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "live_health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "preserved_files": 4,
+  "clinical_validation": false,
+  "external_calls": 0,
+  "histories": [
+    {
+      "fields": 271,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 271,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 271,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 271,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 265,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 265,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 269,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 271,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 265,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    },
+    {
+      "fields": 285,
+      "categories": [
+        "anamnesis",
+        "questionnaires",
+        "visits",
+        "wellbeing"
+      ],
+      "status": "partial",
+      "structured_status": "insufficient_data"
+    }
+  ]
+}

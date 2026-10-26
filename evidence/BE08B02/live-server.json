@@ -1,0 +1,1046 @@
+{
+  "pass": true,
+  "synthetic": true,
+  "production_executor": true,
+  "production_http": true,
+  "active_service_untouched": true,
+  "input_bytes": 4261,
+  "reservation_micro_usd": 6053,
+  "budget_before": 43727,
+  "cases": [
+    {
+      "case": "real_provider_http_queue_worker",
+      "analysis": {
+        "contract_version": "1.0",
+        "created_at": "2026-10-26T18:35:47.086027+00:00",
+        "errors": [],
+        "model": null,
+        "operation": "risk",
+        "patient_id": "BE08NEW",
+        "release": {
+          "blockers": [
+            "BE03",
+            "BE04",
+            "BE18",
+            "BE19",
+            "B04",
+            "E02",
+            "E06"
+          ],
+          "status": "blocked",
+          "version": "be01-contract-only-v1"
+        },
+        "result": {
+          "contradictions": [],
+          "facts": [
+            {
+              "evidence_refs": [
+                "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+              ],
+              "id": "context",
+              "text": "Структурированный контекст врача: F32; дата 2026-10-26."
+            },
+            {
+              "evidence_refs": [
+                "s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8",
+                "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50"
+              ],
+              "id": "age",
+              "text": "Сверенный возраст на дату снимка: 35–35."
+            },
+            {
+              "evidence_refs": [
+                "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+              ],
+              "id": "fact-DEP-SUICIDE-FACT",
+              "text": "DEP-SUICIDE-FACT: triggered; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"present\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26."
+            }
+          ],
+          "missing_data": [
+            "Оценены только перечисленные структурированные правила. Анкеты, общий показатель самочувствия, свободный текст и его сочетания здесь не оценены (BE08); отсутствие совпадения не означает отсутствия риска. Клинический выпуск заблокирован."
+          ],
+          "output": {
+            "assessment": "potential_risk",
+            "patterns": [
+              {
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "id": "DEP-SUICIDE-FACT",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+              }
+            ],
+            "rule_evaluations": [
+              {
+                "attention": "physician_review",
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "pdf_page": 21,
+                "reasons": [],
+                "rule_id": "DEP-SUICIDE-FACT",
+                "section": "2.5 Иные диагностические исследования",
+                "source_id": "KR301_3",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "state": "triggered",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 39,
+                "reasons": [],
+                "rule_id": "GAD-PSY-REVIEW",
+                "section": "5. Профилактика и диспансерное наблюдение",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-PSY-REVIEW"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 30,
+                "reasons": [],
+                "rule_id": "GAD-ADVERSE-REVIEW",
+                "section": "3.2 Психофармакотерапия",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-ADVERSE-REVIEW"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 22,
+                "reasons": [],
+                "rule_id": "GAD-INITIAL-ANXIETY",
+                "section": "3.2 Психофармакотерапия",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-INITIAL-ANXIETY"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              }
+            ]
+          },
+          "summary": "Есть структурированные признаки для рассмотрения врачом."
+        },
+        "revision": 3,
+        "risk_context": {
+          "assessment": "not_established",
+          "candidate_ids": [
+            "29d6afa17a7acbd2243e94a66afcd168f782a75c867404d999d4b8723f692525",
+            "61368908294324b5d695597036b96ff4055c6b7a7833bed97acc9481c426b766"
+          ],
+          "clinical_ready": false,
+          "error_codes": [],
+          "missing_categories": [
+            "questionnaires",
+            "anamnesis",
+            "visits"
+          ],
+          "model_evaluation": "candidates_only",
+          "status": "partial",
+          "version": "risk-candidates-v2"
+        },
+        "run_id": "0e23f40a3100428ee97a9099ac48913b",
+        "scope_version": "backend-scope-v1",
+        "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+        "sources": [
+          {
+            "id": "DASS42-RU-FG-2024-demo-v1-source",
+            "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+            "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+          },
+          {
+            "id": "GAD7-RU-Z-2023-demo-v1-source",
+            "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+            "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+          },
+          {
+            "id": "PHQ9-RU-Z-2023-demo-v1-source",
+            "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+            "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+          },
+          {
+            "id": "be03-KR301_3-F01",
+            "sha256": "5f228ba2eec8771c27d9f3f720f677afcce07116033f7c39ee9979c2b8c70e7c",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR301_3-F02",
+            "sha256": "12c690a91266c2eff0a44f7ce4c2b5d4640b1d34d64d62d4adc2e9a0bd8e143a",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR301_3-F04",
+            "sha256": "7c77f0c27e5528edc3a9eb2e3a0da9febd6ffe9437877377d1585cccc7e5bf84",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F01",
+            "sha256": "730450e31198ca59d5b186ac3ecc81c2e71811ea9f308d4e595b7d99aa3202f4",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F02",
+            "sha256": "6730fd583199d1204ab802d3e72a4c684f17eef94779bd5f79b8657f3accb29a",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F03",
+            "sha256": "6ab11609640c8f7fe03a284c7cf9962cfb08878e2f8a7d61b994a085f559b020",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be07-DEP-SUICIDE-FACT",
+            "sha256": "c2966e7c591335a833c221ed21c2c38b5de6ce2a87116f8810cd59fd1fa53e0b",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-PSY-REVIEW",
+            "sha256": "f024f6a50332177aa69e3f1c1f8d9022626149a58a0908a57299bce0223c9837",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-ADVERSE-REVIEW",
+            "sha256": "dd6b7f94db216777c54fe065037f8b9cf854cf6f65bf3ba19b7e256e6e2c28fc",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-INITIAL-ANXIETY",
+            "sha256": "0e887bd66aa40c264b6cdfb23fddf727b8b4a10df4c14231c611036c2af6ec5d",
+            "version": "backend-risk-rules-v1"
+          }
+        ],
+        "stale_reason": null,
+        "status": "ready",
+        "updated_at": "2026-10-26T18:35:48.643567+00:00"
+      },
+      "details": {
+        "analysis_status": "ready",
+        "report": {
+          "assessment": "not_established",
+          "candidate_version": "risk-candidates-v2",
+          "changed_episodes": [
+            {
+              "episode_id": "cc7f532bbe20ddcbcace65862eda2e72",
+              "revision": 1
+            },
+            {
+              "episode_id": "ffbe0ac478b2c367ae9a470f1f6a55c2",
+              "revision": 1
+            },
+            {
+              "episode_id": "0467426e2b15bdfa34e0f4fad6524ddf",
+              "revision": 1
+            }
+          ],
+          "clinical_ready": false,
+          "errors": [],
+          "missing_categories": [
+            "questionnaires",
+            "anamnesis",
+            "visits"
+          ],
+          "model_candidates": [
+            {
+              "clinical_causality": "not_established",
+              "evidence": [
+                {
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "code": "summary",
+                  "end": 16,
+                  "field_sha256": "856fd17f8c346fdffc4b08910a101b336131ed3b1f357042e8bc307c0433b26e",
+                  "metadata": {
+                    "author_id": "pat-c",
+                    "context": "current",
+                    "current_revision": true,
+                    "event_at": "2026-10-26",
+                    "recorded_at": "2026-10-26T18:35:46.730549+00:00",
+                    "state": "recorded",
+                    "status": "known"
+                  },
+                  "offset_basis": "original_text",
+                  "path": "/payload_json/summary",
+                  "quote": "Хочу убить себя.",
+                  "source_ref": "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50",
+                  "source_sha256": "7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9",
+                  "start": 0,
+                  "text": "Хочу убить себя.",
+                  "unit_id": "u0",
+                  "value": "Хочу убить себя."
+                }
+              ],
+              "id": "29d6afa17a7acbd2243e94a66afcd168f782a75c867404d999d4b8723f692525",
+              "interpretation": "model_suspicion_unreviewed",
+              "record_days": [
+                "2026-10-26"
+              ],
+              "snapshot_sha256": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+              "temporal_relation": "single_observation",
+              "topic": "safety_concern"
+            },
+            {
+              "clinical_causality": "not_established",
+              "evidence": [
+                {
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "code": "wellbeing",
+                  "end": 5,
+                  "field_sha256": "7e89c010318131c024ac9ee1feb079381314375c9364c3b4315435fd339ec062",
+                  "metadata": {
+                    "author_id": "pat-c",
+                    "context": "current",
+                    "current_revision": true,
+                    "event_at": "2026-10-26",
+                    "recorded_at": "2026-10-26T18:35:46.730549+00:00",
+                    "state": "recorded",
+                    "status": "known"
+                  },
+                  "offset_basis": "original_text",
+                  "path": "/payload_json/wellbeing",
+                  "quote": "worse",
+                  "source_ref": "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50",
+                  "source_sha256": "7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9",
+                  "start": 0,
+                  "text": "worse",
+                  "unit_id": "u6",
+                  "value": "worse"
+                }
+              ],
+              "id": "61368908294324b5d695597036b96ff4055c6b7a7833bed97acc9481c426b766",
+              "interpretation": "model_suspicion_unreviewed",
+              "record_days": [
+                "2026-10-26"
+              ],
+              "snapshot_sha256": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+              "temporal_relation": "single_observation",
+              "topic": "reported_change"
+            }
+          ],
+          "model_evaluation": "candidates_only",
+          "model_provenance": {
+            "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+            "prompt_version": "compass-model-v1",
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "returned_model": "deepseek-flash",
+            "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+            "test_double": false
+          },
+          "prompt_sha256": "a0099ae847b3bfa17cea72b11a014a2c4be7d8e072d5b2b630d8bff6a914a16a",
+          "snapshot_sha256": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+          "status": "partial",
+          "structured": {
+            "model": null,
+            "result": {
+              "contradictions": [],
+              "facts": [
+                {
+                  "evidence_refs": [
+                    "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+                  ],
+                  "id": "context",
+                  "text": "Структурированный контекст врача: F32; дата 2026-10-26."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8",
+                    "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50"
+                  ],
+                  "id": "age",
+                  "text": "Сверенный возраст на дату снимка: 35–35."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+                  ],
+                  "id": "fact-DEP-SUICIDE-FACT",
+                  "text": "DEP-SUICIDE-FACT: triggered; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"present\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26."
+                }
+              ],
+              "missing_data": [
+                "Оценены только перечисленные структурированные правила. Анкеты, общий показатель самочувствия, свободный текст и его сочетания здесь не оценены (BE08); отсутствие совпадения не означает отсутствия риска. Клинический выпуск заблокирован."
+              ],
+              "output": {
+                "assessment": "potential_risk",
+                "patterns": [
+                  {
+                    "fact_ids": [
+                      "context",
+                      "age",
+                      "fact-DEP-SUICIDE-FACT"
+                    ],
+                    "id": "DEP-SUICIDE-FACT",
+                    "source_ids": [
+                      "be07-DEP-SUICIDE-FACT"
+                    ],
+                    "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+                  }
+                ],
+                "rule_evaluations": [
+                  {
+                    "attention": "physician_review",
+                    "fact_ids": [
+                      "context",
+                      "age",
+                      "fact-DEP-SUICIDE-FACT"
+                    ],
+                    "pdf_page": 21,
+                    "reasons": [],
+                    "rule_id": "DEP-SUICIDE-FACT",
+                    "section": "2.5 Иные диагностические исследования",
+                    "source_id": "KR301_3",
+                    "source_ids": [
+                      "be07-DEP-SUICIDE-FACT"
+                    ],
+                    "state": "triggered",
+                    "version": "backend-risk-rules-v1"
+                  },
+                  {
+                    "attention": "undetermined",
+                    "fact_ids": [
+                      "context",
+                      "age"
+                    ],
+                    "pdf_page": 39,
+                    "reasons": [],
+                    "rule_id": "GAD-PSY-REVIEW",
+                    "section": "5. Профилактика и диспансерное наблюдение",
+                    "source_id": "KR457_3",
+                    "source_ids": [
+                      "be07-GAD-PSY-REVIEW"
+                    ],
+                    "state": "not_applicable",
+                    "version": "backend-risk-rules-v1"
+                  },
+                  {
+                    "attention": "undetermined",
+                    "fact_ids": [
+                      "context",
+                      "age"
+                    ],
+                    "pdf_page": 30,
+                    "reasons": [],
+                    "rule_id": "GAD-ADVERSE-REVIEW",
+                    "section": "3.2 Психофармакотерапия",
+                    "source_id": "KR457_3",
+                    "source_ids": [
+                      "be07-GAD-ADVERSE-REVIEW"
+                    ],
+                    "state": "not_applicable",
+                    "version": "backend-risk-rules-v1"
+                  },
+                  {
+                    "attention": "undetermined",
+                    "fact_ids": [
+                      "context",
+                      "age"
+                    ],
+                    "pdf_page": 22,
+                    "reasons": [],
+                    "rule_id": "GAD-INITIAL-ANXIETY",
+                    "section": "3.2 Психофармакотерапия",
+                    "source_id": "KR457_3",
+                    "source_ids": [
+                      "be07-GAD-INITIAL-ANXIETY"
+                    ],
+                    "state": "not_applicable",
+                    "version": "backend-risk-rules-v1"
+                  }
+                ]
+              },
+              "summary": "Есть структурированные признаки для рассмотрения врачом."
+            },
+            "status": "ready"
+          },
+          "version": "risk-episodes-v1"
+        },
+        "run_id": "0e23f40a3100428ee97a9099ac48913b",
+        "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e"
+      }
+    },
+    {
+      "case": "real_adapter_unavailable",
+      "analysis": {
+        "contract_version": "1.0",
+        "created_at": "2026-10-26T18:35:48.692863+00:00",
+        "errors": [],
+        "model": null,
+        "operation": "risk",
+        "patient_id": "BE08NEW",
+        "release": {
+          "blockers": [
+            "BE03",
+            "BE04",
+            "BE18",
+            "BE19",
+            "B04",
+            "E02",
+            "E06"
+          ],
+          "status": "blocked",
+          "version": "be01-contract-only-v1"
+        },
+        "result": {
+          "contradictions": [],
+          "facts": [
+            {
+              "evidence_refs": [
+                "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+              ],
+              "id": "context",
+              "text": "Структурированный контекст врача: F32; дата 2026-10-26."
+            },
+            {
+              "evidence_refs": [
+                "s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8",
+                "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50"
+              ],
+              "id": "age",
+              "text": "Сверенный возраст на дату снимка: 35–35."
+            },
+            {
+              "evidence_refs": [
+                "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+              ],
+              "id": "fact-DEP-SUICIDE-FACT",
+              "text": "DEP-SUICIDE-FACT: triggered; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"present\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26."
+            }
+          ],
+          "missing_data": [
+            "Оценены только перечисленные структурированные правила. Анкеты, общий показатель самочувствия, свободный текст и его сочетания здесь не оценены (BE08); отсутствие совпадения не означает отсутствия риска. Клинический выпуск заблокирован."
+          ],
+          "output": {
+            "assessment": "potential_risk",
+            "patterns": [
+              {
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "id": "DEP-SUICIDE-FACT",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+              }
+            ],
+            "rule_evaluations": [
+              {
+                "attention": "physician_review",
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "pdf_page": 21,
+                "reasons": [],
+                "rule_id": "DEP-SUICIDE-FACT",
+                "section": "2.5 Иные диагностические исследования",
+                "source_id": "KR301_3",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "state": "triggered",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 39,
+                "reasons": [],
+                "rule_id": "GAD-PSY-REVIEW",
+                "section": "5. Профилактика и диспансерное наблюдение",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-PSY-REVIEW"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 30,
+                "reasons": [],
+                "rule_id": "GAD-ADVERSE-REVIEW",
+                "section": "3.2 Психофармакотерапия",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-ADVERSE-REVIEW"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              },
+              {
+                "attention": "undetermined",
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "pdf_page": 22,
+                "reasons": [],
+                "rule_id": "GAD-INITIAL-ANXIETY",
+                "section": "3.2 Психофармакотерапия",
+                "source_id": "KR457_3",
+                "source_ids": [
+                  "be07-GAD-INITIAL-ANXIETY"
+                ],
+                "state": "not_applicable",
+                "version": "backend-risk-rules-v1"
+              }
+            ]
+          },
+          "summary": "Есть структурированные признаки для рассмотрения врачом."
+        },
+        "revision": 3,
+        "risk_context": {
+          "assessment": "not_established",
+          "candidate_ids": [],
+          "clinical_ready": false,
+          "error_codes": [
+            "missing_credentials"
+          ],
+          "missing_categories": [
+            "questionnaires",
+            "anamnesis",
+            "visits"
+          ],
+          "model_evaluation": "not_evaluated",
+          "status": "partial",
+          "version": "risk-candidates-v2"
+        },
+        "run_id": "11b11651ac3dec1687e471459e232577",
+        "scope_version": "backend-scope-v1",
+        "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+        "sources": [
+          {
+            "id": "DASS42-RU-FG-2024-demo-v1-source",
+            "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+            "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+          },
+          {
+            "id": "GAD7-RU-Z-2023-demo-v1-source",
+            "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+            "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+          },
+          {
+            "id": "PHQ9-RU-Z-2023-demo-v1-source",
+            "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+            "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+          },
+          {
+            "id": "be03-KR301_3-F01",
+            "sha256": "5f228ba2eec8771c27d9f3f720f677afcce07116033f7c39ee9979c2b8c70e7c",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR301_3-F02",
+            "sha256": "12c690a91266c2eff0a44f7ce4c2b5d4640b1d34d64d62d4adc2e9a0bd8e143a",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR301_3-F04",
+            "sha256": "7c77f0c27e5528edc3a9eb2e3a0da9febd6ffe9437877377d1585cccc7e5bf84",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F01",
+            "sha256": "730450e31198ca59d5b186ac3ecc81c2e71811ea9f308d4e595b7d99aa3202f4",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F02",
+            "sha256": "6730fd583199d1204ab802d3e72a4c684f17eef94779bd5f79b8657f3accb29a",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be03-KR457_3-F03",
+            "sha256": "6ab11609640c8f7fe03a284c7cf9962cfb08878e2f8a7d61b994a085f559b020",
+            "version": "backend-sources-v1"
+          },
+          {
+            "id": "be07-DEP-SUICIDE-FACT",
+            "sha256": "c2966e7c591335a833c221ed21c2c38b5de6ce2a87116f8810cd59fd1fa53e0b",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-PSY-REVIEW",
+            "sha256": "f024f6a50332177aa69e3f1c1f8d9022626149a58a0908a57299bce0223c9837",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-ADVERSE-REVIEW",
+            "sha256": "dd6b7f94db216777c54fe065037f8b9cf854cf6f65bf3ba19b7e256e6e2c28fc",
+            "version": "backend-risk-rules-v1"
+          },
+          {
+            "id": "be07-GAD-INITIAL-ANXIETY",
+            "sha256": "0e887bd66aa40c264b6cdfb23fddf727b8b4a10df4c14231c611036c2af6ec5d",
+            "version": "backend-risk-rules-v1"
+          }
+        ],
+        "stale_reason": null,
+        "status": "ready",
+        "updated_at": "2026-10-26T18:35:48.869369+00:00"
+      }
+    }
+  ],
+  "episodes": [
+    {
+      "id": "cc7f532bbe20ddcbcace65862eda2e72",
+      "patient_id": "BE08NEW",
+      "relationship_id": "be08-link",
+      "origin": "rule",
+      "topic": "DEP-SUICIDE-FACT",
+      "created_at": "2026-10-26T18:35:48.624268+00:00",
+      "version": "risk-episodes-v1",
+      "state": "closed",
+      "revision": 2,
+      "history": [
+        {
+          "episode_id": "cc7f532bbe20ddcbcace65862eda2e72",
+          "revision": 1,
+          "state": "open",
+          "reason": "first_observation",
+          "actor_id": "doc-a",
+          "run_id": "0e23f40a3100428ee97a9099ac48913b",
+          "payload_json": "{\"added_evidence\":[\"c04368b169f2f934279457739ab2dfc462b80b3dfda096d28d07866e98e2862e\"],\"clinical_ready\":false,\"finding\":{\"facts\":[{\"evidence_refs\":[\"s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96\"],\"id\":\"context\",\"text\":\"Структурированный контекст врача: F32; дата 2026-10-26.\"},{\"evidence_refs\":[\"s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8\",\"s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50\"],\"id\":\"age\",\"text\":\"Сверенный возраст на дату снимка: 35–35.\"},{\"evidence_refs\":[\"s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96\"],\"id\":\"fact-DEP-SUICIDE-FACT\",\"text\":\"DEP-SUICIDE-FACT: triggered; структурированные значения: {\\\"suicidal_behavior\\\":\\\"denied\\\",\\\"suicidal_ideation\\\":\\\"denied\\\",\\\"suicidal_intent\\\":\\\"denied\\\",\\\"suicidal_plan\\\":\\\"present\\\",\\\"suicide_risk\\\":\\\"denied\\\"}; наблюдение 2026-10-26.\"}],\"interpretation\":\"reproducible_rule_for_physician_review\",\"pattern\":{\"fact_ids\":[\"context\",\"age\",\"fact-DEP-SUICIDE-FACT\"],\"id\":\"DEP-SUICIDE-FACT\",\"source_ids\":[\"be07-DEP-SUICIDE-FACT\"],\"text\":\"Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится.\"}},\"snapshot_id\":\"317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e\",\"version\":\"risk-episodes-v1\"}",
+          "request_key": null,
+          "recorded_at": "2026-10-26T18:35:48.624891+00:00",
+          "payload": {
+            "added_evidence": [
+              "c04368b169f2f934279457739ab2dfc462b80b3dfda096d28d07866e98e2862e"
+            ],
+            "clinical_ready": false,
+            "finding": {
+              "facts": [
+                {
+                  "evidence_refs": [
+                    "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+                  ],
+                  "id": "context",
+                  "text": "Структурированный контекст врача: F32; дата 2026-10-26."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8",
+                    "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50"
+                  ],
+                  "id": "age",
+                  "text": "Сверенный возраст на дату снимка: 35–35."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_bfa70ccdf28ef80d5b7defc7e794d126915b5b809ba1efd1e5112ab4db9ade96"
+                  ],
+                  "id": "fact-DEP-SUICIDE-FACT",
+                  "text": "DEP-SUICIDE-FACT: triggered; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"present\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26."
+                }
+              ],
+              "interpretation": "reproducible_rule_for_physician_review",
+              "pattern": {
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "id": "DEP-SUICIDE-FACT",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+              }
+            },
+            "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+            "version": "risk-episodes-v1"
+          }
+        },
+        {
+          "episode_id": "cc7f532bbe20ddcbcace65862eda2e72",
+          "revision": 2,
+          "state": "closed",
+          "reason": "Синтетическое рассмотрение завершено.",
+          "actor_id": "doc-a",
+          "run_id": null,
+          "payload_json": "{\"clinical_ready\":false,\"decision\":\"physician_closed_review_episode\",\"limitation\":\"Закрытие задачи рассмотрения не устанавливает отсутствие риска.\",\"version\":\"risk-episodes-v1\"}",
+          "request_key": "eb8cdf1fc8a6bb1930a9c8d84784e3a5",
+          "recorded_at": "2026-10-26T18:35:48.895485+00:00",
+          "payload": {
+            "clinical_ready": false,
+            "decision": "physician_closed_review_episode",
+            "limitation": "Закрытие задачи рассмотрения не устанавливает отсутствие риска.",
+            "version": "risk-episodes-v1"
+          }
+        }
+      ],
+      "clinical_ready": false,
+      "assessment": "not_established"
+    },
+    {
+      "id": "ffbe0ac478b2c367ae9a470f1f6a55c2",
+      "patient_id": "BE08NEW",
+      "relationship_id": "be08-link",
+      "origin": "model_candidate",
+      "topic": "safety_concern",
+      "created_at": "2026-10-26T18:35:48.625137+00:00",
+      "version": "risk-episodes-v1",
+      "state": "open",
+      "revision": 1,
+      "history": [
+        {
+          "episode_id": "ffbe0ac478b2c367ae9a470f1f6a55c2",
+          "revision": 1,
+          "state": "open",
+          "reason": "first_observation",
+          "actor_id": "doc-a",
+          "run_id": "0e23f40a3100428ee97a9099ac48913b",
+          "payload_json": "{\"added_evidence\":[\"afe36f8433aa16651e5f5cdfe0496013d25fb7661dbcf5024420fc287c939eca\"],\"clinical_ready\":false,\"finding\":{\"clinical_causality\":\"not_established\",\"evidence\":[{\"categories\":[\"wellbeing\"],\"code\":\"summary\",\"end\":16,\"field_sha256\":\"856fd17f8c346fdffc4b08910a101b336131ed3b1f357042e8bc307c0433b26e\",\"metadata\":{\"author_id\":\"pat-c\",\"context\":\"current\",\"current_revision\":true,\"event_at\":\"2026-10-26\",\"recorded_at\":\"2026-10-26T18:35:46.730549+00:00\",\"state\":\"recorded\",\"status\":\"known\"},\"offset_basis\":\"original_text\",\"path\":\"/payload_json/summary\",\"quote\":\"Хочу убить себя.\",\"source_ref\":\"s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50\",\"source_sha256\":\"7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9\",\"start\":0,\"text\":\"Хочу убить себя.\",\"unit_id\":\"u0\",\"value\":\"Хочу убить себя.\"}],\"id\":\"29d6afa17a7acbd2243e94a66afcd168f782a75c867404d999d4b8723f692525\",\"interpretation\":\"model_suspicion_unreviewed\",\"record_days\":[\"2026-10-26\"],\"snapshot_sha256\":\"317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e\",\"temporal_relation\":\"single_observation\",\"topic\":\"safety_concern\"},\"snapshot_id\":\"317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e\",\"version\":\"risk-episodes-v1\"}",
+          "request_key": null,
+          "recorded_at": "2026-10-26T18:35:48.625200+00:00",
+          "payload": {
+            "added_evidence": [
+              "afe36f8433aa16651e5f5cdfe0496013d25fb7661dbcf5024420fc287c939eca"
+            ],
+            "clinical_ready": false,
+            "finding": {
+              "clinical_causality": "not_established",
+              "evidence": [
+                {
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "code": "summary",
+                  "end": 16,
+                  "field_sha256": "856fd17f8c346fdffc4b08910a101b336131ed3b1f357042e8bc307c0433b26e",
+                  "metadata": {
+                    "author_id": "pat-c",
+                    "context": "current",
+                    "current_revision": true,
+                    "event_at": "2026-10-26",
+                    "recorded_at": "2026-10-26T18:35:46.730549+00:00",
+                    "state": "recorded",
+                    "status": "known"
+                  },
+                  "offset_basis": "original_text",
+                  "path": "/payload_json/summary",
+                  "quote": "Хочу убить себя.",
+                  "source_ref": "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50",
+                  "source_sha256": "7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9",
+                  "start": 0,
+                  "text": "Хочу убить себя.",
+                  "unit_id": "u0",
+                  "value": "Хочу убить себя."
+                }
+              ],
+              "id": "29d6afa17a7acbd2243e94a66afcd168f782a75c867404d999d4b8723f692525",
+              "interpretation": "model_suspicion_unreviewed",
+              "record_days": [
+                "2026-10-26"
+              ],
+              "snapshot_sha256": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+              "temporal_relation": "single_observation",
+              "topic": "safety_concern"
+            },
+            "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+            "version": "risk-episodes-v1"
+          }
+        }
+      ],
+      "clinical_ready": false,
+      "assessment": "not_established"
+    },
+    {
+      "id": "0467426e2b15bdfa34e0f4fad6524ddf",
+      "patient_id": "BE08NEW",
+      "relationship_id": "be08-link",
+      "origin": "model_candidate",
+      "topic": "reported_change",
+      "created_at": "2026-10-26T18:35:48.625237+00:00",
+      "version": "risk-episodes-v1",
+      "state": "open",
+      "revision": 1,
+      "history": [
+        {
+          "episode_id": "0467426e2b15bdfa34e0f4fad6524ddf",
+          "revision": 1,
+          "state": "open",
+          "reason": "first_observation",
+          "actor_id": "doc-a",
+          "run_id": "0e23f40a3100428ee97a9099ac48913b",
+          "payload_json": "{\"added_evidence\":[\"434a5abaae15bf723581182352452fd7abceaa881c1bfb78ae641a7ca01e9ee9\"],\"clinical_ready\":false,\"finding\":{\"clinical_causality\":\"not_established\",\"evidence\":[{\"categories\":[\"wellbeing\"],\"code\":\"wellbeing\",\"end\":5,\"field_sha256\":\"7e89c010318131c024ac9ee1feb079381314375c9364c3b4315435fd339ec062\",\"metadata\":{\"author_id\":\"pat-c\",\"context\":\"current\",\"current_revision\":true,\"event_at\":\"2026-10-26\",\"recorded_at\":\"2026-10-26T18:35:46.730549+00:00\",\"state\":\"recorded\",\"status\":\"known\"},\"offset_basis\":\"original_text\",\"path\":\"/payload_json/wellbeing\",\"quote\":\"worse\",\"source_ref\":\"s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50\",\"source_sha256\":\"7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9\",\"start\":0,\"text\":\"worse\",\"unit_id\":\"u6\",\"value\":\"worse\"}],\"id\":\"61368908294324b5d695597036b96ff4055c6b7a7833bed97acc9481c426b766\",\"interpretation\":\"model_suspicion_unreviewed\",\"record_days\":[\"2026-10-26\"],\"snapshot_sha256\":\"317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e\",\"temporal_relation\":\"single_observation\",\"topic\":\"reported_change\"},\"snapshot_id\":\"317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e\",\"version\":\"risk-episodes-v1\"}",
+          "request_key": null,
+          "recorded_at": "2026-10-26T18:35:48.625287+00:00",
+          "payload": {
+            "added_evidence": [
+              "434a5abaae15bf723581182352452fd7abceaa881c1bfb78ae641a7ca01e9ee9"
+            ],
+            "clinical_ready": false,
+            "finding": {
+              "clinical_causality": "not_established",
+              "evidence": [
+                {
+                  "categories": [
+                    "wellbeing"
+                  ],
+                  "code": "wellbeing",
+                  "end": 5,
+                  "field_sha256": "7e89c010318131c024ac9ee1feb079381314375c9364c3b4315435fd339ec062",
+                  "metadata": {
+                    "author_id": "pat-c",
+                    "context": "current",
+                    "current_revision": true,
+                    "event_at": "2026-10-26",
+                    "recorded_at": "2026-10-26T18:35:46.730549+00:00",
+                    "state": "recorded",
+                    "status": "known"
+                  },
+                  "offset_basis": "original_text",
+                  "path": "/payload_json/wellbeing",
+                  "quote": "worse",
+                  "source_ref": "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50",
+                  "source_sha256": "7754a131e91688d402e31c0fbc81057c2b826fc692834a3dcb377fc6424c58f9",
+                  "start": 0,
+                  "text": "worse",
+                  "unit_id": "u6",
+                  "value": "worse"
+                }
+              ],
+              "id": "61368908294324b5d695597036b96ff4055c6b7a7833bed97acc9481c426b766",
+              "interpretation": "model_suspicion_unreviewed",
+              "record_days": [
+                "2026-10-26"
+              ],
+              "snapshot_sha256": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+              "temporal_relation": "single_observation",
+              "topic": "reported_change"
+            },
+            "snapshot_id": "317b57361bb930fb680961758ce971cfa8000fb17bf57b18134646ba6657864e",
+            "version": "risk-episodes-v1"
+          }
+        }
+      ],
+      "clinical_ready": false,
+      "assessment": "not_established"
+    },
+    {
+      "id": "98a10e1524562fac9f1ea4a1306c7631",
+      "patient_id": "BE08NEW",
+      "relationship_id": "be08-link",
+      "origin": "rule",
+      "topic": "DEP-SUICIDE-FACT",
+      "created_at": "2026-10-26T18:35:49.290126+00:00",
+      "version": "risk-episodes-v1",
+      "state": "open",
+      "revision": 1,
+      "history": [
+        {
+          "episode_id": "98a10e1524562fac9f1ea4a1306c7631",
+          "revision": 1,
+          "state": "open",
+          "reason": "first_observation",
+          "actor_id": "doc-a",
+          "run_id": "ef30f72ece992bb862be403a53e2642d",
+          "payload_json": "{\"added_evidence\":[\"dbb4dc3e14c3633d0ee31f05c25f63ec1e114de948ea0c6a5905212638206211\"],\"clinical_ready\":false,\"finding\":{\"facts\":[{\"evidence_refs\":[\"s2_c490cea7cd882e4e430a846691b4c348820211a9b84ed136aa859fb89847318e\"],\"id\":\"context\",\"text\":\"Структурированный контекст врача: F32; дата 2026-10-26.\"},{\"evidence_refs\":[\"s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8\",\"s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50\"],\"id\":\"age\",\"text\":\"Сверенный возраст на дату снимка: 35–35.\"},{\"evidence_refs\":[\"s2_c490cea7cd882e4e430a846691b4c348820211a9b84ed136aa859fb89847318e\"],\"id\":\"fact-DEP-SUICIDE-FACT\",\"text\":\"DEP-SUICIDE-FACT: triggered; структурированные значения: {\\\"suicidal_behavior\\\":\\\"denied\\\",\\\"suicidal_ideation\\\":\\\"denied\\\",\\\"suicidal_intent\\\":\\\"denied\\\",\\\"suicidal_plan\\\":\\\"present\\\",\\\"suicide_risk\\\":\\\"denied\\\"}; наблюдение 2026-10-26.\"}],\"interpretation\":\"reproducible_rule_for_physician_review\",\"pattern\":{\"fact_ids\":[\"context\",\"age\",\"fact-DEP-SUICIDE-FACT\"],\"id\":\"DEP-SUICIDE-FACT\",\"source_ids\":[\"be07-DEP-SUICIDE-FACT\"],\"text\":\"Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится.\"}},\"snapshot_id\":\"ecc30b6d3b6796344c5efd40237342c391687e8c445324dd9ab41eea22f08ea4\",\"version\":\"risk-episodes-v1\"}",
+          "request_key": null,
+          "recorded_at": "2026-10-26T18:35:49.290475+00:00",
+          "payload": {
+            "added_evidence": [
+              "dbb4dc3e14c3633d0ee31f05c25f63ec1e114de948ea0c6a5905212638206211"
+            ],
+            "clinical_ready": false,
+            "finding": {
+              "facts": [
+                {
+                  "evidence_refs": [
+                    "s2_c490cea7cd882e4e430a846691b4c348820211a9b84ed136aa859fb89847318e"
+                  ],
+                  "id": "context",
+                  "text": "Структурированный контекст врача: F32; дата 2026-10-26."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_ff2bd47ee7634e1f599fdb4b98bc820e6b9e447b2f40d664d887ad5a84c4cdc8",
+                    "s2_a573a8cb808d4034165b556ba71d8a030571877233ffb2b2cb27ff637c794b50"
+                  ],
+                  "id": "age",
+                  "text": "Сверенный возраст на дату снимка: 35–35."
+                },
+                {
+                  "evidence_refs": [
+                    "s2_c490cea7cd882e4e430a846691b4c348820211a9b84ed136aa859fb89847318e"
+                  ],
+                  "id": "fact-DEP-SUICIDE-FACT",
+                  "text": "DEP-SUICIDE-FACT: triggered; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"present\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26."
+                }
+              ],
+              "interpretation": "reproducible_rule_for_physician_review",
+              "pattern": {
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "id": "DEP-SUICIDE-FACT",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+              }
+            },
+            "snapshot_id": "ecc30b6d3b6796344c5efd40237342c391687e8c445324dd9ab41eea22f08ea4",
+            "version": "risk-episodes-v1"
+          }
+        }
+      ],
+      "clinical_ready": false,
+      "assessment": "not_established"
+    }
+  ],
+  "budget_after": 45150,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "care_actions": 0,
+  "real_model_calls": 1,
+  "missing_credentials_production_run": true,
+  "closed_then_new_episode": true,
+  "immediate_revocation_http_status": 404,
+  "worker_processes": 4
+}

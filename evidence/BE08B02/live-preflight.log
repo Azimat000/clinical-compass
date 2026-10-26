@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/tools/risk_server_check.py", line 139, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/tools/risk_server_check.py", line 37, in main
+    db.execute('INSERT INTO patients('+','.join(row)+') VALUES('+','.join('?' for _ in row)+')',tuple(row.values()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: patients.code

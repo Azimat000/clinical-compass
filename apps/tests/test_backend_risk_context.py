@@ -62,8 +62,10 @@ class RiskContextTests(unittest.TestCase):
         for unit in units:
             source = snapshots.resolve(frozen, unit['source_ref'])
             self.assertEqual(source['sha256'], unit['source_sha256'])
-        for unit in model.data['units']:
-            self.assertNotIn('source_ref', unit); self.assertNotIn('author_id', unit['metadata'])
+        self.assertNotIn('source_ref', model.data['columns']); self.assertNotIn('author_id', model.data['columns'])
+        for unit, original in zip(model.data['units'], units):
+            self.assertEqual(original['text'], unit[1])
+            self.assertEqual(original['metadata']['event_at'], unit[4])
 
     def test_semantic_candidates_keep_full_denial_family_context_and_dates(self):
         self.diary(summary='У отца были мысли о смерти. Я сейчас таких мыслей не отмечаю.')
@@ -170,6 +172,28 @@ class RiskContextTests(unittest.TestCase):
         with patch.object(context, 'analyze_snapshot', side_effect=AssertionError('internal only')):
             self.assertEqual('potential_risk', backend_jobs.execute('risk', self.snapshot())['result']['output']['assessment'])
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
+
+    def test_different_observation_dates_cannot_be_published_as_discrepancy(self):
+        self.diary(summary='Раньше отрицал жалобу.', observed_on='2026-10-20')
+        self.diary(summary='Сегодня жалоба появилась.', observed_on='2026-10-26')
+        units=[u for u in context.prepare_snapshot(self.snapshot()) if u['code']=='summary']
+        proposal={'topic':'discrepancy','evidence':[{'unit_id':u['unit_id'],'quote':u['text']} for u in units]}
+        with self.assertRaisesRegex(context.ContextError,'discrepancy_time_mismatch'):
+            context.verify({'candidates':[proposal]},units,'sha')
+        # Chronology is still inspectable as an unreviewed reported change.
+        proposal['topic']='reported_change'
+        self.assertEqual('different_record_days',context.verify({'candidates':[proposal]},units,'sha')[0]['temporal_relation'])
+
+    def test_same_day_conflict_preserves_both_bases_unknown_date_refused(self):
+        self.diary(summary='Спал восемь часов.', observed_on='2026-10-26')
+        self.diary(summary='Совсем не спал.', observed_on='2026-10-26')
+        units=[u for u in context.prepare_snapshot(self.snapshot()) if u['code']=='summary']
+        proposal={'topic':'discrepancy','evidence':[{'unit_id':u['unit_id'],'quote':u['text']} for u in units]}
+        result=context.verify({'candidates':[proposal]},units,'sha')
+        self.assertEqual(2,len(result[0]['evidence']))
+        units[0]['metadata']['event_at']=None
+        with self.assertRaisesRegex(context.ContextError,'discrepancy_time_mismatch'):
+            context.verify({'candidates':[proposal]},units,'sha')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,53 @@
+{
+  "head": "4c3cca3aaf7ca50dffbf342c4e5e1aef0bedd15c",
+  "status": "?? evidence/audits/2026-10-20-cycles/\n?? tools/run_synthetic_cycles.py\n",
+  "diff": "",
+  "staged_diff": "",
+  "preserved_files": {
+    "tools/run_synthetic_cycles.py": "03acb90a7cd2f5ff3c00691f1f74306988c3b9813828f9ed8ca6e36028c13752",
+    "evidence/audits/2026-10-20-cycles/external-check.md": "3af530b33b3f85bad072b919d0554a24f0555392bc0f4eec89cdf60170429796",
+    "evidence/audits/2026-10-20-cycles/checks.log": "261c46b5229971daa066f8b5e717abe6fe8851c964dc6b8a6c8e758569ec8f69",
+    "evidence/audits/2026-10-20-cycles/results.json": "5adac6404be4349f10bd12095af0e3733d543ee81e58dbd9de4f795b9c739309"
+  },
+  "approved_plan": "No new branches. Complete BE08B02 integration/quality, then accept existing BE08B and BE08 sequentially in this session per direct user authorization. Keep source rules/clinical release/synthetic-only/service8000 and data intact. No delegated writes.",
+  "owned_paths": [
+    "apps/compass/backend_risk_context.py",
+    "apps/compass/backend_risk_episodes.py",
+    "apps/compass/backend_analyses.py",
+    "apps/compass/backend_jobs.py",
+    "apps/compass/web.py",
+    "docs/architecture/backend-api.json",
+    "docs/architecture/backend-risk-context.md",
+    "docs/architecture/backend-risk-episodes.md",
+    "apps/tests/test_backend_risk_context.py",
+    "apps/tests/test_backend_risk_integration.py",
+    "apps/tests/test_backend_risk_episodes.py",
+    "data/fictional/backend-risk-context/be08-holdout.json",
+    "data/fictional/backend-risk-context/be08-policy.json",
+    "evidence/BE08B02/",
+    "evidence/BE08B/",
+    "evidence/BE08/",
+    "tools/evaluate_backend_risk.py",
+    "tools/risk_server_check.py",
+    "memory/STATE.json",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/BLOCKERS.md",
+    "memory/EXTERNAL.md",
+    "memory/sessions/BE08B02.md",
+    "memory/sessions/BE08B.md",
+    "memory/sessions/BE08.md",
+    "plan/backend/README.md",
+    "plan/backend/requirements.json",
+    "plan/coverage.json",
+    "plan/COVERAGE.md",
+    "plan/slices/BE08B02.md",
+    "plan/slices/BE08B.md",
+    "plan/slices/BE08.md",
+    "START_HERE.md"
+  ],
+  "budget_before": [
+    25,
+    39824
+  ]
+}

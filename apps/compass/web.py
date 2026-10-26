@@ -310,6 +310,14 @@ def create_app(database=None):
         value = backend_analyses.inputs(get_db(), g.user, patient_id, run_id, page=int(page))
         return jsonify(value)
 
+    @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/risk-context')
+    def analysis_risk_context(patient_id, run_id):
+        role('doctor')
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        from . import backend_risk_context
+        return jsonify(backend_risk_context.details(get_db(), g.user, patient_id, run_id))
+
     @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/inputs/<reference>')
     def analysis_input_source(patient_id, run_id, reference):
         role('doctor')
