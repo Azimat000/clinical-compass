@@ -299,6 +299,22 @@ def create_app(database=None):
         role('doctor')
         return jsonify(backend_analyses.read(get_db(), g.user, patient_id, run_id))
 
+    @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/inputs')
+    def analysis_inputs(patient_id, run_id):
+        role('doctor')
+        if set(request.args) - {'page'} or len(request.args.getlist('page')) > 1:
+            raise backend_analyses.AnalysisError('Недопустимые параметры страницы.', 400, 'invalid_page')
+        page = request.args.get('page', '1')
+        if not re.fullmatch(r'[1-9][0-9]{0,8}', page):
+            raise backend_analyses.AnalysisError('Нужен номер страницы.', 400, 'invalid_page')
+        value = backend_analyses.inputs(get_db(), g.user, patient_id, run_id, page=int(page))
+        return jsonify(value)
+
+    @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>/inputs/<reference>')
+    def analysis_input_source(patient_id, run_id, reference):
+        role('doctor')
+        return jsonify(backend_analyses.inputs(get_db(), g.user, patient_id, run_id, reference=reference))
+
     @app.teardown_appcontext
     def close_db(error):
         db = g.pop('db', None)

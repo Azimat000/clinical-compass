@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import secrets
 
-from . import access, ages, clinical_rules, decisions, records
+from . import access, ages, backend_snapshot, clinical_rules, decisions, records
 from .db import now, transaction
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -68,7 +68,8 @@ def validate_schema(value, schema, spec=None):
         if set(schema['required']) - set(value) or (schema['additionalProperties'] is False and set(value) - set(schema['properties'])):
             raise AnalysisError('Неполный набор полей или неизвестное поле.')
         for name, item in value.items():
-            validate_schema(item, schema['properties'][name], spec)
+            if name in schema['properties']:
+                validate_schema(item, schema['properties'][name], spec)
     if kind in ('array', 'string'):
         low, high = ('minItems', 'maxItems') if kind == 'array' else ('minLength', 'maxLength')
         if len(value) < schema.get(low, 0) or len(value) > schema.get(high, float('inf')):
@@ -138,13 +139,14 @@ def age_scope(db, patient_id):
 
 
 def capture(db, patient_id, relationship_id):
-    # Reuse conservative existing snapshot; BE02 will add normalized facts, not a second care plan.
+    # Preserve the decision mechanism; normalized analysis history is additive.
     try:
         value = json.loads(decisions.snapshot(db, patient_id, relationship_id))
         value['backend_contract'] = {
             'contract_version': '1.0',
             'schema_sha256': hashlib.sha256(CONTRACT_PATH.read_bytes()).hexdigest(),
             'scope_sha256': hashlib.sha256(SCOPE_PATH.read_bytes()).hexdigest()}
+        value['patient_history'] = backend_snapshot.enrich(db, value, patient_id)
         snapshot = decisions.canonical(value)
         if len(snapshot.encode()) > 4194304:
             raise AnalysisError('Входной снимок превышает 4 МиБ.', 409, 'snapshot_too_large')
@@ -156,6 +158,46 @@ def capture(db, patient_id, relationship_id):
 def source_refs(snapshot):
     return [{'id': r['id'], 'version': r['version'], 'sha256': r['sha256']}
             for r in json.loads(snapshot)['source_versions']]
+
+
+def inputs(db, user, patient_id, run_id, *, reference=None, page=1):
+    """Version-pinned evidence for a future physician client, including stale runs."""
+    if not db.in_transaction:
+        db.execute('BEGIN')
+        try:
+            value = inputs(db, user, patient_id, run_id, reference=reference, page=page)
+            db.commit()
+            return value
+        except BaseException:
+            db.rollback()
+            raise
+    relationship = authorize(db, user, patient_id)
+    row = db.execute('''SELECT s.id,s.payload_json FROM analysis_runs r
+        JOIN analysis_input_snapshots s ON s.id=r.snapshot_id
+        WHERE r.id=? AND r.patient_id=? AND r.relationship_id=?''',
+        (run_id, patient_id, relationship)).fetchone()
+    if row is None:
+        raise AnalysisError('Анализ недоступен.', 404, 'not_found')
+    snapshot = json.loads(row['payload_json'])
+    history = snapshot.get('patient_history')
+    if history is None:
+        raise AnalysisError('У старого снимка нет единой истории; нужен новый запуск.', 409, 'snapshot_version_unavailable')
+    if reference is not None:
+        try:
+            value = backend_snapshot.resolve(snapshot, reference)
+        except ValueError:
+            raise AnalysisError('Нарушена целостность снимка.', 409, 'snapshot_integrity') from None
+        if value is None:
+            raise AnalysisError('Исходная версия недоступна.', 404, 'not_found')
+        return {'snapshot_id': row['id'], 'version': history['version'], 'source': value}
+    pages = max(1, (history['entry_count'] + backend_snapshot.PAGE_SIZE - 1) // backend_snapshot.PAGE_SIZE)
+    if type(page) is not int or not 1 <= page <= pages:
+        raise AnalysisError('Страница истории недоступна.', 400, 'invalid_page')
+    start = (page - 1) * backend_snapshot.PAGE_SIZE
+    return {k: history[k] for k in ('version', 'complete', 'truncated', 'counts', 'entry_count',
+                                    'missing_categories', 'active_medication_plan_ref', 'active_plan_ref')} | {
+        'snapshot_id': row['id'], 'page': page, 'page_size': backend_snapshot.PAGE_SIZE,
+        'page_count': pages, 'entries': history['entries'][start:start + backend_snapshot.PAGE_SIZE]}
 
 
 def validate_analysis(value):
@@ -264,9 +306,16 @@ def _read_in_snapshot(db, user, patient_id, run_id):
     if run is None:
         raise AnalysisError('Анализ недоступен.', 404, 'not_found')
     value = _latest(db, run_id)
-    if value['status'] != 'stale' and run['snapshot_id'] != hashlib.sha256(capture(db, patient_id, relationship).encode()).hexdigest():
-        # Pure read projection: original versions remain intact; no clinical claim remains current.
-        value.update(status='stale', stale_reason='Сведения, источники, связь или дата изменились; нужен новый запуск.')
+    if value['status'] != 'stale':
+        try:
+            current_id = hashlib.sha256(capture(db, patient_id, relationship).encode()).hexdigest()
+        except AnalysisError as exc:
+            if exc.code not in ('snapshot_too_large', 'source_unavailable'):
+                raise
+            current_id = None
+        if run['snapshot_id'] != current_id:
+            # A failed freshness check never leaves an old clinical result current.
+            value.update(status='stale', stale_reason='Сведения, источники, связь или дата изменились либо свежесть не подтверждена; нужен новый запуск.')
     validate_analysis(value)
     return value
 
@@ -292,6 +341,7 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
             raw = db.execute('SELECT payload_json FROM analysis_input_snapshots WHERE id=?', (current['snapshot_id'],)).fetchone()[0]
             snapshot = json.loads(raw)
             known_refs = {'profile:' + patient_id}
+            known_refs.update(snapshot.get('patient_history', {}).get('sources', {}))
             for table, rows in snapshot.items():
                 if isinstance(rows, list):
                     known_refs.update(table + ':' + str(row['id']) for row in rows if isinstance(row, dict) and 'id' in row)

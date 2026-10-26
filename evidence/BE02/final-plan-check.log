@@ -1,0 +1,23 @@
+$ python3 tools/validate_plan.py --pending-tag BE02
+{
+  "slices": 105,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 75,
+  "fulfilled_requirements": 0,
+  "next_slice": "BE03"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+exit_code=0
+
+$ python3 tools/session.py status
+Текущий: нет
+Последний принятый: BE02
+Следующий готовый: BE03
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+exit_code=0
+
+$ git diff --check
+exit_code=0

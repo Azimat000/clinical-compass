@@ -287,6 +287,282 @@
           }
         }
       }
+    },
+    "/api/v1/patients/{patient_id}/analyses/{run_id}/inputs": {
+      "get": {
+        "operationId": "getAnalysisInputs",
+        "description": "Physician-only immutable patient-history-v2 read. Supports HEAD. Page order event_at,recorded_at,ref,category. Max 50 entries per page; null means unknown, complete means no truncation. Same snapshot retained after new facts or permitted legacy deletion. Old BE01 snapshot gives 409. No model, treatment application or patient publication. Unknown/repeated query parameters rejected on the page endpoint.",
+        "parameters": [
+          {
+            "name": "patient_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 999999999,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Frozen source evidence for the same authorized relationship; never live clinical advice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryPage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or repeated page parameter, unknown query parameter or nonexistent page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Doctor role or CSRF token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Patient/run unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Legacy snapshot has no normalized history, or source integrity failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/patients/{patient_id}/analyses/{run_id}/inputs/{reference}": {
+      "get": {
+        "operationId": "getAnalysisInputSource",
+        "description": "Physician-only immutable patient-history-v2 read. Supports HEAD. Page order event_at,recorded_at,ref,category. Max 50 entries per page; null means unknown, complete means no truncation. Same snapshot retained after new facts or permitted legacy deletion. Old BE01 snapshot gives 409. No model, treatment application or patient publication. Unknown/repeated query parameters rejected on the page endpoint.",
+        "parameters": [
+          {
+            "name": "patient_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^s2_[0-9a-f]{64}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Frozen source evidence for the same authorized relationship; never live clinical advice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistorySource"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or repeated page parameter, unknown query parameter or nonexistent page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Doctor role or CSRF token required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Patient/run unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Legacy snapshot has no normalized history, or source integrity failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Request not supported or service failure; no successful clinical result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -759,6 +1035,390 @@
           "message"
         ],
         "additionalProperties": false
+      },
+      "HistoryField": {
+        "type": "object",
+        "properties": {
+          "source_ref": {
+            "type": "string",
+            "pattern": "^s2_[0-9a-f]{64}$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "value": {},
+          "code": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "known",
+              "unknown",
+              "denied",
+              "conflicting"
+            ]
+          },
+          "event_at": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "context": {
+            "type": "string",
+            "enum": [
+              "current",
+              "cumulative_history",
+              "prescribed_only",
+              "reported_intake"
+            ]
+          },
+          "origin": {},
+          "basis": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "carried_from": {}
+        },
+        "required": [
+          "source_ref",
+          "path",
+          "value",
+          "code",
+          "status",
+          "event_at",
+          "context",
+          "origin",
+          "basis",
+          "carried_from"
+        ],
+        "additionalProperties": false
+      },
+      "HistoryEntry": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "pattern": "^s2_[0-9a-f]{64}$"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "questionnaires",
+              "wellbeing",
+              "anamnesis",
+              "visits",
+              "medication_actual",
+              "plans",
+              "context"
+            ]
+          },
+          "event_at": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recorded_at": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "author_id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "current_revision": {
+            "type": "boolean"
+          },
+          "state": {
+            "type": "string"
+          },
+          "related_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^s2_[0-9a-f]{64}$"
+            }
+          },
+          "supersedes_ref": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^s2_[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryField"
+            }
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "temporal_scope": {
+            "type": "string",
+            "enum": [
+              "unknown",
+              "historical",
+              "on_snapshot_day",
+              "future"
+            ]
+          }
+        },
+        "required": [
+          "ref",
+          "category",
+          "event_at",
+          "recorded_at",
+          "author_id",
+          "version",
+          "current_revision",
+          "state",
+          "related_refs",
+          "supersedes_ref",
+          "fields",
+          "issues",
+          "temporal_scope"
+        ],
+        "additionalProperties": false
+      },
+      "HistoryPage": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "const": "patient-history-v2"
+          },
+          "complete": {
+            "type": "boolean",
+            "const": true
+          },
+          "truncated": {
+            "type": "boolean",
+            "const": false
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "questionnaires": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "wellbeing": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "anamnesis": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "visits": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "medication_actual": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "plans": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "context": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "questionnaires",
+              "wellbeing",
+              "anamnesis",
+              "visits",
+              "medication_actual",
+              "plans",
+              "context"
+            ],
+            "additionalProperties": false
+          },
+          "entry_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "missing_categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "active_medication_plan_ref": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^s2_[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "active_plan_ref": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^s2_[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "snapshot_id": {
+            "type": "string"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "const": 50
+          },
+          "page_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryEntry"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "complete",
+          "truncated",
+          "counts",
+          "entry_count",
+          "missing_categories",
+          "active_medication_plan_ref",
+          "active_plan_ref",
+          "snapshot_id",
+          "page",
+          "page_size",
+          "page_count",
+          "entries"
+        ],
+        "additionalProperties": false
+      },
+      "HistorySource": {
+        "type": "object",
+        "properties": {
+          "snapshot_id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "const": "patient-history-v2"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^s2_[0-9a-f]{64}$"
+              },
+              "table": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "id": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                ]
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "row": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "ref",
+              "table",
+              "key",
+              "id",
+              "sha256",
+              "row"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "snapshot_id",
+          "version",
+          "source"
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -766,5 +1426,6 @@
     "UTF-8 JSON. Unknown properties/enums and duplicate JSON keys rejected. Null result/model never means no risk. GET/HEAD safe, no-store.",
     "No update/approval/result-upload HTTP operation. Internal server only writes results. Existing API routes unchanged.",
     "No external model, clinical delivery or plan application in BE01. Clinical release only blocked."
-  ]
+  ],
+  "x-history-version": "patient-history-v2"
 }
