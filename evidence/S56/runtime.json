@@ -1,0 +1,313 @@
+{
+  "status": "PASS",
+  "database": "var/compass.sqlite3",
+  "counts": {
+    "users": 12,
+    "patients": 10,
+    "clinical_entries": 70,
+    "first_visit_versions": 91,
+    "proposals": 34,
+    "doctor_confirmations": 32,
+    "care_actions": 31,
+    "medication_marks": 240,
+    "messages": 140,
+    "assessments": 90
+  },
+  "identities_and_ids_preserved": true,
+  "passwords_and_source_releases_preserved": true,
+  "old_audit_preserved": true,
+  "unchanged_nonmedicated_patients": 4,
+  "schema_trigger_count": 74,
+  "current_placeholders": 0,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "courses": [
+    {
+      "patient_id": "P201",
+      "plans": [
+        {
+          "proposal_id": "ccb77191f2f234277d5fccc55d445589",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 60,
+              "end": "2026-11-13",
+              "name": "Элицея 10 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patient_id": "P202",
+      "plans": [
+        {
+          "proposal_id": "d6d763a92365fcc40074edf814ca81ec",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 7,
+              "end": "2026-09-21",
+              "name": "Алевал 25 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            },
+            {
+              "days": 53,
+              "end": "2026-11-13",
+              "name": "Алевал 50 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-22"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patient_id": "P203",
+      "plans": [
+        {
+          "proposal_id": "d83125448a2e3555771cf90fa8d84470",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 60,
+              "end": "2026-11-13",
+              "name": "Элицея 10 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patient_id": "P204",
+      "plans": [
+        {
+          "proposal_id": "06537cc6c10734aaff466f3aa835a315",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 60,
+              "end": "2026-11-13",
+              "name": "Алевал 50 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            }
+          ]
+        },
+        {
+          "proposal_id": "9929b084546b6e69e8467e2c1fe45654",
+          "confirmed_at": "2026-10-05T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 7,
+              "end": "2026-10-12",
+              "name": "Алевал 25 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-10-06"
+            },
+            {
+              "days": 53,
+              "end": "2026-12-04",
+              "name": "Алевал 50 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-10-13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patient_id": "P207",
+      "plans": [
+        {
+          "proposal_id": "c38f6ee64e6c748c39a323e8a8e152da",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 60,
+              "end": "2026-11-13",
+              "name": "Элицея 10 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            }
+          ]
+        },
+        {
+          "proposal_id": "62defb852f94b6af06fcc9726c041a8b",
+          "confirmed_at": "2026-10-05T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 13,
+              "end": "2026-10-18",
+              "name": "Элицея 10 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 2,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-10-06"
+            }
+          ]
+        },
+        {
+          "proposal_id": "a95f996dc480dce35bd45efc161a2e47",
+          "confirmed_at": "2026-10-25T14:00:00.000000+00:00",
+          "medications": []
+        }
+      ]
+    },
+    {
+      "patient_id": "P208",
+      "plans": [
+        {
+          "proposal_id": "1428f78adcd3a61a8825c8ab1dfce5bf",
+          "confirmed_at": "2026-09-14T14:00:00.000000+00:00",
+          "medications": [
+            {
+              "days": 7,
+              "end": "2026-09-21",
+              "name": "Алевал 25 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-15"
+            },
+            {
+              "days": 53,
+              "end": "2026-11-13",
+              "name": "Алевал 50 мг, таблетки, покрытые плёночной оболочкой",
+              "slots": [
+                {
+                  "quarters": 4,
+                  "time": "08:00"
+                }
+              ],
+              "start": "2026-09-22"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "synthetic": true,
+    "simulated_dates": true,
+    "clinical_review": false,
+    "real_user_trial": false,
+    "medication_eligibility_established": false,
+    "revision": "clinic-medication-revision-20261026-v1",
+    "actual_reauthored_at": "2026-10-26T00:47:23.098901+00:00",
+    "source_database_sha256": "11a17b5005a860ceca645811a832fe4c29d03572b9e792c236c0db49c8f76617",
+    "authoring_file_sha256": "ccfadf1d36ed02ed2009ae9ce83527b0f6084cdc4b3a15061b92df7f1e7dba08",
+    "source_dataset_sha256": "bf529545a103b8d31d9aed32d018b0a1c3c1b1e0a1c3c9a7ed5c61f3fbfcc088",
+    "source_documents": [
+      {
+        "id": "GRLS-ELICEA-2024",
+        "registration": "ЛП-№(002148)-(РГ-RU)",
+        "registry": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=8b16cc03-42ea-45eb-9f96-9a8e3c8a794f",
+        "instruction": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf",
+        "pages": [
+          2,
+          11,
+          12
+        ],
+        "limits": "Взрослые 18+;10 мг раз в сутки для ряда показаний;10/20 мг делятся на равные дозы; отмена постепенная примерно 1–2 недели. Не индивидуальный допуск."
+      },
+      {
+        "id": "GRLS-ALEVAL-2021",
+        "registration": "ЛСР-003615/10",
+        "registry": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=27b11bd7-09da-4e6c-b1c0-2cc88c18c115",
+        "instruction": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf",
+        "pages": [
+          1,
+          2,
+          7,
+          8,
+          9,
+          11,
+          12
+        ],
+        "limits": "Таблетки 25/50/100 мг; приём раз в сутки утром/вечером;25 мг первую неделю для ряда показаний, далее 50 мг; повышение не чаще раза в неделю; равная делимость не подтверждена. Не индивидуальный допуск."
+      }
+    ],
+    "changed_rows": {
+      "observations": 14,
+      "self_reports": 36,
+      "proposals": 19,
+      "adverse_events": 4,
+      "messages": 8,
+      "clinical_entries": 36,
+      "first_visit_versions": 54,
+      "medication_marks": 82
+    },
+    "added_synthetic_marks": 13,
+    "preserved_ids": true,
+    "source_history_retained_offline": true,
+    "active_clinical_rules": false,
+    "primary_source_verification": "product facts only; not individual clinical validation"
+  },
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "processes": {
+    "server": 68459,
+    "worker": 68476
+  },
+  "backup": {
+    "path": "var/backups/S56-before-activation.sqlite3",
+    "sha256": "11a17b5005a860ceca645811a832fe4c29d03572b9e792c236c0db49c8f76617",
+    "mode": "0o600"
+  }
+}

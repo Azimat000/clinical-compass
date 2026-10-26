@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T03:22:10+03:00",
+  "updated_on": "2026-10-26T03:49:32+03:00",
   "current_slice": null,
-  "last_accepted_slice": "S55",
+  "last_accepted_slice": "S56",
   "next_slice": "UI08",
   "qualification": "unknown",
   "postcontest_authorized": false,
@@ -515,6 +515,12 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/S55",
       "handoff": "memory/sessions/S55.md",
+      "reason": null
+    },
+    "S56": {
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/S56",
+      "handoff": "memory/sessions/S56.md",
       "reason": null
     }
   },
@@ -1148,8 +1154,25 @@
     "completed_visits": 30,
     "diary_entries": 70,
     "questionnaire_results": 90,
-    "medication_marks": 227,
-    "neutral_medication_labels": true,
-    "active_clinical_rules": false
+    "medication_marks": 240,
+    "neutral_medication_labels": false,
+    "active_clinical_rules": false,
+    "medication_revision": {
+      "slice": "S56",
+      "dataset": "data/fictional/clinic-medications-20261026.json",
+      "report": "memory/sessions/S56.md",
+      "evidence": "evidence/S56/acceptance.md",
+      "commit_ref": "refs/tags/slice/S56",
+      "source_products": [
+        "Элицея10мг",
+        "Алевал25мг",
+        "Алевал50мг"
+      ],
+      "source_verification": "primary GRLS product facts only",
+      "individual_eligibility_verified": false,
+      "synthetic": true,
+      "clinical_review": false,
+      "identities_and_ids_preserved": true
+    }
   }
 }
