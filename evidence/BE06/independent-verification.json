@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "code_sha256": {
+    "apps/compass/backend_jobs.py": "64fad46a486256d9134421f470f80c3f7c242d27ebec550b869b520da157f994",
+    "apps/compass/backend_analyses.py": "025d33449896e69d67b491c41d031eab22735962c4ef8f526cdef17dbc24d07c",
+    "apps/compass/events.py": "f70ae27611f2e77c0bbd0bb485bd3dd0e916014ffe6a029d8434862c59c120c7",
+    "apps/compass/__main__.py": "a80a04c3abdd483ce18d679f99988a30476c0777318ef0e747ff8f05a3c4c37f",
+    "apps/compass/migrations/017_backend_jobs.sql": "34d0e283bc4aee73631adecf68e27c67dcf877e73f7ce545d17e52922a1a5e59"
+  },
+  "preserved_files": 4,
+  "scope_compliance": "PASS",
+  "requirements": 83,
+  "subchecks": 160,
+  "requirement_statuses_texts_preserved": true,
+  "targeted_tests": 20,
+  "full_app_tests": 705,
+  "tool_tests": 70,
+  "live_processes": "PASS",
+  "ledger_micro_usd": 36739,
+  "ledger_calls": 23,
+  "secret_absent": true,
+  "active_service_health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  }
+}

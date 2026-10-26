@@ -1,4 +1,5 @@
 """Versioned internal analysis records. No inference, delivery or clinical actions."""
+from contextlib import nullcontext
 from copy import deepcopy
 from datetime import datetime
 import hashlib
@@ -148,6 +149,10 @@ def capture(db, patient_id, relationship_id):
             'scope_sha256': hashlib.sha256(SCOPE_PATH.read_bytes()).hexdigest()}
         value['patient_history'] = backend_snapshot.enrich(db, value, patient_id)
         value['backend_sources'] = backend_sources.capture()
+        from . import backend_jobs
+        runtime = backend_jobs.fingerprint(db)
+        if runtime is not None:
+            value['backend_runtime'] = runtime
         snapshot = decisions.canonical(value)
         if len(snapshot.encode()) > 4194304:
             raise AnalysisError('Входной снимок превышает 4 МиБ.', 409, 'snapshot_too_large')
@@ -260,7 +265,7 @@ def _latest(db, run_id):
 
 def create(db, user, patient_id, body):
     validate('CreateAnalysis', body)
-    with transaction(db):
+    with (nullcontext(db) if db.in_transaction else transaction(db)):
         relationship = authorize(db, user, patient_id)
         old = db.execute('SELECT * FROM analysis_runs WHERE actor_id=? AND patient_id=? AND request_key=?',
                          (user['id'], patient_id, body['request_key'])).fetchone()
@@ -284,6 +289,8 @@ def create(db, user, patient_id, body):
             value.update(status=state, revision=2, updated_at=now(),
                          errors=[{'code': 'age_scope', 'message': reason, 'retryable': False}])
             _append(db, value)
+        from . import backend_jobs
+        backend_jobs.schedule(db, value)
         access.audit(db, user['id'], 'analysis.requested', run_id)
         return value
 
@@ -326,7 +333,7 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
     """Internal worker boundary, deliberately absent from HTTP. Never applies a plan."""
     if type(expected_revision) is not int:
         raise AnalysisError('Нужна точная версия.', 409, 'revision_conflict')
-    with transaction(db):
+    with (nullcontext(db) if db.in_transaction else transaction(db)):
         authorize(db, user, patient_id)
         current = read(db, user, patient_id, run_id)
         if current['status'] == 'stale' or current['revision'] != expected_revision:
@@ -366,3 +373,15 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
         _append(db, value)
         access.audit(db, user['id'], 'analysis.' + status, run_id)
         return value
+
+
+def advance_in_job(db, run, current, outcome):
+    """Publish only through the existing contract and evidence validation."""
+    if not db.in_transaction:
+        raise RuntimeError('Publication requires the lease transaction')
+    if (type(outcome) is not dict or set(outcome) - {'status', 'result', 'errors', 'model'}
+            or outcome.get('status') not in ('ready', 'insufficient_data', 'unsupported')):
+        raise AnalysisError('Недопустимый результат фонового анализа.')
+    return advance(db, {'id': run['actor_id'], 'role': 'doctor'}, run['patient_id'],
+                   run['id'], current['revision'], outcome['status'],
+                   result=outcome.get('result'), errors=outcome.get('errors'), model=outcome.get('model'))

@@ -16,6 +16,7 @@ def main():
         commands.add_parser(command)
     worker = commands.add_parser('worker')
     worker.add_argument('--once', action='store_true')
+    worker.add_argument('--lane', choices=['all', 'risk', 'generation'], default='all')
     for reserve_command in ('reserve-macos','reserve-console'):
         reserve = commands.add_parser(reserve_command)
         reserve.add_argument('--recipient', required=True, help='Doctor ID on this local demo workstation')
@@ -52,7 +53,11 @@ def main():
                     time.sleep(1)
         elif args.command == 'worker':
             while True:
-                processed = process_one(db)
+                # A dedicated risk worker stays independent of slow generation.
+                from . import backend_jobs
+                processed = False if args.lane == 'generation' else process_one(db)
+                if not processed:
+                    processed = backend_jobs.process_one(db, lane=args.lane)
                 if args.once and not processed:
                     break
                 if not processed:

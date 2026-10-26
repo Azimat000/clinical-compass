@@ -1,0 +1,25 @@
+test_atomic_intents_rollback_and_existing_deterministic_path (apps.tests.test_backend_jobs.BackendJobTests.test_atomic_intents_rollback_and_existing_deterministic_path) ... ok
+test_cancel_is_authorized_idempotent_and_fenced (apps.tests.test_backend_jobs.BackendJobTests.test_cancel_is_authorized_idempotent_and_fenced) ... ok
+test_concurrent_workers_publish_one_terminal_version (apps.tests.test_backend_jobs.BackendJobTests.test_concurrent_workers_publish_one_terminal_version) ... ok
+test_crash_between_result_and_job_completion_rolls_back_both (apps.tests.test_backend_jobs.BackendJobTests.test_crash_between_result_and_job_completion_rolls_back_both) ... ok
+test_critical_event_priority_over_analysis_and_other_events (apps.tests.test_backend_jobs.BackendJobTests.test_critical_event_priority_over_analysis_and_other_events) ... ok
+test_disable_during_work_and_snapshot_failure_keep_safe_state (apps.tests.test_backend_jobs.BackendJobTests.test_disable_during_work_and_snapshot_failure_keep_safe_state) ... ok
+test_disabled_by_default_and_schema015_tolerated (apps.tests.test_backend_jobs.BackendJobTests.test_disabled_by_default_and_schema015_tolerated) ... ok
+test_disabled_doctor_and_revoked_event_never_reassigned (apps.tests.test_backend_jobs.BackendJobTests.test_disabled_doctor_and_revoked_event_never_reassigned) ... ok
+test_disabled_doctor_during_execution_cannot_receive_output (apps.tests.test_backend_jobs.BackendJobTests.test_disabled_doctor_during_execution_cannot_receive_output) ... ok
+test_four_source_changes_and_corrections_create_only_risk (apps.tests.test_backend_jobs.BackendJobTests.test_four_source_changes_and_corrections_create_only_risk) ... ok
+test_idempotent_replay_and_two_connections_no_duplicate_claim (apps.tests.test_backend_jobs.BackendJobTests.test_idempotent_replay_and_two_connections_no_duplicate_claim) ... ok
+test_invalid_generator_payload_cannot_bypass_contract (apps.tests.test_backend_jobs.BackendJobTests.test_invalid_generator_payload_cannot_bypass_contract) ... ok
+test_model_exception_does_not_log_secret_or_hold_write_lock (apps.tests.test_backend_jobs.BackendJobTests.test_model_exception_does_not_log_secret_or_hold_write_lock) ... ok
+test_new_data_source_version_or_model_version_stales_result (apps.tests.test_backend_jobs.BackendJobTests.test_new_data_source_version_or_model_version_stales_result) ... ok
+test_request_job_and_snapshot_rollback_together (apps.tests.test_backend_jobs.BackendJobTests.test_request_job_and_snapshot_rollback_together) ... ok
+test_restart_expiry_and_fencing_prevent_late_publication (apps.tests.test_backend_jobs.BackendJobTests.test_restart_expiry_and_fencing_prevent_late_publication) ... ok
+test_revoke_or_replace_relationship_during_work_suppresses_result (apps.tests.test_backend_jobs.BackendJobTests.test_revoke_or_replace_relationship_during_work_suppresses_result) ... ok
+test_risk_priority_and_lane_isolation (apps.tests.test_backend_jobs.BackendJobTests.test_risk_priority_and_lane_isolation) ... ok
+test_three_crashes_exhaust_lease_and_fail (apps.tests.test_backend_jobs.BackendJobTests.test_three_crashes_exhaust_lease_and_fail) ... ok
+test_unavailable_is_bounded_technical_failure_with_no_result (apps.tests.test_backend_jobs.BackendJobTests.test_unavailable_is_bounded_technical_failure_with_no_result) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 18.148s
+
+OK

@@ -31,7 +31,12 @@ def ready_routine_report(db, event):
     ready_report(db, event)
 
 
-HANDLERS = {'demo.patient_created.v1': record_demo_receipt,
+def ready_backend_data(db, event):
+    from .backend_jobs import ready_data
+    ready_data(db, event)
+
+
+HANDLERS = {'backend.data_changed.v1': ready_backend_data, 'demo.patient_created.v1': record_demo_receipt,
             'routine.self_report.v1': ready_routine_report,
             'clinical.critical.medication_safety.v1': ready_critical}
 
@@ -44,7 +49,7 @@ def process_one(db, handlers=None):
         clause = '' if deferred in handlers else ' AND topic<>?'
         parameters = (now(),) if deferred in handlers else (now(), deferred)
         event = db.execute("SELECT * FROM outbox_events WHERE status='pending' AND available_at<=?" + clause +
-                           ' ORDER BY created_at,id LIMIT 1', parameters).fetchone()
+                           " ORDER BY CASE topic WHEN 'clinical.critical.medication_safety.v1' THEN 0 WHEN 'backend.data_changed.v1' THEN 1 ELSE 2 END,created_at,id LIMIT 1", parameters).fetchone()
         if event is None:
             return False
         attempt = event['attempts'] + 1

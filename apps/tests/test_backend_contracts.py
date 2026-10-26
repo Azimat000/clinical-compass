@@ -293,7 +293,7 @@ class BackendSpecificationTests(unittest.TestCase):
                 after = table_rows(db)
                 for table, rows in before.items():
                     actual = after[table]
-                    if table == 'schema_migrations':actual = [r for r in actual if '016_backend_analyses' not in r]
+                    if table == 'schema_migrations':actual = [r for r in actual if '016_backend_analyses' not in r and '017_backend_jobs' not in r]
                     self.assertEqual(rows, actual, table)
                 current_schema = dict(db.execute("SELECT name,sql FROM sqlite_master WHERE sql IS NOT NULL"))
                 self.assertTrue(all(current_schema[k] == v for k,v in schema.items()))
