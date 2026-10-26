@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T19:27:46+03:00",
+  "updated_on": "2026-10-26T19:38:23+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE03",
-  "next_slice": "BE04",
+  "last_accepted_slice": "BE04",
+  "next_slice": "BE05",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -542,8 +542,8 @@
       "reason": null
     },
     "BE04": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE04",
       "handoff": "memory/sessions/BE04.md",
       "reason": null
     },
@@ -1330,14 +1330,19 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE03",
+    "last_accepted_slice": "BE04",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
     "active_service_migrated": false,
     "snapshot_version": "patient-history-v2",
     "source_catalog_version": "backend-sources-v1",
-    "source_verification_due_at": "2026-10-27T19:17:00+03:00"
+    "source_verification_due_at": "2026-10-27T19:17:00+03:00",
+    "model_provider": "deepseek",
+    "model_id": "deepseek-flash",
+    "model_prompt_version": "compass-model-v1",
+    "model_mode": "synthetic_only",
+    "model_live_evidence": "evidence/BE04/live-smoke.json"
   },
   "workspace_recovery": {
     "date": "2026-10-26",

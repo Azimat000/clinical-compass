@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "timestamp_utc": "2026-10-26T16:34:10.076989+00:00",
+  "synthetic_input": {
+    "case_id": "fictional-be04",
+    "synthetic": true,
+    "note": "Вымышленный тест: самочувствие записано в понедельник и во вторник. Посчитай число дней recorded_days. Диагноз неизвестен: diagnosis=null."
+  },
+  "expected": {
+    "case_id": "fictional-be04",
+    "recorded_days": 2,
+    "diagnosis": null
+  },
+  "value": {
+    "case_id": "fictional-be04",
+    "recorded_days": 2,
+    "diagnosis": null
+  },
+  "metadata": {
+    "provider": "deepseek",
+    "requested_model": "deepseek-flash",
+    "returned_model": "deepseek-flash",
+    "prompt_version": "compass-model-v1",
+    "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+    "schema_sha256": "757e25f53bceca482dc6a3ecd99285974a824408fbe75288067b06d541f4d10a",
+    "elapsed_seconds": 1.309,
+    "usage": {
+      "prompt_tokens": 236,
+      "completion_tokens": 25,
+      "total_tokens": 261
+    },
+    "cache_hit_tokens": 0,
+    "cache_miss_tokens": 236,
+    "estimated_peak_cost_nano_usd": 100800,
+    "estimated_offpeak_cost_nano_usd": 50400,
+    "cost_ceiling_micro_usd": 361,
+    "reservation_micro_usd": 2036,
+    "synthetic_only": true,
+    "test_double": false
+  }
+}

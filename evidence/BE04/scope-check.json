@@ -1,0 +1,38 @@
+{
+  "secret_leak_paths": [],
+  "credential_mode": "0o600",
+  "secret_ignored": true,
+  "changed_paths": [
+    "apps/compass/backend_model.py",
+    "apps/tests/test_backend_model.py",
+    "docs/architecture/backend-model.md",
+    "evidence/BE04/acceptance.md",
+    "evidence/BE04/baseline.json",
+    "evidence/BE04/check.log",
+    "evidence/BE04/first-attempt-tls.json",
+    "evidence/BE04/live-smoke.json",
+    "evidence/BE04/old-env-key-rejected.json",
+    "evidence/BE04/research.md",
+    "evidence/BE04/targeted.log",
+    "evidence/BE04/tools-final.log",
+    "memory/sessions/BE04.md",
+    "tools/model_smoke.py",
+    "START_HERE.md",
+    "memory/BLOCKERS.md",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/EXTERNAL.md",
+    "memory/STATE.json",
+    "plan/backend/README.md",
+    "plan/backend/requirements.json",
+    "plan/coverage.json",
+    "plan/slices/BE04.md"
+  ],
+  "preexisting_paths_preserved": [
+    "evidence/audits/2026-10-20-cycles/",
+    "tools/run_synthetic_cycles.py"
+  ],
+  "clinical_database_modified": false,
+  "active_service_restarted": false,
+  "main_agent_review": "PASS: inspected adapter, smoke, tests and actual tracked diff; no mutating agents"
+}
