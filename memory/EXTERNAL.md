@@ -465,3 +465,6 @@ S54, 26.10.2026: использована существующая локаль�
 ## Восстановление iCloud,26.10.2026
 
 Read-only web-researcher сверил Apple System.FileFlags.dataless (https://developer.apple.com/documentation/system/fileflags/dataless) и TN3150 (https://developer.apple.com/documentation/technotes/tn3150-getting-ready-for-data-less-files). Dataless означает отсутствие локального содержимого; повторное чтение может ждать материализации. У7проблемных объектов st_blocks=0, отсутствуют com.apple.decmpfs/ResourceFork; локальныйpayload не обнаружен. Флаги/xattr/служебные базы iCloud не изменялись, repair/reset не запускались. Облачные оригиналы проверяются через iCloud.com после самостоятельного входа пользователя; новые внешние допуски/клинические правила/сроки не создавались. Публикаций/покупок/сообщений людям агент не выполнял.
+
+
+Штатное чтение последнего архива выполнено через NSFileCoordinatorReadingWithoutChanges, согласно Apple Foundation coordinateReadingItemAtURL и установленному SDK. Источник не записывался; результат NSCocoaErrorDomain 4101. API: https://developer.apple.com/documentation/foundation/nsfilecoordinator/readingoptions/withoutchanges?language=objc . Принудительная политика setiopolicy, repair/reset и изменение флагов не применялись. После уточнения пользователя дальнейшее восстановление этого архива прекращено.

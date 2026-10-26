@@ -1,5 +1,5 @@
 {
-  "status": "CORE_RESTORED_ARCHIVAL_FILE_BLOCKED",
+  "status": "PASS_APPROVED_SCOPE",
   "source": "/Users/azamatsibgatullin/Documents/HAC",
   "working_directory": "/Users/azamatsibgatullin/HAC-Recovery-20261026/project",
   "baseline_files": 4802,
@@ -30,12 +30,20 @@
   "live_http_checks": 114,
   "clinical_submissions": 0,
   "cloud_originals_verified": 6,
-  "unavailable_archival_file": ".git/index-cloud-before-S37",
   "ordinary_read_result": "Errno60 Operation timed out",
   "coordinated_read_result": "NSCocoaErrorDomain4101",
   "source_originals_preserved": true,
   "plan_commit": "c5ee93144090aba28ff1eb176635e95ca6fd9014",
   "plan_tag": "plan/backend-plan-2026-10-26",
   "backend_started": false,
-  "private_full_manifests": "/Users/azamatsibgatullin/HAC-Recovery-20261026/verification"
+  "private_full_manifests": "/Users/azamatsibgatullin/HAC-Recovery-20261026/verification",
+  "in_scope_files": 4801,
+  "excluded_by_user": [
+    ".git/index-cloud-before-S37"
+  ],
+  "runtime_references_to_excluded_file": 0,
+  "active_git_index": ".git/index",
+  "git_index_file_override": null,
+  "exclusion_authorization": "если этот последний файл не нужен и ни на что не влияет, забей на него",
+  "commit_ref": "refs/tags/recovery/2026-10-26-local"
 }

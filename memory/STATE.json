@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T17:22:26+03:00",
+  "updated_on": "2026-10-26T17:49:52+03:00",
   "current_slice": null,
   "last_accepted_slice": "S56",
   "next_slice": "BE01",
@@ -1333,7 +1333,7 @@
   },
   "workspace_recovery": {
     "date": "2026-10-26",
-    "status": "core_restored_archival_file_blocked",
+    "status": "accepted",
     "working_directory": "/Users/azamatsibgatullin/HAC-Recovery-20261026/project",
     "preserved_source_directory": "/Users/azamatsibgatullin/Documents/HAC",
     "report": "memory/sessions/recovery-2026-10-26.md",
@@ -1343,11 +1343,17 @@
     "baseline_files": 4802,
     "byte_copied_files": 4795,
     "tracked_files_restored_from_git": 6,
-    "cloud_originals_pending": 1,
     "cloud_originals_verified": 6,
-    "unavailable_archival_file": ".git/index-cloud-before-S37",
     "preserved_and_verified_files": 4801,
     "core_tests": "612 application + 70 tools PASS",
-    "live_http_checks": 114
+    "live_http_checks": 114,
+    "commit_ref": "refs/tags/recovery/2026-10-26-local",
+    "in_scope_files": 4801,
+    "cloud_originals_in_scope_pending": 0,
+    "excluded_paths": [
+      ".git/index-cloud-before-S37"
+    ],
+    "exclusion_authorization": "если этот последний файл не нужен и ни на что не влияет, забей на него",
+    "authorization_evidence": "evidence/recovery-2026-10-26/authorization.md"
   }
 }
