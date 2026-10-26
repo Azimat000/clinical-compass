@@ -1,0 +1,62 @@
+test_all_roles_paths_exports_events_and_no_anonymous_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_all_roles_paths_exports_events_and_no_anonymous_leak) ... FAIL
+test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision (apps.tests.test_backend_alerts.BackendAlertTests.test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision) ... FAIL
+test_backlog_and_custom_consumer_and_immutable_logs (apps.tests.test_backend_alerts.BackendAlertTests.test_backlog_and_custom_consumer_and_immutable_logs) ... FAIL
+test_disabled_doctor_before_or_after_delivery_loses_access (apps.tests.test_backend_alerts.BackendAlertTests.test_disabled_doctor_before_or_after_delivery_loses_access) ... ok
+test_publication_failure_rolls_back_episode_signal_outbox_and_analysis (apps.tests.test_backend_alerts.BackendAlertTests.test_publication_failure_rolls_back_episode_signal_outbox_and_analysis) ... ok
+test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision (apps.tests.test_backend_alerts.BackendAlertTests.test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision) ... ERROR
+test_retry_rolls_back_channel_then_restart_replays_one_signal (apps.tests.test_backend_alerts.BackendAlertTests.test_retry_rolls_back_channel_then_restart_replays_one_signal) ... ok
+test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak) ... ok
+test_strict_input_page_order_revision_and_idempotency (apps.tests.test_backend_alerts.BackendAlertTests.test_strict_input_page_order_revision_and_idempotency) ... FAIL
+
+======================================================================
+ERROR: test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision (apps.tests.test_backend_alerts.BackendAlertTests.test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 148, in test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision
+    self.diary(summary='Другое вымышленное опасение.');run=self.create();work=jobs.claim(self.db);jobs.finish(self.db,work,self.result(work))
+                                                                                                                           ~~~~~~~~~~~^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_risk_integration.py", line 32, in result
+    snapshot = work['snapshot']
+               ~~~~^^^^^^^^^^^^
+KeyError: 'snapshot'
+
+======================================================================
+FAIL: test_all_roles_paths_exports_events_and_no_anonymous_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_all_roles_paths_exports_events_and_no_anonymous_leak)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 83, in test_all_roles_paths_exports_events_and_no_anonymous_leak
+    self.assertEqual(403 if uid.startswith('pat') else 404,self.action(row,self.action_body(row,'received'),uid).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 400
+
+======================================================================
+FAIL: test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision (apps.tests.test_backend_alerts.BackendAlertTests.test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 54, in test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision
+    self.assertEqual(409,self.action(row,self.action_body(row,'received')).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 409 != 400
+
+======================================================================
+FAIL: test_backlog_and_custom_consumer_and_immutable_logs (apps.tests.test_backend_alerts.BackendAlertTests.test_backlog_and_custom_consumer_and_immutable_logs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 178, in test_backlog_and_custom_consumer_and_immutable_logs
+    with self.assertRaises(sqlite3.IntegrityError):self.db.execute(sql)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IntegrityError not raised
+
+======================================================================
+FAIL: test_strict_input_page_order_revision_and_idempotency (apps.tests.test_backend_alerts.BackendAlertTests.test_strict_input_page_order_revision_and_idempotency)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_alerts.py", line 186, in test_strict_input_page_order_revision_and_idempotency
+    self.assertEqual(409,self.action(row,self.action_body(row,'received',expected_revision=99)).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 409 != 400
+
+----------------------------------------------------------------------
+Ran 9 tests in 4.721s
+
+FAILED (failures=4, errors=1)

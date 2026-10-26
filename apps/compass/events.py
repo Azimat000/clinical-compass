@@ -36,7 +36,13 @@ def ready_backend_data(db, event):
     ready_data(db, event)
 
 
-HANDLERS = {'backend.data_changed.v1': ready_backend_data, 'demo.patient_created.v1': record_demo_receipt,
+def ready_backend_alert(db, event):
+    from .backend_alerts import deliver
+    deliver(db, event)
+
+
+HANDLERS = {'backend.risk_alert.v1': ready_backend_alert,
+            'backend.data_changed.v1': ready_backend_data, 'demo.patient_created.v1': record_demo_receipt,
             'routine.self_report.v1': ready_routine_report,
             'clinical.critical.medication_safety.v1': ready_critical}
 
@@ -44,12 +50,17 @@ HANDLERS = {'backend.data_changed.v1': ready_backend_data, 'demo.patient_created
 def process_one(db, handlers=None):
     handlers = HANDLERS if handlers is None else handlers
     with transaction(db):
+        if 'backend.risk_alert.v1' in handlers:
+            from .backend_alerts import enqueue_pending
+            enqueue_pending(db)
         # Custom consumers without a critical handler must leave critical jobs intact.
         deferred = 'clinical.critical.medication_safety.v1'
-        clause = '' if deferred in handlers else ' AND topic<>?'
-        parameters = (now(),) if deferred in handlers else (now(), deferred)
+        protected = (deferred, 'backend.risk_alert.v1')
+        excluded = [topic for topic in protected if topic not in handlers]
+        clause = ''.join(' AND topic<>?' for topic in excluded)
+        parameters = (now(), *excluded)
         event = db.execute("SELECT * FROM outbox_events WHERE status='pending' AND available_at<=?" + clause +
-                           " ORDER BY CASE topic WHEN 'clinical.critical.medication_safety.v1' THEN 0 WHEN 'backend.data_changed.v1' THEN 1 ELSE 2 END,created_at,id LIMIT 1", parameters).fetchone()
+                           " ORDER BY CASE topic WHEN 'clinical.critical.medication_safety.v1' THEN 0 WHEN 'backend.risk_alert.v1' THEN 0 WHEN 'backend.data_changed.v1' THEN 1 ELSE 2 END,created_at,id LIMIT 1", parameters).fetchone()
         if event is None:
             return False
         attempt = event['attempts'] + 1

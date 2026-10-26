@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/BE09/live_channel.py", line 49, in <module>
+    patient.open(base+'/patients/D01/self-reports',urllib.parse.urlencode(body).encode()).close()
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 495, in open
+    response = meth(req, response)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 604, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 533, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 613, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: BAD REQUEST

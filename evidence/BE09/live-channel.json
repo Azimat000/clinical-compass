@@ -1,0 +1,42 @@
+{
+  "pass": true,
+  "synthetic": true,
+  "clinical_validation": false,
+  "real_http": true,
+  "production_worker_exit": 0,
+  "external_model_calls": 0,
+  "model_error": "missing_credentials",
+  "rule_preserved": true,
+  "record_save_ms": 4.883,
+  "record_to_channel_ms": 334.688,
+  "record_to_physician_receipt_ms": 343.628,
+  "receipt_actor": "synthetic authenticated test physician, not real human reading",
+  "states": [
+    "queued",
+    "delivered",
+    "received"
+  ],
+  "view_or_decision_inferred": false,
+  "access_checks": [
+    {
+      "actor": "patient",
+      "status": 403
+    },
+    {
+      "actor": "foreign_doctor",
+      "status": 404
+    }
+  ],
+  "restart_receipt_preserved": true,
+  "care_actions": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "attempted_at": "2026-10-26T19:06:42.879648+00:00",
+      "error": null,
+      "outcome": "processed"
+    }
+  ],
+  "live_service_8000_touched": false,
+  "channel": "physician_api_v1"
+}

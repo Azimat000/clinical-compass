@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-26T21:53:56+03:00",
+  "updated_on": "2026-10-26T22:12:40+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE08",
-  "next_slice": "BE09",
+  "last_accepted_slice": "BE09",
+  "next_slice": "BE10",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -572,8 +572,8 @@
       "reason": null
     },
     "BE09": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE09",
       "handoff": "memory/sessions/BE09.md",
       "reason": null
     },
@@ -1358,7 +1358,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE08",
+    "last_accepted_slice": "BE09",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1388,7 +1388,11 @@
     "risk_episode_mode": "synthetic_opt_in_partial",
     "risk_episode_evidence": "evidence/BE08B01/acceptance.md",
     "risk_execution_version": "be08-context-v2",
-    "risk_integration_evidence": "evidence/BE08/acceptance.md"
+    "risk_integration_evidence": "evidence/BE08/acceptance.md",
+    "alert_version": "backend-alerts-v1",
+    "alert_channel": "physician_api_v1",
+    "alert_mode": "synthetic_only_original_physician",
+    "alert_evidence": "evidence/BE09/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",

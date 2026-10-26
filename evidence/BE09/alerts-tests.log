@@ -1,0 +1,16 @@
+test_all_roles_paths_exports_events_and_no_anonymous_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_all_roles_paths_exports_events_and_no_anonymous_leak) ... ok
+test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision (apps.tests.test_backend_alerts.BackendAlertTests.test_atomic_signal_outbox_real_channel_and_separate_receipt_view_decision) ... ok
+test_backlog_and_custom_consumer_and_immutable_logs (apps.tests.test_backend_alerts.BackendAlertTests.test_backlog_and_custom_consumer_and_immutable_logs) ... ok
+test_concurrent_workers_and_receipt_retries_remain_single (apps.tests.test_backend_alerts.BackendAlertTests.test_concurrent_workers_and_receipt_retries_remain_single) ... ok
+test_disabled_doctor_before_or_after_delivery_loses_access (apps.tests.test_backend_alerts.BackendAlertTests.test_disabled_doctor_before_or_after_delivery_loses_access) ... ok
+test_existing_be08_ledger_is_caught_up_without_reanalysis (apps.tests.test_backend_alerts.BackendAlertTests.test_existing_be08_ledger_is_caught_up_without_reanalysis) ... ok
+test_publication_failure_rolls_back_episode_signal_outbox_and_analysis (apps.tests.test_backend_alerts.BackendAlertTests.test_publication_failure_rolls_back_episode_signal_outbox_and_analysis) ... ok
+test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision (apps.tests.test_backend_alerts.BackendAlertTests.test_repeated_snapshot_new_evidence_old_alert_cannot_close_new_revision) ... ok
+test_retry_rolls_back_channel_then_restart_replays_one_signal (apps.tests.test_backend_alerts.BackendAlertTests.test_retry_rolls_back_channel_then_restart_replays_one_signal) ... ok
+test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak (apps.tests.test_backend_alerts.BackendAlertTests.test_revocation_new_recipient_disabled_absent_and_exhaustion_never_leak) ... ok
+test_strict_input_page_order_revision_and_idempotency (apps.tests.test_backend_alerts.BackendAlertTests.test_strict_input_page_order_revision_and_idempotency) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.179s
+
+OK

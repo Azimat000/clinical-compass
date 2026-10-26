@@ -96,7 +96,7 @@ def validate(name, value):
     validate_schema(value, spec['components']['schemas'][name], spec)
 
 
-def parse_request(raw):
+def parse_request(raw, schema='CreateAnalysis'):
     def pairs(items):
         result = {}
         for key, value in items:
@@ -109,7 +109,8 @@ def parse_request(raw):
                            parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
     except (ValueError, UnicodeError, RecursionError):
         raise AnalysisError('Некорректный JSON.') from None
-    validate('CreateAnalysis', value)
+    if schema is not None:
+        validate(schema, value)
     return value
 
 

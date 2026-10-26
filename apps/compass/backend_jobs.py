@@ -194,6 +194,8 @@ def finish(db, claim_value, outcome=None, error=None):
                     saved = episodes.observe(db, {'id':run['actor_id'], 'role':'doctor'}, run['patient_id'], run['id'], report)
                     projected = context.projection(saved)
                 analyses.advance_in_job(db, run, value, publication, risk_context=projected)
+                from . import backend_alerts
+                backend_alerts.enqueue_pending(db)
                 db.execute('RELEASE publication')
             except Exception:
                 db.execute('ROLLBACK TO publication')

@@ -323,6 +323,36 @@ def create_app(database=None):
         role('doctor')
         return jsonify(backend_analyses.inputs(get_db(), g.user, patient_id, run_id, reference=reference))
 
+    @app.get('/api/v1/physician/alerts')
+    def backend_alert_inbox():
+        role('doctor')
+        from . import backend_alerts
+        if set(request.args) - {'page'} or len(request.args.getlist('page')) > 1:
+            raise backend_analyses.AnalysisError('Недопустимые параметры страницы.', 400, 'invalid_page')
+        page = request.args.get('page', '1')
+        if not re.fullmatch(r'[1-9][0-9]{0,5}', page):
+            raise backend_analyses.AnalysisError('Неверная страница.', 400, 'invalid_page')
+        return jsonify(backend_alerts.inbox(get_db(), g.user, int(page)))
+
+    @app.get('/api/v1/physician/alerts/<alert_id>')
+    def backend_alert_detail(alert_id):
+        role('doctor')
+        from . import backend_alerts
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        return jsonify(backend_alerts.read(get_db(), g.user, alert_id))
+
+    @app.post('/api/v1/physician/alerts/<alert_id>/actions')
+    def backend_alert_action(alert_id):
+        role('doctor')
+        from . import backend_alerts
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        if request.mimetype != 'application/json':
+            raise backend_analyses.AnalysisError('Нужен Content-Type application/json.', 415, 'unsupported_media_type')
+        body = backend_analyses.parse_request(request.get_data(), schema=None)
+        return jsonify(backend_alerts.act(get_db(), g.user, alert_id, body))
+
     @app.teardown_appcontext
     def close_db(error):
         db = g.pop('db', None)
