@@ -65,7 +65,7 @@ class BackendJobTests(unittest.TestCase):
         while events.process_one(self.db):
             pass
         for _ in range(3):
-            jobs.process_one(self.db); self.due()
+            jobs.process_one(self.db, executor=jobs.unavailable); self.due()
         self.assertEqual(1, self.db.execute('SELECT count(*) FROM clinical_entries').fetchone()[0])
         self.assertEqual('failed', json.loads(self.db.execute('SELECT payload_json FROM analysis_result_versions ORDER BY revision DESC LIMIT 1').fetchone()[0])['status'])
 
@@ -156,7 +156,7 @@ class BackendJobTests(unittest.TestCase):
         self.enable()
         run = self.create()
         for _ in range(3):
-            self.assertTrue(jobs.process_one(self.db)); self.due()
+            self.assertTrue(jobs.process_one(self.db, executor=jobs.unavailable)); self.due()
         self.assertFalse(jobs.process_one(self.db))
         value = self.latest(run)
         self.assertEqual('failed', value['status'])

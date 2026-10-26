@@ -29,11 +29,12 @@ def fingerprint(db):
     if config is None:
         return None
     # Lazy import avoids the model -> analyses dependency cycle.
-    from . import backend_model, backend_extraction
+    from . import backend_model, backend_extraction, backend_risk_rules
     return {'jobs_version': 'backend-jobs-v1', 'generation_version': config['generation_version'],
             'model': 'deepseek-flash', 'adapter': backend_model.PROMPT_VERSION,
             'system_sha256': hashlib.sha256(backend_model.SYSTEM.encode()).hexdigest(),
-            'extraction': backend_extraction.VERSION}
+            'extraction': backend_extraction.VERSION,
+            'risk_rules': backend_risk_rules.release()['engine_sha256']}
 
 
 def schedule(db, value):
@@ -146,6 +147,11 @@ def unavailable(operation, snapshot):
     raise ModelError('operation_unavailable')
 
 
+def execute(operation, snapshot):
+    from . import backend_risk_rules
+    return backend_risk_rules.execute(operation, snapshot)
+
+
 def finish(db, claim_value, outcome=None, error=None):
     with transaction(db):
         run = claim_value['run']
@@ -190,7 +196,7 @@ def process_one(db, lane='all', executor=None):
         return True
     # No database write lock across network or generator work.
     try:
-        outcome = (executor or unavailable)(work['run']['operation'], work['snapshot'])
+        outcome = (executor or execute)(work['run']['operation'], work['snapshot'])
     except Exception as exc:
         # Never store provider bodies, clinical text, exception strings or secrets.
         from .backend_model import ModelError

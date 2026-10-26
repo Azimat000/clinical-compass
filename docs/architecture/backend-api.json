@@ -733,6 +733,14 @@
               "$ref": "#/components/schemas/Finding"
             },
             "maxItems": 100
+          },
+          "rule_evaluations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/RiskRuleEvaluation"
+            }
           }
         },
         "required": [
@@ -1417,6 +1425,88 @@
           "snapshot_id",
           "version",
           "source"
+        ],
+        "additionalProperties": false
+      },
+      "RiskRuleEvaluation": {
+        "type": "object",
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+            "maxLength": 128
+          },
+          "version": {
+            "type": "string",
+            "const": "backend-risk-rules-v1"
+          },
+          "state": {
+            "enum": [
+              "triggered",
+              "no_match",
+              "insufficient_data",
+              "not_applicable"
+            ]
+          },
+          "attention": {
+            "enum": [
+              "physician_review",
+              "undetermined"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            },
+            "maxItems": 50
+          },
+          "fact_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+              "maxLength": 128
+            },
+            "maxItems": 50
+          },
+          "reasons": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "pdf_page": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "rule_id",
+          "version",
+          "state",
+          "attention",
+          "source_ids",
+          "fact_ids",
+          "reasons",
+          "source_id",
+          "section",
+          "pdf_page"
         ],
         "additionalProperties": false
       }

@@ -149,6 +149,8 @@ def capture(db, patient_id, relationship_id):
             'scope_sha256': hashlib.sha256(SCOPE_PATH.read_bytes()).hexdigest()}
         value['patient_history'] = backend_snapshot.enrich(db, value, patient_id)
         value['backend_sources'] = backend_sources.capture()
+        from . import backend_risk_rules
+        value['backend_risk_rules'] = backend_risk_rules.release()
         from . import backend_jobs
         runtime = backend_jobs.fingerprint(db)
         if runtime is not None:
@@ -157,14 +159,18 @@ def capture(db, patient_id, relationship_id):
         if len(snapshot.encode()) > 4194304:
             raise AnalysisError('Входной снимок превышает 4 МиБ.', 409, 'snapshot_too_large')
         return snapshot
-    except (clinical_rules.RuleError, backend_sources.SourceError):
+    except AnalysisError:
+        raise
+    except (clinical_rules.RuleError, backend_sources.SourceError, OSError, ValueError, KeyError, TypeError):
         raise AnalysisError('Источниковая зависимость недоступна.', 409, 'source_unavailable') from None
 
 
 def source_refs(snapshot):
-    return [{'id': r['id'], 'version': r['version'], 'sha256': r['sha256']}
-            for r in json.loads(snapshot)['source_versions']] + backend_sources.references(
-                json.loads(snapshot)['backend_sources'])
+    from . import backend_risk_rules
+    value = json.loads(snapshot)
+    return ([{'id': r['id'], 'version': r['version'], 'sha256': r['sha256']}
+             for r in value['source_versions']] + backend_sources.references(value['backend_sources'])
+            + backend_risk_rules.references(value['backend_risk_rules']))
 
 
 def inputs(db, user, patient_id, run_id, *, reference=None, page=1):
@@ -340,6 +346,12 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
             raise AnalysisError('Запуск устарел или изменён.', 409, 'revision_conflict')
         if status not in TRANSITIONS[current['status']]:
             raise AnalysisError('Недопустимый переход состояния.', 409, 'invalid_transition')
+        if current['operation'] == 'risk' and status in ('insufficient_data', 'unsupported'):
+            from . import backend_risk_rules
+            raw = db.execute('SELECT payload_json FROM analysis_input_snapshots WHERE id=?', (current['snapshot_id'],)).fetchone()[0]
+            authoritative = backend_risk_rules.evaluate(json.loads(raw))
+            if authoritative.get('status') == 'ready' and authoritative['result']['output']['patterns']:
+                raise AnalysisError('Положительное правило нельзя отменить ответом исполнителя.', 409, 'risk_override_forbidden')
         if status == 'ready':
             state, _ = age_scope(db, patient_id)
             if state:
@@ -365,7 +377,9 @@ def advance(db, user, patient_id, run_id, expected_revision, status, *, result=N
                         or diagnosis['snapshot_id'] != current['snapshot_id']):
                     raise AnalysisError('Нужна актуальная точная версия диагностического анализа.', 409, 'diagnosis_unavailable')
             try:
-                backend_sources.check_result(snapshot.get('backend_sources'), current['operation'], result)
+                backend_sources.check_result(snapshot.get('backend_sources'), current['operation'], result, snapshot=snapshot)
+                if current['operation'] == 'risk' and model is not None:
+                    raise backend_sources.SourceError(['risk_model_override_forbidden'])
             except backend_sources.SourceError as exc:
                 raise AnalysisError('Клиническое основание недоступно: ' + str(exc), 409, 'source_unavailable') from None
         value = {**current, 'status': status, 'revision': expected_revision + 1, 'updated_at': now(),

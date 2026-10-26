@@ -64,6 +64,10 @@ def enrich(db, raw, patient_id):
     field(profile, '/birth_date', patient['birth_date'], code='birth_date')
     field(profile, '/age_years', patient['age_years'], code='age_years')
 
+    for row in raw.get('clinical_contexts', []):
+        entry = item('clinical_contexts', row, 'context', row['observed_on'], row['recorded_at'], row['actor_id'])
+        field(entry, '/payload_json', json.loads(row['payload_json']), code='physician_risk_context')
+
     results = {r['assessment_id']: r for r in raw['assessment_results']}
     requests = {r['id']: r for r in raw['assessment_requests']}
     for row in raw['assessments']:

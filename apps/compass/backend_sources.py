@@ -177,7 +177,7 @@ def require(report, claim_ids, operation, *, age_min, age_max, condition, mode='
         raise SourceError(reasons)
 
 
-def check_result(frozen, operation, result, *, root=None, context=None):
+def check_result(frozen, operation, result, *, root=None, context=None, snapshot=None):
     """Final server check. No arbitrary assertion can borrow a valid citation.
 
     v1 permits only exact registered authored statements. Patient-specific clinical
@@ -187,6 +187,10 @@ def check_result(frozen, operation, result, *, root=None, context=None):
     current = capture(root=root)
     if frozen != current:
         raise SourceError(['source_snapshot_changed'])
+    if operation == 'risk' and snapshot is not None and 'rule_evaluations' in result['output']:
+        from . import backend_risk_rules
+        backend_risk_rules.verify(snapshot, result)
+        return current
     output = result['output']
     findings = (output['patterns'] if operation == 'risk' else
                 [output['leading'], *output['alternatives']] if operation == 'diagnosis' else output['items'])

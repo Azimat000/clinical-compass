@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "scope_compliance": "PASS",
+  "preserved_foreign_files": 4,
+  "requirements": 83,
+  "subchecks": 160,
+  "original_requirement_statuses_preserved": true,
+  "other_slice_statuses_preserved": true,
+  "app_regression_tests": 725,
+  "tool_tests": 70,
+  "final_affected_tests": 75,
+  "live_production_processes": 3,
+  "copy_cases": 10,
+  "copy_old_tables": 80,
+  "ledger_micro_usd": 36739,
+  "ledger_calls": 23,
+  "secrets_absent": true,
+  "final_code_sha256": {
+    "apps/compass/backend_analyses.py": "d29fe8596276fa7ab8e1dfcada8c6e7b9c88c18a8986a008ec2786d52ec18387",
+    "apps/compass/backend_jobs.py": "6054ad73f5494f6d6985fd0ad4372fb5ecaee76894179fbae913fb2d594f7371",
+    "apps/compass/backend_risk_rules.py": "65bae8fd7dc248a6457ed0b3c79b0095f8fe4b361aef7261585aac7b21eab969",
+    "apps/compass/backend_snapshot.py": "072f71e727e9e73f120ee10c9b85e06362bab3f56cbaf783da71fe67022cb2ee",
+    "apps/compass/backend_sources.py": "c3e41e522b8c55add139707a454240c225f7e269ed1175caa671b7f079351607"
+  },
+  "live_health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "clinical_release": "blocked",
+  "other_slices_started": false
+}

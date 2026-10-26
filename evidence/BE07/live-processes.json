@@ -1,0 +1,264 @@
+{
+  "pass": true,
+  "production_cli_processes": 3,
+  "model_calls": 0,
+  "network_calls": 0,
+  "source_fixture_substitution": false,
+  "total_seconds": 0.818,
+  "integrity": "ok",
+  "foreign_keys": 0,
+  "care_actions": 0,
+  "outputs": [
+    {
+      "operation": "risk",
+      "condition": "F32",
+      "status": "ready",
+      "assessment": "potential_risk",
+      "pattern_ids": [
+        "DEP-SUICIDE-FACT"
+      ],
+      "rules": [
+        {
+          "attention": "physician_review",
+          "fact_ids": [
+            "context",
+            "age",
+            "fact-DEP-SUICIDE-FACT"
+          ],
+          "pdf_page": 21,
+          "reasons": [],
+          "rule_id": "DEP-SUICIDE-FACT",
+          "section": "2.5 Иные диагностические исследования",
+          "source_id": "KR301_3",
+          "source_ids": [
+            "be07-DEP-SUICIDE-FACT"
+          ],
+          "state": "triggered",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 39,
+          "reasons": [],
+          "rule_id": "GAD-PSY-REVIEW",
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-PSY-REVIEW"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 30,
+          "reasons": [],
+          "rule_id": "GAD-ADVERSE-REVIEW",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-ADVERSE-REVIEW"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 22,
+          "reasons": [],
+          "rule_id": "GAD-INITIAL-ANXIETY",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-INITIAL-ANXIETY"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        }
+      ],
+      "attempts": 1,
+      "model": null,
+      "release": "blocked"
+    },
+    {
+      "operation": "risk",
+      "condition": "F41.1",
+      "status": "ready",
+      "assessment": "potential_risk",
+      "pattern_ids": [
+        "GAD-PSY-REVIEW",
+        "GAD-ADVERSE-REVIEW",
+        "GAD-INITIAL-ANXIETY"
+      ],
+      "rules": [
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 21,
+          "reasons": [],
+          "rule_id": "DEP-SUICIDE-FACT",
+          "section": "2.5 Иные диагностические исследования",
+          "source_id": "KR301_3",
+          "source_ids": [
+            "be07-DEP-SUICIDE-FACT"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "physician_review",
+          "fact_ids": [
+            "context",
+            "age",
+            "fact-GAD-PSY-REVIEW"
+          ],
+          "pdf_page": 39,
+          "reasons": [],
+          "rule_id": "GAD-PSY-REVIEW",
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-PSY-REVIEW"
+          ],
+          "state": "triggered",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "physician_review",
+          "fact_ids": [
+            "context",
+            "age",
+            "fact-GAD-ADVERSE-REVIEW"
+          ],
+          "pdf_page": 30,
+          "reasons": [],
+          "rule_id": "GAD-ADVERSE-REVIEW",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-ADVERSE-REVIEW"
+          ],
+          "state": "triggered",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "physician_review",
+          "fact_ids": [
+            "context",
+            "age",
+            "fact-GAD-INITIAL-ANXIETY"
+          ],
+          "pdf_page": 22,
+          "reasons": [],
+          "rule_id": "GAD-INITIAL-ANXIETY",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-INITIAL-ANXIETY"
+          ],
+          "state": "triggered",
+          "version": "backend-risk-rules-v1"
+        }
+      ],
+      "attempts": 1,
+      "model": null,
+      "release": "blocked"
+    },
+    {
+      "operation": "risk",
+      "condition": "F32",
+      "status": "ready",
+      "assessment": "no_pattern_found",
+      "pattern_ids": [],
+      "rules": [
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age",
+            "fact-DEP-SUICIDE-FACT"
+          ],
+          "pdf_page": 21,
+          "reasons": [],
+          "rule_id": "DEP-SUICIDE-FACT",
+          "section": "2.5 Иные диагностические исследования",
+          "source_id": "KR301_3",
+          "source_ids": [
+            "be07-DEP-SUICIDE-FACT"
+          ],
+          "state": "no_match",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 39,
+          "reasons": [],
+          "rule_id": "GAD-PSY-REVIEW",
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-PSY-REVIEW"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 30,
+          "reasons": [],
+          "rule_id": "GAD-ADVERSE-REVIEW",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-ADVERSE-REVIEW"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        },
+        {
+          "attention": "undetermined",
+          "fact_ids": [
+            "context",
+            "age"
+          ],
+          "pdf_page": 22,
+          "reasons": [],
+          "rule_id": "GAD-INITIAL-ANXIETY",
+          "section": "3.2 Психофармакотерапия",
+          "source_id": "KR457_3",
+          "source_ids": [
+            "be07-GAD-INITIAL-ANXIETY"
+          ],
+          "state": "not_applicable",
+          "version": "backend-risk-rules-v1"
+        }
+      ],
+      "attempts": 1,
+      "model": null,
+      "release": "blocked"
+    }
+  ]
+}
