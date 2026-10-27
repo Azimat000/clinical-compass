@@ -1,0 +1,1676 @@
+{
+  "status": "PASS",
+  "mode": "offline_transport_only_no_model_or_default_integration",
+  "copy": "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/var/FE03A-sizing.sqlite3",
+  "copy_private": true,
+  "table_hashes_unchanged": true,
+  "all_original_clinical_tables_preserved": 80,
+  "patients": 10,
+  "branches": 20,
+  "results": [
+    {
+      "patient_id": "P201",
+      "branch": "depressive_episode",
+      "unit_count": 279,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 63
+      },
+      "current_revision_counts": {
+        "True": 159,
+        "False": 120
+      },
+      "input_before_bytes": 62166,
+      "reservation_before_micro_usd": 70358,
+      "source_sha256": "8ea1f0c5e332fdced34032d775460f21826053b73904a9a091d184a15f403a16",
+      "roundtrip_sha256": "8ea1f0c5e332fdced34032d775460f21826053b73904a9a091d184a15f403a16",
+      "roundtrip_exact": true,
+      "packet_count": 8,
+      "packet_sha256": [
+        "f6147c6b4f5d5f78ca73e49203e6475abdd0b1a39251bdc54d39f595d86edf28",
+        "5ee320fc57d8f8f68cde91c3a5d274bf47e774cf5ff624b7085a6df2e9e493b9",
+        "6a7d440e14d23462cdbb7c29c79aedaaa17e5c4622cfb2aed4c8bd20ea3917c7",
+        "5375d5be5abcb81176d4c835a6e581de1921527067d1a042e89bcbf019376cb0",
+        "d4f14f828699f55ea9108b3f1a1a2052a7866d16f59dd8cc3b52c595dd741c88",
+        "57c7874c4d89a707ce389c1817f5ec2efce447a637082c06a5e6c174c4886053",
+        "f504538109b6a2a93f84b6dd36d40f1cf504c0eed596c29b99669ae4aa750696",
+        "4cd930cc4f17682e9e47f4b4b783e590ae7c2279df5873625e47cdd841ed6192"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11799,
+          "reservation_micro_usd": 19991,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11802,
+          "reservation_micro_usd": 19994,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11728,
+          "reservation_micro_usd": 19920,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11781,
+          "reservation_micro_usd": 19973,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11707,
+          "reservation_micro_usd": 19899,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11785,
+          "reservation_micro_usd": 19977,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11763,
+          "reservation_micro_usd": 19955,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 8951,
+          "reservation_micro_usd": 17143,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 156852
+    },
+    {
+      "patient_id": "P201",
+      "branch": "generalized_anxiety",
+      "unit_count": 279,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 63
+      },
+      "current_revision_counts": {
+        "True": 159,
+        "False": 120
+      },
+      "input_before_bytes": 63532,
+      "reservation_before_micro_usd": 71724,
+      "source_sha256": "113bb48eaa96841d9ab0f265d244122ea8e05db8210cbda8f1ea3d087cbf32dc",
+      "roundtrip_sha256": "113bb48eaa96841d9ab0f265d244122ea8e05db8210cbda8f1ea3d087cbf32dc",
+      "roundtrip_exact": true,
+      "packet_count": 12,
+      "packet_sha256": [
+        "f1dc8aace6afe9b7b9081ca123c9ff18d0a346b378ecf752fc4dd47351c250de",
+        "47d85a370740bf9d32cdc18ddc2984ef6d20dacfe47bab3d1dd97dac385da699",
+        "53f754990592e6c00d2273d9bbf96fd6fce6380712c00fb3921a6a847a679587",
+        "7cbaed22416c0e64a0df8d6a183262d9f7aecd4a949aa96752d94b49c5e19655",
+        "51b9dc745724b815213873547cea6d7ba0e3eeb1e45b6797a6b5977d7627e93f",
+        "89dee1c4518b1253e2420454a9f4fdd2d703187581b6d6e8ff770522b9adfbbb",
+        "dbf2aa68001d2e2e48a851d863f033b32355c2755b3461d078e13d903c107f0a",
+        "2b8f1ab6f8c67b8a82fe36be620b90c5aeb1129bbc27ad107016245ed56c65df",
+        "51d0902b8c197324a484a8360b5cafbfe00f691ab274f003592d0161ca8b4119",
+        "0317d3fbe776f6d0c028b8bf4c060fca3ebecf2f25a2202892061cbea50bd2de",
+        "4196d0f12eb618787fc47ea947986d584c433f2824ffdbbb3e69a1e9d810a48d",
+        "bfad9025dbe0290d0fdb2881e1659e970df2d4fad4f175b36f63786a428f63d6"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11481,
+          "reservation_micro_usd": 19673,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11793,
+          "reservation_micro_usd": 19985,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11703,
+          "reservation_micro_usd": 19895,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11649,
+          "reservation_micro_usd": 19841,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11787,
+          "reservation_micro_usd": 19979,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11598,
+          "reservation_micro_usd": 19790,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11439,
+          "reservation_micro_usd": 19631,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11806,
+          "reservation_micro_usd": 19998,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11764,
+          "reservation_micro_usd": 19956,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11555,
+          "reservation_micro_usd": 19747,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11411,
+          "reservation_micro_usd": 19603,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11407,
+          "reservation_micro_usd": 19599,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 237697
+    },
+    {
+      "patient_id": "P202",
+      "branch": "depressive_episode",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "True": 151,
+        "False": 120
+      },
+      "input_before_bytes": 60893,
+      "reservation_before_micro_usd": 69085,
+      "source_sha256": "dfa130c9a105aac2e0ee87740aa95f33080e7c218a4bb0b3d53b02a5c0512ace",
+      "roundtrip_sha256": "dfa130c9a105aac2e0ee87740aa95f33080e7c218a4bb0b3d53b02a5c0512ace",
+      "roundtrip_exact": true,
+      "packet_count": 8,
+      "packet_sha256": [
+        "0fb4d4710844802dd2ca16f2b3a1b01fd96dca42d7e43149f37fb27579bff350",
+        "878081c7c12122a92cbf1f7818e4ee3980620425b2043704c7a039da33b803a8",
+        "6bc4f944fdf76a08210cef523feaa3c2f5a5ffd98dc52c08a40b1e2249cdda56",
+        "b8898de182903c1d5d5211d4b82eddea79c08c9ca0a0a309719aaab6e3c888ac",
+        "edb1004903438083bd84d218b2ae302e63b6c7b8f85304fc213549881262125c",
+        "9a68c7c959fcbb4873fce6ad1cf9c16c58c9f0093f1611a59d07ba5089556345",
+        "ed2df3583598120ef9b4e121e8ac654fcc621229ef57f8732c77a3e3f8cf2589",
+        "5c7365ea9bac4cff3ad604db78973ceab07f9a8cb4b04791d41ecc995572ee6b"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11804,
+          "reservation_micro_usd": 19996,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11765,
+          "reservation_micro_usd": 19957,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11608,
+          "reservation_micro_usd": 19800,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11787,
+          "reservation_micro_usd": 19979,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11566,
+          "reservation_micro_usd": 19758,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11779,
+          "reservation_micro_usd": 19971,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11719,
+          "reservation_micro_usd": 19911,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 8049,
+          "reservation_micro_usd": 16241,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 155613
+    },
+    {
+      "patient_id": "P202",
+      "branch": "generalized_anxiety",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "True": 151,
+        "False": 120
+      },
+      "input_before_bytes": 62259,
+      "reservation_before_micro_usd": 70451,
+      "source_sha256": "49fbd26ab1bdb38d6fb76705db01f0f0e025c052653da9f1dbc9a8d8018d9b60",
+      "roundtrip_sha256": "49fbd26ab1bdb38d6fb76705db01f0f0e025c052653da9f1dbc9a8d8018d9b60",
+      "roundtrip_exact": true,
+      "packet_count": 12,
+      "packet_sha256": [
+        "7508055f08fe399b20688d7673f3c1fb695033556873e6cad86cb4e901ec4c6f",
+        "0faa561dabed07252198e7db9ca9626d3d88ffe00fc1c670ce8142d962b4816d",
+        "8f864c68f677b91d6e4052aca352560090ff421b265c1624185401b3d6907997",
+        "ca94ff3db2256fe053187c3bfdfabe0ae87b6689ef029989579db1c88a105f68",
+        "7e30268be8109e884d572999c1c31a3774cf9166be36990e7642c5f53effbeca",
+        "ae024185d8cfa3a92b1f30208ed619788c59f97069880f40a03f55c398c0bcba",
+        "51a2790e983874b7258317c6ec9dcbaced380daf9800e87b263e8afbd08ca052",
+        "3cde4812401a99b8e04f31e718aecd427b4af32257c6816643156a4b6f223664",
+        "a7a31762581fa069dc16476ea920a5116d292f6b1d033da1c010b8b2ef6b71fa",
+        "7a2299d7338a5c4df3bfe8a65082632c5be8bc28687d34b8533dac4b00a1a9c4",
+        "672bb6e19d314088ae63813ee2d7740a44dfbcb78d6f1437d3e7559a3cc06f5c",
+        "1b5b305968a5a8952be8fc24f911f536741e47c0779ca6e796a37bbae695c05d"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11393,
+          "reservation_micro_usd": 19585,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11718,
+          "reservation_micro_usd": 19910,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11615,
+          "reservation_micro_usd": 19807,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11741,
+          "reservation_micro_usd": 19933,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11785,
+          "reservation_micro_usd": 19977,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11752,
+          "reservation_micro_usd": 19944,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11762,
+          "reservation_micro_usd": 19954,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11692,
+          "reservation_micro_usd": 19884,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11559,
+          "reservation_micro_usd": 19751,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11718,
+          "reservation_micro_usd": 19910,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11681,
+          "reservation_micro_usd": 19873,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11240,
+          "reservation_micro_usd": 19432,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 237960
+    },
+    {
+      "patient_id": "P203",
+      "branch": "depressive_episode",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 151
+      },
+      "input_before_bytes": 61202,
+      "reservation_before_micro_usd": 69394,
+      "source_sha256": "80f9625540eb1026531b94753b95dbf25aa316d9daf23977f20d412139003b3e",
+      "roundtrip_sha256": "80f9625540eb1026531b94753b95dbf25aa316d9daf23977f20d412139003b3e",
+      "roundtrip_exact": true,
+      "packet_count": 8,
+      "packet_sha256": [
+        "89c635a6dddf14b14fc5ff149f642254d03db650dfc2d19d5be622532c5506e4",
+        "4356c1fcfbd1dcf5a99eae83f7adf466342c49b88a5f5a220b6780441e63bdec",
+        "62eb19a9cca8c039373518142075cf4449b4745fa33b3d7e25b78ad4595e055e",
+        "ba5062197cde7910a6cace981900af521c2640fd027571d0ed72ded8e62ba024",
+        "cd353277fcb6a75dd876abd01b11fa3c0e99e1a39c27194437301df7e790c12e",
+        "88ee36b1fa532d516420038f424a2b83788224b8e49ef045562db1f9ef2438e5",
+        "f5cd77d3c9e699ef17dffb7e952136b1d6499b0a693cb106a458af469fd5e2bb",
+        "29df09a2cd3076efb88de9e1dd8f07e607608e9e7d264982ac07e7f02df4d809"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11774,
+          "reservation_micro_usd": 19966,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11779,
+          "reservation_micro_usd": 19971,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11792,
+          "reservation_micro_usd": 19984,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11736,
+          "reservation_micro_usd": 19928,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11591,
+          "reservation_micro_usd": 19783,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11762,
+          "reservation_micro_usd": 19954,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 8064,
+          "reservation_micro_usd": 16256,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 155835
+    },
+    {
+      "patient_id": "P203",
+      "branch": "generalized_anxiety",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 151
+      },
+      "input_before_bytes": 62568,
+      "reservation_before_micro_usd": 70760,
+      "source_sha256": "6526312716a15ec2aef2ef342f7cf76b7e7f39cf7843606864b677ef8f6b0556",
+      "roundtrip_sha256": "6526312716a15ec2aef2ef342f7cf76b7e7f39cf7843606864b677ef8f6b0556",
+      "roundtrip_exact": true,
+      "packet_count": 12,
+      "packet_sha256": [
+        "ca7b62b1c690ff96284527a30fd105a451c899aaa8368f32697741f402727c0e",
+        "cf2e225e11fd7c4775aa52f5fe4fc8234bec81e76bbdac4c2ef4e6558ef22a70",
+        "4c38936694a8d9de040b83df9ff99809c0e3b55995b93942e5f5e0705a351515",
+        "2c49ecf4082c9a41eb4e6c54b9db3f210ddf37174426e1676d19c80d42d6890d",
+        "dd9517bb0178b029b0cde4952b172ec7db69ac0d99fe13a6649ad34f5f2bddf6",
+        "a1f9bdee1f65e0eee29288320b3d701af6d3033d176e6602121eaac58e91cdf6",
+        "9812e3db37dc73e786061569e7dcd9f05f228d288dea2b60f6aa029c843b00f5",
+        "963d435cd042b57de91fee6fe40f954394a528adcea3a0d0d492230a063c7882",
+        "f054c38daa18daea513a7213627a505eec12064ad30d5dc9e13ae4ecd3bd33a0",
+        "d72869c30971e2f717135dda83033ea9c697ef0376aa2fdbe46b8f69c054ec11",
+        "e5b71e5d90ae9b5b4f76362d8c1e74008339a3fe5d330600ec07c35e51265cef",
+        "cf9f44fbb6991b9c26dfadd48097a8deca062b60416f3f09646725759ceef234"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11614,
+          "reservation_micro_usd": 19806,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11750,
+          "reservation_micro_usd": 19942,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11688,
+          "reservation_micro_usd": 19880,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11778,
+          "reservation_micro_usd": 19970,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11740,
+          "reservation_micro_usd": 19932,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11793,
+          "reservation_micro_usd": 19985,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11596,
+          "reservation_micro_usd": 19788,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11652,
+          "reservation_micro_usd": 19844,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11729,
+          "reservation_micro_usd": 19921,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11762,
+          "reservation_micro_usd": 19954,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 8833,
+          "reservation_micro_usd": 17025,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 236040
+    },
+    {
+      "patient_id": "P204",
+      "branch": "depressive_episode",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 151
+      },
+      "input_before_bytes": 62579,
+      "reservation_before_micro_usd": 70771,
+      "source_sha256": "2b59c6102243de393d5492ff5ed88a5c39325aa2eb489fb970c64d0938754088",
+      "roundtrip_sha256": "2b59c6102243de393d5492ff5ed88a5c39325aa2eb489fb970c64d0938754088",
+      "roundtrip_exact": true,
+      "packet_count": 8,
+      "packet_sha256": [
+        "21e73b6b48c41cd60d4a5c2d5a9057e72e17beba10f9cf458a362f7b6f9c3754",
+        "8915efc0ddb38791cdf6b277dd803ba8afb304582e330d1cb2f0ec316ae83444",
+        "b8fa0185b698e985a312b7a4cb27f4dbdefca35f821794ab8dba1e18bfefb45a",
+        "7d1e2be116b53456d581a6d7a290305261ae8435b6e811f3c0929e6cf27f04bf",
+        "3bb9150c710a9699bbef45a7f76523e2319b6593b420587c0c8fb05fbc26cb83",
+        "843154fcb2cb1076420806f165ba0eed2fda974cc2fd5c715d2f2f239d5d1a97",
+        "dee17d68f66ddf76b6fb90c319047b8f7814a54cc28e162ed42768106f8460eb",
+        "1f433e46c2be6a3f8d9686ceee12a0204bb5181ff26a508784e49fdb067b78e7"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11789,
+          "reservation_micro_usd": 19981,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11803,
+          "reservation_micro_usd": 19995,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11681,
+          "reservation_micro_usd": 19873,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11780,
+          "reservation_micro_usd": 19972,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11591,
+          "reservation_micro_usd": 19783,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11575,
+          "reservation_micro_usd": 19767,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11796,
+          "reservation_micro_usd": 19988,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 10278,
+          "reservation_micro_usd": 18470,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 157829
+    },
+    {
+      "patient_id": "P204",
+      "branch": "generalized_anxiety",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 151
+      },
+      "input_before_bytes": 63945,
+      "reservation_before_micro_usd": 72137,
+      "source_sha256": "cf698102014700b1f542eaea82c13b4bba9a43b75f293f5c390aac991ff3a413",
+      "roundtrip_sha256": "cf698102014700b1f542eaea82c13b4bba9a43b75f293f5c390aac991ff3a413",
+      "roundtrip_exact": true,
+      "packet_count": 12,
+      "packet_sha256": [
+        "84546404ee6bb342b62cf6eb28530f3dec6c64d76f5dcfb1dfa9469c9d348121",
+        "f0507706835a88155860b0f7879d40e435190992caa8aa78ce4099d8957f1077",
+        "5ebe249ca68762dee32cc72a3f0cad462e3d6a36298235fa1d45ecaf089f79a7",
+        "2b6d7f4f8cd3456a9a16bb140f60b58b0415b71df0ae5a90bcf01773c30308fc",
+        "6a6c3585a2ea890f2e67a653196d82a2d36adcc311d459fc7d38e441d5de8ca5",
+        "a99d28d99f8781e84e3828aeed33b6fb124878638563ebb87b87962c6f67a28e",
+        "6e39c91b696a0229a2402a0c0aa794f65e422883ed529178cfeadafc20d726ee",
+        "a6f7fa1490d4d85713e1b14dc7193139c7019fdd3bfd4bd627e4dbd7a667f0a4",
+        "f2e1584bf80905a866297e17e480d12f1d2cfeeb69937b3c95f10225469e6553",
+        "08f2b24cdb424d2c9134a38f5b880ed50ac38f42a1bec6ea2634c8194b71bab5",
+        "27d06ba43d9a6c8ad355389612a93771e738dfa3b27ff9c575ff77dbe88b1f4f",
+        "fe47725b3d68a1aedd7fa71ff79676263199c4badcb76f94e18b6609003d342a"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11800,
+          "reservation_micro_usd": 19992,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11785,
+          "reservation_micro_usd": 19977,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11401,
+          "reservation_micro_usd": 19593,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11777,
+          "reservation_micro_usd": 19969,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11783,
+          "reservation_micro_usd": 19975,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11753,
+          "reservation_micro_usd": 19945,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11278,
+          "reservation_micro_usd": 19470,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11658,
+          "reservation_micro_usd": 19850,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11808,
+          "reservation_micro_usd": 20000,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11776,
+          "reservation_micro_usd": 19968,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 9021,
+          "reservation_micro_usd": 17213,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 235945
+    },
+    {
+      "patient_id": "P205",
+      "branch": "depressive_episode",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 53006,
+      "reservation_before_micro_usd": 61198,
+      "source_sha256": "d417010f2491bcb8dadf6aefc536987d26d7374bd5ed00b4c3664329ae7bf021",
+      "roundtrip_sha256": "d417010f2491bcb8dadf6aefc536987d26d7374bd5ed00b4c3664329ae7bf021",
+      "roundtrip_exact": true,
+      "packet_count": 6,
+      "packet_sha256": [
+        "34c1e8b797a5bb4355e1e4e96de8787c6a3638e675245216254d65de04c4b6d1",
+        "ed6e7f634a31d30903df8997e31fef2d98e67be04307cb6797a4a1f681674d45",
+        "2e2bb7744e771a1130ce867c9b089886bc43d6e4b59c7f74ecb5084058e5339e",
+        "839b86a9e93cc045e8a3fbea3272ca8d451327f70ec6ae860ebba3670d66c060",
+        "57973a7fadfaddd4ff148004db2fdb7a49cc6311aeb3bcc8ce0ce63cdcb8aecd",
+        "41f8c0064c77014b3dbb361abc9145e100d9cc11952134a54aa2c5eaaabd23af"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11798,
+          "reservation_micro_usd": 19990,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11763,
+          "reservation_micro_usd": 19955,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11781,
+          "reservation_micro_usd": 19973,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11771,
+          "reservation_micro_usd": 19963,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11765,
+          "reservation_micro_usd": 19957,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 8469,
+          "reservation_micro_usd": 16661,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 116499
+    },
+    {
+      "patient_id": "P205",
+      "branch": "generalized_anxiety",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 54372,
+      "reservation_before_micro_usd": 62564,
+      "source_sha256": "41e591e874f528a448d5673584522a988cd558fb6597135ccfcfafaac4a48632",
+      "roundtrip_sha256": "41e591e874f528a448d5673584522a988cd558fb6597135ccfcfafaac4a48632",
+      "roundtrip_exact": true,
+      "packet_count": 10,
+      "packet_sha256": [
+        "97862eb097d152a9d1845dbe9ac4b1a48b31da9fd79a6817222d351ee2185368",
+        "a4b365f4a53189ca206bba3162e5f904cc793feac8f02809a083173e24ef0968",
+        "db366bb6dfab34f8427202262bb79db77aa94adbf07fa2f71e22d74e96d8d60e",
+        "351dc309082e809676716e5d6d051f272c5cfb9722602289c775b766a57630f8",
+        "67c2809a40d6ea704e3ebb03e7810362bf0f31ff70f4254d51d7efaf2cbd363b",
+        "3bf103dbc46980931fc111955522972a701599f63b312c6ca664a5c8171b832a",
+        "7a45e1eb9ac01457271342ef22c579efd0e7988653b8ec4218e921b4cfffe4cb",
+        "0ddabea0ba25e3cc645dca18405be14a0435769abfabc4d9f1aaabec1e28d6f9",
+        "6c2372ef862ada53bc8bd5c9901347aa271c3ebcc04b39bb9c3cfaabf8c0397b",
+        "63a2dd51cc3da813d3fd8514a0fec86a99a492e16a7a880e6b5ccfa75e47cc44"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11777,
+          "reservation_micro_usd": 19969,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11784,
+          "reservation_micro_usd": 19976,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11766,
+          "reservation_micro_usd": 19958,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11736,
+          "reservation_micro_usd": 19928,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11679,
+          "reservation_micro_usd": 19871,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11805,
+          "reservation_micro_usd": 19997,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11627,
+          "reservation_micro_usd": 19819,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11806,
+          "reservation_micro_usd": 19998,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 10623,
+          "reservation_micro_usd": 18815,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 198324
+    },
+    {
+      "patient_id": "P206",
+      "branch": "depressive_episode",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 54296,
+      "reservation_before_micro_usd": 62488,
+      "source_sha256": "6de451b2e852753bab4290b60dd6c9926c5d9831c9590eb11b4d7e91be0c0ecd",
+      "roundtrip_sha256": "6de451b2e852753bab4290b60dd6c9926c5d9831c9590eb11b4d7e91be0c0ecd",
+      "roundtrip_exact": true,
+      "packet_count": 6,
+      "packet_sha256": [
+        "0537f2551493327e3464a213eadbf7fcde94ac3687b9615c4a926794fc258e8d",
+        "2392588d496873294b970d47688c637d9420466340321bac946ed1079b766ba8",
+        "a2bcdb34845ee11019eec2879e4e1af0cc6c4843f9dc28cbf2fe39177e3b0afa",
+        "0e2a44d50d6b55c6306f139583ab07fb0b53d653f6145c44fea290fec096bd55",
+        "33487595da75cf145f889b96a7376854b21e7db2a0397443aa7004654fc92b7c",
+        "6b881e4a621f0e737b9c7fe92939b232040f9c25fabfe696f8f9e0bde0cdcf8e"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11791,
+          "reservation_micro_usd": 19983,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11637,
+          "reservation_micro_usd": 19829,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11782,
+          "reservation_micro_usd": 19974,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11756,
+          "reservation_micro_usd": 19948,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11764,
+          "reservation_micro_usd": 19956,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11511,
+          "reservation_micro_usd": 19703,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 119393
+    },
+    {
+      "patient_id": "P206",
+      "branch": "generalized_anxiety",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 55662,
+      "reservation_before_micro_usd": 63854,
+      "source_sha256": "8402691300508a7151299156bb5c4f5dc3a06ace50367a6e98d838dd0df92899",
+      "roundtrip_sha256": "8402691300508a7151299156bb5c4f5dc3a06ace50367a6e98d838dd0df92899",
+      "roundtrip_exact": true,
+      "packet_count": 11,
+      "packet_sha256": [
+        "47e0124df190567d253a9f3d1a580215a6ad4d159853b298b5f6819c6503fa46",
+        "dd2a00c00f75dd92c1ad3c2fa2aee720034a4886bfa7db449c0d510b28ea310c",
+        "7f7ef70d6910cc6e9e6d37ab7aca9a54d0e22fc1c4250e5b16ac23e5c79433a7",
+        "7f3724072dfbefa3c7a443e75c18ee4a12d00e2b68d12ec5b615adb6035bec81",
+        "7c23717f5732da5899447e250fe96eca3bc8278257975a874bfb55fc0498372e",
+        "57ca278f7651fe736562aacfaccf50d71832ec4c10a42d785f84e894f9b3d30a",
+        "4cc0b8b8b9b006940b594e8d16a7d3569ef0a516710d50abebf6e526cfe247f1",
+        "62cb1751148a605e9478f0e94bf9df94f04c37b635d297dd41da7ef7a5e40e4d",
+        "4f29ce9feb3da5e5cdab734fb6f7b68ce4e7643e7cfb8aba94ede7f7e48ed9ef",
+        "065e2bc13488916e9ad83c489354720312e9b124545ac9cf68de53ea1a78f763",
+        "ef7017bde31e870c14667cfa83f31126780269b3fa7a653f28c5526021751893"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11735,
+          "reservation_micro_usd": 19927,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11784,
+          "reservation_micro_usd": 19976,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11621,
+          "reservation_micro_usd": 19813,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11728,
+          "reservation_micro_usd": 19920,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11610,
+          "reservation_micro_usd": 19802,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11756,
+          "reservation_micro_usd": 19948,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11600,
+          "reservation_micro_usd": 19792,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11805,
+          "reservation_micro_usd": 19997,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11573,
+          "reservation_micro_usd": 19765,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 9904,
+          "reservation_micro_usd": 18096,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 217029
+    },
+    {
+      "patient_id": "P207",
+      "branch": "depressive_episode",
+      "unit_count": 269,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 53
+      },
+      "current_revision_counts": {
+        "True": 149,
+        "False": 120
+      },
+      "input_before_bytes": 63017,
+      "reservation_before_micro_usd": 71209,
+      "source_sha256": "45c99a6200ed17c931dd5d08b8cda4c4f40307cf6f08343ef8f2c64ad134ab30",
+      "roundtrip_sha256": "45c99a6200ed17c931dd5d08b8cda4c4f40307cf6f08343ef8f2c64ad134ab30",
+      "roundtrip_exact": true,
+      "packet_count": 9,
+      "packet_sha256": [
+        "be3707cba74ff0b51dd9b8522bfe15938b5cc82bb584aaf868f1a01e2e272f58",
+        "fc518fe1a9266b3cf1250b51c8048e30e885c5c8562d2647cd6fa834aa51cf14",
+        "2b53b0ac1728b249088c6b5e529e5f821f8521b7abcb4bb755e646a379a0c7d8",
+        "ab9d2c5bb714d920d688cbee964cb82520d73863926b87d278d585f7983edfed",
+        "689c4b19fb463a8d355d55dd21a40cc318fd429401add55d8f9ed217ffe213e7",
+        "9691447836328f367bd9cd9b8db2677ebd33bcd9326260807e376ca262c32e0d",
+        "2cfd0e515ffc049e7a7aebac2c3c2f1125a29bdf37de325f6d9dddc73ea50cf3",
+        "44ac63bc3e8b3aefe0655c89864e8c3a9f4e1847407b69bb2b7c2f7711eb617b",
+        "9aa23e51d76e6fe73fdfaebf2edd075ec413c096c4b7ffc75893c4a64fa211b5"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11764,
+          "reservation_micro_usd": 19956,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11782,
+          "reservation_micro_usd": 19974,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11603,
+          "reservation_micro_usd": 19795,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11774,
+          "reservation_micro_usd": 19966,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11514,
+          "reservation_micro_usd": 19706,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11769,
+          "reservation_micro_usd": 19961,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 6752,
+          "reservation_micro_usd": 14944,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 174288
+    },
+    {
+      "patient_id": "P207",
+      "branch": "generalized_anxiety",
+      "unit_count": 269,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 53
+      },
+      "current_revision_counts": {
+        "True": 149,
+        "False": 120
+      },
+      "input_before_bytes": 64383,
+      "reservation_before_micro_usd": 72575,
+      "source_sha256": "b035bb6969e939979c331132929b405c516f48092fda68a99104da1d5182f1bc",
+      "roundtrip_sha256": "b035bb6969e939979c331132929b405c516f48092fda68a99104da1d5182f1bc",
+      "roundtrip_exact": true,
+      "packet_count": 13,
+      "packet_sha256": [
+        "4beca3ca124d008d44998df43ed693ca38a8a7a7f251cfced051fe17f570cb23",
+        "3d58fd79d728a1dbb77d649a9fa3aacbd0f568ab8fb0741c51c08a9da052fab0",
+        "c78bc9242c95846370961691727652aad132fe46dc498d8780f4c26f8af4af0f",
+        "494057fefe49b4935494173bf9e612a5bd95612efb4ac3ab93b3eb5d398739d3",
+        "986e244e6435dcfb5997f22e98e1026581cbc553da8a943c751d1dadc96fce18",
+        "01bc349a9747851f059bd611f0a2f7c69a36dacc27bd9bf18da752c8dbec0e08",
+        "5c20ca4dd9d33ef683b0dfcd48a0b91c9bab705be7d69a7f17faa9f61b54ed21",
+        "569968937ece412390548d556ef5fda98f0dcb20b0a0bc83c0a9652d1b1d711f",
+        "47505bc2281d63fd2b8ea0232e3a8c53cbe4aec06c4c842323560c36932790cd",
+        "701e3fed4cabca565221986622e7716cc262bf5b3b76851e467dabd61d7ff3a3",
+        "dd4398e7da2890b4831b6635cffa9cd21d4a276be762e8c2fea65f6a90fc0186",
+        "33759c4c798502d1d3258609204f90798bd73f41ac428ff2b382836e813c1f45",
+        "a44e48f43e514b114b5fa20dff80a1bb1fb25e12c4dec1c4ebda872b2404d09b"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11777,
+          "reservation_micro_usd": 19969,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11779,
+          "reservation_micro_usd": 19971,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11469,
+          "reservation_micro_usd": 19661,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11752,
+          "reservation_micro_usd": 19944,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11737,
+          "reservation_micro_usd": 19929,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11736,
+          "reservation_micro_usd": 19928,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11805,
+          "reservation_micro_usd": 19997,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11786,
+          "reservation_micro_usd": 19978,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11592,
+          "reservation_micro_usd": 19784,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11801,
+          "reservation_micro_usd": 19993,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11773,
+          "reservation_micro_usd": 19965,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11573,
+          "reservation_micro_usd": 19765,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 8120,
+          "reservation_micro_usd": 16312,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 255196
+    },
+    {
+      "patient_id": "P208",
+      "branch": "depressive_episode",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "True": 151,
+        "False": 120
+      },
+      "input_before_bytes": 61952,
+      "reservation_before_micro_usd": 70144,
+      "source_sha256": "64e92834e2ea0a6a49b1bab3f33f7e2990ce0d3acb87b3fbe73faf24561731c0",
+      "roundtrip_sha256": "64e92834e2ea0a6a49b1bab3f33f7e2990ce0d3acb87b3fbe73faf24561731c0",
+      "roundtrip_exact": true,
+      "packet_count": 8,
+      "packet_sha256": [
+        "47ec2903cd0918d8dfc3778e870bc659a6422dae8095d097f4b43e6b34a0b7f6",
+        "10abc757f6464d8196cd7f57016948ce07f4b1e02f979269bfd07f9ab4e07c9f",
+        "721b46cf302445667cb933e5e7f146c3b08f466727c3296d7d19db7708ee9332",
+        "1763deff1bc6ab30a81e28359abd738c6a329484d41057079dfe7d86b0d11810",
+        "f5c1659e364618aaaf37de83135cc48ce94c9d412ab3eec4c52f56128abe219c",
+        "61b8d3564a8f4ced32ff38942ca3e4a2e59e89c9721618643a2748248bd8e32f",
+        "ee53e2cd8052a8e26bec99668782ecedff0d4b9865e2d911c0c188e1c74d809e",
+        "6e24cabd16e8cdb175073982eaf6965b9fc2d18eecec63c322e5f380cf3b2dd4"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11708,
+          "reservation_micro_usd": 19900,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11743,
+          "reservation_micro_usd": 19935,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11699,
+          "reservation_micro_usd": 19891,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11790,
+          "reservation_micro_usd": 19982,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11773,
+          "reservation_micro_usd": 19965,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11739,
+          "reservation_micro_usd": 19931,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11780,
+          "reservation_micro_usd": 19972,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 9532,
+          "reservation_micro_usd": 17724,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 157300
+    },
+    {
+      "patient_id": "P208",
+      "branch": "generalized_anxiety",
+      "unit_count": 271,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 55
+      },
+      "current_revision_counts": {
+        "True": 151,
+        "False": 120
+      },
+      "input_before_bytes": 63318,
+      "reservation_before_micro_usd": 71510,
+      "source_sha256": "a7789a0151bfa637a2235ae0f2c14a6a66ccca6cb0c7d3a615d78ed519a5cf76",
+      "roundtrip_sha256": "a7789a0151bfa637a2235ae0f2c14a6a66ccca6cb0c7d3a615d78ed519a5cf76",
+      "roundtrip_exact": true,
+      "packet_count": 12,
+      "packet_sha256": [
+        "e7397891804fe965b60a5ad4c57a1818e6fb67dfdd18721f67270d3149fc27f2",
+        "2f4aa761a73c3f03ad3c80907073cb044ef8e1d55ccacdb4dfcd97a64795f502",
+        "f3439430ab6991874845b5fa9e35a8d3335cbd88ee8f4fe7e07094b6b629f188",
+        "641e0460f24e56c01ea6e2267a2bfc218519530adefbd11a92df806a72603b22",
+        "ef9321e457ad0a78f4b6707c851ab6eae72859a809786198c252671a0661c025",
+        "28b394734b6c328499707c3925611013d88551f14ba0a9426011dd6333aeae90",
+        "26d48a343c7733b9f3b0a6f96ee6ac334aaae88a9b42fb75e393e2fab7066f75",
+        "ff6ea5266598d6dd018bec852a591cea6fbc1ceb4918b95d336863b4cce31194",
+        "82a6dc87ab4e2ff4b22adca8b4074a6695614d2c52dee75b5da870f942abe7b4",
+        "78c3c9b936e02707851f20aabb7d71e47471cbfa5bd4fcea87fcc7e1b0611ed2",
+        "08674a410bd9adb2cb20f0022ac1819e9e1ebee7914a9e04cd546a3711d51a72",
+        "11e282e453e7188caa73efcab2c08dfd075cf413d215e2949c5a59a4c24586cc"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11455,
+          "reservation_micro_usd": 19647,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11545,
+          "reservation_micro_usd": 19737,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11751,
+          "reservation_micro_usd": 19943,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11677,
+          "reservation_micro_usd": 19869,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11785,
+          "reservation_micro_usd": 19977,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11799,
+          "reservation_micro_usd": 19991,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11600,
+          "reservation_micro_usd": 19792,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11773,
+          "reservation_micro_usd": 19965,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11734,
+          "reservation_micro_usd": 19926,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11742,
+          "reservation_micro_usd": 19934,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11629,
+          "reservation_micro_usd": 19821,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11223,
+          "reservation_micro_usd": 19415,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 238017
+    },
+    {
+      "patient_id": "P209",
+      "branch": "depressive_episode",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 53210,
+      "reservation_before_micro_usd": 61402,
+      "source_sha256": "65255ca5a2f35a0027616475ab9ab46c685b81eaf76a3a3a5b3a2f16316776a6",
+      "roundtrip_sha256": "65255ca5a2f35a0027616475ab9ab46c685b81eaf76a3a3a5b3a2f16316776a6",
+      "roundtrip_exact": true,
+      "packet_count": 6,
+      "packet_sha256": [
+        "0a5adb5e424865275bbeb59973ba7b910cf7152fc8bba85a4c5a70dd5d09011d",
+        "596874cd4f014d66d0e63a742aa9bb162df7f88144d87ad77fa44380a9198cd3",
+        "dcc75c144b77537435c170304d69184aa7ea1313e7144f491220b96b6f346aee",
+        "e0a04724644569fa5b801a2370efa525bc70dcdb4e3df225551e1b1ba85cf642",
+        "0647b41078f13b597d9626b36acea6e8abf25742d36604643cd9d5b4645bb916",
+        "36a122f2f7a44400e8c0de484c82a45fd53b3c142e6870c73288be02dbb4073e"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11798,
+          "reservation_micro_usd": 19990,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11627,
+          "reservation_micro_usd": 19819,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11793,
+          "reservation_micro_usd": 19985,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11708,
+          "reservation_micro_usd": 19900,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11794,
+          "reservation_micro_usd": 19986,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 8460,
+          "reservation_micro_usd": 16652,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 116332
+    },
+    {
+      "patient_id": "P209",
+      "branch": "generalized_anxiety",
+      "unit_count": 265,
+      "categories": {
+        "anamnesis": 45,
+        "visits": 180,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "True": 145,
+        "False": 120
+      },
+      "input_before_bytes": 54576,
+      "reservation_before_micro_usd": 62768,
+      "source_sha256": "bf4b5b848842756266c9d53a9e92db91f5be19f9e8b744d0d1c70b906d5ab952",
+      "roundtrip_sha256": "bf4b5b848842756266c9d53a9e92db91f5be19f9e8b744d0d1c70b906d5ab952",
+      "roundtrip_exact": true,
+      "packet_count": 10,
+      "packet_sha256": [
+        "f3ad7426748bbd15c69932670514b1851e212380dd5ff35d7350e061a386ff4d",
+        "59faedfb8c120b6994512f138744e3e1187b43f867f3b805e582084d55fbd1e2",
+        "02b69f2b16a2b94b332878767cc003a419c9957bb1fa5a833993ba5aff77316f",
+        "4436b529db9a86392b682252a5010c76c308468766cd2987d152a41b63ff1020",
+        "5e9257c5147352b79f7cc37efc109dd88a5cf3925d07a6f51d29ed70fc1a7743",
+        "79824593d831e3e521cfe5dfa2da86f6c28ca6cda055241e4ba64222e76c4eda",
+        "10cb583db5a43b4dd3d30613e4b1106a7cc779a446ad5a63103d2027001b3fa1",
+        "a85536c55353ad3559671fe02a58558a114a9002bcc401e31a2244ffd9231ed2",
+        "a3625eb5b3ecb34335af67ea401aa7ce3cf42da6976d5133980e9ff11284b945",
+        "15a2a5758ca0a2ec333e1f22df3ae3043c95410954a16a58d71ac11bfef5e2d2"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11708,
+          "reservation_micro_usd": 19900,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11800,
+          "reservation_micro_usd": 19992,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11625,
+          "reservation_micro_usd": 19817,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11774,
+          "reservation_micro_usd": 19966,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11525,
+          "reservation_micro_usd": 19717,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11763,
+          "reservation_micro_usd": 19955,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11787,
+          "reservation_micro_usd": 19979,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11807,
+          "reservation_micro_usd": 19999,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11739,
+          "reservation_micro_usd": 19931,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 9070,
+          "reservation_micro_usd": 17262,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 196518
+    },
+    {
+      "patient_id": "P210",
+      "branch": "depressive_episode",
+      "unit_count": 285,
+      "categories": {
+        "anamnesis": 50,
+        "visits": 200,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 165
+      },
+      "input_before_bytes": 55268,
+      "reservation_before_micro_usd": 63460,
+      "source_sha256": "fd463f628a49af50b86b90852f08acfc3ccfef7372ed8186933b26b804b0cb1d",
+      "roundtrip_sha256": "fd463f628a49af50b86b90852f08acfc3ccfef7372ed8186933b26b804b0cb1d",
+      "roundtrip_exact": true,
+      "packet_count": 6,
+      "packet_sha256": [
+        "549cdba5a47ec14c940b4c86ab9721514c38bab5ecf2fbac88e248bff2519ac4",
+        "49feb27160a4fcef2653c0dff695a3e3bde44a8eb766238884cc5567defe2002",
+        "3b3b73eac1b5c43f3a9f95d3dc39aba8300240a25a2b3bd0805fcea417728ee4",
+        "8bb4756821856149ddcfb893d62844f96fe136b349982ffd5949b30252aabab4",
+        "cff38bc81a5932c37c42ecc65fe20295e0bc0b32025dbf64dabe89fadb3c06ec",
+        "5c467afa8977ad6dc5f2f1fc819bf011bf809436e72373565432d22c6037465c"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11793,
+          "reservation_micro_usd": 19985,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11684,
+          "reservation_micro_usd": 19876,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11786,
+          "reservation_micro_usd": 19978,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11498,
+          "reservation_micro_usd": 19690,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 11799,
+          "reservation_micro_usd": 19991,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        },
+        {
+          "input_bytes": 10252,
+          "reservation_micro_usd": 18444,
+          "schema_sha256": "393e75de4f4b97bbb3faa7256b1a9c3737cdf52ba90373850f9d02f93a584c2e"
+        }
+      ],
+      "total_reservation_micro_usd": 117964
+    },
+    {
+      "patient_id": "P210",
+      "branch": "generalized_anxiety",
+      "unit_count": 285,
+      "categories": {
+        "anamnesis": 50,
+        "visits": 200,
+        "questionnaires": 36,
+        "wellbeing": 49
+      },
+      "current_revision_counts": {
+        "False": 120,
+        "True": 165
+      },
+      "input_before_bytes": 56634,
+      "reservation_before_micro_usd": 64826,
+      "source_sha256": "f7a62de8a40eb92833bbb4ef9f215b8761bbf2f7c223d765e2d30a03567adaff",
+      "roundtrip_sha256": "f7a62de8a40eb92833bbb4ef9f215b8761bbf2f7c223d765e2d30a03567adaff",
+      "roundtrip_exact": true,
+      "packet_count": 11,
+      "packet_sha256": [
+        "2014172f4916d30f7683fb5e1beceefa2c02e3d66f4b9f1f271592a8c71b9b9e",
+        "2250ff09a39928c27232dedff2fc15c0522b141344ff68ef91ad8fdaa4f5b300",
+        "4495ab607c1323a26fd25c5df9168508c4d1ce63c7cc3fcd999fe6cea057f193",
+        "78ab5d7883c570eefae7042e0c45ec09bd2f03f065cde2e4a36193f44b666887",
+        "712f621fdb00720fd509f0679d8a634badcf7cd7b85f0deb326a9a0406c11186",
+        "c78982d397c52fdf31d4418123e8a6b7b47eafa471ad24fa14f16b01a21ded30",
+        "2831d2e37360873dc4901c4e09298459b9b7832e1fe8c4552631cc09a647ae1c",
+        "48e80c80ebb8571e23aa280882582b7db7eded0b70a2d12e891508cd95290540",
+        "f82d6753e693d4fb5c10ef2f09b99135215cb0b39dddbcf142c831695a908f77",
+        "daa31309af5dcf2c5b0530ce885710f3aec5ddc4c3ccaf1690cb77db92faff50",
+        "19215259f2c109fc6edce0201c9348171af2e5d4421f2a301d05d301700e0ffc"
+      ],
+      "measurements": [
+        {
+          "input_bytes": 11694,
+          "reservation_micro_usd": 19886,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11714,
+          "reservation_micro_usd": 19906,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11725,
+          "reservation_micro_usd": 19917,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11725,
+          "reservation_micro_usd": 19917,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11777,
+          "reservation_micro_usd": 19969,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11803,
+          "reservation_micro_usd": 19995,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11629,
+          "reservation_micro_usd": 19821,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11605,
+          "reservation_micro_usd": 19797,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11786,
+          "reservation_micro_usd": 19978,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 11690,
+          "reservation_micro_usd": 19882,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        },
+        {
+          "input_bytes": 9288,
+          "reservation_micro_usd": 17480,
+          "schema_sha256": "d66432f5355c0c971b72d3f086681f339564824587a687f30cdd001b55303115"
+        }
+      ],
+      "total_reservation_micro_usd": 216548
+    }
+  ],
+  "network_calls": 0,
+  "budget_reservations": 0,
+  "default_generator_changed": false,
+  "quality_gates_unchanged": true,
+  "working_service_changed": false,
+  "clinical_release": "blocked",
+  "limits": {
+    "max_input_bytes": 16000,
+    "per_call_micro_usd": 20000,
+    "max_output_tokens": 1536,
+    "max_packets": 64
+  },
+  "total_prospective_reservation_micro_usd": 3697179,
+  "all_model_results": "not_evaluated",
+  "aggregation_and_quality": "FE03B",
+  "D01_D12_cases": "FE03C"
+}
