@@ -605,3 +605,14 @@ DeepSeekJSONOutput/ChatCompletions/ModelsPricing: JSONmode не гарантир
 Invoice/RUBunknown. Никакихпокупок/пополнений/публикаций/сообщенийлюдям.
 Окончательныйконтроль8/8 иdefaultHTTP/workerPASS, но modelrawошибкиотмечены
 отдельно и clinical_releaseblocked; sourceфакты/пороги не менялись.
+
+
+## BE10B, 27.10.2026
+
+Read-only исследователь /root/be10b_sources,fork_turnsnone проверил обе
+официальные записи Минздрава301_3/457_3:version3,adulttrue,NPCtrue,Применяется;
+PDFSHA256совпали. Время около07:14МСК;источники/пределдоказательства —
+evidence/BE10B/research.md. Основнойагентнеповторялвнешнийпоиск.
+СрокBE03до27.10.2026 19:17МСКнепродлён;каталоги/пороги/права/согласиянеизменены.
+Новыхответовзакрытыхканалов/подписей/согласийнет;организационнаяветкаотложена.
+Новыхплатныхвызовов0;ledger145/730308microUSDсохранён,invoice/RUBunknown.

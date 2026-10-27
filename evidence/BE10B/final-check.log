@@ -1,0 +1,19 @@
+{
+  "slices": 113,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 90,
+  "fulfilled_requirements": 0,
+  "next_slice": "BE10"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+Текущий: нет
+Последний принятый: BE10B
+Следующий готовый: BE10
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+git diff --check: PASS
+make check: exit0,840+70PASS;restartsmoke/pipcheck/validate_syntheticPASS
+Targeted unittest: exit0,60PASS
+Offline replay/source/scope/preservation: PASS
