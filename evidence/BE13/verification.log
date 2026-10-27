@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "catalog_sha256": "51fa20172f8a95799678d9cf26487bcd5304df4aa1e6085fa288d6f0ebf7c373",
+  "engine_sha256": "ba2806015b5b86f75e3f5090e2b6bc7d4ced1a31a481ef97d0e9f31958cd79d5",
+  "scenarios": {
+    "pass": true,
+    "count": 15,
+    "scope": "actual internal engine; no HTTP route, model or clinical accuracy claim"
+  },
+  "preservation": {
+    "pass": true,
+    "live_tables_unchanged": 81,
+    "foreign_files_unchanged": 4,
+    "credentials_unchanged": true,
+    "ledger_unchanged": true,
+    "requirements": 83,
+    "subchecks": 160
+  },
+  "model_calls": 0,
+  "clinical_ready": false
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T13:10:46+03:00",
+  "updated_on": "2026-10-27T13:27:34+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE12",
-  "next_slice": "BE13",
+  "last_accepted_slice": "BE13",
+  "next_slice": "BE14",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -596,8 +596,8 @@
       "reason": null
     },
     "BE13": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE13",
       "handoff": "memory/sessions/BE13.md",
       "reason": null
     },
@@ -1386,7 +1386,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE12",
+    "last_accepted_slice": "BE13",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1438,7 +1438,10 @@
     "diagnosis_review_evidence": "evidence/BE11/acceptance.md",
     "care_plan_version": "care-plan-v1",
     "care_plan_mode": "synthetic_physician_api_source_bound_deterministic",
-    "care_plan_evidence": "evidence/BE12/acceptance.md"
+    "care_plan_evidence": "evidence/BE12/acceptance.md",
+    "medication_safety_version": "medication-safety-v1",
+    "medication_safety_mode": "internal_structured_synthetic_only_partial_coverage_no_admission",
+    "medication_safety_evidence": "evidence/BE13/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
