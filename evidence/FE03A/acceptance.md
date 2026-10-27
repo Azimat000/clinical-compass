@@ -34,7 +34,7 @@ JSON-хеш; исходные строки/Unicode сохраняются без
 
 ## Реально выполненные команды
 
-- `.venv/bin/python -m unittest apps.tests.test_backend_context_packets apps.tests.test_backend_diagnosis_codec apps.tests.test_backend_diagnosis_integration apps.tests.test_backend_model apps.tests.test_frontend_integration`:70PASS/19.841s,targeted-tests.log;12новых входят в69.
+- `.venv/bin/python -m unittest apps.tests.test_backend_context_packets apps.tests.test_backend_diagnosis_codec apps.tests.test_backend_diagnosis_integration apps.tests.test_backend_model apps.tests.test_frontend_integration`:70PASS/19.841s,targeted-tests.log;12новых входят в70.
 - `.venv/bin/python evidence/FE03A/full_history.py`:PASS,20ветвей/10сохранённыхисторий/92пакета, точное восстановление. Не настоящий модельный прогон; без сети.
 - `.venv/bin/python -m pip check`:PASS,dependencies.log; новые зависимости не ставились.
 - `python3 evidence/FE03A/verify.py`:PASS,verification.json/verify.log; сохранность/scope/исходные критерии/scenarios/ledger/qualitygate.
