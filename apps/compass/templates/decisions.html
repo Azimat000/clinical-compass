@@ -194,7 +194,7 @@
         {% if values.get('route_rule_context_id') %}{{ ui.notice('Заполнено по источниковой рекомендации', 'Категорию и срочность подтверждаете вы. Срочность не определена, пока вы её не выберете.', kind='info') }}{% endif %}
         {{ ui.select('kind', 'Вид решения', kinds.items()|list, selected=values.get('kind', 'plan_change'), required=True) }}
         {{ ui.textarea('content', 'Решение', value=values.get('content', ''), hint='Что именно решено.', required=True, rows=4, maxlength=4000) }}
-        {{ ui.textarea('basis', 'Основание', value=values.get('basis', ''), hint='Откуда сведения: запись, документ, источник.', required=True, rows=3, maxlength=4000) }}
+        {{ ui.textarea('basis', 'Основание', value=values.get('basis', ''), hint='Откуда сведения: запись приёма, самоотчёт, источник.', required=True, rows=3, maxlength=4000) }}
         {{ ui.textarea('uncertainties', 'Что неизвестно', value=values.get('uncertainties', ''), hint='Запишите недостающие и противоречивые сведения. Отсутствие данных не означает отсутствия риска.', required=True, rows=3, maxlength=4000) }}
 
         {% include 'medication_editor.html' %}

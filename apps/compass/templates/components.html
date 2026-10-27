@@ -130,12 +130,11 @@
 </div>
 {%- endmacro %}
 
-{#- Разделы пациента одной строкой: active — card | visit | plan | talk | docs. Остальные пункты — обычные ссылки. -#}
+{#- Разделы пациента одной строкой: active — card | visit | plan | talk. Остальные пункты — обычные ссылки. -#}
 {% macro patient_nav(patient_id, active) -%}
 {%- set items = [('card', 'Карточка', url_for('demo_patient', patient_id=patient_id)),
                  ('visit', 'Приём', url_for('first_visit_page', patient_id=patient_id)),
                  ('plan', 'План и решения', url_for('decisions_page', patient_id=patient_id)),
-                 ('talk', 'Сообщения', url_for('communication_page', patient_id=patient_id)),
-                 ('docs', 'Документы', url_for('imports_page', patient_id=patient_id))] -%}
+                 ('talk', 'Сообщения', url_for('communication_page', patient_id=patient_id))] -%}
 <nav class="jump patient-nav" aria-label="Разделы пациента">{% for key, label, href in items %}<a href="{{ href }}"{% if key == active %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}</nav>
 {%- endmacro %}

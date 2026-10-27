@@ -10,20 +10,20 @@ from werkzeug.exceptions import HTTPException
 from flask import Flask, abort, g, jsonify, redirect, render_template, request, url_for
 from .db import connect, health, migrate, now, transaction
 from .repository import patient_list
-from . import access, records, assessments, decisions, routing, notifications, clinical_rules, critical_delivery, communication, extraction
+from . import access, records, assessments, decisions, routing, notifications, clinical_rules, critical_delivery, communication
 from . import first_visits, follow_up, report_drafts, overview, medications, medication_feedback, plan_tasks, backend_analyses
 
 # Screens rebuilt from scratch (UI02+). Every other view keeps answering 503/interface_removed.
 READY_VIEWS = frozenset({'login.html', 'result.html', 'invitation.html',
                          'patient.html', 'assessment_form.html', 'assessment_receipt.html',
                          'dashboard.html', 'invitation_manage.html', 'doctor_patient.html',
-                         'decisions.html', 'first_visit.html', 'imports.html',
+                         'decisions.html', 'first_visit.html',
                          'communication.html', 'plan.html'})
 # Patient cabinet screens: a doctor never receives them; the doctor's card is doctor_patient.html.
 PATIENT_VIEWS = frozenset({'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'plan.html'})
 # Doctor-only screens: a patient asking for the same address still gets the technical answer, not the doctor's page.
 # communication.html is for both roles.
-DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'imports.html', 'critical.html', 'invitation_manage.html'})
+DOCTOR_VIEWS = frozenset({'decisions.html', 'first_visit.html', 'critical.html', 'invitation_manage.html'})
 MOSCOW = ZoneInfo('Europe/Moscow')
 MONTHS = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
 
@@ -731,77 +731,6 @@ def create_app(database=None):
             return '', 204
         return redirect(url_for('dashboard'),code=303)
 
-    @app.route('/patients/<patient_id>/imports', methods=['GET', 'POST'])
-    def imports_page(patient_id):
-        role('doctor')
-        patient = patient_or_404(patient_id)
-        error, status = None, 200
-        values = request.form if request.method == 'POST' else {}
-        if request.method == 'POST':
-            try:
-                file = request.files.get('file')
-                if file and file.filename and request.form.get('source_text','').strip():
-                    raise extraction.ExtractionError('Выберите один источник: текст или файл.')
-                text = extraction.upload_text(file) if file and file.filename else request.form.get('source_text','')
-                if re.search(r'\d{101}',text):
-                    raise extraction.ExtractionError('Числовой фрагмент длиннее 100 цифр не поддерживается; проверьте источник.')
-                saved = extraction.save_import(get_db(),g.user,patient_id,text,request.form.get('request_key',''))
-                return redirect(url_for('imports_page',patient_id=patient_id)+'#import-'+saved,code=303)
-            except (extraction.ExtractionError, decisions.DecisionError) as exc:
-                error, status = str(exc), exc.status
-        return imports_view(patient, patient_id, error, status, values)
-
-    def imports_view(patient, patient_id, error=None, status=200, values=None, review_error=None, document_error=None):
-        """The documents screen; a refused review comes back here with the typed values."""
-        items = extraction.history(get_db(),patient_id)
-        for item in items:
-            for candidate in item['result']['candidates']:
-                candidate['review_value'] = extraction.canonical(candidate['value'])
-            for review in item['reviews']:
-                review['payload'] = json.loads(review['payload_json'])
-        visits = first_visits.history(get_db(), g.user, patient_id)
-        latest = {}
-        for visit in visits:
-            latest.setdefault(visit['visit_id'], visit)
-        document_drafts = [v for v in latest.values() if v['state'] == 'draft']
-        editable_ids = {v['id'] for v in document_drafts}
-        document_history = [v for v in visits if v['id'] not in editable_ids and
-                            (v['payload'].get('documented_facts') or v['payload'].get('document_basis'))]
-        return interface_response('imports.html',patient=patient,items=items,error=error,values=values or {},
-                               document_drafts=document_drafts, document_history=document_history, document_error=document_error,
-                               review_error=review_error,
-                               review_key=review_error['key'] if review_error else request.args.get('review','')[:80],
-                               patient_name=overview.person(patient['code'])[0],
-                               authors=author_names([r for item in items for r in item['reviews']] + visits),
-                               fields=extraction.FIELDS,assertions=extraction.ASSERTIONS,assertion_labels=extraction.ASSERTION_LABELS,
-                               warning=extraction.WARNING,new_key=lambda:secrets.token_hex(16)),status
-
-    @app.post('/patients/<patient_id>/first-visits/<visit_id>/documents')
-    def save_visit_documents(patient_id, visit_id):
-        role('doctor')
-        patient = patient_or_404(patient_id)
-        try:
-            saved = first_visits.save_documents(get_db(), g.user, patient_id, visit_id, request.form)
-        except first_visits.Error as failure:
-            if failure.status in (403, 404):
-                abort(failure.status)
-            return imports_view(patient, patient_id, status=failure.status,
-                                document_error={'visit_id': visit_id, 'message': str(failure), 'form': dict(request.form)})
-        return redirect(url_for('imports_page', patient_id=patient_id) + '#visit-document-' + saved, code=303)
-
-    @app.post('/patients/<patient_id>/imports/<import_id>/review')
-    def review_import(patient_id,import_id):
-        role('doctor')
-        patient_or_404(patient_id)
-        try:
-            extraction.review(get_db(),g.user,patient_id,import_id,request.form)
-        except (extraction.ExtractionError, decisions.DecisionError) as exc:
-            if exc.status in (403, 404):
-                return interface_response('result.html',title='Сверка не сохранена',message=str(exc)),exc.status
-            return imports_view(patient_or_404(patient_id),patient_id,status=exc.status,
-                                review_error={'key':import_id+':'+request.form.get('candidate_id',''),'message':str(exc),'form':request.form})
-        return redirect(url_for('imports_page',patient_id=patient_id)+'#import-'+import_id,code=303)
-
     def patient_today(patient_id, relationship, pending, draft):
         """The one request at the top of the patient's home screen. Read-only; nothing is written."""
         hour = datetime.now(MOSCOW).hour
@@ -1061,20 +990,6 @@ def create_app(database=None):
     @app.get('/api/patients/<patient_id>')
     def patient_api(patient_id):
         return jsonify(dict(patient_or_404(patient_id)))
-
-    @app.get('/api/patients/<patient_id>/documents')
-    def documents_api(patient_id):
-        patient_or_404(patient_id)
-        return jsonify([dict(r) for r in get_db().execute('SELECT id,format,origin,received_at FROM documents WHERE patient_id=?', (patient_id,))])
-
-    @app.get('/api/documents/<document_id>')
-    def document_api(document_id):
-        row = get_db().execute('SELECT patient_id FROM documents WHERE id=?', (document_id,)).fetchone()
-        if row is None:
-            abort(404)
-        patient_or_404(row['patient_id'])
-        # Upload/export are outside S05; never interpret a stored path as a URL.
-        return {'error': 'document_delivery_unavailable'}, 409
 
     @app.get('/api/patients/<patient_id>/reports')
     def reports_api(patient_id):
