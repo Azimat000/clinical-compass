@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "scope": "План интерфейса BE01–BE16; не заменяет plan/coverage.json и plan/backend/requirements.json",
+  "items": [
+    {
+      "id": "U01",
+      "text": "Главная врача: боковые критические сигналы всех связанных пациентов, четыре источника и проверяемые основания",
+      "implementation_slices": [
+        "FE01",
+        "FE05"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D02",
+        "D06",
+        "D07",
+        "D08",
+        "D11"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U02",
+      "text": "Карточка: динамический предполагаемый диагноз системы, ниже собственный диагноз врача",
+      "implementation_slices": [
+        "FE06"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D05",
+        "D08",
+        "D09",
+        "D10"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U03",
+      "text": "План и решения: динамический содержательный план и лечение, отдельно от действующего",
+      "implementation_slices": [
+        "FE07",
+        "FE08"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D03",
+        "D04",
+        "D06",
+        "D07",
+        "D10"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U04",
+      "text": "Новые сведения: обновление, устаревание, версии, защита текста врача, бюджета и подтверждённого лечения",
+      "implementation_slices": [
+        "FE02",
+        "FE04",
+        "FE06",
+        "FE07",
+        "FE08"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D08",
+        "D10",
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U05",
+      "text": "Весь UX/UI обеих ролей: приёмы, история, документы, анкеты, дневник, лекарства, сообщения, приглашения",
+      "implementation_slices": [
+        "FE01",
+        "FE04",
+        "FE09",
+        "FE10"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D03",
+        "D05",
+        "D09"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U06",
+      "text": "Наглядные согласованные истории всех десяти пациентов и воспроизводимые события до/после",
+      "implementation_slices": [
+        "FE03",
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U07",
+      "text": "Одна сессия — один срез, стабильные коммиты/теги, память, критерии и передача",
+      "implementation_slices": [
+        "FE01",
+        "FE02",
+        "FE03",
+        "FE04",
+        "FE05",
+        "FE06",
+        "FE07",
+        "FE08",
+        "FE09",
+        "FE10",
+        "FE11",
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE01",
+        "FE02",
+        "FE03",
+        "FE04",
+        "FE05",
+        "FE06",
+        "FE07",
+        "FE08",
+        "FE09",
+        "FE10",
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U08",
+      "text": "BE17–BE19 пропущены, но не объявлены выполненными; clinical_release blocked",
+      "implementation_slices": [
+        "FE02",
+        "FE11",
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U09",
+      "text": "Прежние данные, доступы, права, CSP и врачебное подтверждение сохранены",
+      "implementation_slices": [
+        "FE02",
+        "FE03",
+        "FE04",
+        "FE08",
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D03",
+        "D08",
+        "D11",
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U10",
+      "text": "Телефон/планшет/компьютер, доступность, ошибки, конфликты, без JS и reduced-motion",
+      "implementation_slices": [
+        "FE04",
+        "FE09",
+        "FE10",
+        "FE11"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D05",
+        "D10",
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U11",
+      "text": "Рабочий локальный сайт обновлён и примеры доступны сразу, проверенный возврат",
+      "implementation_slices": [
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D02",
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    },
+    {
+      "id": "U12",
+      "text": "Содержательные реальные ответы backend/worker/модели, честные ограничения и источники",
+      "implementation_slices": [
+        "FE02",
+        "FE03",
+        "FE06",
+        "FE07",
+        "FE12"
+      ],
+      "verification_slices": [
+        "FE11",
+        "FE12"
+      ],
+      "scenario_ids": [
+        "D01",
+        "D04",
+        "D05",
+        "D06",
+        "D09"
+      ],
+      "status": "planned",
+      "actual_evidence": []
+    }
+  ]
+}

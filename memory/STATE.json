@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T14:56:37+03:00",
+  "updated_on": "2026-10-27T15:14:13+03:00",
   "current_slice": null,
   "last_accepted_slice": "BE16",
-  "next_slice": "BE17",
+  "next_slice": "FE01",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -350,10 +350,11 @@
       "reason": null
     },
     "UI08": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/UI08.md",
-      "reason": null
+      "reason": "Старый общий UI-аудит отложен новым маршрутом FE01–FE12; экранные проверки повторяются в FE11, общий make check остаётся отложенным. UI08 не принят.",
+      "disposition": "deferred_by_frontend_program"
     },
     "UI06B": {
       "status": "accepted",
@@ -620,22 +621,28 @@
       "reason": null
     },
     "BE17": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/BE17.md",
-      "reason": null
+      "reason": "Пропущен по прямому поручению пользователя 27.10.2026; не выполнен и не принят. Возобновление только по новому поручению.",
+      "disposition": "skipped_by_user",
+      "authorization": "evidence/frontend-plan-2026-10-27/authorization.md"
     },
     "BE18": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/BE18.md",
-      "reason": null
+      "reason": "Пропущен по прямому поручению пользователя 27.10.2026; не выполнен и не принят. Возобновление только по новому поручению.",
+      "disposition": "skipped_by_user",
+      "authorization": "evidence/frontend-plan-2026-10-27/authorization.md"
     },
     "BE19": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/BE19.md",
-      "reason": null
+      "reason": "Пропущен по прямому поручению пользователя 27.10.2026; не выполнен и не принят. Возобновление только по новому поручению.",
+      "disposition": "skipped_by_user",
+      "authorization": "evidence/frontend-plan-2026-10-27/authorization.md"
     },
     "BE08A": {
       "status": "accepted",
@@ -683,6 +690,78 @@
       "status": "accepted",
       "commit_ref": "refs/tags/slice/BE10B02",
       "handoff": "memory/sessions/BE10B02.md",
+      "reason": null
+    },
+    "FE01": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE01.md",
+      "reason": null
+    },
+    "FE02": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE02.md",
+      "reason": null
+    },
+    "FE03": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE03.md",
+      "reason": null
+    },
+    "FE04": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE04.md",
+      "reason": null
+    },
+    "FE05": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE05.md",
+      "reason": null
+    },
+    "FE06": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE06.md",
+      "reason": null
+    },
+    "FE07": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE07.md",
+      "reason": null
+    },
+    "FE08": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE08.md",
+      "reason": null
+    },
+    "FE09": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE09.md",
+      "reason": null
+    },
+    "FE10": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE10.md",
+      "reason": null
+    },
+    "FE11": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE11.md",
+      "reason": null
+    },
+    "FE12": {
+      "status": "planned",
+      "commit_ref": null,
+      "handoff": "memory/sessions/FE12.md",
       "reason": null
     }
   },
@@ -932,14 +1011,26 @@
     "current_scope": "Nine-dossier sequence retained as optional; source checks still apply per enabled function"
   },
   "latest_plan_change": {
-    "kind": "three_function_backend_plan",
-    "date": "2026-10-26",
-    "report": "memory/sessions/backend-plan-2026-10-26.md",
-    "commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
+    "kind": "frontend_after_BE16",
+    "date": "2026-10-27",
+    "report": "memory/sessions/frontend-plan-2026-10-27.md",
+    "commit_ref": "refs/tags/plan/frontend-plan-2026-10-27",
     "implementation_started": false,
-    "authorization": "evidence/backend-plan-2026-10-26/authorization.md",
-    "planned_commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
-    "git_status": "verified_in_recovered_local_checkout"
+    "authorization": "evidence/frontend-plan-2026-10-27/authorization.md",
+    "prepared_slice_ids": [
+      "FE01",
+      "FE02",
+      "FE03",
+      "FE04",
+      "FE05",
+      "FE06",
+      "FE07",
+      "FE08",
+      "FE09",
+      "FE10",
+      "FE11",
+      "FE12"
+    ]
   },
   "optional_source_program": {
     "status": "deferred_not_mandatory",
@@ -996,6 +1087,16 @@
       "commit_ref": "refs/tags/plan/service-simplification-2026-10-21",
       "implementation_started": false,
       "authorization": "evidence/service-simplification-2026-10-21/authorization.json"
+    },
+    {
+      "kind": "three_function_backend_plan",
+      "date": "2026-10-26",
+      "report": "memory/sessions/backend-plan-2026-10-26.md",
+      "commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
+      "implementation_started": false,
+      "authorization": "evidence/backend-plan-2026-10-26/authorization.md",
+      "planned_commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
+      "git_status": "verified_in_recovered_local_checkout"
     }
   ],
   "interface_state": {
@@ -1380,7 +1481,7 @@
       "BE18",
       "BE19"
     ],
-    "status": "in_progress",
+    "status": "paused_after_BE16_by_user",
     "technical_gate": "BE18",
     "clinical_gate": "BE19",
     "frontend_in_scope": false,
@@ -1454,7 +1555,13 @@
     "plan_review_mode": "synthetic_physician_api_existing_decision_calendar_no_clinical_release",
     "plan_review_evidence": "evidence/BE15/acceptance.md",
     "security_review_version": "be16-security-v1",
-    "security_review_evidence": "evidence/BE16/security-review.md"
+    "security_review_evidence": "evidence/BE16/security-review.md",
+    "skipped_slice_ids": [
+      "BE17",
+      "BE18",
+      "BE19"
+    ],
+    "next_program": "plan/frontend/README.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
@@ -1480,5 +1587,39 @@
     ],
     "exclusion_authorization": "если этот последний файл не нужен и ни на что не влияет, забей на него",
     "authorization_evidence": "evidence/recovery-2026-10-26/authorization.md"
+  },
+  "frontend_program": {
+    "plan": "plan/frontend/README.md",
+    "session_protocol": "plan/frontend/SESSION.md",
+    "requirements": "plan/frontend/requirements.json",
+    "scenarios": "plan/frontend/scenarios.json",
+    "slice_ids": [
+      "FE01",
+      "FE02",
+      "FE03",
+      "FE04",
+      "FE05",
+      "FE06",
+      "FE07",
+      "FE08",
+      "FE09",
+      "FE10",
+      "FE11",
+      "FE12"
+    ],
+    "status": "planned",
+    "implementation_started": false,
+    "last_accepted_slice": null,
+    "next_slice": "FE01",
+    "backend_baseline": "refs/tags/slice/BE16",
+    "skipped_backend_slices": [
+      "BE17",
+      "BE18",
+      "BE19"
+    ],
+    "active_service_migrated": false,
+    "clinical_release": "blocked",
+    "full_regression": "deferred_by_user",
+    "planning_ref": "refs/tags/plan/frontend-plan-2026-10-27"
   }
 }

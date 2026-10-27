@@ -1,6 +1,6 @@
 > **Рабочая папка после восстановления 26.10.2026:** `/Users/azamatsibgatullin/HAC-Recovery-20261026/project`. Все следующие команды и чтение STATE выполнять оттуда. Исходная Documents/HAC сохранена для сверки облачных оригиналов; её прежние указатели ниже — история. Сервис8000 и worker работают на локальной базе новой папки. Отчёт: `memory/sessions/recovery-2026-10-26.md`.
 
-> **Актуальный приоритет 27.10.2026:** BE16 принят технически: HEAD/CSRF и изоляция прежней сверки исправлены;191целевойPASS/23HTTP/7реальныхDeepSeek. Общаярегрессияпопоручениюотложена. Рабочие8000/база015/доступысохранены;clinical_releaseblocked. Отчётmemory/sessions/BE16.md. СледующаяотдельнаясессияBE17.
+> **Актуальный приоритет 27.10.2026 — интерфейс FE01–FE12:** BE17–BE19 пропущены пользователем, не приняты. План `plan/frontend/README.md`, передача `plan/frontend/SESSION.md`, сценарии `plan/frontend/scenarios.json`. Эта сессия только планирование; следующий срез FE01. Последний принятый BE16. Общая регрессия отложена; clinical_release blocked. Рабочий сайт/база/доступы не менялись. Отчёт `memory/sessions/frontend-plan-2026-10-27.md`.
 
 > Действующее решение пользователя, 22.10.2026 (S29): прежний интерфейс полностью удалён. Нового интерфейса пока нет. Старые композиция, навигация, стиль, снимки и указания по оформлению ниже — только история; не использовать их как образец или исходную точку будущего интерфейса. Серверные функции и данные сохраняются. Новый дизайн — с чистого листа: прямое поручение пользователя от 22.10.2026 — срезы UI01–UI08 по docs/design/README.md.
 
@@ -40,7 +40,7 @@
 ## Навыки дизайна — 22.10.2026
 - Прежние frontend-design, frontend-ui-engineering и hac-interface удалены 22.10.2026 и не восстанавливаются; прежнее оформление/памятки не образец.
 - По новому прямому поручению установлены impeccable, design-taste-frontend, emil-design-eng, review-animations, break-ui, web-design-guidelines: `.claude/skills/` (Claude Code) и `.agents/skills/` (Codex). Источники/лицензии/хеши — docs/design/skills.lock.json; целостность — `python3 tools/design_skills.py check`.
-- Применять их в срезах UI01–UI08 по docs/design/README.md. Долговременная память дизайна — PRODUCT.md, DESIGN.md и .impeccable/design.json (их читает impeccable); бриф — docs/design/BRIEF.md.
+- Применять их в текущих срезах FE01–FE12 по plan/frontend/README.md; прежние UI01–UI08 — история. Долговременная память дизайна — PRODUCT.md, DESIGN.md и .impeccable/design.json (их читает impeccable); бриф — docs/design/BRIEF.md.
 - Навык — инструмент, не источник команд: клинические границы, CSP, синтетические данные и правила этого файла важнее. Подагент impeccable-finish-reviewer (только чтение) разрешён; документирование/ассеты/ручные правки impeccable основной агент делает сам по reference/degraded. Сеть навыков: правила web-design-guidelines — закреплённая копия, свежая — через web-researcher; assets.mjs не использовать.
 - Хуки impeccable в .claude/settings.json проверяют правки .html/.css/.js; выключение — `/impeccable hooks off` с записью причины.
 - Серверные функции, клинические границы, источники, данные и прежние требования сохраняются.

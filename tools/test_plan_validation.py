@@ -39,7 +39,7 @@ class PlanTests(unittest.TestCase):
         self.assertTrue(any('Не все исходные' in e for e in self.errors()))
 
     def test_dependency_cycle(self):
-        self.mutate('plan/manifest.json', lambda d: d['slices'][0]['depends_on'].append('S01'))
+        self.mutate('plan/manifest.json', lambda d: d['slices'][0]['depends_on'].append(d['slices'][0]['id']))
         self.assertTrue(any('Цикл' in e for e in self.errors()))
 
     def test_false_fulfilment(self):

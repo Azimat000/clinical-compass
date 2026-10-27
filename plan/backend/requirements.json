@@ -723,5 +723,17 @@
         "evidence/BE16/security-review.md"
       ]
     }
-  ]
+  ],
+  "execution_policy": {
+    "updated_on": "2026-10-27",
+    "skipped_by_user": [
+      "BE17",
+      "BE18",
+      "BE19"
+    ],
+    "next_program": "plan/frontend/README.md",
+    "acceptance_changed": false,
+    "clinical_release": "blocked",
+    "note": "Прежние verification_slices сохранены как невыполненные проверки, не автоматическая очередь. FE-проверки не принимают BE17–BE19."
+  }
 }
