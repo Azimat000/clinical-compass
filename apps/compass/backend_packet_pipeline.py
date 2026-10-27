@@ -34,8 +34,9 @@ def config():
 
 
 def release():
+    from . import backend_diagnosis_preview as preview
     files=['backend_packet_pipeline.py','backend_packet_store.py','backend_context_packets.py','backend_jobs.py']
-    return {'version':VERSION,'execution_version':EXECUTION_VERSION,'code':{f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files},
+    return {'version':VERSION,'execution_version':EXECUTION_VERSION,'synthetic_preview':preview.release(),'code':{f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files},
             'diagnostic':diagnostic.release(),'risk_prompt_sha256':risk.PROMPT_SHA256,
             'risk_schema_sha256':snapshots.digest(risk.SCHEMA),'deadline_seconds':DEADLINE,
             'total_cap_micro_usd':TOTAL_CAP,'per_call_micro_usd':20000,'max_workers':MAX_WORKERS,'response_format':'signed-local-facts-v1','latest_observation_policy':'same_latest_record_day_v1'}
@@ -283,7 +284,8 @@ def execute(operation,snapshot,model=None,store=None,cancel=None,*,workers=None)
     if model is None:
         try:q=json.loads(QUALITY.read_text());admitted=q.get('pass') is True and q.get('runtime_sha256')==runtime
         except (OSError,ValueError,TypeError):admitted=False
-        if not admitted:
+        from . import backend_diagnosis_preview as preview
+        if not admitted and not preview.allowed(snapshot, operation):
             if operation=='risk':
                 proof={'runtime_sha256':runtime,'cells':[],'incomplete':'packet_quality_not_admitted'}
                 return {**outcome(snapshot,operation,proof),'packet_proof':proof}

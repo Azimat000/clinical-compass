@@ -259,6 +259,7 @@
           announce(!availability.enabled ? 'Очередь анализа выключена. Доступны сохранённые результаты.' : history.items.length ? 'Показаны сохранённые сервером результаты.' : 'Анализ ещё не выполнен.');
           const automatic = availability.automatic?.find(item => item.operation === kind);
           if (automatic) announce(status.textContent + ' ' + automatic.message);
+          if (availability.diagnosis_preview && kind === 'diagnosis') announce(status.textContent + ' Генерация включена для вымышленных историй; качество не проверено. Гипотезу оценивает врач.');
           if (kind === 'diagnosis') await loadDoctor();
         }
       } catch (error) { content.replaceChildren(); doctor?.replaceChildren(); review = null; if (form) form.querySelector('[type=submit]').disabled = true; announce(error.message); }

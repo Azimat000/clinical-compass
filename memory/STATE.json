@@ -1717,7 +1717,16 @@
       "database": "var/compass.sqlite3",
       "schema": "024_ui_update_cursors",
       "backup": "var/backups/decision-support-20261027-172832",
-      "quality_admitted": false
+      "quality_admitted": false,
+      "diagnosis_preview": {
+        "status": "enabled_synthetic_unverified",
+        "quality_pass": false,
+        "report": "memory/sessions/diagnosis-preview-2026-10-27.md",
+        "authorization": "var/diagnosis-preview-authorization.json",
+        "tests_run": false,
+        "results_verified": false,
+        "backup": "var/backups/diagnosis-preview-20261027-173221"
+      }
     }
   }
 }

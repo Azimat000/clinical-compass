@@ -461,7 +461,9 @@ def create_app(database=None):
             from . import backend_ui_updates
             relationship = backend_analyses.authorize(get_db(), g.user, patient_id)
             automatic = backend_ui_updates.view(get_db(), patient_id, relationship)
+        from . import backend_diagnosis_preview
         return jsonify(available=available, automatic=automatic,
+                       diagnosis_preview=backend_diagnosis_preview.release()['enabled'],
                        enabled=available and backend_jobs.settings(get_db()) is not None)
 
     @app.get('/api/v1/physician/alerts')

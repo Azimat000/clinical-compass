@@ -3,7 +3,7 @@ import hashlib
 import json
 import time
 
-from . import backend_analyses as analyses, backend_jobs, backend_snapshot, decisions
+from . import backend_analyses as analyses, backend_jobs, backend_snapshot, decisions, backend_diagnosis_preview
 from .db import now, transaction
 
 _last_tick = 0.0
@@ -81,7 +81,7 @@ def synchronize(db, user, patient, operation, quality):
                 and raw['care_plan_input'].get('review', {}).get('diagnosis')
                 and raw['care_plan_input'].get('condition')):
             status = 'waiting_diagnosis'
-        elif operation == 'diagnosis' and not quality:
+        elif operation == 'diagnosis' and not quality and not backend_diagnosis_preview.allowed(raw, operation):
             status = 'quality_blocked'
         else:
             # Snapshot + relationship + operation is a stable idempotency key,
