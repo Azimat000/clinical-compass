@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T07:19:13+03:00",
+  "updated_on": "2026-10-27T07:35:58+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE10B",
-  "next_slice": "BE10",
+  "last_accepted_slice": "BE10",
+  "next_slice": "BE11",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -578,10 +578,10 @@
       "reason": null
     },
     "BE10": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE10",
       "handoff": "memory/sessions/BE10.md",
-      "reason": "Сохранены все исходные A01–A03; полная приёмка только после BE10A/BE10B."
+      "reason": null
     },
     "BE11": {
       "status": "planned",
@@ -1386,7 +1386,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE10B02",
+    "last_accepted_slice": "BE10",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1432,7 +1432,7 @@
     "diagnosis_workflow_evidence": "evidence/BE10B02/acceptance.md",
     "diagnosis_workflow_quality": "evidence/BE10/diagnosis-quality.json",
     "model_connection_cap_usd": 1.0,
-    "diagnosis_summary_evidence": "evidence/BE10B/acceptance.md"
+    "diagnosis_summary_evidence": "evidence/BE10/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
