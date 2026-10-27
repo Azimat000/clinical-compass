@@ -1,0 +1,14 @@
+..........................................................................F..................................
+======================================================================
+FAIL: test_exact_synthetic_admission_uses_unchanged_ceiling_without_real_network (apps.tests.test_backend_diagnosis_integration.ExactAdmissionTests.test_exact_synthetic_admission_uses_unchanged_ceiling_without_real_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_diagnosis_integration.py", line 190, in test_exact_synthetic_admission_uses_unchanged_ceiling_without_real_network
+    self.assertEqual(1000000,cfg.total_micro_usd);self.assertEqual(20000,cfg.per_call_micro_usd)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1000000 != 4000000
+
+----------------------------------------------------------------------
+Ran 109 tests in 65.844s
+
+FAILED (failures=1)

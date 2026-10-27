@@ -1,0 +1,14 @@
+..............................................F...........
+======================================================================
+FAIL: test_budget_limit_can_split_before_byte_limit (apps.tests.test_backend_context_packets.ContextPacketTests.test_budget_limit_can_split_before_byte_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_context_packets.py", line 51, in test_budget_limit_can_split_before_byte_limit
+    self.assertEqual(cfg.total_micro_usd,1000000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 3000000 != 1000000
+
+----------------------------------------------------------------------
+Ran 58 tests in 10.926s
+
+FAILED (failures=1)

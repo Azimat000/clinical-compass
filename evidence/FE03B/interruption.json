@@ -1,0 +1,37 @@
+{
+  "status": "IN_PROGRESS_VALIDATION_DEFERRED_BY_USER",
+  "at": "2026-10-27T17:00:28+03:00",
+  "instruction": "не проверяй, пока без них",
+  "checks_stopped": true,
+  "new_checks_or_model_calls_authorized": false,
+  "ledger_before": [
+    160,
+    748067
+  ],
+  "ledger_after": [
+    502,
+    2489430
+  ],
+  "new_reservations": 342,
+  "new_ceiling_micro_usd": 1741363,
+  "new_reservation_states": [
+    [
+      "measured_ceiling",
+      341,
+      1722695
+    ],
+    [
+      "reserved",
+      1,
+      18668
+    ]
+  ],
+  "cap_micro_usd": 4000000,
+  "remaining_micro_usd": 1510570,
+  "per_call_micro_usd": 20000,
+  "actual_invoice": null,
+  "rub_conversion": null,
+  "known_unresolved": "J07: model emitted conflicting with one local quote; strict validator rejected it",
+  "default_cli_verification": "not run; script prepared only",
+  "clinical_release": "blocked"
+}

@@ -84,7 +84,7 @@ def _packet(payload, groups, source, start, stop, index, count):
     return value
 
 
-def prepare(payload, schema, config, *, max_packets=MAX_PACKETS):
+def prepare(payload, schema, config, *, max_packets=MAX_PACKETS, split_occurrences=False, request_transform=None):
     """Pack exact field groups with every original occurrence; fail rather than cut text or history.
 
     Both byte and conservative per-call cost limits use the existing adapter's
@@ -95,11 +95,41 @@ def prepare(payload, schema, config, *, max_packets=MAX_PACKETS):
     if type(max_packets) is not int or not 1 <= max_packets <= MAX_PACKETS:
         raise PacketError('invalid_packet_limit')
     source = digest(payload)
+    render = request_transform or (lambda value: value)
     groups = _groups(payload)
+    if split_occurrences:
+        # A repeated field may have hundreds of independently dated occurrences.
+        # Splitting their index list keeps every entire source unit and its text.
+        expanded = []
+        for fields, occurrences in groups:
+            current = []
+            for occurrence in occurrences:
+                candidate = _packet(payload, [[fields, current + [occurrence]]], source, 0, 1, max_packets, max_packets)
+                candidate['transport']['total_groups'] = len(payload['units'])
+                try:
+                    model.preflight(render(candidate), schema, config)
+                except model.ModelError as exc:
+                    if exc.code not in ('context_limit', 'call_cost_limit'):
+                        raise
+                    if not current:
+                        raise PacketError('unit_exceeds_limit', occurrence[1]) from None
+                    expanded.append([deepcopy(fields), current])
+                    current = [occurrence]
+                    single = _packet(payload, [[fields, current]], source, 0, 1, max_packets, max_packets)
+                    single['transport']['total_groups'] = len(payload['units'])
+                    try:
+                        model.preflight(render(single), schema, config)
+                    except model.ModelError:
+                        raise PacketError('unit_exceeds_limit', occurrence[1]) from None
+                else:
+                    current.append(occurrence)
+            if current:
+                expanded.append([deepcopy(fields), current])
+        groups = expanded
     def fits(start, stop):
         packet = _packet(payload, groups, source, start, stop, max_packets, max_packets)
         try:
-            model.preflight(packet, schema, config)
+            model.preflight(render(packet), schema, config)
             return True
         except model.ModelError as exc:
             if exc.code not in ('context_limit', 'call_cost_limit'):
@@ -121,7 +151,7 @@ def prepare(payload, schema, config, *, max_packets=MAX_PACKETS):
         start = stop
     ranges.append((start, stop))
     packets = [_packet(payload, groups, source, a, b, i + 1, len(ranges)) for i, (a, b) in enumerate(ranges)]
-    measured = [model.preflight(p, schema, config) for p in packets]
+    measured = [model.preflight(render(p), schema, config) for p in packets]
     plan = {'version': VERSION, 'source_sha256': source, 'total_units': len(payload['units']), 'total_groups': total,
             'base': deepcopy({k: v for k, v in payload.items() if k not in ('units', 'metadata')}),
             # Server-side manifest only. Never send this full table a second time.

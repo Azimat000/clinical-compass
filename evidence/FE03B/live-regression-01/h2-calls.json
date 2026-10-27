@@ -1,0 +1,50 @@
+[
+  {
+    "branch": "risk",
+    "packet_index": 1,
+    "payload_sha256": "16dbb828418f32d5df380ba67c9bbc7cfe1b18094840c2f3f16c90adfa8e6382",
+    "response": {
+      "value": {
+        "candidates": [
+          {
+            "topic": "reported_change",
+            "evidence": [
+              {
+                "unit_id": "u1",
+                "quote": "С каждым днём тревога сильнее; теперь мешает весь день."
+              }
+            ]
+          }
+        ]
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+        "elapsed_seconds": 1.084,
+        "usage": {
+          "prompt_tokens": 989,
+          "completion_tokens": 44,
+          "total_tokens": 1033
+        },
+        "cache_hit_tokens": 384,
+        "cache_miss_tokens": 605,
+        "estimated_peak_cost_nano_usd": 236604,
+        "estimated_offpeak_cost_nano_usd": 118302,
+        "cost_ceiling_micro_usd": 1209,
+        "reservation_micro_usd": 12398,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]

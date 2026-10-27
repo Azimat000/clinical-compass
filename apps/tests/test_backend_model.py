@@ -179,7 +179,7 @@ class ModelTests(unittest.TestCase):
             self.assertEqual(db.execute('select state from calls').fetchone()[0], 'reserved')
 
     def test_authorized_connection_cap_keeps_existing_ledger_and_fails_above_limit(self):
-        cfg = Config(model='test')
+        cfg = Config(model='test', total_micro_usd=1000000)
         self.assertEqual(1000000, cfg.total_micro_usd)
         self.assertEqual(20000, cfg.per_call_micro_usd)
         self.budget.reserve(45150, cfg.total_micro_usd)
@@ -191,7 +191,7 @@ class ModelTests(unittest.TestCase):
 
     def test_invalid_configuration(self):
         for kwargs in [{'timeout': 0}, {'timeout': 61}, {'max_output_tokens': 1537},
-                       {'total_micro_usd': 1000001}, {'input_ceiling': 0}]:
+                       {'total_micro_usd': 4000001}, {'input_ceiling': 0}]:
             with self.assertRaises(ModelError):
                 Config(model='test', **kwargs)
 
@@ -216,7 +216,7 @@ class RequestSizingTests(unittest.TestCase):
         metrics=request_metrics({'fictional':True},SCHEMA,cfg)
         self.assertGreater(metrics['reservation_micro_usd'],cfg.per_call_micro_usd)
         with self.assertRaisesRegex(ModelError,'call_cost_limit'):preflight({'fictional':True},SCHEMA,cfg)
-        with self.assertRaisesRegex(ModelError,'invalid_config'):Config(model='test',total_micro_usd=1000001)
+        with self.assertRaisesRegex(ModelError,'invalid_config'):Config(model='test',total_micro_usd=4000001)
 
     def test_invalid_model_schema_retains_only_safe_usage_for_accounting(self):
         with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'DEEPSEEK_API_KEY':'secret-for-test'}):

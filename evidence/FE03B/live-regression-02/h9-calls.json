@@ -1,0 +1,50 @@
+[
+  {
+    "branch": "risk",
+    "packet_index": 1,
+    "payload_sha256": "d368ad1ed63652640a5e7514b6d8494881912483f3f761c8806a4cab70563316",
+    "response": {
+      "value": {
+        "candidates": [
+          {
+            "topic": "adverse_report",
+            "evidence": [
+              {
+                "unit_id": "u0",
+                "quote": "Сообщаю о возможном нежелательном явлении: сыпь. Её причина мне неизвестна."
+              }
+            ]
+          }
+        ]
+      },
+      "metadata": {
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "thinking": "disabled",
+        "temperature": 0,
+        "timeout_seconds": 60,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "returned_model": "deepseek-flash",
+        "prompt_version": "compass-model-v1",
+        "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+        "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+        "elapsed_seconds": 2.559,
+        "usage": {
+          "prompt_tokens": 910,
+          "completion_tokens": 51,
+          "total_tokens": 961
+        },
+        "cache_hit_tokens": 768,
+        "cache_miss_tokens": 142,
+        "estimated_peak_cost_nano_usd": 108408,
+        "estimated_offpeak_cost_nano_usd": 54204,
+        "cost_ceiling_micro_usd": 1165,
+        "reservation_micro_usd": 12120,
+        "synthetic_only": true,
+        "test_double": false
+      }
+    }
+  }
+]

@@ -58,7 +58,7 @@ class Config:
     # Conservative ceiling rates, USD per million tokens. Verified before live use.
     input_ceiling: int = 1
     output_ceiling: int = 5
-    total_micro_usd: int = 1000000
+    total_micro_usd: int = 4000000
     per_call_micro_usd: int = 20000
 
     def __post_init__(self):
@@ -71,7 +71,7 @@ class Config:
                 or not 1 <= self.max_input_bytes <= 16000
                 or not 1 <= self.max_output_tokens <= 1536
                 or not 1 <= self.max_response_bytes <= 1048576
-                or not 1 <= self.total_micro_usd <= 1000000
+                or not 1 <= self.total_micro_usd <= 4000000
                 or not 1 <= self.per_call_micro_usd <= 20000
                 or self.input_ceiling < 1 or self.output_ceiling < 1):
             raise ModelError('invalid_config')

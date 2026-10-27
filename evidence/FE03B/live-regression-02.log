@@ -1,0 +1,39 @@
+J01 PASS 
+J02 PASS 
+J03 PASS 
+J04 PASS 
+J05 PASS 
+J06 PASS 
+J07 FAIL packet_response_invalid
+J08 PASS 
+h1 PASS 
+h2 PASS 
+h3 PASS 
+h4 PASS 
+h5 PASS 
+h6 PASS 
+h7 PASS 
+h8 PASS 
+h9 PASS 
+L01 PASS 
+L02 PASS 
+L03 PASS 
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/FE03B/protocol.py", line 141, in <module>
+    result=live(a.phase,a.label) if a.phase and a.label else prepare()
+           ~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/FE03B/protocol.py", line 92, in live
+    outcome=pipeline.execute('diagnosis',snapshot,recorder,store.Store(f.path,work))
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_packet_pipeline.py", line 285, in execute
+    response=model.generate(wire(packet),schema,synthetic=True,cancel=control)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/FE03B/protocol.py", line 51, in generate
+    response=model.DeepSeek(pipeline.config(),model.Budget(ROOT/'var/deepseek-budget.sqlite3')).generate(data,schema,**kw)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_model.py", line 205, in generate
+    kind, payload = result.get(timeout=min(.05, remaining))
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/queue.py", line 210, in get
+    self.not_empty.wait(remaining)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/threading.py", line 363, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt

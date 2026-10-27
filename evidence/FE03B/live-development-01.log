@@ -1,0 +1,48 @@
+DV01 FAIL validation_or_publication_error
+DV02 FAIL validation_or_publication_error
+DVR01 PASS 
+{
+  "pass": false,
+  "phase": "development",
+  "cases": 3,
+  "diagnosis_cases": 2,
+  "risk_cases": 1,
+  "diagnostic_valid": 0,
+  "expected_facts": 0,
+  "correct_facts": 0,
+  "raw_model_correct_facts": 0,
+  "dangerous_omissions": 0,
+  "risk_metrics": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "risk_rule_case_errors": 0,
+  "negative_chronology_checks": true,
+  "freeze": {
+    "runtime_sha256": "ec08fcdc02d78a2b9c667d2d124eff4b94309b407731c58a60173dbd8acea0fc",
+    "development_sha256": "8c1085c09b1a24f90c8961a41d08cdfdecb6e982f1877d835009046bdc7d156b",
+    "regression_sha256": "6dc329f3966f7f374f126d8da3da711edbd1266a7ee11223bbce54cdf9c14774",
+    "protocol_sha256": "e327a642a97d1eb4f1c0bcfebaca2db4f8cb1587745cd1b966b1831357b4a53b",
+    "frozen_before_live": true,
+    "independent_clinical_review": false,
+    "reuses_prior_controls": true
+  },
+  "ledger_before": [
+    160,
+    748067
+  ],
+  "ledger_after": [
+    169,
+    795832
+  ],
+  "real_model": true,
+  "independent_clinical_review": false,
+  "results": [
+    "DV01",
+    "DV02",
+    "DVR01"
+  ]
+}

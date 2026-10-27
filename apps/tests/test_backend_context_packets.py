@@ -42,7 +42,7 @@ class ContextPacketTests(unittest.TestCase):
         self.assertEqual(source,packets.restore(plan,expected_sha256=packets.digest(source)))
 
     def test_budget_limit_can_split_before_byte_limit(self):
-        cfg=model.Config(model='deepseek-flash',max_input_bytes=16000,max_output_tokens=32,per_call_micro_usd=2400)
+        cfg=model.Config(model='deepseek-flash',max_input_bytes=16000,max_output_tokens=32,per_call_micro_usd=2400,total_micro_usd=1000000)
         plan=packets.prepare(payload(),SCHEMA,cfg)
         self.assertGreater(len(plan['packets']),1)
         self.assertTrue(all(m['reservation_micro_usd']<=2400 for m in plan['measurements']))

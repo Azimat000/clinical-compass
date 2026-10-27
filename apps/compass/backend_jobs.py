@@ -43,6 +43,10 @@ def fingerprint(db):
         result['diagnosis'] = backend_diagnosis_service.release()
         result['risk_candidates'] = backend_risk_context.VERSION
         result['risk_prompt_sha256'] = backend_risk_context.PROMPT_SHA256
+    if config['generation_version'] == 'fe03b-packets-v1':
+        from . import backend_packet_pipeline, backend_diagnosis_service
+        result['packet_pipeline'] = backend_packet_pipeline.release()
+        result['diagnosis'] = backend_diagnosis_service.release()
     return result
 
 
@@ -143,7 +147,8 @@ def claim(db, lane='all'):
             analyses._append(db, value)
         token = secrets.token_hex(16)
         attempt = job['attempts'] + 1
-        lease = (datetime.now(timezone.utc) + timedelta(seconds=LEASE_SECONDS)).isoformat(timespec='microseconds')
+        seconds = 240 if settings(db)['generation_version'] == 'fe03b-packets-v1' else LEASE_SECONDS
+        lease = (datetime.now(timezone.utc) + timedelta(seconds=seconds)).isoformat(timespec='microseconds')
         db.execute("UPDATE backend_jobs SET state='running',attempts=?,token=?,lease_until=? WHERE run_id=?", (attempt, token, lease, run['id']))
         db.execute('INSERT INTO backend_job_attempts VALUES(?,?,?,?,NULL,?,NULL)', (run['id'], attempt, token, now(), 'running'))
         raw = db.execute('SELECT payload_json FROM analysis_input_snapshots WHERE id=?', (run['snapshot_id'],)).fetchone()[0]
@@ -156,8 +161,11 @@ def unavailable(operation, snapshot):
     raise ModelError('operation_unavailable')
 
 
-def execute(operation, snapshot):
+def execute(operation, snapshot, *, store=None, cancel=None):
     from . import backend_risk_rules, backend_risk_context, backend_diagnosis_service
+    if snapshot.get('backend_runtime', {}).get('generation_version') == 'fe03b-packets-v1' and operation in ('risk','diagnosis'):
+        from . import backend_packet_pipeline
+        return backend_packet_pipeline.execute(operation,snapshot,store=store,cancel=cancel)
     if operation == 'plan':
         from . import backend_care_plan
         return backend_care_plan.execute(operation, snapshot)
@@ -195,12 +203,19 @@ def finish(db, claim_value, outcome=None, error=None):
                 # SAVEPOINT: validator or INSERT failure cannot leave partial results.
                 db.execute('SAVEPOINT publication')
                 publication = dict(outcome)
+                if settings(db)['generation_version']=='fe03b-packets-v1' and run['operation'] in ('risk','diagnosis'):
+                    from . import backend_packet_pipeline, backend_packet_store
+                    path=db.execute('PRAGMA database_list').fetchone()['file']
+                    proof=publication.pop('packet_proof',None)
+                    if proof is None:raise analyses.AnalysisError('Нет полного протокола пакетов.')
+                    backend_packet_pipeline.verify_publication(claim_value['snapshot'],run['operation'],publication,proof,
+                        backend_packet_store.Store(path,claim_value))
                 report = publication.pop('risk_context_report', None)
                 projected = None
                 if report is not None:
                     from . import backend_risk_context as context, backend_risk_episodes as episodes
                     if (run['operation'] != 'risk' or settings(db)['generation_version']
-                            not in (context.EXECUTION_VERSION, 'be10-diagnosis-v1') or publication != report.get('structured')):
+                            not in (context.EXECUTION_VERSION, 'be10-diagnosis-v1', 'fe03b-packets-v1') or publication != report.get('structured')):
                         raise analyses.AnalysisError('Неверная смысловая оценка.')
                     saved = episodes.observe(db, {'id':run['actor_id'], 'role':'doctor'}, run['patient_id'], run['id'], report)
                     projected = context.projection(saved)
@@ -208,11 +223,11 @@ def finish(db, claim_value, outcome=None, error=None):
                 diagnosis_context = None
                 if diagnosis is not None:
                     from . import backend_diagnosis_service as diagnostic
-                    if (publication or run['operation'] != 'diagnosis' or settings(db)['generation_version'] != diagnostic.EXECUTION_VERSION):
+                    if (publication or run['operation'] != 'diagnosis' or settings(db)['generation_version'] not in (diagnostic.EXECUTION_VERSION,'fe03b-packets-v1')):
                         raise analyses.AnalysisError('Неверная диагностическая оценка.')
                     publication, diagnostic_value = diagnostic.publication(claim_value['snapshot'], diagnosis)
                     diagnosis_context = diagnostic.projection(diagnostic_value)
-                elif run['operation'] == 'diagnosis' and settings(db)['generation_version'] == 'be10-diagnosis-v1':
+                elif run['operation'] == 'diagnosis' and settings(db)['generation_version'] in ('be10-diagnosis-v1','fe03b-packets-v1'):
                     raise analyses.AnalysisError('Отсутствует полная диагностическая оценка.')
                 care_plan_context = publication.pop('care_plan_context', None)
                 if run['operation'] == 'plan' and care_plan_context is None:
@@ -247,12 +262,20 @@ def process_one(db, lane='all', executor=None):
         return True
     # No database write lock across network or generator work.
     try:
-        outcome = (executor or execute)(work['run']['operation'], work['snapshot'])
+        if executor is not None:
+            outcome=executor(work['run']['operation'],work['snapshot'])
+        else:
+            store=None
+            if work['snapshot'].get('backend_runtime',{}).get('generation_version')=='fe03b-packets-v1':
+                from .backend_packet_store import Store
+                store=Store(db.execute('PRAGMA database_list').fetchone()['file'],work)
+            outcome=execute(work['run']['operation'],work['snapshot'],store=store,cancel=store)
     except Exception as exc:
         # Never store provider bodies, clinical text, exception strings or secrets.
         from .backend_model import ModelError
         code = exc.code if isinstance(exc, ModelError) and exc.code in {
-            'operation_unavailable', 'diagnosis_quality_not_admitted', 'timeout', 'transport_error', 'budget_exceeded', 'input_too_large'} else 'executor_error'
+            'operation_unavailable', 'diagnosis_quality_not_admitted', 'timeout', 'transport_error', 'budget_exceeded', 'input_too_large','packet_quality_not_admitted','packet_incomplete','packet_response_invalid',
+            'packet_evidence_mismatch','aggregate_limit','context_limit','call_cost_limit','cancelled'} else 'executor_error'
         finish(db, work, error=code)
     else:
         finish(db, work, outcome=outcome)

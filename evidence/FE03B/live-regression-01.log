@@ -1,0 +1,76 @@
+J01 PASS 
+J02 PASS 
+J03 PASS 
+J04 PASS 
+J05 PASS 
+J06 PASS 
+J07 FAIL packet_response_invalid
+J08 PASS 
+h1 PASS 
+h2 PASS 
+h3 PASS 
+h4 PASS 
+h5 PASS 
+h6 PASS 
+h7 PASS 
+h8 PASS 
+h9 PASS 
+{
+  "pass": false,
+  "phase": "regression",
+  "cases": 17,
+  "diagnosis_cases": 8,
+  "risk_cases": 9,
+  "diagnostic_valid": 7,
+  "expected_facts": 87,
+  "correct_facts": 87,
+  "raw_model_correct_facts": 78,
+  "dangerous_omissions": 0,
+  "risk_metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "risk_rule_case_errors": 0,
+  "negative_chronology_checks": true,
+  "freeze": {
+    "runtime_sha256": "403f7021f435889963717192f0cac9dcbce81c7915470b95adf6fcbbdd48a246",
+    "development_sha256": "8c1085c09b1a24f90c8961a41d08cdfdecb6e982f1877d835009046bdc7d156b",
+    "regression_sha256": "6dc329f3966f7f374f126d8da3da711edbd1266a7ee11223bbce54cdf9c14774",
+    "protocol_sha256": "aca7395a557a8adcc083b4c51b0b610cf796271a5644569529749af8a645df76",
+    "frozen_before_live": true,
+    "independent_clinical_review": false,
+    "reuses_prior_controls": true
+  },
+  "ledger_before": [
+    203,
+    971976
+  ],
+  "ledger_after": [
+    318,
+    1542663
+  ],
+  "real_model": true,
+  "independent_clinical_review": false,
+  "results": [
+    "J01",
+    "J02",
+    "J03",
+    "J04",
+    "J05",
+    "J06",
+    "J07",
+    "J08",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "h7",
+    "h8",
+    "h9"
+  ]
+}

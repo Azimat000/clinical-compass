@@ -1,0 +1,164 @@
+{
+  "freeze": {
+    "runtime_sha256": "ec08fcdc02d78a2b9c667d2d124eff4b94309b407731c58a60173dbd8acea0fc",
+    "development_sha256": "8c1085c09b1a24f90c8961a41d08cdfdecb6e982f1877d835009046bdc7d156b",
+    "regression_sha256": "6dc329f3966f7f374f126d8da3da711edbd1266a7ee11223bbce54cdf9c14774",
+    "protocol_sha256": "e327a642a97d1eb4f1c0bcfebaca2db4f8cb1587745cd1b966b1831357b4a53b",
+    "frozen_before_live": true,
+    "independent_clinical_review": false,
+    "reuses_prior_controls": true
+  },
+  "ledger": [
+    160,
+    748067
+  ],
+  "rows": [
+    {
+      "phase": "development",
+      "id": "DV01",
+      "operation": "diagnosis",
+      "packet_count": 8,
+      "maximum_reservation_micro_usd": 154766
+    },
+    {
+      "phase": "development",
+      "id": "DV02",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 35448
+    },
+    {
+      "phase": "development",
+      "id": "DVR01",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12238
+    },
+    {
+      "phase": "regression",
+      "id": "J01",
+      "operation": "diagnosis",
+      "packet_count": 8,
+      "maximum_reservation_micro_usd": 154766
+    },
+    {
+      "phase": "regression",
+      "id": "J02",
+      "operation": "diagnosis",
+      "packet_count": 8,
+      "maximum_reservation_micro_usd": 155998
+    },
+    {
+      "phase": "regression",
+      "id": "J03",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 35806
+    },
+    {
+      "phase": "regression",
+      "id": "J04",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 35410
+    },
+    {
+      "phase": "regression",
+      "id": "J05",
+      "operation": "diagnosis",
+      "packet_count": 7,
+      "maximum_reservation_micro_usd": 136300
+    },
+    {
+      "phase": "regression",
+      "id": "J06",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 35950
+    },
+    {
+      "phase": "regression",
+      "id": "J07",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 36894
+    },
+    {
+      "phase": "regression",
+      "id": "J08",
+      "operation": "diagnosis",
+      "packet_count": 2,
+      "maximum_reservation_micro_usd": 35836
+    },
+    {
+      "phase": "regression",
+      "id": "h1",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12238
+    },
+    {
+      "phase": "regression",
+      "id": "h2",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12418
+    },
+    {
+      "phase": "regression",
+      "id": "h3",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12250
+    },
+    {
+      "phase": "regression",
+      "id": "h4",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12350
+    },
+    {
+      "phase": "regression",
+      "id": "h5",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12341
+    },
+    {
+      "phase": "regression",
+      "id": "h6",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12359
+    },
+    {
+      "phase": "regression",
+      "id": "h7",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12461
+    },
+    {
+      "phase": "regression",
+      "id": "h8",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12444
+    },
+    {
+      "phase": "regression",
+      "id": "h9",
+      "operation": "risk",
+      "packet_count": 1,
+      "maximum_reservation_micro_usd": 12275
+    }
+  ],
+  "cap_micro_usd": 3000000,
+  "per_call_micro_usd": 20000,
+  "all_cases_worst_reservations_micro_usd": 940548,
+  "all_cases_calls": 53,
+  "new_network_calls": 0,
+  "retry_limit": 3,
+  "policy": "freeze before calls; failed requests retain costs; no overwrite; checkpoints reuse only exact run"
+}

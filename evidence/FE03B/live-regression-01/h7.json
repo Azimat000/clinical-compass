@@ -1,0 +1,905 @@
+{
+  "id": "h7",
+  "operation": "risk",
+  "pass": true,
+  "snapshot": {
+    "policy": "synthetic-inputs-v1",
+    "day": "2026-10-26",
+    "relationship": "synthetic-link",
+    "patients": [
+      {
+        "id": "fictional",
+        "synthetic": 1,
+        "age_status": "known",
+        "age_years": 35,
+        "birth_date": null,
+        "created_at": "2026-10-26T12:00:00+00:00"
+      }
+    ],
+    "backend_risk_rules": {
+      "version": "backend-risk-rules-v1",
+      "mode": "synthetic_only",
+      "clinical_review": null,
+      "authorship": "HAC: собственные краткие фактические изложения; не копия шкалы или алгоритма КР",
+      "evidence": "evidence/BE07/research.md",
+      "rules": [
+        {
+          "id": "DEP-SUICIDE-FACT",
+          "conditions": [
+            "F32",
+            "F33"
+          ],
+          "source_id": "KR301_3",
+          "admission_claim": "be03-KR301_3-F02",
+          "section": "2.5 Иные диагностические исследования",
+          "pdf_page": 21,
+          "printed_page": 16,
+          "attention": "physician_review",
+          "text": "Врач зафиксировал суицидальный риск либо мысли, намерение, план или поведение. Требуется полная врачебная оценка; степень риска и срочность правилом не определены, конкретный фактор из общей отметки риска не выводится."
+        },
+        {
+          "id": "GAD-PSY-REVIEW",
+          "conditions": [
+            "F41.1"
+          ],
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F02",
+          "section": "5. Профилактика и диспансерное наблюдение",
+          "pdf_page": 39,
+          "printed_page": 39,
+          "attention": "physician_review",
+          "text": "При документированном ГТР врач отметил фактор, для которого КР предусматривают наблюдение психиатром. Врачу следует рассмотреть этот вопрос; направление не создано, срок не установлен."
+        },
+        {
+          "id": "GAD-ADVERSE-REVIEW",
+          "conditions": [
+            "F41.1"
+          ],
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F02",
+          "section": "3.2 Психофармакотерапия",
+          "pdf_page": 30,
+          "printed_page": 30,
+          "attention": "physician_review",
+          "text": "В контексте подтверждённой врачом текущей психофармакотерапии ГТР сообщено нежелательное явление. Врач оценивает переносимость; причинность, тяжесть и изменение терапии правилом не установлены."
+        },
+        {
+          "id": "GAD-INITIAL-ANXIETY",
+          "conditions": [
+            "F41.1"
+          ],
+          "source_id": "KR457_3",
+          "admission_claim": "be03-KR457_3-F02",
+          "section": "3.2 Психофармакотерапия",
+          "pdf_page": 22,
+          "printed_page": 22,
+          "attention": "physician_review",
+          "text": "Врач указал начальную фазу антидепрессивной терапии ГТР и усиление тревоги. Требуется врачебная оценка динамики; правило не определяет причинность, срочность или изменение лечения."
+        }
+      ],
+      "engine_sha256": "65bae8fd7dc248a6457ed0b3c79b0095f8fe4b361aef7261585aac7b21eab969",
+      "evidence_sha256": "db669016eaa8f97d81f122e50ab262ccb86c51663416fb1be41233bfd6893266"
+    },
+    "backend_sources": {
+      "version": "backend-sources-v1",
+      "mode": "synthetic_only",
+      "clinical_review": null,
+      "catalog_sha256": "46afb2790c398008b5f84d7242d06dd8c9b71b38ad02293703c85b30d47417c5",
+      "engine_sha256": "7e5b2318461c1121f34eb02e3d1b7c60a30d5b67a6dcc03315016534cad291df",
+      "sources": {
+        "KR301_3": {
+          "pin": {
+            "id": "KR301_3",
+            "registry_sha256": "6d2ecb1db6a732d80ac7d01206489d5837244ef53236858ad2820bfac0dcfb0a",
+            "age_min": 18,
+            "age_max": 120,
+            "conditions": [
+              "F32",
+              "F33"
+            ],
+            "status": "registered",
+            "verification": {
+              "path": "evidence/BE03/research.md",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "current_status": "current"
+            }
+          },
+          "source": {
+            "document_id": "KR301_3",
+            "document_family": "KR301",
+            "path": "evidence/S09/completion-review/sources/kr301.pdf",
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "publisher": "Минздрав России — официальный распространитель",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "document_type": "clinical_guideline",
+            "source_version": "301_3 / 2024 / version=3",
+            "official_status": "current",
+            "official_origin_verified": true,
+            "status": "approved",
+            "admission_id": "S17J02-KR301_3-reference-1",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "verified_at": "2026-10-20T22:32:00+03:00",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "population": {
+              "verified": true,
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ]
+            },
+            "indications": {
+              "verified": true,
+              "text": "Депрессивный эпизод / рекуррентное депрессивное расстройство; F32/F33",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ]
+            },
+            "rights": {
+              "status": "verified",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "index_fields": [
+                "paraphrase"
+              ],
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "content_review": {
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "purpose_and_volume_reviewed": true,
+                "attribution_reviewed": true,
+                "fragment_ids": [
+                  "KR301_3-F01",
+                  "KR301_3-F02",
+                  "KR301_3-F03",
+                  "KR301_3-F04",
+                  "KR301_3-F05"
+                ],
+                "quoted_characters": 101,
+                "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
+              }
+            },
+            "verification": {
+              "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "document_type": "clinical_guideline",
+              "source_version": "301_3 / 2024 / version=3",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+              "publisher": "Минздрав России — официальный распространитель",
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+            },
+            "representation": "reviewed_cards",
+            "artifact_path": "data/retrieval/reference-cards/KR301_3.json",
+            "artifact_sha256": "f8886b9b78c8b62d6c54cd89a080ac57546104687b6f57d2671f896820373bc2",
+            "full_text_rights": {
+              "status": "unknown",
+              "scopes": [],
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
+            }
+          },
+          "reasons": [],
+          "effective_verification": {
+            "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "document_type": "clinical_guideline",
+            "source_version": "301_3 / 2024 / version=3",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=301_3&op=GetClinrecPdf",
+            "publisher": "Минздрав России — официальный распространитель",
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+          },
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00"
+        },
+        "KR457_3": {
+          "pin": {
+            "id": "KR457_3",
+            "registry_sha256": "533b4e8e57c52cf63d55acc1a87f585a7bfef4afb4448c45ca90162eec8ef7a3",
+            "age_min": 18,
+            "age_max": 120,
+            "conditions": [
+              "F41.1"
+            ],
+            "status": "registered",
+            "verification": {
+              "path": "evidence/BE03/research.md",
+              "sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+              "checked_at": "2026-10-26T19:17:00+03:00",
+              "review_due_at": "2026-10-27T19:17:00+03:00",
+              "current_status": "current"
+            }
+          },
+          "source": {
+            "document_id": "KR457_3",
+            "document_family": "KR457",
+            "path": "evidence/S09/completion-review/sources/kr457.pdf",
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "publisher": "Минздрав России — официальный распространитель",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "document_type": "clinical_guideline",
+            "source_version": "457_3 / 2024 / version=3",
+            "official_status": "current",
+            "official_origin_verified": true,
+            "status": "approved",
+            "admission_id": "S17J02-KR457_3-reference-1",
+            "decision_origin": "Codex: source/status/exact original verified previously; independently authored facts under GK1259(5), two purpose-specific KR citations under GK1274(1)(1); exact scoped report and byte checks, not full-PDF permission",
+            "verified_at": "2026-10-20T22:32:00+03:00",
+            "review_due_at": "2026-10-21T22:32:00+03:00",
+            "population": {
+              "verified": true,
+              "text": "Взрослые; adult=true child=false; точная граница проверяется отдельно",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ]
+            },
+            "indications": {
+              "verified": true,
+              "text": "Генерализованное тревожное расстройство; F41.1",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ]
+            },
+            "rights": {
+              "status": "verified",
+              "representation": "reviewed_cards",
+              "scopes": [
+                "local_store",
+                "local_index",
+                "display_reference",
+                "display_excerpt"
+              ],
+              "index_fields": [
+                "paraphrase"
+              ],
+              "evidence": [
+                "evidence/S17J02/legal-resolution/research.md",
+                "evidence/S17J02/legal-resolution/content-review.json"
+              ],
+              "content_review": {
+                "basis": "GK1259_5_FACTS_AND_GK1274_1_1_CITATIONS",
+                "purpose_and_volume_reviewed": true,
+                "attribution_reviewed": true,
+                "fragment_ids": [
+                  "KR457_3-F01",
+                  "KR457_3-F02",
+                  "KR457_3-F03",
+                  "KR457_3-F04",
+                  "KR457_3-F05"
+                ],
+                "quoted_characters": 159,
+                "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+                "record_path": "evidence/S17J02/legal-resolution/content-review.json"
+              },
+              "limitation": "Только точный JSON самостоятельных справочных карточек. Индексировать только paraphrase. Не лицензия на PDF/полный текст; цитаты не индексировать; для Авиандра цитат нет.",
+              "evidence_sha256": {
+                "evidence/S17J02/legal-resolution/research.md": "8f34e7bb5426570ec9c07fd8e880ab144321d667468907ad03e6a104ad765f73",
+                "evidence/S17J02/legal-resolution/content-review.json": "424cba081f8ec7981f9001776b3d85126e1948c99ad0b5995b5d1852532fb522"
+              }
+            },
+            "verification": {
+              "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+              "document_type": "clinical_guideline",
+              "source_version": "457_3 / 2024 / version=3",
+              "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+              "publisher": "Минздрав России — официальный распространитель",
+              "checked_at": "2026-10-20T22:32:00+03:00",
+              "evidence": [
+                "evidence/S17J02/research.md"
+              ],
+              "evidence_sha256": "c52e56d4856028c08ff08a6bc67592d66b68ed757bb02c0fa34bf7c0b9aeaf30",
+              "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+            },
+            "representation": "reviewed_cards",
+            "artifact_path": "data/retrieval/reference-cards/KR457_3.json",
+            "artifact_sha256": "5cca17195ad413c105a129aaba8c2edba2debe76cf53a82c2fbf87967bbeed34",
+            "full_text_rights": {
+              "status": "unknown",
+              "scopes": [],
+              "evidence": [
+                "evidence/S17J02/rights-research.md"
+              ],
+              "limitation": "Полные PDF и полный текст не допущены в runtime-корпус или индекс."
+            }
+          },
+          "reasons": [],
+          "effective_verification": {
+            "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a",
+            "document_type": "clinical_guideline",
+            "source_version": "457_3 / 2024 / version=3",
+            "source_url": "https://apicr.minzdrav.gov.ru/api.ashx?id=457_3&op=GetClinrecPdf",
+            "publisher": "Минздрав России — официальный распространитель",
+            "checked_at": "2026-10-26T19:17:00+03:00",
+            "evidence": [
+              "evidence/BE03/research.md"
+            ],
+            "evidence_sha256": "3dce5faa34b9246c3e20cac9189891a3527e4db59fdcaac56741ebd246275d6c",
+            "method": "researcher_network_bytes_sha256_match; official_registry_metadata"
+          },
+          "effective_review_due_at": "2026-10-27T19:17:00+03:00"
+        }
+      },
+      "claims": {
+        "be03-KR301_3-F01": {
+          "binding": {
+            "id": "be03-KR301_3-F01",
+            "source_id": "KR301_3",
+            "fragment_id": "KR301_3-F01",
+            "operation": "diagnosis",
+            "text_sha256": "b1fa54475fa47083956b1b466feff87d27443cf605377f0a768a3095f1271da6",
+            "section": "2. Диагностика",
+            "page": 12
+          },
+          "text": "Анкета и дневник не устанавливают первичный диагноз депрессивного расстройства. Исходную диагностическую оценку проводит психиатр; HAC помогает подготовить сведения для его работы.",
+          "reasons": []
+        },
+        "be03-KR301_3-F02": {
+          "binding": {
+            "id": "be03-KR301_3-F02",
+            "source_id": "KR301_3",
+            "fragment_id": "KR301_3-F02",
+            "operation": "risk",
+            "text_sha256": "2522d667912880f78c24af8931b7bc06421eef74552441d6e77672fa1382a4d8",
+            "section": "2.1 Жалобы и анамнез",
+            "page": 16
+          },
+          "text": "В диагностический приём при депрессивном расстройстве входит оценка суицидального риска. Сбор ответов в HAC не заменяет эту врачебную оценку и действующий путь реагирования на критические сведения.",
+          "reasons": []
+        },
+        "be03-KR301_3-F04": {
+          "binding": {
+            "id": "be03-KR301_3-F04",
+            "source_id": "KR301_3",
+            "fragment_id": "KR301_3-F04",
+            "operation": "plan",
+            "text_sha256": "4a7a8829305da3efa18dc78ff5f1a28824d59d06a07ceb0ec4e1c3746036e5e0",
+            "section": "3. Лечение",
+            "page": 23
+          },
+          "text": "Индивидуальный план при депрессивном расстройстве зависит в том числе от прежнего лечения и его переносимости, других болезней и принимаемых средств. Эти сведения собирает и оценивает врач; карточка не выбирает препарат.",
+          "reasons": []
+        },
+        "be03-KR457_3-F01": {
+          "binding": {
+            "id": "be03-KR457_3-F01",
+            "source_id": "KR457_3",
+            "fragment_id": "KR457_3-F01",
+            "operation": "diagnosis",
+            "text_sha256": "fe077b20518fd8b7909e887bbf198de8e75781b45f73588c7c115dfd045e14a2",
+            "section": "1.6 Клиническая картина",
+            "page": 10
+          },
+          "text": "Уточнение диагноза ГТР требует отличать его от других психических расстройств и соматических причин. Упоминание тревоги в вопросе не создаёт подтверждённый диагноз.",
+          "reasons": []
+        },
+        "be03-KR457_3-F02": {
+          "binding": {
+            "id": "be03-KR457_3-F02",
+            "source_id": "KR457_3",
+            "fragment_id": "KR457_3-F02",
+            "operation": "risk",
+            "text_sha256": "fc7688dfab17e9e076713b1e70cddddc1d57343ac36e222a552b094979898a8c",
+            "section": "3.2 Психофармакотерапия",
+            "page": 22
+          },
+          "text": "В обсуждении начала антидепрессивной терапии ГТР КР отдельно отмечают наблюдение за суицидальными рисками и возможным усилением тревоги. Краткая справка не определяет срочность и не заменяет врача.",
+          "reasons": []
+        },
+        "be03-KR457_3-F03": {
+          "binding": {
+            "id": "be03-KR457_3-F03",
+            "source_id": "KR457_3",
+            "fragment_id": "KR457_3-F03",
+            "operation": "plan",
+            "text_sha256": "c5f89cff399313dddb798936248004b4c5f1b7415bc515615219bfa5e78acac5",
+            "section": "3.2 Психофармакотерапия",
+            "page": 30
+          },
+          "text": "Для лекарственного лечения ГТР предусмотрена повторная оценка эффекта и переносимости на протяжении курса. Эта карточка не задаёт программный график, порог ответа или решение о коррекции лечения.",
+          "reasons": []
+        }
+      }
+    },
+    "clinical_contexts": [
+      {
+        "id": "00000000000000000000000000000000",
+        "relationship_id": "synthetic-link",
+        "observed_on": "2026-10-26",
+        "payload_json": "{\"aviandr_prescription\":\"unknown\",\"basis\":\"Авторская синтетическая разметка.\",\"clinical_basis\":\"Авторская синтетическая разметка.\",\"condition\":\"F32\",\"gad_status\":\"unknown\",\"initial_antidepressant_phase\":\"denied\",\"psychiatric_comorbidity\":\"denied\",\"psychopharmacotherapy\":\"denied\",\"severity\":\"nonsevere\",\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"denied\",\"suicide_risk\":\"denied\",\"supersedes_id\":null,\"treatment_resistance\":\"denied\",\"version\":\"backend-risk-context-v1\",\"worsening_anxiety\":\"denied\"}"
+      }
+    ],
+    "evidence_documents": [
+      {
+        "id": "0",
+        "value": "В прошлом мыслей о самоубийстве не было."
+      },
+      {
+        "id": "1",
+        "value": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве."
+      }
+    ],
+    "patient_history": {
+      "version": "patient-history-v2",
+      "complete": true,
+      "truncated": false,
+      "entries": [
+        {
+          "category": "anamnesis",
+          "recorded_at": "2026-10-26T12:00:00+00:00",
+          "current_revision": true,
+          "state": "recorded",
+          "author_id": "fictional",
+          "fields": [
+            {
+              "source_ref": "s2_e759d506bfc11a2375f09cbfafb3369fabbc3b197397bc221b7d840d2c1459ff",
+              "path": "/value",
+              "value": "В прошлом мыслей о самоубийстве не было.",
+              "event_at": "2020-04-01",
+              "context": "current",
+              "status": "known",
+              "code": "history"
+            }
+          ]
+        },
+        {
+          "category": "wellbeing",
+          "recorded_at": "2026-10-26T12:00:00+00:00",
+          "current_revision": true,
+          "state": "recorded",
+          "author_id": "fictional",
+          "fields": [
+            {
+              "source_ref": "s2_de6a68c3442574e5c83015b68003bc47057a76ab1c07fbb5658930dfec5e31e7",
+              "path": "/value",
+              "value": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве.",
+              "event_at": "2026-10-26",
+              "context": "current",
+              "status": "known",
+              "code": "summary"
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "s2_0abf13e65ad74c8970305751297df5c03ad0db055879f63d66a00255fa28c63a": {
+          "table": "patients",
+          "key": "id",
+          "id": "fictional",
+          "sha256": "f6968fc50d7b009ff904a720db6cdb5a82c7fb0a27f8e60600ab1a436b8071ec"
+        },
+        "s2_e759d506bfc11a2375f09cbfafb3369fabbc3b197397bc221b7d840d2c1459ff": {
+          "table": "evidence_documents",
+          "key": "id",
+          "id": "0",
+          "sha256": "d4f457140c25aca1ef58f2a17740bd50a8144889d3a24f97b5618f1eaaf26493"
+        },
+        "s2_de6a68c3442574e5c83015b68003bc47057a76ab1c07fbb5658930dfec5e31e7": {
+          "table": "evidence_documents",
+          "key": "id",
+          "id": "1",
+          "sha256": "10ff65b1517394f12c82599a7cb5094b4fbd3d870107701acdda172845b1f5d2"
+        },
+        "s2_1a9bf1f3acb2fcbc994bf9e47621d248df109fc9eeccd434922efa1c9434e6bc": {
+          "table": "clinical_contexts",
+          "key": "id",
+          "id": "00000000000000000000000000000000",
+          "sha256": "e21e613e0194fb647cde47921932f310028ee0d822a68bc8a7fd220408241fcb"
+        }
+      }
+    }
+  },
+  "outcome": {
+    "status": "ready",
+    "result": {
+      "summary": "В пределах применимых структурированных правил совпадений не найдено; это не отсутствие риска.",
+      "facts": [
+        {
+          "id": "context",
+          "text": "Структурированный контекст врача: F32; дата 2026-10-26.",
+          "evidence_refs": [
+            "s2_1a9bf1f3acb2fcbc994bf9e47621d248df109fc9eeccd434922efa1c9434e6bc"
+          ]
+        },
+        {
+          "id": "age",
+          "text": "Сверенный возраст на дату снимка: 35–35.",
+          "evidence_refs": [
+            "s2_0abf13e65ad74c8970305751297df5c03ad0db055879f63d66a00255fa28c63a"
+          ]
+        },
+        {
+          "id": "fact-DEP-SUICIDE-FACT",
+          "text": "DEP-SUICIDE-FACT: no_match; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"denied\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26.",
+          "evidence_refs": [
+            "s2_1a9bf1f3acb2fcbc994bf9e47621d248df109fc9eeccd434922efa1c9434e6bc"
+          ]
+        }
+      ],
+      "contradictions": [],
+      "missing_data": [
+        "Оценены только перечисленные структурированные правила. Анкеты, общий показатель самочувствия, свободный текст и его сочетания здесь не оценены (BE08); отсутствие совпадения не означает отсутствия риска. Клинический выпуск заблокирован."
+      ],
+      "output": {
+        "assessment": "no_pattern_found",
+        "patterns": [],
+        "rule_evaluations": [
+          {
+            "rule_id": "DEP-SUICIDE-FACT",
+            "version": "backend-risk-rules-v1",
+            "state": "no_match",
+            "attention": "undetermined",
+            "source_ids": [
+              "be07-DEP-SUICIDE-FACT"
+            ],
+            "fact_ids": [
+              "context",
+              "age",
+              "fact-DEP-SUICIDE-FACT"
+            ],
+            "reasons": [],
+            "source_id": "KR301_3",
+            "section": "2.5 Иные диагностические исследования",
+            "pdf_page": 21
+          },
+          {
+            "rule_id": "GAD-PSY-REVIEW",
+            "version": "backend-risk-rules-v1",
+            "state": "not_applicable",
+            "attention": "undetermined",
+            "source_ids": [
+              "be07-GAD-PSY-REVIEW"
+            ],
+            "fact_ids": [
+              "context",
+              "age"
+            ],
+            "reasons": [],
+            "source_id": "KR457_3",
+            "section": "5. Профилактика и диспансерное наблюдение",
+            "pdf_page": 39
+          },
+          {
+            "rule_id": "GAD-ADVERSE-REVIEW",
+            "version": "backend-risk-rules-v1",
+            "state": "not_applicable",
+            "attention": "undetermined",
+            "source_ids": [
+              "be07-GAD-ADVERSE-REVIEW"
+            ],
+            "fact_ids": [
+              "context",
+              "age"
+            ],
+            "reasons": [],
+            "source_id": "KR457_3",
+            "section": "3.2 Психофармакотерапия",
+            "pdf_page": 30
+          },
+          {
+            "rule_id": "GAD-INITIAL-ANXIETY",
+            "version": "backend-risk-rules-v1",
+            "state": "not_applicable",
+            "attention": "undetermined",
+            "source_ids": [
+              "be07-GAD-INITIAL-ANXIETY"
+            ],
+            "fact_ids": [
+              "context",
+              "age"
+            ],
+            "reasons": [],
+            "source_id": "KR457_3",
+            "section": "3.2 Психофармакотерапия",
+            "pdf_page": 22
+          }
+        ]
+      }
+    },
+    "model": null,
+    "risk_context_report": {
+      "version": "risk-candidates-v2",
+      "snapshot_sha256": "2aec6b8ca8ee6b3761f4a8fe5a223d4ddf6c98bb38fd86fdc3dbd3973b4e7e25",
+      "clinical_ready": false,
+      "status": "partial",
+      "assessment": "not_established",
+      "structured": {
+        "status": "ready",
+        "result": {
+          "summary": "В пределах применимых структурированных правил совпадений не найдено; это не отсутствие риска.",
+          "facts": [
+            {
+              "id": "context",
+              "text": "Структурированный контекст врача: F32; дата 2026-10-26.",
+              "evidence_refs": [
+                "s2_1a9bf1f3acb2fcbc994bf9e47621d248df109fc9eeccd434922efa1c9434e6bc"
+              ]
+            },
+            {
+              "id": "age",
+              "text": "Сверенный возраст на дату снимка: 35–35.",
+              "evidence_refs": [
+                "s2_0abf13e65ad74c8970305751297df5c03ad0db055879f63d66a00255fa28c63a"
+              ]
+            },
+            {
+              "id": "fact-DEP-SUICIDE-FACT",
+              "text": "DEP-SUICIDE-FACT: no_match; структурированные значения: {\"suicidal_behavior\":\"denied\",\"suicidal_ideation\":\"denied\",\"suicidal_intent\":\"denied\",\"suicidal_plan\":\"denied\",\"suicide_risk\":\"denied\"}; наблюдение 2026-10-26.",
+              "evidence_refs": [
+                "s2_1a9bf1f3acb2fcbc994bf9e47621d248df109fc9eeccd434922efa1c9434e6bc"
+              ]
+            }
+          ],
+          "contradictions": [],
+          "missing_data": [
+            "Оценены только перечисленные структурированные правила. Анкеты, общий показатель самочувствия, свободный текст и его сочетания здесь не оценены (BE08); отсутствие совпадения не означает отсутствия риска. Клинический выпуск заблокирован."
+          ],
+          "output": {
+            "assessment": "no_pattern_found",
+            "patterns": [],
+            "rule_evaluations": [
+              {
+                "rule_id": "DEP-SUICIDE-FACT",
+                "version": "backend-risk-rules-v1",
+                "state": "no_match",
+                "attention": "undetermined",
+                "source_ids": [
+                  "be07-DEP-SUICIDE-FACT"
+                ],
+                "fact_ids": [
+                  "context",
+                  "age",
+                  "fact-DEP-SUICIDE-FACT"
+                ],
+                "reasons": [],
+                "source_id": "KR301_3",
+                "section": "2.5 Иные диагностические исследования",
+                "pdf_page": 21
+              },
+              {
+                "rule_id": "GAD-PSY-REVIEW",
+                "version": "backend-risk-rules-v1",
+                "state": "not_applicable",
+                "attention": "undetermined",
+                "source_ids": [
+                  "be07-GAD-PSY-REVIEW"
+                ],
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "reasons": [],
+                "source_id": "KR457_3",
+                "section": "5. Профилактика и диспансерное наблюдение",
+                "pdf_page": 39
+              },
+              {
+                "rule_id": "GAD-ADVERSE-REVIEW",
+                "version": "backend-risk-rules-v1",
+                "state": "not_applicable",
+                "attention": "undetermined",
+                "source_ids": [
+                  "be07-GAD-ADVERSE-REVIEW"
+                ],
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "reasons": [],
+                "source_id": "KR457_3",
+                "section": "3.2 Психофармакотерапия",
+                "pdf_page": 30
+              },
+              {
+                "rule_id": "GAD-INITIAL-ANXIETY",
+                "version": "backend-risk-rules-v1",
+                "state": "not_applicable",
+                "attention": "undetermined",
+                "source_ids": [
+                  "be07-GAD-INITIAL-ANXIETY"
+                ],
+                "fact_ids": [
+                  "context",
+                  "age"
+                ],
+                "reasons": [],
+                "source_id": "KR457_3",
+                "section": "3.2 Психофармакотерапия",
+                "pdf_page": 22
+              }
+            ]
+          }
+        },
+        "model": null
+      },
+      "model_candidates": [
+        {
+          "id": "8f520cea3746de7c6b8375e03f25c787ca5a032bdbf33b46a9043023129033bb",
+          "topic": "safety_concern",
+          "evidence": [
+            {
+              "unit_id": "u1",
+              "source_ref": "s2_de6a68c3442574e5c83015b68003bc47057a76ab1c07fbb5658930dfec5e31e7",
+              "path": "/value",
+              "source_sha256": "10ff65b1517394f12c82599a7cb5094b4fbd3d870107701acdda172845b1f5d2",
+              "text": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве.",
+              "value": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве.",
+              "categories": [
+                "wellbeing"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "current",
+                "status": "known",
+                "recorded_at": "2026-10-26T12:00:00+00:00",
+                "current_revision": true,
+                "state": "recorded",
+                "author_id": "fictional"
+              },
+              "code": "summary",
+              "field_sha256": "a9afe2c09448b0b7c43706ba189904e2c02741ed6dc52631df6b346ac8a8cc96",
+              "quote": "Сегодня думаю о самоубийстве.",
+              "start": 41,
+              "end": 70,
+              "offset_basis": "original_text"
+            }
+          ],
+          "interpretation": "model_suspicion_unreviewed",
+          "temporal_relation": "single_observation",
+          "record_days": [
+            "2026-10-26"
+          ],
+          "clinical_causality": "not_established",
+          "snapshot_sha256": "2aec6b8ca8ee6b3761f4a8fe5a223d4ddf6c98bb38fd86fdc3dbd3973b4e7e25"
+        },
+        {
+          "id": "b4a8c07ff84b9335e92507bb1cdad0aba2c3ccd36fb68218c0ace60b25446eec",
+          "topic": "reported_change",
+          "evidence": [
+            {
+              "unit_id": "u1",
+              "source_ref": "s2_de6a68c3442574e5c83015b68003bc47057a76ab1c07fbb5658930dfec5e31e7",
+              "path": "/value",
+              "source_sha256": "10ff65b1517394f12c82599a7cb5094b4fbd3d870107701acdda172845b1f5d2",
+              "text": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве.",
+              "value": "За последние дни мне стало намного хуже. Сегодня думаю о самоубийстве.",
+              "categories": [
+                "wellbeing"
+              ],
+              "metadata": {
+                "event_at": "2026-10-26",
+                "context": "current",
+                "status": "known",
+                "recorded_at": "2026-10-26T12:00:00+00:00",
+                "current_revision": true,
+                "state": "recorded",
+                "author_id": "fictional"
+              },
+              "code": "summary",
+              "field_sha256": "a9afe2c09448b0b7c43706ba189904e2c02741ed6dc52631df6b346ac8a8cc96",
+              "quote": "За последние дни мне стало намного хуже.",
+              "start": 0,
+              "end": 40,
+              "offset_basis": "original_text"
+            }
+          ],
+          "interpretation": "model_suspicion_unreviewed",
+          "temporal_relation": "single_observation",
+          "record_days": [
+            "2026-10-26"
+          ],
+          "clinical_causality": "not_established",
+          "snapshot_sha256": "2aec6b8ca8ee6b3761f4a8fe5a223d4ddf6c98bb38fd86fdc3dbd3973b4e7e25"
+        }
+      ],
+      "model_evaluation": "candidates_only",
+      "model_metadata": {
+        "provider": "deepseek",
+        "requested_model": "deepseek-flash",
+        "test_double": false,
+        "packet_count": 1
+      },
+      "missing_categories": [
+        "questionnaires",
+        "visits"
+      ],
+      "errors": [],
+      "limitation": "Непроверенные модельные предположения; цитата подтверждает только наличие текста, не его клинический смысл. Нет оценки отсутствия опасности, причинности, срочности, диагноза или лечения. Клинический выпуск заблокирован.",
+      "prompt_sha256": "a0099ae847b3bfa17cea72b11a014a2c4be7d8e072d5b2b630d8bff6a914a16a"
+    },
+    "packet_proof": {
+      "runtime_sha256": "403f7021f435889963717192f0cac9dcbce81c7915470b95adf6fcbbdd48a246",
+      "cells": [
+        {
+          "branch": "risk",
+          "packet_index": 1,
+          "payload_sha256": "60b1173a97f69c7199b443f0495eb5271309937a4885e59e6d5b27610ccdce46",
+          "response": {
+            "value": {
+              "candidates": [
+                {
+                  "topic": "safety_concern",
+                  "evidence": [
+                    {
+                      "unit_id": "u1",
+                      "quote": "Сегодня думаю о самоубийстве."
+                    }
+                  ]
+                },
+                {
+                  "topic": "reported_change",
+                  "evidence": [
+                    {
+                      "unit_id": "u1",
+                      "quote": "За последние дни мне стало намного хуже."
+                    }
+                  ]
+                }
+              ]
+            },
+            "metadata": {
+              "endpoint": "https://api.deepseek.com/chat/completions",
+              "thinking": "disabled",
+              "temperature": 0,
+              "timeout_seconds": 60,
+              "max_input_bytes": 16000,
+              "max_output_tokens": 1536,
+              "provider": "deepseek",
+              "requested_model": "deepseek-flash",
+              "returned_model": "deepseek-flash",
+              "prompt_version": "compass-model-v1",
+              "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+              "schema_sha256": "952a3125bc438cf401c8c48dcfaafffbf51f16dfb39c3ac9b224d6d256aabd3d",
+              "elapsed_seconds": 1.493,
+              "usage": {
+                "prompt_tokens": 998,
+                "completion_tokens": 68,
+                "total_tokens": 1066
+              },
+              "cache_hit_tokens": 384,
+              "cache_miss_tokens": 614,
+              "estimated_peak_cost_nano_usd": 268104,
+              "estimated_offpeak_cost_nano_usd": 134052,
+              "cost_ceiling_micro_usd": 1338,
+              "reservation_micro_usd": 12441,
+              "synthetic_only": true,
+              "test_double": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "expected_topics": [
+    "safety_concern",
+    "reported_change"
+  ],
+  "actual_topics": [
+    "reported_change",
+    "safety_concern"
+  ],
+  "expected_rules": [],
+  "actual_rules": [],
+  "packet_count": 1
+}

@@ -1,0 +1,81 @@
+{
+  "version": "fe03b-development-v1",
+  "cases": [
+    {
+      "id": "DV01",
+      "note": "Сведения при повторном расспросе. Нынешнее снижение настроения продолжается 25 дней. Утомляется и мало активен, чувствует вину, аппетит снижен. Все эти проявления относятся к одному текущему периоду состояния. Повседневные дела даются труднее, но значительного ограничения функционирования нет. Интерес и удовольствие сохранены. Нарушение сна, трудности сосредоточения, пессимизм и снижение самооценки отрицает. Отрицает суицидные и самоповреждающие мысли или действия. Значительно выраженных симптомов нет. Прежних депрессивных эпизодов не было. Мании и гипомании никогда не было. Врач исключил психоз и ступор, органическую причину, лекарственную причину, влияние ПАВ и другое первичное расстройство как объяснение нынешней картины. Длительность какого-либо тревожного состояния не изучали.",
+      "leading": "depressive_episode",
+      "disposition": "candidates",
+      "expected_facts": {
+        "depressive_episode.appetite": "present",
+        "depressive_episode.concentration": "denied",
+        "depressive_episode.functional_difficulty": "present",
+        "depressive_episode.guilt": "present",
+        "depressive_episode.loss_interest": "denied",
+        "depressive_episode.low_energy": "present",
+        "depressive_episode.low_mood": "present",
+        "depressive_episode.major_functional_impairment": "denied",
+        "depressive_episode.mania_hypomania": "denied",
+        "depressive_episode.marked_symptom_intensity": "denied",
+        "depressive_episode.medication_cause": "denied",
+        "depressive_episode.organic_cause": "denied",
+        "depressive_episode.other_primary_disorder": "denied",
+        "depressive_episode.pessimism": "denied",
+        "depressive_episode.prior_depressive_episode": "denied",
+        "depressive_episode.psychosis_stupor": "denied",
+        "depressive_episode.same_current_period": "present",
+        "depressive_episode.self_esteem": "denied",
+        "depressive_episode.self_harm": "denied",
+        "depressive_episode.sleep": "denied",
+        "depressive_episode.substance_cause": "denied",
+        "generalized_anxiety.somatic_cause": "unknown",
+        "generalized_anxiety.same_current_period": "unknown",
+        "generalized_anxiety.medication_cause": "unknown",
+        "generalized_anxiety.organic_cause": "unknown",
+        "generalized_anxiety.substance_cause": "unknown",
+        "generalized_anxiety.other_primary_disorder": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": 25,
+        "generalized_anxiety": null
+      },
+      "additional_notes": [],
+      "operation": "diagnosis",
+      "padding_records": 18
+    },
+    {
+      "id": "DV02",
+      "operation": "diagnosis",
+      "note": "На этом контакте жалобы, анамнез и длительность не собирались. Есть только неполный опросник.",
+      "leading": null,
+      "disposition": "insufficient_data",
+      "expected_facts": {
+        "depressive_episode.low_mood": "unknown",
+        "generalized_anxiety.generalized_anxiety": "unknown"
+      },
+      "expected_durations": {
+        "depressive_episode": null,
+        "generalized_anxiety": null
+      }
+    },
+    {
+      "id": "DVR01",
+      "scenario": "paraphrase",
+      "expected_topics": [
+        "safety_concern"
+      ],
+      "expected_rules": [],
+      "condition": "F32",
+      "unknown_flags": true,
+      "documents": [
+        {
+          "category": "wellbeing",
+          "code": "summary",
+          "value": "Не хочу проснуться завтра. Лучше бы меня больше не было.",
+          "event_at": "2026-10-26"
+        }
+      ],
+      "operation": "risk"
+    }
+  ]
+}

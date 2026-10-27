@@ -187,7 +187,7 @@ class ExactAdmissionTests(AdmissionAndCancelTests):
         self.assertEqual('depressive_episode',report['diagnosis_report']['context']['leading'])
         budget.assert_called_once();constructor.assert_called_once()
         cfg=constructor.call_args.args[0]
-        self.assertEqual(1000000,cfg.total_micro_usd);self.assertEqual(20000,cfg.per_call_micro_usd)
+        self.assertEqual(4000000,cfg.total_micro_usd);self.assertEqual(20000,cfg.per_call_micro_usd)
         self.assertEqual(2,len(adapter.calls))
 
 if __name__=='__main__':unittest.main()
