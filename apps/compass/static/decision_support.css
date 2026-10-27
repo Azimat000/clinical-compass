@@ -13,3 +13,7 @@
   .ds-dashboard { display: flex; flex-direction: column; }
   .ds-signals { border-left: 0; border-bottom: 1px solid #d5d8d9; }
 }
+.ds-support fieldset { min-width: 0; margin-block: 16px; padding: 12px; border: 1px solid #d5d8d9; }
+.ds-support input:not([type=checkbox]), .ds-support select { max-width: 100%; box-sizing: border-box; }
+.ds-support fieldset[hidden] { display: none; }
+.ds-support [data-therapy-content] form > label, .ds-support [data-therapy-content] fieldset label { max-width: 65ch; }

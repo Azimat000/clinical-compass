@@ -415,6 +415,23 @@ def create_app(database=None):
             raise backend_analyses.AnalysisError('Нужен номер страницы.')
         return jsonify(review.view(get_db(), g.user, patient_id, int(page)))
 
+    @app.get('/api/v1/patients/<patient_id>/therapy-editor')
+    def therapy_editor(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        backend_analyses.authorize(get_db(), g.user, patient_id)
+        from . import backend_therapy_context as context, backend_medication_regimens as regimens
+        catalog = regimens.release()
+        questions = {}
+        for product in catalog['products'].values():
+            for flag, spec in product['required_facts'].items():
+                questions.setdefault(flag, spec['question'])
+        from .backend_ui_therapy import FLAG_LABELS
+        return jsonify(context=context.view(get_db(), g.user, patient_id),
+            facts=[{'id': key, 'label': FLAG_LABELS.get(key, questions.get(key, key))} for key in context.FLAGS],
+            products=[{'id': key, 'name': product['name'], 'ingredient': product['ingredient'],
+                       'form': product['form']} for key, product in catalog['products'].items()])
+
     @app.get('/api/v1/patients/<patient_id>/plan-review-state')
     def plan_review_state(patient_id):
         role('doctor')
@@ -439,7 +456,12 @@ def create_app(database=None):
                     'backend_plan_reviews'}
         available = required.issubset(names)
         from . import backend_jobs
-        return jsonify(available=available,
+        automatic = []
+        if available and patient_id is not None and 'backend_ui_update_cursors' in names:
+            from . import backend_ui_updates
+            relationship = backend_analyses.authorize(get_db(), g.user, patient_id)
+            automatic = backend_ui_updates.view(get_db(), patient_id, relationship)
+        return jsonify(available=available, automatic=automatic,
                        enabled=available and backend_jobs.settings(get_db()) is not None)
 
     @app.get('/api/v1/physician/alerts')

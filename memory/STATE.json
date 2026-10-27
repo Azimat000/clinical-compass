@@ -1663,7 +1663,7 @@
       "BE18",
       "BE19"
     ],
-    "active_service_migrated": false,
+    "active_service_migrated": true,
     "clinical_release": "blocked",
     "full_regression": "deferred_by_user",
     "planning_ref": "refs/tags/plan/decision-support-ui-2026-10-27",
@@ -1703,17 +1703,21 @@
       "active_service_changed": false
     },
     "ui_connection": {
-      "status": "implementation_partial_unverified",
-      "report": "memory/sessions/FE05-FE08-ui-wip.md",
+      "status": "deployed_unverified",
+      "report": "memory/sessions/FE05-FE08-live-unverified.md",
       "surfaces": [
         "dashboard",
         "doctor_patient",
         "decisions"
       ],
       "tests_run": false,
-      "active_service_changed": false,
-      "automatic_generation": false,
-      "structured_medication_review_ui": false
+      "active_service_changed": true,
+      "automatic_generation": "implemented_quality_gate_preserved",
+      "structured_medication_review_ui": true,
+      "database": "var/compass.sqlite3",
+      "schema": "024_ui_update_cursors",
+      "backup": "var/backups/decision-support-20261027-172832",
+      "quality_admitted": false
     }
   }
 }
