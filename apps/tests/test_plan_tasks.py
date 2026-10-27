@@ -113,7 +113,7 @@ class PlanTaskTests(unittest.TestCase):
         t, _ = self.add(due_on='2030-01-01')
         self.action(kind='plan_change')
         self.assertEqual(409, self.mark(t)[0].status_code)
-        self.assertIn('заменён', self.clients['pat-a'].get(self.plan_url).text)
+        self.assertIn('предыдущего плана', self.clients['pat-a'].get(self.plan_url).text)
         self.assertIn(t['label'], self.clients['doc-a'].get(self.plan_url).text)
 
     def test_only_current_approved_decision_can_supply_items(self):
@@ -226,7 +226,25 @@ class PlanTaskTests(unittest.TestCase):
         html = self.clients['pat-a'].get(self.plan_url).text
         self.assertLess(html.index('id="task-'+active['id']), html.index('id="previous-recommendations"'))
         self.assertLess(html.index('id="previous-recommendations"'), html.index('id="task-'+old['id']))
-        self.assertIn('Ранее назначенные рекомендации (1)', html)
+        self.assertIn('История заданий и ответов (1)', html)
+
+    def test_past_old_tasks_and_answers_are_read_only_history(self):
+        old, _ = self.add(due_on='2020-01-01', label='PAST-OLD-ITEM')
+        self.assertEqual(303, self.mark(old, reason='OLD-ANSWER')[0].status_code)
+        current, _ = self.add(due_on='2030-01-01', label='CURRENT-ITEM')
+        html = self.clients['pat-a'].get(self.plan_url).text
+        self.assertIn('<details class="item-history" id="previous-recommendations">', html)
+        self.assertLess(html.index('id="previous-recommendations"'), html.index('PAST-OLD-ITEM'))
+        self.assertIn('OLD-ANSWER', html)
+        self.assertNotIn(self.tasks_url+'/'+old['id']+'/report', html)
+        self.assertIn(self.tasks_url+'/'+current['id']+'/report', html)
+        self.assertEqual(409, self.mark(old, reason='STALE-TAB')[0].status_code)
+        self.assertEqual(1, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
+        # A current plan with no items must not bring back the old ones.
+        self.action(kind='plan_change')
+        html = self.clients['pat-a'].get(self.plan_url).text
+        self.assertNotIn('class="recommendation-form"', html)
+        self.assertIn('OLD-ANSWER', html)
 
     def test_patient_without_relationship_gets_no_marks_or_private_context(self):
         self.db.execute("UPDATE care_relationships SET ends_at='2000-01-01'")

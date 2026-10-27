@@ -15,7 +15,9 @@ def view(db, user, patient_id):
         JOIN proposals p ON p.id=c.proposal_id WHERE p.patient_id=?''', (patient_id,))}
     for task in data['tasks']:
         action = actions[task['action_id']]
-        task.update(proposal_id=action['proposal_id'], version=action['version'],
+        task.update(is_current=bool(data['head'] and data['head']['kind'] != 'therapy_stop'
+                                    and task['action_id'] == data['head']['id']),
+                    proposal_id=action['proposal_id'], version=action['version'],
                     revision=task['history'][-1]['id'] if task['history'] else '')
     authors = {}
     # Historical entries may have a physician author from the same relationship.

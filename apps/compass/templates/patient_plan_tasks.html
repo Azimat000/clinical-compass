@@ -2,11 +2,11 @@
   <article class="recommendation" id="task-{{ t.id }}" aria-labelledby="task-title-{{ t.id }}">
     <h3 class="keep" id="task-title-{{ t.id }}">{{ t.label }}</h3>
     <p class="meta">Срок: <time class="num" datetime="{{ t.due_at }}">{{ t.due_at|msk }}</time> · <a href="#plan-{{ t.proposal_id }}">Решение врача</a></p>
-    {% if t.superseded %}<p class="meta">Пункт заменён новым планом. Прежние отметки сохранены.</p>
+    {% if not t.is_current %}<p class="meta">Пункт из предыдущего плана. Прежние отметки сохранены.</p>
     {% elif t.future %}<p class="meta">Срок впереди — ответ можно отправить уже сейчас.</p>{% endif %}
     <p class="recommendation-result"><b>{{ 'Выполнение не отмечено' if t.outcome == 'unknown' else task_labels[t.outcome] }}</b>{% if t.history %} · {{ t.history[-1].recorded_at|msk }}{% endif %}</p>
-    {% if t.history %}<p class="answer-saved">Ответ доступен врачу; прочтение не подтверждено.</p><p class="meta">{{ plan_task_data.authors.get(t.history[-1].actor_id, 'Автор не указан') }}{% if t.superseded and t.history[-1].reason %}: <span class="keep">{{ t.history[-1].reason }}</span>{% endif %}</p>{% endif %}
-    {% if not t.superseded %}
+    {% if t.history %}<p class="answer-saved">Ответ доступен врачу; прочтение не подтверждено.</p><p class="meta">{{ plan_task_data.authors.get(t.history[-1].actor_id, 'Автор не указан') }}{% if not t.is_current and t.history[-1].reason %}: <span class="keep">{{ t.history[-1].reason }}</span>{% endif %}</p>{% endif %}
+    {% if t.is_current %}
     {% set failed = task_values.get('task_id') == t.id %}
     <form method="post" action="{{ url_for('report_plan_task', patient_id=patient.id, task_id=t.id) }}" class="recommendation-form" data-busy aria-label="Ответить на пункт: {{ t.label }}">
       <input type="hidden" name="csrf" value="{{ csrf }}">
@@ -39,12 +39,12 @@
   {% if task_error %}<div class="notice notice--error" role="alert"><b>Отметка не сохранена</b><p>{{ task_error }}</p>
     {% if task_values.get('reason') %}<p class="keep">Ваш несохранённый комментарий: {{ task_values.get('reason') }}</p>{% endif %}
   </div>{% endif %}
-  {% set active_tasks = plan_task_data.tasks|rejectattr('superseded')|list %}
-  {% set previous_tasks = plan_task_data.tasks|selectattr('superseded')|list %}
+  {% set active_tasks = plan_task_data.tasks|selectattr('is_current')|list %}
+  {% set previous_tasks = plan_task_data.tasks|rejectattr('is_current')|list %}
   {% for t in active_tasks %}{{ recommendation(t) }}
   {% else %}<p class="meta">Действующих отдельных рекомендаций для отметки пока нет.</p>{% endfor %}
   {% if previous_tasks %}
-  <details class="item-history" id="previous-recommendations"><summary>Ранее назначенные рекомендации ({{ previous_tasks|length }})</summary>
+  <details class="item-history" id="previous-recommendations"><summary>История заданий и ответов ({{ previous_tasks|length }})</summary>
     {% for t in previous_tasks %}{{ recommendation(t) }}{% endfor %}
   </details>
   {% endif %}

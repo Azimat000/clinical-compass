@@ -141,6 +141,9 @@ def report(db,user,patient_id,task_id,form, *, patient_only=False):
                 raise Error('Ключ уже использован с другим содержимым.',409)
             return old['id']
         if patient_only:
+            head = current_action(db, patient_id)
+            if not head or head['kind'] == 'therapy_stop' or task['action_id'] != head['id']:
+                raise Error('Это пункт предыдущего плана. Прежние ответы остаются в истории; отвечайте на пункты текущего плана.', 409)
             latest=db.execute('SELECT id FROM adherence_entries WHERE task_id=? ORDER BY recorded_at DESC,id DESC LIMIT 1', (task_id,)).fetchone()
             if form.get('revision') != (latest['id'] if latest else ''):
                 raise Error('В другой вкладке появилась новая отметка. Обновите страницу перед исправлением.',409)
