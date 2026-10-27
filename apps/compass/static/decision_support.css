@@ -1,0 +1,15 @@
+/* Only the three decision support additions. Incumbent styles stay intact. */
+.ds-dashboard { display: grid; grid-template-columns: minmax(0, 1fr) 280px; }
+.ds-patients { grid-column: 1; grid-row: 1; min-width: 0; }
+.ds-signals { grid-column: 2; grid-row: 1; border-left: 1px solid #d5d8d9; min-width: 0; }
+.ds-support, .ds-signals { overflow-wrap: anywhere; }
+.ds-support h2, .ds-signals h2 { font-size: 1.2rem; }
+.ds-support label { display: block; margin-block: 12px; }
+.ds-support textarea { display: block; width: 100%; box-sizing: border-box; font: inherit; }
+.ds-support article, .ds-signals article { padding-block: 12px; border-bottom: 1px solid #d5d8d9; }
+.ds-support pre, .ds-signals pre { white-space: pre-wrap; font: inherit; }
+.ds-signals .ds-alert-reason { color: #962f2f; }
+@media (max-width: 1200px) {
+  .ds-dashboard { display: flex; flex-direction: column; }
+  .ds-signals { border-left: 0; border-bottom: 1px solid #d5d8d9; }
+}

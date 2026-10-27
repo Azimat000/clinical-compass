@@ -61,6 +61,16 @@
   {% if query %}<a class="reset" href="{{ url_for('dashboard', show=show) }}">Сбросить поиск</a>{% endif %}
 </div>
 
+<div class="ds-dashboard">
+<aside class="ds-signals sheet-pad" data-support="alerts" data-csrf="{{ csrf }}" aria-labelledby="ds-signals-title">
+  <h2 id="ds-signals-title">Критические сигналы</h2>
+  <p class="meta">Требуют проверки врача. Отсутствие сигнала не означает отсутствия риска.</p>
+  <p data-support-status role="status">Загрузка сигналов…</p>
+  <div data-support-content></div>
+  <button class="button" type="button" data-support-refresh>Обновить сигналы</button>
+  <noscript>Для загрузки сигналов включите JavaScript.</noscript>
+</aside>
+<div class="ds-patients">
 {% if rows %}
 <table class="results review-list">
   <caption class="visually-hidden">Пациенты врача: сначала записи для проверки</caption>
@@ -107,4 +117,8 @@
   <span>{{ ui.wellbeing(['unknown'], decorative=True) }}не указано</span>
 </div>
 
+</div></div>
 {% endblock %}
+
+{% block page_scripts %}<link rel="stylesheet" href="{{ url_for('static', filename='decision_support.css') }}">
+<script src="{{ url_for('static', filename='decision_support.js') }}" defer></script>{% endblock %}

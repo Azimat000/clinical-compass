@@ -415,6 +415,33 @@ def create_app(database=None):
             raise backend_analyses.AnalysisError('Нужен номер страницы.')
         return jsonify(review.view(get_db(), g.user, patient_id, int(page)))
 
+    @app.get('/api/v1/patients/<patient_id>/plan-review-state')
+    def plan_review_state(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        backend_analyses.authorize(get_db(), g.user, patient_id)
+        from . import backend_plan_review as review
+        review.available(get_db())
+        latest = review.head(get_db(), patient_id)
+        return jsonify(expected_version=latest['version'] if latest else 0,
+                       parent_id=latest['proposal_id'] if latest else None)
+
+    @app.get('/api/v1/physician/decision-support')
+    @app.get('/api/v1/patients/<patient_id>/decision-support')
+    def decision_support_availability(patient_id=None):
+        role('doctor')
+        if patient_id is not None:
+            patient_or_404(patient_id)
+            backend_analyses.authorize(get_db(), g.user, patient_id)
+        names = {row[0] for row in get_db().execute(
+            "SELECT name FROM sqlite_master WHERE type='table'")}
+        required = {'analysis_runs', 'backend_alerts', 'backend_diagnosis_reviews',
+                    'backend_plan_reviews'}
+        available = required.issubset(names)
+        from . import backend_jobs
+        return jsonify(available=available,
+                       enabled=available and backend_jobs.settings(get_db()) is not None)
+
     @app.get('/api/v1/physician/alerts')
     def backend_alert_inbox():
         role('doctor')

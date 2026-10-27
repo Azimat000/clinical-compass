@@ -154,6 +154,16 @@
   {% endset %}
   {% if waiting %}{{ sec_waiting }}{% endif %}{{ sec_current }}
 
+  <section class="block ds-support" data-support="plan" data-patient="{{ patient.id }}" data-csrf="{{ csrf }}" aria-labelledby="ds-plan-title">
+    <h2 id="ds-plan-title">Предложения плана и лечения</h2>
+    <p class="meta">Предложения системы не изменяют текущий план. Решение требует отдельного подтверждения врача.</p>
+    <p data-support-status role="status">Загрузка предложений…</p>
+    <div data-support-content></div>
+    <div class="form-actions"><button class="button" type="button" data-support-refresh>Обновить сведения</button><button class="button" type="button" data-support-analyze>Запросить новый проект</button></div>
+    <p><a href="#new-decision">Подготовить собственный проект решения</a></p>
+    <noscript>Для загрузки предложений включите JavaScript.</noscript>
+  </section>
+
   {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', False) }}
 
   {% include 'plan_outcomes.html' %}
@@ -253,4 +263,5 @@
   </details>
 </div>
 {% endblock %}
-{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script><script src="{{ url_for('static', filename='medications.js') }}" defer></script>{% endblock %}
+{% block page_scripts %}<link rel="stylesheet" href="{{ url_for('static', filename='decision_support.css') }}">
+<script src="{{ url_for('static', filename='decision_support.js') }}" defer></script><script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script><script src="{{ url_for('static', filename='medications.js') }}" defer></script>{% endblock %}
