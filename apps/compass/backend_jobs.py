@@ -158,6 +158,9 @@ def unavailable(operation, snapshot):
 
 def execute(operation, snapshot):
     from . import backend_risk_rules, backend_risk_context, backend_diagnosis_service
+    if operation == 'plan':
+        from . import backend_care_plan
+        return backend_care_plan.execute(operation, snapshot)
     version = snapshot.get('backend_runtime', {}).get('generation_version')
     if operation == 'diagnosis' and version == backend_diagnosis_service.EXECUTION_VERSION:
         return backend_diagnosis_service.execute(operation, snapshot)
@@ -211,7 +214,11 @@ def finish(db, claim_value, outcome=None, error=None):
                     diagnosis_context = diagnostic.projection(diagnostic_value)
                 elif run['operation'] == 'diagnosis' and settings(db)['generation_version'] == 'be10-diagnosis-v1':
                     raise analyses.AnalysisError('Отсутствует полная диагностическая оценка.')
-                analyses.advance_in_job(db, run, value, publication, risk_context=projected, diagnosis_context=diagnosis_context)
+                care_plan_context = publication.pop('care_plan_context', None)
+                if run['operation'] == 'plan' and care_plan_context is None:
+                    raise analyses.AnalysisError('Отсутствует проверенный проект плана.')
+                analyses.advance_in_job(db, run, value, publication, risk_context=projected,
+                    diagnosis_context=diagnosis_context, care_plan_context=care_plan_context)
                 from . import backend_alerts
                 backend_alerts.enqueue_pending(db)
                 db.execute('RELEASE publication')

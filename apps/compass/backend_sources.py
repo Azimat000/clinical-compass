@@ -199,6 +199,12 @@ def check_result(frozen, operation, result, *, root=None, context=None, snapshot
         if diagnostic.projection(report) != saved or expected['status'] != 'ready' or expected['result'] != result:
             raise SourceError(['diagnosis_result_mismatch'])
         return current
+    if operation == 'plan' and context.get('care_plan_context') is not None:
+        from . import backend_care_plan
+        expected, _ = backend_care_plan.evaluate(snapshot)
+        if expected.get('result') != result:
+            raise SourceError(['care_plan_result_mismatch'])
+        return current
     output = result['output']
     findings = (output['patterns'] if operation == 'risk' else
                 [output['leading'], *output['alternatives']] if operation == 'diagnosis' else output['items'])

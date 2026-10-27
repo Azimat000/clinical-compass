@@ -1,0 +1,27 @@
+plan/coverage.json : all original fields/statuses/subchecks preserved
+plan/backend/requirements.json : all original fields/statuses/subchecks preserved
+Source/runtime/provenance/full result/preservation: PASS; see verification.json.
+$python3 tools/validate_plan.py --pending-tag BE12
+{
+  "slices": 113,
+  "pdf_requirements": 37,
+  "contest_conditions": 46,
+  "subchecks": 160,
+  "accepted_slices": 93,
+  "fulfilled_requirements": 0,
+  "next_slice": "BE13"
+}
+PASS: покрытие плана, зависимости и память согласованы. Это не проверка медицинской готовности.
+
+$python3 tools/session.py status
+Текущий: нет
+Последний принятый: BE12
+Следующий готовый: BE13
+Проход в финал: unknown
+Приложение и условия конкурса не считаются выполненными из-за готового плана.
+
+$git diff --check
+
+$git diff --cached --stat
+
+PASS: BE12 technical acceptance, clinical_release remains blocked.

@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "runtime": {
+    "version": "care-plan-v1",
+    "catalog_sha256": "105dfca910d20eadef19b481a4cd9b1d7d3df30b23df46940761ec1f31e4075e",
+    "engine_sha256": "a78768c930022684a9ca2ad501b9a92db7cec037327f35918227acc4edcd624a",
+    "evidence_sha256": "e694603b291c95541f654e46e22d8171a164123e06ab749106577832e58c8b6f"
+  },
+  "clinical_ready": false,
+  "http": {
+    "pass": true,
+    "checks_count": 13,
+    "checks": [
+      "anonymous401",
+      "pat-a_denied",
+      "doc-b_denied",
+      "csrf403",
+      "create202",
+      "default_CLI_worker_ready200",
+      "no_actions_or_patient_publication",
+      "idempotent_retry",
+      "read_only_HEAD200",
+      "pat-a_result_denied",
+      "doc-b_result_denied",
+      "restart_preserves_report",
+      "data_change_stale"
+    ],
+    "worker": "separate production CLI interpreter, --once --lane generation",
+    "transport": "real loopback HTTP",
+    "diagnosis_input": "explicit structured mechanics fixture, not model/clinical quality",
+    "model_calls": 0
+  },
+  "scenarios": {
+    "pass": true,
+    "count": 6,
+    "evidence": "evidence/BE12/scenarios.json"
+  },
+  "preservation": {
+    "pass": true,
+    "live_tables_unchanged": 81,
+    "four_foreign_files_unchanged": true,
+    "credentials_unchanged": true,
+    "ledger_unchanged": true,
+    "migration_copy": {
+      "pass": true,
+      "copy_only": true,
+      "new_migration": false,
+      "preserved_old_tables": 80,
+      "preserved_schema_objects": 174,
+      "repeated_migrate": true
+    },
+    "requirements": 83,
+    "subchecks": 160
+  }
+}

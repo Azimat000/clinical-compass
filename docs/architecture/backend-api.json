@@ -806,9 +806,16 @@
         "type": "object",
         "properties": {
           "diagnosis_run_id": {
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
-            "maxLength": 128
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "items": {
             "type": "array",
@@ -816,6 +823,18 @@
               "$ref": "#/components/schemas/Finding"
             },
             "maxItems": 100
+          },
+          "diagnosis_review_id": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -1041,6 +1060,9 @@
           },
           "diagnosis_context": {
             "$ref": "#/components/schemas/DiagnosisContextProjection"
+          },
+          "care_plan_context": {
+            "$ref": "#/components/schemas/CarePlanContext"
           }
         },
         "required": [
@@ -1817,6 +1839,329 @@
           "clinical_ready",
           "raw",
           "runtime_sha256"
+        ],
+        "additionalProperties": false
+      },
+      "CarePlanContext": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "const": "care-plan-v1"
+          },
+          "runtime_sha256": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1
+          },
+          "report": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "version": {
+                    "const": "care-plan-v1"
+                  },
+                  "status": {
+                    "enum": [
+                      "conditional_clarification",
+                      "physician_diagnosis_draft"
+                    ]
+                  },
+                  "condition": {
+                    "enum": [
+                      "F32",
+                      "F33",
+                      "F41.1"
+                    ]
+                  },
+                  "diagnosis_review_id": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 64,
+                        "minLength": 1
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "diagnosis_run_id": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 128,
+                        "minLength": 1
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "diagnosis_reviewed": {
+                    "type": "boolean"
+                  },
+                  "missing_data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 2000,
+                      "minLength": 1
+                    },
+                    "maxItems": 100
+                  },
+                  "risk_status": {
+                    "enum": [
+                      "attention_required",
+                      "unknown",
+                      "no_rule_match_not_safety"
+                    ]
+                  },
+                  "risk_patterns": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "maxItems": 100
+                  },
+                  "open_episode_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "maxItems": 100
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "minLength": 1
+                        },
+                        "kind": {
+                          "enum": [
+                            "risk_review",
+                            "clarification",
+                            "examination",
+                            "nonpharmacological",
+                            "monitoring",
+                            "routing"
+                          ]
+                        },
+                        "text": {
+                          "type": "string",
+                          "maxLength": 4000,
+                          "minLength": 1
+                        },
+                        "goal": {
+                          "type": "string",
+                          "maxLength": 4000,
+                          "minLength": 1
+                        },
+                        "basis": {
+                          "type": "string",
+                          "maxLength": 4000,
+                          "minLength": 1
+                        },
+                        "condition": {
+                          "enum": [
+                            "F32",
+                            "F33",
+                            "F41.1"
+                          ]
+                        },
+                        "diagnosis_review_id": {
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 64,
+                              "minLength": 1
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "diagnosis_run_id": {
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 128,
+                              "minLength": 1
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "evidence_refs": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "maxLength": 256,
+                            "minLength": 1
+                          },
+                          "maxItems": 50
+                        },
+                        "questions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "maxLength": 2000,
+                            "minLength": 1
+                          },
+                          "maxItems": 100
+                        },
+                        "necessity": {
+                          "enum": [
+                            "conditional",
+                            "required_evaluation",
+                            "recommended_discussion"
+                          ]
+                        },
+                        "source": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "minLength": 1
+                            },
+                            "claim_id": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "minLength": 1
+                            },
+                            "pdf_sha256": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "minLength": 1
+                            },
+                            "pdf_page": {
+                              "type": "integer",
+                              "minimum": 1
+                            },
+                            "section": {
+                              "type": "string",
+                              "maxLength": 200,
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "claim_id",
+                            "pdf_sha256",
+                            "pdf_page",
+                            "section"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "timing": {
+                          "type": "object",
+                          "properties": {
+                            "interval_days": {
+                              "type": "null"
+                            },
+                            "selection": {
+                              "const": "physician_required"
+                            },
+                            "basis": {
+                              "type": "string",
+                              "maxLength": 4000,
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "interval_days",
+                            "selection",
+                            "basis"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "kind",
+                        "text",
+                        "goal",
+                        "basis",
+                        "condition",
+                        "diagnosis_review_id",
+                        "diagnosis_run_id",
+                        "evidence_refs",
+                        "questions",
+                        "necessity",
+                        "source",
+                        "timing"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "maxItems": 100
+                  },
+                  "review_conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 4000,
+                      "minLength": 1
+                    },
+                    "maxItems": 100
+                  },
+                  "clinical_ready": {
+                    "type": "boolean",
+                    "const": false
+                  },
+                  "applied": {
+                    "type": "boolean",
+                    "const": false
+                  },
+                  "patient_published": {
+                    "type": "boolean",
+                    "const": false
+                  },
+                  "limitation": {
+                    "type": "string",
+                    "maxLength": 4000,
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "version",
+                  "status",
+                  "condition",
+                  "diagnosis_review_id",
+                  "diagnosis_run_id",
+                  "diagnosis_reviewed",
+                  "missing_data",
+                  "risk_status",
+                  "risk_patterns",
+                  "open_episode_ids",
+                  "items",
+                  "review_conditions",
+                  "clinical_ready",
+                  "applied",
+                  "patient_published",
+                  "limitation"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "runtime_sha256",
+          "report"
         ],
         "additionalProperties": false
       }

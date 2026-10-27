@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/BE12/verify.py", line 147, in <module>
+    'http':live(),'scenarios':scenarios(),'preservation':preservation()}
+           ~~~~^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/BE12/verify.py", line 78, in live
+    assert before[table]==after[table],table
+           ~~~~~~^^^^^^^
+KeyError: 'treatment_plan_versions'
