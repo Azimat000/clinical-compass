@@ -1,14 +1,13 @@
-"""UI05: кабинет врача — план и решения, приём, документы. Разметка, подтверждение только по ответу сервера, ошибки, худшие данные."""
-import io
+"""UI05: кабинет врача — план и решения, приём (документы убраны из сайта в UI11). Разметка, подтверждение только по ответу сервера, ошибки, худшие данные."""
 import re
 import secrets
 import unittest
 
-from apps.compass import decisions, extraction, first_visits, records
+from apps.compass import decisions, first_visits, records
 import test_access
 import test_decisions
 
-SCREENS = ('/patients/D01/decisions', '/patients/D01/first-visits', '/patients/D01/imports')
+SCREENS = ('/patients/D01/decisions', '/patients/D01/first-visits')
 
 
 class DoctorWorkTests(unittest.TestCase):
@@ -35,7 +34,7 @@ class DoctorWorkTests(unittest.TestCase):
             self.assertIn('aria-current="page"', page, path)
             self.assertNotIn('<script>', page.replace('<script src', ''), path)
             self.assertNotIn(' style=', page, path)
-        for path in ('/patients/D01/first-visits', '/patients/D01/imports'):
+        for path in ('/patients/D01/first-visits',):
             self.assertEqual(403, self.clients['pat-a'].get(path).status_code)
         # Страница решений открыта и пациенту по прежним правилам доступа, но вместо врачебного экрана он получает свой экран плана (UI06B).
         asked = self.clients['pat-a'].get('/patients/D01/decisions')
@@ -54,8 +53,6 @@ class DoctorWorkTests(unittest.TestCase):
     def test_no_duplicate_ids_on_screens_with_data(self):
         self.draft()
         self.draft(kind='plan_change')
-        self.import_text('35 лет. F41.1. Авиандр 20 мг.')
-        self.import_text('40 лет. Беременность отрицает.')
         self.post('doc-a', '/patients/D01/first-visits/new', {'request_key': secrets.token_hex(16), 'base_revision': '0', 'state': 'draft',
                   'observed_on': records.today().isoformat(), 'visit_kind': 'first', 'not_collected': 'yes', 'age_source': 'patient'})
         for path in SCREENS:
@@ -76,7 +73,7 @@ class DoctorWorkTests(unittest.TestCase):
         page = self.page('/patients/D01/decisions')
         self.assertIn('Подтверждённого плана нет. Это не означает, что план не нужен.', page)
         self.assertIn('Неизвестность не означает допуск', page)
-        self.assertIn('Решений ещё не было', page)
+        self.assertIn('Прежних решений и ответов пока нет.', page)
 
     def test_draft_waits_and_confirmation_shows_only_after_server_answer(self):
         proposal = self.draft()
@@ -117,12 +114,13 @@ class DoctorWorkTests(unittest.TestCase):
         self.assertNotIn('Подтверждено врачом', self.page('/patients/D01/decisions'))
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
 
-    def test_waiting_projects_come_before_the_confirmed_plan(self):
+    def test_confirmed_plan_comes_before_waiting_projects(self):
+        # UI14: текущий подтверждённый план и ответы по нему первыми, проекты на подтверждении — следующим разделом.
         first = self.draft()
         self.assertEqual(303, self.confirm(first).status_code)
         self.draft(kind='plan_change')
         page = self.page('/patients/D01/decisions')
-        self.assertLess(page.index('id="waiting"'), page.index('id="current"'))
+        self.assertLess(page.index('id="current"'), page.index('id="waiting"'))
 
     def test_repeat_click_on_confirm_is_the_same_result(self):
         proposal = self.draft()
@@ -237,111 +235,12 @@ class DoctorWorkTests(unittest.TestCase):
         self.assertIn('Новая версия не сохранена', page)
         self.assertIn('Сохранить при ошибке', page)
 
-    # ---- документы ----
-
-    def import_text(self, text, **extra):
-        return self.post('doc-a', '/patients/D01/imports', {'request_key': secrets.token_hex(16), 'source_text': text, **extra})
-
-    def test_import_shows_candidates_as_unchecked_with_exact_quote(self):
-        self.assertEqual(303, self.import_text('35 лет. F41.1. Беременность отрицает.').status_code)
-        page = self.page('/patients/D01/imports')
-        self.assertIn('Найденное — кандидаты, а не факты', page)
-        self.assertIn('Не сверено', page)
-        self.assertIn('Исходный текст целиком', page)
-        self.assertIn('F41.1', page)
-        self.assertIn('Не найдено в тексте', page)
-        for label in ('Подтвердить', 'Исправить', 'Отклонить'):
-            self.assertIn('>%s</button>' % label, page)
-
-    def test_review_changes_candidate_state_and_is_logged(self):
-        self.import_text('35 лет. F41.1.')
-        item = extraction.history(self.db, 'D01')[0]
-        c = item['result']['candidates'][0]
-        form = {'request_key': secrets.token_hex(16), 'candidate_id': c['id'], 'field': c['field'], 'assertion': c['assertion'],
-                'value': extraction.canonical(c['value']), 'quote': c['quote'], 'reason': 'Сверено на приёме', 'disposition': 'accept'}
-        self.assertEqual(303, self.post('doc-a', '/patients/D01/imports/%s/review' % item['id'], form).status_code)
-        page = self.page('/patients/D01/imports')
-        self.assertIn('Сверено врачом: подтверждено', page)
-        self.assertIn('Сверено на приёме', page)
-        self.assertIn('Журнал сверки', page)
-
-    def test_parse_errors_are_plain_and_keep_the_typed_text(self):
-        cases = [({'source_text': ''}, 'Нужен непустой текст'),
-                 ({'source_text': 'a\x00b'}, 'управляющие символы'),
-                 ({'source_text': '9' * 150}, 'длиннее 100 цифр')]
-        for extra, expected in cases:
-            response = self.import_text(extra['source_text'])
-            self.assertEqual(400, response.status_code)
-            self.assertIn(expected, response.get_data(as_text=True))
-            self.assertIn('Документ не загружен', response.get_data(as_text=True))
-        keep = self.import_text('Текст остаётся ' + '9' * 150)
-        self.assertEqual(400, keep.status_code)
-        self.assertIn('Текст остаётся', keep.get_data(as_text=True))
-        both = self.post('doc-a', '/patients/D01/imports', {'request_key': secrets.token_hex(16), 'source_text': 'Тест',
-                                                          'file': (io.BytesIO('Файл'.encode()), 'a.txt')})
-        self.assertEqual(400, both.status_code)
-        self.assertIn('Выберите один источник', both.get_data(as_text=True))
-        pdf = self.post('doc-a', '/patients/D01/imports', {'request_key': secrets.token_hex(16), 'source_text': '',
-                                                         'file': (io.BytesIO(b'%PDF-'), 'a.pdf')})
-        self.assertEqual(400, pdf.status_code)
-        self.assertIn('PDF, DOCX, сканы и архивы не поддерживаются', pdf.get_data(as_text=True))
-        self.assertEqual(0, self.db.execute('SELECT count(*) FROM text_imports').fetchone()[0])
-
-    def test_refused_review_comes_back_to_the_candidate_with_typed_values(self):
-        self.import_text('35 лет. F41.1.')
-        item = extraction.history(self.db, 'D01')[0]
-        c = item['result']['candidates'][0]
-        form = {'request_key': secrets.token_hex(16), 'candidate_id': c['id'], 'field': c['field'], 'assertion': c['assertion'],
-                'value': extraction.canonical(c['value']), 'quote': 'выдуманная цитата', 'reason': 'Мой текст причины', 'disposition': 'correct'}
-        response = self.post('doc-a', '/patients/D01/imports/%s/review' % item['id'], form)
-        self.assertEqual(400, response.status_code)
-        text = response.get_data(as_text=True)
-        self.assertIn('Сверка не сохранена', text)
-        self.assertIn('Мой текст причины', text)
-        self.assertIn('выдуманная цитата', text)
-        self.assertIn('id="review-error"', text)
-        self.assertEqual(0, self.db.execute('SELECT count(*) FROM extraction_reviews').fetchone()[0])
+    # ---- общий отказ на слишком большой запрос ----
 
     def test_oversized_request_shows_a_page_not_a_blank_screen(self):
-        response = self.import_text('я' * 40000)
+        response = self.post('doc-a', '/patients/D01/decisions', self.values(content='я' * 40000))
         self.assertEqual(413, response.status_code)
         self.assertIn('Ввод слишком большой', response.get_data(as_text=True))
-
-    def test_long_document_and_markup_render_safely(self):
-        text = ('Пациент 40 лет, диагноз F41.1, принимает Авиандр 20 мг. ' * 250) + '<img src=x onerror=alert(1)>'
-        self.assertLessEqual(len(text.encode()), extraction.MAX_BYTES)
-        self.assertEqual(303, self.import_text(text).status_code)
-        page = self.page('/patients/D01/imports')
-        self.assertNotIn('<img src=x', page)
-        self.assertIn('&lt;img src=x', page)
-        self.assertIn('class="source"', page)
-
-    def test_large_document_opens_one_review_form_at_a_time(self):
-        self.import_text('Пациент 40 лет, диагноз F41.1. ' * 30)
-        item = extraction.history(self.db, 'D01')[0]
-        self.assertGreater(len(item['result']['candidates']), 25)
-        page = self.page('/patients/D01/imports')
-        self.assertIn('Кандидатов много', page)
-        self.assertIn('?review=%s:0#' % item['id'], page)
-        self.assertEqual(0, page.count('name="disposition" value="accept"'))
-        opened = self.page('/patients/D01/imports?review=%s:0' % item['id'])
-        self.assertEqual(1, opened.count('name="disposition" value="accept"'))
-        self.assertIn('review-open', opened)
-        self.assertIn('Закрыть форму', opened)
-        self.page('/patients/D01/imports?review=' + 'x' * 500)
-        self.page('/patients/D01/imports?review=%s:999' % item['id'])
-
-    def test_redirects_return_to_the_document(self):
-        response = self.import_text('35 лет.')
-        item = extraction.history(self.db, 'D01')[0]
-        self.assertTrue(response.location.endswith('/patients/D01/imports#import-' + item['id']))
-
-    def test_new_import_each_time_is_listed_and_empty_state_is_named(self):
-        self.assertIn('Документов нет', self.page('/patients/D01/imports'))
-        self.import_text('Первый документ 30 лет.')
-        self.import_text('Второй документ 31 год.')
-        self.assertEqual(2, self.page('/patients/D01/imports').count('class="plan import"'))
-
 
 if __name__ == '__main__':
     unittest.main()

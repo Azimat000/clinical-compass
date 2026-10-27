@@ -158,7 +158,7 @@ class ClinicRosterTests(unittest.TestCase):
                     continue
                 self.assertIn(p['name'], page)
                 for route in ('/demo/{id}', '/patients/{id}/first-visits', '/patients/{id}/decisions',
-                              '/patients/{id}/imports', '/patients/{id}/communication'):
+                              '/patients/{id}/communication'):
                     response = client.get(route.format(id=p['id']))
                     self.assertEqual(200, response.status_code, (p['id'], route))
                     self.assertIn('synthetic; dates=simulated', response.text)
@@ -170,7 +170,7 @@ class ClinicRosterTests(unittest.TestCase):
                 self.assertEqual(200, client.get('/patients/' + p['id'] + suffix).status_code)
             other = 'P202' if p['id'] == 'P201' else 'P201'
             self.assertEqual(404, client.get('/demo/' + other).status_code)
-            self.assertEqual(403, client.get('/patients/' + p['id'] + '/imports').status_code)
+            self.assertEqual(404, client.get('/patients/' + p['id'] + '/imports').status_code)
 
     def test_existing_output_never_overwritten(self):
         before = self.target.read_bytes()

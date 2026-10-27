@@ -138,7 +138,7 @@ class UiFoundationTests(unittest.TestCase):
         design = (ROOT / 'DESIGN.md').read_text()
         front = design.split('---')[1]
         colors = re.findall(r'^  ([a-z-]+): "(#[0-9a-f]{6})"$', front.split('typography:')[0], re.M)
-        self.assertGreaterEqual(len(colors), 16)
+        self.assertGreaterEqual(len(colors), 12)  # UI09 palette: 12 named colors
         css = (UI / 'static/app.css').read_text()
         for name, value in colors:
             self.assertIn('--%s: %s;' % (name, value), css, name)

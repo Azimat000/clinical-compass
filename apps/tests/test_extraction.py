@@ -7,8 +7,10 @@ import unittest
 from unittest.mock import patch
 from test_records import RecordsTests
 from apps.compass import extraction, decisions, access
-from apps.compass.web import create_app
+from werkzeug.datastructures import FileStorage
 from test_access import csrf
+
+DOCTOR={'id':'doc-a','role':'doctor'}
 
 
 class ExtractionTests(unittest.TestCase):
@@ -32,37 +34,38 @@ class ExtractionTests(unittest.TestCase):
         self.assertIn('medication_allergy',result['unextracted_fields'])
         self.assertEqual([],extraction.extract('Произвольная история без распознанных слов')['candidates'])
 
+    # UI11: the documents screen and its web endpoints are gone; the stored imports and
+    # their review stay as internal history, so the module keeps its own guarantees.
+
+    def save(self, text='35 лет. F41.1. Авиандр 10 мг.', key=None, user=None, pid='D01'):
+        return extraction.save_import(self.db, user or DOCTOR, pid, text, key or secrets.token_hex(16))
+
     def test_import_retries_review_correction_add_reject_persistence_and_no_actions(self):
         text='35 лет. F41.1. <script>bad</script>'
         key=secrets.token_hex(16)
         initial_outbox=self.db.execute('SELECT count(*) FROM outbox_events').fetchone()[0]
         before=decisions.snapshot(self.db,'D01',self.db.execute('SELECT id FROM care_relationships').fetchone()[0])
-        self.assertEqual(303,self.post_import(source_text=text,request_key=key).status_code)
-        self.assertEqual(303,self.post_import(source_text=text,request_key=key).status_code)
-        self.assertEqual(409,self.post_import(source_text=text+'x',request_key=key).status_code)
+        first=self.save(text,key)
+        self.assertEqual(first,self.save(text,key))
+        with self.assertRaises(extraction.ExtractionError) as error:
+            self.save(text+'x',key)
+        self.assertEqual(409,error.exception.status)
         item=extraction.history(self.db,'D01')[0]
         c=item['result']['candidates'][0]
-        form={'csrf':csrf(self.clients['doc-a']),'request_key':secrets.token_hex(16),
-              'candidate_id':c['id'],'field':c['field'],'assertion':c['assertion'],
+        form={'request_key':secrets.token_hex(16),'candidate_id':c['id'],'field':c['field'],'assertion':c['assertion'],
               'value':extraction.canonical(c['value']),'quote':c['quote'],'reason':'Сверено с вымышленным источником','disposition':'accept'}
-        path=f"/patients/D01/imports/{item['id']}/review"
-        client=self.clients['doc-a']
-        self.assertEqual(303,client.post(path,data=form).status_code)
-        self.assertEqual(303,client.post(path,data=form).status_code)
-        self.assertEqual(409,client.post(path,data={**form,'reason':'другое'}).status_code)
-        self.assertEqual(400,client.post(path,data={**form,'request_key':secrets.token_hex(16),'value':'70'}).status_code)
-        self.assertEqual(400,client.post(path,data={**form,'quote':'выдуманное основание'}).status_code)
+        extraction.review(self.db,DOCTOR,'D01',item['id'],form)
+        extraction.review(self.db,DOCTOR,'D01',item['id'],form)
+        for changed,status in (({'reason':'другое'},409),({'request_key':secrets.token_hex(16),'value':'70'},400),
+                               ({'request_key':secrets.token_hex(16),'quote':'выдуманное основание'},400)):
+            with self.assertRaises(extraction.ExtractionError) as error:
+                extraction.review(self.db,DOCTOR,'D01',item['id'],{**form,**changed})
+            self.assertEqual(status,error.exception.status)
         for kind in ('correct','reject','add'):
-            self.assertEqual(303,client.post(path,data={**form,'request_key':secrets.token_hex(16),'disposition':kind,
-                             'candidate_id':'' if kind=='add' else c['id'],'value':'требует уточнения'}).status_code)
+            extraction.review(self.db,DOCTOR,'D01',item['id'],{**form,'request_key':secrets.token_hex(16),'disposition':kind,
+                              'candidate_id':'' if kind=='add' else c['id'],'value':'требует уточнения'})
         self.assertEqual(4,self.db.execute('SELECT count(*) FROM extraction_reviews').fetchone()[0])
         self.assertNotEqual(before,decisions.snapshot(self.db,'D01',item['relationship_id']))
-        fresh=create_app(self.path).test_client()
-        fresh.set_cookie(access.COOKIE,client.get_cookie(access.COOKIE).value)
-        page=fresh.get('/patients/D01/imports')
-        self.assertEqual(200,page.status_code)
-        self.assertIn('&lt;script&gt;',page.get_data(as_text=True))
-        self.assertNotIn('<script>bad',page.get_data(as_text=True))
         for table in ('proposals','care_actions','clinical_entries','clinical_contexts','critical_events'):
             self.assertEqual(0,self.db.execute('SELECT count(*) FROM '+table).fetchone()[0],table)
         self.assertEqual(initial_outbox,self.db.execute('SELECT count(*) FROM outbox_events').fetchone()[0])
@@ -81,34 +84,34 @@ class ExtractionTests(unittest.TestCase):
 
     def test_unsupported_input_limits_and_atomic_rollback(self):
         for value in ('','a\x00b','x'*24001,'9'*5000+' раза в день'):
-            self.assertEqual(400,self.post_import(source_text=value).status_code)
-        self.assertEqual(413,self.post_import(source_text='я'*12001).status_code)
+            with self.assertRaises(extraction.ExtractionError):
+                self.save(value)
         for filename,raw in [('a.pdf',b'%PDF-'),('a.txt',b'\xff'),('a.txt',b'x'*24001),('a.txt',b'PK\x00\x00')]:
-            self.assertEqual(400,self.post_import(source_text='',file=(io.BytesIO(raw),filename)).status_code)
-        self.assertEqual(303,self.post_import(source_text='',file=(io.BytesIO('45 лет'.encode()),'a.txt')).status_code)
-        self.assertEqual(400,self.post_import(file=(io.BytesIO(b'text'),'a.txt')).status_code)
+            with self.assertRaises(extraction.ExtractionError):
+                extraction.upload_text(FileStorage(io.BytesIO(raw),filename))
+        self.assertEqual('45 лет',extraction.upload_text(FileStorage(io.BytesIO('45 лет'.encode()),'a.txt')))
+        self.assertEqual(0,self.db.execute('SELECT count(*) FROM text_imports').fetchone()[0])
         with patch.object(access,'audit',side_effect=RuntimeError('synthetic failure')):
             with self.assertRaises(RuntimeError):
-                extraction.save_import(self.db,{'id':'doc-a','role':'doctor'},'D01','50 лет',secrets.token_hex(16))
-        self.assertEqual(1,self.db.execute('SELECT count(*) FROM text_imports').fetchone()[0])
+                self.save('50 лет')
+        self.assertEqual(0,self.db.execute('SELECT count(*) FROM text_imports').fetchone()[0])
 
     def test_new_import_and_review_require_rereview_of_pending_decision(self):
         from test_decisions import DecisionTests
-        doctor={'id':'doc-a','role':'doctor'}
         def draft():
-            return decisions.draft(self.db,doctor,'D01',DecisionTests.values(None))
+            return decisions.draft(self.db,DOCTOR,'D01',DecisionTests.values(None))
         def confirm(pid):
             version=self.db.execute('SELECT version FROM proposals WHERE id=?',(pid,)).fetchone()[0]
-            return decisions.confirm(self.db,doctor,'D01',pid,{'version':str(version),'decision':'approved','reviewed':'yes','rationale':'Synthetic'})
+            return decisions.confirm(self.db,DOCTOR,'D01',pid,{'version':str(version),'decision':'approved','reviewed':'yes','rationale':'Synthetic'})
         pending=draft()
-        self.post_import()
+        self.save()
         with self.assertRaises(decisions.DecisionError) as error:
             confirm(pending)
         self.assertEqual(409,error.exception.status)
         pending=draft()
         item=extraction.history(self.db,'D01')[0]
         c=item['result']['candidates'][0]
-        extraction.review(self.db,doctor,'D01',item['id'],{'request_key':secrets.token_hex(16),
+        extraction.review(self.db,DOCTOR,'D01',item['id'],{'request_key':secrets.token_hex(16),
             'candidate_id':c['id'],'field':c['field'],'assertion':'unknown','value':'needs check',
             'quote':c['quote'],'reason':'Synthetic','disposition':'correct'})
         with self.assertRaises(decisions.DecisionError) as error:
@@ -117,16 +120,19 @@ class ExtractionTests(unittest.TestCase):
         confirm(draft())
         self.assertEqual(1,self.db.execute('SELECT count(*) FROM care_actions').fetchone()[0])
 
-    def test_access_csrf_ended_pair_and_other_import_review(self):
-        for uid,pid,expected in [('pat-a','D01',403),('doc-b','D01',404),('doc-a','D02',404)]:
-            self.assertEqual(expected,self.post_import(uid,pid).status_code)
-            self.assertEqual(expected,self.clients[uid].get(f'/patients/{pid}/imports').status_code)
-        self.assertEqual(403,self.clients['doc-a'].post('/patients/D01/imports',data={'source_text':'25 лет'}).status_code)
-        self.assertEqual(303,self.post_import().status_code)
-        iid=extraction.history(self.db,'D01')[0]['id']
-        self.assertEqual(403,self.clients['pat-a'].post(f'/patients/D01/imports/{iid}/review',data={'csrf':csrf(self.clients['pat-a'])}).status_code)
+    def test_access_ended_pair_and_no_web_entry(self):
+        for user,pid,expected in [({'id':'pat-a','role':'patient'},'D01',403),({'id':'doc-b','role':'doctor'},'D01',404),(DOCTOR,'D02',404)]:
+            with self.assertRaises(decisions.DecisionError) as error:
+                self.save(user=user,pid=pid)
+            self.assertEqual(expected,error.exception.status)
+        for uid in ('doc-a','pat-a'):
+            client=self.clients[uid]
+            self.assertEqual(404,client.get('/patients/D01/imports').status_code)
+            self.assertEqual(404,client.post('/patients/D01/imports',data={'csrf':csrf(client),'source_text':'25 лет'}).status_code)
         self.db.execute("UPDATE care_relationships SET ends_at='2026-10-18'")
-        self.assertEqual(404,self.post_import().status_code)
-
+        with self.assertRaises(decisions.DecisionError) as error:
+            self.save()
+        self.assertEqual(404,error.exception.status)
+        self.assertEqual(0,self.db.execute('SELECT count(*) FROM text_imports').fetchone()[0])
 
 del RecordsTests

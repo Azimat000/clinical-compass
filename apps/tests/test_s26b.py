@@ -88,9 +88,10 @@ class DoctorWorkspaceTests(unittest.TestCase):
         for link in ['#records', '#visit-history', '#assessments', '#link']:
             self.assertIn(link, nav)
             self.assertIn('id="%s"' % link[1:], page)
-        # Решения, приём, сообщения (UI06) и документы есть в строке разделов пациента.
-        for path in ['decisions', 'first-visits', 'communication', 'imports']:
+        # Решения, приём и сообщения (UI06) есть в строке разделов пациента; документы убраны в UI11.
+        for path in ['decisions', 'first-visits', 'communication']:
             self.assertIn('href="/patients/D01/' + path + '"', page)
+        self.assertNotIn('href="/patients/D01/imports"', page)
         self.assertNotIn('href="/patients/D01/follow-up"', page)
 
     def test_patient_role_keeps_own_card_without_doctor_header(self):
@@ -98,7 +99,7 @@ class DoctorWorkspaceTests(unittest.TestCase):
         page = patient.get('/demo/D01').text
         self.assertNotIn('Разделы карточки', page)
         self.assertNotIn('Сводка к приёму', page)
-        self.assertEqual(403, patient.get('/patients/D01/imports').status_code)
+        self.assertEqual(404, patient.get('/patients/D01/imports').status_code)
         self.assertEqual(403, patient.get('/patients/D01/follow-up').status_code)
 
     def test_legend_separates_known_unknown_and_conflicting_by_word(self):

@@ -27,12 +27,12 @@ class InterfaceRemovedTests(unittest.TestCase):
                            headers={'Accept': 'application/json'})
 
     def test_only_rebuilt_templates_and_new_assets_are_served(self):
-        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up, UI05 decisions, first visit and imports, UI06 messages (notification and critical screens subsequently removed in S39/S31), UI06B the patient's plan; the rest of the S29 assets stay removed.
+        # UI02 rebuilt login/result, UI03 the patient cabinet, UI04 the doctor's list, card and follow-up, UI05 decisions and first visit (imports removed in UI11), UI06 messages (notification and critical screens subsequently removed in S39/S31), UI06B the patient's plan; the rest of the S29 assets stay removed.
         root = Path(__file__).resolve().parents[1] / 'compass'
         self.assertEqual({'base.html', 'components.html', 'components_gallery.html', 'dev_toggle.html', 'login.html', 'result.html',
                           'patient_base.html', 'patient.html', 'assessment_form.html', 'assessment_receipt.html', 'invitation.html',
                           'doctor_base.html', 'dashboard.html', 'invitation_content.html', 'invitation_manage.html', 'doctor_patient.html',
-                          'decisions.html', 'plan_outcomes.html', 'patient_plan_tasks.html', 'first_visit.html', 'imports.html',
+                          'decisions.html', 'plan_outcomes.html', 'patient_plan_tasks.html', 'first_visit.html',
                           'communication.html', 'plan.html', 'visit_records.html', 'medication_components.html', 'medication_editor.html', 'assessment_charts.html'},
                          {p.name for p in (root / 'templates').iterdir()})
         for name in ('interface.js', 'communication.js', 'critical.js', 'first_visit.js', 'fonts/PTSerif-Bold.ttf'):
@@ -63,7 +63,7 @@ class InterfaceRemovedTests(unittest.TestCase):
 
     def test_doctor_screens_are_pages_for_browsers_and_stay_technical_for_json_clients(self):
         for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/first-visits',
-                     '/patients/D01/decisions', '/patients/D01/imports', '/patients/D01/communication',):
+                     '/patients/D01/decisions', '/patients/D01/communication',):
             with self.subTest(path=path):
                 page = self.clients['doc-a'].get(path)
                 self.assertEqual(200, page.status_code)
@@ -93,7 +93,7 @@ class InterfaceRemovedTests(unittest.TestCase):
 
     def test_existing_apis_and_foreign_access_remain_protected(self):
         for who in ('doc-a', 'pat-a'):
-            for suffix in ('', '/documents', '/reports', '/history', '/assessments', '/decisions'):
+            for suffix in ('', '/reports', '/history', '/assessments', '/decisions'):
                 path = '/api/patients/D01' + suffix
                 self.assertEqual(200, self.clients[who].get(path).status_code, path)
                 self.assertEqual(401, self.app.test_client().get(path).status_code, path)

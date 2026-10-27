@@ -52,11 +52,11 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
                 self.assertIn(item['recorded_at'],page)
                 for key in ('action_draft','age_basis'):
                     self.assertIn(escape(item['payload'][key]),page)
-                documents=self.clients['doc-a'].get('/patients/FV01/imports').text
+                # UI11: document notes stay stored with every revision but are not shown or linked.
                 for key in ('documented_facts','document_basis'):
-                    self.assertIn(escape(item['payload'][key]),documents)
+                    self.assertTrue(item['payload'][key])
                     self.assertNotIn(escape(item['payload'][key]),page)
-                self.assertIn('#visit-document-'+item['id'],page)
+                self.assertNotIn('#visit-document-'+item['id'],page)
                 self.assertIn(item['payload']['age']['detail'],page)
                 for field in item['payload']['fields'].values():
                     self.assertIn(escape(field['text']),page)
@@ -86,7 +86,7 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
         draft=self.post(self.values(observed_on=records.today().isoformat(), documented_facts='CURRENT-DRAFT',document_basis='SOURCE'))
         draft_page=self.clients['doc-a'].get(draft.location).text
         self.assertNotIn('CURRENT-DRAFT',draft_page)
-        self.assertIn('CURRENT-DRAFT',self.clients['doc-a'].get('/patients/FV01/imports').text)
+        self.assertEqual('CURRENT-DRAFT',self.rows()[0]['payload']['documented_facts'])
         self.assertNotIn('OLD-DOCUMENT',draft_page)
         self.assertNotIn('NEW-DOCUMENT',draft_page)
 
@@ -95,9 +95,9 @@ class VisitHistorySingleHomeTests(unittest.TestCase):
         today=records.today().isoformat()
         page=self.clients['doc-a'].get('/demo/FV01',query_string={'start':today,'end':today}).text
         self.assertEqual(1,page.count('id="visit-'+visit+'"'))
-        documents=self.clients['doc-a'].get('/patients/FV01/imports').text
-        self.assertIn('OLD-DOCUMENT',documents)
-        self.assertIn('NEW-DOCUMENT',documents)
+        stored=[r['payload']['documented_facts'] for r in self.rows()]
+        self.assertIn('OLD-DOCUMENT',stored)
+        self.assertIn('NEW-DOCUMENT',stored)
         self.assertNotIn('OLD-DOCUMENT',page)
         self.assertNotIn('NEW-DOCUMENT',page)
         data=follow_up.view(self.db,self.doctor,'FV01',{'start':today,'end':today},include_plan=False)

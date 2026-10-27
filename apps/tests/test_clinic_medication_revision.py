@@ -141,7 +141,7 @@ class ClinicMedicationRevisionTests(unittest.TestCase):
     def test_same_logins_pages_roles_and_pending_forms_work(self):
         for uid,pid in (('e.orlova','P203'),('a.mironov','P207')):
             client=self.login(uid)
-            for route in ('/demo/'+pid,'/patients/'+pid+'/decisions','/patients/'+pid+'/communication','/patients/'+pid+'/imports'):
+            for route in ('/demo/'+pid,'/patients/'+pid+'/decisions','/patients/'+pid+'/communication'):
                 response=client.get(route)
                 self.assertEqual(200,response.status_code,route)
                 self.assertNotIn('Препарат А',response.text);self.assertNotIn('Препарат Б',response.text)

@@ -68,7 +68,7 @@ class AccessTests(unittest.TestCase):
         c = self.app.test_client()
         for path in ('/', '/demo/D01'):
             self.assertEqual(302, c.get(path).status_code)
-        for path in ('/api/patients/D01', '/api/patients/D01/documents', '/api/patients/D01/reports', '/api/documents/doc1'):
+        for path in ('/api/patients/D01', '/api/patients/D01/reports'):
             self.assertEqual(401, c.get(path).status_code)
         self.assertEqual(401, c.post('/api/patients/D01/actions').status_code)
         self.assertEqual('ok', c.get('/healthz').json['status'])
@@ -121,19 +121,18 @@ class AccessTests(unittest.TestCase):
         self.link()
         self.link('doc-b', 'pat-b', 'D02')
         for pid in ('D01', 'D02'):
-            self.db.execute('INSERT INTO documents VALUES(?,?,?, ?,?,?,?,1)', ('doc-' + pid, pid, 'txt', 'hash', '/private/' + pid, 'synthetic', now()))
             self.db.execute('INSERT INTO self_reports VALUES(?,?,?,?,?,?,1)', ('report-' + pid, pid, now(), now(), '{"marker":"private-' + pid + '"}', 'key-' + pid))
         for uid in ('doc-a', 'doc-b', 'pat-a', 'pat-b'):
             own = 'D01' if uid.endswith('a') else 'D02'
             other = 'D02' if own == 'D01' else 'D01'
             c = self.clients[uid]
-            for suffix in ('', '/documents', '/reports'):
+            for suffix in ('', '/reports'):
                 self.assertEqual(200, c.get('/api/patients/' + own + suffix).status_code)
                 denied = c.get('/api/patients/' + other + suffix)
                 self.assertEqual(404, denied.status_code)
                 self.assertNotIn('private-', denied.get_data(as_text=True))
-            self.assertEqual(409, c.get('/api/documents/doc-' + own).status_code)
-            self.assertEqual(404, c.get('/api/documents/doc-' + other).status_code)
+            # UI11: document APIs are gone for everyone, own patient included.
+            self.assertEqual(404, c.get('/api/patients/' + own + '/documents').status_code)
             own_action = self.post(uid, '/api/patients/' + own + '/actions', {'role': 'doctor', 'doctor_id': 'doc-a'})
             self.assertEqual(409 if uid.startswith('doc') else 403, own_action.status_code)
             self.assertEqual(404 if uid.startswith('doc') else 403, self.post(uid, '/api/patients/' + other + '/actions').status_code)

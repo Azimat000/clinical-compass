@@ -271,7 +271,7 @@ class InboxTests(unittest.TestCase):
         eid = self.critical()
         doctor = self.clients_ready()['doc-a']
         for path in ('/', '/notifications', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/decisions',
-                     '/patients/D01/first-visits', '/patients/D01/imports', URL):
+                     '/patients/D01/first-visits', URL):
             page = doctor.get(path).text
             for removed in ('Критические события', 'Критический сигнал', 'href="/critical',
                             'alert-band', 'receipt.js', 'name="reaction"', 'data-receipt-url', eid):
@@ -313,7 +313,7 @@ class InboxTests(unittest.TestCase):
             self.assertEqual(302, response.status_code)
             self.assertEqual('/', response.headers['Location'])
         for path in ('/', '/demo/D01', '/patients/D01/follow-up', '/patients/D01/decisions',
-                     '/patients/D01/first-visits', '/patients/D01/imports', URL, '/invitations/new'):
+                     '/patients/D01/first-visits', URL, '/invitations/new'):
             response = doctor.get(path)
             self.assertEqual(200, response.status_code, path)
             for removed in ('href="/notifications', 'Отметить: просмотрено', 'Отметить: принято',

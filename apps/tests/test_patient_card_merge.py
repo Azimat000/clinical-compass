@@ -44,7 +44,7 @@ class PatientCardMergeTests(unittest.TestCase):
             for anchor in re.findall(r'href="#([^"]+)"', html):
                 self.assertIn(anchor, ids, anchor)
             nav = re.search(r'<nav[^>]*class="jump patient-nav".*?</nav>', html, re.S).group()
-            self.assertEqual(5, nav.count('<a '))
+            self.assertEqual(4, nav.count('<a '))  # UI11: «Документы» removed
             self.assertEqual(1, nav.count('aria-current="page"'))
         self.assertEqual(before, self.clinical_state())
 

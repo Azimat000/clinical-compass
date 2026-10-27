@@ -14,6 +14,27 @@ from apps.tests import test_backend_diagnosis_codec as mechanical
 from apps.tests.diagnosis_fixtures import named_responses
 
 
+COMPACT={'present':'p','denied':'n','unknown':'u'}
+
+
+def compact(value):
+    """Packet answers list facts as {id,p,n,u}: references for present, denied and unknown."""
+    value=deepcopy(value)
+    for i,f in enumerate(value['facts']):
+        if 'p' in f:continue
+        lists={'p':[],'n':[],'u':[]}
+        if f['state']=='conflicting':lists['p']=list(f['refs'])
+        else:lists[COMPACT[f['state']]]=list(f['refs'])
+        value['facts'][i]={'id':f['id'],**lists}
+    return value
+
+
+def mark(fact,state,refs=None):
+    """Move a compact fact to one state; keeps its references unless new ones are given."""
+    refs=list(fact['p']+fact['n']+fact['u']) if refs is None else refs
+    fact.update(p=[],n=[],u=[]);fact[COMPACT[state]]=refs
+
+
 class LocalModel:
     def __init__(self,responses,fail_at=None):self.responses=responses;self.calls=[];self.fail_at=fail_at
     def generate(self,data,schema,**kw):
@@ -23,7 +44,7 @@ class LocalModel:
         value=deepcopy(self.responses[data['branch']]);allowed={uid for group in data['groups'] for uid in group['unit_ids']}
         value['quotes']=[q for q in value['quotes'] if q['unit_id'] in allowed];ids={q['id'] for q in value['quotes']}
         for f in value['facts']:
-            if set(f['refs'])-ids:f.update(state='unknown',refs=[])
+            if set(f['p']+f['n']+f['u'])-ids:f.update(p=[],n=[],u=[])
         d=value['duration']
         if set(d['refs'])-ids:d.update(state='unknown',value=None,refs=[])
         return {'value':value,'metadata':{'test_double':True}}
@@ -43,7 +64,7 @@ class PacketExecutionTests(unittest.TestCase):
         run=analyses.create(self.f.db,self.f.user,'D01',{'contract_version':'1.0','operation':operation,'request_key':secrets.token_hex(16)})
         work=jobs.claim(self.f.db,'risk' if operation=='risk' else 'generation')
         self.assertEqual(run['run_id'],work['run']['id'])
-        responses=named_responses(self.mechanics.positive())
+        responses={k:compact(v) for k,v in named_responses(self.mechanics.positive()).items()}
         units=risk.prepare_snapshot(work['snapshot'])
         for value in responses.values():
             for q in value['quotes']:q['unit_id']=next(u['unit_id'] for u in units if u['text']==q['quote'])
@@ -120,7 +141,7 @@ class PacketExecutionTests(unittest.TestCase):
         q1=raw['quotes'][0];other=next(u for u in units if u['unit_id']!=q1['unit_id'] and pipeline.eligible(u,snapshot['day']))
         second=deepcopy(raw);second['quotes'][0].update(unit_id=other['unit_id'],quote=other['text'])
         # Pure merge mechanics; semantic correctness of these fake claims is not asserted.
-        fid=raw['facts'][0]['id'];raw['facts'][0].update(state='present',refs=[q1['id']]);second['facts'][0].update(state='denied',refs=[second['quotes'][0]['id']])
+        fid=raw['facts'][0]['id'];mark(raw['facts'][0],'present',[q1['id']]);mark(second['facts'][0],'denied',[second['quotes'][0]['id']])
         merged=pipeline.merge_branch(snapshot,'depressive_episode',[{'response':{'value':raw}},{'response':{'value':second}}])
         self.assertEqual('conflicting',next(f for f in merged['facts'] if f['id']==fid)['state'])
         old=deepcopy(snapshot)
@@ -149,9 +170,9 @@ class PacketExecutionTests(unittest.TestCase):
     def test_unknown_packet_does_not_erase_a_positive_safety_assertion(self):
         _,work,adapter,_=self.setup_work()
         positive=deepcopy(adapter.responses['depressive_episode'])
-        fact=next(f for f in positive['facts'] if f['id']=='mania_hypomania');fact.update(state='present')
+        fact=next(f for f in positive['facts'] if f['id']=='mania_hypomania');mark(fact,'present')
         unknown=deepcopy(positive)
-        next(f for f in unknown['facts'] if f['id']=='mania_hypomania').update(state='unknown')
+        mark(next(f for f in unknown['facts'] if f['id']=='mania_hypomania'),'unknown')
         merged=pipeline.merge_branch(work['snapshot'],'depressive_episode',[{'response':{'value':positive}},{'response':{'value':unknown}}])
         self.assertEqual('present',next(f for f in merged['facts'] if f['id']=='mania_hypomania')['state'])
 

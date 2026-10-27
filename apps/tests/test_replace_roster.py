@@ -151,7 +151,7 @@ class ReplaceRosterTests(unittest.TestCase):
                     continue
                 self.assertIn(p['name'], dashboard)
                 for route in ('/demo/{id}', '/patients/{id}/follow-up', '/patients/{id}/first-visits',
-                              '/patients/{id}/decisions', '/patients/{id}/communication', '/patients/{id}/imports'):
+                              '/patients/{id}/decisions', '/patients/{id}/communication'):
                     response = client.get(route.format(id=p['id']))
                     self.assertEqual(200, response.status_code, route)
                     text = ' '.join(VisibleText(response.text).parts)

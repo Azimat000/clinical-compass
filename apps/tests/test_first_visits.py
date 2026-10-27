@@ -94,9 +94,10 @@ class FirstVisitTests(unittest.TestCase):
         for label in ('Жалобы и сведения с источниками','Что уточнить',
                       'Проект действия'):
             self.assertIn(label,page)
-        documents=self.clients['doc-a'].get('/patients/FV01/imports').text
-        self.assertIn('Диагноз только из синтетического документа',documents)
-        self.assertIn('Врач N, 18.10.2026',documents)
+        # UI11: document notes stay in the stored version, but no screen offers them any more.
+        self.assertEqual('Диагноз только из синтетического документа',p['documented_facts'])
+        self.assertEqual('Врач N, 18.10.2026',p['document_basis'])
+        self.assertEqual(404,self.clients['doc-a'].get('/patients/FV01/imports').status_code)
         editor=self.clients['doc-a'].get('/patients/FV01/first-visits').text
         for label in ('Анкеты в карточке','План и решения','Короткая оценка пока недоступна'):
             self.assertIn(label,editor)

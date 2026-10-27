@@ -135,7 +135,9 @@ class FollowUpTests(unittest.TestCase):
         self.assertEqual('unknown',self.view()['tasks'][0]['outcome'])
         self.assertEqual([],self.view()['tasks'][0]['history'])
         html=self.clients['doc-a'].get('/patients/D01/decisions').text
-        self.assertIn('Отметок нет. Результат неизвестен.',html)
+        # UI12: no answer yet and no completion mark are shown as such, never as done.
+        self.assertIn('Пациент пока не ответил.',html)
+        self.assertIn('Выполнение не отмечено',html)
         self.assertNotIn('ONLY-DRAFT',self.clients['doc-a'].get(self.summary).text)
 
     def test_assessments_on_distinct_days_keep_their_own_period(self):

@@ -44,7 +44,7 @@ class PlanDeduplicationTests(unittest.TestCase):
             self.assertNotIn('#fu-plan', jump)
         page = self.clients['doc-a'].get('/patients/D01/decisions').text
         for value in ('UNIQUE-CONFIRMED-PLAN', 'UNIQUE-TASK', 'LATEST-REASON', 'OLD-REASON',
-                      'Приём препаратов', 'Выполнение плана', 'Предыдущие отметки (1)', '/demo/D01#entry-' + report):
+                      'Приём препаратов', 'Ответы пациента по плану', 'Предыдущие отметки (1)', '/demo/D01#entry-' + report):
             self.assertIn(value, page)
         outcomes = re.search(r'<section[^>]*id="fu-plan".*?</section>', page, re.S).group()
         self.assertNotIn('UNIQUE-CONFIRMED-PLAN', outcomes)
@@ -60,7 +60,8 @@ class PlanDeduplicationTests(unittest.TestCase):
         self.assertIn('/patients/D01/decisions#fu-plan', page)
         plan = self.clients['doc-a'].get('/patients/D01/decisions').text
         self.assertIn('UNKNOWN-TASK', plan)
-        self.assertIn('Отметок нет. Результат неизвестен.', plan)
+        self.assertIn('Пациент пока не ответил.', plan)
+        self.assertIn('Выполнение не отмечено', plan)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
 
     def test_legacy_medication_bookmarks_and_patient_boundaries(self):
