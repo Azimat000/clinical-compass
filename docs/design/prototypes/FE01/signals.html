@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="compass-data-origin" content="synthetic; dates=simulated; clinical-review=unverified">
+<meta name="theme-color" content="#1a1f23">
+<title>Пациенты · Клинический компас</title>
+<link rel="icon" href="/static/icons/mark.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/PTSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/support.css" data-fe01-added>
+</head>
+<body><div class="fe01-tools" data-fe01-added><p><b>Прототип FE01.</b> Новые блоки — вымышленные примеры, не результаты анализа. Запись в базу отключена.</p><p><a href="/signals.html">Сигналы</a><a href="/diagnosis.html">Диагноз</a><a href="/plan.html">План</a><a href="/baseline/signals.html">Исходный вид</a></p><label for="fe01-state">Проверить состояние <select id="fe01-state" class="select"><option value="ready">Готово</option><option value="queued">В очереди</option><option value="running">В работе</option><option value="partial">Неполные данные</option><option value="stale">Устарело</option><option value="conflict">Конфликт версий</option><option value="failed">Ошибка</option><option value="cancelled">Отменено</option><option value="offline">Нет связи</option><option value="access_denied">Нет доступа</option><option value="empty">Нет результата</option><option value="saving">Сохранение</option><option value="saved">Ответ об успехе (макет)</option></select></label></div>
+<a class="skip" href="#main">К содержанию</a>
+
+
+
+
+<div class="shell">
+  <aside class="side" aria-label="Разделы">
+    <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Клинический компас</a>
+    <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+</nav>
+    <div class="side-foot"><span class="side-user" translate="no">Екатерина Павловна Орлова</span>Врач
+      <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form></div>
+  </aside>
+
+  <div class="main">
+    <div class="bar carbon">
+      <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Компас</a>
+      <details class="menu">
+        <summary>Меню</summary>
+        <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+
+          <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form>
+        </nav>
+      </details>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head carbon">
+        <span>Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</span>
+      </div>
+      <main id="main">
+
+<div class="title-row">
+  <div>
+    <h1>Пациенты</h1>
+    <p class="asof">Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</p>
+    <p class="finding">Сначала — пациенты с записями для проверки. Нажмите причину, чтобы открыть подробности.</p>
+  </div>
+  <div class="title-actions">
+    <form id="find" class="search" method="get" action="/" role="search">
+      <label class="visually-hidden" for="q">Поиск по пациентам и записям</label>
+      <input class="input" id="q" type="search" name="q" value="" maxlength="100" autocomplete="off" placeholder="Имя, код, слово из записи…">
+      <input type="hidden" name="show" value="">
+
+      <button class="button" type="submit">Найти</button>
+    </form>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="seg" role="group" aria-label="Список пациентов">
+    <a href="/?q=&amp;age_status=&amp;record_kind=&amp;route_category=" aria-current="true">Все пациенты <span class="num">5</span></a>
+    <a href="/?show=flagged&amp;q=&amp;age_status=&amp;record_kind=&amp;route_category=">Нужно проверить <span class="num">4</span></a>
+  </div>
+  <details class="review-filters">
+    <summary>Фильтры</summary>
+    <form class="filter-form" method="get" action="/">
+      <input type="hidden" name="show" value="">
+
+      <label>Возраст <select class="select" name="age_status">
+        <option value="" selected>любой</option><option value="known">известен</option><option value="unknown">не указан</option><option value="conflicting">противоречие</option></select></label>
+      <label>Записи <select class="select" name="record_kind">
+        <option value="" selected>любые</option><option value="self_report">самоотчёт</option><option value="visit">приём</option></select></label>
+      <label>Направление <select class="select" name="route_category">
+        <option value="" selected>любое</option><option value="mandatory">обязательно</option><option value="desirable">желательно</option></select></label>
+      <button class="button" type="submit">Применить</button>
+
+    </form>
+    <p class="meta">Фильтр учитывает направления, включая проекты, которые врач ещё не подтвердил.</p>
+  </details>
+
+</div>
+
+
+<div class="fe01-layout" data-fe01-wrapper><aside class="fe01-support fe01-alerts" aria-labelledby="fe01-signals" data-fe01-added>
+<h2 id="fe01-signals">Критические сигналы</h2><p class="fe01-status" role="status">Предложение подготовлено. Проверьте основания перед решением.</p>
+<div data-fe01-content><div data-fe01-result><p class="fe01-reason">Требует проверки врача</p>
+<p><b>Анна Сергеевна Ларина</b> · P201</p><p>Пример нового сообщения о мыслях о смерти. Не является записью из истории этого пациента.</p>
+<p class="meta">Пример времени: 27.10, 10:42 МСК<br>Источник: дневник · версия 1</p>
+<a class="fe01-source" href="/diagnosis.html#fe01-example-source">Открыть исходную запись примера</a>
+<details><summary>Рассмотрение сигнала</summary><p>Получен → просмотрен → обработан. Открытие списка не закрывает сигнал.</p>
+<label for="fe01-reason">Что проверено и сделано</label><textarea id="fe01-reason" class="textarea" placeholder="Запись врача о рассмотрении сигнала"></textarea>
+<button class="button" type="button" data-fe01-write data-fe01-action="save">Сохранить обработку</button><p class="meta">Рассмотрение не меняет лечение. Новая версия требует отдельной проверки.</p></details></div><p data-fe01-clarify hidden>Нужно уточнить длительность и влияние жалоб, противоречивые сведения и применимость источника. Без этого полный вывод недоступен.</p>
+<button class="button" type="button" data-fe01-retry data-fe01-action="retry" hidden>Повторить анализ</button>
+<button class="button" type="button" data-fe01-compare data-fe01-action="compare" hidden>Сравнить версии</button>
+<div class="fe01-note" data-fe01-comparison hidden><b>Сохранено в другой вкладке — пример версии 2:</b><p>Требуется уточнение жалоб на следующем приёме.</p><p>Ваш ввод ниже сохранён. Автоматического объединения нет.</p></div></div></aside><div class="fe01-list" data-fe01-wrapper><table class="results review-list">
+  <caption class="visually-hidden">Пациенты врача: сначала записи для проверки</caption>
+  <thead><tr><th scope="col">Пациент</th><th scope="col">Что проверить</th><th scope="col">Последние отметки</th></tr></thead>
+  <tbody>
+
+    <tr class="flagged">
+      <td class="who"><b><a href="/demo/P201" translate="no">Анна Сергеевна Ларина</a></b><span>34 года · <span translate="no">P201</span></span></td>
+      <td class="reason">
+
+        <ul class="review-reasons">
+  <li>
+    <a class="reason-link" href="/patients/P201/decisions?med_day=2026-10-26#medications"><span class="marker">Проверить приём препаратов</span></a>
+    <small>За 7 дней: пропущено 0, частично 0, без отметки 1.</small>
+  </li>
+</ul>
+
+      </td>
+      <td class="review-marks">
+        <span class="wb" role="img" aria-label="Самочувствие по отметкам: лучше, лучше, лучше, лучше, не указано"><i class="better"></i><i class="better"></i><i class="better"></i><i class="better"></i><i class="unknown"></i></span><span class="sub">Последняя <time datetime="2026-10-27">27.10</time></span>
+
+      </td>
+    </tr>
+
+    <tr class="flagged">
+      <td class="who"><b><a href="/demo/P203" translate="no">Елена Викторовна Ковалёва</a></b><span>51 год · <span translate="no">P203</span></span></td>
+      <td class="reason">
+
+        <ul class="review-reasons">
+  <li>
+    <a class="reason-link" href="/patients/P203/decisions?med_day=2026-10-26#medications"><span class="marker">Проверить приём препаратов</span></a>
+    <small>За 7 дней: пропущено 0, частично 0, без отметки 1.</small>
+  </li>
+</ul>
+
+      </td>
+      <td class="review-marks">
+        <span class="wb" role="img" aria-label="Самочувствие по отметкам: без изменений, лучше, без изменений, без изменений, без изменений"><i class="same"></i><i class="better"></i><i class="same"></i><i class="same"></i><i class="same"></i></span><span class="sub">Последняя <time datetime="2026-10-25">25.10</time></span>
+
+      </td>
+    </tr>
+
+    <tr class="flagged">
+      <td class="who"><b><a href="/demo/P204" translate="no">Никита Олегович Зуев</a></b><span>37 лет · <span translate="no">P204</span></span></td>
+      <td class="reason">
+
+        <ul class="review-reasons">
+  <li>
+    <a class="reason-link" href="/demo/P204#entry-f07573db79d8757289fbad5b06e0a5b5"><span class="marker">Требует внимания: нежелательные явления</span></a>
+    <small>Алевал 50 мг, таблетки, покрытые плёночной оболочкой: Тошнота возникала после утреннего приёма; связь не установлена, даты передал врачу. · запись от 05.10</small>
+  </li>
+
+  <li>
+    <a class="reason-link" href="/patients/P204/decisions?med_day=2026-10-26#medications">Проверить приём препаратов</a>
+    <small>За 7 дней: пропущено 0, частично 0, без отметки 1.</small>
+  </li>
+</ul>
+
+      </td>
+      <td class="review-marks">
+        <span class="wb" role="img" aria-label="Самочувствие по отметкам: хуже, хуже, лучше, без изменений, без изменений"><i class="worse"></i><i class="worse"></i><i class="better"></i><i class="same"></i><i class="same"></i></span><span class="sub">Последняя <time datetime="2026-10-25">25.10</time></span>
+
+      </td>
+    </tr>
+
+    <tr class="flagged">
+      <td class="who"><b><a href="/demo/P202" translate="no">Павел Андреевич Громов</a></b><span>29 лет · <span translate="no">P202</span></span></td>
+      <td class="reason">
+
+        <ul class="review-reasons">
+  <li>
+    <a class="reason-link" href="/patients/P202/decisions#fu-plan"><span class="marker">Есть пропуски в плане</span></a>
+    <small>Отмечено пропусков: 1.</small>
+  </li>
+
+  <li>
+    <a class="reason-link" href="/patients/P202/decisions?med_day=2026-10-26#medications">Проверить приём препаратов</a>
+    <small>За 7 дней: пропущено 0, частично 0, без отметки 1.</small>
+  </li>
+</ul>
+
+      </td>
+      <td class="review-marks">
+        <span class="wb" role="img" aria-label="Самочувствие по отметкам: лучше, лучше, хуже, лучше, без изменений"><i class="better"></i><i class="better"></i><i class="worse"></i><i class="better"></i><i class="same"></i></span><span class="sub">Последняя <time datetime="2026-10-25">25.10</time></span>
+
+      </td>
+    </tr>
+
+    <tr>
+      <td class="who"><b><a href="/demo/P205" translate="no">Мария Денисовна Фомина</a></b><span>26 лет · <span translate="no">P205</span></span></td>
+      <td class="reason">
+        <span class="sub">Записей с причинами для проверки нет.</span>
+      </td>
+      <td class="review-marks">
+        <span class="wb" role="img" aria-label="Самочувствие по отметкам: хуже, лучше, лучше, без изменений, лучше"><i class="worse"></i><i class="better"></i><i class="better"></i><i class="same"></i><i class="better"></i></span><span class="sub">Последняя <time datetime="2026-10-25">25.10</time></span>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table></div></div>
+
+
+
+<details class="filter-note">
+  <summary>Как составлен список</summary>
+  <p>Причины для проверки: нежелательное явление в записях; противоречивые сведения; две последние отметки «хуже» подряд и больше; пропуск пункта плана или отсутствие отметки после срока выполнения.</p>
+  <p>Это список записей для проверки, а не оценка опасности. Отсутствие причины не означает, что у пациента всё хорошо. Порог «две отметки подряд» помогает организовать список; его клиническая применимость не подтверждена.</p>
+</details>
+<div class="legend" role="group" aria-label="Отметки самочувствия, от более ранних к последним">
+  <span><span class="wb" aria-hidden="true"><i class="better"></i></span>лучше</span>
+  <span><span class="wb" aria-hidden="true"><i class="same"></i></span>без изменений</span>
+  <span><span class="wb" aria-hidden="true"><i class="worse"></i></span>хуже</span>
+  <span><span class="wb" aria-hidden="true"><i class="unknown"></i></span>не указано</span>
+</div>
+
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<dialog class="invite-dialog" id="invite-dialog" aria-labelledby="invite-title">
+  <div class="invite-heading">
+    <h2 id="invite-title">Пригласить пациента</h2>
+    <button class="button" type="button" data-invite-close>Закрыть</button>
+  </div>
+
+
+<form method="post" action="/invitations" class="invite-form">
+  <input type="hidden" name="csrf" value="">
+  <div class="field">
+  <label for="f-patient_id">Код пациента</label>
+  <span class="hint" id="f-patient_id-hint">Код пациента из карточки, например P101.</span>
+  <input class="input" id="f-patient_id" name="patient_id" type="text" required aria-describedby="f-patient_id-hint" maxlength="100" autocomplete="off" spellcheck="false">
+
+</div>
+  <button class="button button--primary" type="submit">Создать приглашение</button>
+</form>
+<p class="meta invite-note">Код приглашения показывается один раз. Передайте его пациенту сами.</p>
+<section class="invite-waiting" aria-labelledby="invite-waiting-title">
+  <h2 id="invite-waiting-title">Ждут принятия</h2>
+
+    <div class="empty"><span>Действующих приглашений нет.</span></div>
+
+</section>
+</dialog>
+<script src="/static/invitations.js" defer></script>
+
+
+
+
+<script src="/support.js" defer data-fe01-added></script></body>
+</html>

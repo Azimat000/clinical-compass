@@ -1,0 +1,45 @@
+page.evaluate: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/azamatsibgatullin/Library/Caches/ms-playwright/firefox-1538/firefox/Nightly.app/Contents/MacOS/firefox -no-remote -headless -profile /var/folders/7q/6f7d54ks3zz8mx9n9rtc30zc0000gn/T/playwright_firefoxdev_profile-X9FFU7 -juggler-pipe -silent
+<launched> pid=95275
+[pid=95275][err] *** You are running in headless mode.
+[pid=95275][err] JavaScript warning: resource://services-settings/Utils.sys.mjs, line 119: unreachable code after return statement
+[pid=95275][out]
+[pid=95275][out] Juggler listening to the pipe
+[pid=95275][err] [WARN  rkv::backend::impl_safe::environment] `load_ratio()` is irrelevant for this storage backend.
+[pid=95275][out] console.warn: services.settings: #fetchAttachment: Forcing fallbackToDump to false due to Utils.LOAD_DUMPS being false
+[pid=95275][out] console.error: (new NotFoundError("Could not find fa0fc42c-d91d-fca7-34eb-806ff46062dc in cache or dump", "resource://services-settings/Attachments.sys.mjs", 48))
+[pid=95275][out] console.warn: "Unable to find the attachment for" "fa0fc42c-d91d-fca7-34eb-806ff46062dc"
+[pid=95275][out] console.error: "Error fetching remote settings base url from CDN. Falling back to https://firefox-settings-attachments.cdn.mozilla.net/" (new SyntaxError("XMLHttpRequest.open: '/' is not a valid URL.", (void 0), 126))
+[pid=95275][out] console.error: services.settings:
+[pid=95275][out]   Message: EmptyDatabaseError: "main/nimbus-desktop-experiments" has not been synced yet
+[pid=95275][out]   Stack:
+[pid=95275][out]     EmptyDatabaseError@resource://services-settings/Database.sys.mjs:19:5
+[pid=95275][out] list@resource://services-settings/Database.sys.mjs:96:13
+[pid=95275][out]
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][out]
+[pid=95275][out]         ERROR: error in channel "content::10/11/21": exception while running method "disposeObject" in namespace "page": Failed to find execution context with id = id-736 findExecutionContext@chrome://juggler/content/content/Runtime.js:298:13
+[pid=95275][out] disposeObject@chrome://juggler/content/content/Runtime.js:119:35
+[pid=95275][out] _onMessageInternal@chrome://juggler/content/SimpleChannel.js:237:37
+[pid=95275][out] _onMessage@chrome://juggler/content/SimpleChannel.js:194:12
+[pid=95275][out] bindToActor/actor.receiveMessage@chrome://juggler/content/SimpleChannel.js:39:44
+[pid=95275][out]  _onMessageInternal@chrome://juggler/content/SimpleChannel.js:208:24
+[pid=95275][out] _onMessage@chrome://juggler/content/SimpleChannel.js:194:12
+[pid=95275][out] bindToActor/actor.receiveMessage@chrome://juggler/content/SimpleChannel.js:39:44
+[pid=95275][out]
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+[pid=95275][err] JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 1715: TypeError: can't access dead object
+[pid=95275][err] JavaScript warning: resource://gre/modules/UpdateService.sys.mjs, line 4029: unreachable code after return statement
+[pid=95275] <gracefully close start>
+    at /Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/FE01/browser.cjs:30:24 {
+  log: []
+}

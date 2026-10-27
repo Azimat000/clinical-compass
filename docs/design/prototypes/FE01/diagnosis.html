@@ -1,0 +1,2269 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="compass-data-origin" content="synthetic; dates=simulated; clinical-review=unverified">
+<meta name="theme-color" content="#1a1f23">
+<title>Анна Сергеевна Ларина · Клинический компас</title>
+<link rel="icon" href="/static/icons/mark.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/PTSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/support.css" data-fe01-added>
+</head>
+<body><div class="fe01-tools" data-fe01-added><p><b>Прототип FE01.</b> Новые блоки — вымышленные примеры, не результаты анализа. Запись в базу отключена.</p><p><a href="/signals.html">Сигналы</a><a href="/diagnosis.html">Диагноз</a><a href="/plan.html">План</a><a href="/baseline/diagnosis.html">Исходный вид</a></p><label for="fe01-state">Проверить состояние <select id="fe01-state" class="select"><option value="ready">Готово</option><option value="queued">В очереди</option><option value="running">В работе</option><option value="partial">Неполные данные</option><option value="stale">Устарело</option><option value="conflict">Конфликт версий</option><option value="failed">Ошибка</option><option value="cancelled">Отменено</option><option value="offline">Нет связи</option><option value="access_denied">Нет доступа</option><option value="empty">Нет результата</option><option value="saving">Сохранение</option><option value="saved">Ответ об успехе (макет)</option></select></label></div>
+<a class="skip" href="#main">К содержанию</a>
+
+
+
+
+<div class="shell">
+  <aside class="side" aria-label="Разделы">
+    <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Клинический компас</a>
+    <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+</nav>
+    <div class="side-foot"><span class="side-user" translate="no">Екатерина Павловна Орлова</span>Врач
+      <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form></div>
+  </aside>
+
+  <div class="main">
+    <div class="bar carbon">
+      <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Компас</a>
+      <details class="menu">
+        <summary>Меню</summary>
+        <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+
+          <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form>
+        </nav>
+      </details>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head carbon">
+        <span>Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</span>
+      </div>
+      <main id="main">
+
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="/">← Пациенты</a></p>
+    <h1 translate="no">Анна Сергеевна Ларина</h1>
+    <p class="asof">Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</p>
+    <p class="finding">34 года · <span class="num" translate="no">P201</span>
+       · ведущий врач <span translate="no">Екатерина Павловна Орлова</span> с <time datetime="2026-09-14T07:00:00.000000+00:00">14.09.2026</time></p>
+  </div>
+</div>
+
+<div class="plan-legacy-links">
+  <span id="fu-plan"></span><span id="medications"></span><span id="routes"></span>
+  <nav class="jump patient-nav" aria-label="Разделы пациента"><a href="/demo/P201" aria-current="page">Карточка</a><a href="/patients/P201/first-visits">Приём</a><a href="/patients/P201/decisions">План и решения</a><a href="/patients/P201/communication">Сообщения</a><a href="/patients/P201/imports">Документы</a></nav>
+</div>
+
+<section class="fe01-support fe01-diagnosis" aria-labelledby="fe01-hypothesis" data-fe01-added>
+<h2 id="fe01-hypothesis">Предполагаемый диагноз системы</h2><p class="fe01-status" role="status">Предложение подготовлено. Проверьте основания перед решением.</p><div data-fe01-content>
+<div data-fe01-result><p class="fe01-diagnosis-value">Депрессивный эпизод — гипотеза для проверки</p>
+<p class="meta">Пример результата · 27.10, 10:45 МСК · версия 1. Не диагноз врача.</p>
+<details><summary>Основания и ограничения</summary><p>Макет структуры: жалобы и их длительность, влияние на жизнь, исключающие и противоречивые сведения. Утверждения должны вести к конкретному источнику и версии.</p>
+<a class="fe01-source" href="#visit-history">Открыть историю приёмов</a> · <a class="fe01-source" href="#assessments">Анкеты и ответы</a>
+<p>Критерии: подтверждено / отсутствует / неизвестно / противоречие. Процент уверенности не придумывается.</p></details></div><p data-fe01-clarify hidden>Нужно уточнить длительность и влияние жалоб, противоречивые сведения и применимость источника. Без этого полный вывод недоступен.</p>
+<button class="button" type="button" data-fe01-retry data-fe01-action="retry" hidden>Повторить анализ</button>
+<button class="button" type="button" data-fe01-compare data-fe01-action="compare" hidden>Сравнить версии</button>
+<div class="fe01-note" data-fe01-comparison hidden><b>Сохранено в другой вкладке — пример версии 2:</b><p>Требуется уточнение жалоб на следующем приёме.</p><p>Ваш ввод ниже сохранён. Автоматического объединения нет.</p></div>
+<div class="fe01-doctor"><h2>Диагноз врача</h2><p class="meta">Вы вводите собственную формулировку. Новые результаты системы её не заменяют.</p>
+<label for="fe01-doctor-diagnosis">Формулировка врача</label><textarea class="textarea" id="fe01-doctor-diagnosis" maxlength="2000">Требуется уточнение характера и длительности симптомов.</textarea>
+<details><summary>Обоснование и неопределённости</summary><label for="fe01-diagnosis-basis">Обоснование врача</label><textarea id="fe01-diagnosis-basis" class="textarea" maxlength="4000">Нужно сопоставить сведения истории и текущие жалобы.</textarea><label for="fe01-diagnosis-unknown">Что остаётся неизвестным</label><textarea id="fe01-diagnosis-unknown" class="textarea" maxlength="4000">Длительность и влияние симптомов требуют уточнения.</textarea><label><input type="checkbox"> Исходные сведения просмотрены</label><p class="meta">В сервисе эти сведения и подтверждение просмотра обязательны.</p></details><div class="fe01-actions"><button class="button" type="button" data-fe01-write data-fe01-action="save">Сохранить диагноз врача</button><a href="/plan.html">К плану и решениям</a></div>
+<p class="meta">Ввод в макете. В сервисе здесь будут автор, время и версия последней записи сервера.</p></div>
+<details id="fe01-example-source"><summary>Исходная запись сигнала — только пример</summary><p>Вымышленный пример для проверки перехода: «Сегодня появились мысли о смерти». Автор: пациент; 27.10, 10:42 МСК; версия 1. В существующей истории такой записи нет.</p><a href="#records">Перейти к существующим самоотчётам</a></details>
+</div></section>
+<div class="sheet-pad">
+  <p class="finding">Сейчас: <a href="/patients/P201/decisions?med_day=2026-10-26#medications"><span class="marker">Проверить приём препаратов</span></a><span class="sub">За 7 дней: пропущено 0, частично 0, без отметки 1.</span></p>
+  <p class="meta">Вся история. Период относится к самочувствию, истории приёмов и анкетам.</p>
+</div>
+<form class="period" method="get" action="/demo/P201">
+  <div class="field">
+  <label for="f-start">С</label>
+
+  <input class="input" id="f-start" name="start" type="date" value="2026-09-14" required max="2026-10-27" autocomplete="off">
+
+</div>
+  <div class="field">
+  <label for="f-end">По</label>
+
+  <input class="input" id="f-end" name="end" type="date" value="2026-10-27" required max="2026-10-27" autocomplete="off">
+
+</div>
+  <button class="button" type="submit">Показать период</button>
+  <a class="reset" href="/demo/P201?start=2026-09-28&amp;end=2026-10-27">Последние 30 дней</a>
+  <a class="reset" href="/demo/P201">Вся история</a>
+</form>
+
+
+<div class="card-state">
+  <div>
+    <span class="label">Отметки самочувствия</span>
+    <b class="num">8 из 44</b> <span class="sub">дней с отметкой; без отметки: 36</span>
+  </div>
+  <div>
+    <span class="label">Приёмы и анкеты</span>
+
+    <b class="num">3</b> приёмов · <b class="num">9</b> анкет
+  </div>
+
+</div>
+
+
+
+<nav class="jump" aria-label="Разделы карточки">
+  <a href="#records">Самочувствие</a><a href="#visit-history">История приёмов</a><a href="#assessments">Анкеты</a><a href="#link">Связь</a>
+</nav>
+
+<div class="card-body">
+  <section class="block" id="records" aria-labelledby="h-records">
+    <span id="fu-records"></span><span id="fu-warnings"></span>
+    <h2 id="h-records">Самочувствие пациента</h2>
+
+
+
+<table class="results records entry-table">
+  <caption class="visually-hidden">Самоотчёты пациента, сначала новые</caption>
+  <thead><tr><th scope="col">Дата</th><th scope="col">Кто записал</th><th scope="col">Самочувствие</th><th scope="col">Что записано</th></tr></thead>
+  <tbody>
+
+    <tr id="entry-1bee53e031228c0a46cf23e1de33f58d">
+      <td><time class="num" datetime="2026-10-27">27.10</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-27T11:33:50.821348+00:00">27.10.2026 14:33 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="unknown"></i></span>Не указано</td>
+      <td>
+        <p class="entry-text">ДЗ</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+
+
+      <dt>Нет эффекта</dt>
+      <dd class="keep">Не чувстввую разницы</dd>
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Тяжело засыпать</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: не указан</span>
+      </td>
+    </tr>
+
+    <tr id="entry-04b6e303d57088bcf9701b9a6dcd6fdd">
+      <td><time class="num" datetime="2026-10-25">25.10</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.391704+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше</td>
+      <td>
+        <p class="entry-text">За неделю одна трудная ночь. В выходные сходили всей семьёй в парк.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">За неделю одна трудная ночь. В выходные сходили всей семьёй в парк.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-d61fd9a748918cf80e6199371b8aa61d">
+      <td><time class="num" datetime="2026-10-19">19.10</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.371675+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше</td>
+      <td>
+        <p class="entry-text">Меньше перепроверяю расчёты, после работы готовлю ужин и разговариваю с сыном.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Меньше перепроверяю расчёты, после работы готовлю ужин и разговариваю с сыном.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-e7dff7d8c98f49adfe7432094a5dc100">
+      <td><time class="num" datetime="2026-10-12">12.10</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.343775+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше</td>
+      <td>
+        <p class="entry-text">Сдала отчёт без ночной проверки почты. К вечеру осталось немного сил.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Сдала отчёт без ночной проверки почты. К вечеру осталось немного сил.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-f7323bc411088b9cd547bdd5975b2400">
+      <td><time class="num" datetime="2026-10-05">05.10</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.288430+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше</td>
+      <td>
+        <p class="entry-text">Четыре ночи спала около семи часов. В воскресенье беспокойство вернулось.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Четыре ночи спала около семи часов. В воскресенье беспокойство вернулось.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-824692fc151ef155f3e61be1044da62a">
+      <td><time class="num" datetime="2026-09-28">28.09</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.262012+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="worse"></i></span>Хуже</td>
+      <td>
+        <p class="entry-text">Перед сдачей отчёта опять долго не спала. С сыном всё же вышли на прогулку.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Перед сдачей отчёта опять долго не спала. С сыном всё же вышли на прогулку.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-c7a34d4bdc0ff142441e381cf9cf02c6">
+      <td><time class="num" datetime="2026-09-21">21.09</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.208677+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше</td>
+      <td>
+        <p class="entry-text">Два вечера не открывала почту дома. Заснула раньше, но проснулась в пять.</p>
+
+
+<ul class="med-feedback-list">
+
+  <li><strong class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</strong>
+    <dl class="facts">
+
+
+      <dt>Есть эффект</dt>
+      <dd class="keep">После первых недель стало легче отключаться от рабочих мыслей вечером; связывать изменение только с таблеткой не могу.</dd>
+
+
+
+
+
+
+    </dl>
+  </li>
+
+</ul>
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Два вечера не открывала почту дома. Заснула раньше, но проснулась в пять.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+    <tr id="entry-b833b171c2b9daeabb4ff8844cd50204">
+      <td><time class="num" datetime="2026-09-14">14.09</time></td>
+      <td>Пациент<span class="sub" translate="no">Анна Сергеевна Ларина</span><span class="sub">Получено: <time datetime="2026-10-26T00:16:13.130018+00:00">26.10.2026 03:16 МСК</time></span></td>
+      <td><span class="wb" aria-hidden="true"><i class="same"></i></span>Без изменений</td>
+      <td>
+        <p class="entry-text">Заснула около двух, утром трижды проверяла один отчёт.</p>
+
+
+
+        <ul class="fields">
+
+          <li><span class="state state--unknown">Нежелательные явления</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--known">Жалобы</span><span class="field-text">Заснула около двух, утром трижды проверяла один отчёт.</span></li>
+
+          <li><span class="state state--unknown">Сопутствующие препараты</span><span class="sub">Неизвестно</span></li>
+
+          <li><span class="state state--unknown">Сообщённые факторы риска</span><span class="sub">Неизвестно</span></li>
+
+        </ul>
+        <span class="sub">Возраст в записи: 34 года</span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+    <p class="meta">Записей за период: 8.</p>
+
+  </section>
+
+  <section class="block" id="visit-history" aria-labelledby="h-visit-history">
+    <h2 id="h-visit-history">История приёмов</h2>
+    <p><a href="/patients/P201/first-visits">Начать новый приём</a></p>
+    <span id="fu-visits"></span>
+
+
+
+
+    <span id="v-list"></span>
+
+    <details class="fold visit" id="visit-5a310fc780af4dc7f9cd04631b271dfb" open>
+      <summary>Повторный приём · <time class="num" datetime="2026-10-25">25.10</time>
+        <span class="sub"><span class="wb" aria-hidden="true"><i class="better"></i></span> Динамика по оценке врача: Лучше</span>
+        <span class="sub">Екатерина Павловна Орлова, версия 3 · Завершена</span></summary>
+      <div class="fold-body">
+        <h3>Запись приёма</h3>
+        <div id="visit-version-5a310fc780af4dc7f9cd04631b271dfb-3">
+
+
+  <span id="visit-source-7547873d729233560aa3a0c86f295bf9"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-25">25.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">3</span> · запись завершена<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-25T12:00:00.000000+00:00">25.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">За неделю одна трудная ночь. В выходные сходили всей семьёй в парк.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-7547873d729233560aa3a0c86f295bf9">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+
+        </div>
+
+
+
+        <details class="fold">
+          <summary>Предыдущие версии (2)</summary>
+
+          <details class="fold" id="visit-version-5a310fc780af4dc7f9cd04631b271dfb-2">
+            <summary>Версия 2 · черновик · <time class="num" datetime="2026-10-25T12:00:00.000000+00:00">25.10.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-81a61a04845ac0d7951aafe65a06b961"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-25">25.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">2</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-25T12:00:00.000000+00:00">25.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">За неделю одна трудная ночь. В выходные сходили всей семьёй в парк.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-81a61a04845ac0d7951aafe65a06b961">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+          <details class="fold" id="visit-version-5a310fc780af4dc7f9cd04631b271dfb-1">
+            <summary>Версия 1 · черновик · <time class="num" datetime="2026-10-25T12:00:00.000000+00:00">25.10.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-1d7f4f730b77f496fc2f5320b395360b"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-25">25.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">1</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-25T12:00:00.000000+00:00">25.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">За неделю одна трудная ночь. В выходные сходили всей семьёй в парк.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-4ccfc1bd8e67b56a253471bf5d59511e">приёма 05.10, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-25">25.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+        </details>
+        <p class="meta">Прежние версии сохранены без изменений.</p>
+
+      </div>
+    </details>
+
+    <details class="fold visit" id="visit-374de7a370278a4b9127c27b3ec1099f">
+      <summary>Повторный приём · <time class="num" datetime="2026-10-05">05.10</time>
+        <span class="sub"><span class="wb" aria-hidden="true"><i class="better"></i></span> Динамика по оценке врача: Лучше</span>
+        <span class="sub">Екатерина Павловна Орлова, версия 3 · Завершена</span></summary>
+      <div class="fold-body">
+        <h3>Запись приёма</h3>
+        <div id="visit-version-374de7a370278a4b9127c27b3ec1099f-3">
+
+
+  <span id="visit-source-4ccfc1bd8e67b56a253471bf5d59511e"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-05">05.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">3</span> · запись завершена<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-05T12:00:00.000000+00:00">05.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Четыре ночи спала около семи часов. В воскресенье беспокойство вернулось.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-4ccfc1bd8e67b56a253471bf5d59511e">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+
+        </div>
+
+
+
+        <details class="fold">
+          <summary>Предыдущие версии (2)</summary>
+
+          <details class="fold" id="visit-version-374de7a370278a4b9127c27b3ec1099f-2">
+            <summary>Версия 2 · черновик · <time class="num" datetime="2026-10-05T12:00:00.000000+00:00">05.10.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-41280fa5c31f40146b407234d8461e69"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-05">05.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">2</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-05T12:00:00.000000+00:00">05.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Четыре ночи спала около семи часов. В воскресенье беспокойство вернулось.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-41280fa5c31f40146b407234d8461e69">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+          <details class="fold" id="visit-version-374de7a370278a4b9127c27b3ec1099f-1">
+            <summary>Версия 1 · черновик · <time class="num" datetime="2026-10-05T12:00:00.000000+00:00">05.10.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-f7fea5c7d374fcb9ebcb342c0e069edf"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-10-05">05.10.2026</time> · Повторный приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">1</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-05T12:00:00.000000+00:00">05.10.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="better"></i></span>Лучше<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026<span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">предыдущей записи</a></span></dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Четыре ночи спала около семи часов. В воскресенье беспокойство вернулось.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span><span class="sub">Перенесено из <a href="#visit-source-507a8665e1e5200e67c5ff4c07c29215">приёма 14.09, версия 3</a>; повторно не собиралось.</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-10-05">05.10</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+        </details>
+        <p class="meta">Прежние версии сохранены без изменений.</p>
+
+      </div>
+    </details>
+
+    <details class="fold visit" id="visit-02f10084e594b5f60aeb7000c9b36b30">
+      <summary>Первый приём · <time class="num" datetime="2026-09-14">14.09</time>
+        <span class="sub"><span class="wb" aria-hidden="true"><i class="unknown"></i></span> Динамика по оценке врача: Не оценено</span>
+        <span class="sub">Екатерина Павловна Орлова, версия 3 · Завершена</span></summary>
+      <div class="fold-body">
+        <h3>Запись приёма</h3>
+        <div id="visit-version-02f10084e594b5f60aeb7000c9b36b30-3">
+
+
+  <span id="visit-source-507a8665e1e5200e67c5ff4c07c29215"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-09-14">14.09.2026</time> · Первый приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">3</span> · запись завершена<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-09-14T12:00:00.000000+00:00">14.09.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="unknown"></i></span>Не оценено<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026</dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Заснула около двух, утром трижды проверяла один отчёт.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Первый приём в текущей истории; сравнение с предыдущим приёмом невозможно.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Трудности засыпания и перепроверки на фоне рабочей нагрузки; влияние на семейную жизнь заметно. На дату первого приёма Элицея ещё не начата; согласование назначения отражено отдельным решением.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-507a8665e1e5200e67c5ff4c07c29215">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+
+        </div>
+
+
+
+        <details class="fold">
+          <summary>Предыдущие версии (2)</summary>
+
+          <details class="fold" id="visit-version-02f10084e594b5f60aeb7000c9b36b30-2">
+            <summary>Версия 2 · черновик · <time class="num" datetime="2026-09-14T12:00:00.000000+00:00">14.09.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-a74c8783b2f058ffb68fcd12c003766a"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-09-14">14.09.2026</time> · Первый приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">2</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-09-14T12:00:00.000000+00:00">14.09.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="unknown"></i></span>Не оценено<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026</dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Заснула около двух, утром трижды проверяла один отчёт.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Первый приём в текущей истории; сравнение с предыдущим приёмом невозможно.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Трудности засыпания и перепроверки на фоне рабочей нагрузки; влияние на семейную жизнь заметно. На дату первого приёма Элицея ещё не начата; согласование назначения отражено отдельным решением.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+  <p class="meta"><a href="/patients/P201/imports#visit-document-a74c8783b2f058ffb68fcd12c003766a">Сведения из документов к этой версии приёма</a></p>
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+          <details class="fold" id="visit-version-02f10084e594b5f60aeb7000c9b36b30-1">
+            <summary>Версия 1 · черновик · <time class="num" datetime="2026-09-14T12:00:00.000000+00:00">14.09.2026 15:00 МСК</time></summary>
+            <div class="fold-body">
+
+  <span id="visit-source-449f8a9ed06f114c0f60184ac07e2e7a"></span>
+  <dl class="facts">
+    <dt>Дата приёма</dt><dd><time class="num" datetime="2026-09-14">14.09.2026</time> · Первый приём</dd>
+    <dt>Версия</dt><dd>версия <span class="num">1</span> · черновик<span class="sub"><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-09-14T12:00:00.000000+00:00">14.09.2026 15:00 МСК</time></span></dd>
+    <dt>Динамика по оценке врача</dt><dd><span class="wb" aria-hidden="true"><i class="unknown"></i></span>Не оценено<span class="sub">По сравнению с прошлым приёмом; отдельно от самоотчёта пациента.</span></dd>
+    <dt>Возраст</dt><dd><span class="state state--known">34 года</span><span class="sub">Со слов пациента: Возраст указан пациентом на приёме.</span></dd>
+    <dt>Дата сведений о возрасте</dt><dd>14.09.2026</dd>
+  </dl>
+  <h3>Жалобы и сведения с источниками</h3>
+  <table class="results records sources">
+    <caption class="visually-hidden">Сведения приёма с источниками</caption>
+    <thead><tr><th scope="col">Раздел</th><th scope="col">Сведения</th><th scope="col">Источник</th></tr></thead>
+    <tbody>
+
+      <tr><td>Жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Заснула около двух, утром трижды проверяла один отчёт.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Изменения с прошлого приёма</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Первый приём в текущей истории; сравнение с предыдущим приёмом невозможно.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: начало и течение</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">С июня трудно засыпает, вечером возвращается мыслями к рабочим задачам. Начало связывает с повышением и ответственностью за отчётность.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Влияние на повседневную жизнь</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Перепроверяет цифры, поздно заканчивает работу, меньше времени проводит с сыном.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез заболевания: прежние эпизоды</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Краткий похожий период после рождения сына шесть лет назад, за помощью тогда не обращалась.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Анамнез жизни</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Бухгалтер, живёт с мужем и шестилетним сыном. До повышения гуляла по вечерам; последние месяцы задерживалась в офисе.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Семейный анамнез</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Мать рассказывала о трудностях сна в периоды нагрузки; медицинских документов родственников нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Соматические и неврологические обстоятельства</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Хронические заболевания со слов не называет. Последний осмотр терапевта в июле; принесла запись о жалобах на утомляемость.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Аллергии и непереносимость</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">О лекарственных аллергиях не знает; прежние назначения переносила без замеченных реакций.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Психический статус</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Контакт поддерживает, на вопросы отвечает по существу, описывает переживания и затруднения. Речь последовательная, ориентирован в ситуации встречи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Объективные данные осмотра</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Очный соматический осмотр и инструментальные измерения на этой встрече не проводились. Приведены только сообщённые сведения и представленные записи.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Другие психические проявления: сведения врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Иные проявления обсуждены в беседе; дополнительных подтверждённых сведений в записи нет.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Сведения о безопасности: запись врача</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">В беседе текущих намерений причинить себе вред не сообщает. Запись относится к этой встрече; будущее состояние и отсутствие риска из неё не выводятся.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Внезапные или острые телесные жалобы</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Новых внезапных телесных жалоб в ходе встречи не сообщает; сведения за другие дни отражены в дневнике.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+      <tr><td>Заключение врача о текущем состоянии</td>
+        <td><span class="state state--known">Есть сведения</span><span class="field-text">Трудности засыпания и перепроверки на фоне рабочей нагрузки; влияние на семейную жизнь заметно. На дату первого приёма Элицея ещё не начата; согласование назначения отражено отдельным решением.</span></td>
+        <td>Запись врача, <time class="num" datetime="2026-09-14">14.09</time><span class="sub">Запись врача на приёме</span></td></tr>
+
+    </tbody>
+  </table>
+
+  <h3>Что уточнить</h3>
+  <ul class="plain">
+
+
+
+  </ul>
+  <p class="meta">Неизвестное остаётся неизвестным: пустое поле не означает «нет». Это перечень записей, а не оценка состояния.</p>
+
+</div>
+          </details>
+
+        </details>
+        <p class="meta">Прежние версии сохранены без изменений.</p>
+
+      </div>
+    </details>
+
+  </section>
+  <section class="block" id="assessments" aria-labelledby="h-assess">
+    <span id="fu-assessments"></span>
+    <div class="assessment-heading"><h2 id="h-assess">Анкеты и динамика</h2><div class="assessment-actions"><form method="get" action="/demo/P201#assessments"><button class="button" type="submit">Обновить результаты</button></form><a href="#assessment-form">Предложить анкету</a></div></div>
+
+
+
+
+
+
+
+<section class="assessment-series" aria-labelledby="chart-DASS42-RU-FG-2024-demo-v1">
+  <div class="assessment-heading">
+    <h3 id="chart-DASS42-RU-FG-2024-demo-v1">DASS-42 <span>Депрессия, тревога и стресс</span></h3>
+    <span class="meta">Анкет: 3 · 14.09.2026 — 25.10.2026</span>
+  </div>
+  <p class="meta">На прошлой неделе. Больше баллов — больше выраженность указанных симптомов. Баллы не являются диагнозом.</p>
+  <div class="assessment-plots">
+
+    <figure class="assessment-plot">
+      <figcaption>Тревожные симптомы</figcaption>
+      <div class="assessment-value">
+        <b class="num">0</b><span>из 42<br><time datetime="2026-10-25">25.10.2026</time></span>
+
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-DASS42-RU-FG-2024-demo-v1-anxiety">
+        <title id="plot-DASS42-RU-FG-2024-demo-v1-anxiety">DASS-42 — Тревожные симптомы. Диапазон 0–42. Точные значения приведены в таблице ниже.</title>
+
+        <line x1="42" x2="530" y1="30" y2="30" class="assessment-grid"/>
+        <text x="29" y="35" text-anchor="end">42</text>
+
+        <line x1="42" x2="530" y1="93" y2="93" class="assessment-grid"/>
+        <text x="29" y="98" text-anchor="end">21</text>
+
+        <line x1="42" x2="530" y1="156" y2="156" class="assessment-grid"/>
+        <text x="29" y="161" text-anchor="end">0</text>
+
+
+        <polyline class="assessment-line" points="42.0,81.0 291.95,123.0 530.0,156.0 "/>
+
+
+        <a href="#assessment-3f18543295cf2a41a34db9f33a5fe3a9" aria-label="14.09.2026: 25 из 42, к исходным ответам">
+          <circle cx="42.0" cy="81.0" r="24" class="assessment-hit"/>
+          <circle cx="42.0" cy="81.0" r="5" class="assessment-point"><title>14.09.2026 · 25 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-9227b96f60bcb00dd2dfedcb3d6fb75c" aria-label="05.10.2026: 11 из 42, к исходным ответам">
+          <circle cx="291.95" cy="123.0" r="24" class="assessment-hit"/>
+          <circle cx="291.95" cy="123.0" r="5" class="assessment-point"><title>05.10.2026 · 11 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-f29e74ff66dcf0d24ed0858c6af37bf8" aria-label="25.10.2026: 0 из 42, к исходным ответам">
+          <circle cx="530.0" cy="156.0" r="24" class="assessment-hit"/>
+          <circle cx="530.0" cy="156.0" r="5" class="assessment-point"><title>25.10.2026 · 0 из 42</title></circle>
+        </a>
+
+        <text x="42" y="185">14.09</text>
+        <text x="530" y="185" text-anchor="end">25.10</text>
+      </svg>
+
+      <p class="assessment-delta">Изменение балла: <b class="num">-11</b> с 05.10.2026 по 25.10.2026.</p>
+
+    </figure>
+
+    <figure class="assessment-plot">
+      <figcaption>Депрессивные симптомы</figcaption>
+      <div class="assessment-value">
+        <b class="num">0</b><span>из 42<br><time datetime="2026-10-25">25.10.2026</time></span>
+
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-DASS42-RU-FG-2024-demo-v1-depression">
+        <title id="plot-DASS42-RU-FG-2024-demo-v1-depression">DASS-42 — Депрессивные симптомы. Диапазон 0–42. Точные значения приведены в таблице ниже.</title>
+
+        <line x1="42" x2="530" y1="30" y2="30" class="assessment-grid"/>
+        <text x="29" y="35" text-anchor="end">42</text>
+
+        <line x1="42" x2="530" y1="93" y2="93" class="assessment-grid"/>
+        <text x="29" y="98" text-anchor="end">21</text>
+
+        <line x1="42" x2="530" y1="156" y2="156" class="assessment-grid"/>
+        <text x="29" y="161" text-anchor="end">0</text>
+
+
+        <polyline class="assessment-line" points="42.0,78.0 291.95,120.0 530.0,156.0 "/>
+
+
+        <a href="#assessment-3f18543295cf2a41a34db9f33a5fe3a9" aria-label="14.09.2026: 26 из 42, к исходным ответам">
+          <circle cx="42.0" cy="78.0" r="24" class="assessment-hit"/>
+          <circle cx="42.0" cy="78.0" r="5" class="assessment-point"><title>14.09.2026 · 26 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-9227b96f60bcb00dd2dfedcb3d6fb75c" aria-label="05.10.2026: 12 из 42, к исходным ответам">
+          <circle cx="291.95" cy="120.0" r="24" class="assessment-hit"/>
+          <circle cx="291.95" cy="120.0" r="5" class="assessment-point"><title>05.10.2026 · 12 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-f29e74ff66dcf0d24ed0858c6af37bf8" aria-label="25.10.2026: 0 из 42, к исходным ответам">
+          <circle cx="530.0" cy="156.0" r="24" class="assessment-hit"/>
+          <circle cx="530.0" cy="156.0" r="5" class="assessment-point"><title>25.10.2026 · 0 из 42</title></circle>
+        </a>
+
+        <text x="42" y="185">14.09</text>
+        <text x="530" y="185" text-anchor="end">25.10</text>
+      </svg>
+
+      <p class="assessment-delta">Изменение балла: <b class="num">-12</b> с 05.10.2026 по 25.10.2026.</p>
+
+    </figure>
+
+    <figure class="assessment-plot">
+      <figcaption>Стресс</figcaption>
+      <div class="assessment-value">
+        <b class="num">0</b><span>из 42<br><time datetime="2026-10-25">25.10.2026</time></span>
+
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-DASS42-RU-FG-2024-demo-v1-stress">
+        <title id="plot-DASS42-RU-FG-2024-demo-v1-stress">DASS-42 — Стресс. Диапазон 0–42. Точные значения приведены в таблице ниже.</title>
+
+        <line x1="42" x2="530" y1="30" y2="30" class="assessment-grid"/>
+        <text x="29" y="35" text-anchor="end">42</text>
+
+        <line x1="42" x2="530" y1="93" y2="93" class="assessment-grid"/>
+        <text x="29" y="98" text-anchor="end">21</text>
+
+        <line x1="42" x2="530" y1="156" y2="156" class="assessment-grid"/>
+        <text x="29" y="161" text-anchor="end">0</text>
+
+
+        <polyline class="assessment-line" points="42.0,81.0 291.95,123.0 530.0,156.0 "/>
+
+
+        <a href="#assessment-3f18543295cf2a41a34db9f33a5fe3a9" aria-label="14.09.2026: 25 из 42, к исходным ответам">
+          <circle cx="42.0" cy="81.0" r="24" class="assessment-hit"/>
+          <circle cx="42.0" cy="81.0" r="5" class="assessment-point"><title>14.09.2026 · 25 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-9227b96f60bcb00dd2dfedcb3d6fb75c" aria-label="05.10.2026: 11 из 42, к исходным ответам">
+          <circle cx="291.95" cy="123.0" r="24" class="assessment-hit"/>
+          <circle cx="291.95" cy="123.0" r="5" class="assessment-point"><title>05.10.2026 · 11 из 42</title></circle>
+        </a>
+
+        <a href="#assessment-f29e74ff66dcf0d24ed0858c6af37bf8" aria-label="25.10.2026: 0 из 42, к исходным ответам">
+          <circle cx="530.0" cy="156.0" r="24" class="assessment-hit"/>
+          <circle cx="530.0" cy="156.0" r="5" class="assessment-point"><title>25.10.2026 · 0 из 42</title></circle>
+        </a>
+
+        <text x="42" y="185">14.09</text>
+        <text x="530" y="185" text-anchor="end">25.10</text>
+      </svg>
+
+      <p class="assessment-delta">Изменение балла: <b class="num">-11</b> с 05.10.2026 по 25.10.2026.</p>
+
+    </figure>
+
+  </div>
+  <p class="meta">Точки расположены по датам. Линия соединяет измерения и не показывает состояние между ними. Редакции и способы подсчёта не смешиваются.</p>
+  <details class="fold assessment-table" open>
+    <summary>Точные значения и исходные ответы · DASS-42</summary>
+    <div class="assessment-table-scroll" role="region" aria-label="Результаты DASS-42" tabindex="0">
+    <table class="results">
+      <caption class="visually-hidden">DASS-42: все заполнения одной версии, от ранних к поздним</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревожные симптомы</th><th scope="col">Депрессивные симптомы</th><th scope="col">Стресс</th><th scope="col">Ответы</th></tr></thead>
+      <tbody>
+
+      <tr id="assessment-3f18543295cf2a41a34db9f33a5fe3a9">
+        <td><time class="num" datetime="2026-09-14">14.09.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">25</td><td class="num">26</td><td class="num">25</td>
+        <td><a href="#answers-3f18543295cf2a41a34db9f33a5fe3a9">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-9227b96f60bcb00dd2dfedcb3d6fb75c">
+        <td><time class="num" datetime="2026-10-05">05.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">11</td><td class="num">12</td><td class="num">11</td>
+        <td><a href="#answers-9227b96f60bcb00dd2dfedcb3d6fb75c">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-f29e74ff66dcf0d24ed0858c6af37bf8">
+        <td><time class="num" datetime="2026-10-25">25.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        <td><a href="#answers-f29e74ff66dcf0d24ed0858c6af37bf8">Открыть</a></td>
+      </tr>
+
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+    <details class="fold" id="answers-f29e74ff66dcf0d24ed0858c6af37bf8">
+      <summary>Исходные ответы (42 пункта) · DASS-42 · 25.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 25.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Я замечал, что расстраиваюсь по любому поводу.</span> <b class="num">0</b></li>
+
+        <li><span>У меня возникало ощущение сухости во рту.</span> <b class="num">0</b></li>
+
+        <li><span>Мне казалось, что я совсем не могу испытать положительных эмоций.</span> <b class="num">0</b></li>
+
+        <li><span>Мне было тяжело дышать (напр., возникало учащённое дыхание, одышка в отсутствие физических нагрузок).</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно начать делать что-либо.</span> <b class="num">0</b></li>
+
+        <li><span>Я был склонен слишком бурно на всё реагировать.</span> <b class="num">0</b></li>
+
+        <li><span>У меня возникало ощущение шаткости (напр., ноги подкашивались).</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно расслабиться.</span> <b class="num">0</b></li>
+
+        <li><span>У меня были ситуации, которые беспокоили меня настолько, что я испытывал большое облегчение, когда они заканчивались.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что мне нечего ждать от жизни.</span> <b class="num">0</b></li>
+
+        <li><span>Я замечал, что довольно легко расстраиваюсь.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что трачу много душевных сил.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал себя грустным и подавленным.</span> <b class="num">0</b></li>
+
+        <li><span>Я замечал, что начинал терять терпение, когда меня что-то задерживало (напр., лифт, светофор и т.д.).</span> <b class="num">0</b></li>
+
+        <li><span>У меня возникало ощущение дурноты.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что потерял интерес почти ко всему в жизни.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что не представляю ценности как личность.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал себя достаточно ранимым.</span> <b class="num">0</b></li>
+
+        <li><span>Я сильно потел (напр., потели ладони в отсутствие высокой температуры или физических нагрузок).</span> <b class="num">0</b></li>
+
+        <li><span>Я испытывал страх без какой-либо веской причины.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что не стоит жить дальше.</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно успокоиться.</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно глотать (напр., возникало ощущение кома в горле).</span> <b class="num">0</b></li>
+
+        <li><span>Я не получал никакого удовольствия от того, чем я занимался.</span> <b class="num">0</b></li>
+
+        <li><span>Я ощущал сердцебиение в отсутствие физических нагрузок (напр., возникало учащённое сердцебиение, замирание сердца).</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал себя разбитым и унылым.</span> <b class="num">0</b></li>
+
+        <li><span>Я заметил, что бывал очень раздражительным.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что был близок к панике.</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно прийти в себя после того, как меня что-то расстраивало.</span> <b class="num">0</b></li>
+
+        <li><span>Я боялся, что не смогу справиться с какой-нибудь простой, но незнакомой мне задачей.</span> <b class="num">0</b></li>
+
+        <li><span>Я был в не состоянии чем-то увлечься.</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно сохранять спокойствие, когда кто-то прерывал меня во время моих занятий.</span> <b class="num">0</b></li>
+
+        <li><span>Я находился в состоянии нервного напряжения.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал себя совершенно никчёмным человеком.</span> <b class="num">0</b></li>
+
+        <li><span>Меня раздражало всё, что отвлекало меня от дел.</span> <b class="num">0</b></li>
+
+        <li><span>Меня охватывал ужас.</span> <b class="num">0</b></li>
+
+        <li><span>У меня не было светлых надежд на будущее.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что моя жизнь не имеет смысла.</span> <b class="num">0</b></li>
+
+        <li><span>Я замечал, что начинал сильно нервничать.</span> <b class="num">0</b></li>
+
+        <li><span>Я опасался ситуаций, в которых я мог запаниковать и оказаться в глупом положении.</span> <b class="num">0</b></li>
+
+        <li><span>Я ощущал дрожь (напр., в руках).</span> <b class="num">0</b></li>
+
+        <li><span>Мне было сложно заставить себя сделать что-либо.</span> <b class="num">0</b></li>
+
+      </ol>
+      <p class="meta">0 — Вообще не относилось ко мне. · 1 — Относилось ко мне в какой-то степени или некоторое время. · 2 — Относилось ко мне в значительной степени или большую часть времени. · 3 — Относилось ко мне в крайней степени или практически всё время.</p>
+    </details>
+
+    <details class="fold" id="answers-9227b96f60bcb00dd2dfedcb3d6fb75c">
+      <summary>Исходные ответы (42 пункта) · DASS-42 · 05.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 05.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Я замечал, что расстраиваюсь по любому поводу.</span> <b class="num">1</b></li>
+
+        <li><span>У меня возникало ощущение сухости во рту.</span> <b class="num">1</b></li>
+
+        <li><span>Мне казалось, что я совсем не могу испытать положительных эмоций.</span> <b class="num">1</b></li>
+
+        <li><span>Мне было тяжело дышать (напр., возникало учащённое дыхание, одышка в отсутствие физических нагрузок).</span> <b class="num">0</b></li>
+
+        <li><span>Мне было трудно начать делать что-либо.</span> <b class="num">1</b></li>
+
+        <li><span>Я был склонен слишком бурно на всё реагировать.</span> <b class="num">1</b></li>
+
+        <li><span>У меня возникало ощущение шаткости (напр., ноги подкашивались).</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно расслабиться.</span> <b class="num">1</b></li>
+
+        <li><span>У меня были ситуации, которые беспокоили меня настолько, что я испытывал большое облегчение, когда они заканчивались.</span> <b class="num">0</b></li>
+
+        <li><span>Я чувствовал, что мне нечего ждать от жизни.</span> <b class="num">1</b></li>
+
+        <li><span>Я замечал, что довольно легко расстраиваюсь.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что трачу много душевных сил.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал себя грустным и подавленным.</span> <b class="num">1</b></li>
+
+        <li><span>Я замечал, что начинал терять терпение, когда меня что-то задерживало (напр., лифт, светофор и т.д.).</span> <b class="num">0</b></li>
+
+        <li><span>У меня возникало ощущение дурноты.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что потерял интерес почти ко всему в жизни.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что не представляю ценности как личность.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал себя достаточно ранимым.</span> <b class="num">1</b></li>
+
+        <li><span>Я сильно потел (напр., потели ладони в отсутствие высокой температуры или физических нагрузок).</span> <b class="num">0</b></li>
+
+        <li><span>Я испытывал страх без какой-либо веской причины.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что не стоит жить дальше.</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно успокоиться.</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно глотать (напр., возникало ощущение кома в горле).</span> <b class="num">1</b></li>
+
+        <li><span>Я не получал никакого удовольствия от того, чем я занимался.</span> <b class="num">0</b></li>
+
+        <li><span>Я ощущал сердцебиение в отсутствие физических нагрузок (напр., возникало учащённое сердцебиение, замирание сердца).</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал себя разбитым и унылым.</span> <b class="num">1</b></li>
+
+        <li><span>Я заметил, что бывал очень раздражительным.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что был близок к панике.</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно прийти в себя после того, как меня что-то расстраивало.</span> <b class="num">0</b></li>
+
+        <li><span>Я боялся, что не смогу справиться с какой-нибудь простой, но незнакомой мне задачей.</span> <b class="num">1</b></li>
+
+        <li><span>Я был в не состоянии чем-то увлечься.</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно сохранять спокойствие, когда кто-то прерывал меня во время моих занятий.</span> <b class="num">1</b></li>
+
+        <li><span>Я находился в состоянии нервного напряжения.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал себя совершенно никчёмным человеком.</span> <b class="num">0</b></li>
+
+        <li><span>Меня раздражало всё, что отвлекало меня от дел.</span> <b class="num">1</b></li>
+
+        <li><span>Меня охватывал ужас.</span> <b class="num">1</b></li>
+
+        <li><span>У меня не было светлых надежд на будущее.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что моя жизнь не имеет смысла.</span> <b class="num">1</b></li>
+
+        <li><span>Я замечал, что начинал сильно нервничать.</span> <b class="num">0</b></li>
+
+        <li><span>Я опасался ситуаций, в которых я мог запаниковать и оказаться в глупом положении.</span> <b class="num">1</b></li>
+
+        <li><span>Я ощущал дрожь (напр., в руках).</span> <b class="num">1</b></li>
+
+        <li><span>Мне было сложно заставить себя сделать что-либо.</span> <b class="num">1</b></li>
+
+      </ol>
+      <p class="meta">0 — Вообще не относилось ко мне. · 1 — Относилось ко мне в какой-то степени или некоторое время. · 2 — Относилось ко мне в значительной степени или большую часть времени. · 3 — Относилось ко мне в крайней степени или практически всё время.</p>
+    </details>
+
+    <details class="fold" id="answers-3f18543295cf2a41a34db9f33a5fe3a9">
+      <summary>Исходные ответы (42 пункта) · DASS-42 · 14.09.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 14.09.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Я замечал, что расстраиваюсь по любому поводу.</span> <b class="num">2</b></li>
+
+        <li><span>У меня возникало ощущение сухости во рту.</span> <b class="num">2</b></li>
+
+        <li><span>Мне казалось, что я совсем не могу испытать положительных эмоций.</span> <b class="num">2</b></li>
+
+        <li><span>Мне было тяжело дышать (напр., возникало учащённое дыхание, одышка в отсутствие физических нагрузок).</span> <b class="num">1</b></li>
+
+        <li><span>Мне было трудно начать делать что-либо.</span> <b class="num">2</b></li>
+
+        <li><span>Я был склонен слишком бурно на всё реагировать.</span> <b class="num">2</b></li>
+
+        <li><span>У меня возникало ощущение шаткости (напр., ноги подкашивались).</span> <b class="num">2</b></li>
+
+        <li><span>Мне было трудно расслабиться.</span> <b class="num">2</b></li>
+
+        <li><span>У меня были ситуации, которые беспокоили меня настолько, что я испытывал большое облегчение, когда они заканчивались.</span> <b class="num">1</b></li>
+
+        <li><span>Я чувствовал, что мне нечего ждать от жизни.</span> <b class="num">2</b></li>
+
+        <li><span>Я замечал, что довольно легко расстраиваюсь.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что трачу много душевных сил.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал себя грустным и подавленным.</span> <b class="num">2</b></li>
+
+        <li><span>Я замечал, что начинал терять терпение, когда меня что-то задерживало (напр., лифт, светофор и т.д.).</span> <b class="num">1</b></li>
+
+        <li><span>У меня возникало ощущение дурноты.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что потерял интерес почти ко всему в жизни.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что не представляю ценности как личность.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал себя достаточно ранимым.</span> <b class="num">2</b></li>
+
+        <li><span>Я сильно потел (напр., потели ладони в отсутствие высокой температуры или физических нагрузок).</span> <b class="num">1</b></li>
+
+        <li><span>Я испытывал страх без какой-либо веской причины.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что не стоит жить дальше.</span> <b class="num">2</b></li>
+
+        <li><span>Мне было трудно успокоиться.</span> <b class="num">2</b></li>
+
+        <li><span>Мне было трудно глотать (напр., возникало ощущение кома в горле).</span> <b class="num">2</b></li>
+
+        <li><span>Я не получал никакого удовольствия от того, чем я занимался.</span> <b class="num">1</b></li>
+
+        <li><span>Я ощущал сердцебиение в отсутствие физических нагрузок (напр., возникало учащённое сердцебиение, замирание сердца).</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал себя разбитым и унылым.</span> <b class="num">2</b></li>
+
+        <li><span>Я заметил, что бывал очень раздражительным.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что был близок к панике.</span> <b class="num">2</b></li>
+
+        <li><span>Мне было трудно прийти в себя после того, как меня что-то расстраивало.</span> <b class="num">1</b></li>
+
+        <li><span>Я боялся, что не смогу справиться с какой-нибудь простой, но незнакомой мне задачей.</span> <b class="num">2</b></li>
+
+        <li><span>Я был в не состоянии чем-то увлечься.</span> <b class="num">2</b></li>
+
+        <li><span>Мне было трудно сохранять спокойствие, когда кто-то прерывал меня во время моих занятий.</span> <b class="num">2</b></li>
+
+        <li><span>Я находился в состоянии нервного напряжения.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал себя совершенно никчёмным человеком.</span> <b class="num">1</b></li>
+
+        <li><span>Меня раздражало всё, что отвлекало меня от дел.</span> <b class="num">2</b></li>
+
+        <li><span>Меня охватывал ужас.</span> <b class="num">2</b></li>
+
+        <li><span>У меня не было светлых надежд на будущее.</span> <b class="num">2</b></li>
+
+        <li><span>Я чувствовал, что моя жизнь не имеет смысла.</span> <b class="num">2</b></li>
+
+        <li><span>Я замечал, что начинал сильно нервничать.</span> <b class="num">1</b></li>
+
+        <li><span>Я опасался ситуаций, в которых я мог запаниковать и оказаться в глупом положении.</span> <b class="num">2</b></li>
+
+        <li><span>Я ощущал дрожь (напр., в руках).</span> <b class="num">2</b></li>
+
+        <li><span>Мне было сложно заставить себя сделать что-либо.</span> <b class="num">2</b></li>
+
+      </ol>
+      <p class="meta">0 — Вообще не относилось ко мне. · 1 — Относилось ко мне в какой-то степени или некоторое время. · 2 — Относилось ко мне в значительной степени или большую часть времени. · 3 — Относилось ко мне в крайней степени или практически всё время.</p>
+    </details>
+
+  <details class="fold"><summary>Версия, источник и ограничения · DASS-42</summary>
+    <p class="meta">Шкала депрессии, тревоги и стресса (DASS). Lovibond &amp; Lovibond, 1995. Перевод: И.М. Фаттахов, Е.А. Горобец, 2024. 250 русскоязычных пациентов соматического стационара и 100 контрольных; возраст участников в статье не указан. Возраст участников русского исследования не указан: применимость к пациенту проверяет врач.</p>
+    <p class="meta">Суммы по подшкалам: три отдельные суммы 0–42, без общего итога, порогов и уровней тяжести. При любом пропуске суммы не рассчитываются.</p>
+    <p class="meta">Редакция: <span data-form-version="RU-FG-2024 / demo-release-2026-10-19-v1">RU-FG-2024</span>. Подсчёт: dass42-three-sums-v1.</p>
+    <p class="meta"><a href="https://dass.psy.unsw.edu.au/Russian/Fattakhov/Fattakhov_DASS_rus.pdf">Бланк и источник</a> · <a href="https://doi.org/10.17116/jnevro2025125051103">Русская валидация</a> · <a href="https://dass.psy.unsw.edu.au/DASSFAQ.htm">Условия применения</a></p>
+  </details>
+</section>
+
+<section class="assessment-series" aria-labelledby="chart-GAD7-RU-Z-2023-demo-v1">
+  <div class="assessment-heading">
+    <h3 id="chart-GAD7-RU-Z-2023-demo-v1">GAD-7 <span>Тревожные симптомы</span></h3>
+    <span class="meta">Анкет: 3 · 14.09.2026 — 25.10.2026</span>
+  </div>
+  <p class="meta">В течение прошедших двух недель. Больше баллов — больше выраженность указанных симптомов. Баллы не являются диагнозом.</p>
+  <div class="assessment-plots">
+
+    <figure class="assessment-plot">
+      <figcaption>Тревожные симптомы</figcaption>
+      <div class="assessment-value">
+        <b class="num">0</b><span>из 21<br><time datetime="2026-10-25">25.10.2026</time></span>
+
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-GAD7-RU-Z-2023-demo-v1-anxiety">
+        <title id="plot-GAD7-RU-Z-2023-demo-v1-anxiety">GAD-7 — Тревожные симптомы. Диапазон 0–21. Точные значения приведены в таблице ниже.</title>
+
+        <line x1="42" x2="530" y1="30" y2="30" class="assessment-grid"/>
+        <text x="29" y="35" text-anchor="end">21</text>
+
+        <line x1="42" x2="530" y1="93" y2="93" class="assessment-grid"/>
+        <text x="29" y="98" text-anchor="end">10,5</text>
+
+        <line x1="42" x2="530" y1="156" y2="156" class="assessment-grid"/>
+        <text x="29" y="161" text-anchor="end">0</text>
+
+
+        <polyline class="assessment-line" points="42.0,78.0 291.95,120.0 530.0,156.0 "/>
+
+
+        <a href="#assessment-5e7b64831d584dd79ef5e3bfe8f10cb3" aria-label="14.09.2026: 13 из 21, к исходным ответам">
+          <circle cx="42.0" cy="78.0" r="24" class="assessment-hit"/>
+          <circle cx="42.0" cy="78.0" r="5" class="assessment-point"><title>14.09.2026 · 13 из 21</title></circle>
+        </a>
+
+        <a href="#assessment-1a55932b4146a795be0365f819bdae04" aria-label="05.10.2026: 6 из 21, к исходным ответам">
+          <circle cx="291.95" cy="120.0" r="24" class="assessment-hit"/>
+          <circle cx="291.95" cy="120.0" r="5" class="assessment-point"><title>05.10.2026 · 6 из 21</title></circle>
+        </a>
+
+        <a href="#assessment-6b3be8cbd8d2979f20b8b3b0028d3511" aria-label="25.10.2026: 0 из 21, к исходным ответам">
+          <circle cx="530.0" cy="156.0" r="24" class="assessment-hit"/>
+          <circle cx="530.0" cy="156.0" r="5" class="assessment-point"><title>25.10.2026 · 0 из 21</title></circle>
+        </a>
+
+        <text x="42" y="185">14.09</text>
+        <text x="530" y="185" text-anchor="end">25.10</text>
+      </svg>
+
+      <p class="assessment-delta">Изменение балла: <b class="num">-6</b> с 05.10.2026 по 25.10.2026.</p>
+
+    </figure>
+
+  </div>
+  <p class="meta">Точки расположены по датам. Линия соединяет измерения и не показывает состояние между ними. Редакции и способы подсчёта не смешиваются.</p>
+  <details class="fold assessment-table" open>
+    <summary>Точные значения и исходные ответы · GAD-7</summary>
+    <div class="assessment-table-scroll" role="region" aria-label="Результаты GAD-7" tabindex="0">
+    <table class="results">
+      <caption class="visually-hidden">GAD-7: все заполнения одной версии, от ранних к поздним</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Тревожные симптомы</th><th scope="col">Ответы</th></tr></thead>
+      <tbody>
+
+      <tr id="assessment-5e7b64831d584dd79ef5e3bfe8f10cb3">
+        <td><time class="num" datetime="2026-09-14">14.09.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">13</td>
+        <td><a href="#answers-5e7b64831d584dd79ef5e3bfe8f10cb3">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-1a55932b4146a795be0365f819bdae04">
+        <td><time class="num" datetime="2026-10-05">05.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">6</td>
+        <td><a href="#answers-1a55932b4146a795be0365f819bdae04">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-6b3be8cbd8d2979f20b8b3b0028d3511">
+        <td><time class="num" datetime="2026-10-25">25.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">0</td>
+        <td><a href="#answers-6b3be8cbd8d2979f20b8b3b0028d3511">Открыть</a></td>
+      </tr>
+
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+    <details class="fold" id="answers-6b3be8cbd8d2979f20b8b3b0028d3511">
+      <summary>Исходные ответы (7 пункта) · GAD-7 · 25.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 25.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Чувство тревоги или раздражения</span> <b class="num">0</b></li>
+
+        <li><span>Неспособность справиться со своим беспокойством</span> <b class="num">0</b></li>
+
+        <li><span>Чрезмерное беспокойство по разным поводам</span> <b class="num">0</b></li>
+
+        <li><span>Неспособность расслабляться</span> <b class="num">0</b></li>
+
+        <li><span>Ощущение такого беспокойства, что трудно найти себе место</span> <b class="num">0</b></li>
+
+        <li><span>Склонность быстро испытывать злость или раздражительность</span> <b class="num">0</b></li>
+
+        <li><span>Чувство страха, как будто может случиться что-то ужасное</span> <b class="num">0</b></li>
+
+      </ol>
+      <p class="meta">0 — Совсем нет · 1 — В течение нескольких дней · 2 — Более чем половину этого времени · 3 — Почти каждый день</p>
+    </details>
+
+    <details class="fold" id="answers-1a55932b4146a795be0365f819bdae04">
+      <summary>Исходные ответы (7 пункта) · GAD-7 · 05.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 05.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Чувство тревоги или раздражения</span> <b class="num">1</b></li>
+
+        <li><span>Неспособность справиться со своим беспокойством</span> <b class="num">1</b></li>
+
+        <li><span>Чрезмерное беспокойство по разным поводам</span> <b class="num">1</b></li>
+
+        <li><span>Неспособность расслабляться</span> <b class="num">0</b></li>
+
+        <li><span>Ощущение такого беспокойства, что трудно найти себе место</span> <b class="num">1</b></li>
+
+        <li><span>Склонность быстро испытывать злость или раздражительность</span> <b class="num">1</b></li>
+
+        <li><span>Чувство страха, как будто может случиться что-то ужасное</span> <b class="num">1</b></li>
+
+      </ol>
+      <p class="meta">0 — Совсем нет · 1 — В течение нескольких дней · 2 — Более чем половину этого времени · 3 — Почти каждый день</p>
+    </details>
+
+    <details class="fold" id="answers-5e7b64831d584dd79ef5e3bfe8f10cb3">
+      <summary>Исходные ответы (7 пункта) · GAD-7 · 14.09.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 14.09.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Чувство тревоги или раздражения</span> <b class="num">2</b></li>
+
+        <li><span>Неспособность справиться со своим беспокойством</span> <b class="num">2</b></li>
+
+        <li><span>Чрезмерное беспокойство по разным поводам</span> <b class="num">2</b></li>
+
+        <li><span>Неспособность расслабляться</span> <b class="num">1</b></li>
+
+        <li><span>Ощущение такого беспокойства, что трудно найти себе место</span> <b class="num">2</b></li>
+
+        <li><span>Склонность быстро испытывать злость или раздражительность</span> <b class="num">2</b></li>
+
+        <li><span>Чувство страха, как будто может случиться что-то ужасное</span> <b class="num">2</b></li>
+
+      </ol>
+      <p class="meta">0 — Совсем нет · 1 — В течение нескольких дней · 2 — Более чем половину этого времени · 3 — Почти каждый день</p>
+    </details>
+
+  <details class="fold"><summary>Версия, источник и ограничения · GAD-7</summary>
+    <p class="meta">Шкала генерализованного тревожного расстройства (GAD-7). Spitzer R.L., Kroenke K., Williams J.B.W., Löwe B., 2006. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC. Психометрическая проверка: 1130 русскоязычных взрослых 18–90 лет, общая популяция; α=0,93. Клинические чувствительность и специфичность этой версии не установлены.</p>
+    <p class="meta">Сумма семи ответов 0–21. Пороговая интерпретация и диагноз не рассчитываются. При любом пропуске суммы не рассчитываются.</p>
+    <p class="meta">Редакция: <span data-form-version="RU-Zolotareva-2023 / demo-release-2026-10-23-v1">RU-Zolotareva-2023</span>. Подсчёт: gad7-z2023-sum-v1.</p>
+    <p class="meta"><a href="https://publications.hse.ru/pubs/share/direct/889173128.pdf">Бланк и источник</a> · <a href="https://publications.hse.ru/pubs/share/direct/889173128.pdf">Русская валидация</a> · <a href="https://publications.hse.ru/pubs/share/direct/889173128.pdf">Условия применения</a></p>
+  </details>
+</section>
+
+<section class="assessment-series" aria-labelledby="chart-PHQ9-RU-Z-2023-demo-v1">
+  <div class="assessment-heading">
+    <h3 id="chart-PHQ9-RU-Z-2023-demo-v1">PHQ-9 <span>Депрессивные симптомы</span></h3>
+    <span class="meta">Анкет: 3 · 14.09.2026 — 25.10.2026</span>
+  </div>
+  <p class="meta">В течение прошедших двух недель. Больше баллов — больше выраженность указанных симптомов. Баллы не являются диагнозом.</p>
+  <div class="assessment-plots">
+
+    <figure class="assessment-plot">
+      <figcaption>Депрессивные симптомы</figcaption>
+      <div class="assessment-value">
+        <b class="num">0</b><span>из 27<br><time datetime="2026-10-25">25.10.2026</time></span>
+
+      </div>
+      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-PHQ9-RU-Z-2023-demo-v1-depression">
+        <title id="plot-PHQ9-RU-Z-2023-demo-v1-depression">PHQ-9 — Депрессивные симптомы. Диапазон 0–27. Точные значения приведены в таблице ниже.</title>
+
+        <line x1="42" x2="530" y1="30" y2="30" class="assessment-grid"/>
+        <text x="29" y="35" text-anchor="end">27</text>
+
+        <line x1="42" x2="530" y1="93" y2="93" class="assessment-grid"/>
+        <text x="29" y="98" text-anchor="end">13,5</text>
+
+        <line x1="42" x2="530" y1="156" y2="156" class="assessment-grid"/>
+        <text x="29" y="161" text-anchor="end">0</text>
+
+
+        <polyline class="assessment-line" points="42.0,86.0 291.95,123.33 530.0,156.0 "/>
+
+
+        <a href="#assessment-fd346e70c6766b0ff82bde192591a2fa" aria-label="14.09.2026: 15 из 27, к исходным ответам">
+          <circle cx="42.0" cy="86.0" r="24" class="assessment-hit"/>
+          <circle cx="42.0" cy="86.0" r="5" class="assessment-point"><title>14.09.2026 · 15 из 27</title></circle>
+        </a>
+
+        <a href="#assessment-9b43389befdad19d3a57518f096114e7" aria-label="05.10.2026: 7 из 27, к исходным ответам">
+          <circle cx="291.95" cy="123.33" r="24" class="assessment-hit"/>
+          <circle cx="291.95" cy="123.33" r="5" class="assessment-point"><title>05.10.2026 · 7 из 27</title></circle>
+        </a>
+
+        <a href="#assessment-6b19757ba8af0d6a365597473595ab4d" aria-label="25.10.2026: 0 из 27, к исходным ответам">
+          <circle cx="530.0" cy="156.0" r="24" class="assessment-hit"/>
+          <circle cx="530.0" cy="156.0" r="5" class="assessment-point"><title>25.10.2026 · 0 из 27</title></circle>
+        </a>
+
+        <text x="42" y="185">14.09</text>
+        <text x="530" y="185" text-anchor="end">25.10</text>
+      </svg>
+
+      <p class="assessment-delta">Изменение балла: <b class="num">-7</b> с 05.10.2026 по 25.10.2026.</p>
+
+    </figure>
+
+  </div>
+  <p class="meta">Точки расположены по датам. Линия соединяет измерения и не показывает состояние между ними. Редакции и способы подсчёта не смешиваются.</p>
+  <details class="fold assessment-table" open>
+    <summary>Точные значения и исходные ответы · PHQ-9</summary>
+    <div class="assessment-table-scroll" role="region" aria-label="Результаты PHQ-9" tabindex="0">
+    <table class="results">
+      <caption class="visually-hidden">PHQ-9: все заполнения одной версии, от ранних к поздним</caption>
+      <thead><tr><th scope="col">Дата</th><th scope="col">Заполнение</th><th scope="col">Депрессивные симптомы</th><th scope="col">Ответы</th></tr></thead>
+      <tbody>
+
+      <tr id="assessment-fd346e70c6766b0ff82bde192591a2fa">
+        <td><time class="num" datetime="2026-09-14">14.09.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">15</td>
+        <td><a href="#answers-fd346e70c6766b0ff82bde192591a2fa">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-9b43389befdad19d3a57518f096114e7">
+        <td><time class="num" datetime="2026-10-05">05.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">7</td>
+        <td><a href="#answers-9b43389befdad19d3a57518f096114e7">Открыть</a></td>
+      </tr>
+
+      <tr id="assessment-6b19757ba8af0d6a365597473595ab4d">
+        <td><time class="num" datetime="2026-10-25">25.10.2026</time></td>
+        <td><span class="state state--known">полное</span></td>
+        <td class="num">0</td>
+        <td><a href="#answers-6b19757ba8af0d6a365597473595ab4d">Открыть</a></td>
+      </tr>
+
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+    <details class="fold" id="answers-6b19757ba8af0d6a365597473595ab4d">
+      <summary>Исходные ответы (9 пункта) · PHQ-9 · 25.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 25.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Снижение интереса и удовольствия от привычных дел</span> <b class="num">0</b></li>
+
+        <li><span>Чувство подавленности или безнадежности</span> <b class="num">0</b></li>
+
+        <li><span>Проблемы со сном (неспособность заснуть, раннее пробуждение или слишком долгий сон)</span> <b class="num">0</b></li>
+
+        <li><span>Чувство усталости или недостатка энергии</span> <b class="num">0</b></li>
+
+        <li><span>Плохой аппетит или переедание</span> <b class="num">0</b></li>
+
+        <li><span>Плохое мнение о себе или чувство, что не смог оправдать ожиданий моей семьи</span> <b class="num">0</b></li>
+
+        <li><span>Проблемы с концентрацией внимания (например, при чтении газеты или просмотре телевизионной передачи)</span> <b class="num">0</b></li>
+
+        <li><span>Замедленность движений или речи, которая стала заметна другим людям, или, напротив, суетливость, когда движения и речь стали более быстрыми и беспокойными</span> <b class="num">0</b></li>
+
+        <li><span>Мысли о том, что мне бы хотелось умереть или причинить себе боль</span> <b class="num">0</b></li>
+
+      </ol>
+      <p class="meta">0 — совсем нет · 1 — в течение нескольких дней · 2 — более, чем половину этого времени · 3 — почти каждый день</p>
+    </details>
+
+    <details class="fold" id="answers-9b43389befdad19d3a57518f096114e7">
+      <summary>Исходные ответы (9 пункта) · PHQ-9 · 05.10.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 05.10.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Снижение интереса и удовольствия от привычных дел</span> <b class="num">1</b></li>
+
+        <li><span>Чувство подавленности или безнадежности</span> <b class="num">1</b></li>
+
+        <li><span>Проблемы со сном (неспособность заснуть, раннее пробуждение или слишком долгий сон)</span> <b class="num">1</b></li>
+
+        <li><span>Чувство усталости или недостатка энергии</span> <b class="num">0</b></li>
+
+        <li><span>Плохой аппетит или переедание</span> <b class="num">1</b></li>
+
+        <li><span>Плохое мнение о себе или чувство, что не смог оправдать ожиданий моей семьи</span> <b class="num">1</b></li>
+
+        <li><span>Проблемы с концентрацией внимания (например, при чтении газеты или просмотре телевизионной передачи)</span> <b class="num">1</b></li>
+
+        <li><span>Замедленность движений или речи, которая стала заметна другим людям, или, напротив, суетливость, когда движения и речь стали более быстрыми и беспокойными</span> <b class="num">1</b></li>
+
+        <li><span>Мысли о том, что мне бы хотелось умереть или причинить себе боль</span> <b class="num">0</b></li>
+
+      </ol>
+      <p class="meta">0 — совсем нет · 1 — в течение нескольких дней · 2 — более, чем половину этого времени · 3 — почти каждый день</p>
+    </details>
+
+    <details class="fold" id="answers-fd346e70c6766b0ff82bde192591a2fa">
+      <summary>Исходные ответы (9 пункта) · PHQ-9 · 14.09.2026</summary>
+      <p class="meta">Заполнил: Анна Сергеевна Ларина. Принято сервером: 14.09.2026 16:00 МСК. Возраст: 34. Основание: Сохранённые сведения в карточке пациента..</p>
+      <ol class="answers">
+
+        <li><span>Снижение интереса и удовольствия от привычных дел</span> <b class="num">2</b></li>
+
+        <li><span>Чувство подавленности или безнадежности</span> <b class="num">2</b></li>
+
+        <li><span>Проблемы со сном (неспособность заснуть, раннее пробуждение или слишком долгий сон)</span> <b class="num">2</b></li>
+
+        <li><span>Чувство усталости или недостатка энергии</span> <b class="num">1</b></li>
+
+        <li><span>Плохой аппетит или переедание</span> <b class="num">2</b></li>
+
+        <li><span>Плохое мнение о себе или чувство, что не смог оправдать ожиданий моей семьи</span> <b class="num">2</b></li>
+
+        <li><span>Проблемы с концентрацией внимания (например, при чтении газеты или просмотре телевизионной передачи)</span> <b class="num">2</b></li>
+
+        <li><span>Замедленность движений или речи, которая стала заметна другим людям, или, напротив, суетливость, когда движения и речь стали более быстрыми и беспокойными</span> <b class="num">2</b></li>
+
+        <li><span>Мысли о том, что мне бы хотелось умереть или причинить себе боль</span> <b class="num">0</b></li>
+
+      </ol>
+      <p class="meta">0 — совсем нет · 1 — в течение нескольких дней · 2 — более, чем половину этого времени · 3 — почти каждый день</p>
+    </details>
+
+  <details class="fold"><summary>Версия, источник и ограничения · PHQ-9</summary>
+    <p class="meta">Опросник здоровья пациента (PHQ-9). Kroenke K., Spitzer R.L., Williams J.B.W., 2001. Русская адаптация: А.А. Золотарева, 2023. Некоммерческое воспроизведение, CC BY-NC. Психометрическая проверка: 1800 русскоязычных респондентов РФ 18–90 лет; α=0,89. Автор указывает на необходимость дальнейшей клинической валидации.</p>
+    <p class="meta">Сумма девяти ответов 0–27. Пороговая интерпретация и диагноз не рассчитываются. При любом пропуске суммы не рассчитываются.</p>
+    <p class="meta">Редакция: <span data-form-version="RU-Zolotareva-2023 / demo-release-2026-10-23-v1">RU-Zolotareva-2023</span>. Подсчёт: phq9-z2023-sum-v1.</p>
+    <p class="meta"><a href="https://publications.hse.ru/pubs/share/direct/896524950.pdf">Бланк и источник</a> · <a href="https://publications.hse.ru/pubs/share/direct/896524950.pdf">Русская валидация</a> · <a href="https://publications.hse.ru/pubs/share/direct/896524950.pdf">Условия применения</a></p>
+  </details>
+</section>
+
+
+    <form method="post" action="/patients/P201/assessment-requests" class="action-form" id="assessment-form" data-busy>
+      <input type="hidden" name="csrf" value="">
+      <input type="hidden" name="assignment_key" value="2e2f14177b8e0110ecca438c95938917">
+      <h3>Предложить анкету</h3>
+      <p class="meta">Предложение появится в кабинете пациента и действует до конца текущих суток по Москве. Анкеты доступны от 18 лет с учётом ограничений выбранной формы.</p>
+      <div class="assessment-catalogue">
+
+        <label class="assessment-choice">
+          <input type="radio" name="form_version_id" value="DASS42-RU-FG-2024-demo-v1" required checked>
+          <span><b>DASS-42</b> · Депрессия, тревога и стресс
+          <small>Вопросов: 42 · 18–120 лет · На прошлой неделе · обязательного интервала нет</small>
+          <small>Последняя отправка: <time datetime="2026-10-25T13:00:00.000000+00:00">25.10.2026 16:00 МСК</time></small>
+          </span>
+        </label>
+
+        <label class="assessment-choice">
+          <input type="radio" name="form_version_id" value="GAD7-RU-Z-2023-demo-v1" required>
+          <span><b>GAD-7</b> · Тревожные симптомы
+          <small>Вопросов: 7 · 18–90 лет · В течение прошедших двух недель · обязательного интервала нет</small>
+          <small>Последняя отправка: <time datetime="2026-10-25T13:00:00.000000+00:00">25.10.2026 16:00 МСК</time></small>
+          </span>
+        </label>
+
+        <label class="assessment-choice">
+          <input type="radio" name="form_version_id" value="PHQ9-RU-Z-2023-demo-v1" required>
+          <span><b>PHQ-9</b> · Депрессивные симптомы
+          <small>Вопросов: 9 · 18–90 лет · В течение прошедших двух недель · обязательного интервала нет</small>
+          <small>Последняя отправка: <time datetime="2026-10-25T13:00:00.000000+00:00">25.10.2026 16:00 МСК</time></small>
+          </span>
+        </label>
+
+      </div>
+      <details class="fold"><summary>Как устроены интервалы</summary>
+        <p class="meta">Период «за последнюю неделю» или «за последние две недели» указывает, о каком времени спрашивают, и сам по себе не запрещает повторение раньше. Если источник не устанавливает обязательный интервал, ранняя отправка разрешена. Уже открытое предложение одной и той же анкеты не дублируется: нужно дождаться ответа или окончания его срока.</p>
+      </details>
+      <button class="button" type="submit">Предложить выбранную анкету</button>
+    </form>
+  </section>
+  <section class="block" id="link" aria-labelledby="h-link">
+    <h2 id="h-link">Связь с пациентом</h2>
+
+      <p>Действует с <time datetime="2026-09-14T07:00:00.000000+00:00">14.09.2026 10:00 МСК</time>.</p>
+
+        <div class="empty"><span>Проверок связи от пациента не было.</span></div>
+
+
+  </section>
+</div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<dialog class="invite-dialog" id="invite-dialog" aria-labelledby="invite-title">
+  <div class="invite-heading">
+    <h2 id="invite-title">Пригласить пациента</h2>
+    <button class="button" type="button" data-invite-close>Закрыть</button>
+  </div>
+
+
+<form method="post" action="/invitations" class="invite-form">
+  <input type="hidden" name="csrf" value="">
+  <div class="field">
+  <label for="f-patient_id">Код пациента</label>
+  <span class="hint" id="f-patient_id-hint">Код пациента из карточки, например P101.</span>
+  <input class="input" id="f-patient_id" name="patient_id" type="text" required aria-describedby="f-patient_id-hint" maxlength="100" autocomplete="off" spellcheck="false">
+
+</div>
+  <button class="button button--primary" type="submit">Создать приглашение</button>
+</form>
+<p class="meta invite-note">Код приглашения показывается один раз. Передайте его пациенту сами.</p>
+<section class="invite-waiting" aria-labelledby="invite-waiting-title">
+  <h2 id="invite-waiting-title">Ждут принятия</h2>
+
+    <div class="empty"><span>Действующих приглашений нет.</span></div>
+
+</section>
+</dialog>
+<script src="/static/invitations.js" defer></script>
+
+<script src="/static/doctor_forms.js" defer></script>
+
+
+<script src="/support.js" defer data-fe01-added></script></body>
+</html>

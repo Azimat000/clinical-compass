@@ -1,0 +1,43 @@
+/* FE01 only: incumbent app.css is reused unchanged. */
+.fe01-tools { padding: 8px 16px; background: #f7f9fa; border-bottom: 1px solid #d3dae0; font: 14px/1.45 'PT Sans', sans-serif; color: #15191d; }
+.fe01-tools a { margin-inline-end: 16px; }
+.fe01-tools label { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fe01-tools select { max-width: 100%; min-height: 36px; }
+.fe01-tools p { margin: 4px 0; }
+.fe01-support { color: var(--ink); font: inherit; overflow-wrap: anywhere; }
+.fe01-support h2 { font-size: 16px; line-height: 1.3; margin: 0 0 12px; }
+.fe01-support h3 { font-size: 16px; line-height: 1.3; margin: 20px 0 8px; }
+.fe01-support p { margin: 8px 0; max-width: 72ch; }
+.fe01-support .meta { color: #56616b; }
+.fe01-support .fe01-status { border-block: 1px dashed #7f8a94; padding: 10px 0; margin: 12px 0; }
+.fe01-support .fe01-status[data-state='conflict'] { border-block-style: double; border-block-width: 3px; }
+.fe01-support .fe01-status[data-state='failed'] { border-block-style: solid; }
+.fe01-support .fe01-actions { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 12px; align-items: center; }
+.fe01-support .button, .fe01-support summary, .fe01-support .fe01-source { min-height: 44px; }
+.fe01-support .fe01-source { display: inline-flex; align-items: center; }
+.fe01-support textarea { width: 100%; min-height: 88px; font-size: 16px; resize: vertical; }
+.fe01-support label { display: block; margin: 12px 0 4px; }
+.fe01-support details { margin-top: 12px; }
+.fe01-support summary { display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+.fe01-support .fe01-reason { color: #b8261b; font-weight: 700; }
+.fe01-support [hidden], .fe01-tools [hidden] { display: none !important; }
+.fe01-support .fe01-note { border-top: 1px solid #d3dae0; padding-top: 10px; }
+.fe01-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+.fe01-list { min-width: 0; grid-column: 1; grid-row: 1; }
+.fe01-alerts { grid-column: 2; grid-row: 1; border-left: 1px solid #d3dae0; padding: 16px; }
+.fe01-diagnosis { margin: 0 28px; padding: 24px 0; border-bottom: 1px solid #d3dae0; }
+.fe01-plan { padding: 24px 28px; border-bottom: 1px solid #d3dae0; }
+.fe01-support .fe01-diagnosis-value { font-size: 16px; font-weight: 700; }
+.fe01-support .fe01-summary { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.fe01-support .fe01-doctor { margin-top: 20px; padding-top: 16px; border-top: 1px solid #d3dae0; }
+@media (max-width: 1200px) {
+  .fe01-layout { display: flex; flex-direction: column; }
+  .fe01-alerts { width: 100%; border-left: 0; border-bottom: 1px solid #d3dae0; padding: 16px 28px; }
+  .fe01-list { width: 100%; }
+}
+@media (max-width: 760px) {
+  .fe01-diagnosis { margin-inline: 16px; padding-block: 16px; }
+  .fe01-alerts { padding: 16px; }
+  .fe01-plan { padding: 16px; }
+  .fe01-support .fe01-actions > .button { flex: 1 1 auto; }
+}

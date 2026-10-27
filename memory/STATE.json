@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T15:22:48+03:00",
+  "updated_on": "2026-10-27T15:42:27+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE16",
-  "next_slice": "FE01",
+  "last_accepted_slice": "FE01",
+  "next_slice": "FE02",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -693,8 +693,8 @@
       "reason": null
     },
     "FE01": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/FE01",
       "handoff": "memory/sessions/FE01.md",
       "reason": null
     },
@@ -1631,10 +1631,10 @@
       "FE11",
       "FE12"
     ],
-    "status": "planned",
-    "implementation_started": false,
-    "last_accepted_slice": null,
-    "next_slice": "FE01",
+    "status": "in_progress",
+    "implementation_started": true,
+    "last_accepted_slice": "FE01",
+    "next_slice": "FE02",
     "backend_baseline": "refs/tags/slice/BE16",
     "skipped_backend_slices": [
       "BE17",
@@ -1651,6 +1651,8 @@
       "FE10"
     ],
     "scope": "decision_support_only_preserve_existing_frontend",
-    "scope_boundary": "Только три функции поддержки принятия решений BE01–BE16 в существующем интерфейсе. Сохранить нынешние стиль, оболочку, навигацию и остальные экраны. Разрешены локальные добавления на главной врача, в карточке пациента и в «Плане и решениях», необходимые серверные связи и синтетические примеры. Не переделывать кабинет пациента, приём, документы, анкеты, сообщения, вход и приглашения. Существующие пациентские план/календарь только проверять на получение подтверждённых решений."
+    "scope_boundary": "Только три функции поддержки принятия решений BE01–BE16 в существующем интерфейсе. Сохранить нынешние стиль, оболочку, навигацию и остальные экраны. Разрешены локальные добавления на главной врача, в карточке пациента и в «Плане и решениях», необходимые серверные связи и синтетические примеры. Не переделывать кабинет пациента, приём, документы, анкеты, сообщения, вход и приглашения. Существующие пациентские план/календарь только проверять на получение подтверждённых решений.",
+    "ux_brief": "docs/design/decision-support-ui.md",
+    "ux_evidence": "evidence/FE01/acceptance.md"
   }
 }

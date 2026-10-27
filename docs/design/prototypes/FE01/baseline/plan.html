@@ -1,0 +1,1777 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="compass-data-origin" content="synthetic; dates=simulated; clinical-review=unverified">
+<meta name="theme-color" content="#1a1f23">
+<title>План и решения · Клинический компас</title>
+<link rel="icon" href="/static/icons/mark.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/PTSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+
+
+
+
+<div class="shell">
+  <aside class="side" aria-label="Разделы">
+    <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Клинический компас</a>
+    <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+</nav>
+    <div class="side-foot"><span class="side-user" translate="no">Екатерина Павловна Орлова</span>Врач
+      <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form></div>
+  </aside>
+
+  <div class="main">
+    <div class="bar carbon">
+      <a class="brand" href="/" translate="no"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5 14 11h-6z" fill="currentColor"/><path d="M11 18.5 8 11h6z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Компас</a>
+      <details class="menu">
+        <summary>Меню</summary>
+        <nav class="nav" aria-label="Основные разделы">
+
+    <a href="/" aria-current="page">Пациенты</a>
+
+    <a href="/invitations/new" data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog">Пригласить пациента</a>
+
+
+          <form class="d-logout" method="post" action="/logout"><input type="hidden" name="csrf" value=""><button type="submit">Выйти</button></form>
+        </nav>
+      </details>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head carbon">
+        <span>Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</span>
+      </div>
+      <main id="main">
+
+<div class="title-row">
+  <div>
+    <p class="crumb"><a href="/demo/P201">← Карточка пациента</a></p>
+    <h1>План и решения</h1>
+    <p class="asof">Вторник, <time class="num" datetime="2026-10-27">27.10.2026</time> · сведения на <span class="num">15:29</span> МСК</p>
+    <p class="finding"><span translate="no">Анна Сергеевна Ларина</span> · <span class="num" translate="no">P201</span></p>
+  </div>
+  <div class="title-actions"><a class="button button--primary" href="/patients/P201/decisions?compose=1#new-decision">Новый проект</a></div>
+</div>
+
+<nav class="jump patient-nav" aria-label="Разделы пациента"><a href="/demo/P201">Карточка</a><a href="/patients/P201/first-visits">Приём</a><a href="/patients/P201/decisions" aria-current="page">План и решения</a><a href="/patients/P201/communication">Сообщения</a><a href="/patients/P201/imports">Документы</a></nav>
+
+
+
+<nav class="jump plan-jump" aria-label="Разделы экрана">
+  <a href="#current">Текущий план</a><a href="#medications">Препараты</a>
+
+  <a href="#fu-plan">Выполнение плана</a><a href="#history">История решений</a>
+</nav>
+
+<div class="card-body">
+
+
+
+  <section class="block" id="current" aria-labelledby="h-current">
+    <h2 id="h-current">Текущий план</h2>
+
+    <article class="plan current-plan" id="decision-e95dc718aef6bbfd19be0130916fe2cd">
+      <div class="current-plan-meta"><span>Изменение плана · версия <span class="num">3</span></span><span class="state state--known">Подтверждено врачом</span></div>
+      <p class="entry-text plan-main-text">Записывать время засыпания, пробуждения и вечернюю нагрузку. На следующем приёме сопоставить рабочие дни и выходные. Сопоставить последние записи с предыдущим приёмом.</p>
+      <p class="meta"><span translate="no">Екатерина Павловна Орлова</span> · <time class="num" datetime="2026-10-25T14:00:00.000000+00:00">25.10.2026 17:00 МСК</time></p>
+      <details class="fold plan-basis">
+        <summary>Основание и подробности решения</summary>
+        <div class="fold-body">
+
+  <dl class="facts">
+    <dt>Основание</dt><dd>Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</dd>
+    <dt>Что неизвестно</dt><dd>Причина жалоб и вклад отдельных обстоятельств не установлены. Полнота сведений и переносимость требуют очного уточнения.</dd>
+    <dt>Проект составил</dt><dd><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-25T14:00:00.000000+00:00">25.10.2026 17:00 МСК</time></dd>
+
+  </dl>
+
+
+
+
+
+
+
+
+          <p class="entry-text"><b>Обоснование врача:</b> Обсуждено на приёме с учётом исходных записей и вопросов пациента.</p>
+        </div>
+      </details>
+    </article>
+
+  </section>
+
+
+
+
+<section class="med-calendar" id="medications" aria-labelledby="h-medications">
+  <div class="med-title"><h2 id="h-medications">Приём препаратов</h2>
+    <a href="/patients/P201/decisions?compose=1&amp;med_edit=1#new-decision">Изменить расписание</a>
+  </div>
+
+  <p class="meta med-context"> <a href="/demo/P201#records">Сопоставить с дневником</a></p>
+  <details class="med-course"><summary>Расписание и курсы · 1</summary>
+
+<ul class="med-schedule">
+
+  <li><b class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</b>
+    <span class="sub"><span class="num">08:00</span> — 1 табл.</span>
+    <span class="sub">Всего 1 табл. в день · 15.09.2026–13.11.2026 · 60 дн.</span>
+  </li>
+
+</ul>
+
+</details>
+  <nav class="med-weeks" aria-label="Недели календаря приёма">
+    <a class="button" href="/patients/P201/decisions?med_day=2026-10-20#medications" aria-label="Предыдущая неделя">← Неделя</a>
+    <span class="num">26.10–01.11<small>2026</small></span>
+    <a class="button" href="/patients/P201/decisions?med_day=2026-11-03#medications" aria-label="Следующая неделя">Неделя →</a>
+  </nav>
+  <div class="med-days" aria-label="Дни недели">
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-10-26#medications" aria-label="26.10.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 1">
+      <span>Пн</span><b class="num">26</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+      <span class="med-day-note">Нет отм.</span>
+
+    </a>
+
+    <a class="med-day med-day--selected" href="/patients/P201/decisions?med_day=2026-10-27#medications" aria-current="date" aria-label="27.10.2026: принято 1 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Вт</span><b class="num">27</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">1/1</span>
+
+
+      <span class="med-today-dot" aria-label="Сегодня"></span>
+    </a>
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-10-28#medications" aria-label="28.10.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Ср</span><b class="num">28</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+
+
+    </a>
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-10-29#medications" aria-label="29.10.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Чт</span><b class="num">29</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+
+
+    </a>
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-10-30#medications" aria-label="30.10.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Пт</span><b class="num">30</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+
+
+    </a>
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-10-31#medications" aria-label="31.10.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Сб</span><b class="num">31</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+
+
+    </a>
+
+    <a class="med-day" href="/patients/P201/decisions?med_day=2026-11-01#medications" aria-label="01.11.2026: принято 0 из 1; пропущено 0, частично 0, нет отметки 0">
+      <span>Вс</span><b class="num">1</b>
+      <span class="med-day-count"><img src="/static/icons/pill.svg" alt="" width="14" height="14">0/1</span>
+
+
+
+    </a>
+
+  </div>
+  <dl class="med-week-summary" aria-label="Итоги выбранной недели">
+    <div><dt>Принято</dt><dd class="num">1</dd></div>
+    <div><dt>Пропущено</dt><dd class="num">0</dd></div>
+    <div><dt>Частично</dt><dd class="num">0</dd></div>
+    <div><dt>Без отметки за прошлые дни</dt><dd class="num">1</dd></div>
+  </dl>
+  <div class="med-selected-heading"><h3>27 октября · сегодня</h3>
+
+  </div>
+
+  <article class="med-dose" id="dose-ccb77191f2f234277d5fccc55d445589-0-0">
+    <div class="med-dose-heading"><img class="med-pill" src="/static/icons/pill.svg" alt="" width="14" height="14"><time class="num">08:00</time><b class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</b></div>
+    <p class="med-dose-amount">1 табл. <span class="med-status med-status--taken">Принято</span></p>
+
+
+      <p class="meta">Пациент отметил 27.10.2026 14:34 МСК.</p>
+
+
+  </article>
+
+
+  <details class="fold med-trend">
+    <summary>Динамика приёма за 6 недель</summary>
+    <div class="fold-body">
+      <p class="meta">Фактические отметки к текущему времени. Будущие приёмы не учитываются; отсутствие расписания — не пропуск.</p>
+      <table class="results med-trend-table">
+        <caption class="visually-hidden">История приёма по неделям</caption>
+        <thead><tr><th scope="col">Неделя</th><th scope="col">Принято / приёмов</th><th scope="col">Пропущено</th><th scope="col">Частично</th><th scope="col">Нет отметки</th></tr></thead>
+        <tbody><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-09-21#medications">21.09–27.09</a></th>
+          <td class="num">7 / 7</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        </tr><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-09-28#medications">28.09–04.10</a></th>
+          <td class="num">7 / 7</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        </tr><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-10-05#medications">05.10–11.10</a></th>
+          <td class="num">7 / 7</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        </tr><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-10-12#medications">12.10–18.10</a></th>
+          <td class="num">7 / 7</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        </tr><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-10-19#medications">19.10–25.10</a></th>
+          <td class="num">7 / 7</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">0</td>
+        </tr><tr>
+          <th scope="row"><a href="/patients/P201/decisions?med_day=2026-10-26#medications">26.10–27.10</a></th>
+          <td class="num">1 / 2</td>
+          <td class="num">0</td><td class="num">0</td><td class="num">1</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </details>
+
+  <p class="meta">Время по Москве. Счёт под таблеткой — полностью принятые дозы из запланированных. «Нет отметки» не означает пропуск.</p>
+
+</section>
+
+
+
+
+<section class="block" id="fu-plan" aria-labelledby="h-outcomes">
+  <h2 id="h-outcomes">Выполнение плана</h2>
+  <p class="meta">Отметки пациента по отдельным рекомендациям, включая будущие пункты. Вся история отметок. Показана последняя отметка выполнения; самоотчёт за ту же дату — рядом для сверки.</p>
+
+
+
+  <details class="item-history" id="add-recommendation">
+    <summary>Добавить рекомендацию для отметки</summary>
+    <form method="post" action="/patients/P201/plan-tasks" class="recommendation-form" data-busy>
+      <input type="hidden" name="csrf" value="">
+      <input type="hidden" name="request_key" value="">
+      <input type="hidden" name="action_id" value="f6b18d3f37162d43268649f101d91da7">
+      <p class="meta">Выделите отдельный пункт текущего подтверждённого решения. Приём препаратов уже отмечается в календаре.</p>
+      <label class="field">Рекомендация<textarea class="textarea" name="label" rows="2" maxlength="500" required></textarea></label>
+      <label class="field">Дата выполнения<input class="input" type="date" name="due_on" min="1900-01-01" value="2026-10-27" required></label>
+      <label class="option"><input type="checkbox" name="reviewed" value="yes" required>Пункт соответствует подтверждённому решению</label>
+      <button class="button" type="submit">Добавить рекомендацию</button>
+    </form>
+  </details>
+
+
+    <h3><a href="#decision-e95dc718aef6bbfd19be0130916fe2cd">Версия плана 3</a></h3>
+      <table class="results records plan-tasks">
+        <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
+        <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
+        <tbody>
+
+          <tr id="task-a1764dd49cebb15856f46b6fccf3cf81">
+            <td><time class="num" datetime="2026-10-24T21:00:00.000000+00:00">25.10</time></td>
+            <td>Записать время засыпания и пробуждения</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-10-25T19:00:00.000000+00:00">25.10.2026 22:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Сон и время пробуждения записала в ежедневник.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-04b6e303d57088bcf9701b9a6dcd6fdd">Самоотчёт за 25.10</a>
+            </td>
+          </tr>
+
+          <tr id="task-c987ab0366b50f63321c42658cfb3167">
+            <td><time class="num" datetime="2026-10-27T21:00:00.000000+00:00">28.10</time></td>
+            <td>Подготовить вопросы к следующему приёму</td>
+            <td><span class="state state--unknown">срок впереди</span></td>
+            <td>
+              <span class="sub">Отметок нет. Результат неизвестен.</span>
+
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    <h3><a href="#decision-59961cdfce7ff80da0c7123237f32cd6">Версия плана 2</a></h3>
+      <table class="results records plan-tasks">
+        <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
+        <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
+        <tbody>
+
+          <tr id="task-0917b7baa6cf34b1966a494b9b6d372f">
+            <td><time class="num" datetime="2026-10-11T21:00:00.000000+00:00">12.10</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-10-12T11:00:00.000000+00:00">12.10.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-e7dff7d8c98f49adfe7432094a5dc100">Самоотчёт за 12.10</a>
+            </td>
+          </tr>
+
+          <tr id="task-c8d70c4e7e5f773a31d4e7fe4fcf00c9">
+            <td><time class="num" datetime="2026-10-18T21:00:00.000000+00:00">19.10</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-10-19T11:00:00.000000+00:00">19.10.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-d61fd9a748918cf80e6199371b8aa61d">Самоотчёт за 19.10</a>
+            </td>
+          </tr>
+
+          <tr id="task-c1f9a762e33d076850b72f9e10927192">
+            <td><time class="num" datetime="2026-10-24T21:00:00.000000+00:00">25.10</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-10-25T11:00:00.000000+00:00">25.10.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-04b6e303d57088bcf9701b9a6dcd6fdd">Самоотчёт за 25.10</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    <h3><a href="#decision-ccb77191f2f234277d5fccc55d445589">Версия плана 1</a></h3>
+      <table class="results records plan-tasks">
+        <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
+        <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Отметка</th><th scope="col">Кто и что записал</th></tr></thead>
+        <tbody>
+
+          <tr id="task-6f22f35221551e194741081adb0d4337">
+            <td><time class="num" datetime="2026-09-20T21:00:00.000000+00:00">21.09</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-09-21T11:00:00.000000+00:00">21.09.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-c7a34d4bdc0ff142441e381cf9cf02c6">Самоотчёт за 21.09</a>
+            </td>
+          </tr>
+
+          <tr id="task-bb45ff9a8b9e2b40884486ecd9afd309">
+            <td><time class="num" datetime="2026-09-27T21:00:00.000000+00:00">28.09</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-09-28T11:00:00.000000+00:00">28.09.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-824692fc151ef155f3e61be1044da62a">Самоотчёт за 28.09</a>
+            </td>
+          </tr>
+
+          <tr id="task-82bcf9ac54d3609cb6ad80ce711c1f9c">
+            <td><time class="num" datetime="2026-10-04T21:00:00.000000+00:00">05.10</time></td>
+            <td>Записать самочувствие и обстоятельства дня</td>
+            <td><span class="state state--known">Выполнено</span></td>
+            <td>
+
+
+              <span class="hist"><time class="num" datetime="2026-10-05T11:00:00.000000+00:00">05.10.2026 14:00 МСК</time> · <span translate="no">Анна Сергеевна Ларина</span>: Запись самочувствия за этот день отправлена; обстоятельства описаны в дневнике.</span>
+
+
+              <a class="row-link" href="/demo/P201#entry-f7323bc411088b9cd547bdd5975b2400">Самоотчёт за 05.10</a>
+            </td>
+          </tr>
+
+          <tr id="task-6da0353ea1bb1864930da26c8d3f9fee">
+            <td><time class="num" datetime="2026-10-27T21:00:00.000000+00:00">28.10</time></td>
+            <td>Записать время засыпания и пробуждения<span class="sub">заменён новой версией плана</span></td>
+            <td><span class="state state--unknown">срок впереди</span></td>
+            <td>
+              <span class="sub">Отметок нет. Результат неизвестен.</span>
+
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+</section>
+
+  <details class="block plan-fold" id="history">
+    <summary><span>История решений</span><span class="meta">3 · включая текущую версию</span></summary>
+    <div class="plan-fold-body">
+
+    <details class="fold decision" id="history-e95dc718aef6bbfd19be0130916fe2cd">
+      <summary><span class="sum"><span>Изменение плана · версия <span class="num">3</span></span> <span class="state state--known">Подтверждено врачом</span><span class="sub"><time class="num" datetime="2026-10-25T14:00:00.000000+00:00">25.10.2026 17:00 МСК</time>, <span translate="no">Екатерина Павловна Орлова</span></span></span></summary>
+      <div class="fold-body">
+
+  <p class="entry-text">Записывать время засыпания, пробуждения и вечернюю нагрузку. На следующем приёме сопоставить рабочие дни и выходные. Сопоставить последние записи с предыдущим приёмом.</p>
+  <dl class="facts">
+    <dt>Основание</dt><dd>Большинство ночей сон удовлетворяет. Сохраняется беспокойство перед отчётами, повседневная активность расширилась. Продолжает Элицею 10 мг утром; улучшение по дневнику не приписывается только лекарству.</dd>
+    <dt>Что неизвестно</dt><dd>Причина жалоб и вклад отдельных обстоятельств не установлены. Полнота сведений и переносимость требуют очного уточнения.</dd>
+    <dt>Проект составил</dt><dd><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-25T14:00:00.000000+00:00">25.10.2026 17:00 МСК</time></dd>
+
+  </dl>
+
+
+
+
+
+
+
+
+        <p class="entry-text"><b>Обоснование врача:</b> Обсуждено на приёме с учётом исходных записей и вопросов пациента.</p>
+      </div>
+    </details>
+
+    <details class="fold decision" id="decision-59961cdfce7ff80da0c7123237f32cd6">
+      <summary><span class="sum"><span>Изменение плана · версия <span class="num">2</span></span> <span class="state state--known">Подтверждено врачом</span><span class="sub"><time class="num" datetime="2026-10-05T14:00:00.000000+00:00">05.10.2026 17:00 МСК</time>, <span translate="no">Екатерина Павловна Орлова</span></span></span></summary>
+      <div class="fold-body">
+
+  <p class="entry-text">Записывать время засыпания, пробуждения и вечернюю нагрузку. На следующем приёме сопоставить рабочие дни и выходные.</p>
+  <dl class="facts">
+    <dt>Основание</dt><dd>Сон устойчивее в обычные дни, перед сроками сохраняется напряжение. Возобновила прогулки с сыном. Сообщает о приёме Элицеи 10 мг по одной таблетке утром с 15 сентября; оценка изменения сна включает рабочую нагрузку.</dd>
+    <dt>Что неизвестно</dt><dd>Причина жалоб и вклад отдельных обстоятельств не установлены. Полнота сведений и переносимость требуют очного уточнения.</dd>
+    <dt>Проект составил</dt><dd><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-10-05T14:00:00.000000+00:00">05.10.2026 17:00 МСК</time></dd>
+
+  </dl>
+
+
+
+
+
+
+
+
+        <p class="entry-text"><b>Обоснование врача:</b> Обсуждено на приёме с учётом исходных записей и вопросов пациента.</p>
+      </div>
+    </details>
+
+    <details class="fold decision" id="decision-ccb77191f2f234277d5fccc55d445589">
+      <summary><span class="sum"><span>Назначение терапии · версия <span class="num">1</span></span> <span class="state state--known">Подтверждено врачом</span><span class="sub"><time class="num" datetime="2026-09-14T14:00:00.000000+00:00">14.09.2026 17:00 МСК</time>, <span translate="no">Екатерина Павловна Орлова</span></span></span></summary>
+      <div class="fold-body">
+
+  <p class="entry-text">Записывать время засыпания, пробуждения и вечернюю нагрузку. На следующем приёме сопоставить рабочие дни и выходные.
+Элицея 10 мг, таблетки, покрытые плёночной оболочкой: 1 таблетка в 08:00, 2026-09-15–2026-11-13.</p>
+  <dl class="facts">
+    <dt>Основание</dt><dd>Трудности засыпания и перепроверки на фоне рабочей нагрузки; влияние на семейную жизнь заметно. На дату первого приёма Элицея ещё не начата; согласование назначения отражено отдельным решением.</dd>
+    <dt>Что неизвестно</dt><dd>Причина жалоб и вклад отдельных обстоятельств не установлены. Полнота сведений и переносимость требуют очного уточнения.</dd>
+    <dt>Проект составил</dt><dd><span translate="no">Екатерина Павловна Орлова</span>, <time class="num" datetime="2026-09-14T14:00:00.000000+00:00">14.09.2026 17:00 МСК</time></dd>
+
+  </dl>
+  <p class="subhead">Состав препаратов</p>
+
+<ul class="med-schedule">
+
+  <li><b class="keep">Элицея 10 мг, таблетки, покрытые плёночной оболочкой</b>
+    <span class="sub"><span class="num">08:00</span> — 1 табл.</span>
+    <span class="sub">Всего 1 табл. в день · 15.09.2026–13.11.2026 · 60 дн.</span>
+  </li>
+
+</ul>
+
+
+
+
+
+
+
+  <p class="subhead">Оценка по листку-вкладышу</p>
+  <table class="results records">
+    <caption class="visually-hidden">Проверка по областям, записанная врачом</caption>
+    <thead><tr><th scope="col">Область</th><th scope="col">Состояние</th><th scope="col">Запись врача</th></tr></thead>
+    <tbody>
+
+      <tr><td>Диагноз и показание</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Возраст</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Противопоказания</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Функция почек и печени</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Сопутствующая терапия и взаимодействия</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Особые группы и осторожность</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Доза, приём и длительность</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+      <tr><td>Нежелательные явления и план наблюдения</td><td><span class="state state--unknown">Неизвестно / не проверено</span></td><td>Полного источникового основания для индивидуального выбора нет; требуется отдельная проверка.</td></tr>
+
+    </tbody>
+  </table>
+  <dl class="facts">
+    <dt>Вывод врача</dt><dd>Недостаточно данных для выбора Авиандра<span class="sub">Данных для индивидуального выбора Авиандра недостаточно; препарат не выбран.</span></dd>
+    <dt>Не проверено или противоречит</dt><dd>Диагноз и показание, Возраст, Противопоказания, Функция почек и печени, Сопутствующая терапия и взаимодействия, Особые группы и осторожность, Доза, приём и длительность, Нежелательные явления и план наблюдения</dd>
+    <dt>Ограничения и риски</dt><dd>не отмечены</dd>
+  </dl>
+  <p class="meta">Справка версии <span class="num">2026-10-25.1</span>. Пригодность лечения этой записью не установлена, рекомендация автоматически не формируется.</p>
+
+
+
+        <p class="entry-text"><b>Обоснование врача:</b> Обсуждено на приёме с учётом исходных записей и вопросов пациента.</p>
+      </div>
+    </details>
+
+    <p class="meta">Записи неизменяемы: поправка — это новая версия, а не правка прежней.</p>
+    </div>
+  </details>
+
+  <details class="block plan-fold" id="new-decision">
+    <summary><span>Новый проект</span><span class="meta">Сохранить → проверить → подтвердить</span></summary>
+    <div class="plan-fold-body">
+    <p class="meta">Сервис сам ничего не назначает. Новый проект изменит план только после отдельного подтверждения врача.</p>
+    <div class="notice notice--info" role="status">
+  <p class="notice-title">Неизвестность не означает допуск</p>
+  <p>Отсутствие данных не означает отсутствия риска. Непроверенные правила оценки не включены; рекомендации сервис не формирует.</p>
+</div>
+
+    <div class="new-form">
+      <form method="post" action="/patients/P201/decisions" class="action-form" data-busy data-decision-form>
+        <input type="hidden" name="csrf" value="">
+        <input type="hidden" name="request_key" value="">
+        <input type="hidden" name="parent_id" value="">
+        <input type="hidden" name="route_rule_context_id" value="">
+        <input type="hidden" name="routing_reference" value="routing-reference-v1">
+        <input type="hidden" name="therapy_reference" value="2026-10-25.1">
+
+
+        <div class="field">
+  <label for="f-kind">Вид решения</label>
+
+  <select class="select" id="f-kind" name="kind" required>
+    <option value="therapy_start">Назначение терапии</option><option value="therapy_change">Изменение терапии</option><option value="therapy_stop">Отмена терапии</option><option value="referral">Направление</option><option value="plan_change" selected>Изменение плана</option>
+  </select>
+
+</div>
+        <div class="field">
+  <label for="f-content">Решение</label>
+  <span class="hint" id="f-content-hint">Что именно решено.</span>
+  <textarea class="textarea" id="f-content" name="content" rows="4" maxlength="4000" required aria-describedby="f-content-hint">
+</textarea>
+
+</div>
+        <div class="field">
+  <label for="f-basis">Основание</label>
+  <span class="hint" id="f-basis-hint">Откуда сведения: запись, документ, источник.</span>
+  <textarea class="textarea" id="f-basis" name="basis" rows="3" maxlength="4000" required aria-describedby="f-basis-hint">
+</textarea>
+
+</div>
+        <div class="field">
+  <label for="f-uncertainties">Что неизвестно</label>
+  <span class="hint" id="f-uncertainties-hint">Запишите недостающие и противоречивые сведения. Отсутствие данных не означает отсутствия риска.</span>
+  <textarea class="textarea" id="f-uncertainties" name="uncertainties" rows="3" maxlength="4000" required aria-describedby="f-uncertainties-hint">
+</textarea>
+
+</div>
+
+        <fieldset class="med-editor">
+  <legend>Препараты в плане</legend>
+  <input type="hidden" name="med_base" value="ccb77191f2f234277d5fccc55d445589">
+  <div class="field">
+  <label for="f-med_change">Что сделать с расписанием</label>
+
+  <select class="select" id="f-med_change" name="med_change">
+    <option value="preserve" selected>Сохранить прежние назначения</option><option value="replace">Задать новый состав препаратов</option>
+  </select>
+
+</div>
+  <p class="meta">Новый состав полностью заменит прежний после подтверждения. Включите в него все препараты, которые нужно продолжить. Пустой состав означает отмену расписания.</p>
+  <div data-med-editor-body>
+
+
+
+    <details class="med-edit-item" open data-med-item>
+      <summary>Элицея 10 мг, таблетки, покрытые плёночной оболочкой</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_0_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_0_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_0_name" name="med_0_name" type="text" value="Элицея 10 мг, таблетки, покрытые плёночной оболочкой" aria-describedby="f-med_0_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_0_start">Начало курса</label>
+
+  <input class="input" id="f-med_0_start" name="med_0_start" type="date" value="2026-09-15">
+
+</div>
+          <div class="field">
+  <label for="f-med_0_days">Курс, дней</label>
+
+  <input class="input" id="f-med_0_days" name="med_0_days" type="number" value="60" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_0_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_0_0_time" name="med_0_0_time" type="time" value="08:00">
+
+</div>
+          <div class="field">
+  <label for="f-med_0_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_0_0_qty" name="med_0_0_qty">
+    <option value="">Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4" selected>1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_0_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_0_1_time" name="med_0_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_0_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_0_1_qty" name="med_0_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_0_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_0_2_time" name="med_0_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_0_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_0_2_qty" name="med_0_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_0_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_0_3_time" name="med_0_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_0_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_0_3_qty" name="med_0_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 2</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_1_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_1_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_1_name" name="med_1_name" type="text" aria-describedby="f-med_1_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_1_start">Начало курса</label>
+
+  <input class="input" id="f-med_1_start" name="med_1_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_1_days">Курс, дней</label>
+
+  <input class="input" id="f-med_1_days" name="med_1_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_1_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_1_0_time" name="med_1_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_1_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_1_0_qty" name="med_1_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_1_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_1_1_time" name="med_1_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_1_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_1_1_qty" name="med_1_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_1_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_1_2_time" name="med_1_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_1_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_1_2_qty" name="med_1_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_1_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_1_3_time" name="med_1_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_1_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_1_3_qty" name="med_1_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 3</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_2_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_2_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_2_name" name="med_2_name" type="text" aria-describedby="f-med_2_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_2_start">Начало курса</label>
+
+  <input class="input" id="f-med_2_start" name="med_2_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_2_days">Курс, дней</label>
+
+  <input class="input" id="f-med_2_days" name="med_2_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_2_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_2_0_time" name="med_2_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_2_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_2_0_qty" name="med_2_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_2_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_2_1_time" name="med_2_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_2_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_2_1_qty" name="med_2_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_2_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_2_2_time" name="med_2_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_2_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_2_2_qty" name="med_2_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_2_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_2_3_time" name="med_2_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_2_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_2_3_qty" name="med_2_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 4</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_3_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_3_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_3_name" name="med_3_name" type="text" aria-describedby="f-med_3_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_3_start">Начало курса</label>
+
+  <input class="input" id="f-med_3_start" name="med_3_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_3_days">Курс, дней</label>
+
+  <input class="input" id="f-med_3_days" name="med_3_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_3_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_3_0_time" name="med_3_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_3_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_3_0_qty" name="med_3_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_3_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_3_1_time" name="med_3_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_3_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_3_1_qty" name="med_3_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_3_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_3_2_time" name="med_3_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_3_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_3_2_qty" name="med_3_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_3_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_3_3_time" name="med_3_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_3_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_3_3_qty" name="med_3_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 5</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_4_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_4_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_4_name" name="med_4_name" type="text" aria-describedby="f-med_4_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_4_start">Начало курса</label>
+
+  <input class="input" id="f-med_4_start" name="med_4_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_4_days">Курс, дней</label>
+
+  <input class="input" id="f-med_4_days" name="med_4_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_4_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_4_0_time" name="med_4_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_4_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_4_0_qty" name="med_4_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_4_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_4_1_time" name="med_4_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_4_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_4_1_qty" name="med_4_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_4_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_4_2_time" name="med_4_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_4_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_4_2_qty" name="med_4_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_4_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_4_3_time" name="med_4_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_4_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_4_3_qty" name="med_4_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 6</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_5_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_5_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_5_name" name="med_5_name" type="text" aria-describedby="f-med_5_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_5_start">Начало курса</label>
+
+  <input class="input" id="f-med_5_start" name="med_5_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_5_days">Курс, дней</label>
+
+  <input class="input" id="f-med_5_days" name="med_5_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_5_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_5_0_time" name="med_5_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_5_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_5_0_qty" name="med_5_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_5_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_5_1_time" name="med_5_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_5_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_5_1_qty" name="med_5_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_5_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_5_2_time" name="med_5_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_5_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_5_2_qty" name="med_5_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_5_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_5_3_time" name="med_5_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_5_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_5_3_qty" name="med_5_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 7</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_6_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_6_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_6_name" name="med_6_name" type="text" aria-describedby="f-med_6_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_6_start">Начало курса</label>
+
+  <input class="input" id="f-med_6_start" name="med_6_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_6_days">Курс, дней</label>
+
+  <input class="input" id="f-med_6_days" name="med_6_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_6_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_6_0_time" name="med_6_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_6_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_6_0_qty" name="med_6_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_6_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_6_1_time" name="med_6_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_6_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_6_1_qty" name="med_6_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_6_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_6_2_time" name="med_6_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_6_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_6_2_qty" name="med_6_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_6_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_6_3_time" name="med_6_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_6_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_6_3_qty" name="med_6_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+
+
+    <details class="med-edit-item" data-med-item>
+      <summary>Добавить препарат 8</summary>
+      <div class="med-edit-body">
+        <div class="field">
+  <label for="f-med_7_name">Название, дозировка и форма препарата</label>
+  <span class="hint" id="f-med_7_name-hint">Напишите так, чтобы пациент различал препараты и дозировки.</span>
+  <input class="input" id="f-med_7_name" name="med_7_name" type="text" aria-describedby="f-med_7_name-hint" maxlength="200" autocomplete="off">
+
+</div>
+        <div class="form-grid">
+          <div class="field">
+  <label for="f-med_7_start">Начало курса</label>
+
+  <input class="input" id="f-med_7_start" name="med_7_start" type="date">
+
+</div>
+          <div class="field">
+  <label for="f-med_7_days">Курс, дней</label>
+
+  <input class="input" id="f-med_7_days" name="med_7_days" type="number" min="1" max="366" inputmode="numeric">
+
+</div>
+        </div>
+        <p class="meta">Время по Москве. Для неиспользуемого приёма оставьте оба поля пустыми.</p>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_7_0_time">Время приёма 1</label>
+
+  <input class="input" id="f-med_7_0_time" name="med_7_0_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_7_0_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_7_0_qty" name="med_7_0_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_7_1_time">Время приёма 2</label>
+
+  <input class="input" id="f-med_7_1_time" name="med_7_1_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_7_1_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_7_1_qty" name="med_7_1_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_7_2_time">Время приёма 3</label>
+
+  <input class="input" id="f-med_7_2_time" name="med_7_2_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_7_2_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_7_2_qty" name="med_7_2_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <div class="med-slot-edit">
+          <div class="field">
+  <label for="f-med_7_3_time">Время приёма 4</label>
+
+  <input class="input" id="f-med_7_3_time" name="med_7_3_time" type="time">
+
+</div>
+          <div class="field">
+  <label for="f-med_7_3_qty">Таблеток на приём</label>
+
+  <select class="select" id="f-med_7_3_qty" name="med_7_3_qty">
+    <option value="" selected>Не задано</option><option value="1">¼</option><option value="2">½</option><option value="3">¾</option><option value="4">1</option><option value="5">1¼</option><option value="6">1½</option><option value="7">1¾</option><option value="8">2</option><option value="9">2¼</option><option value="10">2½</option><option value="11">2¾</option><option value="12">3</option><option value="13">3¼</option><option value="14">3½</option><option value="15">3¾</option><option value="16">4</option><option value="17">4¼</option><option value="18">4½</option><option value="19">4¾</option><option value="20">5</option><option value="21">5¼</option><option value="22">5½</option><option value="23">5¾</option><option value="24">6</option><option value="25">6¼</option><option value="26">6½</option><option value="27">6¾</option><option value="28">7</option><option value="29">7¼</option><option value="30">7½</option><option value="31">7¾</option><option value="32">8</option><option value="33">8¼</option><option value="34">8½</option><option value="35">8¾</option><option value="36">9</option><option value="37">9¼</option><option value="38">9½</option><option value="39">9¾</option><option value="40">10</option><option value="41">10¼</option><option value="42">10½</option><option value="43">10¾</option><option value="44">11</option><option value="45">11¼</option><option value="46">11½</option><option value="47">11¾</option><option value="48">12</option><option value="49">12¼</option><option value="50">12½</option><option value="51">12¾</option><option value="52">13</option><option value="53">13¼</option><option value="54">13½</option><option value="55">13¾</option><option value="56">14</option><option value="57">14¼</option><option value="58">14½</option><option value="59">14¾</option><option value="60">15</option><option value="61">15¼</option><option value="62">15½</option><option value="63">15¾</option><option value="64">16</option><option value="65">16¼</option><option value="66">16½</option><option value="67">16¾</option><option value="68">17</option><option value="69">17¼</option><option value="70">17½</option><option value="71">17¾</option><option value="72">18</option><option value="73">18¼</option><option value="74">18½</option><option value="75">18¾</option><option value="76">19</option><option value="77">19¼</option><option value="78">19½</option><option value="79">19¾</option><option value="80">20</option>
+  </select>
+
+</div>
+        </div>
+
+        <p class="meta" data-med-total>Всего за день рассчитывается по приёмам.</p>
+        <button class="button" type="button" data-med-remove hidden>Убрать препарат из нового состава</button>
+      </div>
+    </details>
+
+    <button class="button" type="button" data-med-add hidden>Добавить препарат</button>
+    <fieldset class="choice">
+  <legend>Проверка расписания</legend>
+  <div class="choice-list">
+
+    <label class="option"><input type="checkbox" name="med_reviewed" value="yes"> Название, дозировка, допустимость дробления таблетки, время и курс проверены мной по источникам и сведениям пациента</label>
+
+  </div>
+
+</fieldset>
+    <p class="meta">Сервис не проверяет пригодность препарата и дробления таблетки. Приёмы до времени подтверждения не добавляются задним числом.</p>
+  </div>
+</fieldset>
+
+        <fieldset class="kind-group" data-for-kinds="referral">
+          <legend>Направление к психиатру</legend>
+          <p class="meta">Нужно только для вида «Направление». Категорию и срочность выбираете отдельно, сервис их не вычисляет. Применимость справки зависит от возраста.</p>
+          <div class="form-grid">
+            <div class="field">
+  <label for="f-route_specialty">Специальность направляющего врача</label>
+
+  <input class="input" id="f-route_specialty" name="route_specialty" type="text" maxlength="2000" autocomplete="off">
+
+</div>
+            <div class="field">
+  <label for="f-route_category">Категория</label>
+
+  <select class="select" id="f-route_category" name="route_category">
+    <option value="unknown" selected>Не определена</option><option value="mandatory">Обязательно</option><option value="desirable">Желательно</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-route_urgency">Срочность</label>
+
+  <select class="select" id="f-route_urgency" name="route_urgency">
+    <option value="unknown" selected>Не определена</option><option value="emergency">Экстренно</option><option value="urgent">Срочно</option><option value="planned">Планово</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-route_severity_status">Сведения о тяжести</label>
+
+  <select class="select" id="f-route_severity_status" name="route_severity_status">
+    <option value="unknown" selected>Неизвестно</option><option value="known">Данные представлены</option><option value="conflicting">Противоречие</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-route_population_status">Применимость к возрасту</label>
+
+  <select class="select" id="f-route_population_status" name="route_population_status">
+    <option value="unknown" selected>Неизвестно</option><option value="known">Данные представлены</option><option value="conflicting">Противоречие</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-route_age_years">Возраст, лет</label>
+
+  <input class="input input--sm" id="f-route_age_years" name="route_age_years" type="text" inputmode="numeric" maxlength="3" autocomplete="off">
+
+</div>
+          </div>
+          <div class="field">
+  <label for="f-route_severity">Тяжесть по вашей оценке</label>
+
+  <textarea class="textarea" id="f-route_severity" name="route_severity" rows="2" maxlength="2000">
+</textarea>
+
+</div>
+          <div class="field">
+  <label for="f-route_population">Для какой группы применима справка</label>
+
+  <textarea class="textarea" id="f-route_population" name="route_population" rows="2" maxlength="2000">
+</textarea>
+
+</div>
+          <div class="field">
+  <label for="f-route_evidence">Основание направления</label>
+
+  <textarea class="textarea" id="f-route_evidence" name="route_evidence" rows="3" maxlength="2000">
+</textarea>
+
+</div>
+          <div class="field">
+  <label for="f-route_unavailable">Если помощь недоступна</label>
+  <span class="hint" id="f-route_unavailable-hint">Что делать пациенту, если психиатр сразу недоступен.</span>
+  <textarea class="textarea" id="f-route_unavailable" name="route_unavailable" rows="2" maxlength="2000" aria-describedby="f-route_unavailable-hint">
+</textarea>
+
+</div>
+        </fieldset>
+
+        <fieldset class="kind-group" data-for-kinds="therapy_start therapy_change therapy_stop">
+          <legend>Терапия: оценка по листку-вкладышу</legend>
+          <p class="meta">Нужно для назначения, изменения и отмены терапии. Заполните все области: «неизвестно» — допустимый ответ, но его нельзя выдавать за проверку.</p>
+          <div class="notice notice--info" role="status">
+
+  <p>Справка не заменяет полный источник. Клинические пороги, автоматические взаимодействия и маршруты не включены; для них нужны отдельные подтверждённые основания. Результат проверки записывает врач.</p>
+</div>
+          <details class="fold">
+            <summary>Справка из источников (3)</summary>
+            <div class="fold-body">
+
+              <p class="subhead">Авиандр: официальный листок-вкладыш ГРЛС</p>
+              <ul class="plain">
+
+                <li><b>Показания</b> <span class="num">§1</span><span class="sub">Показания в листке: ГТР; тревожные состояния после COVID-19 при стрессовой реакции и нарушении адаптации лёгкой или средней выраженности. Указанная популяция — взрослые старше 18 лет. Симптомы тревоги или депрессии сами по себе не расширяют эти показания.</span><span class="sub">Симптомы и балл анкеты не устанавливают показание. Диагноз и применимость проверяет врач по первоисточнику.</span></li>
+
+                <li><b>Противопоказания</b> <span class="num">§2, с.2–3</span><span class="sub">Противопоказания: гиперчувствительность к компонентам; эпилепсия и органическое поражение мозга; одновременный приём ИМАО и 2 недели после их отмены; почечная недостаточность с СКФ менее 60 мл/мин; печёночная недостаточность классов A, B и C Чайлд–Пью. Беременность противопоказана. При грудном вскармливании не применять. Полный текст и ограничения возраста — в источнике.</span><span class="sub">Каждое условие требует отдельной проверки. Неизвестное или противоречие не означает отсутствие противопоказаний.</span></li>
+
+                <li><b>Дозы и режим</b> <span class="num">§3, с.3</span><span class="sub">В листке указан приём внутрь по 20 мг дважды в сутки за 30 минут до еды. Для ГТР длительность определяет врач. При тревожных состояниях после COVID-19 — 4 недели, по рекомендации врача до 6 недель. Схема титрации не указана; её нельзя придумывать. Значения здесь справочные, в проект не подставляются.</span><span class="sub">Автоматического заполнения доз нет; врач сверяет режим, единицы, кратность и длительность с источником.</span></li>
+
+                <li><b>Взаимодействия</b> <span class="num">§2, с.2–3</span><span class="sub">ИМАО и двухнедельный период после отмены — противопоказание. Врач проверяет противотревожные средства, нейролептики, снотворные, противоаллергические, серотонинергические препараты (включая СИОЗС, ТЦА, литий, зверобой, L-триптофан), триптаны, опиоидные анальгетики и ингибиторы CYP2D6. Употребление алкоголя исключается. Перечень групп не является базой всех лекарственных пар.</span><span class="sub">Нужен полный список терапии. Нераспознанное название или отсутствие сведений не означает совместимость.</span></li>
+
+                <li><b>Возраст и особые группы</b> <span class="num">§1–3</span><span class="sub">Листок требует обсудить с врачом сердечно-сосудистые и эндокринные заболевания и зависимость. Беременность противопоказана; при грудном вскармливании не применять. Возрастные границы другой анкеты не подтверждают применимость препарата. При сахарном диабете/других эндокринных заболеваниях, алкогольной/наркотической зависимости нужна осторожность. При непереносимости некоторых сахаров — консультация по составу (лактоза). При сонливости или головокружении следует воздерживаться от вождения и работы с механизмами.</span><span class="sub">Точные профессиональные границы требуют проверки; ровно 18 лет, неизвестный или противоречивый возраст не получают автоматический допуск.</span></li>
+
+                <li><b>Нежелательные явления</b> <span class="num">§4, с.4–5</span><span class="sub">Частые НЯ: сонливость, головная боль, головокружение, астения, парестезии. Нечастые включают нарушения сна, усиление тревоги, изменения внимания/реакции/вкуса, тошноту, боль вверху живота, запор, боль в спине, повышение КФК. Мышечная скованность, тризм, гипергидроз и снижение гемоглобина в листке выделены для немедленного обращения к врачу. Частоты и полный перечень сверяются с документом; автоматический вывод о причинности или срочности здесь не выполняется.</span><span class="sub">Сообщение пациента сохраняется отдельно; причинность, тяжесть и изменение терапии устанавливает врач.</span></li>
+
+                <li><b>Передозировка, прекращение и пропуск</b> <span class="num">§3</span><span class="sub">Листок сообщает об отсутствии данных о случаях передозировки и описывает возможные головокружение, слабость, сонливость и угнетение сознания с немедленным обращением к врачу. Это не схема самостоятельного лечения. Не придумывать режим постепенной отмены или компенсирующую дозу. Пропуск нельзя компенсировать двойной дозой (сведения §3).</span><span class="sub">Сведения о фактическом приёме и жалобы сохраняются для врача. Назначение, изменение и отмена требуют отдельного подтверждения врача; алгоритм медицинской реакции не включён.</span></li>
+
+              </ul>
+
+              <p class="subhead">КР ГТР, 457_3, 2024, взрослые</p>
+              <ul class="plain">
+
+                <li><b>Врачебный выбор фармакотерапии</b> <span class="num">§3.1.1</span><span class="sub">КР ГТР рассматривают психофармакотерапию как один из вариантов. Эта справка не содержит каталога других препаратов, доз или автоматического выбора.</span><span class="sub">Конкретный препарат требует собственной действующей инструкции ГРЛС и индивидуальной оценки врача.</span></li>
+
+                <li><b>Психотерапия</b> <span class="num">§3.1.2</span><span class="sub">КР ГТР рассматривают психотерапию, включая когнитивно-поведенческий подход, релаксационные методы и другие перечисленные в разделе подходы. Выбор и план определяет врач.</span><span class="sub">Автоматическое назначение метода, числа сеансов и отмена лекарств из этого указателя не следуют.</span></li>
+
+              </ul>
+
+              <p class="subhead">КР депрессивный эпизод/РДР, 301_3, 2024, взрослые</p>
+              <ul class="plain">
+
+                <li><b>Психотерапия и психообразование</b> <span class="num">§3.3 и §4</span><span class="sub">КР депрессивного эпизода/РДР рассматривают психотерапию и психообразование в составе помощи; в §3.3 среди изученных методов названы когнитивно-поведенческая и межличностная психотерапия.</span><span class="sub">Это указатель вариантов для врача, а не рекомендация конкретному случаю. Из диагноза депрессии не следует показание к Авиандру.</span></li>
+
+              </ul>
+
+            </div>
+          </details>
+
+          <fieldset class="area">
+            <legend>Диагноз и показание <span class="meta num">SRC12 §1</span></legend>
+            <p class="meta">Укажите диагноз/контекст и соответствует ли он показанию. Балл анкеты сам по себе не устанавливает диагноз.</p>
+            <div class="field">
+  <label for="f-review_indication">Состояние</label>
+
+  <select class="select" id="f-review_indication" name="review_indication">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_indication">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_indication" name="note_indication" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Возраст <span class="meta num">SRC12 §1–2</span></legend>
+            <p class="meta">Учитывайте возрастные ограничения препарата из источника. Ровно 18 лет, неизвестность и противоречия требуют уточнения; не переносите границы DASS на лекарство.</p>
+            <div class="field">
+  <label for="f-review_age">Состояние</label>
+
+  <select class="select" id="f-review_age" name="review_age">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_age">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_age" name="note_age" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Противопоказания <span class="meta num">SRC12 §2</span></legend>
+            <p class="meta">Сверьте весь перечень в листке: аллергию, эпилепсию/органическое поражение мозга, ИМАО и период после отмены, беременность и другие указанные ограничения.</p>
+            <div class="field">
+  <label for="f-review_contraindications">Состояние</label>
+
+  <select class="select" id="f-review_contraindications" name="review_contraindications">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_contraindications">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_contraindications" name="note_contraindications" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Функция почек и печени <span class="meta num">SRC12 §2</span></legend>
+            <p class="meta">Укажите источник/дату СКФ и сведения о печени. Отсутствие обследования не означает нормальную функцию.</p>
+            <div class="field">
+  <label for="f-review_organs">Состояние</label>
+
+  <select class="select" id="f-review_organs" name="review_organs">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_organs">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_organs" name="note_organs" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Сопутствующая терапия и взаимодействия <span class="meta num">SRC12 §2</span></legend>
+            <p class="meta">Укажите полный список, включая безрецептурные препараты и алкоголь; проверьте источник. Неизвестное название не считается совместимым.</p>
+            <div class="field">
+  <label for="f-review_interactions">Состояние</label>
+
+  <select class="select" id="f-review_interactions" name="review_interactions">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_interactions">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_interactions" name="note_interactions" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Особые группы и осторожность <span class="meta num">SRC12 §2</span></legend>
+            <p class="meta">Сверьте беременность/лактацию, сопутствующие заболевания и ограничения из полного документа. Неприменимость также обоснуйте.</p>
+            <div class="field">
+  <label for="f-review_special">Состояние</label>
+
+  <select class="select" id="f-review_special" name="review_special">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_special">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_special" name="note_special" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Доза, приём и длительность <span class="meta num">SRC12 §3</span></legend>
+            <p class="meta">Для лекарственного варианта укажите единицы, разовую дозу, кратность, время и длительность. Не переносите курс одного показания на другое. Для иного варианта обоснуйте неприменимость.</p>
+            <div class="field">
+  <label for="f-review_regimen">Состояние</label>
+
+  <select class="select" id="f-review_regimen" name="review_regimen">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_regimen">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_regimen" name="note_regimen" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <fieldset class="area">
+            <legend>Нежелательные явления и план наблюдения <span class="meta num">SRC12 §4</span></legend>
+            <p class="meta">Укажите жалобы, время, текущую терапию и план оценки. Причинность/тяжесть не выводятся автоматически; отсутствие сообщения не доказывает отсутствие НЯ.</p>
+            <div class="field">
+  <label for="f-review_adverse">Состояние</label>
+
+  <select class="select" id="f-review_adverse" name="review_adverse">
+    <option value="unknown" selected>Неизвестно / не проверено</option><option value="conflicting">Есть противоречие</option><option value="concern">Есть ограничение или риск</option><option value="reviewed">Проверено врачом с указанным основанием</option>
+  </select>
+
+</div>
+            <div class="field">
+  <label for="f-note_adverse">Что вы проверили и откуда</label>
+
+  <textarea class="textarea" id="f-note_adverse" name="note_adverse" rows="2" maxlength="1500">
+</textarea>
+
+</div>
+          </fieldset>
+
+          <div class="field">
+  <label for="f-aviandr_conclusion">Вывод по Авиандру</label>
+
+  <select class="select" id="f-aviandr_conclusion" name="aviandr_conclusion">
+    <option value="not_selected">Авиандр рассмотрен и не выбран</option><option value="insufficient_data" selected>Недостаточно данных для выбора Авиандра</option><option value="individual_review">Сведения сверены; дальнейшее решение принимает врач</option>
+  </select>
+
+</div>
+          <div class="field">
+  <label for="f-aviandr_basis">Основание вывода</label>
+
+  <textarea class="textarea" id="f-aviandr_basis" name="aviandr_basis" rows="3" maxlength="2000">
+</textarea>
+
+</div>
+        </fieldset>
+
+        <div class="form-actions"><button class="button button--primary" type="submit">Сохранить проект</button></div>
+        <p class="meta">Проект не меняет план и не создаёт назначений. Подтверждение — отдельный шаг в разделе «На подтверждении».</p>
+      </form>
+    </div>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<dialog class="invite-dialog" id="invite-dialog" aria-labelledby="invite-title">
+  <div class="invite-heading">
+    <h2 id="invite-title">Пригласить пациента</h2>
+    <button class="button" type="button" data-invite-close>Закрыть</button>
+  </div>
+
+
+<form method="post" action="/invitations" class="invite-form">
+  <input type="hidden" name="csrf" value="">
+  <div class="field">
+  <label for="f-patient_id">Код пациента</label>
+  <span class="hint" id="f-patient_id-hint">Код пациента из карточки, например P101.</span>
+  <input class="input" id="f-patient_id" name="patient_id" type="text" required aria-describedby="f-patient_id-hint" maxlength="100" autocomplete="off" spellcheck="false">
+
+</div>
+  <button class="button button--primary" type="submit">Создать приглашение</button>
+</form>
+<p class="meta invite-note">Код приглашения показывается один раз. Передайте его пациенту сами.</p>
+<section class="invite-waiting" aria-labelledby="invite-waiting-title">
+  <h2 id="invite-waiting-title">Ждут принятия</h2>
+
+    <div class="empty"><span>Действующих приглашений нет.</span></div>
+
+</section>
+</dialog>
+<script src="/static/invitations.js" defer></script>
+
+<script src="/static/doctor_forms.js" defer></script><script src="/static/medications.js" defer></script>
+
+
+</body>
+</html>
