@@ -246,6 +246,22 @@ class PlanTaskTests(unittest.TestCase):
         self.assertNotIn('class="recommendation-form"', html)
         self.assertIn('OLD-ANSWER', html)
 
+    def test_doctor_current_plan_and_answers_precede_collapsed_history(self):
+        old, _ = self.add(due_on='2020-01-01', label='OLD-DOCTOR-ITEM')
+        self.mark(old, reason='OLD-DOCTOR-ANSWER')
+        current, _ = self.add(label='CURRENT-DOCTOR-ITEM')
+        self.mark(current, reason='CURRENT-DOCTOR-ANSWER')
+        self.draft()  # An unconfirmed project must not replace the current plan.
+        html = self.clients['doc-a'].get(self.plan_url).text
+        history = html.index('<details class="block plan-fold" id="history">')
+        self.assertLess(html.index('id="current"'), html.index('id="fu-plan"'))
+        self.assertLess(html.index('CURRENT-DOCTOR-ANSWER'), html.index('id="waiting"'))
+        self.assertLess(html.index('CURRENT-DOCTOR-ANSWER'), history)
+        self.assertGreater(html.index('OLD-DOCTOR-ANSWER'), history)
+        self.assertGreater(html.index('id="task-'+old['id']), history)
+        self.assertEqual(1, html.count('id="task-'+current['id']+'"'))
+        self.assertEqual(1, html.count('id="task-'+old['id']+'"'))
+
     def test_patient_without_relationship_gets_no_marks_or_private_context(self):
         self.db.execute("UPDATE care_relationships SET ends_at='2000-01-01'")
         page = self.clients['pat-a'].get(self.plan_url)

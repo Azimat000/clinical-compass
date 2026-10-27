@@ -1,30 +1,6 @@
 {# Historical adherence facts; the decision text is shown only in its own decision. #}
 {% set outcome_kind = {'taken': 'known', 'missed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
-<section class="block" id="fu-plan" aria-labelledby="h-outcomes">
-  <h2 id="h-outcomes">Ответы пациента по плану</h2>
-  <p class="meta">Ответы пациента по каждому пункту, включая отправленные заранее. Выполнение отмечается отдельно; прежние ответы сохранены в истории.</p>
-  {% if task_error %}<div class="notice notice--error" role="alert"><b>Рекомендация не добавлена</b><p>{{ task_error }}</p>
-    {% if task_values.get('label') %}<p class="keep">Несохранённая рекомендация: {{ task_values.get('label') }}</p>{% endif %}
-    {% if task_values.get('due_on') %}<p>Дата выполнения: {{ task_values.get('due_on') }}</p>{% endif %}
-  </div>{% endif %}
-  {% set task_head = plan_task_data.head %}
-  {% if task_head and task_head.kind != 'therapy_stop' %}
-  <details class="item-history" id="add-recommendation"{% if task_error %} open{% endif %}>
-    <summary>Добавить рекомендацию для отметки</summary>
-    <form method="post" action="{{ url_for('schedule_plan_task', patient_id=patient.id) }}" class="recommendation-form" data-busy>
-      <input type="hidden" name="csrf" value="{{ csrf }}">
-      <input type="hidden" name="request_key" value="{{ task_values.get('request_key') or new_key() }}">
-      <input type="hidden" name="action_id" value="{{ task_values.get('action_id', task_head.id) }}">
-      <p class="meta">Выделите отдельный пункт текущего подтверждённого решения. Приём препаратов уже отмечается в календаре.</p>
-      <label class="field">Рекомендация<textarea class="textarea" name="label" rows="2" maxlength="500" required>{{ task_values.get('label', '') }}</textarea></label>
-      <label class="field">Дата выполнения<input class="input" type="date" name="due_on" min="1900-01-01" value="{{ task_values.get('due_on', today) }}" required></label>
-      <label class="option"><input type="checkbox" name="reviewed" value="yes" required{% if task_values.get('reviewed') == 'yes' %} checked{% endif %}>Пункт соответствует подтверждённому решению</label>
-      <button class="button" type="submit">Добавить рекомендацию</button>
-    </form>
-  </details>
-  {% else %}<p class="meta">Чтобы выделить рекомендацию для отметки, сначала подтвердите план или направление.</p>{% endif %}
-  {% for version, tasks in plan_data.tasks|groupby('version')|reverse %}
-    <h3><a href="#decision-{{ tasks[0].proposal_id }}">Версия плана {{ tasks[0].version }}</a></h3>
+{% macro outcomes(tasks) %}
       <table class="results records plan-tasks">
         <caption class="visually-hidden">Пункты плана и отметки о выполнении</caption>
         <thead><tr><th scope="col">Срок</th><th scope="col">Пункт</th><th scope="col">Ответ пациента</th><th scope="col">Выполнение</th></tr></thead>
@@ -52,6 +28,33 @@
           {% endfor %}
         </tbody>
       </table>
-  {% else %}{{ ui.empty('Пунктов плана с отметками за прошедшие дни нет. Это не означает, что план не нужен.') }}{% endfor %}
+{% endmacro %}
+<section class="block" id="fu-plan" aria-labelledby="h-outcomes">
+  <h2 id="h-outcomes">Ответы пациента по плану</h2>
+  <p class="meta">Ответы пациента по каждому пункту, включая отправленные заранее. Выполнение отмечается отдельно; прежние ответы сохранены в истории.</p>
+  {% if task_error %}<div class="notice notice--error" role="alert"><b>Рекомендация не добавлена</b><p>{{ task_error }}</p>
+    {% if task_values.get('label') %}<p class="keep">Несохранённая рекомендация: {{ task_values.get('label') }}</p>{% endif %}
+    {% if task_values.get('due_on') %}<p>Дата выполнения: {{ task_values.get('due_on') }}</p>{% endif %}
+  </div>{% endif %}
+  {% set task_head = plan_task_data.head %}
+  {% if task_head and task_head.kind != 'therapy_stop' %}
+  <details class="item-history" id="add-recommendation"{% if task_error %} open{% endif %}>
+    <summary>Добавить рекомендацию для отметки</summary>
+    <form method="post" action="{{ url_for('schedule_plan_task', patient_id=patient.id) }}" class="recommendation-form" data-busy>
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="hidden" name="request_key" value="{{ task_values.get('request_key') or new_key() }}">
+      <input type="hidden" name="action_id" value="{{ task_values.get('action_id', task_head.id) }}">
+      <p class="meta">Выделите отдельный пункт текущего подтверждённого решения. Приём препаратов уже отмечается в календаре.</p>
+      <label class="field">Рекомендация<textarea class="textarea" name="label" rows="2" maxlength="500" required>{{ task_values.get('label', '') }}</textarea></label>
+      <label class="field">Дата выполнения<input class="input" type="date" name="due_on" min="1900-01-01" value="{{ task_values.get('due_on', today) }}" required></label>
+      <label class="option"><input type="checkbox" name="reviewed" value="yes" required{% if task_values.get('reviewed') == 'yes' %} checked{% endif %}>Пункт соответствует подтверждённому решению</label>
+      <button class="button" type="submit">Добавить рекомендацию</button>
+    </form>
+  </details>
+  {% else %}<p class="meta">Чтобы выделить рекомендацию для отметки, сначала подтвердите план или направление.</p>{% endif %}
+  {% set current_tasks = plan_data.tasks|selectattr('proposal_id', 'equalto', head.id)|list if head else [] %}
+  {% if current_tasks %}{{ outcomes(current_tasks) }}
+  {% else %}{{ ui.empty('В текущем плане пока нет отдельных пунктов для ответа.') }}{% endif %}
+
 
 </section>

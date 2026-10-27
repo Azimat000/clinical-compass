@@ -11,6 +11,8 @@
 {% set closed = decisions|rejectattr('decision', 'none')|list %}
 {% set approved = closed|selectattr('decision', 'equalto', 'approved')|list %}
 {% set head = approved[0] if approved else none %}
+{% set historical = closed|rejectattr('id', 'equalto', head.id)|list if head else closed %}
+{% from 'plan_outcomes.html' import outcomes with context %}
 {% set stale_waiting = waiting|selectattr('id', 'in', stale)|list %}
 {% set check_state = {'reviewed': 'known', 'unknown': 'unknown', 'conflicting': 'conflict', 'concern': 'new'} %}
 {% set field_state = {'known': 'known', 'unknown': 'unknown', 'conflicting': 'conflict'} %}
@@ -95,7 +97,7 @@
 <nav class="jump plan-jump" aria-label="Разделы экрана">
   <a href="#current">Текущий план</a><a href="#medications">Препараты</a>
   {% if waiting %}<a href="#waiting">На подтверждении · {{ waiting|length }}</a>{% endif %}
-  <a href="#fu-plan">Выполнение плана</a><a href="#history">История решений</a>
+  <a href="#fu-plan">Ответы пациента</a><a href="#history">История планов и ответов</a>
 </nav>
 
 <div class="card-body">
@@ -152,25 +154,27 @@
   </section>
 
   {% endset %}
-  {% if waiting %}{{ sec_waiting }}{% endif %}{{ sec_current }}
+  {{ sec_current }}
+  {% include 'plan_outcomes.html' %}
+  {% if waiting %}{{ sec_waiting }}{% endif %}
 
   {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', False) }}
 
-  {% include 'plan_outcomes.html' %}
-
   <details class="block plan-fold" id="history">
-    <summary><span>История решений</span><span class="meta">{{ closed|length }} · включая текущую версию</span></summary>
+    <summary><span>История планов и ответов</span><span class="meta">Прежних решений: {{ historical|length }}</span></summary>
     <div class="plan-fold-body">
-    {% for item in closed %}
-    <details class="fold decision" id="{{ 'history-' if head and item.id == head.id else 'decision-' }}{{ item.id }}">
+    {% for item in historical %}
+    <details class="fold decision" id="decision-{{ item.id }}">
       <summary><span class="sum"><span>{{ kinds[item.kind] }} · версия <span class="num">{{ item.version }}</span></span> {{ status_line(item) }}<span class="sub"><time class="num" datetime="{{ item.confirmed_at }}">{{ item.confirmed_at|msk }}</time>, <span translate="no">{{ authors.get(item.doctor_id, item.doctor_id) }}</span></span></span></summary>
       <div class="fold-body">
         {{ body(item) }}
         <p class="entry-text"><b>Обоснование врача:</b> {{ item.rationale }}</p>
+        {% set old_tasks = plan_data.tasks|selectattr('proposal_id', 'equalto', item.id)|list %}
+        {% if old_tasks %}<h3>Ответы пациента по этой версии</h3>{{ outcomes(old_tasks) }}{% endif %}
       </div>
     </details>
     {% else %}
-      {{ ui.empty('Решений ещё не было. Первое появится после подтверждения или отклонения проекта.') }}
+      {{ ui.empty('Прежних решений и ответов пока нет.') }}
     {% endfor %}
     {% if closed %}<p class="meta">Записи неизменяемы: поправка — это новая версия, а не правка прежней.</p>{% endif %}
     </div>
