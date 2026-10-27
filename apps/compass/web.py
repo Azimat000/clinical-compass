@@ -294,6 +294,19 @@ def create_app(database=None):
         response.headers['Location'] = url_for('get_analysis', patient_id=patient_id, run_id=value['run_id'])
         return response
 
+    @app.get('/api/v1/patients/<patient_id>/analyses')
+    def analysis_history(patient_id):
+        role('doctor')
+        if (set(request.args) - {'operation', 'page'}
+                or any(len(request.args.getlist(key)) != 1 for key in request.args)):
+            raise backend_analyses.AnalysisError('Недопустимые параметры страницы.', 400, 'invalid_page')
+        page = request.args.get('page', '1')
+        if not re.fullmatch(r'[1-9][0-9]{0,6}', page):
+            raise backend_analyses.AnalysisError('Нужен номер страницы.', 400, 'invalid_page')
+        from . import backend_analysis_history
+        return jsonify(backend_analysis_history.read(get_db(), g.user, patient_id,
+            operation=request.args.get('operation'), page=int(page)))
+
     @app.get('/api/v1/patients/<patient_id>/analyses/<run_id>')
     def get_analysis(patient_id, run_id):
         role('doctor')

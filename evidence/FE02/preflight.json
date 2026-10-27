@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "offline sizing and unchanged runtime admission only; not a model response",
+  "branches": {
+    "depressive_episode": {
+      "input_bytes": 62166,
+      "reservation_micro_usd": 70358,
+      "reason": "context_limit"
+    },
+    "generalized_anxiety": {
+      "input_bytes": 63532,
+      "reservation_micro_usd": 71724,
+      "reason": "context_limit"
+    }
+  },
+  "max_input_bytes": 16000,
+  "per_call_micro_usd": 20000,
+  "network_calls": 0,
+  "diagnosis_runtime_admitted": true,
+  "therapy_runtime_admitted": true,
+  "diagnosis_runtime_sha256": "997afee804b7ce8b81c3d5ef175e1f05756aa44e37d64a0ac64515c0997f0cc8",
+  "therapy_runtime_sha256": "4d9c377cfc01bf98455756a718bf209f6271e8e1f4854f6891d7bbbdfd93a3b8"
+}

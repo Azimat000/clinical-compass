@@ -98,10 +98,11 @@
       ],
       "status": "partial",
       "actual_evidence": [
-        "evidence/FE01/acceptance.md"
+        "evidence/FE01/acceptance.md",
+        "evidence/FE02/acceptance.md"
       ],
       "scope_revision": "decision-support-only-2026-10-27",
-      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted"
+      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted; FE02: isolated migration/API/workers and honest incomplete states; no positive model example or working UI blocks"
     },
     {
       "id": "U05",
@@ -190,11 +191,12 @@
       "scenario_ids": [],
       "status": "partial",
       "actual_evidence": [
-        "evidence/FE01/acceptance.md"
+        "evidence/FE01/acceptance.md",
+        "evidence/FE02/acceptance.md"
       ],
       "previous_scope_text": "Одна сессия — один срез, стабильные коммиты/теги, память, критерии и передача",
       "scope_revision": "decision-support-only-2026-10-27",
-      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted"
+      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted; FE02: isolated migration/API/workers and honest incomplete states; no positive model example or working UI blocks"
     },
     {
       "id": "U08",
@@ -211,9 +213,12 @@
       "scenario_ids": [
         "D12"
       ],
-      "status": "planned",
-      "actual_evidence": [],
-      "scope_revision": "decision-support-only-2026-10-27"
+      "status": "partial",
+      "actual_evidence": [
+        "evidence/FE02/acceptance.md"
+      ],
+      "scope_revision": "decision-support-only-2026-10-27",
+      "evidence_scope": "; FE02: isolated migration/API/workers and honest incomplete states; no positive model example or working UI blocks"
     },
     {
       "id": "U09",
@@ -236,10 +241,11 @@
       ],
       "status": "partial",
       "actual_evidence": [
-        "evidence/FE01/acceptance.md"
+        "evidence/FE01/acceptance.md",
+        "evidence/FE02/acceptance.md"
       ],
       "scope_revision": "decision-support-only-2026-10-27",
-      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted"
+      "evidence_scope": "FE01: UX/prototypes only; production integration not accepted; FE02: isolated migration/API/workers and honest incomplete states; no positive model example or working UI blocks"
     },
     {
       "id": "U10",
@@ -312,9 +318,12 @@
         "D06",
         "D09"
       ],
-      "status": "planned",
-      "actual_evidence": [],
-      "scope_revision": "decision-support-only-2026-10-27"
+      "status": "partial",
+      "actual_evidence": [
+        "evidence/FE02/acceptance.md"
+      ],
+      "scope_revision": "decision-support-only-2026-10-27",
+      "evidence_scope": "; FE02: isolated migration/API/workers and honest incomplete states; no positive model example or working UI blocks"
     }
   ]
 }
