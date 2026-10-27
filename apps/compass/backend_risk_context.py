@@ -199,7 +199,16 @@ def analyze_snapshot(snapshot, model=None, *, synthetic=False, cancel=None):
         result.update(model_candidates=candidates, model_evaluation='candidates_only',
                       model_metadata=deepcopy(response['metadata']))
     except (ModelError, ContextError, extraction.ExtractionError) as exc:
-        result['errors'] = [{'code': str(exc), 'stage': 'model_candidate_evaluation'}]
+        # Only finite codes can cross the provider/validator boundary.
+        known = {'model_unavailable', 'missing_credentials', 'timeout', 'context_limit',
+                 'budget_exceeded', 'cancelled', 'synthetic_only', 'incomplete_snapshot',
+                 'source_mismatch', 'duplicate_field_conflict', 'invalid_candidates',
+                 'unsupported_quote', 'duplicate_candidate', 'duplicate_evidence', 'discrepancy_time_mismatch',
+                 'authentication_failed', 'rate_limited', 'provider_balance',
+                 'incomplete_or_refused', 'invalid_json', 'invalid_response',
+                 'response_too_large', 'call_cost_limit', 'tls_unavailable', 'unavailable'}
+        code = str(exc) if str(exc) in known else 'model_input_or_response_invalid'
+        result['errors'] = [{'code': code, 'stage': 'model_candidate_evaluation'}]
     except Exception:
         result['errors'] = [{'code': 'model_internal_error', 'stage': 'model_candidate_evaluation'}]
     # Partial is deliberate: BE08A cannot attest clinical interpretation or episodes.

@@ -255,7 +255,6 @@ def eligible_options(snapshot,care):
 def payload(snapshot,care):
     patient,p=patient_context(snapshot)
     return {'instruction':INSTRUCTION,'mode':'synthetic_only','condition':care['condition'] if care else None,
-            'physician_diagnosis_review_id':care['diagnosis_review_id'] if care else None,
             'goal':p['goal'],'prior_first_line':p['prior_first_line'],'response':p['response'],
             'tolerability':p['tolerability'],'coded_facts':p['facts'],
             'reconciled_medications':p['medications'],'allergies':p['allergies'],

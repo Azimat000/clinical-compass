@@ -1,0 +1,55 @@
+{
+  "pass": true,
+  "active_tables_unchanged": 81,
+  "accounts_unchanged": true,
+  "preserved_files": 4,
+  "changed_tracked_paths": [
+    "AGENTS.md",
+    "START_HERE.md",
+    "apps/compass/backend_risk_context.py",
+    "apps/compass/backend_therapy.py",
+    "apps/compass/backend_therapy_context.py",
+    "apps/compass/web.py",
+    "evidence/BE14/therapy-quality.json",
+    "memory/BLOCKERS.md",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/EXTERNAL.md",
+    "memory/STATE.json",
+    "plan/backend/README.md",
+    "plan/backend/requirements.json",
+    "plan/coverage.json",
+    "plan/slices/BE16.md"
+  ],
+  "active_health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "ledger_before": [
+    153,
+    739853
+  ],
+  "ledger_after": [
+    160,
+    748067
+  ],
+  "new_model_calls": 7,
+  "new_ceiling_micro_usd": 8214,
+  "remaining_micro_usd": 251933,
+  "known_tokens": 6094,
+  "estimated_peak_usd": 0.002041776,
+  "estimated_offpeak_usd": 0.001020888,
+  "runtime_sha256": "96ddeb22479ddd5b1d4e121e8bd13ab8c76330d2b302917af1c7c00bd56ca89b",
+  "therapy_runtime_sha256": "4d9c377cfc01bf98455756a718bf209f6271e8e1f4854f6891d7bbbdfd93a3b8",
+  "http_checks": 23,
+  "therapy_cases": 19,
+  "post_generation_mutations": 24,
+  "clinical_release": "blocked",
+  "general_regression": "not run: user explicitly deferred general check",
+  "actual_invoice": null,
+  "rub_conversion": null,
+  "new_dependencies": false,
+  "migrations": false
+}

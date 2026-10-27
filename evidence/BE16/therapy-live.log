@@ -1,0 +1,27 @@
+dev-dep-start True calls 1
+dev-dep-continue True calls 1
+dev-gad-second True calls 1
+holdout-aleval-continue True calls 1
+holdout-elicea-twenty True calls 1
+holdout-gad-continue True calls 1
+maoi True calls 0
+unknown-medications True calls 0
+unknown-allergies True calls 0
+allergy-components True calls 0
+recent-stop True calls 0
+partial-response True calls 0
+adverse-events True calls 0
+missing-adherence True calls 0
+first-line-gad True calls 0
+change True calls 0
+stop True calls 0
+duplicate-names True calls 0
+injection-cannot-clear-unknown True calls 0
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/BE16/live_protocol.py", line 138, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/evidence/BE16/live_protocol.py", line 116, in main
+    assert not extension['report']['recommendations']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

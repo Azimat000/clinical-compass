@@ -54,7 +54,7 @@ def view(db, user, patient_id):
         relationship=analyses.authorize(db,user,patient_id)
         row=head(db,patient_id); digest=base(db,patient_id,relationship)
         return {'version':VERSION,'base_sha256':digest,'expected_version':row['version'] if row else 0,
-                'current':None if row is None else {'id':row['id'],'actor_id':row['actor_id'],
+                'current':None if row is None or row['relationship_id']!=relationship else {'id':row['id'],'actor_id':row['actor_id'],
                 'relationship_id':row['relationship_id'],'recorded_at':row['recorded_at'],
                 'fresh':row['base_sha256']==digest and row['relationship_id']==relationship,
                 'payload':json.loads(row['payload_json'])},'clinical_release':False}
@@ -91,9 +91,10 @@ def record(db,user,patient_id,body):
 
 
 def prepare(db,user,patient_id,raw):
+    relationship=analyses.authorize(db,user,patient_id)
     row=head(db,patient_id)
-    if row is None:return None
+    # A new relationship cannot inherit a previous physician's private reconciliation.
+    if row is None or row['relationship_id']!=relationship:return None
     # raw is the same capture before plan-specific dependencies were added.
     value={k:v for k,v in raw.items() if k!='care_plan_input'}
-    relationship=analyses.authorize(db,user,patient_id)
     return {'row':dict(row),'fresh':row['base_sha256']==history.digest(value) and row['relationship_id']==relationship}

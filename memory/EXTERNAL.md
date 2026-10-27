@@ -695,3 +695,8 @@ be14_complete_sourcesread-only/fork_turnsnone:неполныйпервыйотч
 ## BE15 — 27.10.2026
 
 Read-onlyweb-researcher/root/be15_sources,fork_turnsnone,14:38–14:39МСК:5первичныхPDFКР301_3/457_3/Элицея/Алевал/АвиандрHTTP200/SHAсовпали. КРv3/adulttrue/childfalse/NPCtrue/«Применяется»;карточкиГРЛСдоступны,юридическийcurrentнеустановлен. research:evidence/BE15/research.md. Основнойагентпоискнеповторял;срокBE03до19:17МСКнепродлён/fulltextrightsunknown/BE19сохранён. Закрытыеканалы/подписи/согласиянепроверенызаново,организационнаяветкаотложена.1реальныйсинтетическийзапросDeepSeek/1404microUSDceiling;ledger153/739853,остаток260147;invoice/RUBunknown. Покупок/пополнений/публикаций/сообщенийлюдямнет.
+
+
+## BE16 — 27.10.2026
+
+BE16:read-onlyweb-researcherbe16_sourcesсверилOWASPAPI1/PromptInjection/Logging/FlaskипервичныеКР/ГРЛСURL. ДваКРJSON/5PDFHTTP200,размерыкакBE15;новыехешинесообщены,совпадениебайтовнезаявлено. Доступностьнеюридический/клиническийдопуск;BE03до27.10.2026 19:17МСКнепродлён. Закрытыеканалы/организационнаяветкаотложены;подробностиevidence/BE16/research.md.

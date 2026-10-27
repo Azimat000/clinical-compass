@@ -1,0 +1,2219 @@
+{
+  "pass": true,
+  "checks_count": 23,
+  "checks": [
+    "analysis202",
+    "default_worker_real_DeepSeek_ready",
+    "create_csrf403",
+    "patient_create403",
+    "create200_no_store",
+    "create_retry_exact",
+    "unapproved_hidden",
+    "edited_version200",
+    "obsolete_revision409",
+    "pat-a_review_denied",
+    "doc-b_review_denied",
+    "anonymous401",
+    "confirm_csrf403",
+    "HEAD_with_confirmation_body_no_csrf_no_write",
+    "forged_actor_rejected",
+    "physician_confirm200",
+    "confirm_retry_exact",
+    "only_approved_patient_content",
+    "one_existing_action_calendar_tasks",
+    "restart_receipt_preserved",
+    "integrity_foreign_keys",
+    "old_plan_receipt_not_transferred_after_relationship_change",
+    "old_therapy_reconciliation_hidden_after_relationship_change"
+  ],
+  "real_model_calls": 1,
+  "transport": "actual loopback HTTP",
+  "worker": "separate production CLI/default executor",
+  "diagnosis_setup": "structured mechanical synthetic fixture, not independent clinical validation",
+  "runtime_sha256": "96ddeb22479ddd5b1d4e121e8bd13ab8c76330d2b302917af1c7c00bd56ca89b",
+  "generation_runtime": {
+    "version": "therapy-draft-v1",
+    "regimens": {
+      "version": "medication-regimens-v2",
+      "catalog_sha256": "ca23bbcb72af313b9805a9939a1c9aded151aea87b9769864fe17bc7a470e77a",
+      "engine_sha256": "322ee36561947f60db725b151bc520a259d4d0a8c7513ebc2a1463a94c1d66e4"
+    },
+    "context_schema_sha256": "7b017ed7cbc406ca3ae48931240ab82e25e3d4b35f5650ee4b8712d8a447b5d4",
+    "prompt_sha256": "4d92308be6ad4a6a0ed4fa5bea179d1ce201c686cbb25c2b1a34a40514a1bc5a",
+    "schema_sha256": "00ba721e5608a78b3609e19828a915a140f4d20af24986a3863960b8ce9da56f",
+    "code": {
+      "backend_therapy.py": "9acae0fae76b727f0188446e9d487ff6ff7997ebe773bc3c5cae5daf4c0116c5",
+      "backend_therapy_context.py": "d7299d69c217e351efa5f6e864daf97da82ff1f38b5ad6997100da41cc4c3a25",
+      "backend_medication_regimens.py": "322ee36561947f60db725b151bc520a259d4d0a8c7513ebc2a1463a94c1d66e4",
+      "backend_medication_safety.py": "88051f94102580884af4a4b0c3c4fdd65f81e1f39669b32f83698cec0cc17d50",
+      "backend_care_plan.py": "383327ce7b4c7dd6fb249a98380b39ac8899d89d95790b37ec9bfce39a70fda9",
+      "backend_analyses.py": "9eca8c8fc2b64f6fb63583548905415a4d537ea816c1049e99c133a1fde1ae44",
+      "backend_jobs.py": "930461b73ebe20f3ebb7f0be3039427f68f3898a627f26dd97bc62ff935164b7",
+      "backend_sources.py": "42859ffe5a02f00ad1e19f5ebb077db9785f8156cbfb39dccacd754ce54cae93"
+    },
+    "contract_sha256": "1593de0b5936001ada8071d8a90f10692085f4bca911a3ab64788bad4b735fae"
+  },
+  "model_outcome": {
+    "care_plan_context": {
+      "report": {
+        "applied": false,
+        "clinical_ready": false,
+        "condition": "F32",
+        "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+        "diagnosis_reviewed": true,
+        "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+        "items": [
+          {
+            "basis": "Есть свежее решение врача и непротиворечивые критерии; метод и возможность участия ещё согласуются.",
+            "condition": "F32",
+            "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+            "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+            "evidence_refs": [
+              "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+              "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+            ],
+            "goal": "Согласовать немедикаментозную помощь.",
+            "id": "be12-dep-therapy",
+            "kind": "nonpharmacological",
+            "necessity": "recommended_discussion",
+            "questions": [],
+            "source": {
+              "claim_id": "be12-dep-therapy",
+              "id": "KR301_3",
+              "pdf_page": 46,
+              "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "section": "3.7"
+            },
+            "text": "Обсудить психотерапию со специалистом, цели, предпочтения и возможность участия.",
+            "timing": {
+              "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+              "interval_days": null,
+              "selection": "physician_required"
+            }
+          },
+          {
+            "basis": "Есть выбранный врачом диагноз; конкретные меры определяются при обсуждении.",
+            "condition": "F32",
+            "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+            "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+            "evidence_refs": [
+              "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+              "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+            ],
+            "goal": "Уточнить понимание состояния и участия в помощи.",
+            "id": "be12-dep-education",
+            "kind": "nonpharmacological",
+            "necessity": "recommended_discussion",
+            "questions": [],
+            "source": {
+              "claim_id": "be12-dep-education",
+              "id": "KR301_3",
+              "pdf_page": 53,
+              "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "section": "4"
+            },
+            "text": "Обсудить с врачом психообразование и доступную поддержку.",
+            "timing": {
+              "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+              "interval_days": null,
+              "selection": "physician_required"
+            }
+          },
+          {
+            "basis": "Оценка ответа и безопасности после уточнения диагноза/выбора помощи; изменения риска, состояния или переносимости требуют пересмотра.",
+            "condition": "F32",
+            "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+            "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+            "evidence_refs": [
+              "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+              "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+            ],
+            "goal": "Сопоставить динамику с целями помощи.",
+            "id": "be12-dep-monitor",
+            "kind": "monitoring",
+            "necessity": "recommended_discussion",
+            "questions": [],
+            "source": {
+              "claim_id": "be12-dep-monitor",
+              "id": "KR301_3",
+              "pdf_page": 46,
+              "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+              "section": "3.7"
+            },
+            "text": "Врачебно оценивать изменения настроения, активности, функционирования и безопасности; частоту и условия повторной оценки согласовать отдельно.",
+            "timing": {
+              "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+              "interval_days": null,
+              "selection": "physician_required"
+            }
+          }
+        ],
+        "limitation": "Синтетический проект для врача; клиническая проверка не выполнена. Применение, направление и публикация пациенту не выполняются.",
+        "missing_data": [],
+        "open_episode_ids": [],
+        "patient_published": false,
+        "review_conditions": [
+          "Новые или противоречивые сведения.",
+          "Новый сигнал риска или ухудшение состояния.",
+          "Отсутствие ожидаемого ответа либо нежелательные явления."
+        ],
+        "risk_patterns": [],
+        "risk_status": "no_rule_match_not_safety",
+        "status": "physician_diagnosis_draft",
+        "version": "care-plan-v1"
+      },
+      "runtime_sha256": "9925508242a1ccad9bbca5d5662520a93ea76096c0e3b2a86f084ca705b00d7b",
+      "therapy": {
+        "checked_at": "2026-10-27T11:53:00.840474+00:00",
+        "model_metadata": {
+          "cache_hit_tokens": 384,
+          "cache_miss_tokens": 414,
+          "cost_ceiling_micro_usd": 1373,
+          "elapsed_seconds": 1.706,
+          "endpoint": "https://api.deepseek.com/chat/completions",
+          "estimated_offpeak_cost_nano_usd": 132252,
+          "estimated_peak_cost_nano_usd": 264504,
+          "max_input_bytes": 12000,
+          "max_output_tokens": 768,
+          "prompt_sha256": "e0469efb4560f79a0b68cc41a81b6b0dd8609c6cb73cac4667f190a7a4311cb7",
+          "prompt_version": "compass-model-v1",
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "reservation_micro_usd": 7331,
+          "returned_model": "deepseek-flash",
+          "schema_sha256": "7fab9fa8a863f3a83bee919edfa25016fca281ff98c576203e7629083971057c",
+          "synthetic_only": true,
+          "temperature": 0,
+          "test_double": false,
+          "thinking": "disabled",
+          "timeout_seconds": 60,
+          "usage": {
+            "completion_tokens": 115,
+            "prompt_tokens": 798,
+            "total_tokens": 913
+          }
+        },
+        "raw": {
+          "candidates": [
+            {
+              "daily_dose_mg": 10,
+              "form": "film_coated_tablet",
+              "indication": "adult_depression",
+              "phase": "initiation",
+              "product_id": "elicea",
+              "strength_mg": 10,
+              "times_per_day": 1,
+              "unit": "mg"
+            },
+            {
+              "daily_dose_mg": 50,
+              "form": "film_coated_tablet",
+              "indication": "adult_depression",
+              "phase": "initiation",
+              "product_id": "aleval",
+              "strength_mg": 50,
+              "times_per_day": 1,
+              "unit": "mg"
+            }
+          ]
+        },
+        "report": {
+          "applied": false,
+          "candidate_reviews": [
+            {
+              "accepted_for_synthetic_draft": true,
+              "candidate": {
+                "daily_dose_mg": 10,
+                "form": "film_coated_tablet",
+                "indication": "adult_depression",
+                "phase": "initiation",
+                "product_id": "elicea",
+                "strength_mg": 10,
+                "times_per_day": 1,
+                "unit": "mg"
+              },
+              "diagnosis_mismatch": false,
+              "duplicate": false,
+              "safety": {
+                "applied": false,
+                "catalog_sha256": "ca23bbcb72af313b9805a9939a1c9aded151aea87b9769864fe17bc7a470e77a",
+                "checked_at": "2026-10-27T11:53:00.840474+00:00",
+                "checks": [
+                  {
+                    "code": "mode",
+                    "input_refs": [],
+                    "reason": "Только явно вымышленные сведения.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "scope",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "product",
+                    "input_refs": [],
+                    "reason": "Точная регистрация/форма найдена, клинический допуск отдельно.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "scope",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "source_document",
+                    "input_refs": [],
+                    "reason": "Точная официальная версия инструкции наблюдена и сверена; юридический статус регистрации этим не устанавливается.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "scope",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "age",
+                    "input_refs": [
+                      "s2_bfe499d7b9c88328af43ba708a72367dd63576d30fb617bd9726d35df55aa624"
+                    ],
+                    "reason": "Проверенная ветка: взрослые до 65 лет; пограничный/неизвестный возраст требует уточнения.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        2
+                      ],
+                      "section": "age",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "form",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        19
+                      ],
+                      "section": "form",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "unit",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        19
+                      ],
+                      "section": "form",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "strength_mg",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        19
+                      ],
+                      "section": "form",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "indication",
+                    "input_refs": [],
+                    "reason": "Проверка зарегистрированного показания в поддерживаемой ветке.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "indications",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "allergies",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверка точного препарата, действующего и всех перечисленных вспомогательных веществ.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        18,
+                        19
+                      ],
+                      "section": "composition",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "allergies_complete",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Требуется явное подтверждение полноты сверки аллергий.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        2,
+                        9,
+                        10
+                      ],
+                      "section": "contraindications",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "excipient_coverage",
+                    "input_refs": [],
+                    "reason": "Состав перечислен по точной инструкции, включая оболочку.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        18,
+                        19
+                      ],
+                      "section": "composition",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "pregnancy",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить беременность.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "breastfeeding",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить грудное вскармливание.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        2,
+                        9,
+                        10
+                      ],
+                      "section": "contraindications",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "hepatic_impairment",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить нарушения функции печени.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "severe_renal_impairment",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить тяжёлое нарушение функции почек.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "mania_hypomania",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить манию или гипоманию.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "uncontrolled_epilepsy",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить неконтролируемую эпилепсию.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "bleeding_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить риск кровотечений.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "qt_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить удлинение QT и риск аритмии.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "electrolyte_disorder",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить нарушения калия/магния и электролитов.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "diabetes",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить диабет и необходимость контроля гликемии.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "glaucoma",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить закрытоугольную глаукому.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "suicidal_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить суицидальные мысли или поведение.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "cardiovascular_disease",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить сердечно-сосудистые болезни, брадикардию, недавний инфаркт, декомпенсацию.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "ect",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить электросудорожную терапию.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "cyp2c19_poor_metabolizer",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить известный сниженный метаболизм CYP2C19; неизвестное не равно отрицанию.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "lactose_intolerance",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить наследственные нарушения переносимости лактозы.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "seizure_history",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить судороги в анамнезе.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "alcohol_use",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить употребление алкоголя.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "other_special_condition",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Есть ли иные индивидуальные условия, требующие отдельной оценки по инструкции?",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "goal",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Начало и продолжение различаются. Для изменения/отмены нужна отдельная индивидуальная схема.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        10,
+                        11
+                      ],
+                      "section": "dose",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "medications_complete",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить назначенное, фактическое, безрецептурное и недавно отменённое.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        6,
+                        7,
+                        8
+                      ],
+                      "section": "interactions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "dose",
+                    "input_refs": [],
+                    "reason": "Доза в пределах точной поддерживаемой взрослой ветки.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        10,
+                        11
+                      ],
+                      "section": "dose",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "frequency",
+                    "input_refs": [],
+                    "reason": "Кратность по точной инструкции.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        10,
+                        11
+                      ],
+                      "section": "dose",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "tablet_divisibility",
+                    "input_refs": [],
+                    "reason": "Доза должна получаться подтверждённым числом целых/равных половин таблеток.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        19
+                      ],
+                      "section": "form",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "monotherapy_scope",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Поддержана только монотерапия; сочетания/переходы требуют отдельной проверки.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        6,
+                        7,
+                        8
+                      ],
+                      "section": "interactions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "initial_dose",
+                    "input_refs": [],
+                    "reason": "Начальная доза берётся из инструкции, а не из максимума диапазона.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        10,
+                        11
+                      ],
+                      "section": "dose",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "adverse_events",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Неизвестная переносимость/нежелательные явления требуют уточнения.",
+                    "source": {
+                      "id": "elicea",
+                      "pages": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        9,
+                        10,
+                        11,
+                        12,
+                        18
+                      ],
+                      "section": "cautions",
+                      "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "treatment_line",
+                    "input_refs": [],
+                    "reason": "Первая линия в поддерживаемой клинической ветке.",
+                    "source": {
+                      "id": "KR301_3",
+                      "pages": [
+                        23,
+                        24
+                      ],
+                      "section": "clinical_choice",
+                      "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+                      "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3"
+                    },
+                    "state": "pass"
+                  }
+                ],
+                "clinical_release": false,
+                "coverage": {
+                  "interactions": "monotherapy_only",
+                  "phases": [
+                    "initiation",
+                    "exact_effective_tolerated_continuation"
+                  ],
+                  "restrictions": "enumerated_instruction_narrow_adult_scope"
+                },
+                "eligible": false,
+                "engine_sha256": "322ee36561947f60db725b151bc520a259d4d0a8c7513ebc2a1463a94c1d66e4",
+                "expires_at": "2026-10-28T13:32:09+03:00",
+                "input_sha256": "a03cf0b37af206b16665f8b07da635ffe7b153b74e70e3305deef84f920319a2",
+                "release_gates": {
+                  "independent_clinical_review": "not_performed",
+                  "registration_legal_status": "unknown"
+                },
+                "state": "pass",
+                "synthetic_eligible": true,
+                "version": "medication-regimens-v2"
+              }
+            },
+            {
+              "accepted_for_synthetic_draft": true,
+              "candidate": {
+                "daily_dose_mg": 50,
+                "form": "film_coated_tablet",
+                "indication": "adult_depression",
+                "phase": "initiation",
+                "product_id": "aleval",
+                "strength_mg": 50,
+                "times_per_day": 1,
+                "unit": "mg"
+              },
+              "diagnosis_mismatch": false,
+              "duplicate": false,
+              "safety": {
+                "applied": false,
+                "catalog_sha256": "ca23bbcb72af313b9805a9939a1c9aded151aea87b9769864fe17bc7a470e77a",
+                "checked_at": "2026-10-27T11:53:00.840474+00:00",
+                "checks": [
+                  {
+                    "code": "mode",
+                    "input_refs": [],
+                    "reason": "Только явно вымышленные сведения.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "scope",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "product",
+                    "input_refs": [],
+                    "reason": "Точная регистрация/форма найдена, клинический допуск отдельно.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "scope",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "source_document",
+                    "input_refs": [],
+                    "reason": "Точная официальная версия инструкции наблюдена и сверена; юридический статус регистрации этим не устанавливается.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "scope",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "age",
+                    "input_refs": [
+                      "s2_bfe499d7b9c88328af43ba708a72367dd63576d30fb617bd9726d35df55aa624"
+                    ],
+                    "reason": "Проверенная ветка: взрослые до 65 лет; пограничный/неизвестный возраст требует уточнения.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "age",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "form",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "form",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "unit",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "form",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "strength_mg",
+                    "input_refs": [],
+                    "reason": "Проверка точной формы, единицы и силы таблетки.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "form",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "indication",
+                    "input_refs": [],
+                    "reason": "Проверка зарегистрированного показания в поддерживаемой ветке.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "indications",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "allergies",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверка точного препарата, действующего и всех перечисленных вспомогательных веществ.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "composition",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "allergies_complete",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Требуется явное подтверждение полноты сверки аллергий.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5
+                      ],
+                      "section": "contraindications",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "excipient_coverage",
+                    "input_refs": [],
+                    "reason": "Состав перечислен по точной инструкции, включая оболочку.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "composition",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "pregnancy",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить беременность.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "breastfeeding",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить грудное вскармливание.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "hepatic_impairment",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить нарушения функции печени.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "renal_impairment",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить нарушения функции почек.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "epilepsy",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить эпилепсию.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "organic_brain_disease",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить органическое поражение головного мозга.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "low_body_weight",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить выраженный дефицит массы тела.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "bleeding_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить риск кровотечений.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "qt_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить удлинение QT и риск аритмии.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "hyponatremia_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить риск гипонатриемии.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "suicidal_risk",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Уточнить суицидальные мысли или поведение.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "alcohol_use",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить употребление алкоголя.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "other_special_condition",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Есть ли иные индивидуальные условия, требующие отдельной оценки по инструкции?",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "goal",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Начало и продолжение различаются. Для изменения/отмены нужна отдельная индивидуальная схема.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        7,
+                        8
+                      ],
+                      "section": "dose",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "medications_complete",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Сверить назначенное, фактическое, безрецептурное и недавно отменённое.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        19,
+                        20
+                      ],
+                      "section": "interactions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "dose",
+                    "input_refs": [],
+                    "reason": "Доза в пределах точной поддерживаемой взрослой ветки.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        7,
+                        8
+                      ],
+                      "section": "dose",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "frequency",
+                    "input_refs": [],
+                    "reason": "Кратность по точной инструкции.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        7,
+                        8
+                      ],
+                      "section": "dose",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "tablet_divisibility",
+                    "input_refs": [],
+                    "reason": "Доза должна получаться подтверждённым числом целых/равных половин таблеток.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        1,
+                        2
+                      ],
+                      "section": "form",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "monotherapy_scope",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Поддержана только монотерапия; сочетания/переходы требуют отдельной проверки.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        19,
+                        20
+                      ],
+                      "section": "interactions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "initial_dose",
+                    "input_refs": [],
+                    "reason": "Начальная доза берётся из инструкции, а не из максимума диапазона.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        7,
+                        8
+                      ],
+                      "section": "dose",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "adverse_events",
+                    "input_refs": [
+                      "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+                    ],
+                    "reason": "Неизвестная переносимость/нежелательные явления требуют уточнения.",
+                    "source": {
+                      "id": "aleval",
+                      "pages": [
+                        5,
+                        6,
+                        16
+                      ],
+                      "section": "cautions",
+                      "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                      "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+                    },
+                    "state": "pass"
+                  },
+                  {
+                    "code": "treatment_line",
+                    "input_refs": [],
+                    "reason": "Первая линия в поддерживаемой клинической ветке.",
+                    "source": {
+                      "id": "KR301_3",
+                      "pages": [
+                        23,
+                        24
+                      ],
+                      "section": "clinical_choice",
+                      "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+                      "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3"
+                    },
+                    "state": "pass"
+                  }
+                ],
+                "clinical_release": false,
+                "coverage": {
+                  "interactions": "monotherapy_only",
+                  "phases": [
+                    "initiation",
+                    "exact_effective_tolerated_continuation"
+                  ],
+                  "restrictions": "enumerated_instruction_narrow_adult_scope"
+                },
+                "eligible": false,
+                "engine_sha256": "322ee36561947f60db725b151bc520a259d4d0a8c7513ebc2a1463a94c1d66e4",
+                "expires_at": "2026-10-28T13:32:09+03:00",
+                "input_sha256": "a96b539c367a155aac78e31831009184002e6121679228e00324bd8635a486ca",
+                "release_gates": {
+                  "independent_clinical_review": "not_performed",
+                  "registration_legal_status": "unknown"
+                },
+                "state": "pass",
+                "synthetic_eligible": true,
+                "version": "medication-regimens-v2"
+              }
+            }
+          ],
+          "clinical_release": false,
+          "combination_allowed": false,
+          "condition": "F32",
+          "context_fresh": true,
+          "context_id": "186ec4de3debe42383fa0575e018813e",
+          "goal": "initiation",
+          "independent_clinical_review": "not_performed",
+          "patient_published": false,
+          "preconditions": [],
+          "questions": [],
+          "recommendations": [
+            {
+              "administration": "Один раз в сутки; время приёма и длительность определяет врач.",
+              "applied": false,
+              "basis": "Вариант первой линии при подтверждённом диагнозе и сверенных ограничениях.",
+              "candidate": {
+                "daily_dose_mg": 10,
+                "form": "film_coated_tablet",
+                "indication": "adult_depression",
+                "phase": "initiation",
+                "product_id": "elicea",
+                "strength_mg": 10,
+                "times_per_day": 1,
+                "unit": "mg"
+              },
+              "choice_source": {
+                "id": "KR301_3",
+                "pages": [
+                  23,
+                  24
+                ],
+                "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+                "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3"
+              },
+              "clinical_release": false,
+              "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+              "duration_days": null,
+              "duration_selection": "physician_required",
+              "evidence_refs": [
+                "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+              ],
+              "id": "be14-elicea",
+              "patient_published": false,
+              "source": {
+                "id": "elicea",
+                "pages": [
+                  10,
+                  11
+                ],
+                "section": "dose",
+                "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+                "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+              }
+            },
+            {
+              "administration": "Один раз в сутки; время приёма и длительность определяет врач.",
+              "applied": false,
+              "basis": "Вариант первой линии при подтверждённом диагнозе и сверенных ограничениях.",
+              "candidate": {
+                "daily_dose_mg": 50,
+                "form": "film_coated_tablet",
+                "indication": "adult_depression",
+                "phase": "initiation",
+                "product_id": "aleval",
+                "strength_mg": 50,
+                "times_per_day": 1,
+                "unit": "mg"
+              },
+              "choice_source": {
+                "id": "KR301_3",
+                "pages": [
+                  23,
+                  24
+                ],
+                "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+                "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3"
+              },
+              "clinical_release": false,
+              "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+              "duration_days": null,
+              "duration_selection": "physician_required",
+              "evidence_refs": [
+                "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+              ],
+              "id": "be14-aleval",
+              "patient_published": false,
+              "source": {
+                "id": "aleval",
+                "pages": [
+                  7,
+                  8
+                ],
+                "section": "dose",
+                "sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+                "url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf"
+              }
+            }
+          ],
+          "registration_legal_status": "unknown",
+          "selection": "mutually_exclusive_alternatives",
+          "status": "synthetic_physician_draft",
+          "version": "therapy-draft-v1"
+        },
+        "runtime_sha256": "4d9c377cfc01bf98455756a718bf209f6271e8e1f4854f6891d7bbbdfd93a3b8",
+        "version": "therapy-draft-v1"
+      },
+      "version": "care-plan-v1"
+    },
+    "contract_version": "1.0",
+    "created_at": "2026-10-27T11:52:58.917070+00:00",
+    "errors": [],
+    "model": null,
+    "operation": "plan",
+    "patient_id": "D01",
+    "release": {
+      "blockers": [
+        "BE03",
+        "BE04",
+        "BE18",
+        "BE19",
+        "B04",
+        "E02",
+        "E06"
+      ],
+      "status": "blocked",
+      "version": "be01-contract-only-v1"
+    },
+    "result": {
+      "contradictions": [],
+      "facts": [
+        {
+          "evidence_refs": [
+            "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+            "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+          ],
+          "id": "case",
+          "text": "Основания текущего проекта; состояние F32"
+        },
+        {
+          "evidence_refs": [
+            "s2_7217b5004cfb55ed9fd4dd05a5bb537cb2ec5823651f10573aa833161d678899"
+          ],
+          "id": "therapy-reconciliation",
+          "text": "Структурированная сверка врача; это вымышленный случай."
+        }
+      ],
+      "missing_data": [],
+      "output": {
+        "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+        "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+        "items": [
+          {
+            "fact_ids": [
+              "case"
+            ],
+            "id": "be12-dep-therapy",
+            "source_ids": [
+              "be12-dep-therapy"
+            ],
+            "text": "Обсудить психотерапию со специалистом, цели, предпочтения и возможность участия."
+          },
+          {
+            "fact_ids": [
+              "case"
+            ],
+            "id": "be12-dep-education",
+            "source_ids": [
+              "be12-dep-education"
+            ],
+            "text": "Обсудить с врачом психообразование и доступную поддержку."
+          },
+          {
+            "fact_ids": [
+              "case"
+            ],
+            "id": "be12-dep-monitor",
+            "source_ids": [
+              "be12-dep-monitor"
+            ],
+            "text": "Врачебно оценивать изменения настроения, активности, функционирования и безопасности; частоту и условия повторной оценки согласовать отдельно."
+          },
+          {
+            "fact_ids": [
+              "therapy-reconciliation"
+            ],
+            "id": "be14-elicea",
+            "source_ids": [
+              "be14-elicea"
+            ],
+            "text": "Взаимоисключающий синтетический вариант для выбора врача: Элицея, 10 мг/сут, 1 приём(а)/сут. Один раз в сутки; время приёма и длительность определяет врач. Вариант первой линии при подтверждённом диагнозе и сверенных ограничениях. Длительность выбирает врач."
+          },
+          {
+            "fact_ids": [
+              "therapy-reconciliation"
+            ],
+            "id": "be14-aleval",
+            "source_ids": [
+              "be14-aleval"
+            ],
+            "text": "Взаимоисключающий синтетический вариант для выбора врача: Алевал, 50 мг/сут, 1 приём(а)/сут. Один раз в сутки; время приёма и длительность определяет врач. Вариант первой линии при подтверждённом диагнозе и сверенных ограничениях. Длительность выбирает врач."
+          }
+        ]
+      },
+      "summary": "Синтетический проект для врача; клиническая проверка не выполнена. Применение, направление и публикация пациенту не выполняются."
+    },
+    "revision": 3,
+    "run_id": "b6b5a8bed128e146643c9a1ef3c19187",
+    "scope_version": "backend-scope-v1",
+    "snapshot_id": "c6c05f3eccd476e8bf48255c44e49e836102506c991079128876d36c2bc27069",
+    "sources": [
+      {
+        "id": "DASS42-RU-FG-2024-demo-v1-source",
+        "sha256": "5d3fa16c44edd0be88dc0448d0a129f706e0d9ef5954d8e7b932291b2fe33c86",
+        "version": "RU-FG-2024 / demo-release-2026-10-19-v1"
+      },
+      {
+        "id": "GAD7-RU-Z-2023-demo-v1-source",
+        "sha256": "5ff97f086ae6339b035d6be7aac06cc279882495cda2fa79234f73619b3cfd60",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "id": "PHQ9-RU-Z-2023-demo-v1-source",
+        "sha256": "8c6688dce5d16055fdd1ea451f398b43526ace73b1b52be7d2f7bc01acede2b3",
+        "version": "RU-Zolotareva-2023 / demo-release-2026-10-23-v1"
+      },
+      {
+        "id": "be03-KR301_3-F01",
+        "sha256": "5f228ba2eec8771c27d9f3f720f677afcce07116033f7c39ee9979c2b8c70e7c",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be03-KR301_3-F02",
+        "sha256": "12c690a91266c2eff0a44f7ce4c2b5d4640b1d34d64d62d4adc2e9a0bd8e143a",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be03-KR301_3-F04",
+        "sha256": "7c77f0c27e5528edc3a9eb2e3a0da9febd6ffe9437877377d1585cccc7e5bf84",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be03-KR457_3-F01",
+        "sha256": "730450e31198ca59d5b186ac3ecc81c2e71811ea9f308d4e595b7d99aa3202f4",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be03-KR457_3-F02",
+        "sha256": "6730fd583199d1204ab802d3e72a4c684f17eef94779bd5f79b8657f3accb29a",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be03-KR457_3-F03",
+        "sha256": "6ab11609640c8f7fe03a284c7cf9962cfb08878e2f8a7d61b994a085f559b020",
+        "version": "backend-sources-v1"
+      },
+      {
+        "id": "be07-DEP-SUICIDE-FACT",
+        "sha256": "c2966e7c591335a833c221ed21c2c38b5de6ce2a87116f8810cd59fd1fa53e0b",
+        "version": "backend-risk-rules-v1"
+      },
+      {
+        "id": "be07-GAD-PSY-REVIEW",
+        "sha256": "f024f6a50332177aa69e3f1c1f8d9022626149a58a0908a57299bce0223c9837",
+        "version": "backend-risk-rules-v1"
+      },
+      {
+        "id": "be07-GAD-ADVERSE-REVIEW",
+        "sha256": "dd6b7f94db216777c54fe065037f8b9cf854cf6f65bf3ba19b7e256e6e2c28fc",
+        "version": "backend-risk-rules-v1"
+      },
+      {
+        "id": "be07-GAD-INITIAL-ANXIETY",
+        "sha256": "0e887bd66aa40c264b6cdfb23fddf727b8b4a10df4c14231c611036c2af6ec5d",
+        "version": "backend-risk-rules-v1"
+      },
+      {
+        "id": "be12-dep-risk",
+        "sha256": "5a89f765a6c99ab21f7a209d523035e38f4d0cbe72204c6f79bbeb68f75d9622",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-risk",
+        "sha256": "02a7a0d98ca7d25f1e1d811e30c8f073fa229f52ca2138f601b93a56cc474920",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-mania",
+        "sha256": "bd908738230f98abc4e722bc7ba14c17bcfe64e0e590b4575635f0b4f0566483",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-medical",
+        "sha256": "d8604a51431da3462568e015434e7b577983aeda97f2583504aa4ef509b6052a",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-medical",
+        "sha256": "6ce427fc99fc2132c077df519cd88e176139abbc01ef5a5d7551387860637081",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-therapy",
+        "sha256": "b2811d902e89c5a7906e3e9192cdafecb75b4315a3d301f9fd10a18e2e9503cf",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-education",
+        "sha256": "3a45ee144821568e1c5a8f242e4b9fddb8878f653fa6a60b631d7c778abe45d9",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-therapy",
+        "sha256": "b838fc07372b9578011b6edd781ad29c1ad141120bf6589f4ffed1a98f07b6be",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-education",
+        "sha256": "709a652667de45857722e92c958a419bde6477181e21d41e6f4351893114667d",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-monitor",
+        "sha256": "0d54ba908041772dddb436e0247353b23b088cb3d5cbc6fde71239ded8e623ba",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-monitor",
+        "sha256": "1b557fbb90452d5ff8685fc9c838601e87d86714b7be63448a2a97fd0f52f7a5",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-route",
+        "sha256": "be28f0ff3fb326aba0ee1f831c52a2e47b0aaec94aa66f7c7cb4c18f447f08ce",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-route",
+        "sha256": "ad65e19d4692a57689dd961efa5b61999f10bfcb95aaaa74320cb9e0628f6e9d",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-dep-diagnosis",
+        "sha256": "f700cc8ae4b129877049af8566ee003079953b92c001b36d60ca8b5245ea9fd1",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be12-gad-diagnosis",
+        "sha256": "10d35d4a0a6a6c45677668a543b8e61ac992606afc46d52f73e1b19f5aef69d1",
+        "version": "care-plan-v1"
+      },
+      {
+        "id": "be14-elicea",
+        "sha256": "9d82f8ff3492f15a49c8c3a7760c783ee5ee0592a6721761c7757fa1217bf78d",
+        "version": "therapy-draft-v1"
+      },
+      {
+        "id": "be14-aleval",
+        "sha256": "19001dde07fac3a4145a34661ffae9c7fbe9fe619f817a79f00dca8065d9a5bd",
+        "version": "therapy-draft-v1"
+      },
+      {
+        "id": "be14-aviandr",
+        "sha256": "8f7769fea16ff501b1911cc19637b544767d283e418cff7a60945b8f2bf12cd2",
+        "version": "therapy-draft-v1"
+      }
+    ],
+    "stale_reason": null,
+    "status": "ready",
+    "updated_at": "2026-10-27T11:53:00.988840+00:00"
+  },
+  "confirmed": {
+    "clinical_release": "blocked",
+    "confirmation_id": "c93f7d89d675c8bac5134d353f71fdb3",
+    "decision": "approved",
+    "payload": {
+      "automatic": false,
+      "backend_plan_review": {
+        "analysis_revision": 3,
+        "run_id": "b6b5a8bed128e146643c9a1ef3c19187",
+        "snapshot_id": "c6c05f3eccd476e8bf48255c44e49e836102506c991079128876d36c2bc27069",
+        "version": "plan-review-v1"
+      },
+      "basis": "Явное решение вымышленного врача.",
+      "content": "Обсудить психотерапию со специалистом, цели, предпочтения и возможность участия.\nОбсудить с врачом психообразование и доступную поддержку.\nВрачебно оценивать изменения настроения, активности, функционирования и безопасности; частоту и условия повторной оценки согласовать отдельно.\nЭлицея 10 мг: 10 мг/сут; 22:00; начало 2026-10-27, 21 дн. Один раз в сутки; время приёма и длительность определяет врач.",
+      "kind": "plan_change",
+      "medication_context": "Один раз в сутки; время приёма и длительность определяет врач.",
+      "medications": [
+        {
+          "days": 21,
+          "end": "2026-11-16",
+          "name": "Элицея 10 мг",
+          "slots": [
+            {
+              "quarters": 4,
+              "time": "22:00"
+            }
+          ],
+          "start": "2026-10-27"
+        }
+      ],
+      "mode": "physician_reviewed_synthetic",
+      "plan_items": [
+        {
+          "basis": "Есть свежее решение врача и непротиворечивые критерии; метод и возможность участия ещё согласуются.",
+          "condition": "F32",
+          "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+          "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+          "due_on": "2026-10-28",
+          "evidence_refs": [
+            "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+            "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+          ],
+          "goal": "Согласовать немедикаментозную помощь.",
+          "id": "be12-dep-therapy",
+          "kind": "nonpharmacological",
+          "necessity": "recommended_discussion",
+          "questions": [],
+          "source": {
+            "claim_id": "be12-dep-therapy",
+            "id": "KR301_3",
+            "pdf_page": 46,
+            "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "section": "3.7"
+          },
+          "text": "Обсудить психотерапию со специалистом, цели, предпочтения и возможность участия.",
+          "timing": {
+            "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+            "interval_days": null,
+            "selection": "physician_required"
+          }
+        },
+        {
+          "basis": "Есть выбранный врачом диагноз; конкретные меры определяются при обсуждении.",
+          "condition": "F32",
+          "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+          "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+          "due_on": "2026-10-28",
+          "evidence_refs": [
+            "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+            "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+          ],
+          "goal": "Уточнить понимание состояния и участия в помощи.",
+          "id": "be12-dep-education",
+          "kind": "nonpharmacological",
+          "necessity": "recommended_discussion",
+          "questions": [],
+          "source": {
+            "claim_id": "be12-dep-education",
+            "id": "KR301_3",
+            "pdf_page": 53,
+            "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "section": "4"
+          },
+          "text": "Обсудить с врачом психообразование и доступную поддержку.",
+          "timing": {
+            "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+            "interval_days": null,
+            "selection": "physician_required"
+          }
+        },
+        {
+          "basis": "Оценка ответа и безопасности после уточнения диагноза/выбора помощи; изменения риска, состояния или переносимости требуют пересмотра.",
+          "condition": "F32",
+          "diagnosis_review_id": "557b14a158992e0014d0bc4aa6b82ceb",
+          "diagnosis_run_id": "4999ec816384feda8c7bc598384febe7",
+          "due_on": "2026-10-28",
+          "evidence_refs": [
+            "s2_d247d8da738384dd6ab9c5893b0936ff0a2457c52402bd335541dbb502aad5a9",
+            "s2_eb96ec42b89cd9468b453b94e76627b92d672ff30bca3c2d537be93d70ccce9b"
+          ],
+          "goal": "Сопоставить динамику с целями помощи.",
+          "id": "be12-dep-monitor",
+          "kind": "monitoring",
+          "necessity": "recommended_discussion",
+          "questions": [],
+          "source": {
+            "claim_id": "be12-dep-monitor",
+            "id": "KR301_3",
+            "pdf_page": 46,
+            "pdf_sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd",
+            "section": "3.7"
+          },
+          "text": "Врачебно оценивать изменения настроения, активности, функционирования и безопасности; частоту и условия повторной оценки согласовать отдельно.",
+          "timing": {
+            "basis": "Периодичность выбирает врач по состоянию, рискам и выбранному методу; общий числовой срок этим основанием не установлен.",
+            "interval_days": null,
+            "selection": "physician_required"
+          }
+        }
+      ],
+      "selected_medication": {
+        "candidate": {
+          "daily_dose_mg": 10,
+          "form": "film_coated_tablet",
+          "indication": "adult_depression",
+          "phase": "initiation",
+          "product_id": "elicea",
+          "strength_mg": 10,
+          "times_per_day": 1,
+          "unit": "mg"
+        },
+        "clinical_release": false,
+        "duration_selection": "physician_authored",
+        "source": {
+          "id": "elicea",
+          "pages": [
+            10,
+            11
+          ],
+          "section": "dose",
+          "sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+          "url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf"
+        }
+      },
+      "uncertainties": "Синтетическая проверка, клинический допуск отсутствует."
+    },
+    "proposal_id": "7cb1a9608038fbe526e4a243cb879ffa",
+    "proposal_version": 2,
+    "review_version": 2,
+    "synthetic_only": true
+  },
+  "clinical_release": "blocked",
+  "active_service_changed": false
+}

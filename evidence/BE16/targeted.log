@@ -1,0 +1,35 @@
+F.../Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ast.py:295: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x107648130>
+  yield item
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.F.E
+======================================================================
+ERROR: test_untrusted_text_and_provider_output_cannot_publish_or_apply (apps.tests.test_backend_security.BackendSecurityTests.test_untrusted_text_and_provider_output_cannot_publish_or_apply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_security.py", line 147, in test_untrusted_text_and_provider_output_cannot_publish_or_apply
+    self.assertEqual(0,self.db.execute('SELECT count(*) FROM '+table).fetchone()[0])
+                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: treatment_plan_versions
+
+======================================================================
+FAIL: test_every_patient_api_role_object_csrf_and_cached_intermediates (apps.tests.test_backend_security.BackendSecurityTests.test_every_patient_api_role_object_csrf_and_cached_intermediates) (method='GET', path='/api/v1/patients/D01/plan-reviews/4ebde4c611918c7819190f235f961730')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_security.py", line 61, in test_every_patient_api_role_object_csrf_and_cached_intermediates
+    self.assertEqual(200, self.api('HEAD', path).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 415
+
+======================================================================
+FAIL: test_revocation_old_request_keys_and_runs_do_not_transfer (apps.tests.test_backend_security.BackendSecurityTests.test_revocation_old_request_keys_and_runs_do_not_transfer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_security.py", line 105, in test_revocation_old_request_keys_and_runs_do_not_transfer
+    self.assertEqual(404, self.api(method, url, payload, uid).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 409
+
+----------------------------------------------------------------------
+Ran 8 tests in 7.007s
+
+FAILED (failures=2, errors=1)

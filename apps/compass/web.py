@@ -364,7 +364,7 @@ def create_app(database=None):
         from . import backend_plan_review as review
         if request.args:
             raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
-        if request.method == 'GET':
+        if request.method in ('GET', 'HEAD'):
             return jsonify(review.receipt(get_db(), g.user, patient_id, proposal_id))
         if request.mimetype != 'application/json':
             raise backend_analyses.AnalysisError('Нужен JSON.', 415, 'unsupported_media_type')
@@ -978,7 +978,7 @@ def create_app(database=None):
     def self_report_draft(patient_id):
         role('patient')
         patient_or_404(patient_id)
-        if request.method == 'GET':
+        if request.method in ('GET', 'HEAD'):
             return jsonify(report_drafts.view(get_db(), g.user, patient_id))
         try:
             if request.form.get('draft_action', 'save') not in ('save', 'delete'):
