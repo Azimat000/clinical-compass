@@ -10,32 +10,19 @@
     <a href="{{ href }}"{% if key == 'invites' and request.endpoint != 'invitation_page' %} data-invite-open aria-haspopup="dialog" aria-controls="invite-dialog"{% endif %}{% if key == nav_active %} aria-current="page"{% endif %}>{{ label }}</a>
   {% endfor %}
 {% endmacro %}
-<div class="shell">
-  <aside class="side" aria-label="Разделы">
-    {{ ui.brand(url_for('dashboard')) }}
-    <nav class="nav" aria-label="Основные разделы">{{ menu() }}</nav>
-    <div class="side-foot"><span class="side-user" translate="no">{{ current_user.display_name }}</span>Врач
-      <form class="d-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти</button></form></div>
-  </aside>
-
+<div class="shell workspace-shell">
+  <header class="workspace-header">
+    {{ ui.brand(url_for('dashboard'), 'Клинический компас') }}
+    <nav class="workspace-nav" aria-label="Основные разделы">{{ menu() }}</nav>
+    <details class="workspace-account">
+      <summary><span class="account-name" translate="no">{{ current_user.display_name }}</span><span class="account-role">Врач</span></summary>
+      <form class="d-logout" method="post" action="{{ url_for('logout') }}"><p class="account-full" translate="no">{{ current_user.display_name }}</p><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти из кабинета</button></form>
+    </details>
+  </header>
   <div class="main">
-    <div class="bar carbon">
-      {{ ui.brand(url_for('dashboard'), 'Компас') }}
-      <details class="menu">
-        <summary>Меню</summary>
-        <nav class="nav" aria-label="Основные разделы">{{ menu() }}
-          <form class="d-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button type="submit">Выйти</button></form>
-        </nav>
-      </details>
-    </div>
-
     <div class="sheet">
-      <div class="sheet-head carbon">
-        <span>{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</span>
-      </div>
-      <main id="main">
-        {% block doctor_main %}{% endblock %}
-      </main>
+      <div class="workspace-date">{{ weekday }}, <time datetime="{{ iso }}">{{ day }}</time> · сведения на {{ clock_msk() }} МСК</div>
+      <main id="main">{% block doctor_main %}{% endblock %}</main>
     </div>
   </div>
 </div>

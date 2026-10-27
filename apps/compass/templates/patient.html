@@ -32,8 +32,10 @@
 {% if section == 'today' %}
   {{ heading(today_view.greeting) }}
 
+  <div class="patient-home">
+  <div class="home-primary">
   <section class="today" aria-labelledby="h-today">
-    <h2 id="h-today" class="visually-hidden">Что сделать сегодня</h2>
+    <h2 id="h-today">Как вы сегодня?</h2>
     <p>{{ today_view.why }}{% if today_view.task %} Отправить её нужно до <time datetime="{{ today_view.task.deadline_iso }}">{{ today_view.task.deadline_label }}</time>.{% endif %}</p>
     {% if today_view.kind == 'link' %}
       <form method="post" action="{{ url_for('accept_invitation') }}" class="link-form">
@@ -69,6 +71,8 @@
   </section>
   {% endif %}
 
+  </div>
+  <aside class="home-secondary" aria-label="Ваш дневник и врач">
   <section class="p-block" aria-labelledby="h-log">
     <h2 id="h-log">Ваши отметки {% if own_marks %}<a href="{{ url_for('patient_diary', patient_id=patient.id) }}">Весь дневник</a>{% endif %}</h2>
     {% if own_marks %}{{ marks(own_marks[:5]) }}
@@ -76,22 +80,27 @@
   </section>
 
   <section class="p-block" aria-labelledby="h-link">
-    <h2 id="h-link">Связь с врачом</h2>
+    <h2 id="h-link">Ваш врач</h2>
     {% if relationship %}
     <div class="note">
       <p>Ведущий врач: <strong translate="no">{{ relationship.display_name }}</strong></p>
       {% if checks %}<small>Последняя проверка связи получена <time datetime="{{ checks[0].received_at }}">{{ checks[0].received_at|msk }}</time>.</small>{% endif %}
+      <p class="note-action">{{ ui.button('Написать врачу', href=url_for('communication_page', patient_id=patient.id)) }}</p>
+      <details class="connection-tools"><summary>Проверить связь с кабинетом</summary>
       <form method="post" action="{{ url_for('connection_check', patient_id=patient.id) }}" class="note-action">
         <input type="hidden" name="csrf" value="{{ csrf }}">
         {{ ui.button('Отправить проверку связи') }}
       </form>
       <small>Врачу уходит технический отчёт без медицинских сведений.</small>
+      </details>
     </div>
     {% else %}
     {{ ui.empty('Врач с кабинетом не связан. Введите код приглашения выше.') }}
     {% endif %}
   </section>
 
+  </aside>
+  </div>
 {% elif section == 'diary' %}
   {{ heading('Дневник') }}
   {% if doctor_entries %}<p class="p-block"><a href="{{ url_for('patient_visits', patient_id=patient.id) }}">История приёмов</a></p>{% endif %}

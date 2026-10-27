@@ -16,29 +16,29 @@
   --ink-soft: #2b3238;
   --muted: #56616b;
   --sheet: #ffffff;
-  --ground: #e9edf0;
+  --ground: #f3f6f5;
   --band: #f7f9fa;
   --hover: #dfe4e8;
-  --rule: #e6eaed;
+  --rule: #d6dfdc;
   --border: #d3dae0;
   --control: #7f8a94;   /* рамки полей, ≥3:1 к белому */
   --flag: #b8261b;      /* только отклонение, требующее врача */
   --better: #1f6b45;    /* только метка «лучше» */
-  --marker: #e3f08a;    /* только причина внимания */
-  --focus: var(--ink);
+  --marker: #fff0c2;    /* только причина внимания */
+  --focus: #176b5b;
 
   /* шрифт */
-  --font: "PT Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono: "PT Mono", Menlo, Consolas, monospace;
-  --fs-title: 26px;
-  --fs-title-compact: 22px;
-  --fs-title-patient: 24px;
-  --fs-section: 16px;
-  --fs-body: 15px;
-  --fs-cell: 14px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --mono: var(--font);
+  --fs-title: 32px;
+  --fs-title-compact: 26px;
+  --fs-title-patient: 32px;
+  --fs-section: 22px;
+  --fs-body: 17px;
+  --fs-cell: 16px;
   --fs-action: 17px;
-  --fs-meta: 13px;
-  --fs-label: 12px;
+  --fs-meta: 14px;
+  --fs-label: 14px;
 
   /* ритм 4px */
   --sp-xs: 4px;
@@ -52,7 +52,7 @@
   --r-mark: 2px;
   --r-control: 4px;
   --r-sheet: 8px;
-  --h-control: 36px;
+  --h-control: 44px;
   --h-action: 52px;
 
   /* глубина: тень только у того, что лежит поверх страницы */
@@ -74,7 +74,7 @@ body {
   min-height: 100vh;
   background: var(--ground);
   color: var(--ink);
-  font: 400 var(--fs-body)/1.45 var(--font);
+  font: 400 var(--fs-body)/1.55 var(--font);
   font-synthesis: none;
   caret-color: var(--ink);
   overflow-wrap: break-word;
@@ -1032,3 +1032,178 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .recommendation-form .field { margin: 0; min-width: 0; }
 .recommendation-form .input, .recommendation-form .select, .recommendation-form .textarea { width: 100%; min-width: 0; }
 .recommendation-form .button { justify-self: start; min-height: 44px; }
+
+/* UI09 · рабочие кабинеты: читаемость, прямые действия, отдельная мобильная композиция. */
+:root { --accent: #176b5b; --accent-soft: #e7f2ee; }
+.num, .mono { font-size: 1em; }
+h1 { line-height: 1.2; letter-spacing: -.025em; }
+h2 { letter-spacing: -.015em; }
+.button { border-radius: 8px; padding-inline: 18px; font-weight: 600; }
+.button--primary { background: var(--accent); border-color: var(--accent); }
+.button--primary:hover { background: #115447; border-color: #115447; }
+.input, .select, .textarea { border-radius: 7px; font-size: 16px; padding-block: 10px; }
+.option { min-height: 44px; }
+.seg a, .seg button { min-height: 44px; line-height: 1.3; }
+.seg [aria-current="true"], .seg [aria-pressed="true"] { background: var(--accent); }
+.workspace-shell { display: block; }
+.workspace-header { display: flex; align-items: center; gap: 40px; min-height: 88px; padding: 16px 40px; background: var(--sheet); border-bottom: 1px solid var(--border); }
+.workspace-header .brand { font-size: 19px; color: var(--accent); }
+.workspace-nav { display: flex; align-items: center; gap: 28px; }
+.workspace-nav a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; color: var(--muted); font-size: 16px; }
+.workspace-nav a[aria-current] { color: var(--accent); font-weight: 700; border-bottom: 2px solid var(--accent); }
+.workspace-account { margin-left: auto; position: relative; max-width: 290px; }
+.workspace-account summary { cursor: pointer; font-size: 15px; font-weight: 600; min-height: 44px; }
+.account-role { display: block; color: var(--muted); font-size: 14px; font-weight: 400; }
+.workspace-account .d-logout { position: absolute; z-index: 10; right: 0; top: 100%; min-width: 210px; padding: 12px 20px; border: 1px solid var(--border); background: var(--sheet); box-shadow: var(--shadow-float); }
+.workspace-account button { min-height: 44px; font-size: 16px; }
+.workspace-shell .main { max-width: 1520px; margin: 0 auto; padding: 28px 40px 64px; }
+.workspace-shell .main > .sheet { min-height: calc(100vh - 180px); border: 1px solid var(--border); border-radius: 12px; overflow: visible; }
+.workspace-date { padding: 16px 32px 0; color: var(--muted); font-size: 14px; }
+.workspace-shell .asof { display: none; }
+.title-row { align-items: center; padding: 24px 32px; gap: 24px; }
+.finding { margin-top: 12px; font-size: 16px; }
+.crumb a { min-height: 44px; display: inline-flex; align-items: center; color: var(--muted); }
+.title-actions { flex: 0 1 440px; }
+.search { width: 100%; }
+.search .input { width: 100%; min-width: 0; }
+.filters { padding-block: 16px; background: var(--band); border-block: 1px solid var(--border); gap: 16px; }
+.results { font-size: 16px; }
+.results th { font-size: 14px; padding-block: 18px; background: var(--band); }
+.results td { padding-block: 24px; border-bottom-color: var(--border); }
+.results .who b { font-size: 18px; line-height: 1.4; }
+.results .who > span { margin-top: 6px; font-size: 14px; }
+.patient-shortcuts { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; }
+.results .patient-shortcuts a { font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; color: var(--accent); text-decoration: underline; }
+.review-reasons { line-height: 1.5; }
+.review-reasons li + li { margin-top: 14px; }
+.review-reasons small, .sub { font-size: 14px; line-height: 1.5; }
+.marker { background: var(--marker); }
+.patient-nav { background: var(--sheet); border-block: 1px solid var(--border); gap: 4px 28px; padding-block: 6px; }
+.patient-nav a { font-size: 16px; text-decoration: none; min-height: 48px; }
+.patient-nav a[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
+.jump:not(.patient-nav) { background: var(--band); padding-block: 6px; }
+.jump:not(.patient-nav) a { font-size: 15px; min-height: 44px; color: var(--muted); }
+.period-picker { padding: 12px var(--sp-sheet); border-bottom: 1px solid var(--border); }
+.period-picker > summary { min-height: 44px; display: list-item; align-content: center; color: var(--accent); cursor: pointer; font-size: 15px; }
+.period-picker .period { padding: 16px 0 0; border: 0; }
+.card-state { padding-block: 20px; background: var(--band); }
+.block { padding-top: 32px; padding-bottom: 28px; scroll-margin-top: 16px; }
+.block + .block { margin-top: 0; border-top: 2px solid var(--border); }
+.block > h2 { margin-bottom: 24px; }
+.block h3 { font-size: 18px; }
+.fold > summary { padding-block: 16px; min-height: 48px; }
+.keep, .plan-text { line-height: 1.65; }
+.p-top { background: var(--sheet); border-bottom: 1px solid var(--border); --focus: var(--accent); }
+.p-top-in { max-width: 1280px; padding: 20px 32px; min-height: 88px; }
+.p-top .brand { color: var(--accent); font-size: 19px; }
+.patient-identity { font-size: 15px; font-weight: 600; }
+.p-logout-button { color: var(--muted); font-size: 14px; }
+.p-tabs { position: sticky; top: 0; z-index: 5; overflow: visible; }
+.p-tabs-in { max-width: 1280px; padding: 0 32px; gap: 32px; }
+.p-tabs a { min-height: 58px; padding-inline: 4px; font-size: 16px; }
+.p-tabs a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.p-main { max-width: 860px; padding: 36px 32px 64px; }
+.p-main--home { max-width: 1280px; }
+.p-date { margin-top: 10px; margin-bottom: 28px; font-size: 14px; }
+.patient-home { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 40px; align-items: start; }
+.home-primary, .home-secondary { min-width: 0; }
+.today { padding: 28px; background: var(--accent-soft); border: 0; border-radius: 12px; }
+.today h2 { margin-bottom: 12px; }
+.today .button { margin-top: 20px; }
+.today small { font-size: 14px; }
+.p-block { padding-top: 28px; margin-top: 28px; border-top: 2px solid var(--border); }
+.home-primary > .home-plan { padding: 28px; border: 1px solid var(--border); border-radius: 12px; background: var(--sheet); }
+.home-secondary { background: var(--sheet); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.home-secondary > .p-block:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
+.home-secondary h2 { font-size: 20px; }
+.p-block > h2 { flex-wrap: wrap; gap: 4px 12px; margin-bottom: 16px; }
+.p-block h2 a { color: var(--accent); font-size: 14px; }
+.home-secondary .note { padding: 0; border: 0; background: transparent; }
+.home-secondary .note p { font-size: 16px; }
+.connection-tools { margin-top: 20px; font-size: 14px; }
+.connection-tools summary { min-height: 44px; cursor: pointer; color: var(--muted); }
+.p-foot { max-width: 85ch; line-height: 1.6; padding-top: 24px; }
+.p-main section { scroll-margin-top: 80px; }
+.log td { padding-block: 14px; }
+.med-calendar { margin-top: 28px; }
+@media (max-width: 1100px) {
+ .workspace-header { gap: 24px; padding-inline: 24px; flex-wrap: wrap; }
+ .workspace-header .brand { font-size: 17px; }
+ .workspace-account { max-width: 220px; }
+ .workspace-shell .main { padding: 24px; }
+ .patient-home { grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; }
+ .p-tabs-in { gap: 24px; }
+}
+@media (max-width: 760px) {
+ .workspace-header { padding: 16px; gap: 12px 16px; }
+ .workspace-header .brand { flex: 1; font-size: 16px; }
+ .workspace-account { width: 100%; max-width: none; margin: 0; order: 3; }
+ .workspace-account summary { font-size: 14px; }
+ .account-role { display: inline; margin-left: 8px; font-size: 13px; }
+ .workspace-account .d-logout { left: 0; right: auto; }
+ .workspace-nav { gap: 20px; width: 100%; order: 2; border-top: 1px solid var(--rule); }
+ .workspace-nav a { font-size: 15px; }
+ .workspace-shell .main { padding: 0 0 32px; }
+ .workspace-shell .main > .sheet { border: 0; border-radius: 0; }
+ .workspace-date { padding: 16px 20px 0; font-size: 13px; }
+ .title-row { padding: 20px; gap: 20px; }
+ .title-actions { flex-basis: auto; }
+ .title-row h1 { font-size: 26px; }
+ .filters, .sheet-pad, .card-state, .jump, .block, .filter-note { padding-inline: 20px; }
+ .seg { display: flex; width: 100%; }
+ .seg a { flex: 1; justify-content: center; font-size: 14px; padding: 8px; }
+ .results:not(.records) tr { padding: 24px 20px; gap: 14px; }
+ .review-list .who { grid-column: 1 / -1; }
+ .review-list .review-marks { grid-column: 1 / -1; }
+ .review-list .review-marks .sub { display: inline; margin-left: 10px; }
+ .patient-shortcuts { gap: 8px; margin-top: 12px; }
+ .results .patient-shortcuts a { padding: 0 12px; border: 1px solid var(--border); border-radius: 6px; text-decoration: none; }
+ .patient-nav { gap: 0 18px; }
+ .patient-nav a { font-size: 15px; }
+ .jump:not(.patient-nav) { gap: 0 16px; }
+ .period-picker { padding-inline: 20px; }
+ .card-state { gap: 20px; }
+ .block > .results { margin-inline: -20px; width: calc(100% + 40px); }
+ .block { padding-top: 28px; padding-bottom: 28px; }
+ .p-top-in { padding: 16px 20px; min-height: 72px; }
+ .p-top .brand { font-size: 16px; }
+ .patient-identity { display: none; }
+ .p-tabs { position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-top: 1px solid var(--border); padding-bottom: env(safe-area-inset-bottom); }
+ .p-tabs-in { padding: 0 8px; gap: 0; justify-content: space-between; }
+ .p-tabs a { justify-content: center; min-height: 64px; padding: 0 6px; font-size: 14px; border-bottom: 0; border-top: 3px solid transparent; margin: 0; }
+ .p-tabs a[aria-current="page"] { border-top-color: var(--accent); background: var(--accent-soft); }
+ .p-main { padding: 28px 20px calc(104px + env(safe-area-inset-bottom)); }
+ .p-main h1 { font-size: 28px; }
+ .patient-home { display: flex; flex-direction: column; gap: 28px; }
+ .home-primary, .home-secondary { width: 100%; }
+ .today, .home-primary > .home-plan { padding: 22px; }
+ .home-secondary { padding: 22px; }
+ .p-main section { scroll-margin-top: 20px; }
+ .p-block > h2 { font-size: 21px; }
+ .p-foot { margin-bottom: 24px; }
+}
+@media (max-width: 360px) {
+ .p-tabs-in { padding-inline: 2px; }
+ .p-tabs a { font-size: 13px; padding-inline: 4px; }
+ .workspace-header, .p-top-in { padding-inline: 16px; }
+ .p-main { padding-inline: 16px; }
+ .today, .home-primary > .home-plan, .home-secondary { padding: 18px; }
+}
+
+.workspace-account summary { display: block; padding-right: 24px; }
+.workspace-account summary::after { right: 0; }
+.account-full { margin-bottom: 8px; font-size: 14px; }
+.workspace-nav a:hover, .patient-shortcuts a:hover { color: var(--accent); text-decoration: underline; }
+@media (max-width: 760px) {
+ .workspace-header { gap: 4px 12px; padding-block: 12px 0; }
+ .workspace-account { order: 0; width: auto; margin-left: auto; }
+ .workspace-account .account-name { display: none; }
+ .workspace-account summary { display: flex; align-items: center; }
+ .account-role { font-size: 14px; margin: 0; }
+ .workspace-account .d-logout { left: auto; right: 0; }
+ .patient-nav { display: flex; flex-wrap: wrap; overflow: visible; white-space: normal; gap: 0 20px; }
+ .patient-nav a { flex: 0 0 auto; }
+ .card-state { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 15px; }
+ .card-state > div { width: auto; }
+ html { scroll-padding-bottom: 88px; }
+}

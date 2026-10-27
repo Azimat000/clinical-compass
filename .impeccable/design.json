@@ -1,524 +1,89 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T20:30:00+00:00",
-  "title": "Design System: Клинический компас",
+  "generatedAt": "2026-10-27",
+  "title": "Клинический компас · рабочие кабинеты UI09",
   "extensions": {
     "colorMeta": {
-      "carbon": {
-        "role": "primary",
-        "displayName": "Угольная шапка",
-        "canonical": "#1a1f23",
-        "tonalRamp": [
-          "#070c0f",
-          "#202529",
-          "#3b4145",
-          "#595e63",
-          "#787e83",
-          "#999fa5",
-          "#bec5cb",
-          "#e9f0f5"
-        ]
-      },
-      "on-carbon": {
-        "role": "neutral",
-        "displayName": "Текст на шапке",
-        "canonical": "#d5dce2",
-        "tonalRamp": [
-          "#070c10",
-          "#202529",
-          "#3b4145",
-          "#585e64",
-          "#787e84",
-          "#999fa5",
-          "#bec5cb",
-          "#e8eff6"
-        ]
-      },
-      "carbon-line": {
-        "role": "neutral",
-        "displayName": "Линия на шапке",
-        "canonical": "#4a535b",
-        "tonalRamp": [
-          "#060c12",
-          "#1d252c",
-          "#384149",
-          "#565f67",
-          "#757f87",
-          "#96a0a9",
-          "#bbc6cf",
-          "#e5f0fa"
-        ]
-      },
       "ink": {
-        "role": "neutral",
-        "displayName": "Чернила",
         "canonical": "#15191d",
-        "tonalRamp": [
-          "#080c0f",
-          "#202529",
-          "#3c4045",
-          "#595e63",
-          "#797e83",
-          "#9a9fa4",
-          "#bfc5ca",
-          "#e9eff5"
-        ]
-      },
-      "ink-soft": {
-        "role": "neutral",
-        "displayName": "Мягкие чернила",
-        "canonical": "#2b3238",
-        "tonalRamp": [
-          "#060c11",
-          "#1e252b",
-          "#394147",
-          "#575f65",
-          "#767e85",
-          "#97a0a7",
-          "#bdc5cd",
-          "#e7f0f8"
-        ]
+        "role": "neutral"
       },
       "muted": {
-        "role": "neutral",
-        "displayName": "Приглушённый",
         "canonical": "#56616b",
-        "tonalRamp": [
-          "#050c14",
-          "#1c252e",
-          "#37414a",
-          "#545f69",
-          "#737f89",
-          "#94a0ab",
-          "#b9c6d1",
-          "#e3f0fc"
-        ]
+        "role": "neutral"
       },
       "sheet": {
-        "role": "neutral",
-        "displayName": "Лист",
         "canonical": "#ffffff",
-        "tonalRamp": [
-          "#0b0b0b",
-          "#242424",
-          "#404040",
-          "#5d5d5d",
-          "#7d7d7d",
-          "#9e9e9e",
-          "#c4c4c4",
-          "#eeeeee"
-        ]
+        "role": "neutral"
       },
       "ground": {
-        "role": "neutral",
-        "displayName": "Поле",
-        "canonical": "#e9edf0",
-        "tonalRamp": [
-          "#090c0d",
-          "#222427",
-          "#3d4043",
-          "#5b5e61",
-          "#7a7e80",
-          "#9b9fa2",
-          "#c1c5c7",
-          "#ebeff2"
-        ]
+        "canonical": "#f3f6f5",
+        "role": "neutral"
       },
-      "band": {
-        "role": "neutral",
-        "displayName": "Полоса легенды",
-        "canonical": "#f7f9fa",
-        "tonalRamp": [
-          "#0a0b0c",
-          "#232425",
-          "#3e4041",
-          "#5c5e5f",
-          "#7c7d7e",
-          "#9d9fa0",
-          "#c2c4c5",
-          "#edeff0"
-        ]
+      "accent": {
+        "canonical": "#176b5b",
+        "role": "primary"
       },
-      "hover": {
-        "role": "neutral",
-        "displayName": "Наведение",
-        "canonical": "#dfe4e8",
-        "tonalRamp": [
-          "#080c0e",
-          "#212527",
-          "#3c4043",
-          "#5a5e62",
-          "#797e81",
-          "#9a9fa3",
-          "#c0c5c9",
-          "#eaeff3"
-        ]
+      "accent-soft": {
+        "canonical": "#e7f2ee",
+        "role": "neutral"
       },
       "rule": {
-        "role": "neutral",
-        "displayName": "Линия строки",
-        "canonical": "#e6eaed",
-        "tonalRamp": [
-          "#090c0d",
-          "#222427",
-          "#3d4043",
-          "#5b5e61",
-          "#7a7e80",
-          "#9b9fa2",
-          "#c1c5c8",
-          "#ebeff2"
-        ]
-      },
-      "border": {
-        "role": "neutral",
-        "displayName": "Рамка",
-        "canonical": "#d3dae0",
-        "tonalRamp": [
-          "#070c10",
-          "#202529",
-          "#3b4145",
-          "#585e64",
-          "#787e84",
-          "#999fa5",
-          "#bec5cb",
-          "#e8eff6"
-        ]
-      },
-      "control": {
-        "role": "neutral",
-        "displayName": "Рамка поля",
-        "canonical": "#7f8a94",
-        "tonalRamp": [
-          "#050c13",
-          "#1c252d",
-          "#37414a",
-          "#555f68",
-          "#747f89",
-          "#95a0aa",
-          "#bac6d0",
-          "#e4f0fb"
-        ]
-      },
-      "flag": {
-        "role": "secondary",
-        "displayName": "Красный флаг",
-        "canonical": "#b8261b",
-        "tonalRamp": [
-          "#2d0000",
-          "#4f0000",
-          "#721d15",
-          "#953e33",
-          "#ba5f52",
-          "#df8072",
-          "#ffa696",
-          "#ffd0bf"
-        ]
-      },
-      "better": {
-        "role": "secondary",
-        "displayName": "Зелёный «лучше»",
-        "canonical": "#1f6b45",
-        "tonalRamp": [
-          "#001500",
-          "#00300f",
-          "#004e2a",
-          "#226e47",
-          "#468e66",
-          "#68b187",
-          "#8ed7ac",
-          "#b8ffd5"
-        ]
+        "canonical": "#d6dfdc",
+        "role": "neutral"
       },
       "marker": {
-        "role": "tertiary",
-        "displayName": "Маркер",
-        "canonical": "#e3f08a",
-        "tonalRamp": [
-          "#0d0d00",
-          "#242800",
-          "#3f4500",
-          "#5c6400",
-          "#7c8521",
-          "#9ca748",
-          "#c2cd6f",
-          "#ecf899"
-        ]
+        "canonical": "#fff0c2",
+        "role": "neutral"
+      },
+      "flag": {
+        "canonical": "#b8261b",
+        "role": "neutral"
       }
     },
     "typographyMeta": {
-      "title": {
-        "displayName": "Заголовок экрана",
-        "purpose": "Одно существительное на экран врача."
-      },
-      "title-compact": {
-        "displayName": "Заголовок на телефоне",
-        "purpose": "Заголовок врача ≤760px."
-      },
-      "title-patient": {
-        "displayName": "Приветствие пациента",
-        "purpose": "Первая строка экрана «Сегодня»."
-      },
-      "section": {
-        "displayName": "Раздел",
-        "purpose": "Заголовки разделов и блоков."
-      },
       "body": {
-        "displayName": "Текст",
-        "purpose": "Строка-находка, просьба врача, сообщения."
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+        "fontSize": "17px",
+        "fontWeight": 400
       },
       "cell": {
-        "displayName": "Ячейка",
-        "purpose": "Таблица, поля, кнопки."
-      },
-      "action-patient": {
-        "displayName": "Главная кнопка пациента",
-        "purpose": "Одна кнопка на всю ширину."
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": 400
       },
       "meta": {
-        "displayName": "Подпись",
-        "purpose": "Вторые строки, легенда, шапка листа."
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": 400
       },
-      "label": {
-        "displayName": "Метка",
-        "purpose": "«Учебные данные», код флага; минимум 12px."
+      "section": {
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+        "fontSize": "22px",
+        "fontWeight": 700
       },
-      "figure": {
-        "displayName": "Измерение",
-        "purpose": "Отдельно стоящие даты, числа, коды флагов (PT Mono)."
+      "title": {
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+        "fontSize": "32px",
+        "fontWeight": 700
       }
     },
-    "shadows": [
-      {
-        "name": "menu",
-        "value": "0 8px 24px rgba(0,0,0,.12)",
-        "purpose": "Только всплывающее меню; поверхности в покое плоские."
-      }
-    ],
-    "motion": [],
-    "breakpoints": [
-      {
-        "name": "phone",
-        "value": "760px"
-      },
-      {
-        "name": "tablet",
-        "value": "1100px"
-      }
-    ]
-  },
-  "components": [
-    {
-      "name": "Главная кнопка",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Одна на экран: «Пригласить пациента», «Отметить самочувствие».",
-      "html": "<button class=\"ds-btn-primary\">Пригласить пациента</button>",
-      "css": ".ds-btn-primary{background:#1a1f23;color:#fff;border:1px solid #1a1f23;border-radius:4px;height:36px;padding:0 14px;font:700 14px/1 \"PT Sans\",Arial,sans-serif;cursor:pointer}.ds-btn-primary:hover{background:#15191d}.ds-btn-primary:focus-visible{outline:2px solid #1a1f23;outline-offset:2px}"
+    "shadows": {
+      "floating": "0 8px 24px rgba(0,0,0,.12)"
     },
-    {
-      "name": "Обычная кнопка",
-      "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "Второстепенные действия: «Рассмотреть», «Начать».",
-      "html": "<button class=\"ds-btn\">Рассмотреть</button>",
-      "css": ".ds-btn{background:#fff;color:#15191d;border:1px solid #7f8a94;border-radius:4px;height:36px;padding:0 14px;font:700 14px/1 \"PT Sans\",Arial,sans-serif;cursor:pointer}.ds-btn:hover{border-color:#15191d}.ds-btn:focus-visible{outline:2px solid #1a1f23;outline-offset:2px}"
+    "motion": {
+      "duration": "120ms",
+      "reducedMotion": true
     },
-    {
-      "name": "Поле поиска",
-      "kind": "input",
-      "refersTo": "input",
-      "description": "Поиск по пациентам и записям.",
-      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"Имя, код, слово из записи…\">",
-      "css": ".ds-input{height:36px;width:260px;border:1px solid #7f8a94;border-radius:4px;padding:0 10px;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d;background:#fff}.ds-input::placeholder{color:#56616b}.ds-input:focus-visible{outline:2px solid #1a1f23;outline-offset:2px}"
-    },
-    {
-      "name": "Переключатель",
-      "kind": "nav",
-      "refersTo": "button-secondary",
-      "description": "«С сигналами / Все» внутри формы фильтров.",
-      "html": "<div class=\"ds-seg\"><button aria-pressed=\"true\">С сигналами 3</button><button aria-pressed=\"false\">Все 5</button></div>",
-      "css": ".ds-seg{display:inline-flex;border:1px solid #7f8a94;border-radius:4px;overflow:hidden}.ds-seg button{border:0;background:#fff;color:#15191d;height:34px;padding:0 12px;font:400 14px \"PT Sans\",Arial,sans-serif;cursor:pointer}.ds-seg button+button{border-left:1px solid #7f8a94}.ds-seg button[aria-pressed=\"true\"]{background:#1a1f23;color:#fff}.ds-seg button:focus-visible{outline:2px solid #1a1f23;outline-offset:-3px}"
-    },
-    {
-      "name": "Флаг строки",
-      "kind": "chip",
-      "refersTo": "flag",
-      "description": "Отклонение словом; полная причина скрытым текстом.",
-      "html": "<span class=\"ds-flag\">НЯ<span style=\"position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)\">: новое нежелательное явление</span></span>",
-      "css": ".ds-flag{position:relative;display:inline-flex;align-items:center;height:22px;padding:0 6px;border:1.5px solid #b8261b;color:#b8261b;border-radius:2px;font:700 12px \"PT Mono\",Menlo,monospace;white-space:nowrap}"
-    },
-    {
-      "name": "Маркер причины",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Подложка только под причиной внимания.",
-      "html": "<b class=\"ds-marker\">Новое НЯ: тошнота, с 07.10</b>",
-      "css": ".ds-marker{background:#e3f08a;color:#15191d;padding:0 3px;font:700 14px \"PT Sans\",Arial,sans-serif}"
-    },
-    {
-      "name": "Метки самочувствия",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Лучше — верхняя половина, хуже — нижняя, без изменений — черта, не указано — пунктир.",
-      "html": "<span class=\"ds-wb\"><i class=\"b\"></i><i class=\"s\"></i><i class=\"w\"></i><i class=\"u\"></i></span>",
-      "css": ".ds-wb{display:inline-flex;gap:3px}.ds-wb i{width:16px;height:16px;border:1.5px solid #15191d;border-radius:2px;position:relative;overflow:hidden;display:block}.ds-wb i::after{content:\"\";position:absolute;left:0;right:0;background:currentColor}.ds-wb .b{color:#1f6b45;border-color:#1f6b45}.ds-wb .b::after{top:0;height:50%}.ds-wb .w{color:#b8261b;border-color:#b8261b}.ds-wb .w::after{bottom:0;height:50%}.ds-wb .s::after{top:5.5px;height:2px;left:2px;right:2px;background:#15191d}.ds-wb .u{border-style:dashed;border-color:#56616b}.ds-wb .u::after{display:none}"
-    },
-    {
-      "name": "Линия состояния",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Сплошная — есть сведения, штрих — неизвестно, двойная — противоречие.",
-      "html": "<span class=\"ds-st\">есть сведения</span> <span class=\"ds-st u\">неизвестно</span> <span class=\"ds-st c\">противоречие</span>",
-      "css": ".ds-st{display:inline-flex;align-items:center;gap:8px;font:400 13px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-st::before{content:\"\";width:22px;border-top:2px solid currentColor}.ds-st.u{color:#56616b}.ds-st.u::before{border-top-style:dashed}.ds-st.c::before{height:6px;border-bottom:2px solid currentColor}"
-    },
-    {
-      "name": "Меню врача",
-      "kind": "nav",
-      "refersTo": "button-secondary",
-      "description": "Разделы врача: пациенты, уведомления и приглашения. Без критических сигналов и дублирующих счётчиков.",
-      "html": "<nav class=\"ds-nav\"><a aria-current=\"page\" href=\"#\">Пациенты</a><a href=\"#\">Уведомления <span>3</span></a><a href=\"#\">Приглашения</a></nav>",
-      "css": ".ds-nav{display:flex;flex-direction:column;gap:2px;width:208px;background:#e9edf0;padding:8px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-nav a{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 10px;border-radius:4px;color:#2b3238;text-decoration:none}.ds-nav a:hover{background:#dfe4e8}.ds-nav a[aria-current=\"page\"]{background:#fff;color:#15191d;font-weight:700;box-shadow:inset 0 0 0 1px #d3dae0}.ds-nav b{color:#b8261b;font:700 13px \"PT Mono\",Menlo,monospace}.ds-nav span{font:400 13px \"PT Mono\",Menlo,monospace}"
-    },
-    {
-      "name": "Вкладки пациента",
-      "kind": "nav",
-      "refersTo": "button-secondary",
-      "description": "Пять вкладок в белой полосе: Сегодня, Дневник, Анкеты, План, Сообщения; активная подчёркнута чернилами 2px; недоступных пунктов нет; на узком экране полоса прокручивается.",
-      "html": "<nav class=\"ds-ptabs\"><a aria-current=\"page\" href=\"#\">Сегодня</a><a href=\"#\">Дневник</a><a href=\"#\">Анкеты</a></nav>",
-      "css": ".ds-ptabs{display:flex;gap:4px;background:#fff;border-bottom:1px solid #d3dae0;padding:0 12px;font:400 15px \"PT Sans\",Arial,sans-serif}.ds-ptabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 10px;color:#56616b;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}.ds-ptabs a[aria-current]{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
-    },
-    {
-      "name": "Строка списка врача",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Строка листа результатов: имя и возраст, причина под маркером (ссылка к источнику), метки самочувствия, явления линией состояния, анкета, план, флаги словом; на телефоне две-три строки.",
-      "html": "<div class=\"ds-row\"><b>Елена</b><span class=\"m\">Нежелательное явление</span><span class=\"f\">НЯ</span></div>",
-      "css": ".ds-row{display:grid;grid-template-columns:120px 1fr 56px;gap:12px;align-items:start;padding:11px 12px;border-bottom:1px solid #e6eaed;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-row .m{background:#e3f08a;padding:0 3px;font-weight:700;justify-self:start}.ds-row .f{border:1.5px solid #b8261b;color:#b8261b;border-radius:2px;padding:2px 6px;font:400 12px \"PT Mono\",Menlo,monospace;justify-self:end}"
-    },
-    {
-      "name": "Расхождение",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Строка между двумя линиями: знак-сведение слева, текст и ссылка «к записи» справа.",
-      "html": "<div class=\"ds-warn\"><span>22.10: Жалобы — противоречивые сведения</span><a href=\"#\">к записи</a></div>",
-      "css": ".ds-warn{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-block:1px solid #e6eaed;font:400 14px \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-warn::before{content:\"\";width:22px;margin-top:9px;border-top:2px solid currentColor;flex:none}.ds-warn span{flex:1}.ds-warn a{color:#15191d}"
-    },
-    {
-      "name": "Строка разделов пациента",
-      "kind": "custom",
-      "refersTo": "navigation",
-      "description": "Шесть разделов одной строкой под заголовком: Карточка, Сводка к приёму, Приём, План и решения, Сообщения, Документы. Текущий пункт жирный с подчёркиванием 2px чернилами, на телефоне строка прокручивается.",
-      "html": "<nav class=\"ds-pn\"><a>Карточка</a><a>Сводка к приёму</a><a>Приём</a><a class=\"on\">План и решения</a><a>Сообщения</a><a>Документы</a></nav>",
-      "css": ".ds-pn{display:flex;gap:16px;padding:0 28px;background:#f7f9fa;border-bottom:1px solid #e6eaed;font-size:14px}.ds-pn a{display:inline-flex;align-items:center;min-height:44px;color:#2b3238;border-bottom:2px solid transparent}.ds-pn a.on{color:#15191d;font-weight:700;border-bottom-color:#15191d}"
-    },
-    {
-      "name": "Раздел сведений приёма",
-      "kind": "custom",
-      "refersTo": "form",
-      "description": "Рамка 1px, подпись-легенда с кодом PT Mono и названием; ряд из трёх полей (состояние, источник, дата), затем текст и основание. «Неизвестно» по умолчанию.",
-      "html": "<fieldset class=\"ds-vf\"><legend><span>V02</span> Жалобы своими словами</legend><div class=\"r\"><i>Неизвестно</i><i>Со слов пациента</i><i>дд.мм.гггг</i></div></fieldset>",
-      "css": ".ds-vf{margin:0;padding:16px 18px;border:1px solid #d3dae0;border-radius:4px;font-size:14px}.ds-vf legend{padding:0 8px;font-weight:700}.ds-vf legend span{font-family:monospace;font-weight:400;color:#56616b}.ds-vf .r{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.ds-vf i{font-style:normal;border:1px solid #7f8a94;border-radius:4px;padding:8px 10px}"
-    },
-    {
-      "name": "Кандидат из документа",
-      "kind": "custom",
-      "refersTo": "marker",
-      "description": "Строка: поле жирным, значение PT Mono, статус линией состояния; под ней точная цитата с вертикальной чертой 1px и строка «Сверено / Не сверено».",
-      "html": "<div class=\"ds-cand\"><b>Диагноз в источнике</b> <code>F41.1</code><blockquote>F41.1</blockquote><small>Не сверено</small></div>",
-      "css": ".ds-cand{font-size:14px}.ds-cand code{margin:0 12px;font-family:monospace}.ds-cand blockquote{margin:8px 0 0;padding:4px 0 4px 12px;border-left:1px solid #15191d;color:#2b3238}.ds-cand small{color:#56616b}"
-    },
-    {
-      "name": "Сообщение с тремя состояниями",
-      "kind": "custom",
-      "refersTo": "notice",
-      "description": "Карточка: автор словом и время; текст; ниже три отдельные строки линией состояния — «Сохранено на сервере» сплошной, «Получено адресатом» и «Прочитано адресатом» штриховой «не отмечено» или временем. Своё сообщение белое, чужое на полосе. Отметки ставит адресат кнопками.",
-      "html": "<div class=\"ds-msg\"><p><b>Врач</b> <span>22.10.2026 14:05</span></p><p>Запишите давление утром и вечером.</p><ul><li class=\"k\">Сохранено на сервере</li><li class=\"k\">Получено адресатом: 22.10.2026 14:06</li><li class=\"u\">Прочитано адресатом: не отмечено</li></ul></div>",
-      "css": ".ds-msg{padding:14px 16px;background:#f7f9fa;border:1px solid #d3dae0;border-radius:8px;font-size:15px}.ds-msg p:first-child{display:flex;justify-content:space-between}.ds-msg span{color:#56616b;font-size:13px}.ds-msg ul{margin:12px 0 0;padding:8px 0 0;list-style:none;border-top:1px solid #e6eaed;font-size:13px}.ds-msg li{display:flex;gap:8px;align-items:baseline;margin-top:4px}.ds-msg li:before{content:\"\";width:22px;border-top:2px solid #15191d}.ds-msg li.u{color:#56616b}.ds-msg li.u:before{border-top:2px dashed #56616b}"
-    },
-    {
-      "name": "Цепочка шагов критического события",
-      "kind": "custom",
-      "refersTo": "navigation",
-      "description": "Четыре строки подряд: получено на экране врача, просмотрено, подтверждено, реакция записана. Сделанный шаг — сплошная линия и время, несделанный — штриховая «ещё нет». Кнопка есть только у следующего шага. Открытое событие — лист с линией 3px чернилами сверху.",
-      "html": "<ol class=\"ds-chain\"><li class=\"k\">Получено на экране врача: 22.10.2026 23:31</li><li class=\"u\">Просмотрено врачом: ещё нет <button>Отметить: просмотрено</button></li><li class=\"u\">Подтверждено врачом: ещё нет</li><li class=\"u\">Реакция врача записана: ещё нет</li></ol>",
-      "css": ".ds-chain{margin:0;padding:16px;list-style:none;display:grid;gap:12px;border-top:3px solid #15191d;border-bottom:1px solid #15191d;background:#fff;font-size:14px}.ds-chain li{display:grid;gap:8px;padding-top:12px;border-top:1px solid #e6eaed}.ds-chain li:first-child{border-top:0;padding-top:0}.ds-chain li:before{content:\"\";width:22px;border-top:2px solid #15191d}.ds-chain li.u{color:#56616b}.ds-chain li.u:before{border-top:2px dashed #56616b}.ds-chain button{justify-self:start;min-height:36px;padding:0 14px;border:1px solid #15191d;border-radius:4px;background:#1a1f23;color:#fff;font:700 14px sans-serif}"
-    },
-    {
-      "name": "Полоса критического события",
-      "kind": "custom",
-      "refersTo": "notice",
-      "description": "Над содержимым каждого экрана врача, пока есть неподтверждённое критическое событие: белая полоса с линией 2px чернилами снизу, слова с числом и кнопка «Открыть критические события». Знака ошибки и красной заливки нет; роль region с подписью.",
-      "html": "<div class=\"ds-band\"><p><b>Есть критические события, которые ждут вашего подтверждения: 1.</b> Это учебная демонстрация, не служба 24/7.</p><button>Открыть критические события</button></div>",
-      "css": ".ds-band{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:12px 28px;border-bottom:2px solid #15191d;background:#fff;font-size:14px}.ds-band p{flex:1 1 28em;max-width:70ch}.ds-band button{min-height:36px;padding:0 14px;border:1px solid #1a1f23;border-radius:4px;background:#1a1f23;color:#fff;font:700 14px sans-serif}"
-    },
-    {
-      "name": "Подтверждённое решение врача",
-      "kind": "custom",
-      "refersTo": "card",
-      "description": "Экран «План» пациента: вид решения, текст врача, линия состояния «Подтверждено врачом», имя врача и время МСК. Последнее решение — линия 3px чернилами сверху, остальные с тонкой рамкой. Только подтверждённое; красного и значка нет.",
-      "html": "<article class=\"ds-plan\"><h3>Изменение плана</h3><p>Ежедневные отметки самочувствия и анкета через две недели.</p><p class=\"ds-plan-meta\"><span class=\"ds-line\"></span>Подтверждено врачом · <b>Имя врача</b> · 23.10.2026 02:55 МСК</p></article>",
-      "css": ".ds-plan{background:#fff;border:1px solid #d3dae0;border-top:3px solid #15191d;border-radius:2px;padding:18px 16px;max-width:560px;font:400 15px/1.45 \"PT Sans\",Arial,sans-serif;color:#15191d}.ds-plan h3{margin:0;font-size:18px;line-height:1.3}.ds-plan p{margin:8px 0 0;max-width:60ch}.ds-plan-meta{display:flex;flex-wrap:wrap;gap:4px 8px;padding-top:8px;border-top:1px solid #e6eaed;font-size:13px;color:#56616b}.ds-line{align-self:center;width:22px;border-top:2px solid #15191d}"
+    "breakpoints": {
+      "mobile": "760px",
+      "compact": "1100px"
     }
-  ],
+  },
+  "components": [],
   "narrative": {
-    "northStar": "Лист результатов",
-    "overview": "Интерфейс читается как бланк результатов лабораторного анализа. Каждый пациент у врача — строка листа: имя, что проверить и последние отметки самочувствия. Врач читает сверху вниз и сразу видит отклонение, а не абзац текста. У пациента тот же лист, но спокойнее: одна просьба врача, одна кнопка, ниже свои отметки как результаты.\n\nМир даёт рабочим экранам только четыре вещи: шрифт, цвет, плотность и один фирменный приём. Раскладка, навигация и элементы управления остаются обычными для веба: таблица, вкладки, поля, кнопки, переключатели. Белый лист лежит на холодно-сером поле, над листом угольная шапка, как у печатного бланка. Цвета мало, и каждый цвет что-то значит.\n\nФирменный приём — состояние сведений, переданное формой, а не цветом: сплошная, штриховая и двойная линия, заливка метки сверху или снизу, пунктир для «не указано». Неизвестное и противоречивое выглядят иначе, чем «всё в порядке», даже на чёрно-белой распечатке.",
-    "keyCharacteristics": [
-      "Белый лист на холодно-сером поле, угольная шапка листа с датой и пометкой «учебные данные».",
-      "Один красный — только флаг отклонения; жёлто-зелёный маркер — только причина внимания.",
-      "Плотная таблица у врача: пять пациентов целиком на первом экране 1440×900.",
-      "Состояние формой линии и метки; цвет только помогает.",
-      "Даты и числа моноширинным PT Mono, текст PT Sans."
-    ],
-    "rules": [
-      {
-        "name": "The One Red Rule",
-        "body": "Красный появляется только там, где есть отклонение, требующее врача. Марка, кнопки, ссылки и свои записи пациента красными не бывают.",
-        "section": "colors"
-      },
-      {
-        "name": "The Marker Rule",
-        "body": "Маркер лежит только под причиной внимания. Если на экране три маркера, значит три пациента требуют внимания, и ни одного маркера больше.",
-        "section": "colors"
-      },
-      {
-        "name": "The Shape-First Rule",
-        "body": "Любой смысл, переданный цветом, повторён формой или словом: флаг — словом, самочувствие — заливкой половины метки, состояние сведений — видом линии.",
-        "section": "colors"
-      },
-      {
-        "name": "The Measurement Rule",
-        "body": "Моноширинный шрифт только для измерений: дата, число, счёт, код флага. Слова и подписи — PT Sans.",
-        "section": "typography"
-      },
-      {
-        "name": "The Self-Hosted Rule",
-        "body": "Шрифты — локальные файлы ParaType рядом с приложением, без изменений: apps/compass/static/fonts/ (PT Sans 400 и 700, PT Mono 400, SIL OFL 1.1, тексты лицензий рядом, происхождение и sha256 — docs/design/fonts.lock.json, проверка — `python3 tools/check_fonts.py`). Формат TTF как в источнике: конвертация в WOFF2 или урезание набора знаков по OFL-FAQ 2.2.2 и 2.6 может считаться изменённой версией и потребовать другого имени. Жирного PT Mono нет, синтез жирного выключен (`font-synthesis: none`), поэтому коды флагов набраны PT Mono 400.",
-        "section": "typography"
-      },
-      {
-        "name": "The Flat Sheet Rule",
-        "body": "Лист и карточки разделяются рамкой или сменой фона, никогда тенью. Тень — только у того, что лежит поверх страницы.",
-        "section": "elevation"
-      }
-    ],
-    "dos": [
-      "**Do** держать на первом экране врача 1440×900 всех пациентов очереди с их причинами и флагами.",
-      "**Do** начинать экран пациента с одной просьбы врача и одной кнопки на всю ширину выше сгиба.",
-      "**Do** показывать «сведения на» и «учебные данные» на каждом экране и на каждой ширине.",
-      "**Do** повторять каждый цветовой смысл формой или словом.",
-      "**Do** писать с пациентом на «вы», коротко и спокойно; с врачом — сжатыми клиническими словами.",
-      "**Do** делать фильтры и меню обычными формами и `<details>`, работающими без JS."
-    ],
-    "donts": [
-      "**Don't** использовать красный вне отклонения: ни в марке, ни в кнопках, ни в собственных записях пациента.",
-      "**Don't** ставить маркер где-то, кроме причины внимания.",
-      "**Don't** отделять поверхности тенью, градиентом или стеклом.",
-      "**Don't** ставить цветные полосы слева у строк и карточек, иконки в цветных квадратах, надписи-капсулы над заголовками.",
-      "**Don't** показывать пациенту суммы и интерпретацию DASS или красить его «хуже» в красный.",
-      "**Don't** выдавать неизмеренные цифры («займёт две минуты») и выдуманные показатели.",
-      "**Don't** подключать шрифты и скрипты с чужих серверов.",
-      "**Don't** использовать удалённый в S29 интерфейс как образец."
-    ]
+    "northStar": "Читаемый рабочий кабинет",
+    "overview": "Крупный системный шрифт, ясные разделы, прямые действия. Две колонки у пациента на компьютере и нижняя навигация на телефоне. Горизонтальная оболочка врача. Клинические факты и подтверждения сохранены.",
+    "source": "DESIGN.md; apps/compass/static/app.css; evidence/UI09"
   }
 }

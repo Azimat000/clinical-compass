@@ -1740,5 +1740,19 @@
       "removal_report": "memory/sessions/remove-decision-support-2026-10-27.md"
     },
     "resume_requires_explicit_user_request": true
+  },
+  "interface_redesign": {
+    "date": "2026-10-27",
+    "id": "UI09",
+    "status": "implemented_targeted_verified",
+    "report": "memory/sessions/UI09.md",
+    "evidence": "evidence/UI09/acceptance.md",
+    "plan": "plan/slices/UI09.md",
+    "stable_ref": "refs/tags/interface/UI09",
+    "active_service": "http://127.0.0.1:8000",
+    "clinical_data_changed": false,
+    "decision_support_reenabled": false,
+    "physical_mobile_verified": false,
+    "full_regression": false
   }
 }

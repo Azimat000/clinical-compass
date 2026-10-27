@@ -1,4 +1,4 @@
-{#- Оболочка кабинета пациента: угольная полоса, вкладки, колонка до 680px. Потомок задаёт nav_active: today | diary | forms | plan | talk. -#}
+{#- Оболочка кабинета пациента: постоянные разделы и адаптивная рабочая область. Потомок задаёт nav_active: today | diary | forms | plan | talk. -#}
 {% extends 'base.html' %}
 {% import 'components.html' as ui %}
 {% block body %}
@@ -7,10 +7,10 @@
                ('forms', 'Анкеты', url_for('patient_forms', patient_id=patient.id)),
                ('plan', 'План', url_for('decisions_page', patient_id=patient.id)),
                ('talk', 'Сообщения', url_for('communication_page', patient_id=patient.id))] %}
-<header class="p-top carbon">
+<header class="p-top">
   <div class="p-top-in">
-    {{ ui.brand(url_for('dashboard'), 'Компас') }}
-    <span class="p-top-end">
+    {{ ui.brand(url_for('dashboard'), 'Клинический компас') }}
+    <span class="p-top-end"><span class="patient-identity" translate="no">{{ current_user.display_name }}</span>
       <form class="p-logout" method="post" action="{{ url_for('logout') }}">
         <input type="hidden" name="csrf" value="{{ csrf }}">
         <button class="p-logout-button" type="submit">Выйти</button>
@@ -25,7 +25,7 @@
     {% endfor %}
   </div>
 </nav>
-<main class="p-main" id="main">
+<main class="p-main{% if section is defined and section == 'today' %} p-main--home{% endif %}" id="main">
   {% block patient_main %}{% endblock %}
   <p class="p-foot">Вы вошли как <span translate="no">{{ current_user.display_name }}</span>. Сохранено на сервере не значит, что врач уже посмотрел. Ответа здесь может не быть: кабинет не обеспечивает экстренную помощь и круглосуточное наблюдение. Если стало хуже, не ждите, обратитесь за медицинской помощью обычным способом.</p>
 </main>

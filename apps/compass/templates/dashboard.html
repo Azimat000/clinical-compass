@@ -24,7 +24,7 @@
   <div>
     <h1>Пациенты</h1>
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
-    <p class="finding">Сначала — пациенты с записями для проверки. Нажмите причину, чтобы открыть подробности.</p>
+    <p class="finding">Сначала — пациенты с записями для проверки. Откройте запись или сразу перейдите к нужному действию.</p>
   </div>
   <div class="title-actions">
     <form id="find" class="search" method="get" action="{{ url_for('dashboard') }}" role="search">
@@ -68,7 +68,12 @@
   <tbody>
     {% for r in rows %}
     <tr{% if r.attention %} class="flagged"{% endif %}>
-      <td class="who"><b><a href="{{ url_for('demo_patient', patient_id=r.id) }}" translate="no">{{ r.name }}</a></b><span>{{ r.age }} · <span translate="no">{{ r.id }}</span></span></td>
+      <td class="who"><b><a href="{{ url_for('demo_patient', patient_id=r.id) }}" translate="no">{{ r.name }}</a></b><span>{{ r.age }} · <span translate="no">{{ r.id }}</span></span>
+        <nav class="patient-shortcuts" aria-label="Действия для {{ r.name }}">
+          <a href="{{ url_for('first_visit_page', patient_id=r.id) }}">Приём</a>
+          <a href="{{ url_for('decisions_page', patient_id=r.id) }}">План</a>
+          <a href="{{ url_for('communication_page', patient_id=r.id) }}">Написать</a>
+        </nav></td>
       <td class="reason">
         {% if r.attention %}
         <ul class="review-reasons">{{ reason_line(r, r.reason, primary=True) }}{% for reason in r.more %}{{ reason_line(r, reason) }}{% endfor %}</ul>
