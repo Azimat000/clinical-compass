@@ -344,6 +344,23 @@ def create_app(database=None):
         role('doctor')
         return jsonify(backend_analyses.inputs(get_db(), g.user, patient_id, run_id, reference=reference))
 
+    @app.route('/api/v1/patients/<patient_id>/diagnosis-review', methods=['GET', 'POST'])
+    def diagnosis_review(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        from . import backend_diagnosis_review as review
+        if request.method == 'POST':
+            if request.args or request.mimetype != 'application/json':
+                raise backend_analyses.AnalysisError('Нужен JSON без параметров адреса.')
+            body = backend_analyses.parse_request(request.get_data(), schema=None)
+            return jsonify(review.record(get_db(), g.user, patient_id, body))
+        if set(request.args) - {'page'} or len(request.args.getlist('page')) > 1:
+            raise backend_analyses.AnalysisError('Недопустимые параметры страницы.')
+        page = request.args.get('page', '1')
+        if not re.fullmatch(r'[1-9][0-9]{0,8}', page):
+            raise backend_analyses.AnalysisError('Нужен номер страницы.')
+        return jsonify(review.view(get_db(), g.user, patient_id, int(page)))
+
     @app.get('/api/v1/physician/alerts')
     def backend_alert_inbox():
         role('doctor')

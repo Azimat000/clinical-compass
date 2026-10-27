@@ -84,6 +84,13 @@ def snapshot(db, patient_id, relationship_id):
             result[table] = rows
     for table in ('source_versions', 'catalog_versions', 'assessment_form_releases'):
         result[table] = sorted((dict(r) for r in db.execute(f'SELECT * FROM {table}')), key=canonical)
+    from . import backend_diagnosis_review
+    diagnosis = backend_diagnosis_review.head(db, patient_id)
+    if diagnosis is not None:
+        receipt = json.loads(diagnosis['receipt_json'])
+        result['diagnosis_review'] = {k: receipt[k] for k in (
+            'id', 'version', 'action', 'relationship_id', 'diagnosis', 'status',
+            'origin', 'snapshot_id', 'basis', 'uncertainties', 'clinical_release')}
     return canonical(result)
 
 

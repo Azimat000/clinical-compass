@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T07:35:58+03:00",
+  "updated_on": "2026-10-27T12:51:08+03:00",
   "current_slice": null,
-  "last_accepted_slice": "BE10",
-  "next_slice": "BE11",
+  "last_accepted_slice": "BE11",
+  "next_slice": "BE12",
   "qualification": "unknown",
   "postcontest_authorized": false,
   "slices": {
@@ -584,8 +584,8 @@
       "reason": null
     },
     "BE11": {
-      "status": "planned",
-      "commit_ref": null,
+      "status": "accepted",
+      "commit_ref": "refs/tags/slice/BE11",
       "handoff": "memory/sessions/BE11.md",
       "reason": null
     },
@@ -1386,7 +1386,7 @@
     "frontend_in_scope": false,
     "implementation_started": true,
     "clinical_validation": false,
-    "last_accepted_slice": "BE10",
+    "last_accepted_slice": "BE11",
     "contract_version": "1.0",
     "scope_version": "backend-scope-v1",
     "clinical_release": "blocked",
@@ -1432,7 +1432,10 @@
     "diagnosis_workflow_evidence": "evidence/BE10B02/acceptance.md",
     "diagnosis_workflow_quality": "evidence/BE10/diagnosis-quality.json",
     "model_connection_cap_usd": 1.0,
-    "diagnosis_summary_evidence": "evidence/BE10/acceptance.md"
+    "diagnosis_summary_evidence": "evidence/BE10/acceptance.md",
+    "diagnosis_review_version": "diagnosis-review-v1",
+    "diagnosis_review_mode": "synthetic_physician_api_only",
+    "diagnosis_review_evidence": "evidence/BE11/acceptance.md"
   },
   "workspace_recovery": {
     "date": "2026-10-26",
