@@ -1,0 +1,116 @@
+{
+  "status": "partial_preparation_unverified",
+  "tests_run": false,
+  "model_calls": 0,
+  "active_database_changed": false,
+  "cases": [
+    {
+      "id": "D01",
+      "patient_id": "P201",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Содержательная гипотеза → собственный диагноз врача → проект наблюдения/допустимого лечения; затем улучшение и новая версия. Не предписывать модели точный диагноз."
+    },
+    {
+      "id": "D02",
+      "patient_id": "P202",
+      "status": "input_added_unverified",
+      "entry": {
+        "event": "D02-before",
+        "patient_id": "P202",
+        "entry_id": "50b77f50f9b9fe871ed306d9d1dcfe62"
+      },
+      "backend_result": null,
+      "expected_ui": "Новый сигнал на главной своего врача, точная запись и время; обработка с историей. Это пример работы системы, не клиническое заключение."
+    },
+    {
+      "id": "D03",
+      "patient_id": "P203",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Врач видит причину и источник; отсутствие отметки/частичный приём/пропуск разные, новая оценка не меняет дозу сама."
+    },
+    {
+      "id": "D04",
+      "patient_id": "P204",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Показать ограничение лекарственного проекта и сведения для уточнения; никакого выдуманного безопасного переключения."
+    },
+    {
+      "id": "D05",
+      "patient_id": "P205",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Неполная анкета не даёт нулей; сначала insufficient/partial, после достаточного уточнения — новый анализ, история сохранена."
+    },
+    {
+      "id": "D06",
+      "patient_id": "P206",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Сигнал ведёт к точному ответу; высокий риск ограничивает обычный план, врач отдельно решает вопрос направления."
+    },
+    {
+      "id": "D07",
+      "patient_id": "P207",
+      "status": "input_added_unverified",
+      "entry": {
+        "event": "D07-before",
+        "patient_id": "P207",
+        "entry_id": "d63481ce403a14f20216c193b0eea348"
+      },
+      "backend_result": null,
+      "expected_ui": "Историческое сообщение отличается от текущего; не возобновлять препарат и не закрывать новые риски автоматически."
+    },
+    {
+      "id": "D08",
+      "patient_id": "P208",
+      "status": "input_added_unverified",
+      "entry": {
+        "event": "D08-before",
+        "patient_id": "P208",
+        "entry_id": "7ab416402784316dfcacbb365c55304c"
+      },
+      "backend_result": null,
+      "expected_ui": "Оба источника/противоречие видны; новая версия риска/гипотезы/плана, старое подтверждение её не закрывает."
+    },
+    {
+      "id": "D09",
+      "patient_id": "P209",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Не добавлять лечение для красоты демонстрации; врач видит наблюдение или аргументированное отсутствие предложения."
+    },
+    {
+      "id": "D10",
+      "patient_id": "P210",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Готовый проект → новое сведение → stale → обновление; текст врача сохранён, две вкладки дают один успех/понятный конфликт."
+    },
+    {
+      "id": "D11",
+      "patient_id": "P201/P206",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Ни лента, ни счётчики, ни ссылки/API не раскрывают чужого; новая связь не наследует старый служебный контекст."
+    },
+    {
+      "id": "D12",
+      "patient_id": "P210",
+      "status": "existing_history_or_pending_event_unverified",
+      "entry": null,
+      "backend_result": null,
+      "expected_ui": "Видны причина и доступные действия, история и ввод сохраняются; нет зелёного «риска нет», автоматических назначений и неограниченных повторов."
+    }
+  ]
+}

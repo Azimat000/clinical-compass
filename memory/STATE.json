@@ -1688,6 +1688,19 @@
     "validation": "deferred_by_user_2026-10-27",
     "validation_instruction": "не проверяй, пока без них",
     "model_connection_cap_usd": 4.0,
-    "implementation_status": "FE03B_complete_unverified"
+    "implementation_status": "FE03B_complete_unverified",
+    "examples_preparation": {
+      "slice": "FE03C",
+      "status": "partial_unverified",
+      "instruction": "Продолжай FE03C без проверок",
+      "database": "var/FE03C-cases.sqlite3",
+      "manifest": "data/fictional/frontend-cases-v1.json",
+      "report": "memory/sessions/FE03C.md",
+      "before_entries_added": 3,
+      "after_executed": false,
+      "model_calls": 0,
+      "tests_run": false,
+      "active_service_changed": false
+    }
   }
 }
