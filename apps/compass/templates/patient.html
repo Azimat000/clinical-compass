@@ -50,6 +50,8 @@
     {% if today_view.note %}<small>{{ today_view.note }}</small>{% endif %}
   </section>
 
+  {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', True) }}
+
   <section class="p-block home-plan" aria-labelledby="h-home-plan">
     <h2 id="h-home-plan">Ваш план лечения <a href="{{ url_for('decisions_page', patient_id=patient.id) }}">Весь план</a></h2>
     {% if plan %}
@@ -57,7 +59,6 @@
       <p class="meta">Подтвердил <b translate="no">{{ plan[0].doctor }}</b> · {{ plan[0].confirmed_at|msk }}</p>
     {% else %}<p class="meta">Врач пока не подтвердил план.</p>{% endif %}
   </section>
-  {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', True) }}
 
   {% if pending_assessments and today_view.kind != 'assessment' %}
   <section class="p-block" aria-labelledby="h-form">

@@ -94,7 +94,7 @@ time, .num { font-variant-numeric: tabular-nums; }
 .skip:focus-visible { transform: none; }
 
 /* ---------- Марка и пометка учебных данных ---------- */
-.brand { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
+.brand { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
 .brand svg { flex: none; }
 .synthetic { font-size: var(--fs-label); line-height: 1.3; color: var(--muted); border: 1px solid var(--border);
   border-radius: var(--r-control); padding: 1px 6px; white-space: nowrap; }
@@ -336,7 +336,7 @@ time, .num { font-variant-numeric: tabular-nums; }
 .entry .meta { margin-top: var(--sp-xs); }
 .entry-head .meta { margin-top: 0; }
 .entry .wb { vertical-align: -2px; margin-right: 6px; }
-details > summary { cursor: pointer; font-weight: 700; font-size: var(--fs-cell); min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md);
+details > summary { cursor: pointer; font-weight: 700; font-size: var(--fs-cell); min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md);
   list-style: none; touch-action: manipulation; }
 details > summary::-webkit-details-marker { display: none; }
 details > summary::after { content: ""; flex: none; width: 12px; height: 8px; background: url("icons/chevron.svg") center / 12px 8px no-repeat; }
@@ -839,7 +839,7 @@ html:has(.form-bar) { scroll-padding-bottom: 120px; }
 .review-list .review-marks { width: 26%; }
 .review-list .sub { display: block; }
 .review-filters { min-width: 0; }
-.review-filters summary { cursor: pointer; min-height: 36px; display: list-item; align-content: center; }
+.review-filters summary { cursor: pointer; min-height: 44px; display: list-item; align-content: center; }
 .review-filters .filter-form { margin-top: var(--sp-sm); }
 .review-filters > .meta { margin-top: var(--sp-sm); max-width: 60ch; }
 @media (max-width: 760px) {
@@ -1060,7 +1060,7 @@ h2 { letter-spacing: -.015em; }
 .workspace-shell .main > .sheet { min-height: calc(100vh - 180px); border: 1px solid var(--border); border-radius: 12px; overflow: visible; }
 .workspace-date { padding: 16px 32px 0; color: var(--muted); font-size: 14px; }
 .workspace-shell .asof { display: none; }
-.title-row { align-items: center; padding: 24px 32px; gap: 24px; }
+.title-row { align-items: center; padding: 16px 32px; gap: 24px; }
 .finding { margin-top: 12px; font-size: 16px; }
 .crumb a { min-height: 44px; display: inline-flex; align-items: center; color: var(--muted); }
 .title-actions { flex: 0 1 440px; }
@@ -1069,7 +1069,7 @@ h2 { letter-spacing: -.015em; }
 .filters { padding-block: 16px; background: var(--band); border-block: 1px solid var(--border); gap: 16px; }
 .results { font-size: 16px; }
 .results th { font-size: 14px; padding-block: 18px; background: var(--band); }
-.results td { padding-block: 24px; border-bottom-color: var(--border); }
+.results td { padding-block: 18px; border-bottom-color: var(--border); }
 .results .who b { font-size: 18px; line-height: 1.4; }
 .results .who > span { margin-top: 6px; font-size: 14px; }
 .patient-shortcuts { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; }
@@ -1079,10 +1079,10 @@ h2 { letter-spacing: -.015em; }
 .review-reasons small, .sub { font-size: 14px; line-height: 1.5; }
 .marker { background: var(--marker); }
 .patient-nav { background: var(--sheet); border-block: 1px solid var(--border); gap: 4px 28px; padding-block: 6px; }
-.patient-nav a { font-size: 16px; text-decoration: none; min-height: 48px; }
+.patient-nav a { min-width: 44px; font-size: 16px; text-decoration: none; min-height: 48px; }
 .patient-nav a[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
 .jump:not(.patient-nav) { background: var(--band); padding-block: 6px; }
-.jump:not(.patient-nav) a { font-size: 15px; min-height: 44px; color: var(--muted); }
+.jump:not(.patient-nav) a { min-width: 44px; font-size: 15px; min-height: 44px; color: var(--muted); }
 .period-picker { padding: 12px var(--sp-sheet); border-bottom: 1px solid var(--border); }
 .period-picker > summary { min-height: 44px; display: list-item; align-content: center; color: var(--accent); cursor: pointer; font-size: 15px; }
 .period-picker .period { padding: 16px 0 0; border: 0; }
@@ -1100,20 +1100,20 @@ h2 { letter-spacing: -.015em; }
 .p-logout-button { color: var(--muted); font-size: 14px; }
 .p-tabs { position: sticky; top: 0; z-index: 5; overflow: visible; }
 .p-tabs-in { max-width: 1280px; padding: 0 32px; gap: 32px; }
-.p-tabs a { min-height: 58px; padding-inline: 4px; font-size: 16px; }
+.p-tabs a { min-width: 48px; min-height: 58px; padding-inline: 4px; font-size: 16px; }
 .p-tabs a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
 .p-main { max-width: 860px; padding: 36px 32px 64px; }
 .p-main--home { max-width: 1280px; }
 .p-date { margin-top: 10px; margin-bottom: 28px; font-size: 14px; }
 .patient-home { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 40px; align-items: start; }
 .home-primary, .home-secondary { min-width: 0; }
-.today { padding: 28px; background: var(--accent-soft); border: 0; border-radius: 12px; }
+.today { padding: 0 0 24px; background: transparent; border: 0; border-radius: 0; }
 .today h2 { margin-bottom: 12px; }
-.today .button { margin-top: 20px; }
+.today .button { margin-top: 4px; width: auto; min-width: 240px; }
 .today small { font-size: 14px; }
 .p-block { padding-top: 28px; margin-top: 28px; border-top: 2px solid var(--border); }
-.home-primary > .home-plan { padding: 28px; border: 1px solid var(--border); border-radius: 12px; background: var(--sheet); }
-.home-secondary { background: var(--sheet); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.home-primary > .home-plan { padding: 24px 0 0; border: 0; border-top: 2px solid var(--rule); border-radius: 0; background: transparent; }
+.home-secondary { border-left: 1px solid var(--border); padding-left: 28px; }
 .home-secondary > .p-block:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
 .home-secondary h2 { font-size: 20px; }
 .p-block > h2 { flex-wrap: wrap; gap: 4px 12px; margin-bottom: 16px; }
@@ -1176,8 +1176,10 @@ h2 { letter-spacing: -.015em; }
  .p-main h1 { font-size: 28px; }
  .patient-home { display: flex; flex-direction: column; gap: 28px; }
  .home-primary, .home-secondary { width: 100%; }
- .today, .home-primary > .home-plan { padding: 22px; }
- .home-secondary { padding: 22px; }
+ .today { padding: 0 0 24px; }
+ .today .button { width: 100%; min-width: 0; }
+ .home-primary > .home-plan { padding: 24px 0 0; }
+ .home-secondary { border-left: 0; border-top: 2px solid var(--rule); padding: 24px 0 0; }
  .p-main section { scroll-margin-top: 20px; }
  .p-block > h2 { font-size: 21px; }
  .p-foot { margin-bottom: 24px; }
@@ -1187,7 +1189,7 @@ h2 { letter-spacing: -.015em; }
  .p-tabs a { font-size: 13px; padding-inline: 4px; }
  .workspace-header, .p-top-in { padding-inline: 16px; }
  .p-main { padding-inline: 16px; }
- .today, .home-primary > .home-plan, .home-secondary { padding: 18px; }
+
 }
 
 .workspace-account summary { display: block; padding-right: 24px; }
@@ -1206,4 +1208,58 @@ h2 { letter-spacing: -.015em; }
  .card-state { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 15px; }
  .card-state > div { width: auto; }
  html { scroll-padding-bottom: 88px; }
+}
+
+/* UI10 · структура переписки и спокойная иерархия рабочих экранов. */
+.p-main--wide { max-width: 1280px; }
+.communication-counts { display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 16px 32px; border-bottom: 1px solid var(--rule); font-size: var(--fs-meta); }
+.communication-counts > div { display: flex; gap: 8px; align-items: baseline; }
+.communication-counts .label { display: inline; }
+.conversation { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: 36px; align-items: start; margin-top: 28px; }
+.workspace-shell .conversation { padding: 0 32px 32px; }
+.conversation > #thread { grid-column: 1; grid-row: 1; padding: 0; margin: 0; border: 0; min-width: 0; }
+.compose-panel { grid-column: 2; grid-row: 1; position: sticky; top: 84px; padding-left: 28px; border-left: 1px solid var(--border); min-width: 0; }
+.compose-panel .compose { margin: 0; max-width: none; border: 0; padding: 0; background: transparent; }
+.conversation #h-thread { margin-bottom: 8px; }
+.conversation #thread > .meta { margin-bottom: 20px; max-width: 65ch; }
+.conversation .thread { gap: 0; max-width: none; }
+.conversation .msg { max-width: none; padding: 20px 0; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; }
+.conversation .msg--mine .msg-head > b { color: var(--accent); }
+.conversation .msg-body { margin-top: 8px; }
+.message-delivery { margin-top: 8px; }
+.message-delivery > summary { font-size: var(--fs-meta); font-weight: 400; color: var(--muted); justify-content: flex-start; min-height: 44px; }
+.message-delivery .msg-states { margin-top: 0; border-top: 0; }
+.plan-history { margin-top: 32px; }
+.plan-entry--now { border: 0; border-left: 3px solid var(--accent); background: transparent; padding: 4px 0 4px 20px; }
+.plan-history .plan-entry { border: 0; border-bottom: 1px solid var(--border); border-radius: 0; padding-inline: 0; background: transparent; }
+.plan-text, .entry-text, .compose > .meta { max-width: 65ch; }
+.p-block h2 a, .receipts a, .med-version-link { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+.assessment-actions .button, .assessment-actions a { min-height: 44px; }
+@media (max-width: 900px) {
+ .conversation { display: flex; flex-direction: column; gap: 32px; }
+ .conversation > #thread, .compose-panel { width: 100%; }
+ .compose-panel { position: static; border: 0; padding: 0 0 24px; border-bottom: 2px solid var(--rule); }
+}
+@media (max-width: 760px) {
+ .workspace-shell .conversation { padding-inline: 20px; }
+ .communication-counts { padding-inline: 20px; }
+ .conversation { margin-top: 24px; }
+ .med-days { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; border: 0; overflow: visible; margin-inline: 0; }
+ .med-day, .med-day:last-child { border: 1px solid var(--control); border-radius: 6px; min-height: 104px; }
+ .med-day > span:first-child, .med-day-count, .med-day-note { font-size: 14px; }
+ .assessment-hit { r: 46px; }
+ .p-tabs-in { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1.45fr; }
+ .p-tabs a { min-width: 44px; }
+}
+
+.assessment-table td a, .med-trend a, #fu-plan h3 a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+@media (pointer: coarse) { .results .who > a, .review-reasons a, .results .patient-shortcuts a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; } }
+
+.period-picker .card-state { margin-top: 16px; padding: 16px; border: 0; }
+.period-picker + .card-body > .block:first-child { border-top: 0; }
+@media (max-width: 760px) {
+ .workspace-date { padding-top: 12px; }
+ .title-row .crumb { margin-bottom: 0; }
+ .title-row { padding-block: 12px 16px; }
+ .jump:not(.patient-nav) { background: transparent; border-bottom: 1px solid var(--rule); gap: 0 12px; }
 }

@@ -1,0 +1,393 @@
+[
+  {
+    "name": "doctor-focus-walk",
+    "walk": [
+      {
+        "tag": "A",
+        "name": "К содержанию",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 8,
+          "y": 8,
+          "w": 143.828125,
+          "h": 44.34375
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Клинический компас",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 16,
+          "y": 12,
+          "w": 234.75,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Пациенты",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 16,
+          "y": 61,
+          "w": 78.015625,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Пригласить пациента",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 114.015625,
+          "y": 61,
+          "w": 154.921875,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "SUMMARY",
+        "name": "Екатерина Павловна ОрловаВрач",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 262.75,
+          "y": 12,
+          "w": 81.25,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "← Карточка пациента",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 20,
+          "y": 150.140625,
+          "w": 145.625,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Карточка",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 20,
+          "y": 309.921875,
+          "w": 69.9375,
+          "h": 48
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Приём",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 109.9375,
+          "y": 309.921875,
+          "w": 52.34375,
+          "h": 48
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "План и решения",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 182.28125,
+          "y": 309.921875,
+          "w": 120.4375,
+          "h": 48
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Сообщения",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 20,
+          "y": 357.921875,
+          "w": 92.734375,
+          "h": 48
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Документы",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 132.734375,
+          "y": 357.921875,
+          "w": 85.65625,
+          "h": 48
+        },
+        "composer": false
+      },
+      {
+        "tag": "TEXTAREA",
+        "name": "body",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 20,
+          "y": 650.0625,
+          "w": 320,
+          "h": 114.75
+        },
+        "composer": true
+      }
+    ]
+  },
+  {
+    "name": "doctor-submit-state",
+    "pending": {
+      "before": "Отправить",
+      "after": "Отправить",
+      "busy": "true",
+      "prevented": [
+        false,
+        true
+      ]
+    }
+  },
+  {
+    "name": "dialog",
+    "steps": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "restored": true
+  },
+  {
+    "name": "search-empty",
+    "text": "Пациенты\n\nСначала — пациенты с записями для проверки. Откройте запись или сразу перейдите к нужному действию.\n\nПоиск по пациентам и записям\nНайти\nВсе пациенты\n0\nНужно проверить\n0\nФильтры\nСбросить поиск\nПо этому запросу пациентов нет. Проверьте поиск и фильтры.\nПоказать всех\nКак составлен список\nлучше\nбез изменений\nхуже\nне указано"
+  },
+  {
+    "name": "doctor-long-320",
+    "overflow": false
+  },
+  {
+    "name": "doctor-long-768",
+    "overflow": false
+  },
+  {
+    "name": "doctor-long-1280",
+    "overflow": false
+  },
+  {
+    "name": "doctor-nojs",
+    "composer": true,
+    "sendAction": "/patients/P201/communication/send"
+  },
+  {
+    "name": "patient-focus-walk",
+    "walk": [
+      {
+        "tag": "A",
+        "name": "К содержанию",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 8,
+          "y": 8,
+          "w": 143.828125,
+          "h": 44.34375
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Клинический компас",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 16,
+          "y": 16,
+          "w": 201.15625,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "Выйти",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 293.203125,
+          "y": 16,
+          "w": 50.796875,
+          "h": 44
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Сегодня",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 2,
+          "y": 835,
+          "w": 65.3125,
+          "h": 64
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Дневник",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 67.3125,
+          "y": 835,
+          "w": 65.328125,
+          "h": 64
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Анкеты",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 132.640625,
+          "y": 835,
+          "w": 65.3125,
+          "h": 64
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "План",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 197.953125,
+          "y": 835,
+          "w": 65.328125,
+          "h": 64
+        },
+        "composer": false
+      },
+      {
+        "tag": "A",
+        "name": "Сообщения",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 263.28125,
+          "y": 835,
+          "w": 94.71875,
+          "h": 64
+        },
+        "composer": false
+      },
+      {
+        "tag": "TEXTAREA",
+        "name": "body",
+        "outline": "solid",
+        "width": "2px",
+        "box": {
+          "x": 16,
+          "y": 489.78125,
+          "w": 328,
+          "h": 114.75
+        },
+        "composer": true
+      }
+    ]
+  },
+  {
+    "name": "patient-submit-state",
+    "pending": {
+      "before": "Отправить",
+      "after": "Отправить",
+      "busy": "true",
+      "prevented": [
+        false,
+        true
+      ]
+    }
+  },
+  {
+    "name": "archive-anchor",
+    "id": "plan-59961cdfce7ff80da0c7123237f32cd6",
+    "open": true
+  },
+  {
+    "name": "failure-server",
+    "text": "Сервер не подтвердил сохранение. Ответы остались на этой странице. Повторите ту же отправку: вторая такая запись не создастся.",
+    "kept": "UI10: сохраняемый текст server",
+    "attempts": 2,
+    "focused": true
+  },
+  {
+    "name": "failure-malformed",
+    "text": "Не удалось подтвердить сохранение: связь прервалась или сервер не ответил. Ответы остались на этой странице. Повторите ту же отправку: вторая такая запись не создастся.",
+    "kept": "UI10: сохраняемый текст malformed",
+    "attempts": 2,
+    "focused": true
+  },
+  {
+    "name": "failure-offline",
+    "text": "Не удалось подтвердить сохранение: связь прервалась или сервер не ответил. Ответы остались на этой странице. Повторите ту же отправку: вторая такая запись не создастся.",
+    "kept": "UI10: сохраняемый текст offline",
+    "attempts": 2,
+    "focused": true
+  },
+  {
+    "name": "patient-long-320",
+    "overflow": false
+  },
+  {
+    "name": "patient-long-768",
+    "overflow": false
+  },
+  {
+    "name": "patient-long-1280",
+    "overflow": false
+  },
+  {
+    "name": "patient-nojs",
+    "composer": true,
+    "sendAction": "/patients/P201/communication/send"
+  }
+]

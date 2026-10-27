@@ -75,8 +75,6 @@
   <a class="reset" href="{{ card }}?start={{ recent_start }}&amp;end={{ today }}">Последние 30 дней</a>
   <a class="reset" href="{{ card }}">Вся история</a>
 </form>
-</details>
-{% if period_error %}<div class="sheet-pad">{{ ui.notice('Период не показан', period_error, kind='error', id='period-error') }}</div>{% endif %}
 {% if data %}
 <div class="card-state">
   <div>
@@ -93,6 +91,9 @@
 </div>
 
 {% endif %}
+</details>
+{% if period_error %}<div class="sheet-pad">{{ ui.notice('Период не показан', period_error, kind='error', id='period-error') }}</div>{% endif %}
+
 
 
 

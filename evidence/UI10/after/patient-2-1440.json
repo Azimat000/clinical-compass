@@ -1,0 +1,274 @@
+{
+  "role": "patient",
+  "route": "/demo/P201/report",
+  "width": 1440,
+  "status": 200,
+  "overflow": false,
+  "bodyFont": "17px",
+  "targets": [
+    {
+      "tag": "A",
+      "text": "К содержанию",
+      "cls": "skip",
+      "box": {
+        "x": 8,
+        "y": -80.6875,
+        "w": 143.828125,
+        "h": 44.34375
+      },
+      "font": "17px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "Клинический компас",
+      "cls": "brand",
+      "box": {
+        "x": 112,
+        "y": 22,
+        "w": 229.953125,
+        "h": 44
+      },
+      "font": "19px",
+      "inProse": false
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Выйти",
+      "cls": "p-logout-button",
+      "box": {
+        "x": 1277.203125,
+        "y": 22,
+        "w": 50.796875,
+        "h": 44
+      },
+      "font": "14px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "Сегодня",
+      "cls": "",
+      "box": {
+        "x": 112,
+        "y": 89,
+        "w": 71.328125,
+        "h": 58
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "Дневник",
+      "cls": "",
+      "box": {
+        "x": 215.328125,
+        "y": 89,
+        "w": 78.40625,
+        "h": 58
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "Анкеты",
+      "cls": "",
+      "box": {
+        "x": 325.734375,
+        "y": 89,
+        "w": 63.34375,
+        "h": 58
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "План",
+      "cls": "",
+      "box": {
+        "x": 421.078125,
+        "y": 89,
+        "w": 48,
+        "h": 58
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "A",
+      "text": "Сообщения",
+      "cls": "",
+      "box": {
+        "x": 501.078125,
+        "y": 89,
+        "w": 96.28125,
+        "h": 58
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "INPUT",
+      "text": "observed_on",
+      "cls": "input",
+      "box": {
+        "x": 341,
+        "y": 427.046875,
+        "w": 758,
+        "h": 44.796875
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "TEXTAREA",
+      "text": "summary",
+      "cls": "textarea",
+      "box": {
+        "x": 341,
+        "y": 670.8125,
+        "w": 758,
+        "h": 114.75
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "SELECT",
+      "text": "Есть сведения\nНеизвестно\nЯвно отрицает\nПротиворечивые сведения",
+      "cls": "select",
+      "box": {
+        "x": 341,
+        "y": 878.15625,
+        "w": 758,
+        "h": 44
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "TEXTAREA",
+      "text": "complaints_text",
+      "cls": "textarea",
+      "box": {
+        "x": 341,
+        "y": 992.640625,
+        "w": 758,
+        "h": 96
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "INPUT",
+      "text": "feedback_0_effect",
+      "cls": "",
+      "box": {
+        "x": 341,
+        "y": 1257.65625,
+        "w": 18,
+        "h": 18
+      },
+      "font": "13.3333px",
+      "inProse": false
+    },
+    {
+      "tag": "INPUT",
+      "text": "feedback_0_no_effect",
+      "cls": "",
+      "box": {
+        "x": 341,
+        "y": 1301.65625,
+        "w": 18,
+        "h": 18
+      },
+      "font": "13.3333px",
+      "inProse": false
+    },
+    {
+      "tag": "INPUT",
+      "text": "feedback_0_adverse",
+      "cls": "",
+      "box": {
+        "x": 341,
+        "y": 1345.65625,
+        "w": 18,
+        "h": 18
+      },
+      "font": "13.3333px",
+      "inProse": false
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Отправить врачу",
+      "cls": "button button--primary button--action",
+      "box": {
+        "x": 341,
+        "y": 1476.03125,
+        "w": 260,
+        "h": 52
+      },
+      "font": "17px",
+      "inProse": false
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Сохранить черновик",
+      "cls": "button",
+      "box": {
+        "x": 341,
+        "y": 1544.03125,
+        "w": 375,
+        "h": 46
+      },
+      "font": "16px",
+      "inProse": false
+    },
+    {
+      "tag": "SUMMARY",
+      "text": "Удалить черновик",
+      "cls": "",
+      "box": {
+        "x": 737,
+        "y": 1545.03125,
+        "w": 349,
+        "h": 44
+      },
+      "font": "16px",
+      "inProse": false
+    }
+  ],
+  "headings": [
+    {
+      "text": "Самочувствие",
+      "box": {
+        "x": 322,
+        "y": 183,
+        "w": 796,
+        "h": 38.390625
+      },
+      "font": "32px"
+    },
+    {
+      "text": "Назначенные препараты",
+      "box": {
+        "x": 341,
+        "y": 1112.640625,
+        "w": 758,
+        "h": 28.59375
+      },
+      "font": "22px"
+    }
+  ],
+  "wordCount": 200,
+  "axe": [],
+  "log": {
+    "console": [],
+    "pageErrors": [],
+    "failed": [],
+    "badStatus": []
+  }
+}

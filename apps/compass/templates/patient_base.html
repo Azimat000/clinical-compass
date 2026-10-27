@@ -25,7 +25,7 @@
     {% endfor %}
   </div>
 </nav>
-<main class="p-main{% if section is defined and section == 'today' %} p-main--home{% endif %}" id="main">
+<main class="p-main{% if section is defined and section == 'today' %} p-main--home{% endif %}{% if nav_active == 'talk' %} p-main--wide{% endif %}" id="main">
   {% block patient_main %}{% endblock %}
   <p class="p-foot">Вы вошли как <span translate="no">{{ current_user.display_name }}</span>. Сохранено на сервере не значит, что врач уже посмотрел. Ответа здесь может не быть: кабинет не обеспечивает экстренную помощь и круглосуточное наблюдение. Если стало хуже, не ждите, обратитесь за медицинской помощью обычным способом.</p>
 </main>

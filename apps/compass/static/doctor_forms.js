@@ -1,8 +1,7 @@
 /* Формы кабинета врача: без этого файла всё работает, он только убирает лишнее.
    1) повторное нажатие кнопки при ожидании ответа сервера;
    2) для вида решения показываются только нужные группы полей;
-   3) переход по ссылке на запись в истории раскрывает её;
-   4) на узком экране строка разделов пациента прокручивается к текущему пункту. */
+   3) переход по ссылке на запись в истории раскрывает её. */
 (function () {
   'use strict';
 
@@ -10,8 +9,6 @@
     form.dataset.sent = '1';
     form.setAttribute('aria-busy', 'true');
     if (button) {
-      button.dataset.label = button.textContent;
-      button.textContent = button.textContent.replace(/[.…]*$/, '') + '…';
       button.setAttribute('aria-busy', 'true');
       button.setAttribute('aria-disabled', 'true');
     }
@@ -21,7 +18,6 @@
     delete form.dataset.sent;
     form.removeAttribute('aria-busy');
     form.querySelectorAll('button[aria-busy]').forEach(function (button) {
-      if (button.dataset.label) { button.textContent = button.dataset.label; }
       button.removeAttribute('aria-busy');
       button.removeAttribute('aria-disabled');
     });
@@ -51,9 +47,6 @@
     kind.addEventListener('change', sync);
     sync();
   });
-
-  var current = document.querySelector('.patient-nav [aria-current="page"]');
-  if (current && current.scrollIntoView) { current.scrollIntoView({ block: 'nearest', inline: 'center' }); }
 
   function openTarget() {
     if (!location.hash) { return; }

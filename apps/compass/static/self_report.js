@@ -43,7 +43,6 @@
     lock(true);
     submit.disabled = true;
     retry.hidden = true;
-    submit.textContent = 'Отправляем…';
     submit.setAttribute('aria-busy', 'true');
     form.setAttribute('aria-busy', 'true');
     error.hidden = true;

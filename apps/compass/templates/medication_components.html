@@ -29,10 +29,11 @@
   </nav>
   <div class="med-days" aria-label="Дни недели">
     {% for day in cal.days %}
-    <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date, **period) }}#medications"{% if day.selected %} aria-current="date"{% endif %} aria-label="{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}">
+    <a class="med-day{% if day.selected %} med-day--selected{% endif %}" href="{{ url_for(endpoint, patient_id=patient.id, med_day=day.date, **period) }}#medications"{% if day.selected %} aria-current="date"{% endif %}>
       <span>{{ day.weekday }}</span><b class="num">{{ day.number }}</b>
       {% if day.total %}<span class="med-day-count"><img src="{{ url_for('static', filename='icons/pill.svg') }}" alt="" width="14" height="14">{{ day.taken }}/{{ day.total }}</span>
       {% else %}<span class="med-day-count">—</span>{% endif %}
+      <span class="visually-hidden">{{ day.date|full_date }}: принято {{ day.taken }} из {{ day.total }}; пропущено {{ day.missed }}, частично {{ day.partial }}, нет отметки {{ day.unmarked }}</span>
       {% if day.missed %}<span class="med-day-note">Пропуск</span>
       {% elif day.partial %}<span class="med-day-note">Часть</span>
       {% elif day.unmarked %}<span class="med-day-note">Нет отм.</span>{% endif %}

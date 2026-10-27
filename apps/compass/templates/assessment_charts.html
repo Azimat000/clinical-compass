@@ -15,7 +15,7 @@
         {% if series.latest %}<b class="num">{{ series.latest.value }}</b><span>из {{ series.maximum }}<br><time datetime="{{ series.latest.date }}">{{ series.latest.date|full_date }}</time></span>
         {% else %}<span>Нет полных ответов</span>{% endif %}
       </div>
-      <svg viewBox="0 0 570 193" role="img" aria-labelledby="plot-{{ group.version }}-{{ series.code }}">
+      <svg viewBox="0 0 570 193" role="group" aria-labelledby="plot-{{ group.version }}-{{ series.code }}">
         <title id="plot-{{ group.version }}-{{ series.code }}">{{ group.form.code }} — {{ series.name }}. Диапазон 0–{{ series.maximum }}. Точные значения приведены в таблице ниже.</title>
         {% for y, label in [(30, series.maximum), (93, series.middle|string|replace('.', ',')), (156, 0)] %}
         <line x1="42" x2="530" y1="{{ y }}" y2="{{ y }}" class="assessment-grid"/>

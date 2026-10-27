@@ -86,11 +86,14 @@ class PlanScreenTests(unittest.TestCase):
         self.assertRegex(page, r'\d\d\.\d\d\.\d{4}\xa0\d\d:\d\d\xa0МСК')
         self.assertNotIn('Ранее подтверждённые', page)
 
-    def test_old_decisions_beyond_six_fold_into_details(self):
+    def test_old_decisions_fold_after_current_actions_without_losing_history(self):
         for number in range(8):
             self.approved('РЕШЕНИЕ-№%d.' % number)
         page = self.page()
-        self.assertIn('Ещё более ранние (2)', page)
+        self.assertIn('Ранее подтверждённые решения (7)', page)
+        self.assertIn('<details class="fold plan-history" id="plan-history">', page)
+        self.assertLess(page.index('id="medications"'), page.index('id="plan-history"'))
+        self.assertLess(page.index('id="recommendations"'), page.index('id="plan-history"'))
         self.assertEqual(8, page.count('class="plan-entry'))
         self.assertEqual(8, len(set(re.findall(r'id="plan-([0-9a-f]{32})"', page))))
 
@@ -142,7 +145,8 @@ class PlanScreenTests(unittest.TestCase):
         page = response.get_data(as_text=True)
         self.assertEqual('no-store', response.headers['Cache-Control'])
         self.assertNotIn(' style=', page)
-        self.assertNotIn('<script', page)
+        self.assertEqual(['<script src="/static/doctor_forms.js" defer></script>'],
+                         re.findall(r'<script\b[^>]*>.*?</script>', page, re.S))
         ids = re.findall(r'\sid="([^"]+)"', page)
         self.assertEqual(len(ids), len(set(ids)))
         self.assertIn('Кабинет не оказывает экстренную помощь', page)

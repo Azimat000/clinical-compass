@@ -1,4 +1,4 @@
-{#- Сообщения: переписка врача и пациента. Один шаблон для обеих ролей; три состояния каждого сообщения — отдельными строками. -#}
+{#- Сообщения: переписка врача и пациента. Один шаблон для обеих ролей; состояния доставки раскрываются отдельно от текста. -#}
 {% extends 'doctor_base.html' if current_user.role == 'doctor' else 'patient_base.html' %}
 {% import 'components.html' as ui %}
 {% set is_doctor = current_user.role == 'doctor' %}
@@ -23,6 +23,8 @@
       {% if m.entry_id %}<a href="{{ url_for('record_location', patient_id=patient.id, entry_id=m.entry_id) }}">{{ 'записи приёма' if m.entry_kind == 'visit' else 'записи самочувствия' }}</a>{% endif %}{% if m.entry_id and m.task_id %}, {% endif %}{% if m.task_id %}пункту плана{% for t in tasks if t.id == m.task_id %} «<span class="keep">{{ t.label }}</span>» (срок <time class="num" datetime="{{ t.due_at }}">{{ t.due_at|msk }}</time>){% endfor %}{% endif %}
     </p>
     {% endif %}
+    <details class="message-delivery">
+      <summary>{% if m.read_at %}Прочтение отмечено{% elif m.received_at %}Получение отмечено{% else %}Сохранено · получение не отмечено{% endif %}</summary>
     <ul class="msg-states" aria-label="Состояние сообщения">
       <li><span class="state state--known">Сохранено на сервере</span></li>
       <li>{% if m.received_at %}<span class="state state--known"><span>{{ 'Получено вами' if for_me else 'Получено адресатом' }}: <time class="num" datetime="{{ m.received_at }}">{{ m.received_at|msk }}</time></span></span>
@@ -30,6 +32,7 @@
       <li>{% if m.read_at %}<span class="state state--known"><span>{{ 'Прочитано вами' if for_me else 'Прочитано адресатом' }}: <time class="num" datetime="{{ m.read_at }}">{{ m.read_at|msk }}</time></span></span>
         {% else %}<span class="state state--unknown">{{ 'Прочитано вами' if for_me else 'Прочитано адресатом' }}: не отмечено</span>{% endif %}</li>
     </ul>
+    </details>
     {% if for_me and not m.read_at %}
     <div class="msg-actions">
       {% if not m.received_at %}
@@ -78,7 +81,7 @@
     </details>
     {% endif %}
     <div class="form-actions">{{ ui.button('Отправить', kind='primary', size=None if is_doctor else 'action') }}</div>
-    <p class="meta">Сообщение не заменяет срочную помощь. Отправка повторно безопасна: если страница не ответила, проверьте переписку ниже, прежде чем писать снова.</p>
+    <p class="meta">Сообщение не заменяет срочную помощь. Отправка повторно безопасна: если страница не ответила, проверьте переписку, прежде чем писать снова.</p>
   </form>
 {% endmacro %}
 
@@ -109,20 +112,20 @@
     <p class="asof">{{ weekday }}, <time class="num" datetime="{{ iso }}">{{ day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
     <p class="finding"><span translate="no">{{ patient_name|truncate(60, True, '…') }}</span> · <span class="num" translate="no">{{ patient.id }}</span>. Переписка с пациентом.</p>
   </div>
-  <div class="title-actions">{{ ui.button('Написать', kind='primary', href='#compose') }}</div>
+
 </div>
 
 {{ ui.patient_nav(patient.id, 'talk') }}
 
-<div class="card-state">
+<div class="communication-counts">
   <div><span class="label">Сообщений</span>{% if messages %}<b class="num">{{ messages|length }}</b>{% else %}{{ ui.state('unknown', 'нет') }}{% endif %}</div>
   <div><span class="label">От пациента без отметки «прочитано»</span>{% set unread = messages|selectattr('recipient_id', 'equalto', current_user.id)|rejectattr('read_at')|list %}{% if unread %}<b class="num">{{ unread|length }}</b>{% else %}<span class="num">0</span>{% endif %}</div>
 </div>
 
-<div class="card-body">
-  {% if error %}<section class="block" aria-label="Ошибка">{{ top_error() }}</section>{% endif %}
+{{ top_error() }}
+<div class="conversation">
+  <section class="compose-panel" aria-labelledby="h-compose">{{ composer() }}</section>
   {{ thread() }}
-  <section class="block" aria-labelledby="h-compose">{{ composer() }}</section>
 </div>
 {% endblock %}
 
@@ -130,10 +133,11 @@
 <h1>Сообщения</h1>
 <p class="p-date"><time datetime="{{ iso }}">{{ weekday }}, {{ iso|ru_day }}</time> · сведения на <span class="num">{{ clock_msk() }}</span> МСК</p>
 {{ ui.notice('Врач читает не круглосуточно', 'Если стало хуже, не ждите ответа в кабинете: обратитесь за медицинской помощью обычным способом.', kind='info') }}
-<div class="p-actions">{{ ui.button('Написать сообщение', size='action', href='#compose') }}</div>
 {{ top_error() }}
-{{ thread() }}
-<div class="p-block">{{ composer() }}</div>
+<div class="conversation">
+  <section class="compose-panel" aria-labelledby="h-compose">{{ composer() }}</section>
+  {{ thread() }}
+</div>
 {% endblock %}
 
 {% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

@@ -34,21 +34,18 @@
   <ol class="plan-list">{{ entry(plan[0], current=True) }}</ol>
 </section>
 
-{% if plan|length > 1 %}
-<section class="p-block" aria-labelledby="h-plan-before">
-  <h2 id="h-plan-before">Ранее подтверждённые решения</h2>
-  <p class="meta">Сначала новые. Новое решение может менять прежние.</p>
-  <ol class="plan-list">{% for d in plan[1:6] %}{{ entry(d) }}{% endfor %}</ol>
-  {% if plan|length > 6 %}
-  <details class="fold older">
-    <summary>Ещё более ранние ({{ plan|length - 6 }})</summary>
-    <div class="fold-body"><ol class="plan-list">{% for d in plan[6:] %}{{ entry(d) }}{% endfor %}</ol></div>
-  </details>
-  {% endif %}
-</section>
-{% endif %}
-
 {% endif %}
 {% include 'patient_plan_tasks.html' %}
 {{ med.calendar(med_calendar, patient, csrf, 'decisions_page', True) }}
+{% if plan|length > 1 %}
+<details class="fold plan-history" id="plan-history">
+  <summary>Ранее подтверждённые решения ({{ plan|length - 1 }})</summary>
+  <div class="fold-body">
+    <p class="meta">Сначала новые. Новое решение может менять прежние.</p>
+    <ol class="plan-list">{% for d in plan[1:] %}{{ entry(d) }}{% endfor %}</ol>
+  </div>
+</details>
+{% endif %}
 {% endblock %}
+
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

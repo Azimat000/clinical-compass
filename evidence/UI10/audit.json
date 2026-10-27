@@ -1,0 +1,367 @@
+{
+  "audit": {
+    "ranAt": "2026-10-27T15:03:33.640626+00:00",
+    "skill": "ui-design",
+    "mode": "audit",
+    "scope": {
+      "mode": "full",
+      "diffBase": "42fb0ed",
+      "files": [
+        "apps/compass/static/app.css",
+        "apps/compass/static/doctor_forms.js",
+        "apps/compass/static/self_report.js",
+        "apps/compass/templates/assessment_charts.html",
+        "apps/compass/templates/base.html",
+        "apps/compass/templates/communication.html",
+        "apps/compass/templates/doctor_patient.html",
+        "apps/compass/templates/medication_components.html",
+        "apps/compass/templates/patient.html",
+        "apps/compass/templates/patient_base.html",
+        "apps/compass/templates/plan.html",
+        "apps/tests/test_ui06b.py"
+      ],
+      "filesAudited": 12,
+      "renderedRoutes": 11,
+      "note": "11 principal cabinet routes and shared UI, not every clinical form state."
+    },
+    "featuresDetected": [
+      "forms",
+      "navigation",
+      "data tables",
+      "calendar",
+      "charts",
+      "dialog",
+      "messages",
+      "history"
+    ],
+    "rulesPlanned": [
+      "a11y-semantic-html-first",
+      "interaction-target-size",
+      "mobile-viewport-scaling",
+      "slop-decoration-no-role",
+      "forms-no-disable-while-submitting",
+      "interaction-focus-visible",
+      "interaction-keyboard-operable",
+      "focus-broken-focus-trap",
+      "focus-not-restored",
+      "forms-mobile-input-font-size",
+      "forms-lost-data-on-error",
+      "states-no-empty-state",
+      "states-no-error-state",
+      "layout-long-content-safety",
+      "nav-semantic-links",
+      "a11y-data-table-semantics",
+      "type-readable-scale"
+    ],
+    "rulesRun": [
+      "a11y-semantic-html-first",
+      "interaction-target-size",
+      "mobile-viewport-scaling",
+      "slop-decoration-no-role",
+      "forms-no-disable-while-submitting",
+      "interaction-focus-visible",
+      "interaction-keyboard-operable",
+      "focus-broken-focus-trap",
+      "focus-not-restored",
+      "forms-mobile-input-font-size",
+      "forms-lost-data-on-error",
+      "states-no-empty-state",
+      "states-no-error-state",
+      "layout-long-content-safety",
+      "nav-semantic-links",
+      "a11y-data-table-semantics",
+      "type-readable-scale"
+    ],
+    "selfCheck": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "verdict": "READY",
+  "summary": {
+    "found": {
+      "releaseBlockers": 1,
+      "fixThisSprint": 3,
+      "backlog": 2,
+      "total": 6
+    },
+    "applied": {
+      "releaseBlockers": 1,
+      "fixThisSprint": 3,
+      "backlog": 2,
+      "total": 6
+    },
+    "remaining": {
+      "releaseBlockers": 0,
+      "fixThisSprint": 0,
+      "backlog": 0,
+      "total": 0
+    },
+    "outOfScope": [
+      "React hooks: Flask/Jinja project",
+      "dark mode and RTL: not shipped",
+      "clinical admission",
+      "full backend regression"
+    ],
+    "unknown": [
+      "physical device keyboard and safe-area behavior",
+      "real user usability study"
+    ],
+    "suppressed": 0
+  },
+  "findings": [
+    {
+      "id": "UI10-1",
+      "rule": "a11y-semantic-html-first",
+      "category": "a11y",
+      "detect": "rendered",
+      "feature": "medical workspace",
+      "surface": "doctor-1-360",
+      "file": "apps/compass/templates/assessment_charts.html",
+      "line": 18,
+      "result": "pass-after-fix",
+      "defaultTier": "release-blocker",
+      "assignedTier": "release-blocker",
+      "severity": "release-blocker",
+      "observed": "SVG с ролью картинки содержит ссылки",
+      "expected": "Роль group сохраняет ссылки и описание",
+      "fix": "Роль group сохраняет ссылки и описание",
+      "applied": true,
+      "appliedChange": "Роль group сохраняет ссылки и описание",
+      "suppressed": false,
+      "verification": {
+        "probe": "axe-scan / target-size / visual-review",
+        "route": "/demo/P201",
+        "viewport": {
+          "width": 360,
+          "height": 900,
+          "touch": true
+        },
+        "theme": "light",
+        "result": "reproduced",
+        "observed": "SVG с ролью картинки содержит ссылки",
+        "expected": "Роль group сохраняет ссылки и описание",
+        "evidence": [
+          "before/doctor-1-360.png",
+          "before-repeat/doctor-1-360.png"
+        ],
+        "reruns": 2,
+        "reason": null,
+        "clearedBy": {
+          "ranAt": "2026-10-27T15:03:33.640626+00:00",
+          "result": "not-reproduced",
+          "observed": "Роль group сохраняет ссылки и описание",
+          "evidence": [
+            "after/doctor-1-360.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "UI10-2",
+      "rule": "a11y-semantic-html-first",
+      "category": "a11y",
+      "detect": "rendered",
+      "feature": "medical workspace",
+      "surface": "patient-0-360",
+      "file": "apps/compass/templates/medication_components.html",
+      "line": 36,
+      "result": "pass-after-fix",
+      "defaultTier": "release-blocker",
+      "assignedTier": "fix-this-sprint",
+      "severity": "fix-this-sprint",
+      "observed": "Название дня не включает видимые подписи",
+      "expected": "Доступное имя составлено из видимого текста и полного пояснения",
+      "fix": "Доступное имя составлено из видимого текста и полного пояснения",
+      "applied": true,
+      "appliedChange": "Доступное имя составлено из видимого текста и полного пояснения",
+      "suppressed": false,
+      "verification": {
+        "probe": "axe-scan / target-size / visual-review",
+        "route": "/demo/P201",
+        "viewport": {
+          "width": 360,
+          "height": 900,
+          "touch": true
+        },
+        "theme": "light",
+        "result": "reproduced",
+        "observed": "Название дня не включает видимые подписи",
+        "expected": "Доступное имя составлено из видимого текста и полного пояснения",
+        "evidence": [
+          "before/patient-0-360.png",
+          "before-repeat/patient-0-360.png"
+        ],
+        "reruns": 2,
+        "reason": null,
+        "clearedBy": {
+          "ranAt": "2026-10-27T15:03:33.640626+00:00",
+          "result": "not-reproduced",
+          "observed": "Доступное имя составлено из видимого текста и полного пояснения",
+          "evidence": [
+            "after/patient-0-360.png"
+          ]
+        }
+      },
+      "tierReason": "Visible native link remains operable; inconsistent name corrected."
+    },
+    {
+      "id": "UI10-3",
+      "rule": "interaction-target-size",
+      "category": "interaction",
+      "detect": "rendered",
+      "feature": "medical workspace",
+      "surface": "patient-0-360",
+      "file": "apps/compass/static/app.css",
+      "line": 1213,
+      "result": "pass-after-fix",
+      "defaultTier": "fix-this-sprint",
+      "assignedTier": "fix-this-sprint",
+      "severity": "fix-this-sprint",
+      "observed": "Узкие вкладки, мелкие дни, ссылки графиков и раскрытия",
+      "expected": "Увеличены зоны нажатия; календарь перестраивается на телефоне",
+      "fix": "Увеличены зоны нажатия; календарь перестраивается на телефоне",
+      "applied": true,
+      "appliedChange": "Увеличены зоны нажатия; календарь перестраивается на телефоне",
+      "suppressed": false,
+      "verification": {
+        "probe": "axe-scan / target-size / visual-review",
+        "route": "/demo/P201",
+        "viewport": {
+          "width": 360,
+          "height": 900,
+          "touch": true
+        },
+        "theme": "light",
+        "result": "reproduced",
+        "observed": "Узкие вкладки, мелкие дни, ссылки графиков и раскрытия",
+        "expected": "Увеличены зоны нажатия; календарь перестраивается на телефоне",
+        "evidence": [
+          "before/patient-0-360.png",
+          "before-repeat/patient-0-360.png"
+        ],
+        "reruns": 2,
+        "reason": "Rendered boxes and label associations; exhaustive coordinate hit testing not run.",
+        "clearedBy": {
+          "ranAt": "2026-10-27T15:03:33.640626+00:00",
+          "result": "not-reproduced",
+          "observed": "Увеличены зоны нажатия; календарь перестраивается на телефоне",
+          "evidence": [
+            "after/patient-0-360.png"
+          ]
+        }
+      }
+    },
+    {
+      "id": "UI10-4",
+      "rule": "mobile-viewport-scaling",
+      "category": "mobile",
+      "detect": "static",
+      "feature": "medical workspace",
+      "surface": "patient-0-360",
+      "file": "apps/compass/templates/base.html",
+      "line": 5,
+      "result": "pass-after-fix",
+      "defaultTier": "backlog",
+      "assignedTier": "backlog",
+      "severity": "backlog",
+      "observed": "safe-area задана без viewport-fit",
+      "expected": "Добавлен viewport-fit=cover без запрета масштабирования",
+      "fix": "Добавлен viewport-fit=cover без запрета масштабирования",
+      "applied": true,
+      "appliedChange": "Добавлен viewport-fit=cover без запрета масштабирования",
+      "suppressed": false,
+      "verification": {
+        "probe": "source-review",
+        "result": "not-required",
+        "reason": "Static construct reviewed in git diff; screenshots supplement evidence.",
+        "evidence": [
+          "apps/compass/templates/base.html"
+        ]
+      }
+    },
+    {
+      "id": "UI10-5",
+      "rule": "slop-decoration-no-role",
+      "category": "slop",
+      "detect": "static",
+      "feature": "medical workspace",
+      "surface": "patient-0-360",
+      "file": "apps/compass/static/app.css",
+      "line": 1213,
+      "result": "pass-after-fix",
+      "defaultTier": "backlog",
+      "assignedTier": "backlog",
+      "severity": "backlog",
+      "observed": "Карточки внутри рабочей области повторяют одинаковые рамки",
+      "expected": "Удалены лишние рамки главной и сообщений, сохранены разделители",
+      "fix": "Удалены лишние рамки главной и сообщений, сохранены разделители",
+      "applied": true,
+      "appliedChange": "Удалены лишние рамки главной и сообщений, сохранены разделители",
+      "suppressed": false,
+      "verification": {
+        "probe": "source-review",
+        "result": "not-required",
+        "reason": "Static construct reviewed in git diff; screenshots supplement evidence.",
+        "evidence": [
+          "apps/compass/static/app.css"
+        ]
+      }
+    },
+    {
+      "id": "UI10-6",
+      "rule": "forms-no-disable-while-submitting",
+      "category": "forms",
+      "detect": "static",
+      "feature": "medical workspace",
+      "surface": "doctor-3-360",
+      "file": "apps/compass/static/doctor_forms.js",
+      "line": 8,
+      "result": "pass-after-fix",
+      "defaultTier": "fix-this-sprint",
+      "assignedTier": "fix-this-sprint",
+      "severity": "fix-this-sprint",
+      "observed": "При ожидании меняется подпись кнопки",
+      "expected": "Сохранена подпись, aria-busy и защита повторной отправки",
+      "fix": "Сохранена подпись, aria-busy и защита повторной отправки",
+      "applied": true,
+      "appliedChange": "Сохранена подпись, aria-busy и защита повторной отправки",
+      "suppressed": false,
+      "verification": {
+        "probe": "source-review",
+        "result": "not-required",
+        "reason": "Static construct reviewed in git diff; screenshots supplement evidence.",
+        "evidence": [
+          "apps/compass/static/doctor_forms.js"
+        ]
+      }
+    }
+  ],
+  "consideredAndRejected": [
+    {
+      "rule": "interaction-target-size",
+      "candidate": "18px checkboxes",
+      "guard": "Clickable parent label min-height 44px; glyph is not target"
+    },
+    {
+      "rule": "slop-token-drift",
+      "candidate": "CSS token names",
+      "guard": "No Tailwind @theme, no forced token migration"
+    },
+    {
+      "rule": "forms-inline-errors-first-focus",
+      "candidate": "No manual focus on required forms",
+      "guard": "Native browser validation focuses invalid field"
+    },
+    {
+      "rule": "brand-identifiable-body",
+      "candidate": "System font",
+      "guard": "Readability and native Cyrillic more important than adding unverified brand font"
+    }
+  ],
+  "deferredTo": [
+    "ui-verification: browser evidence in after/, flows-chromium/, responsive-*.json",
+    "typography-audit: typography.md",
+    "product-design: product-review.md"
+  ]
+}
