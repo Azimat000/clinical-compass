@@ -596,6 +596,37 @@
           }
         }
       }
+    },
+    "/api/v1/patients/{patient_id}/therapy-context": {
+      "get": {
+        "summary": "Current synthetic physician factual medication reconciliation",
+        "responses": {
+          "200": {
+            "description": "Version, exact base snapshot and current attestation"
+          }
+        }
+      },
+      "post": {
+        "summary": "Append an immutable synthetic factual reconciliation; does not prescribe",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TherapyContextRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stored version or exact retry"
+          },
+          "409": {
+            "description": "Stale base, version conflict or unavailable scope"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2156,12 +2187,609 @@
                 "type": "null"
               }
             ]
+          },
+          "therapy": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "const": "therapy-draft-v1"
+              },
+              "runtime_sha256": {
+                "type": "string",
+                "minLength": 64,
+                "maxLength": 64
+              },
+              "checked_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "raw": {
+                "type": "object",
+                "properties": {
+                  "candidates": {
+                    "type": "array",
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "daily_dose_mg": {
+                          "type": "number"
+                        },
+                        "product_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "phase": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "form": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "strength_mg": {
+                          "type": "number"
+                        },
+                        "indication": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "times_per_day": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "daily_dose_mg",
+                        "form",
+                        "indication",
+                        "phase",
+                        "product_id",
+                        "strength_mg",
+                        "times_per_day",
+                        "unit"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "candidates"
+                ],
+                "additionalProperties": false
+              },
+              "report": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": true
+              },
+              "model_metadata": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {},
+                    "required": [],
+                    "additionalProperties": true
+                  }
+                ]
+              }
+            },
+            "required": [
+              "version",
+              "runtime_sha256",
+              "checked_at",
+              "raw",
+              "report",
+              "model_metadata"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
           "version",
           "runtime_sha256",
           "report"
+        ],
+        "additionalProperties": false
+      },
+      "TherapyContextRequest": {
+        "type": "object",
+        "properties": {
+          "request_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "[0-9a-f]{32}"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "base_sha256": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "[0-9a-f]{64}"
+          },
+          "goal": {
+            "enum": [
+              "initiation",
+              "maintenance",
+              "change",
+              "stop"
+            ]
+          },
+          "facts": {
+            "type": "object",
+            "properties": {
+              "pregnancy": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "breastfeeding": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "hepatic_impairment": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "severe_renal_impairment": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "mania_hypomania": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "uncontrolled_epilepsy": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "bleeding_risk": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "qt_risk": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "electrolyte_disorder": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "renal_impairment": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "epilepsy": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "organic_brain_disease": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "low_body_weight": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "hyponatremia_risk": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "renal_egfr_below60": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "hepatic_failure_child_pugh_a_b_c": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "cardiovascular_disease": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "endocrine_disease": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "substance_dependence": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "alcohol_use": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "diabetes": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "glaucoma": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "suicidal_risk": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "serotonin_syndrome_risk": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "cyp2c19_poor_metabolizer": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "lactose_intolerance": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "akathisia": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "seizure_history": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "ect": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "dehydration": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              },
+              "other_special_condition": {
+                "enum": [
+                  true,
+                  false,
+                  null,
+                  "conflicting"
+                ]
+              }
+            },
+            "required": [
+              "pregnancy",
+              "breastfeeding",
+              "hepatic_impairment",
+              "severe_renal_impairment",
+              "mania_hypomania",
+              "uncontrolled_epilepsy",
+              "bleeding_risk",
+              "qt_risk",
+              "electrolyte_disorder",
+              "renal_impairment",
+              "epilepsy",
+              "organic_brain_disease",
+              "low_body_weight",
+              "hyponatremia_risk",
+              "renal_egfr_below60",
+              "hepatic_failure_child_pugh_a_b_c",
+              "cardiovascular_disease",
+              "endocrine_disease",
+              "substance_dependence",
+              "alcohol_use",
+              "diabetes",
+              "glaucoma",
+              "suicidal_risk",
+              "serotonin_syndrome_risk",
+              "cyp2c19_poor_metabolizer",
+              "lactose_intolerance",
+              "akathisia",
+              "seizure_history",
+              "ect",
+              "dehydration",
+              "other_special_condition"
+            ],
+            "additionalProperties": false
+          },
+          "allergies": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          "allergies_complete": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "medications": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "ingredient": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "state": {
+                  "enum": [
+                    "current",
+                    "recently_stopped"
+                  ]
+                },
+                "prescribed": {
+                  "type": "boolean"
+                },
+                "actual": {
+                  "type": "boolean"
+                },
+                "daily_dose_mg": {
+                  "oneOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "strength_mg": {
+                  "oneOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "times_per_day": {
+                  "oneOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 12
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "form": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              },
+              "required": [
+                "product_id",
+                "ingredient",
+                "state",
+                "prescribed",
+                "actual",
+                "daily_dose_mg",
+                "strength_mg",
+                "times_per_day",
+                "unit",
+                "form"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "medications_complete": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "response": {
+            "enum": [
+              "effective",
+              "partial",
+              "none",
+              "unknown"
+            ]
+          },
+          "tolerability": {
+            "enum": [
+              "good",
+              "adverse",
+              "unknown"
+            ]
+          },
+          "prior_first_line": {
+            "enum": [
+              "ineffective",
+              "intolerant",
+              "not_tried",
+              "unknown"
+            ]
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "reviewed": {
+            "type": "boolean",
+            "const": true
+          }
+        },
+        "required": [
+          "request_key",
+          "expected_version",
+          "base_sha256",
+          "goal",
+          "facts",
+          "allergies",
+          "allergies_complete",
+          "medications",
+          "medications_complete",
+          "response",
+          "tolerability",
+          "prior_first_line",
+          "basis",
+          "reviewed"
         ],
         "additionalProperties": false
       }

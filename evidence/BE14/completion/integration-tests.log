@@ -1,0 +1,26 @@
+test_change_stop_are_clarifications_without_invented_regimen (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_change_stop_are_clarifications_without_invented_regimen) ... ok
+test_context_http_roles_csrf_exact_retry_and_version_conflict (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_context_http_roles_csrf_exact_retry_and_version_conflict) ... ok
+test_data_and_context_changes_fence_inflight_result (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_data_and_context_changes_fence_inflight_result) ... ok
+test_exact_maintenance_response_and_adherence (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_exact_maintenance_response_and_adherence) ... ok
+test_forged_projection_raw_source_or_eligibility_rejected (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_forged_projection_raw_source_or_eligibility_rejected) ... ok
+test_gad_second_line_and_no_universal_aviandr (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_gad_second_line_and_no_universal_aviandr) ... ok
+test_no_quality_admission_blocks_default_model_and_failures_do_not_publish (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_no_quality_admission_blocks_default_model_and_failures_do_not_publish) ... ok
+test_positive_source_bound_plan_no_treatment_changes (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_positive_source_bound_plan_no_treatment_changes) ... ok
+test_post_generation_wrong_unit_dose_product_and_phase_removed (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_post_generation_wrong_unit_dose_product_and_phase_removed) ... ok
+test_reconciliation_stale_base_and_audit_rollback (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_reconciliation_stale_base_and_audit_rollback) ... ok
+test_schema_rejects_bool_number_nonfinite_extra_fields_and_fake_attestation (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_schema_rejects_bool_number_nonfinite_extra_fields_and_fake_attestation) ... ok
+test_unknown_medications_allergy_caution_and_recent_stop_no_model (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_unknown_medications_allergy_caution_and_recent_stop_no_model) ... FAIL
+
+======================================================================
+FAIL: test_unknown_medications_allergy_caution_and_recent_stop_no_model (apps.tests.test_backend_therapy_integration.TherapyIntegrationTests.test_unknown_medications_allergy_caution_and_recent_stop_no_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_therapy_integration.py", line 97, in test_unknown_medications_allergy_caution_and_recent_stop_no_model
+    self.assertEqual(0,model.calls);self.assertFalse(value['care_plan_context']['therapy']['report']['recommendations'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 12 tests in 14.773s
+
+FAILED (failures=1)

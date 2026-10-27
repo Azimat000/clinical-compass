@@ -198,3 +198,14 @@ def verify(candidate, patient, report, *, at=None):
     if not datetime.fromisoformat(report['checked_at']) <= now < datetime.fromisoformat(report['expires_at']):
         raise ValueError('medication_report_expired_or_future')
     return True
+
+
+def evaluate_regimen(candidate, patient, *, at=None):
+    """BE14 extension; technical synthetic eligibility is separate from release."""
+    from . import backend_medication_regimens
+    return backend_medication_regimens.evaluate(candidate, patient, at=at)
+
+
+def verify_regimen(candidate, patient, report, *, at=None):
+    from . import backend_medication_regimens
+    return backend_medication_regimens.verify(candidate, patient, report, at=at)

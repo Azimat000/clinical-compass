@@ -1,0 +1,47 @@
+[2026-10-27 13:50:29,899] ERROR in web: request_failure incident=86f2f3a342cbbab4 type=IntegrityError endpoint=create_analysis
+======================================================================
+ERROR: test_incomplete_unreviewed_branch_has_exact_questions (apps.tests.test_backend_care_plan.CarePlanTests.test_incomplete_unreviewed_branch_has_exact_questions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_care_plan.py", line 201, in test_incomplete_unreviewed_branch_has_exact_questions
+    report=self.report(unknown='organic_cause',reviewed=False)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_care_plan.py", line 68, in report
+    value = self.plan()
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_care_plan.py", line 62, in plan
+    self.assertTrue(jobs.process_one(self.db, 'generation'))
+                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_jobs.py", line 243, in process_one
+    work = claim(db, lane)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_jobs.py", line 133, in claim
+    if not _current(db, run):
+           ~~~~~~~~^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_jobs.py", line 97, in _current
+    return analyses.read(db, user, run['patient_id'], run['id'])['status'] != 'stale'
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_analyses.py", line 333, in read
+    return _read_in_snapshot(db, user, patient_id, run_id)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_analyses.py", line 361, in _read_in_snapshot
+    validate_analysis(value)
+    ~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_analyses.py", line 238, in validate_analysis
+    validate('Analysis', value)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_analyses.py", line 99, in validate
+    spec = specification()
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_analyses.py", line 31, in specification
+    return json.loads(CONTRACT_PATH.read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+----------------------------------------------------------------------
+Ran 49 tests in 35.151s
+
+FAILED (errors=1)

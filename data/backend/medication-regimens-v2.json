@@ -1,0 +1,651 @@
+{
+  "version": "medication-regimens-v2",
+  "mode": "synthetic_only",
+  "clinical_review": null,
+  "evidence": "evidence/BE14/completion/research.md",
+  "evidence_sha256": "0990cf6c3fe3533fc62299c35595554ed13d395c05746a989640091fe0b7f6ce",
+  "scope": "source-checked synthetic adult18–65 monotherapy initiation or exact effective tolerated continuation; clinical/legal release separate",
+  "sources": {
+    "elicea": {
+      "registration": "ЛП-№(002148)-(РГ-RU)",
+      "card_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=8b16cc03-42ea-45eb-9f96-9a8e3c8a794f",
+      "pdf_url": "https://grls.rosminzdrav.ru/InstrImg/2024/11/12/1510612/6aca30c6-f96a-4c23-a390-d0b7279bd03d.pdf",
+      "pdf_sha256": "25300691d20562bf7f55c7d6e5ef6e7b624210442ae3d929b5c446d21caad67e",
+      "status": "registration_observed",
+      "checked_at": "2026-10-27T13:48:02+03:00",
+      "review_due_at": "2026-10-28T13:32:09+03:00",
+      "locators": {
+        "form": [
+          19
+        ],
+        "age": [
+          2
+        ],
+        "indications": [
+          1,
+          2
+        ],
+        "contraindications": [
+          2,
+          9,
+          10
+        ],
+        "cautions": [
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          18
+        ],
+        "dose": [
+          10,
+          11
+        ],
+        "interactions": [
+          6,
+          7,
+          8
+        ],
+        "scope": [
+          1,
+          2
+        ],
+        "composition": [
+          18,
+          19
+        ],
+        "choice": [
+          23,
+          24
+        ]
+      },
+      "observed_fields": {
+        "registered": "2023-04-11",
+        "decision": "2024-10-14",
+        "civil_circulation": "Бессрочный"
+      },
+      "document_status": "official_version_observed"
+    },
+    "aleval": {
+      "registration": "ЛСР-003615/10",
+      "card_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=27b11bd7-09da-4e6c-b1c0-2cc88c18c115",
+      "pdf_url": "https://grls.rosminzdrav.ru/InstrImg/2021/4/22/1468377/%D0%9B%D0%A1%D0%A0-003615_10%5B2021%5D_0.pdf",
+      "pdf_sha256": "b49bbf87b9d7381eb62b40423fb24a23733d71c1f9f8fee6c91deb6dfb98a33e",
+      "status": "registration_observed",
+      "checked_at": "2026-10-27T13:32:09+03:00",
+      "review_due_at": "2026-10-28T13:32:09+03:00",
+      "locators": {
+        "form": [
+          1,
+          2
+        ],
+        "age": [
+          5
+        ],
+        "indications": [
+          5
+        ],
+        "contraindications": [
+          5
+        ],
+        "cautions": [
+          5,
+          6,
+          16
+        ],
+        "dose": [
+          7,
+          8
+        ],
+        "interactions": [
+          5,
+          6,
+          19,
+          20
+        ],
+        "scope": [
+          5
+        ],
+        "composition": [
+          1,
+          2
+        ],
+        "choice": [
+          23,
+          24
+        ]
+      },
+      "observed_fields": {
+        "registered": "2010-04-30",
+        "decision": "2021-04-12",
+        "expiry": "2027-01-01",
+        "civil_circulation": "Бессрочный"
+      },
+      "document_status": "official_version_observed"
+    },
+    "aviandr": {
+      "registration": "ЛП-№(002445)-(РГ-RU)",
+      "card_url": "https://grls.rosminzdrav.ru/Grls_View_v2.aspx?routingGuid=d3c01c29-cddf-4151-9e15-888e6c301e80",
+      "pdf_url": "https://grls.rosminzdrav.ru/InstrImg/2026/07/29/1532717/94ba54dc-ce1c-40ed-96f4-5c3a31f13805.pdf",
+      "pdf_sha256": "873f2962acbb84a3b5ac7cf92da1b5363fa204d29a7246b3f9818d0cce2a83dc",
+      "status": "registration_observed",
+      "checked_at": "2026-10-27T13:32:09+03:00",
+      "review_due_at": "2026-10-28T13:32:09+03:00",
+      "locators": {
+        "form": [
+          1,
+          6
+        ],
+        "age": [
+          1,
+          2
+        ],
+        "indications": [
+          1
+        ],
+        "contraindications": [
+          2
+        ],
+        "cautions": [
+          2
+        ],
+        "dose": [
+          3
+        ],
+        "interactions": [
+          2
+        ],
+        "scope": [
+          1,
+          2
+        ],
+        "composition": [
+          5
+        ],
+        "choice": [
+          25,
+          27
+        ]
+      },
+      "observed_fields": {
+        "registered": "2023-05-31",
+        "decision": "2026-07-16",
+        "expiry": "2028-05-31",
+        "civil_circulation": "5 лет",
+        "observed_at": "2026-10-27T10:18:11Z"
+      },
+      "document_status": "official_version_observed"
+    }
+  },
+  "products": {
+    "elicea": {
+      "source_id": "elicea",
+      "ingredient": "escitalopram",
+      "form": "film_coated_tablet",
+      "unit": "mg",
+      "strengths_mg": [
+        5,
+        10,
+        20
+      ],
+      "split_strengths_mg": [
+        10,
+        20
+      ],
+      "indications": [
+        "adult_depression"
+      ],
+      "age_min": 18,
+      "daily_mg": [
+        10,
+        20
+      ],
+      "times_per_day": 1,
+      "excipients": [
+        "lactose_monohydrate",
+        "crospovidone",
+        "povidone_k30",
+        "microcrystalline_cellulose_200",
+        "pregelatinized_starch",
+        "magnesium_stearate",
+        "hypromellose_6cp",
+        "titanium_dioxide",
+        "macrogol",
+        "triacetin"
+      ],
+      "excipient_coverage": "instruction_enumerated",
+      "required_facts": {
+        "pregnancy": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить беременность."
+        },
+        "breastfeeding": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Уточнить грудное вскармливание."
+        },
+        "hepatic_impairment": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить нарушения функции печени."
+        },
+        "severe_renal_impairment": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить тяжёлое нарушение функции почек."
+        },
+        "mania_hypomania": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить манию или гипоманию."
+        },
+        "uncontrolled_epilepsy": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить неконтролируемую эпилепсию."
+        },
+        "bleeding_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить риск кровотечений."
+        },
+        "qt_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить удлинение QT и риск аритмии."
+        },
+        "electrolyte_disorder": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить нарушения калия/магния и электролитов."
+        },
+        "diabetes": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить диабет и необходимость контроля гликемии."
+        },
+        "glaucoma": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить закрытоугольную глаукому."
+        },
+        "suicidal_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить суицидальные мысли или поведение."
+        },
+        "cardiovascular_disease": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить сердечно-сосудистые болезни, брадикардию, недавний инфаркт, декомпенсацию."
+        },
+        "ect": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить электросудорожную терапию."
+        },
+        "cyp2c19_poor_metabolizer": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить известный сниженный метаболизм CYP2C19; неизвестное не равно отрицанию."
+        },
+        "lactose_intolerance": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить наследственные нарушения переносимости лактозы."
+        },
+        "seizure_history": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить судороги в анамнезе."
+        },
+        "alcohol_use": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить употребление алкоголя."
+        },
+        "other_special_condition": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Есть ли иные индивидуальные условия, требующие отдельной оценки по инструкции?"
+        }
+      },
+      "contraindicated_facts": [
+        "breastfeeding"
+      ],
+      "interactions": {
+        "irreversible_nonselective_maoi": {
+          "state": "block",
+          "reason": "Совместный приём с неселективным необратимым ИМАО противопоказан."
+        },
+        "pimozide": {
+          "state": "block",
+          "reason": "Пимозид противопоказан."
+        },
+        "qt_prolonging_drug": {
+          "state": "block",
+          "reason": "Средства, удлиняющие QT, противопоказаны."
+        },
+        "sertraline": {
+          "state": "unknown",
+          "reason": "Серотонинергическое сочетание требует отдельной врачебной оценки."
+        },
+        "maritupirdine": {
+          "state": "unknown",
+          "reason": "Совместное действие не полностью покрыто каталогом."
+        },
+        "linezolid": {
+          "state": "unknown",
+          "reason": "Сочетание не рекомендуется; исключение требует решения и контроля врача."
+        }
+      },
+      "elderly_max_mg": 10,
+      "hepatic_max_mg": 10,
+      "adjusted_min_mg": 5,
+      "preferred_strength_mg": 10,
+      "initial_daily_mg": 10,
+      "line": "first",
+      "choice_source": {
+        "id": "KR301_3",
+        "pages": [
+          23,
+          24
+        ],
+        "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3",
+        "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd"
+      },
+      "administration": "Один раз в сутки; время приёма и длительность определяет врач.",
+      "name": "Элицея"
+    },
+    "aleval": {
+      "source_id": "aleval",
+      "ingredient": "sertraline",
+      "form": "film_coated_tablet",
+      "unit": "mg",
+      "strengths_mg": [
+        25,
+        50,
+        100
+      ],
+      "split_strengths_mg": [],
+      "indications": [
+        "adult_depression"
+      ],
+      "age_min": 18,
+      "daily_mg": [
+        50,
+        200
+      ],
+      "times_per_day": 1,
+      "excipients": [
+        "calcium_hydrogen_phosphate_dihydrate",
+        "microcrystalline_cellulose",
+        "maize_starch",
+        "indigocarmine",
+        "hypromellose_2910",
+        "purified_talc",
+        "magnesium_stearate",
+        "colloidal_silicon_dioxide",
+        "crospovidone",
+        "macrogol_6000",
+        "titanium_dioxide"
+      ],
+      "excipient_coverage": "instruction_enumerated",
+      "required_facts": {
+        "pregnancy": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить беременность."
+        },
+        "breastfeeding": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить грудное вскармливание."
+        },
+        "hepatic_impairment": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить нарушения функции печени."
+        },
+        "renal_impairment": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить нарушения функции почек."
+        },
+        "epilepsy": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить эпилепсию."
+        },
+        "organic_brain_disease": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить органическое поражение головного мозга."
+        },
+        "low_body_weight": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить выраженный дефицит массы тела."
+        },
+        "bleeding_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить риск кровотечений."
+        },
+        "qt_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить удлинение QT и риск аритмии."
+        },
+        "hyponatremia_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить риск гипонатриемии."
+        },
+        "suicidal_risk": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить суицидальные мысли или поведение."
+        },
+        "alcohol_use": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить употребление алкоголя."
+        },
+        "other_special_condition": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Есть ли иные индивидуальные условия, требующие отдельной оценки по инструкции?"
+        }
+      },
+      "contraindicated_facts": [],
+      "interactions": {
+        "irreversible_maoi": {
+          "state": "block",
+          "reason": "Совместный приём с необратимым ИМАО противопоказан."
+        },
+        "irreversible_nonselective_maoi": {
+          "state": "block",
+          "reason": "Совместный приём с необратимым ИМАО противопоказан."
+        },
+        "pimozide": {
+          "state": "block",
+          "reason": "Пимозид противопоказан."
+        },
+        "escitalopram": {
+          "state": "unknown",
+          "reason": "Другие СИОЗС: требуется врачебная оценка."
+        },
+        "maritupirdine": {
+          "state": "unknown",
+          "reason": "Серотонинергическое сочетание требует оценки врача."
+        }
+      },
+      "preferred_strength_mg": 50,
+      "initial_daily_mg": 50,
+      "line": "first",
+      "choice_source": {
+        "id": "KR301_3",
+        "pages": [
+          23,
+          24
+        ],
+        "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=301_3",
+        "sha256": "2e8b83978be0e5fa3772e1dc37b44954bc5991fb4f74433ffd1375700ab7b5bd"
+      },
+      "administration": "Один раз в сутки; время приёма и длительность определяет врач.",
+      "name": "Алевал"
+    },
+    "aviandr": {
+      "source_id": "aviandr",
+      "ingredient": "maritupirdine",
+      "form": "film_coated_tablet",
+      "unit": "mg",
+      "strengths_mg": [
+        20
+      ],
+      "split_strengths_mg": [],
+      "indications": [
+        "adult_gad"
+      ],
+      "age_min": 19,
+      "daily_mg": [
+        40,
+        40
+      ],
+      "times_per_day": 2,
+      "excipients": [
+        "lactose_monohydrate",
+        "hydrogenated_castor_oil",
+        "potato_starch",
+        "hypromellose",
+        "titanium_dioxide",
+        "polyethylene_glycol_1521"
+      ],
+      "excipient_coverage": "instruction_enumerated",
+      "required_facts": {
+        "pregnancy": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Уточнить беременность."
+        },
+        "breastfeeding": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Уточнить грудное вскармливание."
+        },
+        "epilepsy": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Уточнить эпилепсию."
+        },
+        "organic_brain_disease": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Сверить органическое поражение головного мозга."
+        },
+        "renal_egfr_below60": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Уточнить, нет ли СКФ ниже 60 мл/мин."
+        },
+        "hepatic_failure_child_pugh_a_b_c": {
+          "kind": "contraindication",
+          "section": "contraindications",
+          "question": "Сверить печёночную недостаточность Child–Pugh A/B/C."
+        },
+        "cardiovascular_disease": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить сердечно-сосудистые болезни, брадикардию, недавний инфаркт, декомпенсацию."
+        },
+        "endocrine_disease": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить эндокринные заболевания."
+        },
+        "substance_dependence": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Уточнить алкогольную/наркотическую зависимость."
+        },
+        "alcohol_use": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить употребление алкоголя."
+        },
+        "lactose_intolerance": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Сверить наследственные нарушения переносимости лактозы."
+        },
+        "other_special_condition": {
+          "kind": "caution",
+          "section": "cautions",
+          "question": "Есть ли иные индивидуальные условия, требующие отдельной оценки по инструкции?"
+        }
+      },
+      "contraindicated_facts": [
+        "pregnancy",
+        "breastfeeding",
+        "epilepsy",
+        "organic_brain_disease",
+        "renal_egfr_below60",
+        "hepatic_failure_child_pugh_a_b_c"
+      ],
+      "interactions": {
+        "maoi": {
+          "state": "block",
+          "reason": "ИМАО противопоказаны."
+        },
+        "irreversible_maoi": {
+          "state": "block",
+          "reason": "ИМАО противопоказаны."
+        },
+        "irreversible_nonselective_maoi": {
+          "state": "block",
+          "reason": "ИМАО противопоказаны."
+        },
+        "sertraline": {
+          "state": "unknown",
+          "reason": "Не абсолютный запрет: серотонинергическое сочетание требует оценки врача."
+        },
+        "escitalopram": {
+          "state": "unknown",
+          "reason": "Серотонинергическое сочетание требует оценки врача."
+        },
+        "cyp2d6_inhibitor": {
+          "state": "unknown",
+          "reason": "Ингибитор CYP2D6 требует оценки взаимодействия."
+        },
+        "opioid": {
+          "state": "unknown",
+          "reason": "Опиоидное средство требует оценки взаимодействия."
+        }
+      },
+      "age_ambiguous": 18,
+      "excluded_concurrent_facts": [
+        "alcohol_use"
+      ],
+      "preferred_strength_mg": 20,
+      "initial_daily_mg": 40,
+      "line": "second",
+      "choice_source": {
+        "id": "KR457_3",
+        "pages": [
+          25,
+          27
+        ],
+        "url": "https://apicr.minzdrav.gov.ru/api.ashx?op=GetClinrecPdf&id=457_3",
+        "sha256": "c2db38ebb558ba98a8514bb3027f3e71d0cf293c512183f882ac9a94da21271a"
+      },
+      "administration": "Утром и вечером за 30 минут до еды, таблетку глотать целиком.",
+      "name": "Авиандр"
+    }
+  }
+}

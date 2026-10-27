@@ -1,0 +1,32 @@
+{
+  "pass": true,
+  "at": "2026-10-27T11:01:04.985018+00:00",
+  "real_model_calls": 7,
+  "positive_model_cases": 6,
+  "guard_cases": 13,
+  "post_generation_mutations": 4,
+  "http_checks": 17,
+  "runtime_sha256": "fb241b787a6d6e34c8ee5baeaa177c15d4f7c4c6d106a90e34d82817eaced06b",
+  "active_tables_unchanged": 81,
+  "access_unchanged": true,
+  "preserved_files_unchanged": true,
+  "migration": {
+    "copy_only": true,
+    "old_tables_preserved": 81,
+    "new_version": "021_backend_therapy_context",
+    "repeatable": true,
+    "integrity": "ok",
+    "foreign_keys": 0
+  },
+  "ledger_before": [
+    145,
+    730308
+  ],
+  "ledger_after": [
+    152,
+    738449
+  ],
+  "new_ceiling_micro_usd": 8141,
+  "remaining_micro_usd": 261551,
+  "general_regression": "interrupted by explicit user instruction; no full PASS claimed"
+}

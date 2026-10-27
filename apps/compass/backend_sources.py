@@ -201,7 +201,15 @@ def check_result(frozen, operation, result, *, root=None, context=None, snapshot
         return current
     if operation == 'plan' and context.get('care_plan_context') is not None:
         from . import backend_care_plan
-        expected, _ = backend_care_plan.evaluate(snapshot)
+        saved = context['care_plan_context']
+        expected, detail = backend_care_plan.evaluate(snapshot)
+        if 'therapy_input' in snapshot:
+            from . import backend_therapy
+            extension = saved.get('therapy')
+            if extension is None:
+                raise SourceError(['therapy_check_missing'])
+            expected, _ = backend_therapy.enrich(snapshot, expected, detail, extension['raw'],
+                checked_at=extension['checked_at'], metadata=extension['model_metadata'])
         if expected.get('result') != result:
             raise SourceError(['care_plan_result_mismatch'])
         return current

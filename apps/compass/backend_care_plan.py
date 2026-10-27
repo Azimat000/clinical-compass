@@ -236,16 +236,31 @@ def evaluate(snapshot):
     return {'status': 'ready', 'result': result, 'errors': [], 'model': None}, detail
 
 
-def execute(operation, snapshot):
+def execute(operation, snapshot, model=None):
     if operation != 'plan':
         raise ValueError('operation_unavailable')
     outcome, detail = evaluate(snapshot)
-    return {**outcome, 'care_plan_context': {'version': VERSION,
-        'runtime_sha256': snapshots.digest(release()), 'report': detail}}
+    context = {'version': VERSION, 'runtime_sha256': snapshots.digest(release()), 'report': detail}
+    if 'therapy_input' in snapshot:
+        from . import backend_therapy
+        outcome, extension = backend_therapy.execute_extension(snapshot, outcome, detail, model=model)
+        context['therapy'] = extension
+    return {**outcome, 'care_plan_context': context}
 
 
 def verify(snapshot, outcome, context):
-    expected = execute('plan', snapshot)
-    expected_context = expected.pop('care_plan_context')
-    if outcome != expected or context != expected_context:
+    # Recompute publication from the recorded model JSON; never call the model
+    # a second time inside the lease/database transaction.
+    base, detail = evaluate(snapshot)
+    expected_context = {'version': VERSION, 'runtime_sha256': snapshots.digest(release()), 'report': detail}
+    if 'therapy_input' in snapshot:
+        from . import backend_therapy
+        extension = context.get('therapy')
+        if extension is None:
+            raise analyses.AnalysisError('Нет лекарственной проверки.', 409, 'therapy_result_mismatch')
+        backend_therapy.verify_extension(snapshot, base, detail, extension, expected_outcome=outcome)
+        expected_context['therapy'] = extension
+    elif base != outcome:
         raise analyses.AnalysisError('Проект плана не совпадает с проверенными основаниями.', 409, 'care_plan_mismatch')
+    if context != expected_context:
+        raise analyses.AnalysisError('Контекст плана изменён.', 409, 'care_plan_mismatch')

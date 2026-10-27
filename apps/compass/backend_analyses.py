@@ -43,8 +43,9 @@ def validate_schema(value, schema, spec=None):
         if not schema['$ref'].startswith(prefix):
             raise RuntimeError('External schema reference is not supported')
         return validate_schema(value, spec['components']['schemas'][schema['$ref'][len(prefix):]], spec)
+    import math
     permitted = {'type', 'const', 'enum', 'oneOf', 'properties', 'required', 'additionalProperties',
-                 'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'pattern', 'minimum', 'format'}
+                 'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'pattern', 'minimum', 'maximum', 'format'}
     if set(schema) - permitted:
         raise RuntimeError('Unsupported contract keyword')
     if 'oneOf' in schema:
@@ -59,11 +60,14 @@ def validate_schema(value, schema, spec=None):
             raise AnalysisError('Значение не соответствует формату ответа.')
     if 'const' in schema and (type(value) is not type(schema['const']) or value != schema['const']):
         raise AnalysisError('Неверная версия или состояние выпуска.')
-    if 'enum' in schema and value not in schema['enum']:
+    if 'enum' in schema and not any(type(value) is type(v) and value == v for v in schema['enum']):
         raise AnalysisError('Неизвестное значение перечисления.')
     types = {'object': dict, 'array': list, 'string': str, 'integer': int, 'boolean': bool, 'null': type(None)}
     kind = schema.get('type')
-    if kind and type(value) is not types[kind]:
+    if kind == 'number':
+        if type(value) not in (int, float) or not math.isfinite(value):
+            raise AnalysisError('Нужно конечное число.')
+    elif kind and type(value) is not types[kind]:
         raise AnalysisError('Неверный тип значения.')
     if kind == 'object':
         if set(schema['required']) - set(value) or (schema['additionalProperties'] is False and set(value) - set(schema['properties'])):
@@ -87,8 +91,8 @@ def validate_schema(value, schema, spec=None):
                     raise ValueError()
             except ValueError:
                 raise AnalysisError('Дата должна содержать часовой пояс.') from None
-    if kind == 'integer' and value < schema.get('minimum', -float('inf')):
-        raise AnalysisError('Неверный номер версии.')
+    if kind in ('integer', 'number') and not schema.get('minimum', -float('inf')) <= value <= schema.get('maximum', float('inf')):
+        raise AnalysisError('Число вне допустимых границ.')
 
 
 def validate(name, value):
@@ -162,6 +166,13 @@ def capture(db, patient_id, relationship_id, *, operation=None):
                 {'id': db.execute('SELECT doctor_id FROM care_relationships WHERE id=?',
                                  (relationship_id,)).fetchone()[0], 'role': 'doctor'},
                 patient_id, decisions.canonical(value))
+        if operation == 'plan':
+            from . import backend_therapy
+            therapy_input = backend_therapy.prepare(db,
+                {'id': db.execute('SELECT doctor_id FROM care_relationships WHERE id=?', (relationship_id,)).fetchone()[0], 'role': 'doctor'},
+                patient_id, value)
+            if therapy_input is not None:
+                value['therapy_input'] = therapy_input
         snapshot = decisions.canonical(value)
         if len(snapshot.encode()) > 4194304:
             raise AnalysisError('Входной снимок превышает 4 МиБ.', 409, 'snapshot_too_large')
@@ -175,11 +186,12 @@ def capture(db, patient_id, relationship_id, *, operation=None):
 def source_refs(snapshot):
     from . import backend_risk_rules
     value = json.loads(snapshot)
-    from . import backend_care_plan
+    from . import backend_care_plan, backend_therapy
     return ([{'id': r['id'], 'version': r['version'], 'sha256': r['sha256']}
              for r in value['source_versions']] + backend_sources.references(value['backend_sources'])
             + backend_risk_rules.references(value['backend_risk_rules'])
-            + backend_care_plan.references(value))
+            + backend_care_plan.references(value)
+            + backend_therapy.references(value))
 
 
 def inputs(db, user, patient_id, run_id, *, reference=None, page=1):

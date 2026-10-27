@@ -1,0 +1,223 @@
+{
+  "version": "therapy-inspection-wip-v1",
+  "observed_at": "2026-10-27T10:35:26.439837+00:00",
+  "quality_status": "not_measured",
+  "real_model_runs": 0,
+  "clinical_validation": false,
+  "BE14_A01": "NOT_MET",
+  "positive_regimen_success_rate": null,
+  "probe": "independent checker only; not generation or recommendation quality",
+  "optimistic_facts": "author supplied synthetic mechanics; no clinical attestation",
+  "catalog_sha256": "51fa20172f8a95799678d9cf26487bcd5304df4aa1e6085fa288d6f0ebf7c373",
+  "runtime": {
+    "version": "therapy-inspection-wip-v1",
+    "engine_sha256": "c621cbd016318515f134e6afe36937be1c23e4ef503bc5fd8e1e321f81a367bc",
+    "safety_catalog_sha256": "51fa20172f8a95799678d9cf26487bcd5304df4aa1e6085fa288d6f0ebf7c373",
+    "safety_engine_sha256": "ba2806015b5b86f75e3f5090e2b6bc7d4ced1a31a481ef97d0e9f31958cd79d5",
+    "care_plan_runtime": {
+      "version": "care-plan-v1",
+      "catalog_sha256": "105dfca910d20eadef19b481a4cd9b1d7d3df30b23df46940761ec1f31e4075e",
+      "engine_sha256": "a78768c930022684a9ca2ad501b9a92db7cec037327f35918227acc4edcd624a",
+      "evidence_sha256": "e694603b291c95541f654e46e22d8171a164123e06ab749106577832e58c8b6f"
+    }
+  },
+  "scenario_count": 18,
+  "scenarios": [
+    {
+      "product_id": "elicea",
+      "phase": "change",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "a0a0822bfa4617cfcdd52b0318acd2e1ae2cf5df8e7b6b63e4e23a9dfd27ffbe"
+    },
+    {
+      "product_id": "elicea",
+      "phase": "initiation",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "2c2102fb96e5319721a6318e6bbc322cc646e5105f389faa0c80e838bcdac137"
+    },
+    {
+      "product_id": "elicea",
+      "phase": "maintenance",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "source"
+      ],
+      "report_sha256": "0f908c9d43dcf5a5c799c480f9cba6e16be5f13eedaa1c6ad76eb60b6b6abde9"
+    },
+    {
+      "product_id": "elicea",
+      "phase": "stop",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "d71d9c1776f44b43f99a274436978ef55f3fa812d3c83b0f0b2d99e17abb72d7"
+    },
+    {
+      "product_id": "elicea",
+      "case": "unit",
+      "state": "block",
+      "eligible": false
+    },
+    {
+      "product_id": "elicea",
+      "case": "dose",
+      "state": "block",
+      "eligible": false
+    },
+    {
+      "product_id": "aleval",
+      "phase": "change",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "1bac3cd86a7b1f88d94ab1016c0ddc706bebe18375fb1310dc83b92a36bab0dd"
+    },
+    {
+      "product_id": "aleval",
+      "phase": "initiation",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "0df93108912bf1867055a503856ae13349856101ba2cb3e752039dc4cf969d4d"
+    },
+    {
+      "product_id": "aleval",
+      "phase": "maintenance",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "source"
+      ],
+      "report_sha256": "3288d765c8c0452591afd48d4c64b6c0f64b845a5e374baf6f60c286602de1a5"
+    },
+    {
+      "product_id": "aleval",
+      "phase": "stop",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "260c4cde64a14998a631a54b5b0531d6488f658f316680cefaf4551dba80f838"
+    },
+    {
+      "product_id": "aleval",
+      "case": "unit",
+      "state": "block",
+      "eligible": false
+    },
+    {
+      "product_id": "aleval",
+      "case": "dose",
+      "state": "block",
+      "eligible": false
+    },
+    {
+      "product_id": "aviandr",
+      "phase": "change",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "92edba57b60dc7669f16e493e8538305b12469a4bfa2c7c4c75de3521a24e3ef"
+    },
+    {
+      "product_id": "aviandr",
+      "phase": "initiation",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "e2eb810fcc2f8cef836b6f0de377f3937c41ce9acf469d83cfe0e57d78c95512"
+    },
+    {
+      "product_id": "aviandr",
+      "phase": "maintenance",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "source"
+      ],
+      "report_sha256": "725f0187116cb9b7cfd0541fc0f58a33183fa1718244cb14848be80e4bc2f19e"
+    },
+    {
+      "product_id": "aviandr",
+      "phase": "stop",
+      "state": "unknown",
+      "eligible": false,
+      "unknown_codes": [
+        "coverage",
+        "excipient_coverage",
+        "regimen_phase",
+        "source"
+      ],
+      "report_sha256": "baa245738f5928c2e361ca02e3f2a02fb8e3a9b377286217f3d3845324cd40f9"
+    },
+    {
+      "product_id": "aviandr",
+      "case": "unit",
+      "state": "block",
+      "eligible": false
+    },
+    {
+      "product_id": "aviandr",
+      "case": "dose",
+      "state": "block",
+      "eligible": false
+    }
+  ],
+  "dependency_result": "0 of 12 product/phase combinations can receive independent pass",
+  "remaining_work": [
+    "source/ingredient/interaction coverage",
+    "coded physician reconciliation",
+    "generation and post-generation integration",
+    "real positive and adversarial model runs"
+  ]
+}

@@ -344,6 +344,20 @@ def create_app(database=None):
         role('doctor')
         return jsonify(backend_analyses.inputs(get_db(), g.user, patient_id, run_id, reference=reference))
 
+    @app.route('/api/v1/patients/<patient_id>/therapy-context', methods=['GET', 'POST'])
+    def therapy_context(patient_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        from . import backend_therapy_context as context
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        if request.method == 'POST':
+            if request.mimetype != 'application/json':
+                raise backend_analyses.AnalysisError('Нужен JSON.', 415, 'unsupported_media_type')
+            return jsonify(context.record(get_db(), g.user, patient_id,
+                backend_analyses.parse_request(request.get_data(), schema=None)))
+        return jsonify(context.view(get_db(), g.user, patient_id))
+
     @app.route('/api/v1/patients/<patient_id>/diagnosis-review', methods=['GET', 'POST'])
     def diagnosis_review(patient_id):
         role('doctor')
