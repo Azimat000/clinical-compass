@@ -1,4 +1,5 @@
 """Complete packet execution; partial model assertions never become a diagnosis."""
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 from copy import deepcopy
 import hashlib
 import json
@@ -10,17 +11,19 @@ from . import backend_diagnosis_service as diagnostic, backend_risk_context as r
 from . import backend_snapshot as snapshots, backend_sources as sources, backend_model as adapter
 from .backend_analyses import validate_schema
 
-VERSION='packet-analysis-v1'
+VERSION='packet-analysis-v2'
 EXECUTION_VERSION='fe03b-packets-v1'
 ROOT=Path(__file__).resolve().parents[2]
 QUALITY=ROOT/'evidence/FE03B/quality.json'
 DEADLINE=180
 TOTAL_CAP=4000000
+MAX_WORKERS=3
 LOCAL_TASK=('This is a local evidence pass, not a full diagnosis. All original records and revisions are supplied across packets. '
  'Only quote unit_id from THIS packet occurrences. Old/unknown/other-person evidence must not establish a current fact. '
  'Use as_of_day and observation_day: only observation_day may establish current diagnostic facts. '
  'Different record dates are chronology, not a current contradiction. Missing evidence in a packet is unknown with empty refs. '
- 'Report LOCAL polarity only: a lone denial is denied, not conflicting. Conflicting requires two opposing local quotes. '
+ 'For each fact return p (supporting quote IDs), n (denying quote IDs), u (explicit not-assessed quote IDs). '
+ 'Return empty arrays when absent. Never output state or conflicting: the server combines the cited polarities. '
  'For mania_hypomania and prior_depressive_episode only, explicit OWN past episodes remain positive historical cautions across dates; '
  'family/relative episodes never establish a patient fact. Do not infer an exclusion or duration from absence. No diagnosis.\n')
 
@@ -35,7 +38,7 @@ def release():
     return {'version':VERSION,'execution_version':EXECUTION_VERSION,'code':{f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files},
             'diagnostic':diagnostic.release(),'risk_prompt_sha256':risk.PROMPT_SHA256,
             'risk_schema_sha256':snapshots.digest(risk.SCHEMA),'deadline_seconds':DEADLINE,
-            'total_cap_micro_usd':TOTAL_CAP,'per_call_micro_usd':20000,'latest_observation_policy':'same_latest_record_day_v1'}
+            'total_cap_micro_usd':TOTAL_CAP,'per_call_micro_usd':20000,'max_workers':MAX_WORKERS,'response_format':'signed-local-facts-v1','latest_observation_policy':'same_latest_record_day_v1'}
 
 
 def eligible(unit, day):
@@ -71,6 +74,18 @@ def wire(packet):
     return value
 
 
+def response_schema(branch):
+    if branch=='risk':return deepcopy(risk.SCHEMA)
+    value=codec.schema(branch)
+    ids=list(diagnostic.criteria.release()['conditions'][branch]['facts'])
+    value['properties']['facts']['items']=codec.obj({
+        'id':{'enum':ids},'p':deepcopy(codec.REFS),'n':deepcopy(codec.REFS),'u':deepcopy(codec.REFS)})
+    # Ambiguous local durations remain unknown; no invented negative duration.
+    value['properties']['duration']=deepcopy(codec.DURATION)
+    value['properties']['duration']['properties']['state']['enum']=['known','unknown']
+    return value
+
+
 def plans(snapshot,operation):
     if operation not in ('risk','diagnosis'):raise adapter.ModelError('operation_unavailable')
     units=risk.prepare_snapshot(snapshot);day=observation_day(snapshot,units)
@@ -80,9 +95,11 @@ def plans(snapshot,operation):
         if operation=='risk':
             value.update(task=risk.INSTRUCTION,branch='risk',version=risk.VERSION)
             for key in ('facts','expected_fact_count','duration_unit'):value.pop(key,None)
-        else:value['task']=value['task']+'\n'+LOCAL_TASK
+        else:
+            task=value['task'].split('Example JSON',1)[0].replace('{id,state,refs}','{id,p,n,u}')
+            value['task']=task+'\n'+LOCAL_TASK
         value.update(as_of_day=snapshot['day'],observation_day=day)
-        schema=codec.schema(branch) if operation=='diagnosis' else risk.SCHEMA
+        schema=response_schema(branch)
         try:result[branch]=(packets.prepare(value,schema,config(),split_occurrences=True,request_transform=wire),schema)
         except packets.PacketError:raise adapter.ModelError('input_too_large') from None
     return result
@@ -97,7 +114,7 @@ class Cancel:
 
 
 def check_response(snapshot,branch,packet,value):
-    validate_schema(value,codec.schema(branch) if branch!='risk' else risk.SCHEMA)
+    validate_schema(value,response_schema(branch))
     allowed={o[0] for row in packet['units'] for o in row[3]}
     indexed={u['unit_id']:u for u in risk.prepare_snapshot(snapshot)}
     if branch=='risk':
@@ -114,11 +131,13 @@ def check_response(snapshot,branch,packet,value):
         diagnostic.legacy._evidence([{'unit_id':q['unit_id'],'quote':q['quote']}],indexed)
     facts={f['id']:f for f in value['facts']}
     if len(facts)!=len(value['facts']) or set(facts)!=set(condition['facts']):raise adapter.ModelError('packet_response_invalid')
-    for claim in [*facts.values(),value['duration']]:
-        refs=claim['refs'];state=claim['state']
-        if (len(set(refs))!=len(refs) or set(refs)-set(quotes)
-                or state not in ('unknown',) and not refs
-                or state=='conflicting' and len(refs)<2):raise adapter.ModelError('packet_response_invalid')
+    for fact in facts.values():
+        refs=fact['p']+fact['n']+fact['u']
+        if len(refs)>8 or len(set(refs))!=len(refs) or set(refs)-set(quotes):
+            raise adapter.ModelError('packet_response_invalid')
+    duration=value['duration'];refs=duration['refs']
+    if (len(set(refs))!=len(refs) or set(refs)-set(quotes)
+            or duration['state']=='known' and not refs):raise adapter.ModelError('packet_response_invalid')
     d=value['duration']
     if (d['state']=='known') != (d['value'] is not None):raise adapter.ModelError('packet_response_invalid')
     if d['state']=='known' and not codec.literal_duration(d['value'],condition['duration']['unit'],[quotes[i]['quote'] for i in d['refs']]):
@@ -142,8 +161,10 @@ def merge_branch(snapshot,branch,cells):
             # Mixed current/historical references cannot prove a current assertion.
             return refs if len(refs)==len(claim['refs']) else []
         for fact in value['facts']:
-            refs=current_refs(fact,fact['id'] in ('mania_hypomania','prior_depressive_episode'))
-            if refs:assertions[fact['id']].append((fact['state'],refs))
+            for key,state in [('p','present'),('n','denied'),('u','unknown')]:
+                claim={'state':state,'refs':fact[key]}
+                refs=current_refs(claim,fact['id'] in ('mania_hypomania','prior_depressive_episode'))
+                if refs:assertions[fact['id']].append((state,refs))
         refs=current_refs(value['duration'])
         if refs:durations.append((value['duration']['state'],value['duration']['value'],refs))
     pool={};quotes=[]
@@ -166,7 +187,9 @@ def merge_branch(snapshot,branch,cells):
         if set(pos)&set(neg):raise adapter.ModelError('packet_response_invalid')
         if unknown and not (pos or neg):return {'state':'unknown','refs':refs_for(unknown)}
         state='conflicting' if pos and neg else 'present' if pos else 'denied' if neg else 'unknown'
-        return {'state':state,'refs':refs_for([*pos,*neg])}
+        result={'state':state,'refs':refs_for([*pos,*neg])}
+        if state=='conflicting':result['present_ref_count']=len(dict.fromkeys(pos))
+        return result
     facts=[{'id':fid,**combine(items)} for fid,items in assertions.items()]
     known=[(v,refs) for state,v,refs in durations if state=='known']
     uncertain=[refs for state,_,refs in durations if state!='known']
@@ -187,8 +210,8 @@ def historical_cautions(snapshot,branch,cells):
     for cell in cells:
         value=cell['response']['value'];quotes={q['id']:q for q in value['quotes']}
         for fact in value['facts']:
-            if fact['id'] not in ('mania_hypomania','prior_depressive_episode') or fact['state'] not in ('present','conflicting'):continue
-            for ref in fact['refs']:
+            if fact['id'] not in ('mania_hypomania','prior_depressive_episode') or not fact['p']:continue
+            for ref in fact['p']:
                 q=quotes[ref];u=units[q['unit_id']];m=u['metadata']
                 if (u['code']=='family_history' or m['current_revision'] is not True or m['status']!='known'
                         or not isinstance(m['event_at'],str) or m['event_at'][:10]>snapshot['day']):continue
@@ -228,6 +251,7 @@ def outcome(snapshot,operation,proof):
         for caution in cautions:
             if caution['context']=='cumulative_history':
                 next(f for f in merged[caution['branch']]['facts'] if f['id']==caution['fact_id']).update(state='unknown',refs=[])
+                next(f for f in merged[caution['branch']]['facts'] if f['id']==caution['fact_id']).pop('present_ref_count',None)
         context=diagnostic.named_interpret(snapshot,merged)
         if cautions and context['leading'] is not None:
             raw=deepcopy(context['raw']);raw['leading']=None;context=diagnostic.interpret(snapshot,raw)
@@ -250,9 +274,12 @@ def outcome(snapshot,operation,proof):
     return {**deepcopy(report['structured']),'risk_context_report':report}
 
 
-def execute(operation,snapshot,model=None,store=None,cancel=None):
+def execute(operation,snapshot,model=None,store=None,cancel=None,*,workers=None):
     if snapshot.get('policy')!='synthetic-inputs-v1' or snapshot['patients'][0]['synthetic']!=1:raise adapter.ModelError('synthetic_only')
     runtime=snapshots.digest(release())
+    default_model=model is None
+    worker_count=(MAX_WORKERS if default_model else 1) if workers is None else workers
+    if type(worker_count) is not int or not 1 <= worker_count <= MAX_WORKERS:raise adapter.ModelError('invalid_config')
     if model is None:
         try:q=json.loads(QUALITY.read_text());admitted=q.get('pass') is True and q.get('runtime_sha256')==runtime
         except (OSError,ValueError,TypeError):admitted=False
@@ -269,34 +296,58 @@ def execute(operation,snapshot,model=None,store=None,cancel=None):
         if operation!='risk' or exc.code!='input_too_large':raise
         proof['incomplete']='input_too_large'
         return {**outcome(frozen,operation,proof),'packet_proof':proof}
-    for branch,(plan,schema) in planned.items():
-        for packet,sha in zip(plan['packets'],plan['packet_sha256']):
-            if store:store.assert_active()
-            try:control.check()
-            except adapter.ModelError as exc:
-                if operation!='risk' or exc.code!='timeout':raise
-                proof['incomplete']='timeout'
-                return {**outcome(frozen,operation,proof),'packet_proof':proof}
-            if runtime!=snapshots.digest(release()) or frozen['backend_sources']!=sources.capture():raise adapter.ModelError('sources_or_engine_changed')
-            index=packet['transport']['packet_index']
-            response=store.load(operation,branch,index,sha,runtime) if store else None
-            try:
-                if response is None:
-                    response=model.generate(wire(packet),schema,synthetic=True,cancel=control)
-                    check_response(frozen,branch,packet,response['value'])
-                    control.check()
-                    if store:store.save(operation,branch,index,sha,runtime,response)
-                else:check_response(frozen,branch,packet,response['value'])
-            except (adapter.ModelError,ValueError) as exc:
-                if operation!='risk':raise
-                code=getattr(exc,'code','packet_response_invalid')
-                if code=='cancelled':
-                    if time.monotonic()<control.until:raise
-                    code='timeout'
-                proof['incomplete']=code if code in {'timeout','cancelled','budget_exceeded','packet_response_invalid','packet_evidence_mismatch'} else 'packet_incomplete'
-                return {**outcome(frozen,operation,proof),'packet_proof':proof}
-            proof['cells'].append({'branch':branch,'packet_index':index,'payload_sha256':sha,'response':deepcopy(response)})
-    control.check()
+    tasks=[(branch,packet,sha,schema) for branch,(plan,schema) in planned.items()
+           for packet,sha in zip(plan['packets'],plan['packet_sha256'])]
+    def process(task):
+        branch,packet,sha,schema=task
+        if store:store.assert_active()
+        control.check()
+        if runtime!=snapshots.digest(release()) or frozen['backend_sources']!=sources.capture():
+            raise adapter.ModelError('sources_or_engine_changed')
+        index=packet['transport']['packet_index']
+        response=store.load(operation,branch,index,sha,runtime) if store else None
+        if response is None:
+            response=model.generate(wire(packet),schema,synthetic=True,cancel=control)
+            check_response(frozen,branch,packet,response['value'])
+            control.check()
+            if runtime!=snapshots.digest(release()) or frozen['backend_sources']!=sources.capture():
+                raise adapter.ModelError('sources_or_engine_changed')
+            if store:store.save(operation,branch,index,sha,runtime,response)
+        else:check_response(frozen,branch,packet,response['value'])
+        return {'branch':branch,'packet_index':index,'payload_sha256':sha,'response':deepcopy(response)}
+    completed={};failure=None;next_task=0
+    with ThreadPoolExecutor(max_workers=worker_count) as pool:
+        pending={}
+        while next_task<len(tasks) and len(pending)<worker_count:
+            pending[pool.submit(process,tasks[next_task])]=next_task;next_task+=1
+        try:
+            while pending:
+                control.check()
+                done,_=wait(pending,timeout=.1,return_when=FIRST_COMPLETED)
+                for future in done:
+                    index=pending.pop(future)
+                    completed[index]=future.result()
+                # Do not schedule replacements until all finished responses in
+                # this batch have passed. Running valid responses can checkpoint.
+                while next_task<len(tasks) and len(pending)<worker_count:
+                    pending[pool.submit(process,tasks[next_task])]=next_task;next_task+=1
+        except (adapter.ModelError,ValueError) as exc:
+            failure=exc
+            for future in pending:future.cancel()
+    proof['cells']=[completed[i] for i in sorted(completed)]
+    if failure is not None:
+        code=getattr(failure,'code','packet_response_invalid')
+        if code=='cancelled' and time.monotonic()>=control.until:code='timeout'
+        if operation!='risk' or code in ('cancelled','sources_or_engine_changed'):
+            if isinstance(failure,adapter.ModelError):raise failure
+            raise adapter.ModelError(code) from None
+        proof['incomplete']=code if code in {'timeout','budget_exceeded','packet_response_invalid','packet_evidence_mismatch'} else 'packet_incomplete'
+        return {**outcome(frozen,operation,proof),'packet_proof':proof}
+    try:control.check()
+    except adapter.ModelError as exc:
+        if operation!='risk' or exc.code!='timeout':raise
+        proof['incomplete']='timeout'
+        return {**outcome(frozen,operation,proof),'packet_proof':proof}
     if runtime!=snapshots.digest(release()) or frozen['backend_sources']!=sources.capture():raise adapter.ModelError('sources_or_engine_changed')
     try:completed=outcome(frozen,operation,proof)
     except adapter.ModelError as exc:
