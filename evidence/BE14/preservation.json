@@ -1,0 +1,34 @@
+{
+  "time": "2026-10-27T10:38:22.741202+00:00",
+  "table_count": 81,
+  "changed_tables": [],
+  "preserved_files": {
+    "evidence/audits/2026-10-20-cycles/external-check.md": true,
+    "evidence/audits/2026-10-20-cycles/checks.log": true,
+    "evidence/audits/2026-10-20-cycles/results.json": true,
+    "tools/run_synthetic_cycles.py": true
+  },
+  "access_unchanged": true,
+  "ledgers_unchanged": {
+    "var/deepseek-budget.sqlite3": true
+  },
+  "integrity": [
+    [
+      "ok"
+    ]
+  ],
+  "foreign_key_errors": [],
+  "ledger": [
+    145,
+    730308
+  ],
+  "health_returncode": 0,
+  "health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "final_after_make_check": "2026-10-27T10:41:33.185774+00:00",
+  "final_preservation_pass": true
+}
