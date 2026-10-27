@@ -3,27 +3,27 @@
     <h3 class="keep" id="task-title-{{ t.id }}">{{ t.label }}</h3>
     <p class="meta">Срок: <time class="num" datetime="{{ t.due_at }}">{{ t.due_at|msk }}</time> · <a href="#plan-{{ t.proposal_id }}">Решение врача</a></p>
     {% if t.superseded %}<p class="meta">Пункт заменён новым планом. Прежние отметки сохранены.</p>
-    {% elif t.future %}<p class="meta">Срок впереди. Отметка будет доступна {{ t.due_at|msk }}.</p>{% endif %}
-    <p class="recommendation-result"><b>{{ task_labels[t.outcome] }}</b>{% if t.history %} · {{ t.history[-1].recorded_at|msk }}{% endif %}</p>
-    {% if t.history %}<p class="meta">{{ plan_task_data.authors.get(t.history[-1].actor_id, 'Автор не указан') }}{% if t.history[-1].reason %}: <span class="keep">{{ t.history[-1].reason }}</span>{% endif %}</p>{% endif %}
-    {% if not t.superseded and not t.future %}
+    {% elif t.future %}<p class="meta">Срок впереди — ответ можно отправить уже сейчас.</p>{% endif %}
+    <p class="recommendation-result"><b>{{ 'Выполнение не отмечено' if t.outcome == 'unknown' else task_labels[t.outcome] }}</b>{% if t.history %} · {{ t.history[-1].recorded_at|msk }}{% endif %}</p>
+    {% if t.history %}<p class="answer-saved">Ответ доступен врачу; прочтение не подтверждено.</p><p class="meta">{{ plan_task_data.authors.get(t.history[-1].actor_id, 'Автор не указан') }}{% if t.superseded and t.history[-1].reason %}: <span class="keep">{{ t.history[-1].reason }}</span>{% endif %}</p>{% endif %}
+    {% if not t.superseded %}
     {% set failed = task_values.get('task_id') == t.id %}
-    <form method="post" action="{{ url_for('report_plan_task', patient_id=patient.id, task_id=t.id) }}" class="recommendation-form" data-busy aria-label="Отметить: {{ t.label }}">
+    <form method="post" action="{{ url_for('report_plan_task', patient_id=patient.id, task_id=t.id) }}" class="recommendation-form" data-busy aria-label="Ответить на пункт: {{ t.label }}">
       <input type="hidden" name="csrf" value="{{ csrf }}">
       <input type="hidden" name="request_key" value="{{ task_values.get('request_key') if failed else new_key() }}">
       <input type="hidden" name="revision" value="{{ task_values.get('revision', '') if failed else t.revision }}">
-      <label class="field">Результат
+      <label class="field answer-label" for="answer-{{ t.id }}">Ваш ответ врачу</label>
+      <p class="meta" id="task-hint-{{ t.id }}">Напишите сведения или вопросы по этому пункту. Врач увидит текст после отправки. Позже его можно дополнить.</p>
+      <textarea class="textarea" id="answer-{{ t.id }}" name="reason" rows="4" maxlength="1000" required aria-describedby="task-hint-{{ t.id }}">{{ task_values.get('reason', '') if failed else (t.history[-1].reason if t.history else '') }}</textarea>
+      <label class="field">Выполнение пункта
         <select class="select" name="outcome">
-          {% for value, label in [('unknown', 'Нет сведений'), ('taken', 'Выполнено'), ('missed', 'Не выполнено'), ('conflicting', 'Нужно уточнить')] %}
+          {% for value, label in [('unknown', 'Пока не отмечаю'), ('taken', 'Выполнено'), ('missed', 'Не выполнено'), ('conflicting', 'Нужно уточнить')] %}
           <option value="{{ value }}"{% if (task_values.get('outcome') if failed else t.outcome) == value %} selected{% endif %}>{{ label }}</option>
           {% endfor %}
         </select>
       </label>
-      <label class="field">Комментарий
-        <textarea class="textarea" name="reason" rows="2" maxlength="1000" aria-describedby="task-hint-{{ t.id }}">{{ task_values.get('reason', '') if failed else '' }}</textarea>
-      </label>
-      <p class="meta" id="task-hint-{{ t.id }}">Для «Не выполнено» и «Нужно уточнить» укажите причину.</p>
-      <button class="button" type="submit">Сохранить отметку</button>
+      <p class="meta">Выполнение можно пока не отмечать. Если выбрали «Не выполнено» или «Нужно уточнить», объясните причину в ответе.</p>
+      <button class="button button--primary" type="submit">{{ 'Обновить ответ' if t.history else 'Отправить ответ врачу' }}</button>
     </form>
     {% endif %}
     {% if t.history|length > 1 %}
@@ -34,8 +34,8 @@
   </article>
 {% endmacro %}
 <section class="p-block" id="recommendations" aria-labelledby="h-recommendations">
-  <h2 id="h-recommendations">Другие рекомендации</h2>
-  <p class="meta">Отмечайте выполнение каждого пункта отдельно. Врач увидит результат и комментарий в вашем плане. Приём препаратов отмечается в календаре ниже.</p>
+  <h2 id="h-recommendations">Пункты плана — ваши ответы</h2>
+  <p class="meta">Пишите прямо под нужным пунктом, даже если его срок ещё не наступил. Каждый ответ отправляется отдельно. Приём препаратов отмечается в календаре ниже.</p>
   {% if task_error %}<div class="notice notice--error" role="alert"><b>Отметка не сохранена</b><p>{{ task_error }}</p>
     {% if task_values.get('reason') %}<p class="keep">Ваш несохранённый комментарий: {{ task_values.get('reason') }}</p>{% endif %}
   </div>{% endif %}

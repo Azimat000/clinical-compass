@@ -1263,3 +1263,12 @@ h2 { letter-spacing: -.015em; }
  .title-row { padding-block: 12px 16px; }
  .jump:not(.patient-nav) { background: transparent; border-bottom: 1px solid var(--rule); gap: 0 12px; }
 }
+
+/* UI12: ответ — основное действие в пункте плана. */
+.recommendation-form { max-width: 720px; padding: 20px; background: var(--sheet); border: 1px solid var(--control); border-radius: 8px; }
+.recommendation-form .answer-label { font-size: 18px; font-weight: 700; }
+.recommendation-form > .textarea { min-height: 120px; }
+.answer-saved { margin-top: 12px; color: var(--accent); font-size: 15px; }
+.plan-answer { font-size: var(--fs-body); margin-bottom: 8px; max-width: 65ch; }
+.plan-tasks td:nth-child(3) { min-width: 240px; }
+@media (max-width: 760px) { .recommendation-form { padding: 16px; } .plan-tasks td:nth-child(3) { min-width: 0; } .recommendation-form > .button { width: 100%; } }

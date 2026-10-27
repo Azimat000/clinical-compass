@@ -93,14 +93,21 @@ class PlanTaskTests(unittest.TestCase):
         self.assertEqual(409, self.post('pat-a', target, form).status_code)
         self.assertEqual(0, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
 
-    def test_future_items_visible_to_both_but_not_reportable(self):
+    def test_future_items_accept_answer_without_claiming_completion(self):
         t, _ = self.add(due_on='2030-01-01')
         for uid in ('pat-a', 'doc-a'):
             page = self.clients[uid].get(self.plan_url).text
             self.assertIn(t['label'], page)
             self.assertIn('впереди', page)
-        self.assertNotIn(self.tasks_url+'/'+t['id']+'/report', self.clients['pat-a'].get(self.plan_url).text)
-        self.assertEqual(409, self.mark(t)[0].status_code)
+        self.assertIn(self.tasks_url+'/'+t['id']+'/report', self.clients['pat-a'].get(self.plan_url).text)
+        response, form = self.mark(t, outcome='unknown', reason='Заснул в 23:40. Вопрос к следующему приёму.')
+        self.assertEqual(303, response.status_code)
+        for uid in ('pat-a', 'doc-a'):
+            page = self.clients[uid].get(self.plan_url).text
+            self.assertIn(form['reason'], page)
+            self.assertIn('Выполнение не отмечено', page)
+        self.assertEqual(303, self.post('pat-a', self.tasks_url+'/'+t['id']+'/report', form).status_code)
+        self.assertEqual(1, self.db.execute('SELECT count(*) FROM adherence_entries').fetchone()[0])
 
     def test_replaced_future_plan_blocked_with_history_retained(self):
         t, _ = self.add(due_on='2030-01-01')

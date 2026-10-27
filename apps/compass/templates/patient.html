@@ -53,7 +53,7 @@
   {{ med.calendar(med_calendar, patient, csrf, 'demo_patient', True) }}
 
   <section class="p-block home-plan" aria-labelledby="h-home-plan">
-    <h2 id="h-home-plan">Ваш план лечения <a href="{{ url_for('decisions_page', patient_id=patient.id) }}">Весь план</a></h2>
+    <h2 id="h-home-plan">Ваш план лечения <a href="{{ url_for('decisions_page', patient_id=patient.id) }}">Открыть план и ответить</a></h2>
     {% if plan %}
       <p class="plan-text keep">{{ plan[0].content }}</p>
       <p class="meta">Подтвердил <b translate="no">{{ plan[0].doctor }}</b> · {{ plan[0].confirmed_at|msk }}</p>

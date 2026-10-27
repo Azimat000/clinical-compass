@@ -146,7 +146,7 @@ def report(db,user,patient_id,task_id,form, *, patient_only=False):
                 raise Error('В другой вкладке появилась новая отметка. Обновите страницу перед исправлением.',409)
         if superseded(db,task):
             raise Error('План заменён: этот пункт больше не учитывается.',409)
-        if task['due_at']>now():
+        if task['due_at']>now() and not patient_only:
             raise Error('Отметка доступна после указанного времени.',409)
         rid=secrets.token_hex(16)
         db.execute('INSERT INTO adherence_entries VALUES(?,?,?,?,?,?,?)',(rid,task_id,user['id'],outcome,reason,now(),retry))
