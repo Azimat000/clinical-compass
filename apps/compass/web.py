@@ -415,57 +415,6 @@ def create_app(database=None):
             raise backend_analyses.AnalysisError('Нужен номер страницы.')
         return jsonify(review.view(get_db(), g.user, patient_id, int(page)))
 
-    @app.get('/api/v1/patients/<patient_id>/therapy-editor')
-    def therapy_editor(patient_id):
-        role('doctor')
-        patient_or_404(patient_id)
-        backend_analyses.authorize(get_db(), g.user, patient_id)
-        from . import backend_therapy_context as context, backend_medication_regimens as regimens
-        catalog = regimens.release()
-        questions = {}
-        for product in catalog['products'].values():
-            for flag, spec in product['required_facts'].items():
-                questions.setdefault(flag, spec['question'])
-        from .backend_ui_therapy import FLAG_LABELS
-        return jsonify(context=context.view(get_db(), g.user, patient_id),
-            facts=[{'id': key, 'label': FLAG_LABELS.get(key, questions.get(key, key))} for key in context.FLAGS],
-            products=[{'id': key, 'name': product['name'], 'ingredient': product['ingredient'],
-                       'form': product['form']} for key, product in catalog['products'].items()])
-
-    @app.get('/api/v1/patients/<patient_id>/plan-review-state')
-    def plan_review_state(patient_id):
-        role('doctor')
-        patient_or_404(patient_id)
-        backend_analyses.authorize(get_db(), g.user, patient_id)
-        from . import backend_plan_review as review
-        review.available(get_db())
-        latest = review.head(get_db(), patient_id)
-        return jsonify(expected_version=latest['version'] if latest else 0,
-                       parent_id=latest['proposal_id'] if latest else None)
-
-    @app.get('/api/v1/physician/decision-support')
-    @app.get('/api/v1/patients/<patient_id>/decision-support')
-    def decision_support_availability(patient_id=None):
-        role('doctor')
-        if patient_id is not None:
-            patient_or_404(patient_id)
-            backend_analyses.authorize(get_db(), g.user, patient_id)
-        names = {row[0] for row in get_db().execute(
-            "SELECT name FROM sqlite_master WHERE type='table'")}
-        required = {'analysis_runs', 'backend_alerts', 'backend_diagnosis_reviews',
-                    'backend_plan_reviews'}
-        available = required.issubset(names)
-        from . import backend_jobs
-        automatic = []
-        if available and patient_id is not None and 'backend_ui_update_cursors' in names:
-            from . import backend_ui_updates
-            relationship = backend_analyses.authorize(get_db(), g.user, patient_id)
-            automatic = backend_ui_updates.view(get_db(), patient_id, relationship)
-        from . import backend_diagnosis_preview
-        return jsonify(available=available, automatic=automatic,
-                       diagnosis_preview=backend_diagnosis_preview.release()['enabled'],
-                       enabled=available and backend_jobs.settings(get_db()) is not None)
-
     @app.get('/api/v1/physician/alerts')
     def backend_alert_inbox():
         role('doctor')

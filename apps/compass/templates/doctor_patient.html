@@ -60,26 +60,6 @@
   {{ ui.patient_nav(patient.id, 'card') }}
 </div>
 
-
-<section class="sheet-pad ds-support" data-support="diagnosis" data-patient="{{ patient.id }}" data-csrf="{{ csrf }}" aria-labelledby="ds-diagnosis-title">
-  <h2 id="ds-diagnosis-title">Предполагаемый диагноз системы</h2>
-  <p data-support-status role="status">Загрузка анализа…</p>
-  <div data-support-content></div>
-  <div class="form-actions"><button class="button" type="button" data-support-refresh>Обновить сведения</button><button class="button" type="button" data-support-analyze>Запросить новый анализ</button></div>
-  <h2>Диагноз врача</h2>
-  <div data-support-doctor></div>
-  <form data-support-diagnosis-form>
-    <label>Собственная формулировка<textarea class="input" name="diagnosis" rows="3" maxlength="2000" required></textarea></label>
-    <label>Код диагноза (если определён)<select class="select" name="diagnosis_code"><option value="">Не определён</option value="F32">F32 — депрессивный эпизод</option><option value="F33">F33 — рекуррентное депрессивное расстройство</option><option value="F41.1">F41.1 — генерализованное тревожное расстройство</option></select></label>
-    <label>Основания<textarea class="input" name="basis" rows="2" maxlength="4000" required></textarea></label>
-    <label>Неопределённость и что уточнить<textarea class="input" name="uncertainties" rows="2" maxlength="4000" required></textarea></label>
-    <label><input type="checkbox" name="reviewed" required> Я просмотрел сведения и записываю собственный диагноз</label>
-    <button class="button" type="submit" disabled>Сохранить диагноз врача</button>
-    <p data-support-save-status role="status"></p>
-  </form>
-  <noscript>Для работы с новым блоком включите JavaScript.</noscript>
-</section>
-
 <div class="sheet-pad">
   {% if overview.attention %}<p class="finding">Сейчас: {% if overview.reason.page == 'plan' %}<a href="{{ url_for('decisions_page', patient_id=patient.id, med_day=overview.reason.med_day) if overview.reason.med_day else url_for('decisions_page', patient_id=patient.id) }}#{{ overview.reason.anchor }}">{{ ui.marker(overview.reason.text) }}</a>{% else %}{{ ui.marker(overview.reason.text) }}{% endif %}{% if overview.reason.sub %}<span class="sub">{{ overview.reason.sub }}</span>{% endif %}{% for m in overview.more %}<span class="sub">{{ m.text }}{% if m.sub %} ({{ m.sub }}){% endif %}</span>{% endfor %}</p>{% endif %}
   <p class="meta">{% if all_history %}Вся история{% else %}Выбранный период{% endif %}. Период относится к самочувствию, истории приёмов и анкетам.</p>
@@ -234,5 +214,4 @@
   </section>
 </div>
 {% endblock %}
-{% block page_scripts %}<link rel="stylesheet" href="{{ url_for('static', filename='decision_support.css') }}">
-<script src="{{ url_for('static', filename='decision_support.js') }}" defer></script><script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}
+{% block page_scripts %}<script src="{{ url_for('static', filename='doctor_forms.js') }}" defer></script>{% endblock %}

@@ -1653,10 +1653,10 @@
       "FE11",
       "FE12"
     ],
-    "status": "in_progress",
+    "status": "cancelled_by_user",
     "implementation_started": true,
     "last_accepted_slice": "FE03A",
-    "next_slice": "FE03B",
+    "next_slice": null,
     "backend_baseline": "refs/tags/slice/BE16",
     "skipped_backend_slices": [
       "BE17",
@@ -1672,7 +1672,7 @@
       "FE09",
       "FE10"
     ],
-    "scope": "decision_support_only_preserve_existing_frontend",
+    "scope": "decision_support_ui_cancelled_2026-10-27",
     "scope_boundary": "Только три функции поддержки принятия решений BE01–BE16 в существующем интерфейсе. Сохранить нынешние стиль, оболочку, навигацию и остальные экраны. Разрешены локальные добавления на главной врача, в карточке пациента и в «Плане и решениях», необходимые серверные связи и синтетические примеры. Не переделывать кабинет пациента, приём, документы, анкеты, сообщения, вход и приглашения. Существующие пациентские план/календарь только проверять на получение подтверждённых решений.",
     "ux_brief": "docs/design/decision-support-ui.md",
     "ux_evidence": "evidence/FE01/acceptance.md",
@@ -1703,7 +1703,7 @@
       "active_service_changed": false
     },
     "ui_connection": {
-      "status": "deployed_unverified",
+      "status": "removed_from_interface_disabled_by_user",
       "report": "memory/sessions/FE05-FE08-live-unverified.md",
       "surfaces": [
         "dashboard",
@@ -1712,21 +1712,33 @@
       ],
       "tests_run": false,
       "active_service_changed": true,
-      "automatic_generation": "implemented_quality_gate_preserved",
-      "structured_medication_review_ui": true,
+      "automatic_generation": false,
+      "structured_medication_review_ui": false,
       "database": "var/compass.sqlite3",
       "schema": "024_ui_update_cursors",
       "backup": "var/backups/decision-support-20261027-172832",
       "quality_admitted": false,
       "diagnosis_preview": {
-        "status": "enabled_synthetic_unverified",
+        "status": "revoked_by_user",
         "quality_pass": false,
         "report": "memory/sessions/diagnosis-preview-2026-10-27.md",
         "authorization": "var/diagnosis-preview-authorization.json",
         "tests_run": false,
         "results_verified": false,
         "backup": "var/backups/diagnosis-preview-20261027-173221"
-      }
-    }
+      },
+      "current_history_generation": {
+        "status": "cancelled_by_user",
+        "report": "memory/sessions/current-history-generation-2026-10-27.md",
+        "authorization": "var/current-history-generation-authorization.json",
+        "risk_worker": null,
+        "plan_intents": null,
+        "tests_run": false,
+        "clinical_history_edited": false,
+        "physician_decisions_created": false
+      },
+      "removal_report": "memory/sessions/remove-decision-support-2026-10-27.md"
+    },
+    "resume_requires_explicit_user_request": true
   }
 }
