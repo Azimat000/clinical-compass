@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "План интерфейса BE01–BE16; не заменяет plan/coverage.json и plan/backend/requirements.json",
+  "scope": "Только три функции поддержки принятия решений BE01–BE16 в существующем интерфейсе. Сохранить нынешние стиль, оболочку, навигацию и остальные экраны. Разрешены локальные добавления на главной врача, в карточке пациента и в «Плане и решениях», необходимые серверные связи и синтетические примеры. Не переделывать кабинет пациента, приём, документы, анкеты, сообщения, вход и приглашения. Существующие пациентские план/календарь только проверять на получение подтверждённых решений.",
   "items": [
     {
       "id": "U01",
@@ -21,7 +21,8 @@
         "D11"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U02",
@@ -41,7 +42,8 @@
         "D10"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U03",
@@ -63,14 +65,15 @@
         "D10"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U04",
       "text": "Новые сведения: обновление, устаревание, версии, защита текста врача, бюджета и подтверждённого лечения",
       "implementation_slices": [
         "FE02",
-        "FE04",
+        "FE05",
         "FE06",
         "FE07",
         "FE08"
@@ -85,16 +88,19 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U05",
-      "text": "Весь UX/UI обеих ролей: приёмы, история, документы, анкеты, дневник, лекарства, сообщения, приглашения",
+      "text": "Три блока интегрированы в существующие страницы; весь остальной frontend/дизайн/навигация сохранены",
       "implementation_slices": [
         "FE01",
-        "FE04",
-        "FE09",
-        "FE10"
+        "FE05",
+        "FE06",
+        "FE07",
+        "FE08",
+        "FE11"
       ],
       "verification_slices": [
         "FE11",
@@ -107,11 +113,13 @@
         "D09"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "previous_scope_text": "Весь UX/UI обеих ролей: приёмы, история, документы, анкеты, дневник, лекарства, сообщения, приглашения",
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U06",
-      "text": "Наглядные согласованные истории всех десяти пациентов и воспроизводимые события до/после",
+      "text": "Наглядные примеры трёх функций на существующих десяти историях без их пересоздания",
       "implementation_slices": [
         "FE03",
         "FE12"
@@ -135,22 +143,21 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "previous_scope_text": "Наглядные согласованные истории всех десяти пациентов и воспроизводимые события до/после",
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U07",
-      "text": "Одна сессия — один срез, стабильные коммиты/теги, память, критерии и передача",
+      "text": "Одна сессия — один активный срез; девять срезов, память и отдельные коммиты/теги",
       "implementation_slices": [
         "FE01",
         "FE02",
         "FE03",
-        "FE04",
         "FE05",
         "FE06",
         "FE07",
         "FE08",
-        "FE09",
-        "FE10",
         "FE11",
         "FE12"
       ],
@@ -158,19 +165,18 @@
         "FE01",
         "FE02",
         "FE03",
-        "FE04",
         "FE05",
         "FE06",
         "FE07",
         "FE08",
-        "FE09",
-        "FE10",
         "FE11",
         "FE12"
       ],
       "scenario_ids": [],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "previous_scope_text": "Одна сессия — один срез, стабильные коммиты/теги, память, критерии и передача",
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U08",
@@ -188,7 +194,8 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U09",
@@ -196,7 +203,6 @@
       "implementation_slices": [
         "FE02",
         "FE03",
-        "FE04",
         "FE08",
         "FE12"
       ],
@@ -211,15 +217,18 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U10",
-      "text": "Телефон/планшет/компьютер, доступность, ошибки, конфликты, без JS и reduced-motion",
+      "text": "Адаптивность, доступность, ошибки и конфликты только новых блоков; остальное проверяется на сохранность",
       "implementation_slices": [
-        "FE04",
-        "FE09",
-        "FE10",
+        "FE01",
+        "FE05",
+        "FE06",
+        "FE07",
+        "FE08",
         "FE11"
       ],
       "verification_slices": [
@@ -232,11 +241,13 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "previous_scope_text": "Телефон/планшет/компьютер, доступность, ошибки, конфликты, без JS и reduced-motion",
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U11",
-      "text": "Рабочий локальный сайт обновлён и примеры доступны сразу, проверенный возврат",
+      "text": "Рабочий локальный сайт с тремя новыми функциями и примерами; прочий интерфейс сохранён",
       "implementation_slices": [
         "FE12"
       ],
@@ -252,7 +263,9 @@
         "D12"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "previous_scope_text": "Рабочий локальный сайт обновлён и примеры доступны сразу, проверенный возврат",
+      "scope_revision": "decision-support-only-2026-10-27"
     },
     {
       "id": "U12",
@@ -276,7 +289,8 @@
         "D09"
       ],
       "status": "planned",
-      "actual_evidence": []
+      "actual_evidence": [],
+      "scope_revision": "decision-support-only-2026-10-27"
     }
   ]
 }

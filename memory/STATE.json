@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-27T15:14:13+03:00",
+  "updated_on": "2026-10-27T15:22:48+03:00",
   "current_slice": null,
   "last_accepted_slice": "BE16",
   "next_slice": "FE01",
@@ -353,7 +353,7 @@
       "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/UI08.md",
-      "reason": "Старый общий UI-аудит отложен новым маршрутом FE01–FE12; экранные проверки повторяются в FE11, общий make check остаётся отложенным. UI08 не принят.",
+      "reason": "Общий UI-аудит остаётся отложенным. FE11 проверяет только новые функции поддержки решений и не заменяет UI08; остальной frontend не менять.",
       "disposition": "deferred_by_frontend_program"
     },
     "UI06B": {
@@ -711,10 +711,11 @@
       "reason": null
     },
     "FE04": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/FE04.md",
-      "reason": null
+      "reason": "Уточнение пользователя 27.10.2026: остальной frontend не менять. Срез исключён из текущего плана, не начат и не принят.",
+      "disposition": "excluded_by_user_scope"
     },
     "FE05": {
       "status": "planned",
@@ -741,16 +742,18 @@
       "reason": null
     },
     "FE09": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/FE09.md",
-      "reason": null
+      "reason": "Уточнение пользователя 27.10.2026: остальной frontend не менять. Срез исключён из текущего плана, не начат и не принят.",
+      "disposition": "excluded_by_user_scope"
     },
     "FE10": {
-      "status": "planned",
+      "status": "blocked",
       "commit_ref": null,
       "handoff": "memory/sessions/FE10.md",
-      "reason": null
+      "reason": "Уточнение пользователя 27.10.2026: остальной frontend не менять. Срез исключён из текущего плана, не начат и не принят.",
+      "disposition": "excluded_by_user_scope"
     },
     "FE11": {
       "status": "planned",
@@ -1011,25 +1014,27 @@
     "current_scope": "Nine-dossier sequence retained as optional; source checks still apply per enabled function"
   },
   "latest_plan_change": {
-    "kind": "frontend_after_BE16",
+    "kind": "decision_support_ui_scope_correction",
     "date": "2026-10-27",
-    "report": "memory/sessions/frontend-plan-2026-10-27.md",
-    "commit_ref": "refs/tags/plan/frontend-plan-2026-10-27",
+    "report": "memory/sessions/frontend-scope-2026-10-27.md",
+    "commit_ref": "refs/tags/plan/decision-support-ui-2026-10-27",
     "implementation_started": false,
-    "authorization": "evidence/frontend-plan-2026-10-27/authorization.md",
-    "prepared_slice_ids": [
+    "authorization": "evidence/frontend-scope-2026-10-27/authorization.md",
+    "active_slice_ids": [
       "FE01",
       "FE02",
       "FE03",
-      "FE04",
       "FE05",
       "FE06",
       "FE07",
       "FE08",
-      "FE09",
-      "FE10",
       "FE11",
       "FE12"
+    ],
+    "excluded_slice_ids": [
+      "FE04",
+      "FE09",
+      "FE10"
     ]
   },
   "optional_source_program": {
@@ -1097,6 +1102,28 @@
       "authorization": "evidence/backend-plan-2026-10-26/authorization.md",
       "planned_commit_ref": "refs/tags/plan/backend-plan-2026-10-26",
       "git_status": "verified_in_recovered_local_checkout"
+    },
+    {
+      "kind": "frontend_after_BE16",
+      "date": "2026-10-27",
+      "report": "memory/sessions/frontend-plan-2026-10-27.md",
+      "commit_ref": "refs/tags/plan/frontend-plan-2026-10-27",
+      "implementation_started": false,
+      "authorization": "evidence/frontend-plan-2026-10-27/authorization.md",
+      "prepared_slice_ids": [
+        "FE01",
+        "FE02",
+        "FE03",
+        "FE04",
+        "FE05",
+        "FE06",
+        "FE07",
+        "FE08",
+        "FE09",
+        "FE10",
+        "FE11",
+        "FE12"
+      ]
     }
   ],
   "interface_state": {
@@ -1597,13 +1624,10 @@
       "FE01",
       "FE02",
       "FE03",
-      "FE04",
       "FE05",
       "FE06",
       "FE07",
       "FE08",
-      "FE09",
-      "FE10",
       "FE11",
       "FE12"
     ],
@@ -1620,6 +1644,13 @@
     "active_service_migrated": false,
     "clinical_release": "blocked",
     "full_regression": "deferred_by_user",
-    "planning_ref": "refs/tags/plan/frontend-plan-2026-10-27"
+    "planning_ref": "refs/tags/plan/decision-support-ui-2026-10-27",
+    "excluded_slice_ids": [
+      "FE04",
+      "FE09",
+      "FE10"
+    ],
+    "scope": "decision_support_only_preserve_existing_frontend",
+    "scope_boundary": "Только три функции поддержки принятия решений BE01–BE16 в существующем интерфейсе. Сохранить нынешние стиль, оболочку, навигацию и остальные экраны. Разрешены локальные добавления на главной врача, в карточке пациента и в «Плане и решениях», необходимые серверные связи и синтетические примеры. Не переделывать кабинет пациента, приём, документы, анкеты, сообщения, вход и приглашения. Существующие пациентские план/календарь только проверять на получение подтверждённых решений."
   }
 }

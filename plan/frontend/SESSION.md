@@ -1,13 +1,13 @@
-# Передача FE01–FE12 между сессиями
+# Передача срезов поддержки решений между сессиями
 
 ## Начало
 
 Рабочая папка: `/Users/azamatsibgatullin/HAC-Recovery-20261026/project`.
-Прочитать AGENTS/START_HERE, memory/STATE.json, DECISIONS/BLOCKERS/EXTERNAL/BUDGET, последний принятый отчёт и приёмку, plan/frontend/README/requirements/scenarios и карточку выбранного FE. Перед FE01 последний принятый отчёт — BE16, планировочная передача — frontend-plan-2026-10-27.md.
+Прочитать AGENTS/START_HERE, memory/STATE.json, DECISIONS/BLOCKERS/EXTERNAL/BUDGET, последний принятый отчёт и приёмку, plan/frontend/README/requirements/scenarios и карточку выбранного FE. Перед FE01 последний принятый отчёт — BE16, планировочная передача — frontend-scope-2026-10-27.md.
 
 Зафиксировать HEAD, status, staged/unstaged diff, сохранность чужих файлов, доступы/состав базы без вывода секретов. Выполнить validate_plan.py и session.py status. Затем `python3 tools/session.py start FE##` только для одного готового среза. Самостоятельно не начинать следующий срез в той же сессии.
 
-Для дизайна читать память через impeccable context; для реализации определить точные пути и целевые существующие тесты. Применять правила делегирования AGENTS; не давать рабочему агенту весь workspace. Перед любым модельным вызовом сверить ledger, источники/сроки и synthetic opt-in. Новые внешние факты — read-only web-researcher/fork_turns=none. Не повышать бюджет и не продлевать gate ради экрана.
+Для дизайна читать память через impeccable context; для реализации определить точные пути и целевые существующие тесты. Действующая граница — только три функции на трёх существующих страницах. Активны FE01/02/03/05/06/07/08/11/12, FE04/09/10 исключены. Проверка соседних экранов — только на сохранность. Применять правила делегирования AGENTS; не давать рабочему агенту весь workspace. Перед любым модельным вызовом сверить ledger, источники/сроки и synthetic opt-in. Новые внешние факты — read-only web-researcher/fork_turns=none. Не повышать бюджет и не продлевать gate ради экрана.
 
 ## Реализация и доказательства
 
@@ -19,7 +19,7 @@
 
 ## Завершение
 
-Обновить memory/sessions/FE##.md, STATE (включая frontend_program), DECISIONS/BLOCKERS/EXTERNAL/BUDGET при изменении фактов, frontend/requirements/scenarios и исходную матрицу. Отчёт содержит: baseline, изменения и миграции, способ восстановления, версии/сроки источников, фактические расходы, команды/результаты, доказательства всех критериев, ограничения, сохранённые чужие файлы, следующий срез и первую команду. DESIGN/PRODUCT/sidecar/брифы отражают принятый экран, не план будущего.
+Обновить memory/sessions/FE##.md, STATE (включая frontend_program), DECISIONS/BLOCKERS/EXTERNAL/BUDGET при изменении фактов, frontend/requirements/scenarios и исходную матрицу. Отчёт содержит: baseline, изменения и миграции, способ восстановления, версии/сроки источников, фактические расходы, команды/результаты, доказательства всех критериев, ограничения, сохранённые чужие файлы, следующий срез и первую команду. Отдельный бриф docs/design/decision-support-ui.md отражает новые блоки. Глобальное обновление DESIGN/PRODUCT/sidecar, исправление прочего дизайна и переделка других страниц не входят в объём.
 
 Только при полном результате: status=accepted, current_slice=null, last_accepted_slice=FE##, commit_ref=refs/tags/slice/FE##, next_slice — фактически готовый по manifest. Обновить frontend_program.last_accepted_slice/next_slice/status. Последний FE12: next_slice определить session.py, не возобновлять пропущенные BE/отложенный UI08.
 
