@@ -1,0 +1,35 @@
+{
+  "pass": true,
+  "active_tables_unchanged": 81,
+  "accounts_unchanged": true,
+  "preexisting_files_unchanged": 4,
+  "migration": {
+    "legacy015_manual_confirmation": true,
+    "old_tables_preserved": 79,
+    "old_objects_preserved": 262,
+    "repeated_migration": true,
+    "integrity": "ok",
+    "foreign_key_violations": 0
+  },
+  "active_health": {
+    "foreign_keys": true,
+    "journal_mode": "delete",
+    "schema_version": "015_medication_marks",
+    "status": "ok"
+  },
+  "ledger_before": [
+    152,
+    738449
+  ],
+  "ledger_after": [
+    153,
+    739853
+  ],
+  "new_model_calls": 1,
+  "new_ceiling_micro_usd": 1404,
+  "remaining_micro_usd": 260147,
+  "general_regression": "not run: user explicitly deferred general check",
+  "http_checks": 19,
+  "runtime_sha256": "96ddeb22479ddd5b1d4e121e8bd13ab8c76330d2b302917af1c7c00bd56ca89b",
+  "clinical_release": "blocked"
+}

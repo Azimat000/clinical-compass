@@ -1,0 +1,45 @@
+{
+  "pass": true,
+  "changed_tracked": [
+    "START_HERE.md",
+    "apps/compass/backend_snapshot.py",
+    "apps/compass/decisions.py",
+    "apps/compass/web.py",
+    "memory/BLOCKERS.md",
+    "memory/BUDGET.json",
+    "memory/DECISIONS.md",
+    "memory/EXTERNAL.md",
+    "memory/STATE.json",
+    "plan/backend/README.md",
+    "plan/backend/requirements.json",
+    "plan/coverage.json"
+  ],
+  "new_owned": [
+    "apps/compass/backend_plan_review.py",
+    "apps/compass/migrations/022_backend_plan_reviews.sql",
+    "apps/tests/test_backend_plan_review.py",
+    "docs/architecture/backend-plan-review.md",
+    "evidence/BE15/acceptance.md",
+    "evidence/BE15/baseline.json",
+    "evidence/BE15/final-checks.log",
+    "evidence/BE15/http-protocol.json",
+    "evidence/BE15/http-protocol.log",
+    "evidence/BE15/http_protocol.py",
+    "evidence/BE15/integration.log",
+    "evidence/BE15/preservation.log",
+    "evidence/BE15/research.md",
+    "evidence/BE15/targeted-final.log",
+    "evidence/BE15/targeted-second.log",
+    "evidence/BE15/targeted.log",
+    "evidence/BE15/verification.json",
+    "evidence/BE15/verify_preservation.py",
+    "memory/sessions/BE15.md"
+  ],
+  "outside_scope_changes": [],
+  "preexisting_untracked_preserved": [
+    "evidence/audits/2026-10-20-cycles/checks.log",
+    "evidence/audits/2026-10-20-cycles/external-check.md",
+    "evidence/audits/2026-10-20-cycles/results.json",
+    "tools/run_synthetic_cycles.py"
+  ]
+}

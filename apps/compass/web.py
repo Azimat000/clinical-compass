@@ -344,6 +344,33 @@ def create_app(database=None):
         role('doctor')
         return jsonify(backend_analyses.inputs(get_db(), g.user, patient_id, run_id, reference=reference))
 
+    @app.post('/api/v1/patients/<patient_id>/analyses/<run_id>/plan-reviews')
+    def create_plan_review(patient_id, run_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        from . import backend_plan_review as review
+        if request.args or request.mimetype != 'application/json':
+            raise backend_analyses.AnalysisError('Нужен JSON без параметров адреса.')
+        try:
+            return jsonify(review.create(get_db(), g.user, patient_id, run_id,
+                backend_analyses.parse_request(request.get_data(), schema=None)))
+        except decisions.DecisionError as exc:
+            raise backend_analyses.AnalysisError(str(exc), exc.status, 'plan_review_refused') from None
+
+    @app.route('/api/v1/patients/<patient_id>/plan-reviews/<proposal_id>', methods=['GET', 'POST'])
+    def plan_review(patient_id, proposal_id):
+        role('doctor')
+        patient_or_404(patient_id)
+        from . import backend_plan_review as review
+        if request.args:
+            raise backend_analyses.AnalysisError('Параметры не поддерживаются.')
+        if request.method == 'GET':
+            return jsonify(review.receipt(get_db(), g.user, patient_id, proposal_id))
+        if request.mimetype != 'application/json':
+            raise backend_analyses.AnalysisError('Нужен JSON.', 415, 'unsupported_media_type')
+        return jsonify(review.confirm(get_db(), g.user, patient_id, proposal_id,
+            backend_analyses.parse_request(request.get_data(), schema=None)))
+
     @app.route('/api/v1/patients/<patient_id>/therapy-context', methods=['GET', 'POST'])
     def therapy_context(patient_id):
         role('doctor')

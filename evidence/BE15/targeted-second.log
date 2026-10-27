@@ -1,0 +1,19 @@
+......E....
+======================================================================
+ERROR: test_rejection_never_applies_and_exact_retries_survive_data_change (apps.tests.test_backend_plan_review.PlanReviewTests.test_rejection_never_applies_and_exact_retries_survive_data_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 102, in test_rejection_never_applies_and_exact_retries_survive_data_change
+    with self.assertRaises(decisions.DecisionError):self.approve(draft)
+                                                    ~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 68, in approve
+    return review.confirm(self.db, self.user, 'D01', receipt['proposal_id'], self.confirmation(receipt))
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 238, in confirm
+    raise analyses.AnalysisError(str(exc), exc.status, 'plan_confirmation_refused') from None
+apps.compass.backend_analyses.AnalysisError: Решение уже записано с другим содержимым.
+
+----------------------------------------------------------------------
+Ran 11 tests in 12.879s
+
+FAILED (errors=1)

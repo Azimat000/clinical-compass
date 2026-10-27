@@ -27,6 +27,16 @@ def enrich(db, raw, patient_id):
             ON p.id=d.proposal_id WHERE p.patient_id=? ORDER BY d.proposal_id'''),
     ):
         raw[table] = [dict(r) for r in db.execute(query, (patient_id,))]
+    # A pending review of this very analysis is not a new clinical observation.
+    # Keep it in the immutable decision ledger, but avoid invalidating its own
+    # diagnosis/reconciliation before it can be confirmed. Confirmed/rejected
+    # decisions and all legacy manual drafts remain normal history inputs.
+    if db.execute("SELECT 1 FROM sqlite_master WHERE name='backend_plan_reviews'").fetchone():
+        pending = {r[0] for r in db.execute('''SELECT r.proposal_id FROM backend_plan_reviews r
+            LEFT JOIN doctor_confirmations c ON c.proposal_id=r.proposal_id
+            WHERE r.patient_id=? AND c.id IS NULL''', (patient_id,))}
+        raw['proposals'] = [r for r in raw['proposals'] if r['id'] not in pending]
+        raw['decision_drafts'] = [r for r in raw['decision_drafts'] if r['proposal_id'] not in pending]
     entries = []
     sources = {}
 

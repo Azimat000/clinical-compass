@@ -1,0 +1,28 @@
+...E..E.......
+======================================================================
+ERROR: test_existing_medication_mark_survives_replacement_and_atomic_failure (apps.tests.test_backend_plan_review.PlanReviewTests.test_existing_medication_mark_survives_replacement_and_atomic_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 149, in test_existing_medication_mark_survives_replacement_and_atomic_failure
+    value=self.ready_plan();body=self.edit_body(value)
+                                 ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 47, in edit_body
+    med = options[0] if medication else None
+          ~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_new_risk_episode_blocks_confirmation_and_alert_remains_deliverable (apps.tests.test_backend_plan_review.PlanReviewTests.test_new_risk_episode_blocks_confirmation_and_alert_remains_deliverable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 133, in test_new_risk_episode_blocks_confirmation_and_alert_remains_deliverable
+    self.db.execute('INSERT INTO backend_risk_episode_versions VALUES(?,?,?,?,?,?,?,?,?)',
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (eid,1,'open','Synthetic mechanics','doc-a',value['run_id'],'{}',None,now()))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: episode run scope mismatch
+
+----------------------------------------------------------------------
+Ran 14 tests in 17.108s
+
+FAILED (errors=2)

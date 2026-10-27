@@ -197,6 +197,9 @@ def confirm(db, user, patient_id, proposal_id, form):
             return previous['id']
         if proposal['status'] != 'draft':
             raise DecisionError('Проект закрыт.', 409)
+        if decision == 'approved':
+            from . import backend_plan_review
+            backend_plan_review.validate_confirmation(db, user, patient_id, proposal)
         if decision == 'approved' and proposal['kind'] == 'referral':
             routing.confirmable(db, patient_id, json.loads(proposal['payload_json']))
         if decision == 'approved' and proposal['input_snapshot_json'] != snapshot(db, patient_id, relationship):
@@ -209,6 +212,7 @@ def confirm(db, user, patient_id, proposal_id, form):
                 JOIN proposals p ON p.id=c.proposal_id WHERE p.patient_id=? ORDER BY p.version DESC LIMIT 1''', (patient_id,)).fetchone()
             db.execute('INSERT INTO care_actions VALUES(?,?,?,?,?)',
                        (secrets.token_hex(16), cid, 'approved', stamp, head['id'] if head else None))
+            backend_plan_review.materialize(db, user, patient_id, proposal, cid)
         access.audit(db, user['id'], 'decision.' + decision, proposal_id)
         return cid
 

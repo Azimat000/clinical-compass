@@ -1,0 +1,120 @@
+E.E[2026-10-27 14:40:19,737] ERROR in web: request_failure incident=d3867c561fb25606 type=DecisionError endpoint=plan_review
+F...EE..
+======================================================================
+ERROR: test_audit_and_task_storage_failure_roll_back_everything (apps.tests.test_backend_plan_review.PlanReviewTests.test_audit_and_task_storage_failure_roll_back_everything)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 156, in test_audit_and_task_storage_failure_roll_back_everything
+    with self.assertRaises(sqlite3.IntegrityError):self.approve(draft)
+                                                   ~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 68, in approve
+    return review.confirm(self.db, self.user, 'D01', receipt['proposal_id'], self.confirmation(receipt))
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 232, in confirm
+    decisions.confirm(db, user, patient_id, proposal_id,
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {**body, 'version': str(body['version']), 'reviewed': 'yes'})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/decisions.py", line 202, in confirm
+    backend_plan_review.validate_confirmation(db, user, patient_id, proposal)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 204, in validate_confirmation
+    if project(db, user, patient_id, row['run_id'], body) != payload:
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 75, in project
+    raise analyses.AnalysisError('Проект или его точные входы устарели.', 409, 'plan_unavailable')
+apps.compass.backend_analyses.AnalysisError: Проект или его точные входы устарели.
+
+======================================================================
+ERROR: test_edit_separate_approval_single_action_calendar_tasks_and_history (apps.tests.test_backend_plan_review.PlanReviewTests.test_edit_separate_approval_single_action_calendar_tasks_and_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 75, in test_edit_separate_approval_single_action_calendar_tasks_and_history
+    second = self.draft_plan(value, body2)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 61, in draft_plan
+    return review.create(self.db, self.user, 'D01', value['run_id'], body or self.edit_body(value))
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 162, in create
+    payload = project(db, user, patient_id, run_id, body)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 75, in project
+    raise analyses.AnalysisError('Проект или его точные входы устарели.', 409, 'plan_unavailable')
+apps.compass.backend_analyses.AnalysisError: Проект или его точные входы устарели.
+
+======================================================================
+ERROR: test_retry_conflicts_no_second_action_and_parallel_confirmation (apps.tests.test_backend_plan_review.PlanReviewTests.test_retry_conflicts_no_second_action_and_parallel_confirmation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 175, in test_retry_conflicts_no_second_action_and_parallel_confirmation
+    results=list(pool.map(lambda _:call(),range(2)))
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 175, in <lambda>
+    results=list(pool.map(lambda _:call(),range(2)))
+                                   ~~~~^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 172, in call
+    barrier.wait();return review.confirm(db,self.user,'D01',draft['proposal_id'],self.confirmation(draft))
+                          ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 232, in confirm
+    decisions.confirm(db, user, patient_id, proposal_id,
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {**body, 'version': str(body['version']), 'reviewed': 'yes'})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/decisions.py", line 202, in confirm
+    backend_plan_review.validate_confirmation(db, user, patient_id, proposal)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 204, in validate_confirmation
+    if project(db, user, patient_id, row['run_id'], body) != payload:
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 75, in project
+    raise analyses.AnalysisError('Проект или его точные входы устарели.', 409, 'plan_unavailable')
+apps.compass.backend_analyses.AnalysisError: Проект или его точные входы устарели.
+
+======================================================================
+ERROR: test_routing_requires_explicit_review_and_risk_cannot_be_removed (apps.tests.test_backend_plan_review.PlanReviewTests.test_routing_requires_explicit_review_and_risk_cannot_be_removed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 224, in test_routing_requires_explicit_review_and_risk_cannot_be_removed
+    draft=self.draft_plan(value,body);self.approve(draft)
+                                      ~~~~~~~~~~~~^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 68, in approve
+    return review.confirm(self.db, self.user, 'D01', receipt['proposal_id'], self.confirmation(receipt))
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 232, in confirm
+    decisions.confirm(db, user, patient_id, proposal_id,
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {**body, 'version': str(body['version']), 'reviewed': 'yes'})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/decisions.py", line 202, in confirm
+    backend_plan_review.validate_confirmation(db, user, patient_id, proposal)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 204, in validate_confirmation
+    if project(db, user, patient_id, row['run_id'], body) != payload:
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/compass/backend_plan_review.py", line 75, in project
+    raise analyses.AnalysisError('Проект или его точные входы устарели.', 409, 'plan_unavailable')
+apps.compass.backend_analyses.AnalysisError: Проект или его точные входы устарели.
+
+======================================================================
+FAIL: test_http_auth_csrf_exact_versions_restart_and_patient_projection (apps.tests.test_backend_plan_review.PlanReviewTests.test_http_auth_csrf_exact_versions_restart_and_patient_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azamatsibgatullin/HAC-Recovery-20261026/project/apps/tests/test_backend_plan_review.py", line 196, in test_http_auth_csrf_exact_versions_restart_and_patient_projection
+    self.assertEqual(409,client.post(path,json=bad,headers=headers).status_code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 409 != 500
+
+----------------------------------------------------------------------
+Ran 11 tests in 13.240s
+
+FAILED (failures=1, errors=4)
